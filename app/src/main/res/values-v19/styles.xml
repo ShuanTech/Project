@@ -1,0 +1,41 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppBaseTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="AppBaseTheme.Profile" parent="AppBaseTheme"></style>
+
+
+    <!--Junior Theme-->
+    <style name="Junior" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/junPrimary</item>
+        <item name="colorPrimaryDark">@color/junDark</item>
+        <item name="colorAccent">@color/junAccent</item>
+    </style>
+
+    <style name="Junior.Profile" parent="Junior"></style>
+
+    <!--Senior Theme-->
+    <style name="Senior" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/senPrimary</item>
+        <item name="colorPrimaryDark">@color/senDark</item>
+        <item name="colorAccent">@color/senAccent</item>
+    </style>
+
+    <style name="Profile" parent="AppBaseTheme">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowTranslucentNavigation">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowActionBarOverlay">true</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+
+</resources>

@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:layout_marginTop="@dimen/standard_margin"
+        android:background="?android:attr/selectableItemBackground"
+        android:orientation="horizontal"
+        android:id="@+id/lay1">
+
+        <com.shuan.project.Utils.CircleImageView
+            android:id="@+id/usr_img"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_gravity="center"
+            android:scaleType="centerCrop"
+            android:src="@drawable/user" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginLeft="@dimen/activity_vertical_margin"
+            android:layout_gravity="center_vertical">
+
+            <TextView
+                android:id="@+id/name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="Name"
+                android:textAppearance="?android:textAppearanceMedium"
+                android:textColor="#000" />
+
+            <!--  <TextView
+                  android:id="@+id/position"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:alpha="0.8"
+                  android:text="Position"
+                  android:textAppearance="?android:textAppearanceSmall"
+                  android:textColor="#000"
+                  android:visibility="invisible"/>
+
+              <TextView
+                  android:id="@+id/place"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:alpha="0.9"
+                  android:text="Company Name"
+                  android:visibility="invisible"
+                  android:textAppearance="?android:textAppearanceSmall"
+                  android:textColor="#000" />
+  -->
+
+
+            <TextView
+                android:id="@+id/u_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/level"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone" />
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <View
+        android:layout_below="@+id/lay1"
+        android:layout_marginLeft="70dp"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="@dimen/standard_margin"
+        android:alpha="0.2"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:background="#000" />
+</RelativeLayout>

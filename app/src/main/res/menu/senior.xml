@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <group
+        android:id="@+id/grp1"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/home"
+            android:checked="true"
+            android:icon="@drawable/ic_home"
+            android:title="Home" />
+        <item
+            android:id="@+id/strength"
+            android:checked="true"
+            android:icon="@drawable/ic_profile_strength"
+            android:title="Profile Strength"
+            app:actionViewClass="android.widget.TextView" />
+        <item
+            android:id="@+id/connect"
+            android:icon="@drawable/ic_connection"
+            android:title="Connection"
+            app:actionViewClass="android.widget.TextView" />
+
+        <item
+            android:id="@+id/following"
+            android:icon="@drawable/ic_follower"
+            android:title="Following"
+            app:actionViewClass="android.widget.TextView" />
+
+      <!--  <item
+            android:id="@+id/follower"
+            android:icon="@drawable/ic_follower"
+            android:title="Following"
+            app:actionViewClass="android.widget.TextView" />-->
+
+        <item
+            android:id="@+id/sugg"
+            android:icon="@drawable/ic_suggest"
+            android:title="Suggestion" />
+
+        <item android:title="Labels">
+            <menu>
+                <group android:checkableBehavior="single">
+                    <item
+                        android:id="@+id/imp"
+                        android:icon="@drawable/ic_important"
+                        android:title="Important" />
+                    <item
+                        android:id="@+id/ref"
+                        android:icon="@drawable/ic_reference"
+                        android:title="References"
+                        app:actionViewClass="android.widget.TextView" />
+                </group>
+            </menu>
+        </item>
+
+        <item android:title="Activities">
+            <menu>
+                <group android:checkableBehavior="single">
+                    <item
+                        android:id="@+id/offer"
+                        android:icon="@drawable/ic_offers"
+                        android:title="Offers"
+                        app:actionViewClass="android.widget.TextView" />
+                    <item
+                        android:id="@+id/apply"
+                        android:icon="@drawable/ic_applied"
+                        android:title="Applied" />
+                    <item
+                        android:id="@+id/share"
+                        android:icon="@drawable/ic_share"
+                        android:title="Shared" />
+                    <item
+                        android:id="@+id/ready"
+                        android:icon="@drawable/ic_get_ready"
+                        android:title="Get Ready"
+                        app:actionViewClass="android.widget.TextView" />
+                </group>
+            </menu>
+        </item>
+
+    </group>
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/feed"
+            android:icon="@drawable/ic_feed_back"
+            android:title="Feed Back" />
+        <item
+            android:id="@+id/about"
+            android:icon="@drawable/ic_about_us"
+            android:title="About Us" />
+        <item
+            android:id="@+id/help"
+            android:icon="@drawable/ic_help"
+            android:title="Help Us" />
+    </group>
+
+</menu>

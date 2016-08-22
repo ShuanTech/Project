@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#a63f07</color>
+    <color name="colorPrimaryDark">#943602</color>
+    <color name="colorAccent">#f9590a</color>
+
+    <color name="toolbar_transparent">#4c4c4c</color>
+    <color name="gray">#333</color>
+
+    <color name="junPrimary">#486189</color>
+    <color name="junDark">#415980</color>
+    <color name="junAccent">#0091EA</color>
+
+    <color name="senPrimary">#37435b</color>
+    <color name="senDark">#2c374d</color>
+    <color name="senAccent">#01579B</color>
+
+</resources>
