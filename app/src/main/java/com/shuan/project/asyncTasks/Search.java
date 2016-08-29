@@ -31,12 +31,14 @@ public class Search extends AsyncTask<String, String, String> {
     private HashMap<String, String> sData;
     private ArrayList<Sample> sList;
     private SerachAdapter adapter;
+    private String uId;
 
-    public Search(Context mContext, ListView list, ProgressBar progressBar,EditText search) {
+    public Search(Context mContext, String uId, ListView list, ProgressBar progressBar, EditText search) {
         this.mContext = mContext;
+        this.uId = uId;
         this.list = list;
         this.progressBar = progressBar;
-        this.search=search;
+        this.search = search;
         sList = new ArrayList<Sample>();
     }
 
@@ -44,7 +46,7 @@ public class Search extends AsyncTask<String, String, String> {
     protected String doInBackground(String... params) {
 
         sData = new HashMap<String, String>();
-        sData.put("id", "karthi");
+        sData.put("id", uId);
         try {
 
             JSONObject json = Connection.UrlConnection(php.serach_critria, sData);
@@ -90,7 +92,7 @@ public class Search extends AsyncTask<String, String, String> {
 
             @Override
             public void afterTextChanged(Editable s) {
-                String str=search.getText().toString().toLowerCase(Locale.getDefault());
+                String str = search.getText().toString().toLowerCase(Locale.getDefault());
                 adapter.filter(str);
             }
         });

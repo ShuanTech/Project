@@ -68,6 +68,7 @@ public class Common extends Application {
     public static final String FOLLOWER="follower";
     public static final String FOLLOWING="following";
     public static final String APPLY="apply";
+    public static final String ALERT="alert";
     public Context mContext;
     private String update = null;
     public static final String Version = "version";

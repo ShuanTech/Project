@@ -8,6 +8,7 @@ import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Build;
+import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
@@ -17,7 +18,6 @@ import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
 import android.view.Menu;
@@ -45,6 +45,8 @@ import com.shuan.project.launcher.LoginActivity;
 import com.shuan.project.profile.JuniorProfile;
 import com.shuan.project.resume.ExpResumeGenerate;
 import com.shuan.project.resume.JuniorResumeGenerate;
+import com.shuan.project.resume.ResumeEditActivity;
+import com.shuan.project.search.SearchActivity;
 
 import java.util.HashMap;
 
@@ -75,7 +77,7 @@ public class SeniorActivity extends AppCompatActivity {
     private TextView usrName;
     private CircleImageView proPic;
     private DisplayImageOptions options;
-    private TextView alertCount;
+    private TextView alertCount, profileStrength, following;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -154,6 +156,8 @@ public class SeniorActivity extends AppCompatActivity {
         });
 
         connect = (TextView) MenuItemCompat.getActionView(mNavigationView.getMenu().findItem(R.id.connect));
+        profileStrength = (TextView) MenuItemCompat.getActionView(mNavigationView.getMenu().findItem(R.id.strength));
+        following = (TextView) MenuItemCompat.getActionView(mNavigationView.getMenu().findItem(R.id.following));
 
         usrName.setText(mApp.getPreference().getString(Common.FULLNAME, ""));
 
@@ -171,8 +175,7 @@ public class SeniorActivity extends AppCompatActivity {
                         display(0);
                         return true;
                     case R.id.strength:
-                        toolbar.setTitle("Profile Strength");
-                        mDrawerLayout.closeDrawers();
+                        startActivity(new Intent(getApplicationContext(), ResumeEditActivity.class));
                         return true;
                     case R.id.connect:
                         toolbar.setTitle("Connections");
@@ -264,6 +267,58 @@ public class SeniorActivity extends AppCompatActivity {
         connect.setTypeface(helper.droid(getApplicationContext()));
         connect.setTextColor(getResources().getColor(R.color.senAccent));
         connect.setText(mApp.getPreference().getString(Common.CONNECTION, ""));
+
+        following.setGravity(Gravity.CENTER_VERTICAL);
+        following.setTypeface(helper.droid(getApplicationContext()));
+        following.setTextColor(getResources().getColor(R.color.senAccent));
+        following.setText(mApp.getPreference().getString(Common.FOLLOWING, ""));
+
+        profileStrength.setGravity(Gravity.CENTER_VERTICAL);
+        profileStrength.setTypeface(helper.droid(getApplicationContext()));
+        profileStrength.setTextColor(getResources().getColor(R.color.senAccent));
+
+        profileStrength.setText(calculateStrength());
+
+
+    }
+
+    private String calculateStrength() {
+        String s = null;
+
+        boolean step1 = mApp.getPreference().getBoolean(Common.PROFILESUMMARY, false);
+        boolean step2 = mApp.getPreference().getBoolean(Common.WORKEXPERIENCE, false);
+        boolean step3 = mApp.getPreference().getBoolean(Common.WORKINFO, false);
+        boolean step4 = mApp.getPreference().getBoolean(Common.SSLC, false);
+        boolean step5 = mApp.getPreference().getBoolean(Common.HSC, false);
+        boolean step6 = mApp.getPreference().getBoolean(Common.QUALIFICATION, false);
+        boolean step7 = mApp.getPreference().getBoolean(Common.SKILL, false);
+        boolean step8 = mApp.getPreference().getBoolean(Common.CERITIFY, false);
+        boolean step9 = mApp.getPreference().getBoolean(Common.PERSONALINFO, false);
+
+        if (step1 && step2 && step3 && step4 && step5 && step6 && step7 && step8 && step9) {
+            s = "95";
+        } else if (step1 || step2 || step3 || step4 || step5 || step6 || step7 || step8 || step9) {
+            s = "34";
+        } else if ((step1 || step2) || (step1 || step3) || (step1 || step4) || (step1 || step5) || (step1 || step6) || (step1 || step7) ||
+                (step1 || step8) || (step1 || step9)) {
+            s = "45";
+        } else if ((step1 || step2 || step3) || (step4 || step5 || step6) || (step7 || step8 || step9)) {
+            s = "55";
+        } else if (step1 && step2 || !step3 || !step4 || !step5 || !step6 || !step7 || !step8 || !step9) {
+            s = "44";
+        } else if (step1 && step2 && step3 || !step4 || !step5 || !step6 || !step7 || !step8 || !step9) {
+            s = "50";
+        } else if (step1 || step2 || step3 || step4 && step5 || !step6 || !step7 || !step8 || !step9) {
+            s = "63";
+        } else if (step1 || step2 || step3 || step4 && step5 && step6 || !step7 || !step8 || !step9) {
+            s = "72";
+        } else if (step1 || step2 || step3 || step4 || step5 || step6 || step7 && step8 || !step9) {
+            s = "84";
+        } else {
+            s = "67";
+        }
+
+        return s;
     }
 
     private void setUpNavDrawer() {
@@ -284,15 +339,21 @@ public class SeniorActivity extends AppCompatActivity {
         MenuItem menuItem = menu.findItem(R.id.notify);
         MenuItemCompat.setActionView(menuItem, R.layout.toolbar_counter);
         lay1 = (RelativeLayout) MenuItemCompat.getActionView(menuItem);
-        alertCount= (TextView) lay1.findViewById(R.id.counter1);
-        int cnt=0;
-        if(cnt==0){alertCount.setVisibility(View.GONE);}else{alertCount.setText(""+cnt);}
+        alertCount = (TextView) lay1.findViewById(R.id.counter1);
+        if (mApp.getPreference().getString(Common.ALERT,"").equalsIgnoreCase("0")) {
+            alertCount.setVisibility(View.GONE);
+        } else {
+            alertCount.setText(mApp.getPreference().getString(Common.ALERT,""));
+        }
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
+            case R.id.search:
+                startActivity(new Intent(getApplicationContext(), SearchActivity.class));
+                break;
             case R.id.profile:
                 startActivity(new Intent(getApplicationContext(), JuniorProfile.class));
                 break;

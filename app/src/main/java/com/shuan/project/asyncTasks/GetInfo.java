@@ -46,6 +46,7 @@ public class GetInfo extends AsyncTask<String, String, String> {
                 mApp.getPreference().edit().putString(Common.CONNECTION, child.optString("connection")).commit();
                 mApp.getPreference().edit().putString(Common.FOLLOWER, child.optString("follower")).commit();
                 mApp.getPreference().edit().putString(Common.FOLLOWING, child.optString("following")).commit();
+                mApp.getPreference().edit().putString(Common.ALERT, child.optString("alert")).commit();
             }
 
         } catch (Exception e) {

@@ -42,6 +42,8 @@ import com.shuan.project.fragment.EmployerAboutFragment;
 import com.shuan.project.fragment.EmployerHome;
 import com.shuan.project.fragment.FollowerFragment;
 import com.shuan.project.fragment.FollowingFragment;
+import com.shuan.project.fragment.NotifyFragment;
+import com.shuan.project.fragment.ShortlistFragment;
 import com.shuan.project.launcher.LoginActivity;
 import com.shuan.project.profile.JuniorProfile;
 import com.shuan.project.search.SearchActivity;
@@ -157,6 +159,11 @@ public class EmployerActivity extends AppCompatActivity {
                         mDrawerLayout.closeDrawers();
                         display(2);
                         return true;
+                    case R.id.action:
+                        toolbar.setTitle("Action");
+                        mDrawerLayout.closeDrawers();
+                        display(3);
+                        return true;
                     case R.id.abt:
                         toolbar.setTitle("About Company");
                         mDrawerLayout.closeDrawers();
@@ -220,6 +227,7 @@ public class EmployerActivity extends AppCompatActivity {
                 f = new FollowingFragment();
                 break;
             case 3:
+                f=new ShortlistFragment();
                 break;
             case 4:
                 break;
@@ -229,7 +237,10 @@ public class EmployerActivity extends AppCompatActivity {
                 f.setArguments(bundle);
                 break;
             case 6:
-                
+                break;
+            case 14:
+                toolbar.setTitle("Notification");
+                f=new NotifyFragment();
                 break;
         }
 
@@ -296,9 +307,19 @@ public class EmployerActivity extends AppCompatActivity {
         MenuItem menuItem = menu.findItem(R.id.notify);
         MenuItemCompat.setActionView(menuItem, R.layout.toolbar_counter);
         lay1 = (RelativeLayout) MenuItemCompat.getActionView(menuItem);
-        alertCount= (TextView) lay1.findViewById(R.id.counter1);
-        int cnt=0;
-        if(cnt==0){alertCount.setVisibility(View.GONE);}else{alertCount.setText(""+cnt);}
+        alertCount = (TextView) lay1.findViewById(R.id.counter1);
+        //int cnt = 0;
+        if (mApp.getPreference().getString(Common.ALERT,"").equalsIgnoreCase("0")) {
+            alertCount.setVisibility(View.GONE);
+        } else {
+            alertCount.setText(mApp.getPreference().getString(Common.ALERT,""));
+        }
+        lay1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                display(14);
+            }
+        });
         return true;
     }
 
@@ -311,6 +332,9 @@ public class EmployerActivity extends AppCompatActivity {
                 break;
             case R.id.drawer:
                 mDrawerLayout.openDrawer(GravityCompat.END);
+                break;
+            case R.id.notify:
+                Toast.makeText(getApplicationContext(),"Wrk",Toast.LENGTH_SHORT).show();
                 break;
         }
 

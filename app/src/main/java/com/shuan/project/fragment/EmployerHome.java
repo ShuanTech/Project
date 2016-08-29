@@ -63,8 +63,10 @@ public class EmployerHome extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 TextView txt = (TextView) view.findViewById(R.id.jId);
+                TextView txt1= (TextView) view.findViewById(R.id.frm_id);
                 Intent in=new Intent(getActivity(),PostViewActivity.class);
                 in.putExtra("jId",txt.getText().toString());
+                in.putExtra("frmId",txt1.getText().toString());
                 startActivity(in);
             }
         });

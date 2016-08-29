@@ -63,7 +63,7 @@ public class FollowerFragment extends Fragment {
                 Intent in = new Intent(getActivity(), ProfileViewActivity.class);
                 in.putExtra("u_id", txt.getText().toString());
                 in.putExtra("level", txt2.getText().toString());
-                in.putExtra("who","employer");
+                in.putExtra("who",mApp.getPreference().getString(Common.LEVEL,""));
                 startActivity(in);
 
             }

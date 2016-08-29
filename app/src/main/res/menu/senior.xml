@@ -16,6 +16,7 @@
             android:icon="@drawable/ic_profile_strength"
             android:title="Profile Strength"
             app:actionViewClass="android.widget.TextView" />
+
         <item
             android:id="@+id/connect"
             android:icon="@drawable/ic_connection"
@@ -28,11 +29,11 @@
             android:title="Following"
             app:actionViewClass="android.widget.TextView" />
 
-      <!--  <item
-            android:id="@+id/follower"
-            android:icon="@drawable/ic_follower"
-            android:title="Following"
-            app:actionViewClass="android.widget.TextView" />-->
+        <!--  <item
+              android:id="@+id/follower"
+              android:icon="@drawable/ic_follower"
+              android:title="Following"
+              app:actionViewClass="android.widget.TextView" />-->
 
         <item
             android:id="@+id/sugg"

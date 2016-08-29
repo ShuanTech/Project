@@ -9,6 +9,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.shuan.project.R;
+import com.shuan.project.Utils.Common;
 import com.shuan.project.list.Sample;
 import com.shuan.project.profile.ProfileViewActivity;
 
@@ -22,7 +23,7 @@ public class SerachAdapter extends BaseAdapter {
     private Context mContext;
     private LayoutInflater inflater;
     private ArrayList<Sample> list, temp;
-
+    private Common mApp;
 
     public SerachAdapter(Context mContext, ArrayList<Sample> list) {
         this.mContext = mContext;
@@ -30,6 +31,7 @@ public class SerachAdapter extends BaseAdapter {
         inflater = LayoutInflater.from(mContext);
         this.temp = new ArrayList<Sample>();
         temp.addAll(list);
+        mApp= (Common) mContext.getApplicationContext();
     }
 
     @Override
@@ -68,6 +70,7 @@ public class SerachAdapter extends BaseAdapter {
                 Intent in = new Intent(mContext, ProfileViewActivity.class);
                 in.putExtra("u_id", curr.getU_id());
                 in.putExtra("level", curr.getLevel());
+                in.putExtra("who",mApp.getPreference().getString(Common.LEVEL,""));
                 in.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 mContext.startActivity(in);
             }

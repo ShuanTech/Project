@@ -1,7 +1,11 @@
 package com.shuan.project.employer;
 
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -14,10 +18,14 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.shuan.project.R;
 import com.shuan.project.Utils.Common;
 import com.shuan.project.asyncTasks.PostView;
+import com.shuan.project.resume.ExpResumeGenerate;
+import com.shuan.project.resume.JuniorResumeGenerate;
+import com.shuan.project.resume.ResumeEditActivity;
 
 public class PostViewActivity extends AppCompatActivity {
 
@@ -74,8 +82,52 @@ public class PostViewActivity extends AppCompatActivity {
                 created,viewd,applied,shared,skill,desc,type,cate,jId,jType,jSal,jCate,j_Id,sal).execute();
 
 
+        apply.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    mApp.getPreference().edit().putBoolean(Common.APPLY, true).commit();
 
+                    CallResumeData(getIntent().getStringExtra("jId"),getIntent().getStringExtra("frmId"));
+
+                } else {
+
+                    AlertDialog.Builder build = new AlertDialog.Builder(PostViewActivity.this);
+                    build.setTitle("CONFIRMATION");
+                    build.setMessage("Are You Sure Apply the Post or Edit the resume Content")
+                            .setPositiveButton("EDIT", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.cancel();
+                                    Intent in=new Intent(getApplicationContext(), ResumeEditActivity.class);
+                                    startActivity(in);
+                                }
+                            }).setNegativeButton("APPLY", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+
+                            dialog.cancel();
+                            CallResumeData(getIntent().getStringExtra("jId"),getIntent().getStringExtra("frmId"));
+                        }
+                    }).show();
+                }
+
+            }
+        });
     }
 
+    private void CallResumeData(String jId,String frmId) {
 
+        if (mApp.getPreference().getString(Common.LEVEL, "").equalsIgnoreCase("1")) {
+            Intent in = new Intent(getApplicationContext(), JuniorResumeGenerate.class);
+            in.putExtra("job_id", jId);
+            in.putExtra("frm_id", frmId);
+            startActivity(in);
+        } else {
+            Intent in = new Intent(getApplicationContext(), ExpResumeGenerate.class);
+            in.putExtra("job_id", jId);
+            in.putExtra("frm_id", frmId);
+            startActivity(in);
+        }
+    }
 }

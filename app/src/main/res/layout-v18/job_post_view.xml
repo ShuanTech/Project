@@ -314,6 +314,7 @@
                 android:layout_weight="1">
 
                 <ImageView
+                    android:id="@+id/imprtnt"
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:layout_centerHorizontal="true"
@@ -326,6 +327,12 @@
 
     <TextView
         android:id="@+id/jId"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/frm_id"
         android:visibility="gone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />

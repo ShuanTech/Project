@@ -128,9 +128,9 @@ public class PostView extends AsyncTask<String, String, String> {
         jTitle.setText(title);
         cmpny.setText(cmpny_name + ", " + location);
         created.setText("Posted on " + help.getTimeAgo(mContext, date_created));
-        viewd.setText(vied + "Viewed");
-        shared.setText(shred + "Shared");
-        applied.setText(appled + "Applied");
+        viewd.setText(vied + " Viewed");
+        shared.setText(shred + " Shared");
+        applied.setText(appled + " Applied");
         skill.setText("Skill: " + skll);
         desc.setText(description);
 

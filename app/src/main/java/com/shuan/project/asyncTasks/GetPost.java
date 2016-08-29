@@ -8,7 +8,6 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 
 import com.shuan.project.Utils.Common;
-import com.shuan.project.adapter.ConnectAdapter;
 import com.shuan.project.adapter.PostAdapter;
 import com.shuan.project.list.Sample;
 import com.shuan.project.parser.Connection;
@@ -64,9 +63,10 @@ public class GetPost extends AsyncTask<String, String, String> {
                     String jView = child.optString("viewed");
                     String jShare = child.optString("shared");
                     String jApplied = child.optString("applied");
-                    String jFrmId=child.optString("frm_id");
+                    String jFrmId = child.optString("frm_id");
+                    String jImp = child.optString("is_important");
 
-                    list.add(new Sample(cName,pPic,jId,jTitle,jSkill,jLevel,jLoc,jDated,jView,jApplied,jShare,jFrmId));
+                    list.add(new Sample(cName, pPic, jId, jTitle, jSkill, jLevel, jLoc, jDated, jView, jApplied, jShare, jFrmId,jImp));
                 }
             }
 
@@ -81,7 +81,7 @@ public class GetPost extends AsyncTask<String, String, String> {
         super.onPostExecute(s);
         progressBar.setVisibility(View.GONE);
         listView.setVisibility(View.VISIBLE);
-        adapter=new PostAdapter(mContext,list);
+        adapter = new PostAdapter(mContext, list);
         listView.setAdapter(adapter);
 
     }

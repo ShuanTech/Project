@@ -235,7 +235,7 @@ public class ProfileViewActivity extends AppCompatActivity {
             exp.addView(v);
         }
 
-        if(getIntent().getStringExtra("who").equalsIgnoreCase("employer")){
+        if(getIntent().getStringExtra("who").equalsIgnoreCase("3")){
             bu1.setVisibility(View.GONE);
             bu2.setVisibility(View.GONE);
         }else{

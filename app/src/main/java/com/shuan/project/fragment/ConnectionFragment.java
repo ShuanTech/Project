@@ -62,6 +62,7 @@ public class ConnectionFragment extends Fragment {
                 Intent in = new Intent(getActivity(), ProfileViewActivity.class);
                 in.putExtra("u_id", txt.getText().toString());
                 in.putExtra("level", txt2.getText().toString());
+                in.putExtra("who","senior");
                 startActivity(in);
 
             }

@@ -6,6 +6,7 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
     <application
         android:name=".Utils.Common"
@@ -60,7 +61,6 @@
 
         <activity
             android:name=".employer.EmployerActivity"
-            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/AppBaseTheme.Profile" />
 
@@ -150,14 +150,31 @@
             android:name=".search.SearchActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysVisible" />
-
         <activity
             android:name=".resume.ResumeEditActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Junior">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".resume.ExpResumeGenerate" />
+        </activity>
+        <activity
+            android:name=".employer.ShortListActivity"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".employee.SeniorActivity" />
+                android:value=".employer.EmployerActivity" />
         </activity>
+        <activity android:name=".resume.UpdateResumeActivity" />
+        <activity
+            android:name=".employer.PdfViewActivity"
+            android:screenOrientation="portrait">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".employer.ShortListActivity" />
+        </activity>
+        <activity android:name=".employer.InterviewPanelActivity"></activity>
     </application>
 
 </manifest>

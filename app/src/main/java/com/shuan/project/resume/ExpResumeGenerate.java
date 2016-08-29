@@ -73,7 +73,7 @@ public class ExpResumeGenerate extends AppCompatActivity implements View.OnClick
     private ProgressBar progressBar;
     private Common mApp;
     private EditText objective;
-    private RelativeLayout apply, edt;
+    private RelativeLayout apply, edt, prv, nxt;
     private Button prev, next, applied, edit;
     private LinearLayout scroll;
     private int currPage = 0;
@@ -94,7 +94,8 @@ public class ExpResumeGenerate extends AppCompatActivity implements View.OnClick
         edt = (RelativeLayout) findViewById(R.id.edt);
         edit = (Button) findViewById(R.id.edit);
         pdfView = (ImageView) findViewById(R.id.pdf_view);
-
+        prv = (RelativeLayout) findViewById(R.id.prv);
+        nxt = (RelativeLayout) findViewById(R.id.nxt);
         list = new ArrayList<ResumeList>();
         if (mApp.getPreference().getBoolean(Common.APPLY, false) == true) {
 
@@ -149,13 +150,21 @@ public class ExpResumeGenerate extends AppCompatActivity implements View.OnClick
             genrateResume("1", FILE);
         }
 
-        if (mApp.getPreference().getBoolean(Common.APPLY, false) == true) {
-            apply.setVisibility(View.VISIBLE);
-            edt.setVisibility(View.VISIBLE);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            if (mApp.getPreference().getBoolean(Common.APPLY, false) == true) {
+                apply.setVisibility(View.VISIBLE);
+                edt.setVisibility(View.VISIBLE);
+            } else {
+                apply.setVisibility(View.GONE);
+                edt.setVisibility(View.GONE);
+            }
         } else {
+            prv.setVisibility(View.GONE);
+            nxt.setVisibility(View.GONE);
             apply.setVisibility(View.GONE);
             edt.setVisibility(View.GONE);
         }
+
 
         prev.setOnClickListener(this);
         next.setOnClickListener(this);
@@ -232,9 +241,7 @@ public class ExpResumeGenerate extends AppCompatActivity implements View.OnClick
                 new UploadPicture(ExpResumeGenerate.this, FILE, "resume", "senior", php.upload_resume).execute();
                 break;
             case R.id.edit:
-                Toast.makeText(getApplicationContext(),"OK",Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(getApplicationContext(),ResumeEditActivity.class));
-                finish();
+                startActivity(new Intent(getApplicationContext(), ResumeEditActivity.class));
                 break;
         }
     }
@@ -375,9 +382,7 @@ public class ExpResumeGenerate extends AppCompatActivity implements View.OnClick
                                 doc.add(p23);
                                 doc.add(Chunk.NEWLINE);
 
-                                //new UploadPicture(ExpResumeGenerate.this, FILE, "resume", php.upload_resume).execute();
 
-                                //doc.close();
                                 new getWrkDetails().execute();
 
                             } catch (Exception e) {
@@ -1081,12 +1086,16 @@ public class ExpResumeGenerate extends AppCompatActivity implements View.OnClick
             doc.close();
 
             if (mApp.getPreference().getBoolean(Common.APPLY, false) == true) {
-                progressBar.setVisibility(View.GONE);
-                scroll.setVisibility(View.VISIBLE);
-                render();
-                /**/
+
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    progressBar.setVisibility(View.GONE);
+                    scroll.setVisibility(View.VISIBLE);
+                    render();
+                }else{
+                    Toast.makeText(getApplicationContext(), "Upload start", Toast.LENGTH_SHORT).show();
+                    new UploadPicture(ExpResumeGenerate.this, FILE, "resume", "senior", php.upload_resume).execute();
+                }
             } else {
-                //openPdf();
                 render();
             }
 
@@ -1116,8 +1125,7 @@ public class ExpResumeGenerate extends AppCompatActivity implements View.OnClick
             pdfView.setImageBitmap(bitmap);
             pdfView.invalidate();
 
-        } catch (Exception e) {
-        }
+        } catch (Exception e) {}
     }
 
 

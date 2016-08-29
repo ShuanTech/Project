@@ -6,12 +6,11 @@ public class Sample {
     String u_id, proPic, name, pos, companyName, level;
     String cty, distrct, state, contry;
     String orgName, type, addr, land, pin;
-    String jId,jTitle,jSkill,jLevel,jLoc,jCreate,jView,jApply,jShare,jFrmId;
+    String jId, jTitle, jSkill, jLevel, jLoc, jCreate, jView, jApply, jShare, jFrmId, jImp;
 
 
     public Sample() {
     }
-
 
 
     public Sample(String u_id, String name, String level) {
@@ -62,7 +61,7 @@ public class Sample {
         this.pin = pin;
     }
 
-    public Sample(String companyName, String proPic, String jId, String jTitle, String jSkill, String jLevel, String jLoc, String jCreate, String jView, String jApply, String jShare,String jFrmId) {
+    public Sample(String companyName, String proPic, String jId, String jTitle, String jSkill, String jLevel, String jLoc, String jCreate, String jView, String jApply, String jShare, String jFrmId, String jImp) {
         this.companyName = companyName;
         this.proPic = proPic;
         this.jId = jId;
@@ -74,7 +73,8 @@ public class Sample {
         this.jView = jView;
         this.jApply = jApply;
         this.jShare = jShare;
-        this.jFrmId=jFrmId;
+        this.jFrmId = jFrmId;
+        this.jImp = jImp;
     }
 
     public String getU_id() {
@@ -307,5 +307,14 @@ public class Sample {
 
     public void setjFrmId(String jFrmId) {
         this.jFrmId = jFrmId;
+    }
+
+
+    public String getjImp() {
+        return jImp;
+    }
+
+    public void setjImp(String jImp) {
+        this.jImp = jImp;
     }
 }
