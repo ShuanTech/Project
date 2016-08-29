@@ -16,7 +16,6 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.shuan.project.R;
 import com.shuan.project.Utils.Common;
@@ -38,7 +37,8 @@ public class ResumeEditActivity extends AppCompatActivity implements View.OnClic
     private ProgressBar progressBar;
     private ScrollView scroll;
     private RelativeLayout senior;
-    private LinearLayout pro, disPro, wrk_detail, wrk_exprince, qualifiy, prjct, skll, certify, achieve, extra, prsnal;
+    private LinearLayout pro, disPro, wrkDet, wrk_detail, wrkExp, wrk_exprince, addClg, addSchool, qualifiy, project, prjct,
+            skill, skll, cert, certify, ach, achieve, ex, extra, prsnal;
     private HashMap<String, String> rData;
     private ArrayList<Sample> list;
     private PopupMenu popupMenu;
@@ -61,8 +61,12 @@ public class ResumeEditActivity extends AppCompatActivity implements View.OnClic
         senior = (RelativeLayout) findViewById(R.id.senior);
         pro = (LinearLayout) findViewById(R.id.pro);
         disPro = (LinearLayout) findViewById(R.id.dis_pro);
+        wrkDet = (LinearLayout) findViewById(R.id.wrk_det);
         wrk_detail = (LinearLayout) findViewById(R.id.wrk_detail);
+        wrkExp = (LinearLayout) findViewById(R.id.wrk_exp);
         wrk_exprince = (LinearLayout) findViewById(R.id.wrk_exprince);
+        addClg = (LinearLayout) findViewById(R.id.add_clg);
+        addSchool = (LinearLayout) findViewById(R.id.add_school);
         qualifiy = (LinearLayout) findViewById(R.id.qualify);
         skll = (LinearLayout) findViewById(R.id.skll);
         prjct = (LinearLayout) findViewById(R.id.prjct);
@@ -73,14 +77,15 @@ public class ResumeEditActivity extends AppCompatActivity implements View.OnClic
 
         pro = (LinearLayout) findViewById(R.id.pro);
 
-        if (!mApp.getPreference().getString(Common.LEVEL, "").equalsIgnoreCase("2")) {
-            senior.setVisibility(View.GONE);
-        }
 
         list = new ArrayList<Sample>();
         new GetResumeData().execute();
 
         pro.setOnClickListener(this);
+        wrkDet.setOnClickListener(this);
+        wrkExp.setOnClickListener(this);
+        addClg.setOnClickListener(this);
+        addSchool.setOnClickListener(this);
 
     }
 
@@ -90,7 +95,23 @@ public class ResumeEditActivity extends AppCompatActivity implements View.OnClic
         switch (v.getId()) {
             case R.id.pro:
                 in.putExtra("what", "add");
-                in.putExtra("which", "pro");
+                in.putExtra("which", "proSum");
+                break;
+            case R.id.wrk_det:
+                in.putExtra("what", "add");
+                in.putExtra("which", "wrkDet");
+                break;
+            case R.id.wrk_exp:
+                in.putExtra("what", "add");
+                in.putExtra("which", "wrkExp");
+                break;
+            case R.id.add_clg:
+                in.putExtra("what", "add");
+                in.putExtra("which", "addClg");
+                break;
+            case R.id.add_school:
+                in.putExtra("what", "add");
+                in.putExtra("which", "addSch");
                 break;
         }
         startActivity(in);
@@ -112,7 +133,7 @@ public class ResumeEditActivity extends AppCompatActivity implements View.OnClic
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(getApplicationContext(), "OK", Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(getApplicationContext(), "OK", Toast.LENGTH_SHORT).show();
                         }
                     });
 
@@ -130,42 +151,50 @@ public class ResumeEditActivity extends AppCompatActivity implements View.OnClic
                         final String profile = data.optString("summary");
                         final String pId = data.optString("id");
 
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                                View v = inflater.inflate(R.layout.resume_data, null);
-                                TextView txt = (TextView) v.findViewById(R.id.wrk);
-                                txt.setText(profile);
-                                final RelativeLayout lay = (RelativeLayout) v.findViewById(R.id.col);
+                        if (profile.equalsIgnoreCase("")) {
 
-                                lay.setOnClickListener(new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View v) {
-                                        popupMenu = new PopupMenu(ResumeEditActivity.this, lay);
-                                        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-                                            @Override
-                                            public boolean onMenuItemClick(MenuItem item) {
-                                                switch (item.getItemId()) {
-                                                    case R.id.edit:
-                                                        //Toast.makeText(getApplicationContext(), "Edit", Toast.LENGTH_SHORT).show();
+                        } else {
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                                    View v = inflater.inflate(R.layout.resume_data, null);
+                                    TextView txt = (TextView) v.findViewById(R.id.wrk);
+                                    txt.setText(profile);
+                                    final RelativeLayout lay = (RelativeLayout) v.findViewById(R.id.col);
 
-                                                        break;
-                                                    case R.id.del:
-                                                        //Toast.makeText(getApplicationContext(),pId,Toast.LENGTH_SHORT).show();
-                                                        new DeleteDetail(ResumeEditActivity.this,pId,"proSum").execute();
-                                                        break;
+                                    lay.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View v) {
+                                            popupMenu = new PopupMenu(ResumeEditActivity.this, lay);
+                                            popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                                                @Override
+                                                public boolean onMenuItemClick(MenuItem item) {
+                                                    switch (item.getItemId()) {
+                                                        case R.id.edit:
+                                                            Intent in = new Intent(getApplicationContext(), UpdateResumeActivity.class);
+                                                            mApp.getPreference().edit().putString("eId", pId).commit();
+                                                            mApp.getPreference().edit().putString("data", profile).commit();
+                                                            in.putExtra("what", "edit");
+                                                            in.putExtra("which", "proSum");
+                                                            startActivity(in);
+                                                            break;
+                                                        case R.id.del:
+                                                            new DeleteDetail(ResumeEditActivity.this, pId, "proSum").execute();
+                                                            break;
+                                                    }
+                                                    return false;
                                                 }
-                                                return false;
-                                            }
-                                        });
-                                        popupMenu.inflate(R.menu.resume_edit);
-                                        popupMenu.show();
-                                    }
-                                });
-                                disPro.addView(v);
-                            }
-                        });
+                                            });
+                                            popupMenu.inflate(R.menu.resume_edit);
+                                            popupMenu.show();
+                                        }
+                                    });
+                                    disPro.addView(v);
+                                }
+                            });
+                        }
+
 
                     }
                     final JSONObject wrk = child.getJSONObject("wrk");
@@ -178,18 +207,56 @@ public class ResumeEditActivity extends AppCompatActivity implements View.OnClic
                         final String location = data.optString("location");
                         final String from_date = data.optString("from_date");
                         final String to_date = data.optString("to_date");
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                                View v = inflater.inflate(R.layout.wrk_lay, null);
-                                TextView txt = (TextView) v.findViewById(R.id.wrk);
-                                ImageView img = (ImageView) v.findViewById(R.id.img);
-                                img.setVisibility(View.GONE);
-                                txt.setText(position + " at " + org_name + ", " + location + " . " + from_date + " - " + to_date);
-                                wrk_detail.addView(v);
-                            }
-                        });
+                        final String pId = data.optString("id");
+
+                        if (pId.equalsIgnoreCase("")) {
+                        } else {
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                                    View v = inflater.inflate(R.layout.resume_data, null);
+                                    TextView txt = (TextView) v.findViewById(R.id.wrk);
+                                    txt.setText(position + " at " + org_name + ", " + location + " . " + from_date + " - " + to_date);
+
+                                    final RelativeLayout lay = (RelativeLayout) v.findViewById(R.id.col);
+
+                                    lay.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View v) {
+                                            popupMenu = new PopupMenu(ResumeEditActivity.this, lay);
+                                            popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                                                @Override
+                                                public boolean onMenuItemClick(MenuItem item) {
+                                                    switch (item.getItemId()) {
+                                                        case R.id.edit:
+                                                            Intent in = new Intent(getApplicationContext(), UpdateResumeActivity.class);
+                                                            mApp.getPreference().edit().putString("eId", pId).commit();
+                                                            mApp.getPreference().edit().putString("pos", position).commit();
+                                                            mApp.getPreference().edit().putString("org", org_name).commit();
+                                                            mApp.getPreference().edit().putString("loc", location).commit();
+                                                            in.putExtra("what", "edit");
+                                                            in.putExtra("which", "wrkDet");
+                                                            startActivity(in);
+                                                            break;
+                                                        case R.id.del:
+                                                            new DeleteDetail(ResumeEditActivity.this, pId, "wrkDet").execute();
+                                                            break;
+                                                    }
+                                                    return false;
+                                                }
+                                            });
+                                            popupMenu.inflate(R.menu.resume_edit);
+                                            popupMenu.show();
+                                        }
+                                    });
+
+
+                                    wrk_detail.addView(v);
+                                }
+                            });
+                        }
+
                     }
 
                     JSONObject wrkExp = child.getJSONObject("wrk_exp");
@@ -197,41 +264,123 @@ public class ResumeEditActivity extends AppCompatActivity implements View.OnClic
                     for (int i = 0; i < wrkExpArray.length(); i++) {
                         JSONObject data = wrkExpArray.getJSONObject(i);
                         final String exp = data.optString("wrk_exp");
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                                View v = inflater.inflate(R.layout.wrk_lay, null);
-                                TextView txt = (TextView) v.findViewById(R.id.wrk);
-                                ImageView img = (ImageView) v.findViewById(R.id.img);
-                                img.setVisibility(View.GONE);
-                                txt.setText(exp);
-                                wrk_exprince.addView(v);
-                            }
-                        });
+                        final String pId = data.optString("id");
+                        if (exp.equalsIgnoreCase("")) {
+                        } else {
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                                    View v = inflater.inflate(R.layout.resume_data, null);
+                                    TextView txt = (TextView) v.findViewById(R.id.wrk);
+                                    txt.setText(exp);
+
+                                    final RelativeLayout lay = (RelativeLayout) v.findViewById(R.id.col);
+
+                                    lay.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View v) {
+                                            popupMenu = new PopupMenu(ResumeEditActivity.this, lay);
+                                            popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                                                @Override
+                                                public boolean onMenuItemClick(MenuItem item) {
+                                                    switch (item.getItemId()) {
+                                                        case R.id.edit:
+                                                            Intent in = new Intent(getApplicationContext(), UpdateResumeActivity.class);
+                                                            mApp.getPreference().edit().putString("eId", pId).commit();
+                                                            mApp.getPreference().edit().putString("data", exp).commit();
+                                                            in.putExtra("what", "edit");
+                                                            in.putExtra("which", "wrkExp");
+                                                            startActivity(in);
+                                                            break;
+                                                        case R.id.del:
+                                                            new DeleteDetail(ResumeEditActivity.this, pId, "wrkExp").execute();
+                                                            break;
+                                                    }
+                                                    return false;
+                                                }
+                                            });
+                                            popupMenu.inflate(R.menu.resume_edit);
+                                            popupMenu.show();
+                                        }
+                                    });
+
+                                    wrk_exprince.addView(v);
+                                }
+                            });
+                        }
                     }
 
                     final JSONObject qualify = child.getJSONObject("edu");
                     JSONArray qualifyArray = qualify.getJSONArray("edu");
                     for (int i = 0; i < qualifyArray.length(); i++) {
                         JSONObject data = qualifyArray.getJSONObject(i);
+                        final String pId = data.optString("id");
                         final String concentration = data.optString("concentration");
                         final String ins_name = data.optString("ins_name");
                         final String location = data.optString("location");
                         final String aggregate = data.optString("aggregate");
+                        final String level = data.optString("level");
+                        final String univ = data.optString("board");
 
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                                View v = inflater.inflate(R.layout.wrk_lay, null);
-                                TextView txt = (TextView) v.findViewById(R.id.wrk);
-                                ImageView img = (ImageView) v.findViewById(R.id.img);
-                                img.setVisibility(View.GONE);
-                                txt.setText(concentration + " , " + ins_name + " at " + location + " with " + aggregate + "%");
-                                qualifiy.addView(v);
-                            }
-                        });
+                        if (pId.equalsIgnoreCase("")) {
+                        } else {
+
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                                    View v = inflater.inflate(R.layout.resume_data, null);
+                                    TextView txt = (TextView) v.findViewById(R.id.wrk);
+                                    txt.setText(concentration + " , " + ins_name + " at " + location + " with " + aggregate + "%");
+
+
+                                    final RelativeLayout lay = (RelativeLayout) v.findViewById(R.id.col);
+
+                                    lay.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View v) {
+                                            popupMenu = new PopupMenu(ResumeEditActivity.this, lay);
+                                            popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                                                @Override
+                                                public boolean onMenuItemClick(MenuItem item) {
+                                                    switch (item.getItemId()) {
+                                                        case R.id.edit:
+                                                            Intent in = new Intent(getApplicationContext(), UpdateResumeActivity.class);
+                                                            mApp.getPreference().edit().putString("eId", pId).commit();
+                                                            mApp.getPreference().edit().putString("level", level).commit();
+                                                            mApp.getPreference().edit().putString("conCent", concentration).commit();
+                                                            mApp.getPreference().edit().putString("insName", ins_name).commit();
+                                                            mApp.getPreference().edit().putString("univ",univ).commit();
+                                                            mApp.getPreference().edit().putString("location", location).commit();
+                                                            mApp.getPreference().edit().putString("aggrt", aggregate).commit();
+
+                                                            in.putExtra("what", "edit");
+                                                            if (level.equalsIgnoreCase("1") || level.equalsIgnoreCase("2") ||
+                                                                    level.equalsIgnoreCase("3")) {
+                                                                in.putExtra("which", "addClg");
+                                                            } else {
+                                                                in.putExtra("which", "addSch");
+                                                            }
+
+                                                            startActivity(in);
+                                                            break;
+                                                        case R.id.del:
+                                                            new DeleteDetail(ResumeEditActivity.this, pId, "edu").execute();
+                                                            break;
+                                                    }
+                                                    return false;
+                                                }
+                                            });
+                                            popupMenu.inflate(R.menu.resume_edit);
+                                            popupMenu.show();
+                                        }
+                                    });
+
+                                    qualifiy.addView(v);
+                                }
+                            });
+                        }
                     }
 
                     JSONObject skill = child.getJSONObject("skill");

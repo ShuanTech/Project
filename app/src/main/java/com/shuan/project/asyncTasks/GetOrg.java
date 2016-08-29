@@ -38,7 +38,6 @@ public class GetOrg extends AsyncTask<String, String, String> {
         this.progressBar = progressBar;
         this.scroll = scroll;
         this.txt = txt;
-        this.pin = pin;
         list=new ArrayList<Sample>();
     }
 

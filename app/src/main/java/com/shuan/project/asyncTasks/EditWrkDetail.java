@@ -16,25 +16,28 @@ import org.json.JSONObject;
 
 import java.util.HashMap;
 
-public class DeleteDetail extends AsyncTask<String, String, String> {
+public class EditWrkDetail extends AsyncTask<String,String,String>{
 
-    private Context mContext;
-    private String pId, table, s;
-    private ProgressDialog pDialog;
-    private HashMap<String, String> pData;
+    public Context mContext;
+    public String uId, org, loc, pos, frmDate, toDate, s;
+    public HashMap<String, String> rData;
+    public ProgressDialog pDialog;
 
-
-    public DeleteDetail(Context mContext, String pId, String table) {
+    public EditWrkDetail(Context mContext, String uId, String org, String loc, String pos, String frmDate, String toDate) {
         this.mContext = mContext;
-        this.pId = pId;
-        this.table = table;
+        this.uId = uId;
+        this.org = org;
+        this.loc = loc;
+        this.pos = pos;
+        this.frmDate = frmDate;
+        this.toDate = toDate;
     }
 
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
         pDialog = new ProgressDialog(mContext);
-        pDialog.setMessage("Deleting Detail");
+        pDialog.setMessage("Updating Work Detail");
         pDialog.setIndeterminate(false);
         pDialog.setCancelable(false);
         pDialog.show();
@@ -42,33 +45,33 @@ public class DeleteDetail extends AsyncTask<String, String, String> {
 
     @Override
     protected String doInBackground(String... params) {
-
-        pData = new HashMap<String, String>();
-        pData.put("p_id", pId);
-        pData.put("table", table);
+        rData = new HashMap<String, String>();
+        rData.put("u_id", uId);
+        rData.put("org_name", org);
+        rData.put("position", pos);
+        rData.put("loc", loc);
+        rData.put("frm", frmDate);
+        rData.put("to", toDate);
+        rData.put("type","edit");
 
         try {
-
-            JSONObject json = Connection.UrlConnection(php.delData, pData);
-            int succ=json.getInt("success");
-            if(succ==0){
-                s="false";
-            }else{
-                s="true";
+            JSONObject json = Connection.UrlConnection(php.work_info, rData);
+            int succ = json.getInt("success");
+            if (succ == 0) {
+                s = "false";
+            } else {
+                s = "true";
             }
-
         } catch (Exception e) {
         }
-
         return s;
     }
 
     @Override
     protected void onPostExecute(String s) {
         super.onPostExecute(s);
-        pDialog.cancel();
         if (s.equalsIgnoreCase("true")) {
-            Toast.makeText(mContext, "Successfully Deleted", Toast.LENGTH_SHORT).show();
+            Toast.makeText(mContext, "Successfully Work Details Updated", Toast.LENGTH_SHORT).show();
             Intent in = new Intent(mContext, ResumeEditActivity.class);
             in.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             mContext.startActivity(in);

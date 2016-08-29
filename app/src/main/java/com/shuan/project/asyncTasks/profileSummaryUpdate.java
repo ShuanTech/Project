@@ -20,16 +20,16 @@ public class profileSummaryUpdate extends AsyncTask<String, String, String> {
 
     private Context mContext;
     private String uId;
-    private String[] profile;
+    private String profile, table;
     private ProgressDialog pDialog;
     private HashMap<String, String> seniorData;
 
 
-    public profileSummaryUpdate(Context mContext, String uId, String[] profile) {
+    public profileSummaryUpdate(Context mContext, String uId, String profile, String table) {
         this.mContext = mContext;
         this.uId = uId;
         this.profile = profile;
-
+        this.table = table;
     }
 
     @Override
@@ -45,16 +45,17 @@ public class profileSummaryUpdate extends AsyncTask<String, String, String> {
 
     @Override
     protected String doInBackground(String... params) {
-        for (int i = 0; i < profile.length; i++) {
-            seniorData = new HashMap<String, String>();
-            seniorData.put("u_id", uId);
-            seniorData.put("summary", profile[i]);
-            try {
-                JSONObject json = Connection.UrlConnection(php.profile_summary, seniorData);
 
-            } catch (Exception e) {
-            }
+        seniorData = new HashMap<String, String>();
+        seniorData.put("u_id", uId);
+        seniorData.put("summary", profile);
+        seniorData.put("table",table);
+        try {
+            JSONObject json = Connection.UrlConnection(php.profile_summary, seniorData);
+
+        } catch (Exception e) {
         }
+
         return null;
     }
 

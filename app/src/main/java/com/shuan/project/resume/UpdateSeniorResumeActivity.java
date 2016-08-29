@@ -1969,8 +1969,6 @@ public class UpdateSeniorResumeActivity extends AppCompatActivity implements Vie
                         String board = child.optString("board");
                         String location = child.optString("location");
 
-                        locate[i] = location;
-
                         list.add(new Sample(insName + "," + location, insName, board, location));
                     }
 

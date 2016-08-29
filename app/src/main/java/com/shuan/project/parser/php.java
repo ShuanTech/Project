@@ -69,6 +69,7 @@ public class php {
     public static final String slcted_candidate_list = "http://192.168.1.111/Project/android/slcted_candidate_list.php";
     public static final String rjct_candidate_list = "http://192.168.1.111/Project/android/rjct_candidate_list.php";
     public static final String notify_list = "http://192.168.1.111/Project/android/notify_list.php";
-    public static final String delDate="http://192.168.1.111/Project/android/del_data.php";
+    public static final String delData="http://192.168.1.111/Project/android/del_data.php";
+    public static final String EdtData="http://192.168.1.111/Project/android/edt_data.php";
 
 }

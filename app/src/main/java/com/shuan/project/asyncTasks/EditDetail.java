@@ -1,6 +1,5 @@
 package com.shuan.project.asyncTasks;
 
-
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -16,17 +15,18 @@ import org.json.JSONObject;
 
 import java.util.HashMap;
 
-public class DeleteDetail extends AsyncTask<String, String, String> {
+
+public class EditDetail extends AsyncTask<String, String, String> {
 
     private Context mContext;
-    private String pId, table, s;
+    private String pId, data, table, s;
+    private HashMap<String, String> rData;
     private ProgressDialog pDialog;
-    private HashMap<String, String> pData;
 
-
-    public DeleteDetail(Context mContext, String pId, String table) {
+    public EditDetail(Context mContext, String pId, String data, String table) {
         this.mContext = mContext;
         this.pId = pId;
+        this.data = data;
         this.table = table;
     }
 
@@ -34,7 +34,7 @@ public class DeleteDetail extends AsyncTask<String, String, String> {
     protected void onPreExecute() {
         super.onPreExecute();
         pDialog = new ProgressDialog(mContext);
-        pDialog.setMessage("Deleting Detail");
+        pDialog.setMessage("Updating Detail");
         pDialog.setIndeterminate(false);
         pDialog.setCancelable(false);
         pDialog.show();
@@ -43,18 +43,19 @@ public class DeleteDetail extends AsyncTask<String, String, String> {
     @Override
     protected String doInBackground(String... params) {
 
-        pData = new HashMap<String, String>();
-        pData.put("p_id", pId);
-        pData.put("table", table);
+        rData = new HashMap<String, String>();
+        rData.put("p_id", pId);
+        rData.put("data", data);
+        rData.put("table", table);
 
         try {
 
-            JSONObject json = Connection.UrlConnection(php.delData, pData);
-            int succ=json.getInt("success");
-            if(succ==0){
-                s="false";
-            }else{
-                s="true";
+            JSONObject json = Connection.UrlConnection(php.EdtData, rData);
+            int succ = json.getInt("success");
+            if (succ == 0) {
+                s = "false";
+            } else {
+                s = "true";
             }
 
         } catch (Exception e) {
@@ -66,9 +67,8 @@ public class DeleteDetail extends AsyncTask<String, String, String> {
     @Override
     protected void onPostExecute(String s) {
         super.onPostExecute(s);
-        pDialog.cancel();
         if (s.equalsIgnoreCase("true")) {
-            Toast.makeText(mContext, "Successfully Deleted", Toast.LENGTH_SHORT).show();
+            Toast.makeText(mContext, "Successfully Updated", Toast.LENGTH_SHORT).show();
             Intent in = new Intent(mContext, ResumeEditActivity.class);
             in.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             mContext.startActivity(in);

@@ -375,8 +375,7 @@
                 <RelativeLayout
                     android:id="@+id/scroll1"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:visibility="gone">
+                    android:layout_height="wrap_content">
 
                     <TextView
                         android:id="@+id/qfy"
@@ -626,7 +625,7 @@
                 android:id="@+id/lay5"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:visibility="gone">
+                >
 
                 <ProgressBar
                     android:id="@+id/progress_bar2"
@@ -638,7 +637,7 @@
                     android:id="@+id/scroll2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:visibility="gone">
+                    >
 
                     <TextView
                         android:id="@+id/hsc"
