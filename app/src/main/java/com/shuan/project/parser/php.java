@@ -71,5 +71,8 @@ public class php {
     public static final String notify_list = "http://192.168.1.111/Project/android/notify_list.php";
     public static final String delData="http://192.168.1.111/Project/android/del_data.php";
     public static final String EdtData="http://192.168.1.111/Project/android/edt_data.php";
+    public static final String get_skill="http://192.168.1.111/Project/android/get_skill.php";
+    public static final String contactInfo="http://192.168.1.111/Project/android/usr_contact_info.php";
+    public static final String basicInfo="http://192.168.1.111/Project/android/usr_basic_info.php";
 
 }

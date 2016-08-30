@@ -16,48 +16,52 @@ import org.json.JSONObject;
 import java.util.HashMap;
 
 
-public class AddWrkDetail extends AsyncTask<String, String, String> {
+public class AddContactInfo extends AsyncTask<String, String, String> {
 
-    public Context mContext;
-    public String uId, org, loc, pos, frmDate, toDate, s;
-    public HashMap<String, String> rData;
-    public ProgressDialog pDialog;
+    private Context mContext;
+    private String uId, addr, city, distrct, state, country, s;
+    private boolean ins;
+    private HashMap<String, String> seniorData;
+    private ProgressDialog pDialog;
 
-    public AddWrkDetail(Context mContext, String uId, String org, String loc, String pos, String frmDate, String toDate) {
+    public AddContactInfo(Context mContext, String uId, String addr, String city, String distrct, String state, String country, boolean ins) {
         this.mContext = mContext;
         this.uId = uId;
-        this.org = org;
-        this.loc = loc;
-        this.pos = pos;
-        this.frmDate = frmDate;
-        this.toDate = toDate;
+        this.addr = addr;
+        this.city = city;
+        this.distrct = distrct;
+        this.state = state;
+        this.country = country;
+        this.ins = ins;
     }
 
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
         pDialog = new ProgressDialog(mContext);
-        pDialog.setMessage("Adding Work Detail");
+        pDialog.setMessage("Updating");
         pDialog.setIndeterminate(false);
         pDialog.setCancelable(false);
         pDialog.show();
     }
 
-
     @Override
     protected String doInBackground(String... params) {
 
-        rData = new HashMap<String, String>();
-        rData.put("u_id", uId);
-        rData.put("org_name", org);
-        rData.put("position", pos);
-        rData.put("loc", loc);
-        rData.put("frm", frmDate);
-        rData.put("to", toDate);
-        rData.put("type","add");
-
+        seniorData = new HashMap<String, String>();
+        seniorData.put("u_id", uId);
+        seniorData.put("address", addr);
+        seniorData.put("city", city);
+        seniorData.put("district", distrct);
+        seniorData.put("state", state);
+        seniorData.put("country", country);
+        if (ins == true) {
+            seniorData.put("insrt", "false");
+        } else {
+            seniorData.put("insrt", "true");
+        }
         try {
-            JSONObject json = Connection.UrlConnection(php.work_info, rData);
+            JSONObject json = Connection.UrlConnection(php.contactInfo, seniorData);
             int succ = json.getInt("success");
             if (succ == 0) {
                 s = "false";
@@ -66,6 +70,7 @@ public class AddWrkDetail extends AsyncTask<String, String, String> {
             }
         } catch (Exception e) {
         }
+
         return s;
     }
 
@@ -74,7 +79,7 @@ public class AddWrkDetail extends AsyncTask<String, String, String> {
         super.onPostExecute(s);
         pDialog.cancel();
         if (s.equalsIgnoreCase("true")) {
-            Toast.makeText(mContext, "Successfully Work Details Added", Toast.LENGTH_SHORT).show();
+            Toast.makeText(mContext, "Successfully Contact Info Added", Toast.LENGTH_SHORT).show();
             Intent in = new Intent(mContext, ResumeEditActivity.class);
             in.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             mContext.startActivity(in);

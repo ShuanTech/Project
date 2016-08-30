@@ -16,28 +16,34 @@ import org.json.JSONObject;
 import java.util.HashMap;
 
 
-public class AddWrkDetail extends AsyncTask<String, String, String> {
+public class AddProject extends AsyncTask<String, String, String> {
 
-    public Context mContext;
-    public String uId, org, loc, pos, frmDate, toDate, s;
-    public HashMap<String, String> rData;
-    public ProgressDialog pDialog;
+    private Context mContext;
+    private String uId, title, pltfrm, role, teamSze, dur, url, desc, isAcd,type, s;
+    private HashMap<String, String> seniorData;
+    private ProgressDialog pDialog;
 
-    public AddWrkDetail(Context mContext, String uId, String org, String loc, String pos, String frmDate, String toDate) {
+
+    public AddProject(Context mContext, String uId, String title, String pltfrm, String role, String teamSze, String dur, String url,
+                      String desc, String isAcd,String type) {
         this.mContext = mContext;
         this.uId = uId;
-        this.org = org;
-        this.loc = loc;
-        this.pos = pos;
-        this.frmDate = frmDate;
-        this.toDate = toDate;
+        this.title = title;
+        this.pltfrm = pltfrm;
+        this.role = role;
+        this.teamSze = teamSze;
+        this.dur = dur;
+        this.url = url;
+        this.desc = desc;
+        this.isAcd=isAcd;
+        this.type = type;
     }
 
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
         pDialog = new ProgressDialog(mContext);
-        pDialog.setMessage("Adding Work Detail");
+        pDialog.setMessage("Adding Project Detail");
         pDialog.setIndeterminate(false);
         pDialog.setCancelable(false);
         pDialog.show();
@@ -46,18 +52,20 @@ public class AddWrkDetail extends AsyncTask<String, String, String> {
 
     @Override
     protected String doInBackground(String... params) {
-
-        rData = new HashMap<String, String>();
-        rData.put("u_id", uId);
-        rData.put("org_name", org);
-        rData.put("position", pos);
-        rData.put("loc", loc);
-        rData.put("frm", frmDate);
-        rData.put("to", toDate);
-        rData.put("type","add");
+        seniorData = new HashMap<String, String>();
+        seniorData.put("u_id", uId);
+        seniorData.put("title", title);
+        seniorData.put("platform", pltfrm);
+        seniorData.put("role", role);
+        seniorData.put("teamSze", teamSze);
+        seniorData.put("dur", dur);
+        seniorData.put("desc", desc);
+        seniorData.put("url", url);
+        seniorData.put("isAcd",isAcd);
+        seniorData.put("type", type);
 
         try {
-            JSONObject json = Connection.UrlConnection(php.work_info, rData);
+            JSONObject json = Connection.UrlConnection(php.project, seniorData);
             int succ = json.getInt("success");
             if (succ == 0) {
                 s = "false";
@@ -66,6 +74,7 @@ public class AddWrkDetail extends AsyncTask<String, String, String> {
             }
         } catch (Exception e) {
         }
+
         return s;
     }
 
@@ -74,7 +83,7 @@ public class AddWrkDetail extends AsyncTask<String, String, String> {
         super.onPostExecute(s);
         pDialog.cancel();
         if (s.equalsIgnoreCase("true")) {
-            Toast.makeText(mContext, "Successfully Work Details Added", Toast.LENGTH_SHORT).show();
+            Toast.makeText(mContext, "Successfully Project Details Added", Toast.LENGTH_SHORT).show();
             Intent in = new Intent(mContext, ResumeEditActivity.class);
             in.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             mContext.startActivity(in);
