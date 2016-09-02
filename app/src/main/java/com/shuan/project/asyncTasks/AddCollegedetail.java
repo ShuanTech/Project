@@ -7,6 +7,7 @@ import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
+import com.shuan.project.Utils.Common;
 import com.shuan.project.parser.Connection;
 import com.shuan.project.parser.php;
 import com.shuan.project.resume.ResumeEditActivity;
@@ -19,13 +20,14 @@ import java.util.HashMap;
 public class AddCollegedetail extends AsyncTask<String, String, String> {
 
     private Context mContext;
-    private String uId, level, course, clg, univ, loc, frm, to, agrt, s,type;
+    private String uId, level, course, clg, univ, loc, frm, to, agrt, s, type;
     private boolean ins, cIns;
     private HashMap<String, String> sData;
     private ProgressDialog pDialog;
+    private Common mApp;
 
     public AddCollegedetail(Context mContext, String uId, String level, String course, String clg, String univ, String loc, String frm,
-                            String to, String agrt, boolean ins, boolean cIns,String type) {
+                            String to, String agrt, boolean ins, boolean cIns, String type) {
         this.mContext = mContext;
         this.uId = uId;
         this.level = level;
@@ -38,7 +40,8 @@ public class AddCollegedetail extends AsyncTask<String, String, String> {
         this.agrt = agrt;
         this.ins = ins;
         this.cIns = cIns;
-        this.type=type;
+        this.type = type;
+        this.mApp = (Common) mContext.getApplicationContext();
     }
 
     @Override
@@ -75,7 +78,7 @@ public class AddCollegedetail extends AsyncTask<String, String, String> {
         } else {
             sData.put("cInsrt", "true");
         }
-        sData.put("type",type);
+        sData.put("type", type);
 
 
         try {
@@ -99,6 +102,12 @@ public class AddCollegedetail extends AsyncTask<String, String, String> {
         super.onPostExecute(s);
         pDialog.cancel();
         if (s.equalsIgnoreCase("true")) {
+            mApp.getPreference().edit().putBoolean(Common.QUALIFICATION, true).commit();
+            int val = mApp.getPreference().getInt(Common.PROFILESTRENGTH, 0);
+            mApp.getPreference().edit().putInt(Common.PROFILESTRENGTH, val + 8).commit();
+            new GetInfo(mContext, uId).execute();
+            new Connect(mContext, uId, mApp.getPreference().getString(Common.LEVEL, ""),
+                    clg, course).execute();
             Toast.makeText(mContext, "Successfully Updated", Toast.LENGTH_SHORT).show();
             Intent in = new Intent(mContext, ResumeEditActivity.class);
             in.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

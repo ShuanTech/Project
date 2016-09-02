@@ -23,11 +23,13 @@ public class AddExtra extends AsyncTask<String, String, String> {
     private String uId, extra, s;
     private HashMap<String, String> seniorData;
     private ProgressDialog pDialog;
+    private Common mApp;
 
     public AddExtra(Context mContext, String uId, String extra) {
         this.mContext = mContext;
         this.uId = uId;
         this.extra = extra;
+        this.mApp= (Common) mContext.getApplicationContext();
     }
 
     @Override
@@ -62,6 +64,8 @@ public class AddExtra extends AsyncTask<String, String, String> {
         super.onPostExecute(s);
         pDialog.cancel();
         if (s.equalsIgnoreCase("true")) {
+            int val=mApp.getPreference().getInt(Common.PROFILESTRENGTH,0);
+            mApp.getPreference().edit().putInt(Common.PROFILESTRENGTH, val+2).commit();
             Toast.makeText(mContext, "Successfully Extra-Curricular Added", Toast.LENGTH_SHORT).show();
             Intent in = new Intent(mContext, ResumeEditActivity.class);
             in.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

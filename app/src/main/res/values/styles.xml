@@ -26,6 +26,9 @@
         <item name="colorAccent">@color/senAccent</item>
     </style>
 
+    <style name="Senior.Profile" parent="Senior">
+
+    </style>
 
     <style name="Profile" parent="AppBaseTheme">
         <item name="colorPrimary">@color/colorPrimary</item>

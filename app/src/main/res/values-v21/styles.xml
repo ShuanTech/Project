@@ -30,6 +30,9 @@
         <item name="colorPrimary">@color/senPrimary</item>
         <item name="colorPrimaryDark">@color/senDark</item>
         <item name="colorAccent">@color/senAccent</item>
+    </style>
+
+    <style name="Senior.Profile" parent="Senior">
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
         <item name="android:statusBarColor">@android:color/transparent</item>
     </style>

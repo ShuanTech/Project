@@ -5,16 +5,15 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Bundle;
 import android.os.Environment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
-
 
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Chunk;
@@ -33,7 +32,7 @@ import com.itextpdf.text.pdf.PdfWriter;
 import com.itextpdf.text.pdf.draw.LineSeparator;
 import com.shuan.project.R;
 import com.shuan.project.Utils.Common;
-import com.shuan.project.Utils.Resume;
+import com.shuan.project.asyncTasks.UploadPicture;
 import com.shuan.project.list.ResumeList;
 import com.shuan.project.parser.Connection;
 import com.shuan.project.parser.php;
@@ -45,9 +44,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.HashMap;
 
 
@@ -78,6 +75,15 @@ public class JuniorResumeGenerate extends AppCompatActivity {
 
         progressBar = (ProgressBar) findViewById(R.id.progress_bar);
         list = new ArrayList<ResumeList>();
+
+        if (mApp.getPreference().getBoolean(Common.APPLY, false) == true) {
+
+            FILE = Environment.getExternalStorageDirectory() + "/" + mApp.getPreference().getString(Common.u_id, "") + "-"
+                    + getIntent().getStringExtra("job_id") + "-" +
+                    getIntent().getStringExtra("refer") + ".pdf";
+        } else {
+            FILE = Environment.getExternalStorageDirectory() + "/" + mApp.getPreference().getString(Common.u_id, "") + ".pdf";
+        }
 
 
         if (mApp.getPreference().getBoolean(Common.QUALIFICATION, false) == false) {
@@ -135,9 +141,9 @@ public class JuniorResumeGenerate extends AppCompatActivity {
             fout = new FileOutputStream(file);
             PdfWriter.getInstance(doc, fout);
             doc.open();
-            if(mApp.getPreference().getBoolean(Common.OBJECTIVE,false)==false){
+            if (mApp.getPreference().getBoolean(Common.OBJECTIVE, false) == false) {
                 getObjective();
-            }else{
+            } else {
                 new getInfo().execute();
             }
 
@@ -163,8 +169,8 @@ public class JuniorResumeGenerate extends AppCompatActivity {
                 } else {
                     objective.setError("");
                     dialog.cancel();
-                    mApp.getPreference().edit().putBoolean(Common.OBJECTIVE,true).commit();
-                    mApp.getPreference().edit().putString(Common.OBJDATA,objective.getText().toString()).commit();
+                    mApp.getPreference().edit().putBoolean(Common.OBJECTIVE, true).commit();
+                    mApp.getPreference().edit().putString(Common.OBJDATA, objective.getText().toString()).commit();
                     new getInfo().execute();
                 }
             }
@@ -231,10 +237,11 @@ public class JuniorResumeGenerate extends AppCompatActivity {
                                 Paragraph p3 = new Paragraph("OBJECTIVIES", heading);
                                 p3.setAlignment(Paragraph.ALIGN_LEFT);
                                 doc.add(p3);
-                                Paragraph p4 = new Paragraph(mApp.getPreference().getString(Common.OBJDATA,""), content);
+                                Paragraph p4 = new Paragraph(mApp.getPreference().getString(Common.OBJDATA, ""), content);
                                 p4.setAlignment(Paragraph.ALIGN_LEFT);
                                 doc.add(p4);
                                 doc.add(Chunk.NEWLINE);
+
 
                                 new getEduInfo().execute();
 
@@ -308,6 +315,7 @@ public class JuniorResumeGenerate extends AppCompatActivity {
                                 doc.add(p6);
                                 doc.add(Chunk.NEWLINE);
 
+
                                 new getSkill().execute();
 
                             } catch (Exception e) {
@@ -321,6 +329,7 @@ public class JuniorResumeGenerate extends AppCompatActivity {
             }
             return null;
         }
+
     }
 
     public class getSkill extends AsyncTask<String, String, String> {
@@ -341,6 +350,7 @@ public class JuniorResumeGenerate extends AppCompatActivity {
                             new getProjectDetail().execute();
                         }
                     });
+
                 } else {
                     JSONArray jsonArray = json.getJSONArray("skill");
                     JSONObject child = jsonArray.getJSONObject(0);
@@ -401,8 +411,8 @@ public class JuniorResumeGenerate extends AppCompatActivity {
                             table.setHorizontalAlignment(Element.ALIGN_LEFT);
                             doc.add(table);
                             doc.add(Chunk.NEWLINE);
-                            new getProjectDetail().execute();
 
+                            new getProjectDetail().execute();
                         } catch (Exception e) {
                         }
                     }
@@ -414,7 +424,6 @@ public class JuniorResumeGenerate extends AppCompatActivity {
         }
     }
 
-
     public class getProjectDetail extends AsyncTask<String, String, String> {
 
         @Override
@@ -422,12 +431,18 @@ public class JuniorResumeGenerate extends AppCompatActivity {
             list.clear();
             resumeData = new HashMap<String, String>();
             resumeData.put("u_id", mApp.getPreference().getString(Common.u_id, ""));
-            resumeData.put("level", "junior");
+            resumeData.put("level", "senior");
 
             try {
                 JSONObject json = Connection.UrlConnection(php.getProjectDetail, resumeData);
                 int succ = json.getInt("success");
                 if (succ == 0) {
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            new getCertification().execute();
+                        }
+                    });
                 } else {
                     final JSONArray jsonArray = json.getJSONArray("project");
                     for (int i = 0; i < jsonArray.length(); i++) {
@@ -447,9 +462,11 @@ public class JuniorResumeGenerate extends AppCompatActivity {
                         public void run() {
                             try {
 
-                                Paragraph p14 = new Paragraph("ACADEMIC PROJECT", heading);
+
+                                Paragraph p14 = new Paragraph("PROJECT SUMMARY", heading);
                                 p14.setAlignment(Paragraph.ALIGN_LEFT);
                                 doc.add(p14);
+
 
                                 for (int j = 0; j < list.size(); j++) {
                                     ResumeList curr = list.get(j);
@@ -486,7 +503,7 @@ public class JuniorResumeGenerate extends AppCompatActivity {
                                         table.addCell(c6);
                                     }
 
-                                    if (!curr.getTeam_mem().equalsIgnoreCase("0") ) {
+                                    if (!curr.getTeam_mem().equalsIgnoreCase("0")) {
                                         c7 = new PdfPCell(new Paragraph("Team-Size", heading));
                                         c8 = new PdfPCell(new Paragraph(curr.getTeam_mem(), content));
                                         c7.setBorder(Rectangle.NO_BORDER);
@@ -520,7 +537,6 @@ public class JuniorResumeGenerate extends AppCompatActivity {
 
                                 new getCertification().execute();
 
-
                             } catch (Exception e) {
                             }
                         }
@@ -534,7 +550,7 @@ public class JuniorResumeGenerate extends AppCompatActivity {
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
-            progressBar.setVisibility(View.GONE);
+
         }
     }
 
@@ -592,7 +608,6 @@ public class JuniorResumeGenerate extends AppCompatActivity {
 
 
                                 new getAchivmnt().execute();
-
 
                             } catch (Exception e) {
                             }
@@ -712,8 +727,8 @@ public class JuniorResumeGenerate extends AppCompatActivity {
                                 }
                                 doc.add(p13);
                                 doc.add(Chunk.NEWLINE);
+
                                 personalInfo();
-                                //getDeclaration();
 
                             } catch (Exception e) {
                             }
@@ -726,6 +741,7 @@ public class JuniorResumeGenerate extends AppCompatActivity {
             return null;
         }
     }
+
 
     private void personalInfo() {
         try {
@@ -776,15 +792,6 @@ public class JuniorResumeGenerate extends AppCompatActivity {
             doc.add(table1);
             doc.add(Chunk.NEWLINE);
 
-
-          /*  if (objective.getText().toString().length() == 0) {
-
-            } else {*/
-            Paragraph p17 = new Paragraph("DECLARATION", heading);
-            p17.setAlignment(Paragraph.ALIGN_LEFT);
-            doc.add(p17);
-            Paragraph p18 = new Paragraph("I hereby declare that all the above furnished information is true to the best of my knowledge and belief.", content);
-            doc.add(p18);
             doc.add(Chunk.NEWLINE);
             doc.add(Chunk.NEWLINE);
             Paragraph p19 = new Paragraph("PLACE:  " + city);
@@ -799,11 +806,36 @@ public class JuniorResumeGenerate extends AppCompatActivity {
             Paragraph p21 = new Paragraph(name);
             p21.setAlignment(Paragraph.ALIGN_RIGHT);
             doc.add(p21);
-            //}
-
 
             doc.close();
-            openPdf();
+            if (mApp.getPreference().getBoolean(Common.APPLY, false) == true) {
+                Toast.makeText(getApplicationContext(), "Upload start", Toast.LENGTH_SHORT).show();
+                new UploadPicture(JuniorResumeGenerate.this, FILE, "resume", "junior", php.upload_resume).execute();
+                mApp.getPreference().edit().putBoolean(Common.APPLY, false).commit();
+            } else {
+                Toast.makeText(getApplicationContext(), "Resume Saved in" + FILE, Toast.LENGTH_SHORT).show();
+                openPdf();
+            }
+
+
+            /*
+
+            openPdf();*/
+
+           /* if (mApp.getPreference().getBoolean(Common.APPLY, false) == true) {
+
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    progressBar.setVisibility(View.GONE);
+                    scroll.setVisibility(View.VISIBLE);
+                    render();
+                } else {
+                    Toast.makeText(getApplicationContext(), "Upload start", Toast.LENGTH_SHORT).show();
+                    new UploadPicture(ExpResumeGenerate.this, FILE, "resume", "senior", php.upload_resume).execute();
+                }
+            } else {
+                render();
+            }*/
+
         } catch (Exception e) {
         }
     }

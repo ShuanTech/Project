@@ -6,12 +6,11 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
@@ -22,7 +21,6 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -30,6 +28,7 @@ import android.widget.TextView;
 import com.shuan.project.R;
 import com.shuan.project.Utils.Common;
 import com.shuan.project.Utils.Helper;
+import com.shuan.project.Utils.MonthYearPicker;
 import com.shuan.project.asyncTasks.AddAchieve;
 import com.shuan.project.asyncTasks.AddBasicInfo;
 import com.shuan.project.asyncTasks.AddCert;
@@ -61,11 +60,11 @@ public class UpdateResumeActivity extends AppCompatActivity implements View.OnCl
     private LinearLayout psEdt, wrkDet, wrkExp, clg, sch, skill, prjct, cert, ach, exc, cntInfo, bsc;
     private HashMap<String, String> seniorData;
     private ProgressDialog pDialog;
-    private String frmDate, toDate;
     private ProgressBar progressBar;
     private ScrollView scroll;
     private boolean ins = false;
     private boolean sIns = false;
+    private String frmDate;
 
 
     /* Profile Summary Field */
@@ -74,39 +73,34 @@ public class UpdateResumeActivity extends AppCompatActivity implements View.OnCl
     private EditText psEdtTxt;
 
     /* Work Details Field */
-    private AutoCompleteTextView orgname, postition, location;
+    private AutoCompleteTextView orgname;
+    private EditText postition, location, fYr, tYr, present;
     private Button wkDetails;
-    private EditText fY, fM, fD, tY, tM, tD, present;
-    private String[] mnth = new String[0];
-    private String[] date = new String[0];
-    private RelativeLayout frm_mnth, frm_date, to_mnth, to_date;
-    private LinearLayout to_year;
     private CheckBox wrking;
     private TextView add_wrk;
     private boolean visible = false;
+    private String toDate;
+    private MonthYearPicker myp;
+    private MonthYearPicker myp1;
 
     /* Work Summary Field */
     private EditText weEdtTxt;
     private Button weEdtBut;
 
     /* College Fields */
-    private AutoCompleteTextView clgName, univ, loc, conCent;
-    private EditText cfY, cfM, cfD, ctY, ctM, ctD, agrt;
+    private AutoCompleteTextView clgName, conCent;
+    private EditText univ, loc, frm_yr, to_yr, agrt;
     private String[] cours = new String[0];
-    private RelativeLayout cfrm_mnth, cfrm_date, cto_mnth, cto_date;
     private boolean cIns = false;
     private String[] qulify = new String[]{"PG", "UG", "DIPLOMA"};
     private String q;
     private Spinner level;
     private Button q_update;
-    private ProgressBar progressBar1;
-    private RelativeLayout scroll1;
     private TextView frm, to, qfy;
 
     /* School Fields */
-    private AutoCompleteTextView h_name, board, cty;
-    private EditText mode, hfY, hfM, hfD, htY, htM, htD, hAgrt;
-    private RelativeLayout h_frm_mnth, h_frm_date, h_to_mnth, h_to_date;
+    private AutoCompleteTextView h_name;
+    private EditText mode, board, cty, sFrmyr, sTYr, hAgrt;
     private Button h_update;
 
     /* Skill Set */
@@ -145,6 +139,8 @@ public class UpdateResumeActivity extends AppCompatActivity implements View.OnCl
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         what = getIntent().getStringExtra("what");
         which = getIntent().getStringExtra("which");
         super.onCreate(savedInstanceState);
@@ -193,117 +189,58 @@ public class UpdateResumeActivity extends AppCompatActivity implements View.OnCl
             wrkDet.setVisibility(View.VISIBLE);
             progressBar.setVisibility(View.VISIBLE);
 
-            add_wrk = (TextView) findViewById(R.id.add_wrk);
             orgname = (AutoCompleteTextView) findViewById(R.id.orgname);
-            postition = (AutoCompleteTextView) findViewById(R.id.position);
-            location = (AutoCompleteTextView) findViewById(R.id.location);
-            to_year = (LinearLayout) findViewById(R.id.to_year);
+            postition = (EditText) findViewById(R.id.position);
+            location = (EditText) findViewById(R.id.location);
+            fYr = (EditText) findViewById(R.id.f_yr);
+            tYr = (EditText) findViewById(R.id.t_yr);
 
             wrking = (CheckBox) findViewById(R.id.wrking);
-
-            fY = (EditText) findViewById(R.id.f_year);
-            fM = (EditText) findViewById(R.id.f_month);
-            fD = (EditText) findViewById(R.id.f_date);
-            tY = (EditText) findViewById(R.id.t_year);
-            tM = (EditText) findViewById(R.id.t_month);
-            tD = (EditText) findViewById(R.id.t_date);
             present = (EditText) findViewById(R.id.present);
-            frm_mnth = (RelativeLayout) findViewById(R.id.frm_mnth);
-            frm_date = (RelativeLayout) findViewById(R.id.frm_dat);
-            to_mnth = (RelativeLayout) findViewById(R.id.to_mnth);
-            to_date = (RelativeLayout) findViewById(R.id.to_dat);
-            mnth = getResources().getStringArray(R.array.month);
-            date = getResources().getStringArray(R.array.date);
+            frm = (TextView) findViewById(R.id.frm);
+            to = (TextView) findViewById(R.id.to);
+
+            myp = new MonthYearPicker(this);
+            myp1 = new MonthYearPicker(this);
+
+
             wkDetails = (Button) findViewById(R.id.wk_detail);
-            wrking.setTypeface(helper.droid(getApplicationContext()));
-            add_wrk.setTypeface(helper.droid(getApplicationContext()));
-            fY.setTypeface(helper.droid(getApplicationContext()));
-            fM.setTypeface(helper.droid(getApplicationContext()));
-            fD.setTypeface(helper.droid(getApplicationContext()));
-            tY.setTypeface(helper.droid(getApplicationContext()));
-            tM.setTypeface(helper.droid(getApplicationContext()));
-            tD.setTypeface(helper.droid(getApplicationContext()));
-            present.setTypeface(helper.droid(getApplicationContext()));
-            wkDetails.setTypeface(helper.droid(getApplicationContext()));
 
-
-            fM.setOnTouchListener(new View.OnTouchListener() {
+            fYr.setOnTouchListener(new View.OnTouchListener() {
                 @Override
                 public boolean onTouch(View v, MotionEvent event) {
                     if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                        showMnth("fm");
+                        myp.build(new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                fYr.setText(myp.getSelectedYear() + "-" + myp.getSelectedMonthShortName());
+                            }
+                        }, null);
+                        myp.show();
+
                     }
                     return false;
                 }
             });
 
-            fD.setOnTouchListener(new View.OnTouchListener() {
+            tYr.setOnTouchListener(new View.OnTouchListener() {
                 @Override
                 public boolean onTouch(View v, MotionEvent event) {
                     if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                        showDate("fd");
+                        myp1.build(new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                tYr.setText(myp.getSelectedYear() + "-" + myp.getSelectedMonthShortName());
+                            }
+                        }, null);
+                        myp1.show();
+
+
                     }
                     return false;
                 }
             });
 
-            tM.setOnTouchListener(new View.OnTouchListener() {
-                @Override
-                public boolean onTouch(View v, MotionEvent event) {
-                    if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                        showMnth("tm");
-                    }
-                    return false;
-                }
-            });
-
-            tD.setOnTouchListener(new View.OnTouchListener() {
-                @Override
-                public boolean onTouch(View v, MotionEvent event) {
-                    if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                        showDate("td");
-                    }
-                    return false;
-                }
-            });
-
-
-            fY.addTextChangedListener(new TextWatcher() {
-                @Override
-                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-                }
-
-                @Override
-                public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-                }
-
-                @Override
-                public void afterTextChanged(Editable s) {
-                    if (fY.getText().toString().length() == 4) {
-                        frm_mnth.setVisibility(View.VISIBLE);
-                    }
-                }
-            });
-            tY.addTextChangedListener(new TextWatcher() {
-                @Override
-                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-                }
-
-                @Override
-                public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-                }
-
-                @Override
-                public void afterTextChanged(Editable s) {
-                    if (tY.getText().toString().length() == 4) {
-                        to_mnth.setVisibility(View.VISIBLE);
-                    }
-                }
-            });
 
             new GetOrg(UpdateResumeActivity.this, progressBar, scroll, orgname).execute();
 
@@ -349,23 +286,16 @@ public class UpdateResumeActivity extends AppCompatActivity implements View.OnCl
 
             level = (Spinner) findViewById(R.id.level);
             clgName = (AutoCompleteTextView) findViewById(R.id.clg_name);
-            univ = (AutoCompleteTextView) findViewById(R.id.univ);
-            loc = (AutoCompleteTextView) findViewById(R.id.c_location);
-            cfY = (EditText) findViewById(R.id.c_f_year);
-            cfM = (EditText) findViewById(R.id.c_f_month);
-            cfD = (EditText) findViewById(R.id.c_f_date);
-            ctY = (EditText) findViewById(R.id.c_t_year);
-            ctM = (EditText) findViewById(R.id.c_t_month);
-            ctD = (EditText) findViewById(R.id.c_t_date);
+            univ = (EditText) findViewById(R.id.univ);
+            loc = (EditText) findViewById(R.id.locate);
+            frm = (TextView) findViewById(R.id.frm);
+            to = (TextView) findViewById(R.id.to);
             conCent = (AutoCompleteTextView) findViewById(R.id.concent);
+            frm_yr = (EditText) findViewById(R.id.frm_yr);
+            to_yr = (EditText) findViewById(R.id.to_yr);
             agrt = (EditText) findViewById(R.id.agrt);
 
-            cfrm_mnth = (RelativeLayout) findViewById(R.id.c_frm_mnth);
-            cfrm_date = (RelativeLayout) findViewById(R.id.c_frm_dat);
-            cto_mnth = (RelativeLayout) findViewById(R.id.c_to_mnth);
-            cto_date = (RelativeLayout) findViewById(R.id.c_to_dat);
-            mnth = getResources().getStringArray(R.array.month);
-            date = getResources().getStringArray(R.array.date);
+
             q_update = (Button) findViewById(R.id.q_update);
 
             ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(getApplicationContext(), R.layout.spinner_item, qulify);
@@ -391,88 +321,6 @@ public class UpdateResumeActivity extends AppCompatActivity implements View.OnCl
             });
 
 
-            cfM.setOnTouchListener(new View.OnTouchListener() {
-                @Override
-                public boolean onTouch(View v, MotionEvent event) {
-                    if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                        showMnth("cfm");
-                    }
-                    return false;
-                }
-            });
-
-            cfD.setOnTouchListener(new View.OnTouchListener() {
-                @Override
-                public boolean onTouch(View v, MotionEvent event) {
-                    if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                        showDate("cfd");
-                    }
-                    return false;
-                }
-            });
-
-            ctM.setOnTouchListener(new View.OnTouchListener() {
-                @Override
-                public boolean onTouch(View v, MotionEvent event) {
-                    if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                        showMnth("ctm");
-                    }
-                    return false;
-                }
-            });
-
-            ctD.setOnTouchListener(new View.OnTouchListener() {
-                @Override
-                public boolean onTouch(View v, MotionEvent event) {
-                    if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                        showDate("ctd");
-                    }
-                    return false;
-                }
-            });
-
-
-            cfY.addTextChangedListener(new TextWatcher() {
-                @Override
-                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-                }
-
-                @Override
-                public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-                }
-
-                @Override
-                public void afterTextChanged(Editable s) {
-
-                    if (cfY.getText().toString().length() == 4) {
-                        cfrm_mnth.setVisibility(View.VISIBLE);
-                    }
-
-
-                }
-            });
-            ctY.addTextChangedListener(new TextWatcher() {
-                @Override
-                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-                }
-
-                @Override
-                public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-                }
-
-                @Override
-                public void afterTextChanged(Editable s) {
-                    if (ctY.getText().toString().length() == 4) {
-                        cto_mnth.setVisibility(View.VISIBLE);
-                    }
-
-                }
-            });
-
             new GetCollege(UpdateResumeActivity.this, progressBar, scroll, clgName).execute();
             new GetCourse(UpdateResumeActivity.this, conCent).execute();
 
@@ -496,7 +344,7 @@ public class UpdateResumeActivity extends AppCompatActivity implements View.OnCl
                     TextView txt = (TextView) view.findViewById(R.id.display);
                     conCent.setText(txt.getText().toString());
                     cIns = true;
-                    cfY.requestFocus();
+                    frm_yr.requestFocus();
                 }
             });
 
@@ -525,105 +373,15 @@ public class UpdateResumeActivity extends AppCompatActivity implements View.OnCl
 
             mode = (EditText) findViewById(R.id.mode);
             h_name = (AutoCompleteTextView) findViewById(R.id.h_name);
-            board = (AutoCompleteTextView) findViewById(R.id.board);
-            cty = (AutoCompleteTextView) findViewById(R.id.cty);
-
-            hfY = (EditText) findViewById(R.id.h_f_year);
-            hfM = (EditText) findViewById(R.id.h_f_month);
-            hfD = (EditText) findViewById(R.id.h_f_date);
-            htY = (EditText) findViewById(R.id.h_t_year);
-            htM = (EditText) findViewById(R.id.h_t_month);
-            htD = (EditText) findViewById(R.id.h_t_date);
+            board = (EditText) findViewById(R.id.board);
+            cty = (EditText) findViewById(R.id.cty);
+            sFrmyr = (EditText) findViewById(R.id.s_frm_yr);
+            sTYr = (EditText) findViewById(R.id.s_to_yr);
             hAgrt = (EditText) findViewById(R.id.h_agrt);
 
-            h_frm_mnth = (RelativeLayout) findViewById(R.id.h_frm_mnth);
-            h_frm_date = (RelativeLayout) findViewById(R.id.h_frm_dat);
-            h_to_mnth = (RelativeLayout) findViewById(R.id.h_to_mnth);
-            h_to_date = (RelativeLayout) findViewById(R.id.h_to_dat);
 
-            mnth = getResources().getStringArray(R.array.month);
-            date = getResources().getStringArray(R.array.date);
             h_update = (Button) findViewById(R.id.h_update);
 
-            hfM.setOnTouchListener(new View.OnTouchListener() {
-                @Override
-                public boolean onTouch(View v, MotionEvent event) {
-                    if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                        showMnth("hfm");
-                    }
-                    return false;
-                }
-            });
-
-            hfD.setOnTouchListener(new View.OnTouchListener() {
-                @Override
-                public boolean onTouch(View v, MotionEvent event) {
-                    if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                        showDate("hfd");
-                    }
-                    return false;
-                }
-            });
-
-            htM.setOnTouchListener(new View.OnTouchListener() {
-                @Override
-                public boolean onTouch(View v, MotionEvent event) {
-                    if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                        showMnth("htm");
-                    }
-                    return false;
-                }
-            });
-
-            htD.setOnTouchListener(new View.OnTouchListener() {
-                @Override
-                public boolean onTouch(View v, MotionEvent event) {
-                    if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                        showDate("htd");
-                    }
-                    return false;
-                }
-            });
-
-
-            hfY.addTextChangedListener(new TextWatcher() {
-                @Override
-                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-                }
-
-                @Override
-                public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-                }
-
-                @Override
-                public void afterTextChanged(Editable s) {
-                    if (hfY.getText().toString().length() == 4) {
-                        h_frm_mnth.setVisibility(View.VISIBLE);
-                    }
-
-                }
-            });
-            htY.addTextChangedListener(new TextWatcher() {
-                @Override
-                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-                }
-
-                @Override
-                public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-                }
-
-                @Override
-                public void afterTextChanged(Editable s) {
-                    if (htY.getText().toString().length() == 4) {
-                        h_to_mnth.setVisibility(View.VISIBLE);
-                    }
-
-                }
-            });
 
             new GetSchool(UpdateResumeActivity.this, scroll, progressBar, h_name).execute();
             h_name.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -636,7 +394,7 @@ public class UpdateResumeActivity extends AppCompatActivity implements View.OnCl
                     board.setText(txt2.getText().toString());
                     cty.setText(txt3.getText().toString());
                     ins = true;
-                    hfY.requestFocus();
+                    sFrmyr.requestFocus();
                 }
             });
 
@@ -811,16 +569,16 @@ public class UpdateResumeActivity extends AppCompatActivity implements View.OnCl
                 }
             });
 
-            dob.setText(mApp.getPreference().getString("dob",""));
-            fName.setText(mApp.getPreference().getString("fName",""));
-            mName.setText(mApp.getPreference().getString("mName",""));
-            rel.setText(mApp.getPreference().getString("rel",""));
-            lang.setText(mApp.getPreference().getString("lang",""));
-            hobby.setText(mApp.getPreference().getString("hobby",""));
+            dob.setText(mApp.getPreference().getString("dob", ""));
+            fName.setText(mApp.getPreference().getString("fName", ""));
+            mName.setText(mApp.getPreference().getString("mName", ""));
+            rel.setText(mApp.getPreference().getString("rel", ""));
+            lang.setText(mApp.getPreference().getString("lang", ""));
+            hobby.setText(mApp.getPreference().getString("hobby", ""));
 
-            if(mApp.getPreference().getString("gen","").equalsIgnoreCase("male")){
+            if (mApp.getPreference().getString("gen", "").equalsIgnoreCase("male")) {
                 r1.setChecked(true);
-            }else{
+            } else {
                 r2.setChecked(true);
             }
 
@@ -845,11 +603,11 @@ public class UpdateResumeActivity extends AppCompatActivity implements View.OnCl
             case R.id.wrking:
                 if (((CheckBox) v).isChecked()) {
                     present.setVisibility(View.VISIBLE);
-                    to_year.setVisibility(View.GONE);
+                    tYr.setVisibility(View.GONE);
                     visible = false;
                 } else {
                     present.setVisibility(View.GONE);
-                    to_year.setVisibility(View.VISIBLE);
+                    tYr.setVisibility(View.VISIBLE);
                     visible = true;
                 }
                 break;
@@ -860,45 +618,32 @@ public class UpdateResumeActivity extends AppCompatActivity implements View.OnCl
                 } else if (location.getText().toString().length() == 0) {
                     location.setError("Location Mandatory");
                     location.requestFocus();
-                } else if (fY.getText().toString().length() == 0) {
-                    fY.setError("Year Mandatory");
-                    fY.requestFocus();
-                } else if (fM.getText().toString().length() == 0) {
-                    fM.setError("Month Mandatory");
-                    fM.requestFocus();
-                } else if (fD.getText().toString().length() == 0) {
-                    fD.setError("Date Mandatory");
-                    fD.requestFocus();
+                } else if (fYr.getText().toString().length() == 0) {
+                    fYr.setError("Field Mandatory");
+                    fYr.requestFocus();
                 } else {
                     if (visible) {
-                        if (tY.getText().toString().length() == 0) {
-                            tY.setError("Year Mandatory");
-                            tY.requestFocus();
-                        } else if (tM.getText().toString().length() == 0) {
-                            tM.setError("Month Mandatory");
-                            tM.requestFocus();
-                        } else if (tD.getText().toString().length() == 0) {
-                            tD.setError("Date Mandatory");
-                            tD.requestFocus();
+                        if (tYr.getText().toString().length() == 0) {
+                            tYr.setError("Field Mandatory");
+                            tYr.requestFocus();
+                        } else {
+                            toDate = tYr.getText().toString();
                         }
-                        toDate = tY.getText().toString() + "-" + tM.getText().toString() + "-" + tD.getText().toString();
                     } else {
                         toDate = "present";
                     }
-                    frmDate = fY.getText().toString() + "-" + fM.getText().toString() + "-" + fD.getText().toString();
-                    if (toDate.toString().equalsIgnoreCase("--")) {
-                    } else {
-                        if (what.equalsIgnoreCase("add")) {
-                            new AddWrkDetail(UpdateResumeActivity.this, mApp.getPreference().getString(Common.u_id, ""),
-                                    orgname.getText().toString(), location.getText().toString(), postition.getText().toString(),
-                                    frmDate, toDate).execute();
-                        } else {
-                            new EditWrkDetail(UpdateResumeActivity.this, mApp.getPreference().getString("eId", ""),
-                                    orgname.getText().toString(), location.getText().toString(), postition.getText().toString(),
-                                    frmDate, toDate).execute();
-                        }
 
+                    if (what.equalsIgnoreCase("add")) {
+                        new AddWrkDetail(UpdateResumeActivity.this, mApp.getPreference().getString(Common.u_id, ""),
+                                orgname.getText().toString(), location.getText().toString(), postition.getText().toString(),
+                                fYr.getText().toString(), toDate).execute();
+                    } else {
+                        new EditWrkDetail(UpdateResumeActivity.this, mApp.getPreference().getString("eId", ""),
+                                orgname.getText().toString(), location.getText().toString(), postition.getText().toString(),
+                                fYr.getText().toString(), toDate).execute();
                     }
+
+
                 }
                 break;
             case R.id.we_edit_but:
@@ -911,33 +656,16 @@ public class UpdateResumeActivity extends AppCompatActivity implements View.OnCl
                 }
                 break;
             case R.id.q_update:
-                if (clgName.getText().toString().length() == 0) {
-                    clgName.setError("College Mandatory");
-                    clgName.requestFocus();
-                } else if (univ.getText().toString().length() == 0) {
+                if (univ.getText().toString().length() == 0) {
                     univ.setError("University Mandatory");
                     univ.requestFocus();
                 } else if (loc.getText().toString().length() == 0) {
                     loc.setError("City / Town / Location Mandatory");
                     loc.requestFocus();
-                } else if (cfY.getText().toString().length() == 0) {
-                    cfY.setError("Year Mandatory");
-                    cfY.requestFocus();
-                } else if (cfM.getText().toString().length() == 0) {
-                    cfM.setError("Month Mandatory");
-                    cfM.requestFocus();
-                } else if (cfD.getText().toString().length() == 0) {
-                    cfD.setError("Date Mandatory");
-                    cfD.requestFocus();
-                } else if (ctY.getText().toString().length() == 0) {
-                    ctY.setError("Year Mandatory");
-                    ctY.requestFocus();
-                } else if (ctM.getText().toString().length() == 0) {
-                    ctM.setError("Month Mandatory");
-                    ctM.requestFocus();
-                } else if (ctD.getText().toString().length() == 0) {
-                    ctD.setError("Date Mandatory");
-                    ctD.requestFocus();
+                } else if (frm_yr.getText().toString().length() == 0) {
+                    frm_yr.setError("Field Mandatory");
+                } else if (to_yr.getText().toString().length() == 0) {
+                    to_yr.setError("Field Mandatory");
                 } else if (conCent.getText().toString().length() == 0) {
                     conCent.setError("Concentration Mandatory");
                     conCent.requestFocus();
@@ -945,17 +673,16 @@ public class UpdateResumeActivity extends AppCompatActivity implements View.OnCl
                     agrt.setError("Aggregate Mandatory");
                     agrt.requestFocus();
                 } else {
-                    frmDate = cfY.getText().toString() + "-" + cfM.getText().toString() + "-" + cfD.getText().toString();
-                    toDate = ctY.getText().toString() + "-" + ctM.getText().toString() + "-" + ctD.getText().toString();
+
 
                     if (what.equalsIgnoreCase("add")) {
                         new AddCollegedetail(UpdateResumeActivity.this, mApp.getPreference().getString(Common.u_id, ""), q, conCent.getText().toString(),
                                 clgName.getText().toString(), univ.getText().toString(), loc.getText().toString(),
-                                frmDate, toDate, agrt.getText().toString(), ins, cIns, "add").execute();
+                                frm_yr.getText().toString(), to_yr.getText().toString(), agrt.getText().toString(), ins, cIns, "add").execute();
                     } else {
                         new AddCollegedetail(UpdateResumeActivity.this, mApp.getPreference().getString("eId", ""), q, conCent.getText().toString(),
                                 clgName.getText().toString(), univ.getText().toString(), loc.getText().toString(),
-                                frmDate, toDate, agrt.getText().toString(), ins, cIns, "edit").execute();
+                                frm_yr.getText().toString(), to_yr.getText().toString(), agrt.getText().toString(), ins, cIns, "edit").execute();
                     }
                 }
                 break;
@@ -968,23 +695,16 @@ public class UpdateResumeActivity extends AppCompatActivity implements View.OnCl
                     board.setError("Field Mandatory");
                 } else if (cty.getText().toString().length() == 0) {
                     cty.setError("Field Mandatory");
-                } else if (hfY.getText().toString().length() == 0) {
-                    hfY.setError("Field Mandatory");
-                } else if (hfM.getText().toString().length() == 0) {
-                    hfM.setError("Field Mandatory");
-                } else if (hfD.getText().toString().length() == 0) {
-                    hfD.setError("Field Mandatory");
-                } else if (htY.getText().toString().length() == 0) {
-                    htY.setError("Field Mandatory");
-                } else if (htM.getText().toString().length() == 0) {
-                    htM.setError("Field Mandatory");
-                } else if (htD.getText().toString().length() == 0) {
-                    htD.setError("Field Mandatory");
+                } else if (sFrmyr.getText().toString().length() == 0) {
+                    sFrmyr.setError("Field Mandatory");
+                    sFrmyr.requestFocus();
+                } else if (sTYr.getText().toString().length() == 0) {
+                    sTYr.setError("Field Mandatory");
+                    sTYr.requestFocus();
                 } else if (hAgrt.getText().toString().length() == 0) {
                     hAgrt.setError("Field Mandatory");
                 } else {
-                    frmDate = hfY.getText().toString() + "-" + hfM.getText().toString() + "-" + hfD.getText().toString();
-                    toDate = htY.getText().toString() + "-" + htM.getText().toString() + "-" + htD.getText().toString();
+
                     String sLevel;
                     if (mode.getText().toString().equalsIgnoreCase("hsc")) {
                         sLevel = "4";
@@ -995,11 +715,11 @@ public class UpdateResumeActivity extends AppCompatActivity implements View.OnCl
                     if (what.equalsIgnoreCase("add")) {
                         new AddSchool(UpdateResumeActivity.this, mApp.getPreference().getString(Common.u_id, ""), sLevel,
                                 mode.getText().toString(), h_name.getText().toString(), board.getText().toString(), cty.getText().toString(),
-                                frmDate, toDate, hAgrt.getText().toString(), "add", ins).execute();
+                                sFrmyr.getText().toString(), sTYr.getText().toString(), hAgrt.getText().toString(), "add", ins).execute();
                     } else {
                         new AddSchool(UpdateResumeActivity.this, mApp.getPreference().getString("eId", ""), sLevel,
                                 mode.getText().toString(), h_name.getText().toString(), board.getText().toString(), cty.getText().toString(),
-                                frmDate, toDate, hAgrt.getText().toString(), "edit", ins).execute();
+                                sFrmyr.getText().toString(), sTYr.getText().toString(), hAgrt.getText().toString(), "edit", ins).execute();
                     }
 
                 }
@@ -1121,71 +841,14 @@ public class UpdateResumeActivity extends AppCompatActivity implements View.OnCl
                     hobby.setError("Field Mandatory");
                     hobby.requestFocus();
                 } else {
-                    new AddBasicInfo(UpdateResumeActivity.this,mApp.getPreference().getString(Common.u_id,""),
-                            dob.getText().toString(),radio.getText().toString(),fName.getText().toString(),
-                            mName.getText().toString(),rel.getText().toString(),lang.getText().toString(),hobby.getText().toString()).execute();
+                    new AddBasicInfo(UpdateResumeActivity.this, mApp.getPreference().getString(Common.u_id, ""),
+                            dob.getText().toString(), radio.getText().toString(), fName.getText().toString(),
+                            mName.getText().toString(), rel.getText().toString(), lang.getText().toString(), hobby.getText().toString()).execute();
                 }
                 break;
 
         }
     }
 
-    private void showDate(final String val) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(UpdateResumeActivity.this);
-        builder.setTitle("Select Date")
-                .setSingleChoiceItems(date, 0, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        if (val.equalsIgnoreCase("fd")) {
-                            fD.setText(date[which]);
-
-                        } else if (val.equalsIgnoreCase("td")) {
-                            tD.setText(date[which]);
-
-                        } else if (val.equalsIgnoreCase("cfd")) {
-                            cfD.setText(date[which]);
-                        } else if (val.equalsIgnoreCase("ctd")) {
-                            ctD.setText(date[which]);
-                        } else if (val.equalsIgnoreCase("hfd")) {
-                            hfD.setText(date[which]);
-                        } else if (val.equalsIgnoreCase("htd")) {
-                            htD.setText(date[which]);
-                        }
-                        dialog.cancel();
-                    }
-                }).show();
-    }
-
-    private void showMnth(final String val) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(UpdateResumeActivity.this);
-        builder.setTitle("Select Month")
-                .setSingleChoiceItems(mnth, 0, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        if (val.equalsIgnoreCase("fm")) {
-                            fM.setText(mnth[which]);
-                            frm_date.setVisibility(View.VISIBLE);
-                        } else if (val.equalsIgnoreCase("tm")) {
-                            tM.setText(mnth[which]);
-                            to_date.setVisibility(View.VISIBLE);
-                        } else if (val.equalsIgnoreCase("cfm")) {
-                            cfM.setText(mnth[which]);
-                            cfrm_date.setVisibility(View.VISIBLE);
-                        } else if (val.equalsIgnoreCase("ctm")) {
-                            ctM.setText(mnth[which]);
-                            cto_date.setVisibility(View.VISIBLE);
-                        } else if (val.equalsIgnoreCase("hfm")) {
-                            hfM.setText(mnth[which]);
-                            h_frm_date.setVisibility(View.VISIBLE);
-                        } else if (val.equalsIgnoreCase("htm")) {
-                            htM.setText(mnth[which]);
-                            h_to_date.setVisibility(View.VISIBLE);
-                        }
-
-                        dialog.cancel();
-                    }
-                }).show();
-
-    }
 
 }

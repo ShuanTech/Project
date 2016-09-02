@@ -12,6 +12,8 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -23,18 +25,17 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.shuan.project.asyncTasks.GetInfo;
-import com.shuan.project.employee.JuniorActivity;
 import com.shuan.project.R;
 import com.shuan.project.Utils.Common;
 import com.shuan.project.Utils.Helper;
 import com.shuan.project.adapter.LocationAdapter;
+import com.shuan.project.asyncTasks.GetInfo;
+import com.shuan.project.employee.JuniorActivity;
 import com.shuan.project.employee.SeniorActivity;
 import com.shuan.project.fragment.DateDialog;
 import com.shuan.project.list.Sample;
 import com.shuan.project.parser.Connection;
 import com.shuan.project.parser.php;
-
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -62,6 +63,8 @@ public class PersonalActivity extends AppCompatActivity implements View.OnClickL
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         mApp = (Common) getApplicationContext();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_personal);
@@ -112,8 +115,6 @@ public class PersonalActivity extends AppCompatActivity implements View.OnClickL
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                   /* InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
-                    inputMethodManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);*/
                     DateDialog dialog = new DateDialog(v);
                     FragmentTransaction ft = getFragmentManager().beginTransaction();
                     dialog.show(ft, "DataPicker");
@@ -169,20 +170,18 @@ public class PersonalActivity extends AppCompatActivity implements View.OnClickL
                 mApp.getPreference().edit().putBoolean(Common.HOBBIES, false).commit();
                 mApp.getPreference().edit().putBoolean(Common.PROJECT, false).commit();
                 mApp.getPreference().edit().putBoolean(Common.PERSONALINFO, false).commit();
-                mApp.getPreference().edit().putBoolean(Common.ACTIVITY4, true).commit();
-                mApp.getPreference().edit().putString(Common.PROFILESTRENGTH,"25").commit();
+                mApp.getPreference().edit().putInt(Common.PROFILESTRENGTH, 25).commit();
 
                 if (mApp.getPreference().getString(Common.LEVEL, "").equalsIgnoreCase("1")) {
                     mApp.getPreference().edit().putString(Common.RESUME, "junior").commit();
+                    startActivity(new Intent(getApplicationContext(), JuniorActivity.class));
                 } else {
                     mApp.getPreference().edit().putString(Common.RESUME, "senior").commit();
                     mApp.getPreference().edit().putBoolean(Common.PROFILESUMMARY, false).commit();
                     mApp.getPreference().edit().putBoolean(Common.WORKEXPERIENCE, false).commit();
+                    startActivity(new Intent(getApplicationContext(), SeniorActivity.class));
                 }
-                mApp.getPreference().edit().putBoolean(Common.Login, true).commit();
-                mApp.getPreference().edit().putBoolean(Common.USRINFO,true).commit();
-                new GetInfo(getApplicationContext(),mApp.getPreference().getString(Common.u_id,"")).execute();
-                startActivity(new Intent(getApplicationContext(), JuniorActivity.class));
+                new GetInfo(getApplicationContext(), mApp.getPreference().getString(Common.u_id, "")).execute();
                 finish();
                 break;
 
@@ -258,6 +257,7 @@ public class PersonalActivity extends AppCompatActivity implements View.OnClickL
                                     state.setText(txt3.getText().toString());
                                     country.setText(txt4.getText().toString());
                                     ins = true;
+                                    pinNo.requestFocus();
 
                                 }
                             });
@@ -333,9 +333,9 @@ public class PersonalActivity extends AppCompatActivity implements View.OnClickL
                             mApp.getPreference().edit().putBoolean(Common.HOBBIES, false).commit();
                             mApp.getPreference().edit().putBoolean(Common.PROJECT, false).commit();
                             mApp.getPreference().edit().putBoolean(Common.ACTIVITY4, true).commit();
-                            mApp.getPreference().edit().putBoolean(Common.USRINFO,true).commit();
-                            mApp.getPreference().edit().putString(Common.PROFILESTRENGTH,"25").commit();
-                            new GetInfo(getApplicationContext(),mApp.getPreference().getString(Common.u_id,"")).execute();
+                            mApp.getPreference().edit().putBoolean(Common.USRINFO, true).commit();
+                            mApp.getPreference().edit().putString(Common.PROFILESTRENGTH, "25").commit();
+                            new GetInfo(getApplicationContext(), mApp.getPreference().getString(Common.u_id, "")).execute();
 
                             if (mApp.getPreference().getString(Common.LEVEL, "").equalsIgnoreCase("1")) {
                                 mApp.getPreference().edit().putString(Common.RESUME, "junior").commit();

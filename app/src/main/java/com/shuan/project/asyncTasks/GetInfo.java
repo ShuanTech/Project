@@ -43,6 +43,7 @@ public class GetInfo extends AsyncTask<String, String, String> {
                 mApp.getPreference().edit().putString(Common.FULLNAME, child.optString("full_name")).commit();
                 mApp.getPreference().edit().putString(Common.PROPIC, child.optString("pro_pic")).commit();
                 mApp.getPreference().edit().putString(Common.COVER, child.optString("cover_pic")).commit();
+                mApp.getPreference().edit().putString(Common.PASSWRD,child.optString("passwrd")).commit();
                 mApp.getPreference().edit().putString(Common.CONNECTION, child.optString("connection")).commit();
                 mApp.getPreference().edit().putString(Common.FOLLOWER, child.optString("follower")).commit();
                 mApp.getPreference().edit().putString(Common.FOLLOWING, child.optString("following")).commit();

@@ -42,7 +42,8 @@ public class ConnectionFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-
+        mContext=getActivity();
+        mApp= (Common) mContext.getApplicationContext();
         View view = inflater.inflate(R.layout.fragment_connection, container, false);
 
         listView = (ListView) view.findViewById(R.id.connect);
@@ -50,7 +51,7 @@ public class ConnectionFragment extends Fragment {
 
         list = new ArrayList<Sample>();
 
-        new GetConnection(getActivity(), listView, progressBar, getArguments().getString("u_id")).execute();
+        new GetConnection(getActivity(), listView, progressBar, mApp.getPreference().getString(Common.u_id,"")).execute();
 
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {

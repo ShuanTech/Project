@@ -62,10 +62,10 @@
             </LinearLayout>
 
             <LinearLayout
-                android:layout_marginTop="@dimen/activity_horizontal_margin"
                 android:id="@+id/wrk_det_edit"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/activity_horizontal_margin"
                 android:orientation="vertical"
                 android:visibility="gone">
 
@@ -87,7 +87,7 @@
                     android:imeOptions="actionNext"
                     android:inputType="text" />
 
-                <AutoCompleteTextView
+                <EditText
                     android:id="@+id/location"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -96,7 +96,7 @@
                     android:imeOptions="actionNext"
                     android:inputType="text" />
 
-                <AutoCompleteTextView
+                <EditText
                     android:id="@+id/position"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -107,162 +107,78 @@
 
 
                 <LinearLayout
-                    android:id="@+id/frm_date"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/location"
-                    android:layout_marginTop="@dimen/standard_margin"
                     android:orientation="horizontal">
 
-                    <TextView
-                        android:id="@+id/frm"
-                        android:layout_width="wrap_content"
+                    <LinearLayout
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:text="@string/frm"
-                        android:textColor="#000" />
+                        android:layout_weight="1">
+
+                        <TextView
+                            android:id="@+id/frm"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="@string/frm"
+                            android:textColor="#000" />
+
+                        <EditText
+                            android:id="@+id/f_yr"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="From"
+                            android:imeOptions="actionNext"
+                            android:singleLine="true" />
+
+
+                    </LinearLayout>
 
                     <LinearLayout
-                        android:id="@+id/frm_year"
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_alignRight="@+id/frm"
-                        android:layout_marginLeft="@dimen/small_margin"
+                        android:layout_weight="1"
                         android:orientation="horizontal">
 
-                        <RelativeLayout
-                            android:layout_width="0dp"
+                        <TextView
+                            android:id="@+id/to"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1">
+                            android:layout_gravity="center"
+                            android:text="@string/to"
+                            android:textColor="#000" />
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
 
                             <EditText
-                                android:id="@+id/f_year"
+                                android:id="@+id/present"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:editable="false"
+                                android:imeOptions="actionDone"
+                                android:text="Present" />
+
+
+                            <EditText
+                                android:id="@+id/t_yr"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:hint="Year"
-                                android:imeOptions="actionNext"
-                                android:inputType="numberDecimal"
-                                android:maxLength="4" />
-                        </RelativeLayout>
+                                android:imeOptions="actionDone"
+                                android:singleLine="true"
+                                android:visibility="gone" />
 
-                        <RelativeLayout
-                            android:id="@+id/frm_mnth"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:visibility="gone">
-
-                            <EditText
-                                android:id="@+id/f_month"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:hint="Month" />
 
                         </RelativeLayout>
 
-
-                        <RelativeLayout
-                            android:id="@+id/frm_dat"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:visibility="gone">
-
-                            <EditText
-                                android:id="@+id/f_date"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:hint="Date" />
-
-                        </RelativeLayout>
 
                     </LinearLayout>
 
                 </LinearLayout>
 
-                <LinearLayout
-                    android:id="@+id/to_date"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/frm_date"
-                    android:layout_marginTop="@dimen/standard_margin"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/to"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                        android:text="@string/to"
-                        android:textColor="#000" />
-
-                    <EditText
-                        android:id="@+id/present"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:editable="false"
-                        android:text="Present" />
-
-                    <LinearLayout
-                        android:id="@+id/to_year"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_alignRight="@+id/frm"
-                        android:layout_marginLeft="@dimen/small_margin"
-                        android:orientation="horizontal"
-                        android:visibility="gone">
-
-                        <RelativeLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1">
-
-                            <EditText
-                                android:id="@+id/t_year"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:hint="Year"
-                                android:imeOptions="actionNext"
-                                android:inputType="numberDecimal"
-                                android:maxLength="4" />
-
-                        </RelativeLayout>
-
-                        <RelativeLayout
-                            android:id="@+id/to_mnth"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:visibility="gone">
-
-                            <EditText
-                                android:id="@+id/t_month"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:hint="Month" />
-
-                        </RelativeLayout>
-
-
-                        <RelativeLayout
-                            android:id="@+id/to_dat"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:visibility="gone">
-
-                            <EditText
-                                android:id="@+id/t_date"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:hint="Date" />
-
-                        </RelativeLayout>
-
-                    </LinearLayout>
-
-                </LinearLayout>
 
                 <CheckBox
                     android:id="@+id/wrking"
@@ -291,10 +207,10 @@
 
 
             <LinearLayout
-                android:layout_marginTop="@dimen/activity_horizontal_margin"
                 android:id="@+id/wrk_exp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/activity_horizontal_margin"
                 android:orientation="vertical"
                 android:visibility="gone">
 
@@ -328,10 +244,10 @@
             </LinearLayout>
 
             <LinearLayout
-                android:layout_marginTop="@dimen/activity_horizontal_margin"
                 android:id="@+id/clg"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/activity_horizontal_margin"
                 android:orientation="vertical"
                 android:visibility="gone">
 
@@ -344,12 +260,13 @@
                     android:textAppearance="?android:textAppearanceMedium"
                     android:textColor="#333" />
 
+
                 <Spinner
                     android:id="@+id/level"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/qfy"
                     android:layout_marginTop="@dimen/standard_margin" />
+
 
                 <AutoCompleteTextView
                     android:id="@+id/clg_name"
@@ -358,25 +275,25 @@
                     android:layout_marginTop="@dimen/standard_margin"
                     android:hint="@string/clg_name"
                     android:imeOptions="actionNext"
-                    android:singleLine="true" />
+                    android:inputType="textAutoComplete" />
 
-                <AutoCompleteTextView
+                <EditText
                     android:id="@+id/univ"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/standard_margin"
                     android:hint="@string/univ"
                     android:imeOptions="actionNext"
-                    android:singleLine="true" />
+                    android:inputType="textAutoComplete" />
 
-                <AutoCompleteTextView
-                    android:id="@+id/c_location"
+                <EditText
+                    android:id="@+id/locate"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/standard_margin"
                     android:hint="@string/location"
                     android:imeOptions="actionNext"
-                    android:singleLine="true" />
+                    android:inputType="textAutoComplete" />
 
                 <AutoCompleteTextView
                     android:id="@+id/concent"
@@ -384,172 +301,75 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/standard_margin"
                     android:hint="@string/concent"
-                    android:imeOptions="actionNext" />
+                    android:imeOptions="actionNext"
+                    android:singleLine="true" />
+
 
                 <LinearLayout
-                    android:id="@+id/c_frm_date"
+                    android:id="@+id/yr"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/standard_margin"
+                    android:layout_below="@+id/concent"
                     android:orientation="horizontal">
 
-                    <TextView
-                        android:id="@+id/c_frm"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:text="@string/frm"
-                        android:textColor="#000" />
-
                     <LinearLayout
-                        android:id="@+id/c_frm_year"
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_alignRight="@+id/frm"
-                        android:layout_marginLeft="@dimen/small_margin"
+                        android:layout_weight="1"
                         android:orientation="horizontal">
 
-                        <RelativeLayout
-                            android:layout_width="0dp"
+                        <TextView
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1">
+                            android:text="From :"
+                            android:textColor="#000"
+                            android:textStyle="bold" />
 
-                            <EditText
-                                android:id="@+id/c_f_year"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:hint="Year"
-                                android:imeOptions="actionNext"
-                                android:inputType="numberDecimal"
-                                android:maxLength="4" />
-                        </RelativeLayout>
-
-                        <RelativeLayout
-                            android:id="@+id/c_frm_mnth"
-                            android:layout_width="0dp"
+                        <EditText
+                            android:id="@+id/frm_yr"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:visibility="gone">
+                            android:layout_marginLeft="@dimen/small_margin"
+                            android:imeOptions="actionNext"
+                            android:inputType="numberDecimal"
+                            android:maxLength="4"
+                            android:singleLine="true" />
 
-                            <EditText
-                                android:id="@+id/c_f_month"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:editable="false"
-                                android:hint="Month"
-                                android:imeOptions="actionNext"
-                                android:singleLine="true" />
+                    </LinearLayout>
 
-                        </RelativeLayout>
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
 
-
-                        <RelativeLayout
-                            android:id="@+id/c_frm_dat"
-                            android:layout_width="0dp"
+                        <TextView
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:visibility="gone">
+                            android:text="To :"
+                            android:textColor="#000"
+                            android:textStyle="bold" />
 
-                            <EditText
-                                android:id="@+id/c_f_date"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:editable="false"
-                                android:hint="Date"
-                                android:imeOptions="actionNext"
-                                android:singleLine="true" />
-
-                        </RelativeLayout>
+                        <EditText
+                            android:id="@+id/to_yr"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/small_margin"
+                            android:imeOptions="actionNext"
+                            android:inputType="numberDecimal"
+                            android:maxLength="4"
+                            android:singleLine="true" />
 
                     </LinearLayout>
 
                 </LinearLayout>
 
-                <LinearLayout
-                    android:id="@+id/c_to_date"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/standard_margin"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/c_to"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                        android:text="@string/to"
-                        android:textColor="#000" />
-
-                    <LinearLayout
-                        android:id="@+id/c_to_year"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_alignRight="@+id/frm"
-                        android:layout_marginLeft="@dimen/small_margin"
-                        android:orientation="horizontal">
-
-                        <RelativeLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1">
-
-                            <EditText
-                                android:id="@+id/c_t_year"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:hint="Year"
-                                android:imeOptions="actionNext"
-                                android:inputType="numberDecimal"
-                                android:maxLength="4" />
-                        </RelativeLayout>
-
-                        <RelativeLayout
-                            android:id="@+id/c_to_mnth"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:visibility="gone">
-
-                            <EditText
-                                android:id="@+id/c_t_month"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:editable="false"
-                                android:hint="Month"
-                                android:imeOptions="actionNext"
-                                android:singleLine="true" />
-
-                        </RelativeLayout>
-
-
-                        <RelativeLayout
-                            android:id="@+id/c_to_dat"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:visibility="gone">
-
-                            <EditText
-                                android:id="@+id/c_t_date"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:editable="false"
-                                android:hint="Date"
-                                android:imeOptions="actionNext"
-                                android:singleLine="true" />
-
-                        </RelativeLayout>
-
-                    </LinearLayout>
-
-                </LinearLayout>
 
                 <EditText
                     android:id="@+id/agrt"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/standard_margin"
+                    android:layout_below="@+id/yr"
                     android:hint="@string/agrt"
                     android:imeOptions="actionDone"
                     android:inputType="number"
@@ -568,12 +388,12 @@
             </LinearLayout>
 
             <LinearLayout
-                android:layout_marginTop="@dimen/activity_horizontal_margin"
                 android:id="@+id/add_school"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/activity_horizontal_margin"
                 android:orientation="vertical"
-                android:visibility="gone">
+               android:visibility="gone">
 
                 <TextView
                     android:id="@+id/hsc"
@@ -589,7 +409,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/standard_margin"
-                    android:hint="Mode of School (ex: HSC OR SSLC)" />
+                    android:hint="Mode of School (ex: HSC OR SSLC)"
+                    android:imeOptions="actionNext"
+                    android:singleLine="true" />
 
                 <AutoCompleteTextView
                     android:id="@+id/h_name"
@@ -600,7 +422,7 @@
                     android:imeOptions="actionNext"
                     android:inputType="textAutoComplete" />
 
-                <AutoCompleteTextView
+                <EditText
                     android:id="@+id/board"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -609,7 +431,7 @@
                     android:imeOptions="actionNext"
                     android:inputType="textAutoComplete" />
 
-                <AutoCompleteTextView
+                <EditText
                     android:id="@+id/cty"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -619,161 +441,61 @@
                     android:inputType="textAutoComplete"
                     android:singleLine="true" />
 
+
                 <LinearLayout
-                    android:id="@+id/h_frm_date"
+                    android:id="@+id/syr"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-
-                    android:layout_marginTop="@dimen/standard_margin"
+                    android:layout_below="@+id/concent"
                     android:orientation="horizontal">
 
-                    <TextView
-                        android:id="@+id/h_frm"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:text="@string/frm"
-                        android:textColor="#000" />
-
                     <LinearLayout
-                        android:id="@+id/h_frm_year"
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_alignRight="@+id/frm"
-                        android:layout_marginLeft="@dimen/small_margin"
+                        android:layout_weight="1"
                         android:orientation="horizontal">
 
-                        <RelativeLayout
-                            android:layout_width="0dp"
+                        <TextView
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1">
+                            android:text="From :"
+                            android:textColor="#000"
+                            android:textStyle="bold" />
 
-                            <EditText
-                                android:id="@+id/h_f_year"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:hint="Year"
-                                android:imeOptions="actionNext"
-                                android:inputType="numberDecimal"
-                                android:maxLength="4" />
-                        </RelativeLayout>
-
-                        <RelativeLayout
-                            android:id="@+id/h_frm_mnth"
-                            android:layout_width="0dp"
+                        <EditText
+                            android:id="@+id/s_frm_yr"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:visibility="gone">
-
-                            <EditText
-                                android:id="@+id/h_f_month"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:editable="false"
-                                android:hint="Month"
-                                android:imeOptions="actionNext"
-                                android:singleLine="true" />
-
-                        </RelativeLayout>
-
-
-                        <RelativeLayout
-                            android:id="@+id/h_frm_dat"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:visibility="gone">
-
-                            <EditText
-                                android:id="@+id/h_f_date"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:editable="false"
-                                android:hint="Date"
-                                android:imeOptions="actionNext"
-                                android:singleLine="true" />
-
-                        </RelativeLayout>
+                            android:layout_marginLeft="@dimen/small_margin"
+                            android:imeOptions="actionNext"
+                            android:inputType="numberDecimal"
+                            android:maxLength="4"
+                            android:singleLine="true" />
 
                     </LinearLayout>
 
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/h_to_date"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/standard_margin"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/h_to"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                        android:text="@string/to"
-                        android:textColor="#000" />
-
                     <LinearLayout
-                        android:id="@+id/h_to_year"
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_alignRight="@+id/frm"
-                        android:layout_marginLeft="@dimen/small_margin"
+                        android:layout_weight="1"
                         android:orientation="horizontal">
 
-                        <RelativeLayout
-                            android:layout_width="0dp"
+                        <TextView
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1">
+                            android:text="To :"
+                            android:textColor="#000"
+                            android:textStyle="bold" />
 
-                            <EditText
-                                android:id="@+id/h_t_year"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:hint="Year"
-                                android:imeOptions="actionNext"
-                                android:inputType="numberDecimal"
-                                android:maxLength="4" />
-                        </RelativeLayout>
-
-                        <RelativeLayout
-                            android:id="@+id/h_to_mnth"
-                            android:layout_width="0dp"
+                        <EditText
+                            android:id="@+id/s_to_yr"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:visibility="gone">
-
-                            <EditText
-                                android:id="@+id/h_t_month"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:editable="false"
-                                android:hint="Month"
-                                android:imeOptions="actionNext"
-                                android:singleLine="true" />
-
-                        </RelativeLayout>
-
-
-                        <RelativeLayout
-                            android:id="@+id/h_to_dat"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:visibility="gone">
-
-                            <EditText
-                                android:id="@+id/h_t_date"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:editable="false"
-                                android:hint="Date"
-                                android:imeOptions="actionNext"
-                                android:singleLine="true" />
-
-                        </RelativeLayout>
+                            android:layout_marginLeft="@dimen/small_margin"
+                            android:imeOptions="actionNext"
+                            android:inputType="numberDecimal"
+                            android:maxLength="4"
+                            android:singleLine="true" />
 
                     </LinearLayout>
 
@@ -803,10 +525,10 @@
 
 
             <LinearLayout
-                android:layout_marginTop="@dimen/activity_horizontal_margin"
                 android:id="@+id/skill"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/activity_horizontal_margin"
                 android:orientation="vertical"
                 android:visibility="gone">
 
@@ -824,7 +546,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/standard_margin"
-                    android:hint="Enter Skill" />
+                    android:hint="Enter Skill"
+                    android:imeOptions="actionDone"
+                    android:singleLine="true" />
 
                 <Button
                     android:id="@+id/sk_add"
@@ -839,10 +563,10 @@
             </LinearLayout>
 
             <LinearLayout
-                android:layout_marginTop="@dimen/activity_horizontal_margin"
                 android:id="@+id/project"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/activity_horizontal_margin"
                 android:orientation="vertical"
                 android:visibility="gone">
 
@@ -947,10 +671,10 @@
 
 
             <LinearLayout
-                android:layout_marginTop="@dimen/activity_horizontal_margin"
                 android:id="@+id/cert"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/activity_horizontal_margin"
                 android:orientation="vertical"
                 android:visibility="gone">
 
@@ -1003,10 +727,10 @@
             </LinearLayout>
 
             <LinearLayout
-                android:layout_marginTop="@dimen/activity_horizontal_margin"
                 android:id="@+id/ach"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/activity_horizontal_margin"
                 android:orientation="vertical"
                 android:visibility="gone">
 
@@ -1041,10 +765,10 @@
             </LinearLayout>
 
             <LinearLayout
-                android:layout_marginTop="@dimen/activity_horizontal_margin"
                 android:id="@+id/extra"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/activity_horizontal_margin"
                 android:orientation="vertical"
                 android:visibility="gone">
 
@@ -1081,9 +805,9 @@
 
             <LinearLayout
                 android:id="@+id/cntInfo"
-                android:layout_marginTop="@dimen/activity_horizontal_margin"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/activity_horizontal_margin"
                 android:orientation="vertical"
                 android:visibility="gone">
 
@@ -1159,8 +883,8 @@
                 android:id="@+id/bsc"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical"
                 android:layout_marginTop="@dimen/activity_horizontal_margin"
+                android:orientation="vertical"
                 android:visibility="gone">
 
                 <TextView

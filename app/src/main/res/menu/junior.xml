@@ -24,8 +24,14 @@
 
         <item
             android:id="@+id/following"
-            android:icon="@drawable/ic_following"
+            android:icon="@drawable/ic_follower"
             android:title="Following"
+            app:actionViewClass="android.widget.TextView" />
+
+        <item
+            android:id="@+id/follower"
+            android:icon="@drawable/ic_following"
+            android:title="Follower"
             app:actionViewClass="android.widget.TextView" />
         <item
             android:id="@+id/sugg"
@@ -39,11 +45,11 @@
                         android:id="@+id/imp"
                         android:icon="@drawable/ic_important"
                         android:title="Important" />
-                    <item
+                    <!--<item
                         android:id="@+id/ref"
                         android:icon="@drawable/ic_reference"
                         android:title="References"
-                        app:actionViewClass="android.widget.TextView" />
+                        app:actionViewClass="android.widget.TextView" />-->
                 </group>
             </menu>
         </item>

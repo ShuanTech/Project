@@ -24,6 +24,11 @@
         <item name="colorAccent">@color/senAccent</item>
     </style>
 
+    <style name="Senior.Profile" parent="Senior">
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+    </style>
+
 
     <style name="Profile" parent="AppBaseTheme">
         <item name="colorPrimary">@color/colorPrimary</item>

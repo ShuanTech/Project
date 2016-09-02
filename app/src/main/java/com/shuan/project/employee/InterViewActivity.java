@@ -40,10 +40,25 @@ public class InterViewActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        if (mApp.getPreference().getString(Common.LEVEL, "").equalsIgnoreCase("1")) {
+            setTheme(R.style.Junior);
+        } else if (mApp.getPreference().getString(Common.LEVEL, "").equalsIgnoreCase("2")) {
+            setTheme(R.style.Senior);
+        } else {
+            setTheme(R.style.AppBaseTheme);
+        }
+
         mApp = (Common) getApplicationContext();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inter_view);
         toolbar = (Toolbar) findViewById(R.id.app_bar);
+        if (mApp.getPreference().getString(Common.LEVEL, "").equalsIgnoreCase("1")) {
+            toolbar.setBackgroundColor(getResources().getColor(R.color.junPrimary));
+        } else if (mApp.getPreference().getString(Common.LEVEL, "").equalsIgnoreCase("2")) {
+            toolbar.setBackgroundColor(getResources().getColor(R.color.senPrimary));
+        } else {
+            toolbar.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+        }
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);

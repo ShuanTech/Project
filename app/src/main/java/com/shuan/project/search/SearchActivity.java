@@ -24,6 +24,14 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        if (mApp.getPreference().getString(Common.LEVEL, "").equalsIgnoreCase("1")) {
+            setTheme(R.style.Junior);
+        } else if (mApp.getPreference().getString(Common.LEVEL, "").equalsIgnoreCase("2")) {
+            setTheme(R.style.Senior);
+        } else {
+            setTheme(R.style.AppBaseTheme);
+        }
+
         super.onCreate(savedInstanceState);
         mApp = (Common) getApplicationContext();
         setContentView(R.layout.activity_search);

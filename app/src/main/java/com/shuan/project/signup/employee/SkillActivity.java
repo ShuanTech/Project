@@ -10,6 +10,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.MultiAutoCompleteTextView;
@@ -33,13 +35,15 @@ public class SkillActivity extends AppCompatActivity implements View.OnClickList
     private Common mApp;
     private EditText course, cerCentre, cerDur, dev_env, others;
     private MultiAutoCompleteTextView skill, workArea;
-    private TextView tv,tv1;
+    private TextView tv, tv1;
     private Button s_skip, s_next;
     private HashMap<String, String> sData;
     private boolean exit = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         mApp = (Common) getApplicationContext();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_skill);
@@ -100,16 +104,12 @@ public class SkillActivity extends AppCompatActivity implements View.OnClickList
                             new Certificate().execute();
                         }
                     } else {
-                        mApp.getPreference().edit().putBoolean(Common.CERITIFY, false).commit();
                         new Skill().execute();
                     }
                 }
                 break;
             case R.id.s_skip:
                 mApp.getPreference().edit().putBoolean(Common.SKILL, false).commit();
-                mApp.getPreference().edit().putBoolean(Common.CERITIFY, false).commit();
-                mApp.getPreference().edit().putBoolean(Common.ACTIVITY3, true).commit();
-                mApp.getPreference().edit().putBoolean(Common.ACTIVITY2, true).commit();
                 startActivity(new Intent(getApplicationContext(), PersonalActivity.class));
                 finish();
                 break;
@@ -199,6 +199,7 @@ public class SkillActivity extends AppCompatActivity implements View.OnClickList
             sData.put("cer_name", cName);
             sData.put("cer_centre", cCentre);
             sData.put("cer_dur", cDuration);
+            sData.put("type", "add");
             try {
                 JSONObject json = Connection.UrlConnection(php.certification, sData);
                 int succ = json.getInt("success");
@@ -214,8 +215,6 @@ public class SkillActivity extends AppCompatActivity implements View.OnClickList
                         @Override
                         public void run() {
                             mApp.getPreference().edit().putBoolean(Common.CERITIFY, true).commit();
-                            mApp.getPreference().edit().putBoolean(Common.ACTIVITY3, true).commit();
-                            mApp.getPreference().edit().putBoolean(Common.ACTIVITY2, true).commit();
                             Toast.makeText(getApplicationContext(), "Certification Details Saved", Toast.LENGTH_SHORT).show();
 
 
@@ -233,8 +232,6 @@ public class SkillActivity extends AppCompatActivity implements View.OnClickList
     @Override
     public void onBackPressed() {
         if (exit) {
-            mApp.getPreference().edit().putBoolean(Common.ACTIVITY3, false).commit();
-            mApp.getPreference().edit().putBoolean(Common.ACTIVITY2, true).commit();
             super.onBackPressed();
             return;
         } else {

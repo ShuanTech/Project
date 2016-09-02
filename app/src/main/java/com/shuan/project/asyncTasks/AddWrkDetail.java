@@ -7,6 +7,7 @@ import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
+import com.shuan.project.Utils.Common;
 import com.shuan.project.parser.Connection;
 import com.shuan.project.parser.php;
 import com.shuan.project.resume.ResumeEditActivity;
@@ -22,6 +23,7 @@ public class AddWrkDetail extends AsyncTask<String, String, String> {
     public String uId, org, loc, pos, frmDate, toDate, s;
     public HashMap<String, String> rData;
     public ProgressDialog pDialog;
+    public Common mApp;
 
     public AddWrkDetail(Context mContext, String uId, String org, String loc, String pos, String frmDate, String toDate) {
         this.mContext = mContext;
@@ -31,6 +33,7 @@ public class AddWrkDetail extends AsyncTask<String, String, String> {
         this.pos = pos;
         this.frmDate = frmDate;
         this.toDate = toDate;
+        this.mApp = (Common) mContext.getApplicationContext();
     }
 
     @Override
@@ -54,7 +57,7 @@ public class AddWrkDetail extends AsyncTask<String, String, String> {
         rData.put("loc", loc);
         rData.put("frm", frmDate);
         rData.put("to", toDate);
-        rData.put("type","add");
+        rData.put("type", "add");
 
         try {
             JSONObject json = Connection.UrlConnection(php.work_info, rData);
@@ -74,11 +77,29 @@ public class AddWrkDetail extends AsyncTask<String, String, String> {
         super.onPostExecute(s);
         pDialog.cancel();
         if (s.equalsIgnoreCase("true")) {
-            Toast.makeText(mContext, "Successfully Work Details Added", Toast.LENGTH_SHORT).show();
-            Intent in = new Intent(mContext, ResumeEditActivity.class);
-            in.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            mContext.startActivity(in);
-            ((AppCompatActivity) mContext).finish();
+            if(mApp.getPreference().getString(Common.LEVEL,"").equalsIgnoreCase("1")){
+                new UpdateLevel(mContext,uId).execute();
+                mApp.getPreference().edit().putString(Common.LEVEL,"2").commit();
+                AppCompatActivity activity= (AppCompatActivity) mContext;
+                Intent i = activity.getBaseContext().getPackageManager()
+                        .getLaunchIntentForPackage( activity.getBaseContext().getPackageName() );
+                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                activity.startActivity(i);
+            }else{
+                new GetInfo(mContext, uId).execute();
+                mApp.getPreference().edit().putBoolean(Common.WORKINFO,true).commit();
+                int val=mApp.getPreference().getInt(Common.PROFILESTRENGTH,0);
+
+                mApp.getPreference().edit().putInt(Common.PROFILESTRENGTH, val+6).commit();
+
+                Toast.makeText(mContext, "Successfully Work Details Added", Toast.LENGTH_SHORT).show();
+                Intent in = new Intent(mContext, ResumeEditActivity.class);
+                in.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                mContext.startActivity(in);
+                ((AppCompatActivity) mContext).finish();
+            }
+
+
         } else {
             Toast.makeText(mContext, "Something went wrong!... Try Again", Toast.LENGTH_SHORT).show();
         }

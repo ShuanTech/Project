@@ -8,6 +8,7 @@ import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
+import com.shuan.project.Utils.Common;
 import com.shuan.project.parser.Connection;
 import com.shuan.project.parser.php;
 import com.shuan.project.resume.ResumeEditActivity;
@@ -23,6 +24,7 @@ public class AddSchool extends AsyncTask<String, String, String> {
     private boolean ins;
     private ProgressDialog pDialog;
     private HashMap<String, String> seniorData;
+    private Common mApp;
 
     public AddSchool(Context mContext, String uId, String level, String conCent, String sName, String sBoard, String sCty, String frm, String to, String agrt, String type, boolean ins) {
         this.mContext = mContext;
@@ -37,6 +39,7 @@ public class AddSchool extends AsyncTask<String, String, String> {
         this.agrt = agrt;
         this.type = type;
         this.ins = ins;
+        this.mApp = (Common) mContext.getApplicationContext();
     }
 
     @Override
@@ -66,7 +69,7 @@ public class AddSchool extends AsyncTask<String, String, String> {
         } else {
             seniorData.put("insrt", "true");
         }
-        seniorData.put("type",type);
+        seniorData.put("type", type);
 
         try {
             JSONObject json = Connection.UrlConnection(php.schooling, seniorData);
@@ -87,6 +90,15 @@ public class AddSchool extends AsyncTask<String, String, String> {
         super.onPostExecute(s);
         pDialog.cancel();
         if (s.equalsIgnoreCase("true")) {
+            if (level.equalsIgnoreCase("4")) {
+                mApp.getPreference().edit().putBoolean(Common.HSC, true).commit();
+                int val=mApp.getPreference().getInt(Common.PROFILESTRENGTH,0);
+                mApp.getPreference().edit().putInt(Common.PROFILESTRENGTH, val+5).commit();
+            } else {
+                mApp.getPreference().edit().putBoolean(Common.SSLC, true).commit();
+                int val=mApp.getPreference().getInt(Common.PROFILESTRENGTH,0);
+                mApp.getPreference().edit().putInt(Common.PROFILESTRENGTH, val+5).commit();
+            }
             Toast.makeText(mContext, "Successfully Updated", Toast.LENGTH_SHORT).show();
             Intent in = new Intent(mContext, ResumeEditActivity.class);
             in.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

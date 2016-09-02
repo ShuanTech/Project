@@ -44,7 +44,7 @@ public class ProfileViewActivity extends AppCompatActivity {
     private ImageView cover;
     private CircleImageView proPic;
     private TextView name, position, org, intro;
-    private Button bu1, bu2,but3;
+    private Button bu1, bu2, but3;
     private TextView abt, url, cate, sze, found;
     private ProgressBar progressBar;
     private RelativeLayout scroll;
@@ -105,8 +105,8 @@ public class ProfileViewActivity extends AppCompatActivity {
         sze = (TextView) findViewById(R.id.sze);
         found = (TextView) findViewById(R.id.found);
         exprience = (LinearLayout) findViewById(R.id.exprience);
-        msg= (RelativeLayout) findViewById(R.id.msg);
-        but3= (Button) findViewById(R.id.but3);
+        msg = (RelativeLayout) findViewById(R.id.msg);
+        but3 = (Button) findViewById(R.id.but3);
         list = new ArrayList<Sample>();
 
 
@@ -127,7 +127,6 @@ public class ProfileViewActivity extends AppCompatActivity {
                 }
             }
         });
-
 
 
     }
@@ -168,7 +167,7 @@ public class ProfileViewActivity extends AppCompatActivity {
                         JSONArray jsonArray = json.getJSONArray("pro_view");
                         JSONObject child = jsonArray.getJSONObject(0);
                         final String following = child.optString("following");
-                        final String follower=child.optString("follower");
+                        final String follower = child.optString("follower");
 
                         JSONObject info = child.getJSONObject("info");
                         JSONArray infoArray = info.getJSONArray("info");
@@ -199,14 +198,14 @@ public class ProfileViewActivity extends AppCompatActivity {
                                 mail.setText(email_id);
                                 phNo.setText(ph_no);
 
-                                if(following.equalsIgnoreCase("1") && follower.equalsIgnoreCase("1")){
+                                if (following.equalsIgnoreCase("1") && follower.equalsIgnoreCase("1")) {
                                     bu1.setText("Follow");
-                                }else if(following.equalsIgnoreCase("0") && follower.equalsIgnoreCase("0")){
+                                } else if (following.equalsIgnoreCase("0") && follower.equalsIgnoreCase("0")) {
                                     bu1.setVisibility(View.GONE);
                                     bu2.setVisibility(View.VISIBLE);
-                                }else if(following.equalsIgnoreCase("0") && follower.equalsIgnoreCase("1")){
+                                } else if (following.equalsIgnoreCase("0") && follower.equalsIgnoreCase("1")) {
                                     bu1.setText("Following");
-                                }else {
+                                } else {
                                     bu1.setText("Follow");
                                 }
                             }
@@ -293,7 +292,8 @@ public class ProfileViewActivity extends AppCompatActivity {
 
                         JSONArray jsonArray = json.getJSONArray("pro_view");
                         JSONObject child = jsonArray.getJSONObject(0);
-                        final String follow = child.optString("follow");
+                        final String following = child.optString("following");
+                        final String follower = child.optString("follower");
 
                         JSONObject info = child.getJSONObject("info");
                         JSONArray infoArray = info.getJSONArray("info");
@@ -324,10 +324,15 @@ public class ProfileViewActivity extends AppCompatActivity {
                                 }
                                 mail.setText(email_id);
                                 phNo.setText(ph_no);
-                                if (follow.equalsIgnoreCase("1")) {
+                                if (following.equalsIgnoreCase("1") && follower.equalsIgnoreCase("1")) {
                                     bu1.setText("Follow");
+                                } else if (following.equalsIgnoreCase("0") && follower.equalsIgnoreCase("0")) {
+                                    bu1.setVisibility(View.GONE);
+                                    bu2.setVisibility(View.VISIBLE);
+                                } else if (following.equalsIgnoreCase("0") && follower.equalsIgnoreCase("1")) {
+                                    bu1.setText("Following");
                                 } else {
-                                    bu1.setText("Message");
+                                    bu1.setText("Follow");
                                 }
                             }
                         });
@@ -478,6 +483,7 @@ public class ProfileViewActivity extends AppCompatActivity {
                                 } else {
                                     bu1.setVisibility(View.GONE);
                                     bu2.setVisibility(View.VISIBLE);
+                                    msg.setVisibility(View.GONE);
                                     bu2.setText("Followed");
                                 }
                             }

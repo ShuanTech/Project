@@ -3,26 +3,21 @@ package com.shuan.project.launcher;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TextView;
 
-import com.shuan.project.Utils.Helper;
-import com.shuan.project.asyncTasks.CompanyContactInfo;
-import com.shuan.project.employee.JuniorActivity;
 import com.shuan.project.R;
 import com.shuan.project.Utils.Common;
+import com.shuan.project.Utils.Helper;
 import com.shuan.project.Utils.NetworkUtil;
+import com.shuan.project.employee.JuniorActivity;
 import com.shuan.project.employee.SeniorActivity;
 import com.shuan.project.employer.EmployerActivity;
-import com.shuan.project.signup.employee.EducationActivity;
-import com.shuan.project.signup.employee.PersonalActivity;
-import com.shuan.project.signup.employee.SkillActivity;
-import com.shuan.project.signup.employee.WorkActivity;
 import com.shuan.project.signup.employer.AboutCompanyActivity;
 import com.shuan.project.signup.employer.CompanyContactInfoActivity;
 import com.shuan.project.signup.employer.CompanyDetails;
@@ -31,7 +26,7 @@ public class Launcher extends AppCompatActivity {
 
     private Common mApp;
     private Context context;
-    private TextView ud,ud1;
+    private TextView ud, ud1;
     private Helper helper = new Helper();
     private static int SPLASH_TIME_OUT = 2000;
     private AlertDialog.Builder builder;
@@ -116,38 +111,24 @@ public class Launcher extends AppCompatActivity {
             if (mApp.getPreference().getString(Common.LEVEL, "").equalsIgnoreCase("3")) {
                 if (mApp.getPreference().getBoolean(Common.COMPANY1, false) == false) {
                     startActivity(new Intent(getApplicationContext(), CompanyDetails.class));
-                } else if(mApp.getPreference().getBoolean(Common.COMPANY2, false) == false){
+                } else if (mApp.getPreference().getBoolean(Common.COMPANY2, false) == false) {
                     startActivity(new Intent(getApplicationContext(), CompanyContactInfoActivity.class));
-                }else if(mApp.getPreference().getBoolean(Common.COMPANY3, false) == false){
+                } else if (mApp.getPreference().getBoolean(Common.COMPANY3, false) == false) {
                     startActivity(new Intent(getApplicationContext(), AboutCompanyActivity.class));
-                }else {
+                } else {
                     startActivity(new Intent(Launcher.this, EmployerActivity.class));
                 }
 
 
             } else {
-                if (mApp.getPreference().getBoolean(Common.ACTIVITY1, false) == false) {
-                    startActivity(new Intent(getApplicationContext(), EducationActivity.class));
 
-                } else if (mApp.getPreference().getBoolean(Common.ACTIVITY2, false) == false) {
-                    startActivity(new Intent(getApplicationContext(), WorkActivity.class));
-
-                } else if (mApp.getPreference().getBoolean(Common.ACTIVITY3, false) == false) {
-                    startActivity(new Intent(getApplicationContext(), SkillActivity.class));
-
-                } else if (mApp.getPreference().getBoolean(Common.ACTIVITY4, false) == false) {
-                    startActivity(new Intent(getApplicationContext(), PersonalActivity.class));
-
+                if (mApp.getPreference().getString(Common.LEVEL, "").equalsIgnoreCase("1")) {
+                    startActivity(new Intent(Launcher.this, JuniorActivity.class));
                 } else {
-                    if (mApp.getPreference().getString(Common.LEVEL, "").equalsIgnoreCase("1")) {
-                        startActivity(new Intent(Launcher.this, JuniorActivity.class));
-                    } else {
-                        startActivity(new Intent(Launcher.this, SeniorActivity.class));
-                    }
-
+                    startActivity(new Intent(Launcher.this, SeniorActivity.class));
                 }
 
-
+                
             }
         }
 

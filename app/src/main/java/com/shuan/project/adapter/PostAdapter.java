@@ -25,8 +25,6 @@ import com.shuan.project.asyncTasks.CheckEligible;
 import com.shuan.project.asyncTasks.SavePost;
 import com.shuan.project.asyncTasks.SharePost;
 import com.shuan.project.list.Sample;
-import com.shuan.project.resume.ExpResumeGenerate;
-import com.shuan.project.resume.JuniorResumeGenerate;
 
 import java.util.ArrayList;
 
@@ -159,37 +157,9 @@ public class PostAdapter extends BaseAdapter {
             @Override
             public void onClick(View v) {
 
-                new CheckEligible(mContext,mApp.getPreference().getString(Common.u_id,""),curr.getjId(),
-                        mApp.getPreference().getString(Common.LEVEL,"")).execute();
+                new CheckEligible(mContext, mApp.getPreference().getString(Common.u_id, ""), curr.getjId(),
+                        mApp.getPreference().getString(Common.LEVEL, "")).execute();
                 mApp.getPreference().edit().putBoolean(Common.APPLY, true).commit();
-
-                /*if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    mApp.getPreference().edit().putBoolean(Common.APPLY, true).commit();
-
-                    CallResumeData(curr.getjId(), curr.getjFrmId());
-
-                } else {
-
-                    AlertDialog.Builder build = new AlertDialog.Builder(mContext);
-                    build.setTitle("CONFIRMATION");
-                    build.setMessage("Are You Sure Apply the Post or Edit the resume Content")
-                            .setPositiveButton("EDIT", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    dialog.cancel();
-                                    Intent in = new Intent(mContext, ResumeEditActivity.class);
-                                    in.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                                    mContext.startActivity(in);
-                                }
-                            }).setNegativeButton("APPLY", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-
-                            dialog.cancel();
-                            CallResumeData(curr.getjId(), curr.getjFrmId());
-                        }
-                    }).show();
-                }*/
 
 
             }
@@ -214,19 +184,6 @@ public class PostAdapter extends BaseAdapter {
 
         return convertView;
     }
-
-    /*private void CallResumeData(String jId, String frmId) {
-
-        if (mApp.getPreference().getString(Common.LEVEL, "").equalsIgnoreCase("1")) {
-            Intent in = new Intent(mContext, JuniorResumeGenerate.class);
-            in.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            mContext.startActivity(in);
-        } else {
-            Intent in = new Intent(mContext, ExpResumeGenerate.class);
-            in.putExtra("job_id", jId);
-            in.putExtra("frm_id", frmId);
-            in.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            mContext.startActivity(in);
-        }
-    }*/
 }
+
+

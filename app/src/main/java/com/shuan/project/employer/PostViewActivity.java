@@ -18,6 +18,7 @@ import android.widget.TextView;
 
 import com.shuan.project.R;
 import com.shuan.project.Utils.Common;
+import com.shuan.project.asyncTasks.CheckEligible;
 import com.shuan.project.asyncTasks.PostView;
 import com.shuan.project.resume.ExpResumeGenerate;
 import com.shuan.project.resume.JuniorResumeGenerate;
@@ -86,35 +87,10 @@ public class PostViewActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                if (!getIntent().getStringExtra("apply").equalsIgnoreCase("yes")) {
 
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                        mApp.getPreference().edit().putBoolean(Common.APPLY, true).commit();
-
-                        CallResumeData(getIntent().getStringExtra("jId"), getIntent().getStringExtra("frmId"));
-
-                    } else {
-
-                        AlertDialog.Builder build = new AlertDialog.Builder(PostViewActivity.this);
-                        build.setTitle("CONFIRMATION");
-                        build.setMessage("Are You Sure Apply the Post or Edit the resume Content")
-                                .setPositiveButton("EDIT", new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        dialog.cancel();
-                                        Intent in = new Intent(getApplicationContext(), ResumeEditActivity.class);
-                                        startActivity(in);
-                                    }
-                                }).setNegativeButton("APPLY", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-
-                                dialog.cancel();
-                                CallResumeData(getIntent().getStringExtra("jId"), getIntent().getStringExtra("frmId"));
-                            }
-                        }).show();
-                    }
-                }
+                new CheckEligible(PostViewActivity.this,mApp.getPreference().getString(Common.u_id,""),getIntent().getStringExtra("jId"),
+                        mApp.getPreference().getString(Common.LEVEL,"")).execute();
+                mApp.getPreference().edit().putBoolean(Common.APPLY, true).commit();
 
 
             }

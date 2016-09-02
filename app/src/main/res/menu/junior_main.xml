@@ -33,7 +33,7 @@
                 android:orderInCategory="101"
                 android:title="Resume Generation" />
 
-            <item
+         <!--   <item
                 android:id="@+id/chat"
                 android:icon="@drawable/ic_chat"
                 android:orderInCategory="102"
@@ -49,7 +49,7 @@
                 android:id="@+id/privacy"
                 android:icon="@drawable/ic_privacy"
                 android:orderInCategory="104"
-                android:title="Privacy" />
+                android:title="Privacy" />-->
 
             <item
                 android:id="@+id/setting"

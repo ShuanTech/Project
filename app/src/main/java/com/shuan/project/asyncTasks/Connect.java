@@ -16,14 +16,15 @@ public class Connect extends AsyncTask<String, String, String> {
 
     private Common mApp;
     private Context mContext;
-    private String u_id, level;
+    private String u_id, level,clgName,course;
     private HashMap<String, String> cData;
 
-    public Connect(Context mContext, String u_id, String level) {
+    public Connect(Context mContext, String u_id, String level,String clgName,String course) {
         this.mContext = mContext;
-        mApp = (Common) mContext;
         this.u_id = u_id;
         this.level = level;
+        this.clgName=clgName;
+        this.course=course;
     }
 
     @Override
@@ -32,6 +33,8 @@ public class Connect extends AsyncTask<String, String, String> {
 
         cData.put("u_id", u_id);
         cData.put("level",level);
+        cData.put("clgName",clgName);
+        cData.put("course",course);
 
         try {
             JSONObject json = Connection.UrlConnection(php.defaultFollow, cData);

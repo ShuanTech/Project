@@ -20,10 +20,12 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -39,11 +41,24 @@ import com.shuan.project.Utils.Common;
 import com.shuan.project.Utils.Helper;
 import com.shuan.project.about.About;
 import com.shuan.project.about.Help;
+import com.shuan.project.asyncTasks.Feedback;
+import com.shuan.project.fragment.AppliedFragment;
 import com.shuan.project.fragment.ConnectionFragment;
+import com.shuan.project.fragment.EmployerHome;
+import com.shuan.project.fragment.FollowerFragment;
+import com.shuan.project.fragment.FollowingFragment;
+import com.shuan.project.fragment.GetReadyFragment;
+import com.shuan.project.fragment.ImportanceFragment;
+import com.shuan.project.fragment.NotifyFragment;
+import com.shuan.project.fragment.OffersFragment;
+import com.shuan.project.fragment.ReferenceFragment;
+import com.shuan.project.fragment.SuggestionFragment;
 import com.shuan.project.launcher.LoginActivity;
-import com.shuan.project.profile.JuniorProfile;
+import com.shuan.project.profile.ProfileActivity;
 import com.shuan.project.resume.JuniorResumeGenerate;
+import com.shuan.project.resume.ResumeEditActivity;
 import com.shuan.project.search.SearchActivity;
+import com.shuan.project.setting.SettingActivity;
 
 import java.util.HashMap;
 
@@ -75,7 +90,8 @@ public class JuniorActivity extends AppCompatActivity {
     private TextView usrName;
     private CircleImageView proPic;
     private DisplayImageOptions options;
-    private TextView alertCount;
+    private TextView alertCount, profileStrength, following, follower;
+    int selected;
 
 
     @Override
@@ -114,7 +130,7 @@ public class JuniorActivity extends AppCompatActivity {
 
         lay1 = (RelativeLayout) findViewById(R.id.notification);
 
-
+        display(0);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer);
 
         mUserLearnedDrawer = Boolean.valueOf(readSharedSetting(this, PREF_USER_LEARNED_DRAWER, "false"));
@@ -129,14 +145,7 @@ public class JuniorActivity extends AppCompatActivity {
 
 
         if (mApp.getPreference().getBoolean(Common.QUALIFICATION, false) == false) {
-
-            snackbar.make(root, "Complete Your Qualification", Snackbar.LENGTH_LONG)
-                    .setAction("DO", new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            startActivity(new Intent(getApplicationContext(), JuniorResumeGenerate.class));
-                        }
-                    }).show();
+            showAlert();
         }
 
         mNavigationView = (NavigationView) findViewById(R.id.navigation);
@@ -151,11 +160,14 @@ public class JuniorActivity extends AppCompatActivity {
         proPic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), JuniorProfile.class));
+                startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
             }
         });
 
         connect = (TextView) MenuItemCompat.getActionView(mNavigationView.getMenu().findItem(R.id.connect));
+        profileStrength = (TextView) MenuItemCompat.getActionView(mNavigationView.getMenu().findItem(R.id.strength));
+        following = (TextView) MenuItemCompat.getActionView(mNavigationView.getMenu().findItem(R.id.following));
+        follower = (TextView) MenuItemCompat.getActionView(mNavigationView.getMenu().findItem(R.id.follower));
 
         usrName.setText(mApp.getPreference().getString(Common.FULLNAME, ""));
 
@@ -170,15 +182,69 @@ public class JuniorActivity extends AppCompatActivity {
                     case R.id.home:
                         toolbar.setTitle("Home");
                         mDrawerLayout.closeDrawers();
+                        selected = 0;
+                        display(0);
                         return true;
                     case R.id.strength:
-                        toolbar.setTitle("Profile Strength");
-                        mDrawerLayout.closeDrawers();
+                        startActivity(new Intent(getApplicationContext(), ResumeEditActivity.class));
                         return true;
                     case R.id.connect:
                         toolbar.setTitle("Connections");
                         mDrawerLayout.closeDrawers();
                         display(2);
+                        selected = 2;
+                        return true;
+                    case R.id.following:
+                        toolbar.setTitle("Following");
+                        mDrawerLayout.closeDrawers();
+                        display(3);
+                        selected = 3;
+                        return true;
+                    case R.id.follower:
+                        toolbar.setTitle("Follower");
+                        mDrawerLayout.closeDrawers();
+                        display(4);
+                        selected = 4;
+                        return true;
+                    case R.id.sugg:
+                        toolbar.setTitle("Suggestions");
+                        mDrawerLayout.closeDrawers();
+                        display(5);
+                        selected = 5;
+                        return true;
+                    case R.id.imp:
+                        toolbar.setTitle("Importance");
+                        mDrawerLayout.closeDrawers();
+                        display(6);
+                        selected = 6;
+                        return true;
+                    case R.id.ref:
+                        toolbar.setTitle("Reference");
+                        mDrawerLayout.closeDrawers();
+                        display(7);
+                        selected = 7;
+                        return true;
+                    case R.id.offer:
+                        toolbar.setTitle("Offers");
+                        mDrawerLayout.closeDrawers();
+                        display(8);
+                        selected = 8;
+                        return true;
+                    case R.id.apply:
+                        toolbar.setTitle("Applied");
+                        mDrawerLayout.closeDrawers();
+                        display(9);
+                        selected = 9;
+                        return true;
+                    case R.id.ready:
+                        toolbar.setTitle("Get Ready");
+                        mDrawerLayout.closeDrawers();
+                        display(10);
+                        selected = 10;
+                        return true;
+                    case R.id.feed:
+                        mDrawerLayout.closeDrawers();
+                        showFeedDialog();
                         return true;
                     case R.id.about:
                         mDrawerLayout.closeDrawers();
@@ -197,11 +263,6 @@ public class JuniorActivity extends AppCompatActivity {
         });
 
 
-        /*Toast.makeText(getApplicationContext(),
-                mApp.getPreference().getString(Common.FULLNAME, "")
-                        + mApp.getPreference().getString(Common.PROPIC, "")
-                        + mApp.getPreference().getString(Common.CONNECTION, ""), Toast.LENGTH_SHORT).show();*/
-
     }
 
     private void display(int i) {
@@ -209,13 +270,41 @@ public class JuniorActivity extends AppCompatActivity {
         Bundle bundle = new Bundle();
         switch (i) {
             case 0:
+                f = new EmployerHome();
                 break;
             case 1:
                 break;
             case 2:
-                bundle.putString("u_id", mApp.getPreference().getString(Common.u_id, ""));
                 f = new ConnectionFragment();
-                f.setArguments(bundle);
+
+                break;
+            case 3:
+                f = new FollowingFragment();
+                break;
+            case 4:
+                f = new FollowerFragment();
+                break;
+            case 5:
+                f = new SuggestionFragment();
+                break;
+            case 6:
+                f = new ImportanceFragment();
+                break;
+            case 7:
+                f = new ReferenceFragment();
+                break;
+            case 8:
+                f = new OffersFragment();
+                break;
+            case 9:
+                f = new AppliedFragment();
+                break;
+            case 10:
+                f = new GetReadyFragment();
+                break;
+            case 11:
+                toolbar.setTitle("Notification");
+                f = new NotifyFragment();
                 break;
         }
 
@@ -268,6 +357,23 @@ public class JuniorActivity extends AppCompatActivity {
         connect.setTypeface(helper.droid(getApplicationContext()));
         connect.setTextColor(getResources().getColor(R.color.junAccent));
         connect.setText(mApp.getPreference().getString(Common.CONNECTION, ""));
+
+        following.setGravity(Gravity.CENTER_VERTICAL);
+        following.setTypeface(helper.droid(getApplicationContext()));
+        following.setTextColor(getResources().getColor(R.color.junAccent));
+        following.setText(mApp.getPreference().getString(Common.FOLLOWING, ""));
+
+        profileStrength.setGravity(Gravity.CENTER_VERTICAL);
+        profileStrength.setTypeface(helper.droid(getApplicationContext()));
+        profileStrength.setTextColor(getResources().getColor(R.color.junAccent));
+
+        profileStrength.setText("" + mApp.getPreference().getInt(Common.PROFILESTRENGTH, 0));
+
+
+        follower.setGravity(Gravity.CENTER_VERTICAL);
+        follower.setTypeface(helper.droid(getApplicationContext()));
+        follower.setTextColor(getResources().getColor(R.color.junAccent));
+        follower.setText(mApp.getPreference().getString(Common.FOLLOWER, ""));
     }
 
     private void setUpNavDrawer() {
@@ -288,9 +394,21 @@ public class JuniorActivity extends AppCompatActivity {
         MenuItem menuItem = menu.findItem(R.id.notify);
         MenuItemCompat.setActionView(menuItem, R.layout.toolbar_counter);
         lay1 = (RelativeLayout) MenuItemCompat.getActionView(menuItem);
-        alertCount= (TextView) lay1.findViewById(R.id.counter1);
-        int cnt=0;
-        if(cnt==0){alertCount.setVisibility(View.GONE);}else{alertCount.setText(""+cnt);}
+        alertCount = (TextView) lay1.findViewById(R.id.counter1);
+        if (mApp.getPreference().getString(Common.ALERT, "").equalsIgnoreCase("0")) {
+            alertCount.setVisibility(View.GONE);
+        } else {
+            alertCount.setText(mApp.getPreference().getString(Common.ALERT, ""));
+        }
+        lay1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                toolbar.setTitle("Notification");
+                mDrawerLayout.closeDrawers();
+                mNavigationView.getMenu().getItem(selected).setChecked(false);
+                display(11);
+            }
+        });
         return true;
     }
 
@@ -301,10 +419,14 @@ public class JuniorActivity extends AppCompatActivity {
                 startActivity(new Intent(getApplicationContext(), SearchActivity.class));
                 break;
             case R.id.profile:
-                startActivity(new Intent(getApplicationContext(), JuniorProfile.class));
+                startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
                 break;
             case R.id.resume:
+                mApp.getPreference().edit().putBoolean(Common.APPLY, false).commit();
                 startActivity(new Intent(getApplicationContext(), JuniorResumeGenerate.class));
+                break;
+            case R.id.setting:
+                startActivity(new Intent(getApplicationContext(), SettingActivity.class));
                 break;
             case R.id.logout:
                 mApp.getPreference().edit().putBoolean(Common.Login, false).commit();
@@ -344,5 +466,51 @@ public class JuniorActivity extends AppCompatActivity {
                 }
             }, 2000);
         }
+    }
+
+
+    private void showAlert() {
+        AlertDialog.Builder build = new AlertDialog.Builder(JuniorActivity.this);
+        build.setTitle("Udyomitra");
+        build.setMessage("Complete Profile, Build your Network!")
+                .setPositiveButton("Build", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        startActivity(new Intent(getApplicationContext(), ResumeEditActivity.class));
+                        dialog.cancel();
+                    }
+                }).setNegativeButton("Not Now", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        }).show();
+    }
+
+    private void showFeedDialog() {
+        LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View v = inflater.inflate(R.layout.intro_dialog, null, false);
+        final EditText feed = (EditText) v.findViewById(R.id.intro);
+        feed.setHint("Enter FeedBack");
+        AlertDialog.Builder builder = new AlertDialog.Builder(JuniorActivity.this)
+                .setView(v);
+        builder.setTitle("FeedBack")
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        if (feed.getText().toString().length() == 0) {
+                            feed.setError("Filed Mandatory");
+                        } else {
+                            new Feedback(getApplicationContext(), mApp.getPreference().getString(Common.u_id, ""), feed.getText().toString()).execute();
+                            dialog.cancel();
+
+                        }
+                    }
+                }).setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        }).show();
     }
 }

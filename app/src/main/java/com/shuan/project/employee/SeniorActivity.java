@@ -42,7 +42,6 @@ import com.shuan.project.Utils.Helper;
 import com.shuan.project.about.About;
 import com.shuan.project.about.Help;
 import com.shuan.project.asyncTasks.Feedback;
-import com.shuan.project.asyncTasks.UpdateStatus;
 import com.shuan.project.fragment.AppliedFragment;
 import com.shuan.project.fragment.ConnectionFragment;
 import com.shuan.project.fragment.EmployerHome;
@@ -55,13 +54,11 @@ import com.shuan.project.fragment.OffersFragment;
 import com.shuan.project.fragment.ReferenceFragment;
 import com.shuan.project.fragment.SuggestionFragment;
 import com.shuan.project.launcher.LoginActivity;
-import com.shuan.project.profile.JuniorProfile;
 import com.shuan.project.profile.ProfileActivity;
-import com.shuan.project.profile.ProfileViewActivity;
 import com.shuan.project.resume.ExpResumeGenerate;
-import com.shuan.project.resume.JuniorResumeGenerate;
 import com.shuan.project.resume.ResumeEditActivity;
 import com.shuan.project.search.SearchActivity;
+import com.shuan.project.setting.SettingActivity;
 
 import java.util.HashMap;
 
@@ -132,7 +129,7 @@ public class SeniorActivity extends AppCompatActivity {
 
         lay1 = (RelativeLayout) findViewById(R.id.notification);
 
-
+        display(0);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer);
 
         mUserLearnedDrawer = Boolean.valueOf(readSharedSetting(this, PREF_USER_LEARNED_DRAWER, "false"));
@@ -144,15 +141,8 @@ public class SeniorActivity extends AppCompatActivity {
 
         setUpNavDrawer();
 
-        if (mApp.getPreference().getBoolean(Common.QUALIFICATION, false) == false) {
-
-            snackbar.make(root, "Complete Your Qualification", Snackbar.LENGTH_LONG)
-                    .setAction("DO", new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            startActivity(new Intent(getApplicationContext(), JuniorResumeGenerate.class));
-                        }
-                    }).show();
+        if (mApp.getPreference().getBoolean(Common.WORKINFO, false) == false) {
+            showAlert();
         }
 
         mNavigationView = (NavigationView) findViewById(R.id.navigation);
@@ -179,7 +169,7 @@ public class SeniorActivity extends AppCompatActivity {
         usrName.setText(mApp.getPreference().getString(Common.FULLNAME, ""));
 
         initializeCount();
-        display(0);
+
         mNavigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @TargetApi(Build.VERSION_CODES.HONEYCOMB)
             @Override
@@ -269,6 +259,24 @@ public class SeniorActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void showAlert() {
+        AlertDialog.Builder build = new AlertDialog.Builder(SeniorActivity.this);
+        build.setTitle("Udyomitra");
+        build.setMessage("Complete Profile, Build your Network!")
+                .setPositiveButton("Build", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        startActivity(new Intent(getApplicationContext(), ResumeEditActivity.class));
+                        dialog.cancel();
+                    }
+                }).setNegativeButton("Not Now", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        }).show();
     }
 
     private void showFeedDialog() {
@@ -403,7 +411,7 @@ public class SeniorActivity extends AppCompatActivity {
         profileStrength.setTypeface(helper.droid(getApplicationContext()));
         profileStrength.setTextColor(getResources().getColor(R.color.senAccent));
 
-        profileStrength.setText(mApp.getPreference().getString(Common.PROFILESTRENGTH, ""));
+        profileStrength.setText(""+mApp.getPreference().getInt(Common.PROFILESTRENGTH,0));
 
 
         follower.setGravity(Gravity.CENTER_VERTICAL);
@@ -460,7 +468,11 @@ public class SeniorActivity extends AppCompatActivity {
                 startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
                 break;
             case R.id.resume:
+                mApp.getPreference().edit().putBoolean(Common.APPLY, false).commit();
                 startActivity(new Intent(getApplicationContext(), ExpResumeGenerate.class));
+                break;
+            case R.id.setting:
+                startActivity(new Intent(getApplicationContext(), SettingActivity.class));
                 break;
             case R.id.logout:
                 mApp.getPreference().edit().putBoolean(Common.Login, false).commit();

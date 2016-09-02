@@ -3,26 +3,30 @@ package com.shuan.project.signup.employee;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
-import android.os.Handler;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.os.Handler;
+import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.AdapterView;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
+import android.widget.ProgressBar;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.shuan.project.R;
 import com.shuan.project.Utils.Common;
 import com.shuan.project.Utils.Helper;
+import com.shuan.project.Utils.MonthYearPicker;
+import com.shuan.project.asyncTasks.GetOrg;
 import com.shuan.project.parser.Connection;
 import com.shuan.project.parser.php;
 
@@ -34,110 +38,52 @@ public class WorkActivity extends AppCompatActivity implements View.OnClickListe
 
     private Helper helper = new Helper();
     private Common mApp;
-    private AutoCompleteTextView orgname, postition, location;
+    private AutoCompleteTextView orgname;
     private Button wk_skip, wk_next;
     private HashMap<String, String> wData;
-    private TextView frm,to;
-    private EditText fY, fM, fD, tY, tM, tD, present;
-    private String[] mnth = new String[0];
-    private String[] date = new String[0];
-    private RelativeLayout frm_mnth, frm_date, to_mnth, to_date;
-    private String frmDate, toDate;
-    private LinearLayout to_year;
+    private TextView frm, to;
+    private EditText postition, location, fYr, tYr, present;
     private CheckBox wrking;
     private boolean visible = false;
-    private boolean exit=false;
+    private boolean exit = false;
+    private String toDate;
+    private ProgressBar progressBar;
+    private ScrollView scroll;
+    private MonthYearPicker myp;
+    private MonthYearPicker myp1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         mApp = (Common) getApplicationContext();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_work);
 
+
+        progressBar = (ProgressBar) findViewById(R.id.progress_bar);
+        scroll = (ScrollView) findViewById(R.id.scroll);
         orgname = (AutoCompleteTextView) findViewById(R.id.orgname);
-        postition = (AutoCompleteTextView) findViewById(R.id.position);
-        location = (AutoCompleteTextView) findViewById(R.id.location);
-        to_year = (LinearLayout) findViewById(R.id.to_year);
+        postition = (EditText) findViewById(R.id.position);
+        location = (EditText) findViewById(R.id.location);
+        fYr = (EditText) findViewById(R.id.f_yr);
+        tYr = (EditText) findViewById(R.id.t_yr);
 
         wrking = (CheckBox) findViewById(R.id.wrking);
-
-
-        fY = (EditText) findViewById(R.id.f_year);
-        fM = (EditText) findViewById(R.id.f_month);
-        fD = (EditText) findViewById(R.id.f_date);
-        tY = (EditText) findViewById(R.id.t_year);
-        tM = (EditText) findViewById(R.id.t_month);
-        tD = (EditText) findViewById(R.id.t_date);
         present = (EditText) findViewById(R.id.present);
         frm = (TextView) findViewById(R.id.frm);
         to = (TextView) findViewById(R.id.to);
 
-
-        frm_mnth = (RelativeLayout) findViewById(R.id.frm_mnth);
-        frm_date = (RelativeLayout) findViewById(R.id.frm_dat);
-        to_mnth = (RelativeLayout) findViewById(R.id.to_mnth);
-        to_date = (RelativeLayout) findViewById(R.id.to_dat);
-        mnth = getResources().getStringArray(R.array.month);
-        date = getResources().getStringArray(R.array.date);
-
+        myp = new MonthYearPicker(this);
+        myp1=new MonthYearPicker(this);
         orgname.setTypeface(helper.droid(getApplicationContext()));
         postition.setTypeface(helper.droid(getApplicationContext()));
         location.setTypeface(helper.droid(getApplicationContext()));
         wrking.setTypeface(helper.droid(getApplicationContext()));
-        fY.setTypeface(helper.droid(getApplicationContext()));
-        fM.setTypeface(helper.droid(getApplicationContext()));
-        fD.setTypeface(helper.droid(getApplicationContext()));
-        tY.setTypeface(helper.droid(getApplicationContext()));
-        tM.setTypeface(helper.droid(getApplicationContext()));
-        tD.setTypeface(helper.droid(getApplicationContext()));
+
         present.setTypeface(helper.droid(getApplicationContext()));
         frm.setTypeface(helper.droid(getApplicationContext()));
         to.setTypeface(helper.droid(getApplicationContext()));
-
-
-        fM.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                    showMnth("fm");
-                }
-                return false;
-            }
-        });
-
-        fD.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                    showDate("fd");
-                }
-                return false;
-            }
-        });
-
-        tM.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                    showMnth("tm");
-                }
-                return false;
-            }
-        });
-
-        tD.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                    showDate("td");
-                }
-                return false;
-            }
-        });
-
-
-        fY.addTextChangedListener(this);
-        tY.addTextChangedListener(this);
 
 
         wk_next = (Button) findViewById(R.id.wk_next);
@@ -149,47 +95,57 @@ public class WorkActivity extends AppCompatActivity implements View.OnClickListe
         wk_next.setOnClickListener(this);
         wk_skip.setOnClickListener(this);
 
+        new GetOrg(WorkActivity.this, progressBar, scroll, orgname).execute();
 
-    }
+        orgname.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                TextView txt1 = (TextView) view.findViewById(R.id.ins_name);
+                TextView txt4 = (TextView) view.findViewById(R.id.txt1);
 
-    private void showDate(final String val) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(WorkActivity.this);
-        builder.setTitle("Select Date")
-                .setSingleChoiceItems(date, 0, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        if (val.equalsIgnoreCase("fd")) {
-                            fD.setText(date[which]);
+                orgname.setText(txt1.getText().toString());
+                location.setText(txt4.getText().toString());
+            }
+        });
 
-                        } else {
-                            tD.setText(date[which]);
-
+        fYr.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                    myp.build(new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            fYr.setText(myp.getSelectedYear() + "-" + myp.getSelectedMonthShortName());
                         }
+                    }, null);
+                    myp.show();
 
-                        dialog.cancel();
-                    }
-                }).show();
-    }
+                }
+                return false;
+            }
+        });
 
-    private void showMnth(final String val) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(WorkActivity.this);
-        builder.setTitle("Select Month")
-                .setSingleChoiceItems(mnth, 0, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        if (val.equalsIgnoreCase("fm")) {
-                            fM.setText(mnth[which]);
-                            frm_date.setVisibility(View.VISIBLE);
-                        } else {
-                            tM.setText(mnth[which]);
-                            to_date.setVisibility(View.VISIBLE);
+        tYr.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                    myp1.build(new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            tYr.setText(myp.getSelectedYear() + "-" + myp.getSelectedMonthShortName());
                         }
+                    }, null);
+                    myp1.show();
 
-                        dialog.cancel();
-                    }
-                }).show();
+
+                }
+                return false;
+            }
+        });
+
 
     }
+
 
     @Override
     public void onClick(View v) {
@@ -197,11 +153,11 @@ public class WorkActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.wrking:
                 if (((CheckBox) v).isChecked()) {
                     present.setVisibility(View.VISIBLE);
-                    to_year.setVisibility(View.GONE);
+                    tYr.setVisibility(View.GONE);
                     visible = false;
                 } else {
                     present.setVisibility(View.GONE);
-                    to_year.setVisibility(View.VISIBLE);
+                    tYr.setVisibility(View.VISIBLE);
                     visible = true;
                 }
                 break;
@@ -212,36 +168,25 @@ public class WorkActivity extends AppCompatActivity implements View.OnClickListe
                 } else if (location.getText().toString().length() == 0) {
                     location.setError("Location Mandatory");
                     location.requestFocus();
-                } else if (fY.getText().toString().length() == 0) {
-                    fY.setError("Year Mandatory");
-                    fY.requestFocus();
-                } else if (fM.getText().toString().length() == 0) {
-                    fM.setError("Month Mandatory");
-                    fM.requestFocus();
-                } else if (fD.getText().toString().length() == 0) {
-                    fD.setError("Date Mandatory");
-                    fD.requestFocus();
+                } else if (fYr.getText().toString().length() == 0) {
+                    fYr.setError("Field Mandatory");
+                    fYr.requestFocus();
                 } else {
                     if (visible) {
-                        if (tY.getText().toString().length() == 0) {
-                            tY.setError("Year Mandatory");
-                            tY.requestFocus();
-                        } else if (tM.getText().toString().length() == 0) {
-                            tM.setError("Month Mandatory");
-                            tM.requestFocus();
-                        } else if (tD.getText().toString().length() == 0) {
-                            tD.setError("Date Mandatory");
-                            tD.requestFocus();
+                        if (tYr.getText().toString().length() == 0) {
+                            tYr.setError("Field Mandatory");
+                            tYr.requestFocus();
+                        } else {
+                            toDate = tYr.getText().toString();
                         }
-                        toDate = tY.getText().toString() + "-" + tM.getText().toString() + "-" + tD.getText().toString();
+
                     } else {
                         toDate = "present";
                     }
-                    frmDate = fY.getText().toString() + "-" + fM.getText().toString() + "-" + fD.getText().toString();
-                    if (toDate.toString().equalsIgnoreCase("--")) {
-                    } else {
-                        new Wrk().execute();
-                    }
+
+
+                    new Wrk().execute();
+
                 }
 
                 break;
@@ -269,12 +214,6 @@ public class WorkActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void afterTextChanged(Editable s) {
 
-        if (fY.getText().toString().length() == 4) {
-            frm_mnth.setVisibility(View.VISIBLE);
-        }
-        if (tY.getText().toString().length() == 4) {
-            to_mnth.setVisibility(View.VISIBLE);
-        }
         if (orgname.getText().toString().length() == 0) {
             wk_skip.setVisibility(View.VISIBLE);
             wk_next.setVisibility(View.GONE);
@@ -289,6 +228,7 @@ public class WorkActivity extends AppCompatActivity implements View.OnClickListe
         String uOrgname = orgname.getText().toString();
         String uPosition = postition.getText().toString();
         String uLocation = location.getText().toString();
+        String uFrm = fYr.getText().toString();
 
 
         @Override
@@ -298,9 +238,9 @@ public class WorkActivity extends AppCompatActivity implements View.OnClickListe
             wData.put("org_name", uOrgname);
             wData.put("position", uPosition);
             wData.put("loc", uLocation);
-            wData.put("frm", frmDate);
+            wData.put("frm", uFrm);
             wData.put("to", toDate);
-            wData.put("type","add");
+            wData.put("type", "add");
 
 
             try {
@@ -318,10 +258,8 @@ public class WorkActivity extends AppCompatActivity implements View.OnClickListe
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            mApp.getPreference().edit().putBoolean(Common.WORKINFO,true).commit();
-                            mApp.getPreference().edit().putBoolean(Common.ACTIVITY2, true).commit();
-                            Toast.makeText(getApplicationContext(), "Work Details Added Successfully", Toast.LENGTH_SHORT).show();
-                           startActivity(new Intent(getApplicationContext(), EducationActivity.class));
+                            mApp.getPreference().edit().putBoolean(Common.WORKINFO, true).commit();
+                            startActivity(new Intent(getApplicationContext(), EducationActivity.class));
                             finish();
                         }
                     });
@@ -338,8 +276,6 @@ public class WorkActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onBackPressed() {
         if (exit) {
-            mApp.getPreference().edit().putBoolean(Common.ACTIVITY1, true).commit();
-            mApp.getPreference().edit().putBoolean(Common.ACTIVITY2, false).commit();
             super.onBackPressed();
             return;
         } else {

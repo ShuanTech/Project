@@ -7,6 +7,7 @@ import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
+import com.shuan.project.Utils.Common;
 import com.shuan.project.parser.Connection;
 import com.shuan.project.parser.php;
 import com.shuan.project.resume.ResumeEditActivity;
@@ -20,9 +21,10 @@ public class profileSummaryUpdate extends AsyncTask<String, String, String> {
 
     private Context mContext;
     private String uId;
-    private String profile, table;
+    private String profile, table, s;
     private ProgressDialog pDialog;
     private HashMap<String, String> seniorData;
+    private Common mApp;
 
 
     public profileSummaryUpdate(Context mContext, String uId, String profile, String table) {
@@ -30,6 +32,7 @@ public class profileSummaryUpdate extends AsyncTask<String, String, String> {
         this.uId = uId;
         this.profile = profile;
         this.table = table;
+        this.mApp = (Common) mContext.getApplicationContext();
     }
 
     @Override
@@ -49,14 +52,20 @@ public class profileSummaryUpdate extends AsyncTask<String, String, String> {
         seniorData = new HashMap<String, String>();
         seniorData.put("u_id", uId);
         seniorData.put("summary", profile);
-        seniorData.put("table",table);
+        seniorData.put("table", table);
         try {
             JSONObject json = Connection.UrlConnection(php.profile_summary, seniorData);
+            int succ = json.getInt("success");
+            if (succ == 0) {
+                s = "false";
+            } else {
+                s = "true";
+            }
 
         } catch (Exception e) {
         }
 
-        return null;
+        return s;
     }
 
 
@@ -64,10 +73,26 @@ public class profileSummaryUpdate extends AsyncTask<String, String, String> {
     protected void onPostExecute(String s) {
         super.onPostExecute(s);
         pDialog.cancel();
-        Toast.makeText(mContext, "Successfully Update Profile Summary", Toast.LENGTH_SHORT).show();
-        Intent in = new Intent(mContext, ResumeEditActivity.class);
-        in.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        mContext.startActivity(in);
-        ((AppCompatActivity) mContext).finish();
+        if (s.equalsIgnoreCase("true")) {
+            if (table.equalsIgnoreCase("skill")) {
+                int val=mApp.getPreference().getInt(Common.PROFILESTRENGTH,0);
+                mApp.getPreference().edit().putInt(Common.PROFILESTRENGTH, val+3).commit();
+                mApp.getPreference().edit().putBoolean(Common.SKILL,true).commit();
+            }else if(table.equalsIgnoreCase("proSum")){
+                int val=mApp.getPreference().getInt(Common.PROFILESTRENGTH,0);
+                mApp.getPreference().edit().putInt(Common.PROFILESTRENGTH, val+5).commit();
+            }else if(table.equalsIgnoreCase("wrkExp")){
+                int val=mApp.getPreference().getInt(Common.PROFILESTRENGTH,0);
+                mApp.getPreference().edit().putInt(Common.PROFILESTRENGTH, val+4).commit();
+            }
+            Toast.makeText(mContext, "Successfully Update Profile Summary", Toast.LENGTH_SHORT).show();
+            Intent in = new Intent(mContext, ResumeEditActivity.class);
+            in.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            mContext.startActivity(in);
+            ((AppCompatActivity) mContext).finish();
+        } else {
+            Toast.makeText(mContext, "Try Again Not updated", Toast.LENGTH_SHORT).show();
+        }
+
     }
 }

@@ -1090,6 +1090,7 @@ public class ExpResumeGenerate extends AppCompatActivity implements View.OnClick
                 new UploadPicture(ExpResumeGenerate.this, FILE, "resume", "senior", php.upload_resume).execute();
                 mApp.getPreference().edit().putBoolean(Common.APPLY, false).commit();
             } else {
+                Toast.makeText(getApplicationContext(),"Resume Saved in"+FILE,Toast.LENGTH_SHORT).show();
                 openPdf();
             }
 

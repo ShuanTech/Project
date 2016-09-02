@@ -207,8 +207,9 @@ public class SignupActivity extends AppCompatActivity {
                         @Override
                         public void run() {
                             mApp.getPreference().edit().putString(Common.u_id, u_id).commit();
-                            mApp.getPreference().edit().putBoolean(Common.Login, true).commit();
                             mApp.getPreference().edit().putString(Common.LEVEL, type).commit();
+                            mApp.getPreference().edit().putBoolean(Common.Login, true).commit();
+                            mApp.getPreference().edit().putBoolean(Common.USRINFO,true).commit();
                             if (type.toString().equalsIgnoreCase("1")) {
                                 startActivity(new Intent(getApplicationContext(), EducationActivity.class));
                                 finish();
