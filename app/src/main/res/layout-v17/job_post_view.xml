@@ -84,10 +84,10 @@
 
 
                     <TextView
-                        android:layout_below="@id/des"
                         android:id="@+id/title"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_below="@id/des"
                         android:layout_marginLeft="@dimen/standard_margin"
                         android:layout_marginRight="@dimen/standard_margin"
                         android:layout_marginTop="@dimen/standard_margin"
@@ -202,6 +202,7 @@
             android:layout_marginBottom="@dimen/standard_margin"
             android:layout_marginLeft="@dimen/standard_margin"
             android:layout_marginRight="@dimen/standard_margin"
+            android:layout_marginTop="@dimen/standard_margin"
             android:orientation="horizontal">
 
 
@@ -263,21 +264,6 @@
             </RelativeLayout>
 
             <RelativeLayout
-                android:id="@+id/refer"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1">
-
-                <ImageView
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:layout_centerHorizontal="true"
-                    android:alpha="0.7"
-                    android:src="@drawable/refer" />
-            </RelativeLayout>
-
-
-            <RelativeLayout
                 android:id="@+id/share"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -327,14 +313,15 @@
 
     <TextView
         android:id="@+id/jId"
-        android:visibility="gone"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:visibility="gone" />
+
     <TextView
         android:id="@+id/frm_id"
-        android:visibility="gone"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:visibility="gone" />
 
     <View
         android:layout_width="match_parent"
@@ -346,11 +333,6 @@
         android:layout_marginTop="@dimen/small_margin"
         android:alpha="0.4"
         android:background="#000" />
-
-
-
-
-
 
 
 </RelativeLayout>

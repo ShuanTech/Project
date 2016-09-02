@@ -260,20 +260,6 @@
 
             </RelativeLayout>
 
-            <RelativeLayout
-                android:id="@+id/refer"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1">
-
-                <ImageView
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:layout_centerHorizontal="true"
-                    android:alpha="0.7"
-                    android:src="@drawable/refer" />
-            </RelativeLayout>
-
 
             <RelativeLayout
                 android:id="@+id/share"
@@ -325,15 +311,15 @@
 
     <TextView
         android:id="@+id/jId"
-        android:visibility="gone"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:visibility="gone" />
 
     <TextView
         android:id="@+id/frm_id"
-        android:visibility="gone"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:visibility="gone" />
 
     <View
         android:layout_width="match_parent"

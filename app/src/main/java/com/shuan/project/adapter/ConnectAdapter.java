@@ -72,13 +72,13 @@ public class ConnectAdapter extends BaseAdapter {
         TextView companyName = (TextView) convertView.findViewById(R.id.place);*/
         TextView level = (TextView) convertView.findViewById(R.id.level);
 
-        uId.setText(curr.getU_id());
-        name.setText(curr.getName());
+        uId.setText(curr.getDis());
+        name.setText(curr.getBoard());
        /* pos.setText(curr.getPos());
         companyName.setText(curr.getCompanyName());*/
-        level.setText(curr.getLevel());
+        level.setText(curr.getLoc());
 
-        ImageLoader.getInstance().displayImage(curr.getProPic(), usrImg, options, new SimpleImageLoadingListener() {
+        ImageLoader.getInstance().displayImage(curr.getInsName(), usrImg, options, new SimpleImageLoadingListener() {
 
             @Override
             public void onLoadingStarted(String imageUri, View view) {

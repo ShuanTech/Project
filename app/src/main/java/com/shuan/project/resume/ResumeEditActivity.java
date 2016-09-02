@@ -784,7 +784,9 @@ public class ResumeEditActivity extends AppCompatActivity implements View.OnClic
                             mApp.getPreference().edit().putString(Common.INTRO, about.getText().toString()).commit();
                             new UpdateStatus(getApplicationContext(), mApp.getPreference().getString(Common.u_id, ""), about.getText().toString()).execute();
                             dialog.cancel();
-                            chkIntro();
+                            Intent in = getIntent();
+                            finish();
+                            startActivity(in);
                         }
                     }
                 }).setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {

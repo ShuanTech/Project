@@ -28,13 +28,14 @@ public class GetPost extends AsyncTask<String, String, String> {
     private Common mApp;
     private ArrayList<Sample> list;
     private PostAdapter adapter;
-    private String u_id;
+    private String u_id,type;
 
-    public GetPost(Context mContext, ListView listView, ProgressBar progressBar, String u_id) {
+    public GetPost(Context mContext, ListView listView, ProgressBar progressBar, String u_id,String type) {
         this.mContext = mContext;
         this.listView = listView;
         this.progressBar = progressBar;
         this.u_id = u_id;
+        this.type=type;
         list = new ArrayList<Sample>();
     }
 
@@ -42,6 +43,7 @@ public class GetPost extends AsyncTask<String, String, String> {
     protected String doInBackground(String... params) {
         cData = new HashMap<String, String>();
         cData.put("u_id", u_id);
+        cData.put("type",type);
 
         try {
             JSONObject json = Connection.UrlConnection(php.get_post, cData);

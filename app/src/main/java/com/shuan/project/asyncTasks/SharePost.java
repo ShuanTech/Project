@@ -72,7 +72,7 @@ public class SharePost extends AsyncTask<String,String,String> {
         super.onPostExecute(s);
         pDialog.cancel();
         if(s.equalsIgnoreCase("true")){
-            Toast.makeText(mContext,"Successfully shred",Toast.LENGTH_SHORT).show();
+            Toast.makeText(mContext,"Successfully shared",Toast.LENGTH_SHORT).show();
             AppCompatActivity activity= (AppCompatActivity) mContext;
             Fragment f=new EmployerHome();
             FragmentTransaction ft=activity.getSupportFragmentManager().beginTransaction().replace(R.id.container, f);

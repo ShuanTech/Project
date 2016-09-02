@@ -100,7 +100,8 @@ public class ExpResumeGenerate extends AppCompatActivity implements View.OnClick
         if (mApp.getPreference().getBoolean(Common.APPLY, false) == true) {
 
             FILE = Environment.getExternalStorageDirectory() + "/" + mApp.getPreference().getString(Common.u_id, "") + "-"
-                    + getIntent().getStringExtra("job_id") + "-" + getIntent().getStringExtra("frm_id") + ".pdf";
+                    + getIntent().getStringExtra("job_id") + "-" +
+                    getIntent().getStringExtra("refer") + ".pdf";
         } else {
             FILE = Environment.getExternalStorageDirectory() + "/" + mApp.getPreference().getString(Common.u_id, "") + ".pdf";
         }
@@ -445,21 +446,20 @@ public class ExpResumeGenerate extends AppCompatActivity implements View.OnClick
 
                                 for (int i = 0; i < list.size(); i++) {
                                     ResumeList curr = list.get(i);
-                                    String toDat1 = null, toDat2 = null, toDat3;
-                                    String[] frmDate = curr.getFrm_dat().toString().split("-", 3);
+                                    String toDat1 = null, toDat2 = null;
+                                    String[] frmDate = curr.getFrm_dat().toString().split("-", 2);
                                     String frmDate1 = frmDate[0];
                                     String frmDate2 = frmDate[1];
-                                    String frmDate3 = frmDate[2];
+
 
                                     if (curr.getTo_dat().toString().equalsIgnoreCase("present")) {
                                         Paragraph p25 = new Paragraph("Since " + " " + frmDate2 + " ' " + frmDate1.substring(2) + " with " + curr.getOrgName() + ", " + curr.getLoc() + " as " + curr.getPos(), content);
                                         p25.setAlignment(Paragraph.ALIGN_CENTER);
                                         doc.add(p25);
                                     } else {
-                                        String[] toDate = curr.getTo_dat().toString().split("-", 3);
+                                        String[] toDate = curr.getTo_dat().toString().split("-", 2);
                                         toDat1 = toDate[0];
                                         toDat2 = toDate[1];
-                                        toDat3 = toDate[2];
                                         Paragraph p26 = new Paragraph(frmDate2 + " ' " + frmDate1.substring(2) + " - " + toDat2 + " ' " + toDat1.substring(2) + " with " + curr.getOrgName() + ", " + curr.getLoc() + " as " + curr.getPos(), content);
                                         p26.setAlignment(Paragraph.ALIGN_CENTER);
                                         doc.add(p26);
@@ -525,6 +525,7 @@ public class ExpResumeGenerate extends AppCompatActivity implements View.OnClick
 
                                 doc.add(p27);
                                 doc.add(Chunk.NEWLINE);
+
 
                                 new getEduInfo().execute();
 
@@ -1084,20 +1085,32 @@ public class ExpResumeGenerate extends AppCompatActivity implements View.OnClick
             doc.add(p21);
 
             doc.close();
-
             if (mApp.getPreference().getBoolean(Common.APPLY, false) == true) {
+                Toast.makeText(getApplicationContext(), "Upload start", Toast.LENGTH_SHORT).show();
+                new UploadPicture(ExpResumeGenerate.this, FILE, "resume", "senior", php.upload_resume).execute();
+                mApp.getPreference().edit().putBoolean(Common.APPLY, false).commit();
+            } else {
+                openPdf();
+            }
+
+
+            /*
+
+            openPdf();*/
+
+           /* if (mApp.getPreference().getBoolean(Common.APPLY, false) == true) {
 
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                     progressBar.setVisibility(View.GONE);
                     scroll.setVisibility(View.VISIBLE);
                     render();
-                }else{
+                } else {
                     Toast.makeText(getApplicationContext(), "Upload start", Toast.LENGTH_SHORT).show();
                     new UploadPicture(ExpResumeGenerate.this, FILE, "resume", "senior", php.upload_resume).execute();
                 }
             } else {
                 render();
-            }
+            }*/
 
         } catch (Exception e) {
         }
@@ -1125,7 +1138,8 @@ public class ExpResumeGenerate extends AppCompatActivity implements View.OnClick
             pdfView.setImageBitmap(bitmap);
             pdfView.invalidate();
 
-        } catch (Exception e) {}
+        } catch (Exception e) {
+        }
     }
 
 

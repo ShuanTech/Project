@@ -4,12 +4,9 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v4.app.NavUtils;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
@@ -18,7 +15,6 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.shuan.project.R;
 import com.shuan.project.Utils.Common;
@@ -32,11 +28,12 @@ public class PostViewActivity extends AppCompatActivity {
     private Toolbar toolbar;
     private Common mApp;
     private ImageView coverImg, cmpny_logo;
-    private TextView jTitle, cmpny, created, viewd, applied, shared, skill, desc, type, cate, jId,sal;
+    private TextView jTitle, cmpny, created, viewd, applied, shared, skill, desc, type, cate, jId, sal;
     private Button apply;
     private RelativeLayout scroll;
     private ProgressBar progressBar;
-    private LinearLayout jType,jSal,jCate,j_Id;
+    private LinearLayout jType, jSal, jCate, j_Id;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         mApp = (Common) getApplicationContext();
@@ -52,12 +49,12 @@ public class PostViewActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        scroll= (RelativeLayout) findViewById(R.id.scroll);
-        progressBar= (ProgressBar) findViewById(R.id.progress_bar);
-        jType= (LinearLayout) findViewById(R.id.j_type);
-        jSal= (LinearLayout) findViewById(R.id.j_sal);
-        jCate= (LinearLayout) findViewById(R.id.j_cate);
-        j_Id= (LinearLayout) findViewById(R.id.j_id);
+        scroll = (RelativeLayout) findViewById(R.id.scroll);
+        progressBar = (ProgressBar) findViewById(R.id.progress_bar);
+        jType = (LinearLayout) findViewById(R.id.j_type);
+        jSal = (LinearLayout) findViewById(R.id.j_sal);
+        jCate = (LinearLayout) findViewById(R.id.j_cate);
+        j_Id = (LinearLayout) findViewById(R.id.j_id);
         coverImg = (ImageView) findViewById(R.id.cover_img);
         cmpny_logo = (ImageView) findViewById(R.id.cmpny_logo);
         jTitle = (TextView) findViewById(R.id.jTitle);
@@ -71,52 +68,60 @@ public class PostViewActivity extends AppCompatActivity {
         type = (TextView) findViewById(R.id.type);
         cate = (TextView) findViewById(R.id.cate);
         jId = (TextView) findViewById(R.id.jId);
-        apply= (Button) findViewById(R.id.apply);
-        sal= (TextView) findViewById(R.id.sal);
+        apply = (Button) findViewById(R.id.apply);
+        sal = (TextView) findViewById(R.id.sal);
 
-        if(mApp.getPreference().getString(Common.LEVEL,"").equalsIgnoreCase("3")){
+        if (mApp.getPreference().getString(Common.LEVEL, "").equalsIgnoreCase("3")) {
             apply.setVisibility(View.GONE);
         }
+        if (getIntent().getStringExtra("apply").equalsIgnoreCase("yes")) {
+            apply.setText("Applied");
+        }
 
-        new PostView(PostViewActivity.this,mApp.getPreference().getString(Common.u_id,""),getIntent().getStringExtra("jId"),scroll,progressBar,coverImg,cmpny_logo,jTitle,cmpny,
-                created,viewd,applied,shared,skill,desc,type,cate,jId,jType,jSal,jCate,j_Id,sal).execute();
+        new PostView(PostViewActivity.this, mApp.getPreference().getString(Common.u_id, ""), getIntent().getStringExtra("jId"), scroll, progressBar, coverImg, cmpny_logo, jTitle, cmpny,
+                created, viewd, applied, shared, skill, desc, type, cate, jId, jType, jSal, jCate, j_Id, sal).execute();
 
 
         apply.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    mApp.getPreference().edit().putBoolean(Common.APPLY, true).commit();
 
-                    CallResumeData(getIntent().getStringExtra("jId"),getIntent().getStringExtra("frmId"));
+                if (!getIntent().getStringExtra("apply").equalsIgnoreCase("yes")) {
 
-                } else {
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                        mApp.getPreference().edit().putBoolean(Common.APPLY, true).commit();
 
-                    AlertDialog.Builder build = new AlertDialog.Builder(PostViewActivity.this);
-                    build.setTitle("CONFIRMATION");
-                    build.setMessage("Are You Sure Apply the Post or Edit the resume Content")
-                            .setPositiveButton("EDIT", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    dialog.cancel();
-                                    Intent in=new Intent(getApplicationContext(), ResumeEditActivity.class);
-                                    startActivity(in);
-                                }
-                            }).setNegativeButton("APPLY", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
+                        CallResumeData(getIntent().getStringExtra("jId"), getIntent().getStringExtra("frmId"));
 
-                            dialog.cancel();
-                            CallResumeData(getIntent().getStringExtra("jId"),getIntent().getStringExtra("frmId"));
-                        }
-                    }).show();
+                    } else {
+
+                        AlertDialog.Builder build = new AlertDialog.Builder(PostViewActivity.this);
+                        build.setTitle("CONFIRMATION");
+                        build.setMessage("Are You Sure Apply the Post or Edit the resume Content")
+                                .setPositiveButton("EDIT", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        dialog.cancel();
+                                        Intent in = new Intent(getApplicationContext(), ResumeEditActivity.class);
+                                        startActivity(in);
+                                    }
+                                }).setNegativeButton("APPLY", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                                dialog.cancel();
+                                CallResumeData(getIntent().getStringExtra("jId"), getIntent().getStringExtra("frmId"));
+                            }
+                        }).show();
+                    }
                 }
+
 
             }
         });
     }
 
-    private void CallResumeData(String jId,String frmId) {
+    private void CallResumeData(String jId, String frmId) {
 
         if (mApp.getPreference().getString(Common.LEVEL, "").equalsIgnoreCase("1")) {
             Intent in = new Intent(getApplicationContext(), JuniorResumeGenerate.class);

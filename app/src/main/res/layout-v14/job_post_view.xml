@@ -202,6 +202,7 @@
             android:layout_marginBottom="@dimen/standard_margin"
             android:layout_marginLeft="@dimen/standard_margin"
             android:layout_marginRight="@dimen/standard_margin"
+            android:layout_marginTop="@dimen/standard_margin"
             android:orientation="horizontal">
 
 
@@ -212,7 +213,6 @@
                 android:layout_weight="1">
 
                 <LinearLayout
-
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_horizontal"
@@ -262,19 +262,6 @@
 
             </RelativeLayout>
 
-            <RelativeLayout
-                android:id="@+id/refer"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1">
-
-                <ImageView
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:layout_centerHorizontal="true"
-                    android:alpha="0.7"
-                    android:src="@drawable/refer" />
-            </RelativeLayout>
 
 
             <RelativeLayout

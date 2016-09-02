@@ -260,20 +260,6 @@
 
             </RelativeLayout>
 
-            <RelativeLayout
-                android:id="@+id/refer"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1">
-
-                <ImageView
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:layout_centerHorizontal="true"
-                    android:alpha="0.7"
-                    android:src="@drawable/refer" />
-            </RelativeLayout>
-
 
             <RelativeLayout
                 android:id="@+id/share"

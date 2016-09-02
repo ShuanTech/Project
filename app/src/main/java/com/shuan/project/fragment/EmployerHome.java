@@ -56,7 +56,7 @@ public class EmployerHome extends Fragment {
 
         list = new ArrayList<Sample>();
 
-        new GetPost(getActivity(), listView, progressBar, mApp.getPreference().getString(Common.u_id,"")).execute();
+        new GetPost(getActivity(), listView, progressBar, mApp.getPreference().getString(Common.u_id,""),"all").execute();
 
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -67,6 +67,7 @@ public class EmployerHome extends Fragment {
                 Intent in=new Intent(getActivity(),PostViewActivity.class);
                 in.putExtra("jId",txt.getText().toString());
                 in.putExtra("frmId",txt1.getText().toString());
+                in.putExtra("apply","no");
                 startActivity(in);
             }
         });

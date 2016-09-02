@@ -250,7 +250,6 @@ public class EducationActivity extends AppCompatActivity implements View.OnClick
         switch (v.getId()) {
 
             case R.id.q_next:
-
                 if (univ.getText().toString().length() == 0) {
                     univ.setError("University Mandatory");
                     univ.requestFocus();
@@ -476,6 +475,7 @@ public class EducationActivity extends AppCompatActivity implements View.OnClick
             } else {
                 eData.put("cInsrt", "true");
             }
+            eData.put("type","add");
 
             try {
                 JSONObject json = Connection.UrlConnection(php.qualify, eData);
@@ -495,7 +495,8 @@ public class EducationActivity extends AppCompatActivity implements View.OnClick
                             Toast.makeText(getApplicationContext(), "College Added Successfully", Toast.LENGTH_SHORT).show();
                             mApp.getPreference().edit().putString(Common.CLGNAME, uClgName).commit();
                             mApp.getPreference().edit().putString(Common.COURSE, uConcent).commit();
-                            new Connect(getApplicationContext(), mApp.getPreference().getString(Common.u_id, "")).execute();
+                            new Connect(getApplicationContext(), mApp.getPreference().getString(Common.u_id, ""),
+                                    mApp.getPreference().getString(Common.LEVEL,"")).execute();
                             mApp.getPreference().edit().putBoolean(Common.QUALIFICATION, true).commit();
                             mApp.getPreference().edit().putBoolean(Common.HSC, false).commit();
                             mApp.getPreference().edit().putBoolean(Common.SSLC, false).commit();

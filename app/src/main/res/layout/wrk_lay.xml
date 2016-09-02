@@ -15,8 +15,7 @@
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_gravity="center"
-            android:alpha="0.5"
-            android:src="@drawable/ic_work" />
+            android:alpha="0.5"/>
 
         <TextView
             android:id="@+id/wrk"
@@ -25,7 +24,6 @@
             android:layout_marginLeft="@dimen/standard_margin"
             android:gravity="left"
             android:text=""
-            android:textColor="#000"
-            android:alpha="0.8"/>
+            android:textColor="#333" />
     </LinearLayout>
 </LinearLayout>

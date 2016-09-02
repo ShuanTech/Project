@@ -18,15 +18,14 @@ public class Following extends AsyncTask<String,String,String> {
 
     private Context mContext;
     private String u_id,frm_d,s;
-    private Button but1,but2;
+    private Button but1;
     private HashMap<String,String> fData;
 
-    public Following(Context mContext, String u_id, String frm_d, Button but1, Button but2) {
+    public Following(Context mContext, String u_id, String frm_d, Button but1) {
         this.mContext = mContext;
         this.u_id = u_id;
         this.frm_d = frm_d;
         this.but1 = but1;
-        this.but2 = but2;
     }
 
     @Override
@@ -52,13 +51,10 @@ public class Following extends AsyncTask<String,String,String> {
         super.onPostExecute(s);
         if(s.equalsIgnoreCase("true")){
             Toast.makeText(mContext,"You have succesfully followed",Toast.LENGTH_SHORT).show();
-            but1.setVisibility(View.GONE);
-            but2.setVisibility(View.VISIBLE);
-            but2.setText("Followed");
+            but1.setText("Following");
         }else{
             Toast.makeText(mContext,"Error! Try Again",Toast.LENGTH_SHORT).show();
-            but1.setText("Following");
-            but2.setVisibility(View.GONE);
+            but1.setText("Follow");
         }
     }
 }

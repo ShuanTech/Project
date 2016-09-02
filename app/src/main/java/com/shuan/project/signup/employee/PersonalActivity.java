@@ -170,6 +170,7 @@ public class PersonalActivity extends AppCompatActivity implements View.OnClickL
                 mApp.getPreference().edit().putBoolean(Common.PROJECT, false).commit();
                 mApp.getPreference().edit().putBoolean(Common.PERSONALINFO, false).commit();
                 mApp.getPreference().edit().putBoolean(Common.ACTIVITY4, true).commit();
+                mApp.getPreference().edit().putString(Common.PROFILESTRENGTH,"25").commit();
 
                 if (mApp.getPreference().getString(Common.LEVEL, "").equalsIgnoreCase("1")) {
                     mApp.getPreference().edit().putString(Common.RESUME, "junior").commit();
@@ -333,6 +334,7 @@ public class PersonalActivity extends AppCompatActivity implements View.OnClickL
                             mApp.getPreference().edit().putBoolean(Common.PROJECT, false).commit();
                             mApp.getPreference().edit().putBoolean(Common.ACTIVITY4, true).commit();
                             mApp.getPreference().edit().putBoolean(Common.USRINFO,true).commit();
+                            mApp.getPreference().edit().putString(Common.PROFILESTRENGTH,"25").commit();
                             new GetInfo(getApplicationContext(),mApp.getPreference().getString(Common.u_id,"")).execute();
 
                             if (mApp.getPreference().getString(Common.LEVEL, "").equalsIgnoreCase("1")) {

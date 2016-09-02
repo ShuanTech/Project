@@ -69,6 +69,7 @@ public class Common extends Application {
     public static final String FOLLOWING="following";
     public static final String APPLY="apply";
     public static final String ALERT="alert";
+    public static final String PROFILESTRENGTH="strenght";
     public Context mContext;
     private String update = null;
     public static final String Version = "version";
@@ -101,6 +102,7 @@ public class Common extends Application {
         PackageManager manager = mContext.getPackageManager();
 
 
+
         try {
             info = manager.getPackageInfo(
                     mContext.getPackageName(), 0);
@@ -110,13 +112,13 @@ public class Common extends Application {
         new chkVersion().execute();
 
         if (getPreference().getBoolean(Common.USRINFO, false) == true) {
-            if (getPreference().getString(Common.LEVEL, "").equalsIgnoreCase("1")) {
+            /*if (getPreference().getString(Common.LEVEL, "").equalsIgnoreCase("1")) {
                 new Connect(getApplicationContext(), getPreference().getString(Common.u_id, "")).execute();
             } else if (getPreference().getString(Common.LEVEL, "").equalsIgnoreCase("2")) {
                 new Connect(getApplicationContext(), getPreference().getString(Common.u_id, "")).execute();
             } else {
                 new Follower(getApplicationContext(), getPreference().getString(Common.u_id, "")).execute();
-            }
+            }*/
 
             new GetInfo(getApplicationContext(), getPreference().getString(Common.u_id, "")).execute();
         }

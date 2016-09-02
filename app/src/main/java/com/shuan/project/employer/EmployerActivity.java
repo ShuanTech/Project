@@ -239,7 +239,7 @@ public class EmployerActivity extends AppCompatActivity {
             case 6:
                 break;
             case 14:
-                toolbar.setTitle("Notification");
+
                 f=new NotifyFragment();
                 break;
         }
@@ -317,6 +317,8 @@ public class EmployerActivity extends AppCompatActivity {
         lay1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                toolbar.setTitle("Notification");
+                mDrawerLayout.closeDrawers();
                 display(14);
             }
         });
@@ -332,9 +334,6 @@ public class EmployerActivity extends AppCompatActivity {
                 break;
             case R.id.drawer:
                 mDrawerLayout.openDrawer(GravityCompat.END);
-                break;
-            case R.id.notify:
-                Toast.makeText(getApplicationContext(),"Wrk",Toast.LENGTH_SHORT).show();
                 break;
         }
 

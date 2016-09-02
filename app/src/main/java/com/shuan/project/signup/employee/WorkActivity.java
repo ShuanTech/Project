@@ -300,6 +300,7 @@ public class WorkActivity extends AppCompatActivity implements View.OnClickListe
             wData.put("loc", uLocation);
             wData.put("frm", frmDate);
             wData.put("to", toDate);
+            wData.put("type","add");
 
 
             try {

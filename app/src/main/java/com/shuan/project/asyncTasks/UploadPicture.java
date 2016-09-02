@@ -3,6 +3,7 @@ package com.shuan.project.asyncTasks;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -158,14 +159,18 @@ public class UploadPicture extends AsyncTask<String, String, String> {
                 mApp.getPreference().edit().putString(Common.COVER, data).commit();
             } else if (type.equalsIgnoreCase("resume")) {
                 Toast.makeText(mContext, "Applied Successfully", Toast.LENGTH_SHORT).show();
+                AppCompatActivity activity = (AppCompatActivity) mContext;
                 if (from.equalsIgnoreCase("senior")) {
+
                     Intent in = new Intent(mContext, SeniorActivity.class);
                     in.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     mContext.startActivity(in);
+                    activity.finish();
                 } else {
                     Intent in = new Intent(mContext, JuniorActivity.class);
                     in.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     mContext.startActivity(in);
+                    activity.finish();
                 }
 
 

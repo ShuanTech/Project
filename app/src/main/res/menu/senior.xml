@@ -29,11 +29,11 @@
             android:title="Following"
             app:actionViewClass="android.widget.TextView" />
 
-        <!--  <item
+           <item
               android:id="@+id/follower"
-              android:icon="@drawable/ic_follower"
-              android:title="Following"
-              app:actionViewClass="android.widget.TextView" />-->
+              android:icon="@drawable/ic_following"
+              android:title="Follower"
+              app:actionViewClass="android.widget.TextView" />
 
         <item
             android:id="@+id/sugg"
@@ -68,10 +68,10 @@
                         android:id="@+id/apply"
                         android:icon="@drawable/ic_applied"
                         android:title="Applied" />
-                    <item
+                    <!--<item
                         android:id="@+id/share"
                         android:icon="@drawable/ic_share"
-                        android:title="Shared" />
+                        android:title="Shared" />-->
                     <item
                         android:id="@+id/ready"
                         android:icon="@drawable/ic_get_ready"

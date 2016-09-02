@@ -3,22 +3,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/overflow"
-        android:icon="@drawable/abc_ic_menu_moreoverflow_mtrl_alpha"
-        android:title="Overflow"
-        app:showAsAction="always">
+        android:id="@+id/search"
+        android:icon="@drawable/abc_ic_search_api_mtrl_alpha"
+        android:title="search"
+        app:showAsAction="always"
+        android:orderInCategory="100"/>
 
-        <menu>
-            <item
-                android:id="@+id/resume"
-                android:orderInCategory="100"
-                android:title="Resume Generation">
-
-            </item>
-
-
-
-        </menu>
-
-    </item>
+    <item
+        android:id="@+id/edit"
+        android:icon="@drawable/ic_update"
+        android:title="Update"
+        app:showAsAction="always" />
 </menu>

@@ -29,7 +29,7 @@ public class GetFollowing extends AsyncTask<String,String,String>{
     private Common mApp;
     private ArrayList<Sample> list;
     private ConnectAdapter adapter;
-    private String u_id;
+    private String u_id,s;
 
     public GetFollowing(Context mContext, ListView listView, ProgressBar progressBar,String id) {
         this.mContext = mContext;
@@ -49,7 +49,7 @@ public class GetFollowing extends AsyncTask<String,String,String>{
             JSONObject json= Connection.UrlConnection(php.get_following,cData);
             int succ=json.getInt("success");
             if(succ==0){
-                Toast.makeText(mContext,"No Data",Toast.LENGTH_SHORT).show();
+               s="false";
             }else{
                 JSONArray jsonArray=json.getJSONArray("following");
                 for(int i=0;i<jsonArray.length();i++){
@@ -59,23 +59,28 @@ public class GetFollowing extends AsyncTask<String,String,String>{
                     String pro_pic=child.optString("pro_pic");
                     String name=child.optString("full_name");
                     String level=child.optString("level");
-                    String position=child.optString("position");
-                    String org_name=child.optString("org_name");
-                    list.add(new Sample(u_id,pro_pic,name,level,position,org_name));
-                }
 
+                    list.add(new Sample(u_id,pro_pic,name,level));
+                }
+                s="true";
             }
         }catch (Exception e){}
 
-        return null;
+        return s;
     }
 
     @Override
     protected void onPostExecute(String s) {
         super.onPostExecute(s);
         progressBar.setVisibility(View.GONE);
-        listView.setVisibility(View.VISIBLE);
-        adapter=new ConnectAdapter(mContext,list);
-        listView.setAdapter(adapter);
+        if(s.equalsIgnoreCase("true")){
+            listView.setVisibility(View.VISIBLE);
+            adapter=new ConnectAdapter(mContext,list);
+            listView.setAdapter(adapter);
+        }else{
+            Toast.makeText(mContext,"No Data",Toast.LENGTH_SHORT).show();
+        }
+
+
     }
 }

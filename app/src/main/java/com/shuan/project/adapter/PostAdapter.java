@@ -2,16 +2,8 @@ package com.shuan.project.adapter;
 
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.Color;
-import android.graphics.PorterDuff;
-import android.graphics.PorterDuffColorFilter;
-import android.graphics.drawable.Drawable;
-import android.os.Build;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,7 +11,6 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -29,12 +20,13 @@ import com.nostra13.universalimageloader.core.listener.SimpleImageLoadingListene
 import com.shuan.project.R;
 import com.shuan.project.Utils.Common;
 import com.shuan.project.Utils.Helper;
+import com.shuan.project.activities.CommentsActivity;
+import com.shuan.project.asyncTasks.CheckEligible;
 import com.shuan.project.asyncTasks.SavePost;
 import com.shuan.project.asyncTasks.SharePost;
 import com.shuan.project.list.Sample;
 import com.shuan.project.resume.ExpResumeGenerate;
 import com.shuan.project.resume.JuniorResumeGenerate;
-import com.shuan.project.resume.ResumeEditActivity;
 
 import java.util.ArrayList;
 
@@ -88,9 +80,8 @@ public class PostAdapter extends BaseAdapter {
         RelativeLayout apply = (RelativeLayout) convertView.findViewById(R.id.apply);
         RelativeLayout share = (RelativeLayout) convertView.findViewById(R.id.share);
         RelativeLayout imp = (RelativeLayout) convertView.findViewById(R.id.imp);
-        RelativeLayout refer = (RelativeLayout) convertView.findViewById(R.id.refer);
         ImageView cImg = (ImageView) convertView.findViewById(R.id.cmpny_logo);
-        TextView jId = (TextView) convertView.findViewById(R.id.jId);
+        final TextView jId = (TextView) convertView.findViewById(R.id.jId);
         TextView cName = (TextView) convertView.findViewById(R.id.cmpny_name);
         TextView cDated = (TextView) convertView.findViewById(R.id.created);
         TextView cTitle = (TextView) convertView.findViewById(R.id.title);
@@ -100,7 +91,7 @@ public class PostAdapter extends BaseAdapter {
         TextView cApplied = (TextView) convertView.findViewById(R.id.applied);
         TextView cShared = (TextView) convertView.findViewById(R.id.shared);
         TextView cFrmId = (TextView) convertView.findViewById(R.id.frm_id);
-        ImageView cImpt= (ImageView) convertView.findViewById(R.id.imprtnt);
+        ImageView cImpt = (ImageView) convertView.findViewById(R.id.imprtnt);
 
         cName.setText(curr.getCompanyName());
         jId.setText(curr.getjId());
@@ -113,9 +104,9 @@ public class PostAdapter extends BaseAdapter {
         cShared.setText(curr.getjShare());
         cFrmId.setText(curr.getjFrmId());
 
-        if(curr.getjImp().equalsIgnoreCase("1")){
+        if (curr.getjImp().equalsIgnoreCase("1")) {
             //Drawable getDraw=mContext.getResources().getDrawable(R.drawable.ic_important);
-           // getDraw.setColorFilter(new PorterDuffColorFilter(mContext.getResources().getColor(R.color.junPrimary), PorterDuff.Mode.MULTIPLY));
+            // getDraw.setColorFilter(new PorterDuffColorFilter(mContext.getResources().getColor(R.color.junPrimary), PorterDuff.Mode.MULTIPLY));
             cImpt.setImageResource(R.drawable.ic_important_clr);
             //Toast.makeText(mContext,"wrk",Toast.LENGTH_SHORT).show();
         }
@@ -150,15 +141,29 @@ public class PostAdapter extends BaseAdapter {
 
         if (mApp.getPreference().getString(Common.LEVEL, "").equalsIgnoreCase("3")) {
             apply.setVisibility(View.GONE);
-            refer.setVisibility(View.GONE);
             imp.setVisibility(View.GONE);
         }
+
+        comments.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent in = new Intent(mContext, CommentsActivity.class);
+                in.putExtra("jId", curr.getjId());
+                in.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                mContext.startActivity(in);
+            }
+        });
 
 
         apply.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+
+                new CheckEligible(mContext,mApp.getPreference().getString(Common.u_id,""),curr.getjId(),
+                        mApp.getPreference().getString(Common.LEVEL,"")).execute();
+                mApp.getPreference().edit().putBoolean(Common.APPLY, true).commit();
+
+                /*if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                     mApp.getPreference().edit().putBoolean(Common.APPLY, true).commit();
 
                     CallResumeData(curr.getjId(), curr.getjFrmId());
@@ -184,7 +189,7 @@ public class PostAdapter extends BaseAdapter {
                             CallResumeData(curr.getjId(), curr.getjFrmId());
                         }
                     }).show();
-                }
+                }*/
 
 
             }
@@ -210,7 +215,7 @@ public class PostAdapter extends BaseAdapter {
         return convertView;
     }
 
-    private void CallResumeData(String jId, String frmId) {
+    /*private void CallResumeData(String jId, String frmId) {
 
         if (mApp.getPreference().getString(Common.LEVEL, "").equalsIgnoreCase("1")) {
             Intent in = new Intent(mContext, JuniorResumeGenerate.class);
@@ -223,5 +228,5 @@ public class PostAdapter extends BaseAdapter {
             in.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             mContext.startActivity(in);
         }
-    }
+    }*/
 }

@@ -155,7 +155,7 @@ public class LoginActivity extends AppCompatActivity {
                                 mApp.getPreference().edit().putBoolean(Common.ACTIVITY2, true).commit();
                                 mApp.getPreference().edit().putBoolean(Common.ACTIVITY3, true).commit();
                                 mApp.getPreference().edit().putBoolean(Common.ACTIVITY4, true).commit();
-                                new Connect(getApplicationContext(),uId).execute();
+
                                 if(level.equalsIgnoreCase("2")){
                                     startActivity(new Intent(LoginActivity.this, SeniorActivity.class));
                                     finish();

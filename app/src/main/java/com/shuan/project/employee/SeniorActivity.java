@@ -20,10 +20,12 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -39,10 +41,23 @@ import com.shuan.project.Utils.Common;
 import com.shuan.project.Utils.Helper;
 import com.shuan.project.about.About;
 import com.shuan.project.about.Help;
+import com.shuan.project.asyncTasks.Feedback;
+import com.shuan.project.asyncTasks.UpdateStatus;
+import com.shuan.project.fragment.AppliedFragment;
 import com.shuan.project.fragment.ConnectionFragment;
 import com.shuan.project.fragment.EmployerHome;
+import com.shuan.project.fragment.FollowerFragment;
+import com.shuan.project.fragment.FollowingFragment;
+import com.shuan.project.fragment.GetReadyFragment;
+import com.shuan.project.fragment.ImportanceFragment;
+import com.shuan.project.fragment.NotifyFragment;
+import com.shuan.project.fragment.OffersFragment;
+import com.shuan.project.fragment.ReferenceFragment;
+import com.shuan.project.fragment.SuggestionFragment;
 import com.shuan.project.launcher.LoginActivity;
 import com.shuan.project.profile.JuniorProfile;
+import com.shuan.project.profile.ProfileActivity;
+import com.shuan.project.profile.ProfileViewActivity;
 import com.shuan.project.resume.ExpResumeGenerate;
 import com.shuan.project.resume.JuniorResumeGenerate;
 import com.shuan.project.resume.ResumeEditActivity;
@@ -77,7 +92,8 @@ public class SeniorActivity extends AppCompatActivity {
     private TextView usrName;
     private CircleImageView proPic;
     private DisplayImageOptions options;
-    private TextView alertCount, profileStrength, following;
+    private TextView alertCount, profileStrength, following, follower;
+    int selected;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -151,13 +167,14 @@ public class SeniorActivity extends AppCompatActivity {
         proPic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), JuniorProfile.class));
+                startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
             }
         });
 
         connect = (TextView) MenuItemCompat.getActionView(mNavigationView.getMenu().findItem(R.id.connect));
         profileStrength = (TextView) MenuItemCompat.getActionView(mNavigationView.getMenu().findItem(R.id.strength));
         following = (TextView) MenuItemCompat.getActionView(mNavigationView.getMenu().findItem(R.id.following));
+        follower = (TextView) MenuItemCompat.getActionView(mNavigationView.getMenu().findItem(R.id.follower));
 
         usrName.setText(mApp.getPreference().getString(Common.FULLNAME, ""));
 
@@ -172,6 +189,7 @@ public class SeniorActivity extends AppCompatActivity {
                     case R.id.home:
                         toolbar.setTitle("Home");
                         mDrawerLayout.closeDrawers();
+                        selected = 0;
                         display(0);
                         return true;
                     case R.id.strength:
@@ -181,6 +199,59 @@ public class SeniorActivity extends AppCompatActivity {
                         toolbar.setTitle("Connections");
                         mDrawerLayout.closeDrawers();
                         display(2);
+                        selected = 2;
+                        return true;
+                    case R.id.following:
+                        toolbar.setTitle("Following");
+                        mDrawerLayout.closeDrawers();
+                        display(3);
+                        selected = 3;
+                        return true;
+                    case R.id.follower:
+                        toolbar.setTitle("Follower");
+                        mDrawerLayout.closeDrawers();
+                        display(4);
+                        selected = 4;
+                        return true;
+                    case R.id.sugg:
+                        toolbar.setTitle("Suggestions");
+                        mDrawerLayout.closeDrawers();
+                        display(5);
+                        selected = 5;
+                        return true;
+                    case R.id.imp:
+                        toolbar.setTitle("Importance");
+                        mDrawerLayout.closeDrawers();
+                        display(6);
+                        selected = 6;
+                        return true;
+                    case R.id.ref:
+                        toolbar.setTitle("Reference");
+                        mDrawerLayout.closeDrawers();
+                        display(7);
+                        selected = 7;
+                        return true;
+                    case R.id.offer:
+                        toolbar.setTitle("Offers");
+                        mDrawerLayout.closeDrawers();
+                        display(8);
+                        selected = 8;
+                        return true;
+                    case R.id.apply:
+                        toolbar.setTitle("Applied");
+                        mDrawerLayout.closeDrawers();
+                        display(9);
+                        selected = 9;
+                        return true;
+                    case R.id.ready:
+                        toolbar.setTitle("Get Ready");
+                        mDrawerLayout.closeDrawers();
+                        display(10);
+                        selected = 10;
+                        return true;
+                    case R.id.feed:
+                        mDrawerLayout.closeDrawers();
+                        showFeedDialog();
                         return true;
                     case R.id.about:
                         mDrawerLayout.closeDrawers();
@@ -200,6 +271,33 @@ public class SeniorActivity extends AppCompatActivity {
 
     }
 
+    private void showFeedDialog() {
+        LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View v = inflater.inflate(R.layout.intro_dialog, null, false);
+        final EditText feed = (EditText) v.findViewById(R.id.intro);
+        feed.setHint("Enter FeedBack");
+        AlertDialog.Builder builder = new AlertDialog.Builder(SeniorActivity.this)
+                .setView(v);
+        builder.setTitle("FeedBack")
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        if (feed.getText().toString().length() == 0) {
+                            feed.setError("Filed Mandatory");
+                        } else {
+                            new Feedback(getApplicationContext(), mApp.getPreference().getString(Common.u_id, ""), feed.getText().toString()).execute();
+                            dialog.cancel();
+
+                        }
+                    }
+                }).setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        }).show();
+    }
+
     private void display(int i) {
         Fragment f = null;
         Bundle bundle = new Bundle();
@@ -215,6 +313,34 @@ public class SeniorActivity extends AppCompatActivity {
                 bundle.putString("u_id", mApp.getPreference().getString(Common.u_id, ""));
                 f = new ConnectionFragment();
                 f.setArguments(bundle);
+                break;
+            case 3:
+                f = new FollowingFragment();
+                break;
+            case 4:
+                f = new FollowerFragment();
+                break;
+            case 5:
+                f = new SuggestionFragment();
+                break;
+            case 6:
+                f = new ImportanceFragment();
+                break;
+            case 7:
+                f = new ReferenceFragment();
+                break;
+            case 8:
+                f = new OffersFragment();
+                break;
+            case 9:
+                f = new AppliedFragment();
+                break;
+            case 10:
+                f = new GetReadyFragment();
+                break;
+            case 11:
+                toolbar.setTitle("Notification");
+                f = new NotifyFragment();
                 break;
         }
 
@@ -277,49 +403,16 @@ public class SeniorActivity extends AppCompatActivity {
         profileStrength.setTypeface(helper.droid(getApplicationContext()));
         profileStrength.setTextColor(getResources().getColor(R.color.senAccent));
 
-        profileStrength.setText(calculateStrength());
+        profileStrength.setText(mApp.getPreference().getString(Common.PROFILESTRENGTH, ""));
 
+
+        follower.setGravity(Gravity.CENTER_VERTICAL);
+        follower.setTypeface(helper.droid(getApplicationContext()));
+        follower.setTextColor(getResources().getColor(R.color.senAccent));
+        follower.setText(mApp.getPreference().getString(Common.FOLLOWER, ""));
 
     }
 
-    private String calculateStrength() {
-        String s = null;
-
-        boolean step1 = mApp.getPreference().getBoolean(Common.PROFILESUMMARY, false);
-        boolean step2 = mApp.getPreference().getBoolean(Common.WORKEXPERIENCE, false);
-        boolean step3 = mApp.getPreference().getBoolean(Common.WORKINFO, false);
-        boolean step4 = mApp.getPreference().getBoolean(Common.SSLC, false);
-        boolean step5 = mApp.getPreference().getBoolean(Common.HSC, false);
-        boolean step6 = mApp.getPreference().getBoolean(Common.QUALIFICATION, false);
-        boolean step7 = mApp.getPreference().getBoolean(Common.SKILL, false);
-        boolean step8 = mApp.getPreference().getBoolean(Common.CERITIFY, false);
-        boolean step9 = mApp.getPreference().getBoolean(Common.PERSONALINFO, false);
-
-        if (step1 && step2 && step3 && step4 && step5 && step6 && step7 && step8 && step9) {
-            s = "95";
-        } else if (step1 || step2 || step3 || step4 || step5 || step6 || step7 || step8 || step9) {
-            s = "34";
-        } else if ((step1 || step2) || (step1 || step3) || (step1 || step4) || (step1 || step5) || (step1 || step6) || (step1 || step7) ||
-                (step1 || step8) || (step1 || step9)) {
-            s = "45";
-        } else if ((step1 || step2 || step3) || (step4 || step5 || step6) || (step7 || step8 || step9)) {
-            s = "55";
-        } else if (step1 && step2 || !step3 || !step4 || !step5 || !step6 || !step7 || !step8 || !step9) {
-            s = "44";
-        } else if (step1 && step2 && step3 || !step4 || !step5 || !step6 || !step7 || !step8 || !step9) {
-            s = "50";
-        } else if (step1 || step2 || step3 || step4 && step5 || !step6 || !step7 || !step8 || !step9) {
-            s = "63";
-        } else if (step1 || step2 || step3 || step4 && step5 && step6 || !step7 || !step8 || !step9) {
-            s = "72";
-        } else if (step1 || step2 || step3 || step4 || step5 || step6 || step7 && step8 || !step9) {
-            s = "84";
-        } else {
-            s = "67";
-        }
-
-        return s;
-    }
 
     private void setUpNavDrawer() {
 
@@ -340,11 +433,20 @@ public class SeniorActivity extends AppCompatActivity {
         MenuItemCompat.setActionView(menuItem, R.layout.toolbar_counter);
         lay1 = (RelativeLayout) MenuItemCompat.getActionView(menuItem);
         alertCount = (TextView) lay1.findViewById(R.id.counter1);
-        if (mApp.getPreference().getString(Common.ALERT,"").equalsIgnoreCase("0")) {
+        if (mApp.getPreference().getString(Common.ALERT, "").equalsIgnoreCase("0")) {
             alertCount.setVisibility(View.GONE);
         } else {
-            alertCount.setText(mApp.getPreference().getString(Common.ALERT,""));
+            alertCount.setText(mApp.getPreference().getString(Common.ALERT, ""));
         }
+        lay1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                toolbar.setTitle("Notification");
+                mDrawerLayout.closeDrawers();
+                mNavigationView.getMenu().getItem(selected).setChecked(false);
+                display(11);
+            }
+        });
         return true;
     }
 
@@ -355,7 +457,7 @@ public class SeniorActivity extends AppCompatActivity {
                 startActivity(new Intent(getApplicationContext(), SearchActivity.class));
                 break;
             case R.id.profile:
-                startActivity(new Intent(getApplicationContext(), JuniorProfile.class));
+                startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
                 break;
             case R.id.resume:
                 startActivity(new Intent(getApplicationContext(), ExpResumeGenerate.class));

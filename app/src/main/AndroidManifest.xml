@@ -149,7 +149,12 @@
         <activity
             android:name=".search.SearchActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysVisible" />
+            android:windowSoftInputMode="stateAlwaysVisible" >
+
+            <meta-data android:name="android.support.PARENT_ACTIVITY"
+                android:value=".employer.EmployerActivity"/>
+
+        </activity>
         <activity
             android:name=".resume.ResumeEditActivity"
             android:screenOrientation="portrait"
@@ -174,7 +179,31 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".employer.ShortListActivity" />
         </activity>
-        <activity android:name=".employer.InterviewPanelActivity"></activity>
+        <activity android:name=".employer.InterviewPanelActivity" />
+        <activity
+            android:name=".profile.ProfileActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Junior.Profile">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".employee.SeniorActivity" />
+        </activity>
+        <activity
+            android:name=".employee.InterViewActivity"
+            android:theme="@style/Junior">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".employee.SeniorActivity" />
+        </activity>
+        <activity
+            android:name=".activities.CommentsActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Junior"
+            android:windowSoftInputMode="stateAlwaysHidden">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".employee.SeniorActivity" />
+        </activity>
     </application>
 
 </manifest>

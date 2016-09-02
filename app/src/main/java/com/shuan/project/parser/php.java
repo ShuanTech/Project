@@ -69,10 +69,21 @@ public class php {
     public static final String slcted_candidate_list = "http://192.168.1.111/Project/android/slcted_candidate_list.php";
     public static final String rjct_candidate_list = "http://192.168.1.111/Project/android/rjct_candidate_list.php";
     public static final String notify_list = "http://192.168.1.111/Project/android/notify_list.php";
-    public static final String delData="http://192.168.1.111/Project/android/del_data.php";
-    public static final String EdtData="http://192.168.1.111/Project/android/edt_data.php";
-    public static final String get_skill="http://192.168.1.111/Project/android/get_skill.php";
-    public static final String contactInfo="http://192.168.1.111/Project/android/usr_contact_info.php";
-    public static final String basicInfo="http://192.168.1.111/Project/android/usr_basic_info.php";
-
+    public static final String delData = "http://192.168.1.111/Project/android/del_data.php";
+    public static final String EdtData = "http://192.168.1.111/Project/android/edt_data.php";
+    public static final String get_skill = "http://192.168.1.111/Project/android/get_skill.php";
+    public static final String contactInfo = "http://192.168.1.111/Project/android/usr_contact_info.php";
+    public static final String basicInfo = "http://192.168.1.111/Project/android/usr_basic_info.php";
+    public static final String profile = "http://192.168.1.111/Project/android/profile.php";
+    public static final String defaultFollow = "http://192.168.1.111/Project/android/default_follow.php";
+    public static final String suggest = "http://192.168.1.111/Project/android/suggest.php";
+    public static final String refer = "http://192.168.1.111/Project/android/refer.php";
+    public static final String interView = "http://192.168.1.111/Project/android/getInterViewdetail.php";
+    public static final String updateNotify = "http://192.168.1.111/Project/android/notify_update.php";
+    public static final String referenceList = "http://192.168.1.111/Project/android/get_reference.php";
+    public static final String ready = "http://192.168.1.111/Project/android/get_ready.php";
+    public static final String feedBack = "http://192.168.1.111/Project/android/feed_back.php";
+    public static final String comments = "http://192.168.1.111/Project/android/get_comments.php";
+    public static final String postComment = "http://192.168.1.111/Project/android/post_comment.php";
+    public static final String chkEligible = "http://192.168.1.111/Project/android/chk_eligible.php";
 }
