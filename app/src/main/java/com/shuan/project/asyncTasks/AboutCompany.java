@@ -63,9 +63,6 @@ public class AboutCompany extends AsyncTask<String, String, String> {
 
     private void save(String s) {
         if(s.equalsIgnoreCase("true")){
-            mApp.getPreference().edit().putBoolean(Common.COMPANY3,true).commit();
-            mApp.getPreference().edit().putBoolean(Common.ABOUTCOMPNAY,true).commit();
-            mApp.getPreference().edit().putBoolean(Common.Login, true).commit();
             Toast.makeText(mContext,"Successfully Completed Your Signup Process. Let's begin",Toast.LENGTH_SHORT).show();
             mApp.getPreference().edit().putBoolean(Common.USRINFO,true).commit();
             new GetInfo(mContext,mApp.getPreference().getString(Common.u_id,"")).execute();

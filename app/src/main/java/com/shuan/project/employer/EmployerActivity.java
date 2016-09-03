@@ -43,10 +43,14 @@ import com.shuan.project.fragment.EmployerHome;
 import com.shuan.project.fragment.FollowerFragment;
 import com.shuan.project.fragment.FollowingFragment;
 import com.shuan.project.fragment.NotifyFragment;
+import com.shuan.project.fragment.PortfolioFragment;
+import com.shuan.project.fragment.ServicesFragment;
 import com.shuan.project.fragment.ShortlistFragment;
+import com.shuan.project.fragment.TestmonialFragment;
 import com.shuan.project.launcher.LoginActivity;
-import com.shuan.project.profile.JuniorProfile;
+import com.shuan.project.profile.ProfileActivity;
 import com.shuan.project.search.SearchActivity;
+import com.shuan.project.setting.SettingActivity;
 
 public class EmployerActivity extends AppCompatActivity {
 
@@ -72,8 +76,9 @@ public class EmployerActivity extends AppCompatActivity {
     private CircleImageView proPic;
     private DisplayImageOptions options;
     private RelativeLayout lay1;
-    private TextView follower, following;
+    private TextView follower;
     private TextView alertCount;
+    private int selectd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,6 +112,9 @@ public class EmployerActivity extends AppCompatActivity {
         toolbar.setTitle("Home");
         root = (RelativeLayout) findViewById(R.id.root);
 
+        if (mApp.getPreference().getBoolean(Common.COMPANY, false) == false) {
+            showAlert();
+        }
 
         lay1 = (RelativeLayout) findViewById(R.id.notification);
 
@@ -132,7 +140,7 @@ public class EmployerActivity extends AppCompatActivity {
 
         usrName.setText(mApp.getPreference().getString(Common.FULLNAME, ""));
         follower = (TextView) MenuItemCompat.getActionView(mNavigationView.getMenu().findItem(R.id.follower));
-        following = (TextView) MenuItemCompat.getActionView(mNavigationView.getMenu().findItem(R.id.following));
+
 
         initializeCount();
 
@@ -148,31 +156,64 @@ public class EmployerActivity extends AppCompatActivity {
                         toolbar.setTitle("Home");
                         mDrawerLayout.closeDrawers();
                         display(0);
+                        selectd = 0;
                         return true;
                     case R.id.follower:
                         toolbar.setTitle("Follower");
                         mDrawerLayout.closeDrawers();
                         display(1);
+                        selectd = 1;
                         return true;
                     case R.id.following:
                         toolbar.setTitle("Following");
                         mDrawerLayout.closeDrawers();
                         display(2);
+                        selectd = 2;
                         return true;
                     case R.id.action:
                         toolbar.setTitle("Action");
                         mDrawerLayout.closeDrawers();
                         display(3);
+                        selectd = 3;
                         return true;
                     case R.id.abt:
-                        toolbar.setTitle("About Company");
+                        toolbar.setTitle("About Me");
                         mDrawerLayout.closeDrawers();
                         display(5);
+                        selectd = 5;
+                        return true;
+                    case R.id.service:
+                        toolbar.setTitle("Services");
+                        mDrawerLayout.closeDrawers();
+                        display(6);
+                        selectd = 6;
+                        return true;
+                    case R.id.port:
+                        toolbar.setTitle("Portfolio");
+                        mDrawerLayout.closeDrawers();
+                        display(7);
+                        selectd = 7;
+                        return true;
+                    case R.id.test:
+                        toolbar.setTitle("Portfolio");
+                        mDrawerLayout.closeDrawers();
+                        display(8);
+                        selectd = 8;
+                        return true;
+                    case R.id.contact:
+                        toolbar.setTitle("Contact");
+                        mDrawerLayout.closeDrawers();
+                        display(9);
+                        selectd = 9;
+                        return true;
+                    case R.id.setting:
+                        startActivity(new Intent(EmployerActivity.this, SettingActivity.class));
                         return true;
                     case R.id.logout:
-                        mApp.getPreference().edit().putBoolean(Common.Login, false).commit();
-                        mApp.getPreference().edit().putBoolean(Common.USRINFO, false).commit();
-                        startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+                        mApp.getPreference().edit().clear().commit();
+                        Intent intent = new Intent(EmployerActivity.this, LoginActivity.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(intent);
                         finish();
                         return true;
                     case R.id.about:
@@ -204,9 +245,28 @@ public class EmployerActivity extends AppCompatActivity {
         proPic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), JuniorProfile.class));
+                startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
             }
         });
+    }
+
+
+    private void showAlert() {
+        AlertDialog.Builder build = new AlertDialog.Builder(EmployerActivity.this);
+        build.setTitle("Udyomitra");
+        build.setMessage("Complete Profile, Build your Network!")
+                .setPositiveButton("Build", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        startActivity(new Intent(getApplicationContext(), AddCompanyInfoActivity.class));
+                        dialog.cancel();
+                    }
+                }).setNegativeButton("Not Now", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        }).show();
     }
 
     private void display(int i) {
@@ -214,12 +274,10 @@ public class EmployerActivity extends AppCompatActivity {
         Bundle bundle = new Bundle();
         switch (i) {
             case 0:
-                bundle.putString("u_id", mApp.getPreference().getString(Common.u_id, ""));
                 f = new EmployerHome();
-                f.setArguments(bundle);
+
                 break;
             case 1:
-                bundle.putString("u_id", mApp.getPreference().getString(Common.u_id, ""));
                 f = new FollowerFragment();
                 f.setArguments(bundle);
                 break;
@@ -227,20 +285,24 @@ public class EmployerActivity extends AppCompatActivity {
                 f = new FollowingFragment();
                 break;
             case 3:
-                f=new ShortlistFragment();
+                f = new ShortlistFragment();
                 break;
             case 4:
                 break;
             case 5:
-                bundle.putString("u_id", mApp.getPreference().getString(Common.u_id, ""));
                 f = new EmployerAboutFragment();
-                f.setArguments(bundle);
                 break;
             case 6:
+                f = new ServicesFragment();
+                break;
+            case 7:
+                f = new PortfolioFragment();
+                break;
+            case 8:
+                f = new TestmonialFragment();
                 break;
             case 14:
-
-                f=new NotifyFragment();
+                f = new NotifyFragment();
                 break;
         }
 
@@ -291,18 +353,10 @@ public class EmployerActivity extends AppCompatActivity {
     private void initializeCount() {
         follower.setGravity(Gravity.CENTER_VERTICAL);
         follower.setTypeface(helper.droid(getApplicationContext()));
-/*
         follower.setTextColor(getResources().getColor(R.color.junAccent));
-*/
         follower.setText(mApp.getPreference().getString(Common.FOLLOWER, ""));
 
 
-        following.setGravity(Gravity.CENTER_VERTICAL);
-/*
-        following.setTypeface(helper.droid(getApplicationContext()));
-*/
-        following.setTextColor(getResources().getColor(R.color.junAccent));
-        following.setText(mApp.getPreference().getString(Common.FOLLOWING, ""));
     }
 
     @Override
@@ -313,16 +367,17 @@ public class EmployerActivity extends AppCompatActivity {
         lay1 = (RelativeLayout) MenuItemCompat.getActionView(menuItem);
         alertCount = (TextView) lay1.findViewById(R.id.counter1);
         //int cnt = 0;
-        if (mApp.getPreference().getString(Common.ALERT,"").equalsIgnoreCase("0")) {
+        if (mApp.getPreference().getString(Common.ALERT, "").equalsIgnoreCase("0")) {
             alertCount.setVisibility(View.GONE);
         } else {
-            alertCount.setText(mApp.getPreference().getString(Common.ALERT,""));
+            alertCount.setText(mApp.getPreference().getString(Common.ALERT, ""));
         }
         lay1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 toolbar.setTitle("Notification");
                 mDrawerLayout.closeDrawers();
+                mNavigationView.getMenu().getItem(selectd).setChecked(false);
                 display(14);
             }
         });

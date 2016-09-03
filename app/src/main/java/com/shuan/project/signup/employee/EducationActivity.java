@@ -373,7 +373,7 @@ public class EducationActivity extends AppCompatActivity implements View.OnClick
                                 startActivity(new Intent(getApplicationContext(), SkillActivity.class));
                                 finish();
                             } else {
-                                mApp.getPreference().edit().putBoolean(Common.ACTIVITY3, true).commit();
+
                                 startActivity(new Intent(getApplicationContext(), PersonalActivity.class));
                                 finish();
                             }

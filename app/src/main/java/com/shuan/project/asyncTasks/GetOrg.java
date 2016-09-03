@@ -65,8 +65,9 @@ public class GetOrg extends AsyncTask<String, String, String> {
                     String city=child.optString("city");
                     String land=child.optString("land_mark");
                     String pin=child.optString("pincode");
+                    String district=child.optString("dis");
 
-                    list.add(new Sample(orgNme+", "+land,orgNme,type,addr,land,city,state,country,pin));
+                    list.add(new Sample(orgNme+", "+land,orgNme,type,addr,land,city,state,country,pin,district));
 
                 }
             }

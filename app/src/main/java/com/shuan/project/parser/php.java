@@ -49,7 +49,7 @@ public class php {
     public static final String cmpntContact = "http://udyomitra.com/android/cmpny_cnct_info.php";
     public static final String abtCmpny = "http://udyomitra.com/android/about_cmpny.php";
     public static final String jobPost = "http://udyomitra.com/android/post_job.php";
-    public static final String followers = "http://udyomitra.com/android/followers.php";
+    public static final String followers = "http://udyomitra.com/android/cmpny_default_follower.php";
     public static final String get_followers = "http://udyomitra.com/android/get_follower.php";
     public static final String get_post = "http://udyomitra.com/android/get_post.php";
     public static final String share_post = "http://udyomitra.com/android/share_post.php";
@@ -88,4 +88,8 @@ public class php {
     public static final String chkEligible = "http://udyomitra.com/android/chk_eligible.php";
     public static final String updatePass = "http://udyomitra.com/android/update_pass.php";
     public static final String updateLevel = "http://udyomitra.com/android/update_level.php";
+    public static final String cmpnyServices="http://udyomitra.com/android/cmpny_services.php";
+    public static final String cmpnyPortfolio="http://udyomitra.com/android/cmpny_portfolio.php";
+    public static final String cmpnyTestmpnial="http://udyomitra.com/android/cmpny_testmonial.php";
+    public static final String cmpnyCnt="http://udyomitra.com/android/cmpny_cnt.php";
 }

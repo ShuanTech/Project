@@ -56,15 +56,7 @@ public class LoginActivity extends AppCompatActivity {
         pass = (EditText) findViewById(R.id.pass);
         reg = (Button) findViewById(R.id.reg);
         login = (Button) findViewById(R.id.login);
-        layout_usr = (TextInputLayout) findViewById(R.id.layout_usr);
 
-
-
-        /*layout_usr.setTypeface(helper.droid(getApplicationContext()));
-        usr.setTypeface(helper.droid(getApplicationContext()));
-        pass.setTypeface(helper.droid(getApplicationContext()));
-        reg.setTypeface(helper.droid(getApplicationContext()));
-        login.setTypeface(helper.droid(getApplicationContext()));*/
 
         reg.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -142,10 +134,6 @@ public class LoginActivity extends AppCompatActivity {
                             mApp.getPreference().edit().putString(Common.u_id,uId).commit();
                             mApp.getPreference().edit().putString(Common.LEVEL, level).commit();
                             if (level.equalsIgnoreCase("3")) {
-                                mApp.getPreference().edit().putBoolean(Common.COMPANY1, true).commit();
-                                mApp.getPreference().edit().putBoolean(Common.COMPANY2, true).commit();
-                                mApp.getPreference().edit().putBoolean(Common.COMPANY3, true).commit();
-                                new Follower(getApplicationContext(),uId).execute();
                                 startActivity(new Intent(LoginActivity.this, EmployerActivity.class));
                                 finish();
                             } else {
@@ -159,11 +147,6 @@ public class LoginActivity extends AppCompatActivity {
                                 mApp.getPreference().edit().putBoolean(Common.WORKINFO, true).commit();
                                 mApp.getPreference().edit().putBoolean(Common.PROFILESUMMARY, true).commit();
                                 mApp.getPreference().edit().putBoolean(Common.WORKEXPERIENCE, true).commit();
-                                mApp.getPreference().edit().putBoolean(Common.ACTIVITY1, true).commit();
-                                mApp.getPreference().edit().putBoolean(Common.ACTIVITY2, true).commit();
-                                mApp.getPreference().edit().putBoolean(Common.ACTIVITY3, true).commit();
-                                mApp.getPreference().edit().putBoolean(Common.ACTIVITY4, true).commit();
-
                                 if(level.equalsIgnoreCase("2")){
                                     startActivity(new Intent(LoginActivity.this, SeniorActivity.class));
                                     finish();

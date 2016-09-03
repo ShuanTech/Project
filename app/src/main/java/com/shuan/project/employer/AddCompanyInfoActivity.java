@@ -1,12 +1,8 @@
-package com.shuan.project.signup.employer;
+package com.shuan.project.employer;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -18,7 +14,6 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.ScrollView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.shuan.project.R;
 import com.shuan.project.Utils.Common;
@@ -28,21 +23,18 @@ import com.shuan.project.asyncTasks.GetOrg;
 
 import java.util.HashMap;
 
-public class CompanyDetails extends AppCompatActivity implements TextWatcher, View.OnClickListener {
-
+public class AddCompanyInfoActivity extends AppCompatActivity {
 
     private Helper helper = new Helper();
     private Common mApp;
     private AutoCompleteTextView cmpname;
     private HashMap<String, String> cData;
     private EditText cmpnyType, doorno, lctn, cntry, city, state, pin;
-    private Button cd_skip, cd_next;
+    private Button cUpt;
     private ProgressBar progressBar;
     private ScrollView scroll;
     public boolean ins = false;
-    private boolean exit = false;
     private String district;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,10 +42,7 @@ public class CompanyDetails extends AppCompatActivity implements TextWatcher, Vi
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         mApp = (Common) getApplicationContext();
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_company_details);
-
-
-                /*Organization Details */
+        setContentView(R.layout.activity_add_company_info);
 
         progressBar = (ProgressBar) findViewById(R.id.progress_bar);
         scroll = (ScrollView) findViewById(R.id.scroll);
@@ -65,19 +54,9 @@ public class CompanyDetails extends AppCompatActivity implements TextWatcher, Vi
         city = (AutoCompleteTextView) findViewById(R.id.city);
         state = (AutoCompleteTextView) findViewById(R.id.state);
         pin = (EditText) findViewById(R.id.pin);
-        cd_skip = (Button) findViewById(R.id.cd_skip);
-        cd_next = (Button) findViewById(R.id.cd_next);
 
-        cmpname.setTypeface(helper.droid(getApplicationContext()));
-        cmpnyType.setTypeface(helper.droid(getApplicationContext()));
-        doorno.setTypeface(helper.droid(getApplicationContext()));
-        lctn.setTypeface(helper.droid(getApplicationContext()));
-        cntry.setTypeface(helper.droid(getApplicationContext()));
-        city.setTypeface(helper.droid(getApplicationContext()));
-        state.setTypeface(helper.droid(getApplicationContext()));
-        pin.setTypeface(helper.droid(getApplicationContext()));
-        cd_next.setTypeface(helper.droid(getApplicationContext()));
-        cd_skip.setTypeface(helper.droid(getApplicationContext()));
+        cUpt = (Button) findViewById(R.id.c_update);
+
 
         new GetOrg(getApplicationContext(), progressBar, scroll, cmpname).execute();
 
@@ -111,45 +90,9 @@ public class CompanyDetails extends AppCompatActivity implements TextWatcher, Vi
             }
         });
 
-
-        cd_skip.setOnClickListener(this);
-        cd_next.setOnClickListener(this);
-
-        cmpname.addTextChangedListener(this);
-
-
-    }
-
-
-    @Override
-    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-    }
-
-    @Override
-    public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-    }
-
-    @Override
-    public void afterTextChanged(Editable s) {
-
-        if (cmpname.getText().toString().length() == 0) {
-            cd_skip.setVisibility(View.VISIBLE);
-            cd_next.setVisibility(View.GONE);
-        } else {
-
-            cd_skip.setVisibility(View.GONE);
-            cd_next.setVisibility(View.VISIBLE);
-        }
-
-    }
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-
-            case R.id.cd_next:
+        cUpt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
                 if (doorno.getText().toString().length() == 0) {
                     doorno.setError("Address Mandatory");
                     doorno.requestFocus();
@@ -169,37 +112,15 @@ public class CompanyDetails extends AppCompatActivity implements TextWatcher, Vi
                     pin.setError("Pincode Mandatory");
                     pin.requestFocus();
                 } else {
-                    new CompanyDetail(CompanyDetails.this, mApp.getPreference().getString(Common.u_id, ""), cmpname.getText().toString(),
+                    mApp.getPreference().edit().putBoolean("frm", false).commit();
+                    new CompanyDetail(AddCompanyInfoActivity.this, mApp.getPreference().getString(Common.u_id, ""), cmpname.getText().toString(),
                             cmpnyType.getText().toString(), doorno.getText().toString(), lctn.getText().toString(), city.getText().toString(), state.getText().toString(),
-                            cntry.getText().toString(), pin.getText().toString(), ins,district).execute();
+                            cntry.getText().toString(), pin.getText().toString(), ins, district).execute();
 
 
                 }
-                break;
-            case R.id.cd_skip:
-                mApp.getPreference().edit().putBoolean(Common.COMPANY, false).commit();
-                startActivity(new Intent(getApplicationContext(), CompanyContactInfoActivity.class));
-                finish();
-                break;
+            }
+        });
 
-        }
-    }
-
-
-    @Override
-    public void onBackPressed() {
-        if (exit) {
-            super.onBackPressed();
-            return;
-        } else {
-            Toast.makeText(this, "Press Back again to Cancel Signup Process.", Toast.LENGTH_SHORT).show();
-            exit = true;
-            new Handler().postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    exit = false;
-                }
-            }, 2000);
-        }
     }
 }

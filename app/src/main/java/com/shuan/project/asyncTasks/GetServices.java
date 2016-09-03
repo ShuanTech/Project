@@ -1,0 +1,84 @@
+package com.shuan.project.asyncTasks;
+
+import android.content.Context;
+import android.os.AsyncTask;
+import android.view.View;
+import android.widget.ListView;
+import android.widget.ProgressBar;
+import android.widget.Toast;
+
+import com.shuan.project.adapter.ServiceAdapter;
+import com.shuan.project.list.Sample;
+import com.shuan.project.parser.Connection;
+import com.shuan.project.parser.php;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+
+
+public class GetServices extends AsyncTask<String, String, String> {
+
+    private Context mContext;
+    private String uId, s;
+    private ProgressBar progressBar;
+    private ListView listView;
+    private ArrayList<Sample> list;
+    private ServiceAdapter adpter;
+    private HashMap<String, String> sData;
+
+
+    public GetServices(Context mContext, String uId, ProgressBar progressBar, ListView listView) {
+        this.mContext = mContext;
+        this.uId = uId;
+        this.progressBar = progressBar;
+        this.listView = listView;
+        list=new ArrayList<Sample>();
+    }
+
+    @Override
+    protected String doInBackground(String... params) {
+
+        sData = new HashMap<String, String>();
+        sData.put("u_id", uId);
+        try {
+
+            JSONObject json = Connection.UrlConnection(php.cmpnyServices, sData);
+            int succ = json.getInt("success");
+            if (succ == 0) {
+                s = "false";
+            } else {
+                JSONArray jsonArray = json.getJSONArray("services");
+                for (int i = 0; i < jsonArray.length(); i++) {
+                    JSONObject child = jsonArray.getJSONObject(i);
+                    String img = child.optString("img");
+                    String ser_name = child.optString("ser_name");
+                    String ser_desc = child.optString("ser_desc");
+
+                    list.add(new Sample(img, ser_name, ser_desc));
+
+                }
+                s = "true";
+            }
+
+        } catch (Exception e) {
+        }
+        return s;
+    }
+
+    @Override
+    protected void onPostExecute(String s) {
+        super.onPostExecute(s);
+        progressBar.setVisibility(View.GONE);
+
+        if (s.equalsIgnoreCase("true")) {
+            listView.setVisibility(View.VISIBLE);
+            adpter = new ServiceAdapter(mContext, list);
+            listView.setAdapter(adpter);
+       } else {
+            Toast.makeText(mContext, "No services Available.", Toast.LENGTH_SHORT).show();
+        }
+    }
+}

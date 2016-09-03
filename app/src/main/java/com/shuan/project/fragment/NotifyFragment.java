@@ -17,9 +17,11 @@ import android.widget.TextView;
 
 import com.shuan.project.R;
 import com.shuan.project.Utils.Common;
+import com.shuan.project.asyncTasks.GetNotifyDetail;
 import com.shuan.project.asyncTasks.Refer;
 import com.shuan.project.asyncTasks.UpdateNotify;
 import com.shuan.project.employee.InterViewActivity;
+import com.shuan.project.employer.ShortListActivity;
 
 
 public class NotifyFragment extends Fragment {
@@ -64,14 +66,14 @@ public class NotifyFragment extends Fragment {
                     new UpdateNotify(getActivity(), mApp.getPreference().getString(Common.u_id, ""),
                             txt1.getText().toString()).execute();
                     startActivity(in);
+                }else{
+                    mApp.getPreference().edit().putString("title", txt.getText().toString()).commit();
+                    mApp.getPreference().edit().putString("jId", txt1.getText().toString()).commit();
+
+                    startActivity(new Intent(getActivity(), ShortListActivity.class));
                 }
 
-               /*
 
-                mApp.getPreference().edit().putString("title", txt.getText().toString()).commit();
-                mApp.getPreference().edit().putString("jId", txt1.getText().toString()).commit();
-
-                startActivity(new Intent(getActivity(), ShortListActivity.class));*/
             }
         });
         return v;

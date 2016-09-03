@@ -98,14 +98,17 @@ public class CommentsActivity extends AppCompatActivity implements View.OnClickL
                 TextView usrCmts = (TextView) vi.findViewById(R.id.usr_cmts);
                 TextView cmtdata = (TextView) vi.findViewById(R.id.cmt_created);
 
-               setImage(mApp.getPreference().getString(Common.PROPIC, ""), usrImg);
+                setImage(mApp.getPreference().getString(Common.PROPIC, ""), usrImg);
                 usrName.setText(mApp.getPreference().getString(Common.FULLNAME, ""));
                 usrCmts.setText(cmtEdt.getText().toString());
                 cmtdata.setText("now");
                 cmnts.addView(vi);
 
-                new PostCommnts(CommentsActivity.this,mApp.getPreference().getString(Common.u_id,""),
-                        getIntent().getStringExtra("jId"),cmtEdt.getText().toString()).execute();
+                cmtEdt.setText("");
+                scroll.fullScroll(View.FOCUS_DOWN);
+
+                new PostCommnts(CommentsActivity.this, mApp.getPreference().getString(Common.u_id, ""),
+                        getIntent().getStringExtra("jId"), cmtEdt.getText().toString()).execute();
             }
         }
 
@@ -121,7 +124,8 @@ public class CommentsActivity extends AppCompatActivity implements View.OnClickL
             try {
                 JSONObject json = Connection.UrlConnection(php.comments, cData);
                 int succ = json.getInt("success");
-                if (succ == 0) {} else {
+                if (succ == 0) {
+                } else {
                     JSONArray jsonArray = json.getJSONArray("comments");
                     for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject child = jsonArray.getJSONObject(i);

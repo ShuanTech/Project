@@ -62,8 +62,6 @@ public class CompanyContactInfo extends AsyncTask<String, String, String> {
     protected void onPostExecute(String s) {
         super.onPostExecute(s);
         if (s.equalsIgnoreCase("true")) {
-            mApp.getPreference().edit().putBoolean(Common.CONTACTDETAILS, true).commit();
-            mApp.getPreference().edit().putBoolean(Common.COMPANY2, true).commit();
             Toast.makeText(mContext, "Contact Details! Saved Successfully...", Toast.LENGTH_SHORT).show();
             Intent in = new Intent(mContext, AboutCompanyActivity.class);
             in.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

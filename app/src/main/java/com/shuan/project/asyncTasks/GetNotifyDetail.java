@@ -1,4 +1,4 @@
-package com.shuan.project.fragment;
+package com.shuan.project.asyncTasks;
 
 import android.content.Context;
 import android.os.AsyncTask;

@@ -66,10 +66,10 @@
                         android:id="@+id/apply"
                         android:icon="@drawable/ic_applied"
                         android:title="Applied" />
-                    <item
+                   <!-- <item
                         android:id="@+id/share"
                         android:icon="@drawable/ic_share"
-                        android:title="Shared" />
+                        android:title="Shared" />-->
                     <item
                         android:id="@+id/ready"
                         android:icon="@drawable/ic_get_ready"

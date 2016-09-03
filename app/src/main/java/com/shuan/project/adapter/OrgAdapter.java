@@ -59,6 +59,7 @@ public class OrgAdapter extends ArrayAdapter<Sample> implements Filterable {
         TextView txt3 = (TextView) convertView.findViewById(R.id.txt3);
         TextView txt4 = (TextView) convertView.findViewById(R.id.txt4);
         TextView txt5 = (TextView) convertView.findViewById(R.id.txt5);
+        TextView txt6 = (TextView) convertView.findViewById(R.id.txt6);
 
         display.setText(curr.getDis());
         insName.setText(curr.getOrgName());
@@ -69,6 +70,7 @@ public class OrgAdapter extends ArrayAdapter<Sample> implements Filterable {
         txt3.setText(curr.getState());
         txt4.setText(curr.getContry());
         txt5.setText(curr.getPin());
+        txt6.setText(curr.getDistrct());
 
         return convertView;
     }

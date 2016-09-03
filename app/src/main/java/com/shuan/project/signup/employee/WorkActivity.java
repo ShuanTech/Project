@@ -51,6 +51,7 @@ public class WorkActivity extends AppCompatActivity implements View.OnClickListe
     private ScrollView scroll;
     private MonthYearPicker myp;
     private MonthYearPicker myp1;
+    private boolean cIns = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,15 +76,15 @@ public class WorkActivity extends AppCompatActivity implements View.OnClickListe
         to = (TextView) findViewById(R.id.to);
 
         myp = new MonthYearPicker(this);
-        myp1=new MonthYearPicker(this);
-   /*     orgname.setTypeface(helper.droid(getApplicationContext()));
+        myp1 = new MonthYearPicker(this);
+        orgname.setTypeface(helper.droid(getApplicationContext()));
         postition.setTypeface(helper.droid(getApplicationContext()));
         location.setTypeface(helper.droid(getApplicationContext()));
         wrking.setTypeface(helper.droid(getApplicationContext()));
 
         present.setTypeface(helper.droid(getApplicationContext()));
         frm.setTypeface(helper.droid(getApplicationContext()));
-        to.setTypeface(helper.droid(getApplicationContext()));*/
+        to.setTypeface(helper.droid(getApplicationContext()));
 
 
         wk_next = (Button) findViewById(R.id.wk_next);
@@ -105,6 +106,7 @@ public class WorkActivity extends AppCompatActivity implements View.OnClickListe
 
                 orgname.setText(txt1.getText().toString());
                 location.setText(txt4.getText().toString());
+                cIns=true;
             }
         });
 
@@ -192,7 +194,6 @@ public class WorkActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.wk_skip:
                 mApp.getPreference().edit().putBoolean(Common.WORKINFO, false).commit();
-                mApp.getPreference().edit().putBoolean(Common.ACTIVITY2, true).commit();
                 startActivity(new Intent(getApplicationContext(), EducationActivity.class));
                 finish();
                 break;
@@ -241,6 +242,11 @@ public class WorkActivity extends AppCompatActivity implements View.OnClickListe
             wData.put("frm", uFrm);
             wData.put("to", toDate);
             wData.put("type", "add");
+            if(cIns==true){
+                wData.put("ins","false");
+            }else{
+                wData.put("ins","true");
+            }
 
 
             try {

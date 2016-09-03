@@ -313,16 +313,12 @@ public class SeniorActivity extends AppCompatActivity {
         Bundle bundle = new Bundle();
         switch (i) {
             case 0:
-                bundle.putString("u_id", mApp.getPreference().getString(Common.u_id, ""));
                 f = new EmployerHome();
-                f.setArguments(bundle);
                 break;
             case 1:
                 break;
             case 2:
-                bundle.putString("u_id", mApp.getPreference().getString(Common.u_id, ""));
                 f = new ConnectionFragment();
-                f.setArguments(bundle);
                 break;
             case 3:
                 f = new FollowingFragment();
@@ -413,7 +409,7 @@ public class SeniorActivity extends AppCompatActivity {
         profileStrength.setTypeface(helper.droid(getApplicationContext()));
         profileStrength.setTextColor(getResources().getColor(R.color.senAccent));
 
-        profileStrength.setText(""+mApp.getPreference().getInt(Common.PROFILESTRENGTH,0));
+        profileStrength.setText(String.valueOf(mApp.getPreference().getInt(Common.PROFILESTRENGTH, 0)));
 
 
         follower.setGravity(Gravity.CENTER_VERTICAL);
@@ -477,9 +473,10 @@ public class SeniorActivity extends AppCompatActivity {
                 startActivity(new Intent(getApplicationContext(), SettingActivity.class));
                 break;
             case R.id.logout:
-                mApp.getPreference().edit().putBoolean(Common.Login, false).commit();
-                mApp.getPreference().edit().putBoolean(Common.USRINFO, false).commit();
-                startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+                mApp.getPreference().edit().clear().commit();
+                Intent intent = new Intent(SeniorActivity.this, LoginActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
                 finish();
                 break;
         }

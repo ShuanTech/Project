@@ -24,8 +24,9 @@ public class AddWrkDetail extends AsyncTask<String, String, String> {
     public HashMap<String, String> rData;
     public ProgressDialog pDialog;
     public Common mApp;
+    public boolean Ins;
 
-    public AddWrkDetail(Context mContext, String uId, String org, String loc, String pos, String frmDate, String toDate) {
+    public AddWrkDetail(Context mContext, String uId, String org, String loc, String pos, String frmDate, String toDate,boolean Ins) {
         this.mContext = mContext;
         this.uId = uId;
         this.org = org;
@@ -33,6 +34,7 @@ public class AddWrkDetail extends AsyncTask<String, String, String> {
         this.pos = pos;
         this.frmDate = frmDate;
         this.toDate = toDate;
+        this.Ins=Ins;
         this.mApp = (Common) mContext.getApplicationContext();
     }
 
@@ -58,6 +60,12 @@ public class AddWrkDetail extends AsyncTask<String, String, String> {
         rData.put("frm", frmDate);
         rData.put("to", toDate);
         rData.put("type", "add");
+        if(Ins==true){
+            rData.put("ins","false");
+        }else{
+            rData.put("ins","true");
+        }
+
 
         try {
             JSONObject json = Connection.UrlConnection(php.work_info, rData);

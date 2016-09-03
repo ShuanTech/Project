@@ -138,14 +138,53 @@
 
             </RadioGroup>
 
+
+            <LinearLayout
+                android:id="@+id/row"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/level">
+
+                <CheckBox
+                    android:id="@+id/agree"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="true" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/small_margin"
+                    android:text="I Agree the"
+                    android:textColor="#000" />
+
+                <TextView
+                    android:id="@+id/term"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/small_margin"
+                    android:text="Terms an Conditions"
+                    android:textColor="@color/junDark"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/small_margin"
+                    android:text="of Udyomitra."
+                    android:textColor="#000"/>
+
+            </LinearLayout>
+
+
             <Button
                 android:id="@+id/sign_up"
-                android:layout_width="150dp"
+                android:layout_width="180dp"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/level"
+                android:layout_below="@+id/row"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="@dimen/activity_horizontal_margin"
-                android:background="@color/colorAccent"
+                android:background="@drawable/signin_border"
                 android:text="@string/let_start"
                 android:textColor="@android:color/white" />
 

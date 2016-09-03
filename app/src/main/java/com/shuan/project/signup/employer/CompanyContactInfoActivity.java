@@ -151,8 +151,6 @@ public class CompanyContactInfoActivity extends AppCompatActivity implements Vie
                 }
                 break;
             case R.id.cp_skip:
-                mApp.getPreference().edit().putBoolean(Common.CONTACTDETAILS, false).commit();
-                mApp.getPreference().edit().putBoolean(Common.COMPANY2, true).commit();
                 startActivity(new Intent(getApplicationContext(),AboutCompanyActivity.class));
                 finish();
                 break;
@@ -220,7 +218,6 @@ public class CompanyContactInfoActivity extends AppCompatActivity implements Vie
     @Override
     public void onBackPressed() {
         if (exit) {
-            mApp.getPreference().edit().putBoolean(Common.COMPANY2, false).commit();
             super.onBackPressed();
             return;
         } else {

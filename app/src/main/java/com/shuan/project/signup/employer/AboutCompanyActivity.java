@@ -121,10 +121,6 @@ public class AboutCompanyActivity extends AppCompatActivity implements View.OnCl
                 }
                 break;
             case R.id.ft_skip:
-                mApp.getPreference().edit().putBoolean(Common.ABOUTCOMPNAY, false).commit();
-                mApp.getPreference().edit().putBoolean(Common.Login, true).commit();
-                mApp.getPreference().edit().putBoolean(Common.COMPANY3, true).commit();
-                mApp.getPreference().edit().putBoolean(Common.USRINFO,true).commit();
                 new GetInfo(getApplicationContext(),mApp.getPreference().getString(Common.u_id,"")).execute();
                 startActivity(new Intent(getApplicationContext(), EmployerActivity.class));
                 finish();
@@ -134,7 +130,6 @@ public class AboutCompanyActivity extends AppCompatActivity implements View.OnCl
     @Override
     public void onBackPressed() {
         if (exit) {
-            mApp.getPreference().edit().putBoolean(Common.COMPANY3, false).commit();
             super.onBackPressed();
             return;
         } else {

@@ -82,6 +82,7 @@ public class UpdateResumeActivity extends AppCompatActivity implements View.OnCl
     private String toDate;
     private MonthYearPicker myp;
     private MonthYearPicker myp1;
+    private boolean Ins=false;
 
     /* Work Summary Field */
     private EditText weEdtTxt;
@@ -252,6 +253,7 @@ public class UpdateResumeActivity extends AppCompatActivity implements View.OnCl
 
                     orgname.setText(txt1.getText().toString());
                     location.setText(txt4.getText().toString());
+                    Ins=true;
                 }
             });
 
@@ -636,7 +638,7 @@ public class UpdateResumeActivity extends AppCompatActivity implements View.OnCl
                     if (what.equalsIgnoreCase("add")) {
                         new AddWrkDetail(UpdateResumeActivity.this, mApp.getPreference().getString(Common.u_id, ""),
                                 orgname.getText().toString(), location.getText().toString(), postition.getText().toString(),
-                                fYr.getText().toString(), toDate).execute();
+                                fYr.getText().toString(), toDate,Ins).execute();
                     } else {
                         new EditWrkDetail(UpdateResumeActivity.this, mApp.getPreference().getString("eId", ""),
                                 orgname.getText().toString(), location.getText().toString(), postition.getText().toString(),

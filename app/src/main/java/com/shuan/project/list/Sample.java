@@ -49,7 +49,7 @@ public class Sample {
     }
 
 
-    public Sample(String dis, String orgName, String type, String addr, String land, String contry, String state, String cty, String pin) {
+    public Sample(String dis, String orgName, String type, String addr, String land, String contry, String state, String cty, String pin,String distrct) {
         this.dis = dis;
         this.orgName = orgName;
         this.type = type;
@@ -59,6 +59,7 @@ public class Sample {
         this.state = state;
         this.cty = cty;
         this.pin = pin;
+        this.distrct=distrct;
     }
 
     public Sample(String companyName, String proPic, String jId, String jTitle, String jSkill, String jLevel, String jLoc, String jCreate, String jView, String jApply, String jShare, String jFrmId, String jImp) {

@@ -109,17 +109,7 @@ public class Launcher extends AppCompatActivity {
             startActivity(i);
         } else {
             if (mApp.getPreference().getString(Common.LEVEL, "").equalsIgnoreCase("3")) {
-                if (mApp.getPreference().getBoolean(Common.COMPANY1, false) == false) {
-                    startActivity(new Intent(getApplicationContext(), CompanyDetails.class));
-                } else if (mApp.getPreference().getBoolean(Common.COMPANY2, false) == false) {
-                    startActivity(new Intent(getApplicationContext(), CompanyContactInfoActivity.class));
-                } else if (mApp.getPreference().getBoolean(Common.COMPANY3, false) == false) {
-                    startActivity(new Intent(getApplicationContext(), AboutCompanyActivity.class));
-                } else {
                     startActivity(new Intent(Launcher.this, EmployerActivity.class));
-                }
-
-
             } else {
 
                 if (mApp.getPreference().getString(Common.LEVEL, "").equalsIgnoreCase("1")) {
@@ -128,7 +118,7 @@ public class Launcher extends AppCompatActivity {
                     startActivity(new Intent(Launcher.this, SeniorActivity.class));
                 }
 
-                
+
             }
         }
 

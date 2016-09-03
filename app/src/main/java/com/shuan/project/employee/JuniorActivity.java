@@ -369,7 +369,7 @@ public class JuniorActivity extends AppCompatActivity {
         profileStrength.setTypeface(helper.droid(getApplicationContext()));
         profileStrength.setTextColor(getResources().getColor(R.color.junAccent));
 
-        profileStrength.setText("" + mApp.getPreference().getInt(Common.PROFILESTRENGTH, 0));
+        profileStrength.setText(String.valueOf(mApp.getPreference().getInt(Common.PROFILESTRENGTH, 0)));
 
 
         follower.setGravity(Gravity.CENTER_VERTICAL);
@@ -431,9 +431,10 @@ public class JuniorActivity extends AppCompatActivity {
                 startActivity(new Intent(getApplicationContext(), SettingActivity.class));
                 break;
             case R.id.logout:
-                mApp.getPreference().edit().putBoolean(Common.Login, false).commit();
-                mApp.getPreference().edit().putBoolean(Common.USRINFO, false).commit();
-                startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+                mApp.getPreference().edit().clear().commit();
+                Intent intent = new Intent(JuniorActivity.this, LoginActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
                 finish();
                 break;
         }

@@ -90,6 +90,7 @@ public class UpdateSeniorResumeActivity extends AppCompatActivity implements Vie
     private String toDate;
     private MonthYearPicker myp;
     private MonthYearPicker myp1;
+    private boolean Ins=false;
 
 
     /* College Fields */
@@ -296,6 +297,7 @@ public class UpdateSeniorResumeActivity extends AppCompatActivity implements Vie
 
                     orgname.setText(txt1.getText().toString());
                     location.setText(txt4.getText().toString());
+                    Ins=true;
                 }
             });
 
@@ -1786,6 +1788,11 @@ public class UpdateSeniorResumeActivity extends AppCompatActivity implements Vie
             seniorData.put("frm", uFrm);
             seniorData.put("to", uTo);
             seniorData.put("type", "add");
+            if(Ins==true){
+                seniorData.put("ins","false");
+            }else{
+                seniorData.put("ins","true");
+            }
 
 
             try {
