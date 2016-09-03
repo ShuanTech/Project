@@ -106,29 +106,6 @@ public class PersonalActivity extends AppCompatActivity implements View.OnClickL
         po_skip = (Button) findViewById(R.id.po_skip);
         sex = (RadioGroup) findViewById(R.id.sex);
 
-       /* layout_f_name.setTypeface(helper.droid(getApplicationContext()));
-        layout_m_name.setTypeface(helper.droid(getApplicationContext()));
-        layout_door.setTypeface(helper.droid(getApplicationContext()));
-        layout_location.setTypeface(helper.droid(getApplicationContext()));
-        layout_district.setTypeface(helper.droid(getApplicationContext()));
-        layout_state.setTypeface(helper.droid(getApplicationContext()));
-        layout_cntry.setTypeface(helper.droid(getApplicationContext()));
-        layout_pin.setTypeface(helper.droid(getApplicationContext()));
-
-        dob.setTypeface(helper.droid(getApplicationContext()));
-        r1.setTypeface(helper.droid(getApplicationContext()));
-        r2.setTypeface(helper.droid(getApplicationContext()));
-        fName.setTypeface(helper.droid(getApplicationContext()));
-        mName.setTypeface(helper.droid(getApplicationContext()));
-        addr.setTypeface(helper.droid(getApplicationContext()));
-        loc.setTypeface(helper.droid(getApplicationContext()));
-        district.setTypeface(helper.droid(getApplicationContext()));
-        state.setTypeface(helper.droid(getApplicationContext()));
-        country.setTypeface(helper.droid(getApplicationContext()));
-        pinNo.setTypeface(helper.droid(getApplicationContext()));
-        prsnl.setTypeface(helper.droid(getApplicationContext()));
-        po_next.setTypeface(helper.droid(getApplicationContext()));
-        po_skip.setTypeface(helper.droid(getApplicationContext()));*/
 
 
         dob.setOnTouchListener(new View.OnTouchListener() {

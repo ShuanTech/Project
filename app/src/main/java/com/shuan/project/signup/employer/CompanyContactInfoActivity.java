@@ -81,16 +81,6 @@ public class CompanyContactInfoActivity extends AppCompatActivity implements Vie
             }
         });
 
-        /*layout_cnt_prsn.setTypeface(helper.droid(getApplicationContext()));
-        layout_cnt_mail.setTypeface(helper.droid(getApplicationContext()));
-        layout_cnt_phn.setTypeface(helper.droid(getApplicationContext()));
-
-        cnt_prsn.setTypeface(helper.droid(getApplicationContext()));
-        cnt_mail.setTypeface(helper.droid(getApplicationContext()));
-        cnt_phn.setTypeface(helper.droid(getApplicationContext()));
-
-        cp_next.setTypeface(helper.droid(getApplicationContext()));
-        cp_skip.setTypeface(helper.droid(getApplicationContext()));*/
 
         cp_skip.setOnClickListener(this);
         cp_next.setOnClickListener(this);

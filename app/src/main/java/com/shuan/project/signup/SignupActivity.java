@@ -104,14 +104,6 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
             }
         });
 
-        name.setTypeface(helper.droid(getApplicationContext()));
-        emailId.setTypeface(helper.droid(getApplicationContext()));
-        phNo.setTypeface(helper.droid(getApplicationContext()));
-        pass.setTypeface(helper.droid(getApplicationContext()));
-        confrmPass.setTypeface(helper.droid(getApplicationContext()));
-        r1.setTypeface(helper.droid(getApplicationContext()));
-        r2.setTypeface(helper.droid(getApplicationContext()));
-        signUp.setTypeface(helper.droid(getApplicationContext()));
 
         if (select.equalsIgnoreCase("employer")) {
             level.setVisibility(View.GONE);

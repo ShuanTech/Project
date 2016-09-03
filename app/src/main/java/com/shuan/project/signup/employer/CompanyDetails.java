@@ -68,17 +68,6 @@ public class CompanyDetails extends AppCompatActivity implements TextWatcher, Vi
         cd_skip = (Button) findViewById(R.id.cd_skip);
         cd_next = (Button) findViewById(R.id.cd_next);
 
-        cmpname.setTypeface(helper.droid(getApplicationContext()));
-        cmpnyType.setTypeface(helper.droid(getApplicationContext()));
-        doorno.setTypeface(helper.droid(getApplicationContext()));
-        lctn.setTypeface(helper.droid(getApplicationContext()));
-        cntry.setTypeface(helper.droid(getApplicationContext()));
-        city.setTypeface(helper.droid(getApplicationContext()));
-        state.setTypeface(helper.droid(getApplicationContext()));
-        pin.setTypeface(helper.droid(getApplicationContext()));
-        cd_next.setTypeface(helper.droid(getApplicationContext()));
-        cd_skip.setTypeface(helper.droid(getApplicationContext()));
-
         new GetOrg(getApplicationContext(), progressBar, scroll, cmpname).execute();
 
 

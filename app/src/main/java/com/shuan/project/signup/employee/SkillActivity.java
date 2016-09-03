@@ -63,18 +63,6 @@ public class SkillActivity extends AppCompatActivity implements View.OnClickList
         s_skip = (Button) findViewById(R.id.s_skip);
         tv = (TextView) findViewById(R.id.tv);
 
-       /* layout_skill.setTypeface(helper.droid(getApplicationContext()));
-        layout_area.setTypeface(helper.droid(getApplicationContext()));
-        layout_dev_evn.setTypeface(helper.droid(getApplicationContext()));
-        layout_others.setTypeface(helper.droid(getApplicationContext()));
-
-        skill.setTypeface(helper.droid(getApplicationContext()));
-        workArea.setTypeface(helper.droid(getApplicationContext()));
-        dev_env.setTypeface(helper.droid(getApplicationContext()));
-        others.setTypeface(helper.droid(getApplicationContext()));
-        s_next.setTypeface(helper.droid(getApplicationContext()));
-        s_skip.setTypeface(helper.droid(getApplicationContext()));
-        tv.setTypeface(helper.droid(getApplicationContext()));*/
 
         layout_cer_name = (TextInputLayout) findViewById(R.id.layout_cer_name);
         layout_cer_centre = (TextInputLayout) findViewById(R.id.layout_cer_centre);
@@ -85,14 +73,6 @@ public class SkillActivity extends AppCompatActivity implements View.OnClickList
         cerDur = (EditText) findViewById(R.id.cer_duration);
         tv1 = (TextView) findViewById(R.id.tv1);
 
-       /* layout_cer_centre.setTypeface(helper.droid(getApplicationContext()));
-        layout_cer_name.setTypeface(helper.droid(getApplicationContext()));
-        layout_cer_duration.setTypeface(helper.droid(getApplicationContext()));
-
-        tv1.setTypeface(helper.droid(getApplicationContext()));
-        course.setTypeface(helper.droid(getApplicationContext()));
-        cerCentre.setTypeface(helper.droid(getApplicationContext()));
-        cerDur.setTypeface(helper.droid(getApplicationContext()));*/
 
         skill.addTextChangedListener(this);
 

@@ -50,52 +50,79 @@
                     android:layout_marginTop="@dimen/standard_margin" />
 
 
-                <AutoCompleteTextView
-                    android:id="@+id/clg_name"
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/lay_clg_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/level"
-                    android:layout_marginTop="@dimen/standard_margin"
-                    android:hint="@string/clg_name"
-                    android:imeOptions="actionNext"
-                    android:inputType="textAutoComplete" />
+                    android:layout_below="@+id/level">
 
-                <EditText
-                    android:id="@+id/univ"
+                    <AutoCompleteTextView
+                        android:id="@+id/clg_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/level"
+                        android:layout_marginTop="@dimen/standard_margin"
+                        android:hint="@string/clg_name"
+                        android:imeOptions="actionNext"
+                        android:inputType="textAutoComplete" />
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/lay_univ"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/clg_name"
-                    android:layout_marginTop="@dimen/standard_margin"
-                    android:hint="@string/univ"
-                    android:imeOptions="actionNext"
-                    android:inputType="textAutoComplete" />
+                    android:layout_below="@id/lay_clg_name">
 
-                <EditText
-                    android:id="@+id/c_location"
+                    <EditText
+                        android:id="@+id/univ"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/lay_clg_name"
+                        android:layout_marginTop="@dimen/standard_margin"
+                        android:hint="@string/univ"
+                        android:imeOptions="actionNext"
+                        android:inputType="textAutoComplete" />
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/lay_c_location"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/univ"
-                    android:layout_marginTop="@dimen/standard_margin"
-                    android:hint="@string/location"
-                    android:imeOptions="actionNext"
-                    android:inputType="textAutoComplete" />
+                    android:layout_below="@+id/lay_univ">
 
-                <AutoCompleteTextView
-                    android:id="@+id/concent"
+                    <EditText
+                        android:id="@+id/c_location"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/lay_univ"
+                        android:layout_marginTop="@dimen/standard_margin"
+                        android:hint="@string/location"
+                        android:imeOptions="actionNext"
+                        android:inputType="textAutoComplete" />
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/lay_concent"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/c_location"
-                    android:layout_marginTop="@dimen/standard_margin"
-                    android:hint="@string/concent"
-                    android:imeOptions="actionNext"
-                    android:singleLine="true" />
+                    android:layout_below="@id/lay_c_location">
 
+                    <AutoCompleteTextView
+                        android:id="@+id/concent"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/lay_c_location"
+                        android:layout_marginTop="@dimen/standard_margin"
+                        android:hint="@string/concent"
+                        android:imeOptions="actionNext"
+                        android:singleLine="true" />
+                </android.support.design.widget.TextInputLayout>
 
                 <LinearLayout
                     android:id="@+id/yr"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/concent"
+                    android:layout_below="@+id/lay_concent"
                     android:orientation="horizontal">
 
                     <LinearLayout
@@ -151,21 +178,28 @@
                 </LinearLayout>
 
 
-                <EditText
-                    android:id="@+id/agrt"
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/lay_agrt"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/yr"
-                    android:hint="@string/agrt"
-                    android:imeOptions="actionDone"
-                    android:inputType="number"
-                    android:maxLength="3" />
+                    android:layout_below="@+id/yr">
+
+                    <EditText
+                        android:id="@+id/agrt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/yr"
+                        android:hint="@string/agrt"
+                        android:imeOptions="actionDone"
+                        android:inputType="number"
+                        android:maxLength="3" />
+                </android.support.design.widget.TextInputLayout>
 
                 <Button
                     android:id="@+id/q_update"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/agrt"
+                    android:layout_below="@+id/lay_agrt"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="@dimen/activity_horizontal_margin"
                     android:background="@null"
@@ -192,43 +226,63 @@
                     android:textColor="#333" />
 
 
-                <AutoCompleteTextView
-                    android:id="@+id/h_name"
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/lay_h_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/hsc"
-                    android:layout_marginTop="@dimen/standard_margin"
-                    android:hint="@string/school"
-                    android:imeOptions="actionNext"
-                    android:inputType="textAutoComplete" />
+                    android:layout_below="@+id/hsc">
 
-                <EditText
-                    android:id="@+id/board"
+                    <AutoCompleteTextView
+                        android:id="@+id/h_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/hsc"
+                        android:layout_marginTop="@dimen/standard_margin"
+                        android:hint="@string/school"
+                        android:imeOptions="actionNext"
+                        android:inputType="textAutoComplete" />
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/lay_board"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/h_name"
-                    android:layout_marginTop="@dimen/standard_margin"
-                    android:hint="@string/board"
-                    android:imeOptions="actionNext"
-                    android:inputType="textAutoComplete" />
+                    android:layout_below="@+id/lay_h_name">
 
-                <EditText
-                    android:id="@+id/cty"
+                    <EditText
+                        android:id="@+id/board"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/lay_h_name"
+                        android:layout_marginTop="@dimen/standard_margin"
+                        android:hint="@string/board"
+                        android:imeOptions="actionNext"
+                        android:inputType="textAutoComplete" />
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/lay_cty"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/board"
-                    android:layout_marginTop="@dimen/standard_margin"
-                    android:hint="@string/location"
-                    android:imeOptions="actionNext"
-                    android:inputType="textAutoComplete"
-                    android:singleLine="true" />
+                    android:layout_below="@+id/lay_board">
 
+                    <EditText
+                        android:id="@+id/cty"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/lay_board"
+                        android:layout_marginTop="@dimen/standard_margin"
+                        android:hint="@string/location"
+                        android:imeOptions="actionNext"
+                        android:inputType="textAutoComplete"
+                        android:singleLine="true" />
+                </android.support.design.widget.TextInputLayout>
 
                 <LinearLayout
                     android:id="@+id/syr"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/cty"
+                    android:layout_below="@+id/lay_cty"
                     android:orientation="horizontal">
 
                     <LinearLayout
@@ -284,22 +338,29 @@
                 </LinearLayout>
 
 
-                <EditText
-                    android:id="@+id/h_agrt"
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/lay_h_agrt"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/syr"
-                    android:layout_marginTop="@dimen/standard_margin"
-                    android:hint="@string/agrt"
-                    android:imeOptions="actionDone"
-                    android:inputType="number"
-                    android:maxLength="3" />
+                    android:layout_below="@+id/syr">
+
+                    <EditText
+                        android:id="@+id/h_agrt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/syr"
+                        android:layout_marginTop="@dimen/standard_margin"
+                        android:hint="@string/agrt"
+                        android:imeOptions="actionDone"
+                        android:inputType="number"
+                        android:maxLength="3" />
+                </android.support.design.widget.TextInputLayout>
 
                 <Button
                     android:id="@+id/h_update"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/h_agrt"
+                    android:layout_below="@+id/lay_h_agrt"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="@dimen/activity_horizontal_margin"
                     android:background="@null"
@@ -326,6 +387,11 @@
                     android:textAppearance="?android:textAppearanceMedium"
                     android:textColor="#333" />
 
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/lay_s_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/sslc">
                 <AutoCompleteTextView
                     android:id="@+id/s_name"
                     android:layout_width="match_parent"
@@ -335,33 +401,45 @@
                     android:hint="@string/school"
                     android:imeOptions="actionNext"
                     android:singleLine="true" />
+                </android.support.design.widget.TextInputLayout>
 
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/lay_s_board"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/lay_s_name">
                 <EditText
                     android:id="@+id/s_board"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/s_name"
+                    android:layout_below="@+id/lay_s_name"
                     android:layout_marginTop="@dimen/standard_margin"
                     android:hint="@string/board"
                     android:imeOptions="actionNext"
                     android:inputType="textAutoComplete" />
-
+                </android.support.design.widget.TextInputLayout>
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/lay_s_cty"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/lay_s_board">
                 <EditText
                     android:id="@+id/s_cty"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/s_board"
+                    android:layout_below="@+id/lay_s_board"
                     android:layout_marginTop="@dimen/standard_margin"
                     android:hint="@string/location"
                     android:imeOptions="actionNext"
                     android:inputType="textAutoComplete" />
+                </android.support.design.widget.TextInputLayout>
 
 
                 <LinearLayout
                     android:id="@+id/ssyr"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/s_cty"
+                    android:layout_below="@+id/lay_s_cty"
                     android:orientation="horizontal">
 
                     <LinearLayout
@@ -415,7 +493,12 @@
                     </LinearLayout>
 
                 </LinearLayout>
+                <android.support.design.widget.TextInputLayout
 
+                    android:id="@+id/lay_s_agrt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/ssyr">
                 <EditText
                     android:id="@+id/s_agrt"
                     android:layout_width="match_parent"
@@ -426,13 +509,14 @@
                     android:imeOptions="actionDone"
                     android:inputType="number"
                     android:maxLength="3" />
+                </android.support.design.widget.TextInputLayout>
 
 
                 <Button
                     android:id="@+id/s_update"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/s_agrt"
+                    android:layout_below="@+id/lay_s_agrt"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="@dimen/activity_horizontal_margin"
                     android:background="@null"
@@ -453,6 +537,9 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
                     <TextView
                         android:id="@+id/tex"
                         android:layout_width="wrap_content"
@@ -461,7 +548,10 @@
                         android:text="@string/extra"
                         android:textAppearance="?android:textAppearanceMedium"
                         android:textColor="#333" />
-
+</android.support.design.widget.TextInputLayout>
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
                     <MultiAutoCompleteTextView
                         android:id="@+id/skill"
                         android:layout_width="match_parent"
@@ -470,6 +560,11 @@
                         android:hint="@string/skill"
                         android:imeOptions="actionNext"
                         android:inputType="text" />
+                    </android.support.design.widget.TextInputLayout>
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
 
 
                     <MultiAutoCompleteTextView
@@ -479,6 +574,11 @@
                         android:hint="@string/work_area"
                         android:imeOptions="actionDone"
                         android:inputType="text" />
+                    </android.support.design.widget.TextInputLayout>
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
 
                     <EditText
                         android:id="@+id/dev_env"
@@ -487,7 +587,10 @@
                         android:hint="@string/dev_env"
                         android:imeOptions="actionDone"
                         android:inputType="text" />
-
+                    </android.support.design.widget.TextInputLayout>
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
                     <EditText
                         android:id="@+id/others"
                         android:layout_width="match_parent"
@@ -495,6 +598,7 @@
                         android:hint="@string/others"
                         android:imeOptions="actionDone"
                         android:inputType="text" />
+                    </android.support.design.widget.TextInputLayout>
 
 
                     <TextView
@@ -507,6 +611,9 @@
                         android:textAppearance="?android:textAppearanceMedium"
                         android:textColor="#333" />
 
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
                     <EditText
                         android:id="@+id/cer_name"
                         android:layout_width="match_parent"
@@ -515,7 +622,11 @@
                         android:hint="@string/cert"
                         android:imeOptions="actionNext"
                         android:inputType="text" />
+                    </android.support.design.widget.TextInputLayout>
 
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
                     <EditText
                         android:id="@+id/cer_centre"
                         android:layout_width="match_parent"
@@ -524,8 +635,12 @@
                         android:hint="@string/cer_centre"
                         android:imeOptions="actionNext"
                         android:inputType="text" />
+                    </android.support.design.widget.TextInputLayout>
 
 
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
                     <EditText
                         android:id="@+id/cer_duration"
                         android:layout_width="match_parent"
@@ -534,6 +649,7 @@
                         android:hint="@string/cer_dur"
                         android:imeOptions="actionDone"
                         android:inputType="text" />
+                    </android.support.design.widget.TextInputLayout>
 
                     <Button
                         android:id="@+id/sk_update"
@@ -641,6 +757,10 @@
                         android:textAppearance="?android:textAppearanceMedium"
                         android:textColor="#333" />
 
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/lay_hobby"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
                     <EditText
                         android:id="@+id/hobby"
                         android:layout_width="match_parent"
@@ -648,14 +768,20 @@
                         android:layout_marginTop="@dimen/activity_horizontal_margin"
                         android:hint="@string/hobby"
                         android:inputType="text" />
+                    </android.support.design.widget.TextInputLayout>
 
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/lay_hobby">
                     <EditText
                         android:id="@+id/lang"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_below="@+id/hobby"
+                        android:layout_below="@+id/lay_hobby"
                         android:hint="@string/lang_known"
                         android:inputType="text" />
+                    </android.support.design.widget.TextInputLayout>
 
                 </RelativeLayout>
 
@@ -694,6 +820,9 @@
                         android:textAppearance="?android:textAppearanceMedium"
                         android:textColor="#333" />
 
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
                     <EditText
                         android:id="@+id/title"
                         android:layout_width="match_parent"
@@ -703,7 +832,11 @@
                         android:imeOptions="actionNext"
                         android:inputType="text"
                         android:singleLine="true" />
+                    </android.support.design.widget.TextInputLayout>
 
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
                     <EditText
                         android:id="@+id/platform"
                         android:layout_width="match_parent"
@@ -713,7 +846,11 @@
                         android:imeOptions="actionNext"
                         android:inputType="text"
                         android:singleLine="true" />
+                    </android.support.design.widget.TextInputLayout>
 
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
                     <EditText
                         android:id="@+id/role"
                         android:layout_width="match_parent"
@@ -722,7 +859,11 @@
                         android:hint="Your Role of this Project"
                         android:imeOptions="actionNext"
                         android:inputType="text" />
+                    </android.support.design.widget.TextInputLayout>
 
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
                     <EditText
                         android:id="@+id/team_sze"
                         android:layout_width="match_parent"
@@ -732,7 +873,11 @@
                         android:imeOptions="actionNext"
                         android:inputType="text"
                         android:singleLine="true" />
+                    </android.support.design.widget.TextInputLayout>
 
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
                     <EditText
                         android:id="@+id/dur"
                         android:layout_width="match_parent"
@@ -742,7 +887,11 @@
                         android:imeOptions="actionNext"
                         android:inputType="text"
                         android:singleLine="true" />
+                    </android.support.design.widget.TextInputLayout>
 
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
                     <EditText
                         android:id="@+id/p_url"
                         android:layout_width="match_parent"
@@ -752,8 +901,12 @@
                         android:imeOptions="actionNext"
                         android:inputType="textWebEditText"
                         android:singleLine="true" />
+                    </android.support.design.widget.TextInputLayout>
 
 
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
                     <EditText
                         android:id="@+id/prjct_des"
                         android:layout_width="match_parent"
@@ -762,6 +915,7 @@
                         android:hint="Project Description"
                         android:imeOptions="actionDone"
                         android:inputType="text" />
+                    </android.support.design.widget.TextInputLayout>
 
                     <CheckBox
                         android:id="@+id/acd"
@@ -845,6 +999,9 @@
 
                     </RadioGroup>
 
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
                     <EditText
                         android:id="@+id/f_name"
                         android:layout_width="match_parent"
@@ -854,7 +1011,11 @@
                         android:imeOptions="actionNext"
                         android:inputType="text"
                         android:singleLine="true" />
+                    </android.support.design.widget.TextInputLayout>
 
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
                     <EditText
                         android:id="@+id/m_name"
                         android:layout_width="match_parent"
@@ -864,8 +1025,12 @@
                         android:imeOptions="actionNext"
                         android:inputType="text"
                         android:singleLine="true" />
+                    </android.support.design.widget.TextInputLayout>
 
 
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
                     <EditText
                         android:id="@id/door"
                         android:layout_width="match_parent"
@@ -875,7 +1040,11 @@
                         android:imeOptions="actionNext"
                         android:inputType="textPostalAddress"
                         android:singleLine="true" />
+                    </android.support.design.widget.TextInputLayout>
 
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
                     <AutoCompleteTextView
                         android:id="@+id/locate"
                         android:layout_width="match_parent"
@@ -883,6 +1052,7 @@
                         android:layout_marginTop="@dimen/standard_margin"
                         android:hint="@string/location"
                         android:inputType="textAutoComplete" />
+                    </android.support.design.widget.TextInputLayout>
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -895,6 +1065,9 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1">
 
+                            <android.support.design.widget.TextInputLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
                             <AutoCompleteTextView
                                 android:id="@+id/district"
                                 android:layout_width="match_parent"
@@ -903,6 +1076,7 @@
                                 android:imeOptions="actionNext"
                                 android:inputType="textAutoComplete"
                                 android:singleLine="true" />
+                            </android.support.design.widget.TextInputLayout>
                         </RelativeLayout>
 
                         <RelativeLayout
@@ -910,6 +1084,9 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1">
 
+                            <android.support.design.widget.TextInputLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
                             <AutoCompleteTextView
                                 android:id="@+id/state"
                                 android:layout_width="match_parent"
@@ -918,6 +1095,7 @@
                                 android:imeOptions="actionNext"
                                 android:inputType="textAutoComplete"
                                 android:singleLine="true" />
+                            </android.support.design.widget.TextInputLayout>
                         </RelativeLayout>
 
 
@@ -933,6 +1111,9 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1">
 
+                            <android.support.design.widget.TextInputLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
                             <AutoCompleteTextView
                                 android:id="@+id/cntry"
                                 android:layout_width="match_parent"
@@ -941,6 +1122,7 @@
                                 android:imeOptions="actionNext"
                                 android:inputType="textAutoComplete"
                                 android:singleLine="true" />
+                            </android.support.design.widget.TextInputLayout>
                         </RelativeLayout>
 
                         <RelativeLayout
@@ -948,6 +1130,9 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1">
 
+                            <android.support.design.widget.TextInputLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
                             <EditText
                                 android:id="@+id/pin"
                                 android:layout_width="match_parent"
@@ -957,6 +1142,7 @@
                                 android:inputType="number"
                                 android:maxLength="6"
                                 android:singleLine="true" />
+                            </android.support.design.widget.TextInputLayout>
                         </RelativeLayout>
 
 

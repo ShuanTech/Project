@@ -53,16 +53,6 @@ public class AboutCompanyActivity extends AppCompatActivity implements View.OnCl
         ft_next = (Button) findViewById(R.id.ft_next);
         ft_skip = (Button) findViewById(R.id.ft_skip);
 
-       /* layout_c_des.setTypeface(helper.droid(getApplicationContext()));
-        layout_yr_st.setTypeface(helper.droid(getApplicationContext()));
-        layout_no_wrkr.setTypeface(helper.droid(getApplicationContext()));
-
-
-        yr_st.setTypeface(helper.droid(getApplicationContext()));
-        no_wrkr.setTypeface(helper.droid(getApplicationContext()));
-        c_des.setTypeface(helper.droid(getApplicationContext()));
-        ft_next.setTypeface(helper.droid(getApplicationContext()));
-        ft_skip.setTypeface(helper.droid(getApplicationContext()));*/
 
         yr_st.setOnTouchListener(new View.OnTouchListener() {
             @TargetApi(Build.VERSION_CODES.HONEYCOMB)

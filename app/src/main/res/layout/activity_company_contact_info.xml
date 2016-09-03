@@ -29,40 +29,43 @@
                 android:id="@+id/layout_cnt_prsn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-            <EditText
-                android:id="@+id/cnt_prsn"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/cnt_prsn"
-                android:imeOptions="actionNext"
-                android:inputType="text" />
+
+                <EditText
+                    android:id="@+id/cnt_prsn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/cnt_prsn"
+                    android:imeOptions="actionNext"
+                    android:inputType="text" />
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
                 android:id="@+id/layout_cnt_mail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-            <EditText
-                android:id="@+id/cnt_mail"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/cnt_mail"
-                android:imeOptions="actionNext"
-                android:inputType="textEmailAddress" />
+
+                <EditText
+                    android:id="@+id/cnt_mail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/cnt_mail"
+                    android:imeOptions="actionNext"
+                    android:inputType="textEmailAddress" />
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
                 android:id="@+id/layout_cnt_phn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-            <EditText
-                android:id="@+id/cnt_phn"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/cnt_phn"
-                android:imeOptions="actionNext"
-                android:maxLength="10"
-                android:inputType="phone" />
+
+                <EditText
+                    android:id="@+id/cnt_phn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/cnt_phn"
+                    android:imeOptions="actionNext"
+                    android:inputType="phone"
+                    android:maxLength="10" />
             </android.support.design.widget.TextInputLayout>
 
             <LinearLayout
@@ -75,13 +78,18 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1">
 
-                    <EditText
-                        android:id="@+id/frm_time"
+                    <android.support.design.widget.TextInputLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="Contact Time From"
-                        android:imeOptions="actionDone"
-                        android:inputType="time" />
+                        android:layout_height="wrap_content">
+
+                        <EditText
+                            android:id="@+id/frm_time"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Contact Time From"
+                            android:imeOptions="actionDone"
+                            android:inputType="time" />
+                    </android.support.design.widget.TextInputLayout>
                 </RelativeLayout>
 
 
@@ -90,13 +98,18 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1">
 
-                    <EditText
-                        android:id="@+id/to_time"
+                    <android.support.design.widget.TextInputLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="Contact Time To"
-                        android:imeOptions="actionDone"
-                        android:inputType="time" />
+                        android:layout_height="wrap_content">
+
+                        <EditText
+                            android:id="@+id/to_time"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Contact Time To"
+                            android:imeOptions="actionDone"
+                            android:inputType="time" />
+                    </android.support.design.widget.TextInputLayout>
                 </RelativeLayout>
 
             </LinearLayout>

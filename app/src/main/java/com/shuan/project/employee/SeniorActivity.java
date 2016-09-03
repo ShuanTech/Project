@@ -152,7 +152,7 @@ public class SeniorActivity extends AppCompatActivity {
         usrName = (TextView) header.findViewById(R.id.usr_name);
         proPic = (CircleImageView) header.findViewById(R.id.profile);
 
-        /*usrName.setTypeface(helper.droid(getApplicationContext()));*/
+
 
         setImage(mApp.getPreference().getString(Common.PROPIC, ""), proPic);
 
@@ -396,24 +396,21 @@ public class SeniorActivity extends AppCompatActivity {
 
     private void initializeCount() {
         connect.setGravity(Gravity.CENTER_VERTICAL);
-        connect.setTypeface(helper.droid(getApplicationContext()));
         connect.setTextColor(getResources().getColor(R.color.senAccent));
         connect.setText(mApp.getPreference().getString(Common.CONNECTION, ""));
 
         following.setGravity(Gravity.CENTER_VERTICAL);
-        following.setTypeface(helper.droid(getApplicationContext()));
+
         following.setTextColor(getResources().getColor(R.color.senAccent));
         following.setText(mApp.getPreference().getString(Common.FOLLOWING, ""));
 
         profileStrength.setGravity(Gravity.CENTER_VERTICAL);
-        profileStrength.setTypeface(helper.droid(getApplicationContext()));
         profileStrength.setTextColor(getResources().getColor(R.color.senAccent));
 
         profileStrength.setText(String.valueOf(mApp.getPreference().getInt(Common.PROFILESTRENGTH, 0)));
 
 
         follower.setGravity(Gravity.CENTER_VERTICAL);
-        follower.setTypeface(helper.droid(getApplicationContext()));
         follower.setTextColor(getResources().getColor(R.color.senAccent));
         follower.setText(mApp.getPreference().getString(Common.FOLLOWER, ""));
 

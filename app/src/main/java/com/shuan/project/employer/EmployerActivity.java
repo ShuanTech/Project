@@ -352,7 +352,6 @@ public class EmployerActivity extends AppCompatActivity {
 
     private void initializeCount() {
         follower.setGravity(Gravity.CENTER_VERTICAL);
-        follower.setTypeface(helper.droid(getApplicationContext()));
         follower.setTextColor(getResources().getColor(R.color.junAccent));
         follower.setText(mApp.getPreference().getString(Common.FOLLOWER, ""));
 
