@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -33,6 +34,7 @@ public class AboutCompanyActivity extends AppCompatActivity implements View.OnCl
     private EditText yr_st, no_wrkr, c_des;
     private Button ft_skip, ft_next;
     private boolean exit = false;
+    private TextInputLayout layout_yr_st,layout_no_wrkr,layout_c_des;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,18 +43,26 @@ public class AboutCompanyActivity extends AppCompatActivity implements View.OnCl
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about_company);
 
+        layout_yr_st = (TextInputLayout) findViewById(R.id.layout_yr_st);
+        layout_no_wrkr = (TextInputLayout) findViewById(R.id.layout_no_wrkr);
+        layout_c_des = (TextInputLayout) findViewById(R.id.layout_c_des);
+
         yr_st = (EditText) findViewById(R.id.yr_st);
         no_wrkr = (EditText) findViewById(R.id.no_wrkr);
         c_des = (EditText) findViewById(R.id.c_des);
         ft_next = (Button) findViewById(R.id.ft_next);
         ft_skip = (Button) findViewById(R.id.ft_skip);
 
+       /* layout_c_des.setTypeface(helper.droid(getApplicationContext()));
+        layout_yr_st.setTypeface(helper.droid(getApplicationContext()));
+        layout_no_wrkr.setTypeface(helper.droid(getApplicationContext()));
+
 
         yr_st.setTypeface(helper.droid(getApplicationContext()));
         no_wrkr.setTypeface(helper.droid(getApplicationContext()));
         c_des.setTypeface(helper.droid(getApplicationContext()));
         ft_next.setTypeface(helper.droid(getApplicationContext()));
-        ft_skip.setTypeface(helper.droid(getApplicationContext()));
+        ft_skip.setTypeface(helper.droid(getApplicationContext()));*/
 
         yr_st.setOnTouchListener(new View.OnTouchListener() {
             @TargetApi(Build.VERSION_CODES.HONEYCOMB)

@@ -6,6 +6,7 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -39,6 +40,7 @@ public class SkillActivity extends AppCompatActivity implements View.OnClickList
     private Button s_skip, s_next;
     private HashMap<String, String> sData;
     private boolean exit = false;
+    private TextInputLayout layout_skill,layout_area,layout_dev_evn,layout_others,layout_cer_name,layout_cer_centre,layout_cer_duration;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +50,11 @@ public class SkillActivity extends AppCompatActivity implements View.OnClickList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_skill);
 
+        layout_skill = (TextInputLayout) findViewById(R.id.layout_skill);
+        layout_area = (TextInputLayout) findViewById(R.id.layout_area);
+        layout_dev_evn = (TextInputLayout) findViewById(R.id.layout_dev_env);
+        layout_others = (TextInputLayout) findViewById(R.id.layout_others);
+
         skill = (MultiAutoCompleteTextView) findViewById(R.id.skill);
         workArea = (MultiAutoCompleteTextView) findViewById(R.id.area);
         dev_env = (EditText) findViewById(R.id.dev_env);
@@ -56,23 +63,36 @@ public class SkillActivity extends AppCompatActivity implements View.OnClickList
         s_skip = (Button) findViewById(R.id.s_skip);
         tv = (TextView) findViewById(R.id.tv);
 
+       /* layout_skill.setTypeface(helper.droid(getApplicationContext()));
+        layout_area.setTypeface(helper.droid(getApplicationContext()));
+        layout_dev_evn.setTypeface(helper.droid(getApplicationContext()));
+        layout_others.setTypeface(helper.droid(getApplicationContext()));
+
         skill.setTypeface(helper.droid(getApplicationContext()));
         workArea.setTypeface(helper.droid(getApplicationContext()));
         dev_env.setTypeface(helper.droid(getApplicationContext()));
         others.setTypeface(helper.droid(getApplicationContext()));
         s_next.setTypeface(helper.droid(getApplicationContext()));
         s_skip.setTypeface(helper.droid(getApplicationContext()));
-        tv.setTypeface(helper.droid(getApplicationContext()));
+        tv.setTypeface(helper.droid(getApplicationContext()));*/
+
+        layout_cer_name = (TextInputLayout) findViewById(R.id.layout_cer_name);
+        layout_cer_centre = (TextInputLayout) findViewById(R.id.layout_cer_centre);
+        layout_cer_duration = (TextInputLayout) findViewById(R.id.layout_cer_duration);
 
         course = (EditText) findViewById(R.id.cer_name);
         cerCentre = (EditText) findViewById(R.id.cer_centre);
         cerDur = (EditText) findViewById(R.id.cer_duration);
         tv1 = (TextView) findViewById(R.id.tv1);
 
+       /* layout_cer_centre.setTypeface(helper.droid(getApplicationContext()));
+        layout_cer_name.setTypeface(helper.droid(getApplicationContext()));
+        layout_cer_duration.setTypeface(helper.droid(getApplicationContext()));
+
         tv1.setTypeface(helper.droid(getApplicationContext()));
         course.setTypeface(helper.droid(getApplicationContext()));
         cerCentre.setTypeface(helper.droid(getApplicationContext()));
-        cerDur.setTypeface(helper.droid(getApplicationContext()));
+        cerDur.setTypeface(helper.droid(getApplicationContext()));*/
 
         skill.addTextChangedListener(this);
 

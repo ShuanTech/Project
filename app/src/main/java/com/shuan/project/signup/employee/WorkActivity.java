@@ -76,14 +76,14 @@ public class WorkActivity extends AppCompatActivity implements View.OnClickListe
 
         myp = new MonthYearPicker(this);
         myp1=new MonthYearPicker(this);
-        orgname.setTypeface(helper.droid(getApplicationContext()));
+   /*     orgname.setTypeface(helper.droid(getApplicationContext()));
         postition.setTypeface(helper.droid(getApplicationContext()));
         location.setTypeface(helper.droid(getApplicationContext()));
         wrking.setTypeface(helper.droid(getApplicationContext()));
 
         present.setTypeface(helper.droid(getApplicationContext()));
         frm.setTypeface(helper.droid(getApplicationContext()));
-        to.setTypeface(helper.droid(getApplicationContext()));
+        to.setTypeface(helper.droid(getApplicationContext()));*/
 
 
         wk_next = (Button) findViewById(R.id.wk_next);

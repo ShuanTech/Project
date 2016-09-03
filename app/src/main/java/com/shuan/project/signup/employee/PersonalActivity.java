@@ -7,6 +7,7 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -60,6 +61,7 @@ public class PersonalActivity extends AppCompatActivity implements View.OnClickL
     private Helper helper = new Helper();
     public boolean ins = false;
     public boolean exit = false;
+    private TextInputLayout layout_f_name,layout_m_name,layout_door,layout_location,layout_district,layout_state,layout_cntry,layout_pin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,6 +77,16 @@ public class PersonalActivity extends AppCompatActivity implements View.OnClickL
         list = new ArrayList<Sample>();
 
         new getLocation().execute();
+
+        layout_f_name = (TextInputLayout) findViewById(R.id.layout_f_name);
+        layout_m_name = (TextInputLayout) findViewById(R.id.layout_m_name);
+        layout_door = (TextInputLayout) findViewById(R.id.layout_door);
+        layout_location = (TextInputLayout) findViewById(R.id.layout_location);
+        layout_district = (TextInputLayout) findViewById(R.id.layout_district);
+        layout_state = (TextInputLayout) findViewById(R.id.layout_state);
+        layout_cntry = (TextInputLayout) findViewById(R.id.layout_cntry);
+        layout_pin = (TextInputLayout) findViewById(R.id.layout_pin);
+
 
         dob = (EditText) findViewById(R.id.dob);
         r1 = (RadioButton) findViewById(R.id.male);
@@ -94,6 +106,15 @@ public class PersonalActivity extends AppCompatActivity implements View.OnClickL
         po_skip = (Button) findViewById(R.id.po_skip);
         sex = (RadioGroup) findViewById(R.id.sex);
 
+       /* layout_f_name.setTypeface(helper.droid(getApplicationContext()));
+        layout_m_name.setTypeface(helper.droid(getApplicationContext()));
+        layout_door.setTypeface(helper.droid(getApplicationContext()));
+        layout_location.setTypeface(helper.droid(getApplicationContext()));
+        layout_district.setTypeface(helper.droid(getApplicationContext()));
+        layout_state.setTypeface(helper.droid(getApplicationContext()));
+        layout_cntry.setTypeface(helper.droid(getApplicationContext()));
+        layout_pin.setTypeface(helper.droid(getApplicationContext()));
+
         dob.setTypeface(helper.droid(getApplicationContext()));
         r1.setTypeface(helper.droid(getApplicationContext()));
         r2.setTypeface(helper.droid(getApplicationContext()));
@@ -107,7 +128,7 @@ public class PersonalActivity extends AppCompatActivity implements View.OnClickL
         pinNo.setTypeface(helper.droid(getApplicationContext()));
         prsnl.setTypeface(helper.droid(getApplicationContext()));
         po_next.setTypeface(helper.droid(getApplicationContext()));
-        po_skip.setTypeface(helper.droid(getApplicationContext()));
+        po_skip.setTypeface(helper.droid(getApplicationContext()));*/
 
 
         dob.setOnTouchListener(new View.OnTouchListener() {

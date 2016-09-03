@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
@@ -18,6 +19,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
@@ -36,6 +38,7 @@ public class CompanyContactInfoActivity extends AppCompatActivity implements Vie
     private EmailValidator emailValidator;
     private Button cp_skip, cp_next;
     private String contctTime;
+    private TextInputLayout layout_cnt_prsn,layout_cnt_mail,layout_cnt_phn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +48,10 @@ public class CompanyContactInfoActivity extends AppCompatActivity implements Vie
         setContentView(R.layout.activity_company_contact_info);
 
          /*Contact Details */
+
+        layout_cnt_mail = (TextInputLayout) findViewById(R.id.layout_cnt_mail);
+        layout_cnt_phn = (TextInputLayout) findViewById(R.id.layout_cnt_phn);
+        layout_cnt_prsn = (TextInputLayout) findViewById(R.id.layout_cnt_prsn);
 
         cnt_prsn = (EditText) findViewById(R.id.cnt_prsn);
         cnt_mail = (EditText) findViewById(R.id.cnt_mail);
@@ -74,12 +81,16 @@ public class CompanyContactInfoActivity extends AppCompatActivity implements Vie
             }
         });
 
+        /*layout_cnt_prsn.setTypeface(helper.droid(getApplicationContext()));
+        layout_cnt_mail.setTypeface(helper.droid(getApplicationContext()));
+        layout_cnt_phn.setTypeface(helper.droid(getApplicationContext()));
+
         cnt_prsn.setTypeface(helper.droid(getApplicationContext()));
         cnt_mail.setTypeface(helper.droid(getApplicationContext()));
         cnt_phn.setTypeface(helper.droid(getApplicationContext()));
 
         cp_next.setTypeface(helper.droid(getApplicationContext()));
-        cp_skip.setTypeface(helper.droid(getApplicationContext()));
+        cp_skip.setTypeface(helper.droid(getApplicationContext()));*/
 
         cp_skip.setOnClickListener(this);
         cp_next.setOnClickListener(this);

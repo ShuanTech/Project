@@ -443,7 +443,7 @@ public class UpdateSeniorResumeActivity extends AppCompatActivity implements Vie
             tex1 = (TextView) findViewById(R.id.tex1);
 
 
-            tex1.setTypeface(helper.droid(getApplicationContext()));
+          /*  tex1.setTypeface(helper.droid(getApplicationContext()));
             tex.setTypeface(helper.droid(getApplicationContext()));
             skill.setTypeface(helper.droid(getApplicationContext()));
             dev_env.setTypeface(helper.droid(getApplicationContext()));
@@ -451,7 +451,7 @@ public class UpdateSeniorResumeActivity extends AppCompatActivity implements Vie
             cercourse.setTypeface(helper.droid(getApplicationContext()));
             cerCentre.setTypeface(helper.droid(getApplicationContext()));
             cerDur.setTypeface(helper.droid(getApplicationContext()));
-
+*/
             sk_update.setOnClickListener(this);
 
         } else if (mApp.getPreference().getBoolean(Common.HOBBIES, false) == false) {
@@ -481,14 +481,14 @@ public class UpdateSeniorResumeActivity extends AppCompatActivity implements Vie
             extra_c = (TextView) findViewById(R.id.extra_c);
             ot = (TextView) findViewById(R.id.ot);
 
-            ah.setTypeface(helper.droid(getApplicationContext()));
+         /*   ah.setTypeface(helper.droid(getApplicationContext()));
             extra_c.setTypeface(helper.droid(getApplicationContext()));
             ot.setTypeface(helper.droid(getApplicationContext()));
             hobby.setTypeface(helper.droid(getApplicationContext()));
             lang.setTypeface(helper.droid(getApplicationContext()));
             add_achieve.setTypeface(helper.droid(getApplicationContext()));
             o_update.setTypeface(helper.droid(getApplicationContext()));
-            add_extra.setTypeface(helper.droid(getApplicationContext()));
+            add_extra.setTypeface(helper.droid(getApplicationContext()));*/
 
             add_achieve.setOnClickListener(this);
             o_update.setOnClickListener(this);
@@ -553,7 +553,7 @@ public class UpdateSeniorResumeActivity extends AppCompatActivity implements Vie
             sex = (RadioGroup) findViewById(R.id.sex);
             prsnl = (TextView) findViewById(R.id.prsnl);
 
-            prsnl.setTypeface(helper.droid(getApplicationContext()));
+      /*      prsnl.setTypeface(helper.droid(getApplicationContext()));
             dob.setTypeface(helper.droid(getApplicationContext()));
             r1.setTypeface(helper.droid(getApplicationContext()));
             r2.setTypeface(helper.droid(getApplicationContext()));
@@ -565,7 +565,7 @@ public class UpdateSeniorResumeActivity extends AppCompatActivity implements Vie
             state.setTypeface(helper.droid(getApplicationContext()));
             country.setTypeface(helper.droid(getApplicationContext()));
             pinNo.setTypeface(helper.droid(getApplicationContext()));
-
+*/
             dob.setOnTouchListener(new View.OnTouchListener() {
                 @TargetApi(Build.VERSION_CODES.HONEYCOMB)
                 @Override

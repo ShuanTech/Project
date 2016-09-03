@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -39,6 +40,7 @@ public class LoginActivity extends AppCompatActivity {
     private HashMap<String, String> loginData;
     private ProgressDialog pDialog;
     private Helper helper = new Helper();
+    private TextInputLayout layout_usr;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,11 +56,15 @@ public class LoginActivity extends AppCompatActivity {
         pass = (EditText) findViewById(R.id.pass);
         reg = (Button) findViewById(R.id.reg);
         login = (Button) findViewById(R.id.login);
+        layout_usr = (TextInputLayout) findViewById(R.id.layout_usr);
 
+
+
+        /*layout_usr.setTypeface(helper.droid(getApplicationContext()));
         usr.setTypeface(helper.droid(getApplicationContext()));
         pass.setTypeface(helper.droid(getApplicationContext()));
         reg.setTypeface(helper.droid(getApplicationContext()));
-        login.setTypeface(helper.droid(getApplicationContext()));
+        login.setTypeface(helper.droid(getApplicationContext()));*/
 
         reg.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,8 +79,10 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (usr.getText().toString().length() == 0) {
                     usr.setError("Enter Email / Phone Number");
+                    usr.requestFocus();
                 } else if (pass.getText().toString().length() == 0) {
                     pass.setError("Enter Password");
+                    pass.requestFocus();
                 } else {
                     new Login().execute();
                 }

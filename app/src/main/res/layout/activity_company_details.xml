@@ -43,41 +43,65 @@
                     android:textAppearance="?android:textAppearanceMedium"
                     android:textColor="#333" />
 
-                <AutoCompleteTextView
-                    android:id="@+id/cmpn_name"
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/layout_cmpn_name"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/standard_margin"
-                    android:hint="@string/cmpn_name"
-                    android:imeOptions="actionNext"
-                    android:inputType="textAutoComplete" />
+                    android:layout_height="wrap_content">
 
-                <EditText
-                    android:id="@+id/cmpny_type"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/standard_margin"
-                    android:hint="Company Type"
-                    android:imeOptions="actionNext"
-                    android:inputType="text" />
+                    <AutoCompleteTextView
+                        android:id="@+id/cmpn_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/standard_margin"
+                        android:hint="@string/cmpn_name"
+                        android:imeOptions="actionNext"
+                        android:inputType="textAutoComplete" />
+                </android.support.design.widget.TextInputLayout>
 
-                <EditText
-                    android:id="@+id/door_num"
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/layout_cmpny_type"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/standard_margin"
-                    android:hint="@string/doornum"
-                    android:imeOptions="actionNext"
-                    android:inputType="text" />
+                    android:layout_height="wrap_content">
 
-                <AutoCompleteTextView
-                    android:id="@+id/loc"
+                    <EditText
+                        android:id="@+id/cmpny_type"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/standard_margin"
+                        android:hint="Company Type"
+                        android:imeOptions="actionNext"
+                        android:inputType="text" />
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/layout_door_num"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/standard_margin"
-                    android:hint="@string/loc"
-                    android:imeOptions="actionNext"
-                    android:inputType="textAutoComplete" />
+                    android:layout_height="wrap_content">
+
+                    <EditText
+                        android:id="@+id/door_num"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/standard_margin"
+                        android:hint="@string/doornum"
+                        android:imeOptions="actionNext"
+                        android:inputType="text" />
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/layout_loc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <AutoCompleteTextView
+                        android:id="@+id/loc"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/standard_margin"
+                        android:hint="@string/loc"
+                        android:imeOptions="actionNext"
+                        android:inputType="textAutoComplete" />
+                </android.support.design.widget.TextInputLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -90,13 +114,19 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1">
 
-                        <AutoCompleteTextView
-                            android:id="@+id/city"
+                        <android.support.design.widget.TextInputLayout
+                            android:id="@+id/layout_city"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:hint="@string/city"
-                            android:imeOptions="actionNext"
-                            android:inputType="textAutoComplete" />
+                            android:layout_height="wrap_content">
+
+                            <AutoCompleteTextView
+                                android:id="@+id/city"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="@string/city"
+                                android:imeOptions="actionNext"
+                                android:inputType="textAutoComplete" />
+                        </android.support.design.widget.TextInputLayout>
                     </RelativeLayout>
 
                     <RelativeLayout
@@ -104,13 +134,20 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1">
 
-                        <AutoCompleteTextView
-                            android:id="@+id/state"
+                        <android.support.design.widget.TextInputLayout
+                            android:id="@+id/layout_state"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:hint="@string/state"
-                            android:imeOptions="actionNext"
-                            android:inputType="textAutoComplete" />
+                            android:layout_height="wrap_content">
+
+                            <AutoCompleteTextView
+                                android:id="@+id/state"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="@string/state"
+                                android:imeOptions="actionNext"
+                                android:inputType="textAutoComplete" />
+                        </android.support.design.widget.TextInputLayout>
+
                     </RelativeLayout>
                 </LinearLayout>
 
@@ -124,13 +161,20 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1">
 
-                        <AutoCompleteTextView
-                            android:id="@+id/count"
+                        <android.support.design.widget.TextInputLayout
+                            android:id="@+id/layout_count"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:hint="@string/cntry"
-                            android:imeOptions="actionNext"
-                            android:inputType="textAutoComplete" />
+                            android:layout_height="wrap_content">
+
+                            <AutoCompleteTextView
+                                android:id="@+id/count"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="@string/cntry"
+                                android:imeOptions="actionNext"
+                                android:inputType="textAutoComplete" />
+                        </android.support.design.widget.TextInputLayout>
+
                     </RelativeLayout>
 
                     <RelativeLayout
@@ -138,6 +182,10 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1">
 
+                        <android.support.design.widget.TextInputLayout
+                            android:id="@+id/layout_pin"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
                         <EditText
                             android:id="@+id/pin"
                             android:layout_width="match_parent"
@@ -146,6 +194,7 @@
                             android:imeOptions="actionDone"
                             android:inputType="number"
                             android:maxLength="6" />
+                        </android.support.design.widget.TextInputLayout>
                     </RelativeLayout>
                 </LinearLayout>
 
@@ -159,7 +208,6 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1" />
-
 
 
                     <RelativeLayout

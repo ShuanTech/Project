@@ -92,7 +92,7 @@ public class EducationActivity extends AppCompatActivity implements View.OnClick
         qfy = (TextView) findViewById(R.id.qfy);
 
 
-        qfy.setTypeface(helper.droid(getApplicationContext()));
+       /* qfy.setTypeface(helper.droid(getApplicationContext()));
         clgName.setTypeface(helper.droid(getApplicationContext()));
         univ.setTypeface(helper.droid(getApplicationContext()));
         loc.setTypeface(helper.droid(getApplicationContext()));
@@ -100,7 +100,7 @@ public class EducationActivity extends AppCompatActivity implements View.OnClick
         conCent.setTypeface(helper.droid(getApplicationContext()));
         agrt.setTypeface(helper.droid(getApplicationContext()));
         q_next.setTypeface(helper.droid(getApplicationContext()));
-        q_skip.setTypeface(helper.droid(getApplicationContext()));
+        q_skip.setTypeface(helper.droid(getApplicationContext()));*/
 
         ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(getApplicationContext(), R.layout.spinner_item, qulify);
 

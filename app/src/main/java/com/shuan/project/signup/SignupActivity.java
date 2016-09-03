@@ -3,6 +3,7 @@ package com.shuan.project.signup;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
@@ -42,6 +43,7 @@ public class SignupActivity extends AppCompatActivity {
     private ProgressDialog pDialog;
     private String select;
     private EmailValidator emailValidator;
+    private TextInputLayout layout_name,layout_email,layout_phone;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,12 +57,18 @@ public class SignupActivity extends AppCompatActivity {
         phNo = (EditText) findViewById(R.id.phone);
         pass = (EditText) findViewById(R.id.pass);
         confrmPass = (EditText) findViewById(R.id.confrm_pass);
+        layout_name = (TextInputLayout) findViewById(R.id.layout_name);
+        layout_email = (TextInputLayout) findViewById(R.id.layout_email);
+        layout_phone = (TextInputLayout) findViewById(R.id.layout_phone);
         level = (RadioGroup) findViewById(R.id.level);
         r1 = (RadioButton) findViewById(R.id.r1);
         r2 = (RadioButton) findViewById(R.id.r2);
         signUp = (Button) findViewById(R.id.sign_up);
         emailValidator = new EmailValidator();
 
+        /*layout_name.setTypeface(helper.droid(getApplicationContext()));
+        layout_email.setTypeface(helper.droid(getApplicationContext()));
+        layout_phone.setTypeface(helper.droid(getApplicationContext()));
         name.setTypeface(helper.droid(getApplicationContext()));
         emailId.setTypeface(helper.droid(getApplicationContext()));
         phNo.setTypeface(helper.droid(getApplicationContext()));
@@ -68,7 +76,7 @@ public class SignupActivity extends AppCompatActivity {
         confrmPass.setTypeface(helper.droid(getApplicationContext()));
         r1.setTypeface(helper.droid(getApplicationContext()));
         r2.setTypeface(helper.droid(getApplicationContext()));
-        signUp.setTypeface(helper.droid(getApplicationContext()));
+        signUp.setTypeface(helper.droid(getApplicationContext()));*/
 
         if (select.equalsIgnoreCase("employer")) {
             level.setVisibility(View.GONE);

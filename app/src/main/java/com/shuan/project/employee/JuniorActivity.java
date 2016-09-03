@@ -155,6 +155,8 @@ public class JuniorActivity extends AppCompatActivity {
         usrName = (TextView) header.findViewById(R.id.usr_name);
         proPic = (CircleImageView) header.findViewById(R.id.profile);
 
+        /*usrName.setTypeface(helper.droid(getApplicationContext()));*/
+
         setImage(mApp.getPreference().getString(Common.PROPIC, ""), proPic);
 
         proPic.setOnClickListener(new View.OnClickListener() {

@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
@@ -48,6 +49,7 @@ public class CompanyDetails extends AppCompatActivity implements TextWatcher, Vi
     private ScrollView scroll;
     public boolean ins = false;
     private boolean exit = false;
+    private TextInputLayout layout_cmpn_name,layout_cmpny_type,layout_door_num,layout_loc,layout_count,layout_state,layout_pin,layout_city;
 
 
     @Override
@@ -60,6 +62,15 @@ public class CompanyDetails extends AppCompatActivity implements TextWatcher, Vi
 
 
                 /*Organization Details */
+
+        layout_cmpn_name = (TextInputLayout) findViewById(R.id.layout_cmpn_name);
+        layout_cmpny_type = (TextInputLayout) findViewById(R.id.layout_cmpny_type);
+        layout_door_num = (TextInputLayout) findViewById(R.id.layout_door_num);
+        layout_loc = (TextInputLayout) findViewById(R.id.layout_loc);
+        layout_city = (TextInputLayout) findViewById(R.id.layout_city);
+        layout_count = (TextInputLayout) findViewById(R.id.layout_count);
+        layout_state = (TextInputLayout) findViewById(R.id.layout_state);
+        layout_pin = (TextInputLayout) findViewById(R.id.layout_pin);
 
         progressBar = (ProgressBar) findViewById(R.id.progress_bar);
         scroll = (ScrollView) findViewById(R.id.scroll);
@@ -74,6 +85,16 @@ public class CompanyDetails extends AppCompatActivity implements TextWatcher, Vi
         cd_skip = (Button) findViewById(R.id.cd_skip);
         cd_next = (Button) findViewById(R.id.cd_next);
 
+/*
+        layout_cmpn_name.setTypeface(helper.droid(getApplicationContext()));
+        layout_cmpny_type.setTypeface(helper.droid(getApplicationContext()));
+        layout_door_num.setTypeface(helper.droid(getApplicationContext()));
+        layout_loc.setTypeface(helper.droid(getApplicationContext()));
+        layout_city.setTypeface(helper.droid(getApplicationContext()));
+        layout_state.setTypeface(helper.droid(getApplicationContext()));
+        layout_count.setTypeface(helper.droid(getApplicationContext()));
+        layout_pin.setTypeface(helper.droid(getApplicationContext()));
+
         cmpname.setTypeface(helper.droid(getApplicationContext()));
         cmpnyType.setTypeface(helper.droid(getApplicationContext()));
         doorno.setTypeface(helper.droid(getApplicationContext()));
@@ -84,6 +105,7 @@ public class CompanyDetails extends AppCompatActivity implements TextWatcher, Vi
         pin.setTypeface(helper.droid(getApplicationContext()));
         cd_next.setTypeface(helper.droid(getApplicationContext()));
         cd_skip.setTypeface(helper.droid(getApplicationContext()));
+*/
 
         new GetOrg(getApplicationContext(), progressBar, scroll, cmpname).execute();
 
