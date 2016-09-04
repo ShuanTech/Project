@@ -9,6 +9,13 @@
         app:showAsAction="always" />
 
     <item
+        android:id="@+id/job_ser"
+        android:icon="@drawable/ic_search_job"
+        android:title="Job Search"
+        app:showAsAction="always" />
+
+
+    <item
         android:id="@+id/notify"
         android:title="Notification"
         app:showAsAction="always" />
@@ -33,23 +40,23 @@
                 android:orderInCategory="101"
                 android:title="Resume Generation" />
 
-         <!--   <item
-                android:id="@+id/chat"
-                android:icon="@drawable/ic_chat"
-                android:orderInCategory="102"
-                android:title="Chat" />
+            <!--   <item
+                   android:id="@+id/chat"
+                   android:icon="@drawable/ic_chat"
+                   android:orderInCategory="102"
+                   android:title="Chat" />
 
-            <item
-                android:id="@+id/nearby"
-                android:icon="@drawable/ic_nearby"
-                android:orderInCategory="103"
-                android:title="Near bY" />
+               <item
+                   android:id="@+id/nearby"
+                   android:icon="@drawable/ic_nearby"
+                   android:orderInCategory="103"
+                   android:title="Near bY" />
 
-            <item
-                android:id="@+id/privacy"
-                android:icon="@drawable/ic_privacy"
-                android:orderInCategory="104"
-                android:title="Privacy" />-->
+               <item
+                   android:id="@+id/privacy"
+                   android:icon="@drawable/ic_privacy"
+                   android:orderInCategory="104"
+                   android:title="Privacy" />-->
 
             <item
                 android:id="@+id/setting"

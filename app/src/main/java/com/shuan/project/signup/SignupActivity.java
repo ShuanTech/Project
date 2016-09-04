@@ -9,6 +9,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -91,7 +92,7 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
                 });
 
                 new AlertDialog.Builder(SignupActivity.this).setView(myWebView)
-                        .setTitle("Term and Conditions")
+                        .setTitle("Terms and Conditions")
                         .setPositiveButton("OK", new DialogInterface.OnClickListener() {
 
                             public void onClick(DialogInterface dialog, int id) {
@@ -181,7 +182,7 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
                 } else if (agre) {
                     new Signup().execute();
                 } else {
-                    Toast.makeText(getApplicationContext(), "Agree the Term and Conditions.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Agree the Terms and Conditions.", Toast.LENGTH_SHORT).show();
                 }
                 break;
         }
@@ -256,6 +257,7 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
+                            Log.d("uId",u_id);
                             mApp.getPreference().edit().putString(Common.u_id, u_id).commit();
                             mApp.getPreference().edit().putString(Common.LEVEL, type).commit();
                             mApp.getPreference().edit().putBoolean(Common.Login, true).commit();

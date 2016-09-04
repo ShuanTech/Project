@@ -51,7 +51,7 @@ public class ClosePost extends AsyncTask<String, String, String> {
     protected void onPostExecute(String s) {
         super.onPostExecute(s);
         if (s.equalsIgnoreCase("true")) {
-            Toast.makeText(mContext, "Successfully Shared", Toast.LENGTH_SHORT).show();
+            Toast.makeText(mContext, "Successfully Closed", Toast.LENGTH_SHORT).show();
             AppCompatActivity activity = (AppCompatActivity) mContext;
             Fragment f = new ShortlistFragment();
             FragmentTransaction ft = activity.getSupportFragmentManager().beginTransaction().replace(R.id.container, f);

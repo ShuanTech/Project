@@ -45,6 +45,10 @@
                         android:id="@+id/imp"
                         android:icon="@drawable/ic_important"
                         android:title="Important" />
+                    <item
+                        android:id="@+id/invite"
+                        android:icon="@drawable/invite"
+                        android:title="Invitation" />
                     <!--<item
                         android:id="@+id/ref"
                         android:icon="@drawable/ic_reference"
@@ -66,10 +70,10 @@
                         android:id="@+id/apply"
                         android:icon="@drawable/ic_applied"
                         android:title="Applied" />
-                   <!-- <item
-                        android:id="@+id/share"
-                        android:icon="@drawable/ic_share"
-                        android:title="Shared" />-->
+                    <!-- <item
+                         android:id="@+id/share"
+                         android:icon="@drawable/ic_share"
+                         android:title="Shared" />-->
                     <item
                         android:id="@+id/ready"
                         android:icon="@drawable/ic_get_ready"
@@ -91,9 +95,13 @@
             android:icon="@drawable/ic_about_us"
             android:title="About Us" />
         <item
+            android:id="@+id/term"
+            android:icon="@drawable/ic_terms"
+            android:title="Term and Conditions" />
+        <!--<item
             android:id="@+id/help"
             android:icon="@drawable/ic_help"
-            android:title="Help Us" />
+            android:title="Help Us" />-->
     </group>
 
 </menu>

@@ -24,6 +24,8 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
@@ -49,6 +51,7 @@ import com.shuan.project.fragment.FollowerFragment;
 import com.shuan.project.fragment.FollowingFragment;
 import com.shuan.project.fragment.GetReadyFragment;
 import com.shuan.project.fragment.ImportanceFragment;
+import com.shuan.project.fragment.InviteFragment;
 import com.shuan.project.fragment.NotifyFragment;
 import com.shuan.project.fragment.OffersFragment;
 import com.shuan.project.fragment.ReferenceFragment;
@@ -57,6 +60,7 @@ import com.shuan.project.launcher.LoginActivity;
 import com.shuan.project.profile.ProfileActivity;
 import com.shuan.project.resume.JuniorResumeGenerate;
 import com.shuan.project.resume.ResumeEditActivity;
+import com.shuan.project.search.EmplyeeSearchActivity;
 import com.shuan.project.search.SearchActivity;
 import com.shuan.project.setting.SettingActivity;
 
@@ -252,10 +256,20 @@ public class JuniorActivity extends AppCompatActivity {
                         mDrawerLayout.closeDrawers();
                         startActivity(new Intent(getApplicationContext(), About.class));
                         return true;
-                    case R.id.help:
+                    case R.id.term:
+                        mDrawerLayout.closeDrawers();
+                        showTerm();
+                        return true;
+                    case R.id.invite:
+                        toolbar.setTitle("Invitations");
+                        mDrawerLayout.closeDrawers();
+                        display(12);
+                        selected = 12;
+                        return true;
+                   /* case R.id.help:
                         mDrawerLayout.closeDrawers();
                         startActivity(new Intent(getApplicationContext(), Help.class));
-                        return true;
+                        return true;*/
                     default:
                         return true;
                 }
@@ -266,6 +280,30 @@ public class JuniorActivity extends AppCompatActivity {
 
 
     }
+
+    private void showTerm() {
+        WebView myWebView = new WebView(JuniorActivity.this);
+        myWebView.loadUrl("file:///android_asset/privacy.html");
+        myWebView.setWebViewClient(new WebViewClient() {
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                view.loadUrl(url);
+                return true;
+            }
+        });
+
+        new AlertDialog.Builder(JuniorActivity.this).setView(myWebView)
+                .setTitle("Terms and Conditions")
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+
+                    }
+
+                }).show();
+    }
+
 
     private void display(int i) {
         Fragment f = null;
@@ -307,6 +345,9 @@ public class JuniorActivity extends AppCompatActivity {
             case 11:
                 toolbar.setTitle("Notification");
                 f = new NotifyFragment();
+                break;
+            case 12:
+                f=new InviteFragment();
                 break;
         }
 
@@ -425,6 +466,9 @@ public class JuniorActivity extends AppCompatActivity {
                 break;
             case R.id.setting:
                 startActivity(new Intent(getApplicationContext(), SettingActivity.class));
+                break;
+            case R.id.job_ser:
+                startActivity(new Intent(getApplicationContext(), EmplyeeSearchActivity.class));
                 break;
             case R.id.logout:
                 mApp.getPreference().edit().clear().commit();

@@ -30,6 +30,7 @@ import com.shuan.project.R;
 import com.shuan.project.Utils.Common;
 import com.shuan.project.Utils.Helper;
 import com.shuan.project.adapter.LocationAdapter;
+import com.shuan.project.asyncTasks.FrsherDefault;
 import com.shuan.project.asyncTasks.GetInfo;
 import com.shuan.project.employee.JuniorActivity;
 import com.shuan.project.employee.SeniorActivity;
@@ -331,11 +332,12 @@ public class PersonalActivity extends AppCompatActivity implements View.OnClickL
                             mApp.getPreference().edit().putBoolean(Common.HOBBIES, false).commit();
                             mApp.getPreference().edit().putBoolean(Common.PROJECT, false).commit();
                             mApp.getPreference().edit().putBoolean(Common.USRINFO, true).commit();
-                            mApp.getPreference().edit().putString(Common.PROFILESTRENGTH, "25").commit();
+                            mApp.getPreference().edit().putInt(Common.PROFILESTRENGTH, 25).commit();
                             new GetInfo(getApplicationContext(), mApp.getPreference().getString(Common.u_id, "")).execute();
 
                             if (mApp.getPreference().getString(Common.LEVEL, "").equalsIgnoreCase("1")) {
                                 mApp.getPreference().edit().putString(Common.RESUME, "junior").commit();
+                                new FrsherDefault(PersonalActivity.this,mApp.getPreference().getString(Common.u_id,""),uct).execute();
                                 startActivity(new Intent(getApplicationContext(), JuniorActivity.class));
                             } else {
                                 mApp.getPreference().edit().putString(Common.RESUME, "senior").commit();

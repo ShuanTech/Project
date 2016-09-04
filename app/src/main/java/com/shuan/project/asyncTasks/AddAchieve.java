@@ -70,7 +70,6 @@ public class AddAchieve extends AsyncTask<String, String, String> {
         if (s.equalsIgnoreCase("true")) {
             int val=mApp.getPreference().getInt(Common.PROFILESTRENGTH,0);
             mApp.getPreference().edit().putInt(Common.PROFILESTRENGTH, val+2).commit();
-            Toast.makeText(mContext, "Successfully Project Details Added", Toast.LENGTH_SHORT).show();
             Intent in = new Intent(mContext, ResumeEditActivity.class);
             in.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             mContext.startActivity(in);

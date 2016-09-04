@@ -29,11 +29,11 @@
             android:title="Following"
             app:actionViewClass="android.widget.TextView" />
 
-           <item
-              android:id="@+id/follower"
-              android:icon="@drawable/ic_following"
-              android:title="Follower"
-              app:actionViewClass="android.widget.TextView" />
+        <item
+            android:id="@+id/follower"
+            android:icon="@drawable/ic_following"
+            android:title="Follower"
+            app:actionViewClass="android.widget.TextView" />
 
         <item
             android:id="@+id/sugg"
@@ -52,6 +52,11 @@
                         android:icon="@drawable/ic_reference"
                         android:title="References"
                         app:actionViewClass="android.widget.TextView" />
+                    <item
+                        android:id="@+id/invite"
+                        android:icon="@drawable/invite"
+                        android:title="Invitation" />
+
                 </group>
             </menu>
         </item>
@@ -92,10 +97,15 @@
             android:id="@+id/about"
             android:icon="@drawable/ic_about_us"
             android:title="About Us" />
+
         <item
+            android:id="@+id/term"
+            android:icon="@drawable/ic_terms"
+            android:title="Term and Conditions"/>
+        <!--<item
             android:id="@+id/help"
             android:icon="@drawable/ic_help"
-            android:title="Help Us" />
+            android:title="Help Us" />-->
     </group>
 
 </menu>

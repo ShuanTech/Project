@@ -40,6 +40,7 @@ public class InterViewActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        mApp = (Common) getApplicationContext();
         if (mApp.getPreference().getString(Common.LEVEL, "").equalsIgnoreCase("1")) {
             setTheme(R.style.Junior);
         } else if (mApp.getPreference().getString(Common.LEVEL, "").equalsIgnoreCase("2")) {
@@ -48,7 +49,7 @@ public class InterViewActivity extends AppCompatActivity {
             setTheme(R.style.AppBaseTheme);
         }
 
-        mApp = (Common) getApplicationContext();
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inter_view);
         toolbar = (Toolbar) findViewById(R.id.app_bar);

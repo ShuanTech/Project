@@ -45,7 +45,7 @@ public class ShortlistFragment extends Fragment {
         progressBar = (ProgressBar) v.findViewById(R.id.progress_bar);
         list = (ListView) v.findViewById(R.id.shrt_list);
 
-        new GetJobDetail(getActivity(), mApp.getPreference().getString(Common.u_id, ""), list, progressBar).execute();
+        new GetJobDetail(getActivity(), mApp.getPreference().getString(Common.u_id, ""), list, progressBar,"open").execute();
 
         return v;
     }

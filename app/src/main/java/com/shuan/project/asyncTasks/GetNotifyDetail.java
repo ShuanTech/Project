@@ -5,6 +5,7 @@ import android.os.AsyncTask;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.shuan.project.adapter.NotifyAdapter;
 import com.shuan.project.list.Sample;
@@ -21,7 +22,7 @@ import java.util.HashMap;
 public class GetNotifyDetail extends AsyncTask<String, String, String> {
 
     private Context mContext;
-    private String uId;
+    private String uId, s;
     private ListView listView;
     private ProgressBar progressBar;
     private ArrayList<Sample> list;
@@ -46,6 +47,7 @@ public class GetNotifyDetail extends AsyncTask<String, String, String> {
 
             int succ = json.getInt("success");
             if (succ == 0) {
+                s = "false";
             } else {
                 JSONArray jsonArray = json.getJSONArray("notify");
                 for (int i = 0; i < jsonArray.length(); i++) {
@@ -56,23 +58,29 @@ public class GetNotifyDetail extends AsyncTask<String, String, String> {
                     String content = child.optString("content");
                     String type = child.optString("type");
 
-                    list.add(new Sample(title, frm_id, post_id,content, type));
+                    list.add(new Sample(title, frm_id, post_id, content, type));
                 }
+                s = "true";
             }
 
 
         } catch (Exception e) {
         }
-        return null;
+        return s;
     }
 
     @Override
     protected void onPostExecute(String s) {
         super.onPostExecute(s);
         progressBar.setVisibility(View.GONE);
-        listView.setVisibility(View.VISIBLE);
-        adapter = new NotifyAdapter(mContext, list);
-        listView.setAdapter(adapter);
+        if(s.equalsIgnoreCase("true")){
+            listView.setVisibility(View.VISIBLE);
+            adapter = new NotifyAdapter(mContext, list);
+            listView.setAdapter(adapter);
+        }else{
+            Toast.makeText(mContext,"No Data Found",Toast.LENGTH_SHORT).show();
+        }
+
 
     }
 }

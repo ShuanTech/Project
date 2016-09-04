@@ -28,11 +28,21 @@
                         android:id="@+id/action"
                         android:icon="@drawable/ic_action"
                         android:title="Actions" />
+
                     <item
+                        android:id="@+id/fav"
+                        android:icon="@drawable/refer"
+                        android:title="Favorite"/>
+
+                    <item
+                        android:id="@+id/reopen"
+                        android:icon="@drawable/re_open"
+                        android:title="Reopen Jobs"/>
+                    <!--<item
                         android:id="@+id/evt"
                         android:icon="@drawable/ic_event"
                         android:title="Events"
-                        app:actionViewClass="android.widget.TextView" />
+                        app:actionViewClass="android.widget.TextView" />-->
                 </group>
             </menu>
         </item>
@@ -106,9 +116,9 @@
             android:icon="@drawable/ic_about_us"
             android:title="About Us" />
         <item
-            android:id="@+id/help"
-            android:icon="@drawable/ic_help"
-            android:title="Help Us" />
+            android:id="@+id/term"
+            android:icon="@drawable/ic_terms"
+            android:title="Term and Conditions" />
     </group>
 
 </menu>

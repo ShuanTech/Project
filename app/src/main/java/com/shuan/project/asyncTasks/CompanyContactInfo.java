@@ -21,7 +21,7 @@ public class CompanyContactInfo extends AsyncTask<String, String, String> {
 
     private Common mApp;
     private Context mContext;
-    private String uId, cPrsn, cMail, cPh, cAvlTime, s;
+    private String uId, cPrsn, cMail, cPh, cAvlTime, s="";
     private HashMap<String, String> cData;
 
     public CompanyContactInfo(Context mContext, String uId, String cPrsn, String cMail, String cPh, String cAvlTime) {

@@ -9,6 +9,13 @@
         app:showAsAction="always" />
 
     <item
+        android:id="@+id/emp_search"
+        android:icon="@drawable/ic_emp_search"
+        android:title="Employee Search"
+        app:showAsAction="always" />
+
+
+    <item
         android:id="@+id/notify"
         android:title="Notification"
         app:showAsAction="always" />

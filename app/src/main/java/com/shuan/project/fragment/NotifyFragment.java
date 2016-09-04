@@ -21,6 +21,7 @@ import com.shuan.project.asyncTasks.GetNotifyDetail;
 import com.shuan.project.asyncTasks.Refer;
 import com.shuan.project.asyncTasks.UpdateNotify;
 import com.shuan.project.employee.InterViewActivity;
+import com.shuan.project.employee.InviteActivity;
 import com.shuan.project.employer.ShortListActivity;
 
 
@@ -66,10 +67,17 @@ public class NotifyFragment extends Fragment {
                     new UpdateNotify(getActivity(), mApp.getPreference().getString(Common.u_id, ""),
                             txt1.getText().toString()).execute();
                     startActivity(in);
-                }else{
+                } else if (type.getText().toString().equalsIgnoreCase("4")) {
+                    Intent in = new Intent(getActivity(), InviteActivity.class);
+                    in.putExtra("frm", txt2.getText().toString());
+                    new UpdateNotify(getActivity(), mApp.getPreference().getString(Common.u_id, ""),
+                            txt1.getText().toString()).execute();
+                    startActivity(in);
+                } else {
                     mApp.getPreference().edit().putString("title", txt.getText().toString()).commit();
                     mApp.getPreference().edit().putString("jId", txt1.getText().toString()).commit();
-
+                    new UpdateNotify(getActivity(), mApp.getPreference().getString(Common.u_id, ""),
+                            txt1.getText().toString()).execute();
                     startActivity(new Intent(getActivity(), ShortListActivity.class));
                 }
 

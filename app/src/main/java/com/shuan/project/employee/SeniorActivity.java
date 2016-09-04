@@ -24,12 +24,15 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.games.internal.api.SnapshotsImpl;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.assist.FailReason;
@@ -49,6 +52,7 @@ import com.shuan.project.fragment.FollowerFragment;
 import com.shuan.project.fragment.FollowingFragment;
 import com.shuan.project.fragment.GetReadyFragment;
 import com.shuan.project.fragment.ImportanceFragment;
+import com.shuan.project.fragment.InviteFragment;
 import com.shuan.project.fragment.NotifyFragment;
 import com.shuan.project.fragment.OffersFragment;
 import com.shuan.project.fragment.ReferenceFragment;
@@ -57,6 +61,7 @@ import com.shuan.project.launcher.LoginActivity;
 import com.shuan.project.profile.ProfileActivity;
 import com.shuan.project.resume.ExpResumeGenerate;
 import com.shuan.project.resume.ResumeEditActivity;
+import com.shuan.project.search.EmplyeeSearchActivity;
 import com.shuan.project.search.SearchActivity;
 import com.shuan.project.setting.SettingActivity;
 
@@ -249,10 +254,20 @@ public class SeniorActivity extends AppCompatActivity {
                         mDrawerLayout.closeDrawers();
                         startActivity(new Intent(getApplicationContext(), About.class));
                         return true;
-                    case R.id.help:
+                    case R.id.term:
+                        mDrawerLayout.closeDrawers();
+                        showTerm();
+                        return true;
+                    case R.id.invite:
+                        toolbar.setTitle("Invitations");
+                        mDrawerLayout.closeDrawers();
+                        display(12);
+                        selected = 12;
+                        return true;
+                    /*case R.id.help:
                         mDrawerLayout.closeDrawers();
                         startActivity(new Intent(getApplicationContext(), Help.class));
-                        return true;
+                        return true;*/
                     default:
                         return true;
                 }
@@ -261,6 +276,29 @@ public class SeniorActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void showTerm() {
+        WebView myWebView = new WebView(SeniorActivity.this);
+        myWebView.loadUrl("file:///android_asset/privacy.html");
+        myWebView.setWebViewClient(new WebViewClient() {
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                view.loadUrl(url);
+                return true;
+            }
+        });
+
+        new AlertDialog.Builder(SeniorActivity.this).setView(myWebView)
+                .setTitle("Terms and Conditions")
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+
+                    }
+
+                }).show();
     }
 
     private void showAlert() {
@@ -347,6 +385,9 @@ public class SeniorActivity extends AppCompatActivity {
             case 11:
                 toolbar.setTitle("Notification");
                 f = new NotifyFragment();
+                break;
+            case 12:
+                f=new InviteFragment();
                 break;
         }
 
@@ -468,6 +509,9 @@ public class SeniorActivity extends AppCompatActivity {
                 break;
             case R.id.setting:
                 startActivity(new Intent(getApplicationContext(), SettingActivity.class));
+                break;
+            case R.id.job_ser:
+                startActivity(new Intent(getApplicationContext(), EmplyeeSearchActivity.class));
                 break;
             case R.id.logout:
                 mApp.getPreference().edit().clear().commit();

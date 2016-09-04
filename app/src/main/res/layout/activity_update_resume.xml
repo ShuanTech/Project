@@ -51,6 +51,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/activity_horizontal_margin"
+                        android:imeOptions="actionDone"
                         android:hint="Profile Summary" />
                 </android.support.design.widget.TextInputLayout>
 
@@ -150,7 +151,8 @@
                             android:layout_height="wrap_content"
                             android:hint="From"
                             android:imeOptions="actionNext"
-                            android:singleLine="true" />
+                            android:singleLine="true"
+                            android:editable="false"/>
 
 
                     </LinearLayout>
@@ -251,6 +253,7 @@
                         android:id="@+id/we_edit_txt"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:imeOptions="actionDone"
                         android:layout_marginTop="@dimen/activity_horizontal_margin"
                         android:hint="Work Experience" />
                 </android.support.design.widget.TextInputLayout>
@@ -714,7 +717,7 @@
                         android:layout_marginTop="@dimen/standard_margin"
                         android:hint="Team Size"
                         android:imeOptions="actionNext"
-                        android:inputType="text"
+                        android:inputType="number"
                         android:singleLine="true" />
                 </android.support.design.widget.TextInputLayout>
 
@@ -729,7 +732,7 @@
                         android:layout_marginTop="@dimen/standard_margin"
                         android:hint="Project Duration (months)"
                         android:imeOptions="actionNext"
-                        android:inputType="text"
+                        android:inputType="numberDecimal"
                         android:singleLine="true" />
                 </android.support.design.widget.TextInputLayout>
 
@@ -813,7 +816,7 @@
                         android:layout_marginTop="@dimen/standard_margin"
                         android:hint="@string/cert"
                         android:imeOptions="actionNext"
-                        android:inputType="text" />
+                        android:inputType="textPersonName" />
                 </android.support.design.widget.TextInputLayout>
 
                 <android.support.design.widget.TextInputLayout
@@ -838,6 +841,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/standard_margin"
+                        android:inputType="numberDecimal"
                         android:hint="@string/cer_dur"
                         android:imeOptions="actionDone" />
                 </android.support.design.widget.TextInputLayout>
@@ -881,6 +885,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/standard_margin"
+                        android:imeOptions="actionDone"
                         android:hint="Enter Achievement" />
                 </android.support.design.widget.TextInputLayout>
 
@@ -912,6 +917,7 @@
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="@dimen/small_margin"
                     android:text="Extra-Curricular Activity"
+
                     android:textAppearance="?android:textAppearanceMedium"
                     android:textColor="#333" />
 
@@ -924,6 +930,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/standard_margin"
+                        android:imeOptions="actionDone"
                         android:hint="Enter Extra Curricular" />
                 </android.support.design.widget.TextInputLayout>
 

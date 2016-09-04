@@ -139,7 +139,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.cover_img:
                 loadCover();
                 break;
@@ -214,7 +214,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
                     proPic.setImageBitmap(photo);
 
                     if (saveFile(photo)) {
-                        new UploadPicture(getApplicationContext(), Path, "time_line","pic", php.uploadProPic).execute();
+                        new UploadPicture(getApplicationContext(), Path, "time_line", "pic", php.uploadProPic).execute();
                     }
                 }
             } catch (Exception e) {
@@ -236,7 +236,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
                     cover.setImageBitmap(photo);
 
                     if (saveCover(photo)) {
-                        new UploadPicture(getApplicationContext(), Path, "cover", "pic",php.uploadCoverPic).execute();
+                        new UploadPicture(getApplicationContext(), Path, "cover", "pic", php.uploadCoverPic).execute();
                     }
                 }
             } catch (Exception e) {
@@ -372,7 +372,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
                     });
 
                 } else {
-                    if ( mApp.getPreference().getString(Common.LEVEL, "").equalsIgnoreCase("1")) {
+                    if (mApp.getPreference().getString(Common.LEVEL, "").equalsIgnoreCase("1")) {
 
                         JSONArray jsonArray = json.getJSONArray("profile");
                         JSONObject child = jsonArray.getJSONObject(0);
@@ -484,7 +484,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
                                 });
                             }
                         }
-                    } else if ( mApp.getPreference().getString(Common.LEVEL, "").equalsIgnoreCase("2")) {
+                    } else if (mApp.getPreference().getString(Common.LEVEL, "").equalsIgnoreCase("2")) {
 
 
                         JSONArray jsonArray = json.getJSONArray("profile");
@@ -771,7 +771,11 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-       getMenuInflater().inflate(R.menu.profile,menu);
+        getMenuInflater().inflate(R.menu.profile, menu);
+        MenuItem item = menu.findItem(R.id.edit);
+        if(mApp.getPreference().getString(Common.LEVEL,"").equalsIgnoreCase("3")){
+            item.setVisible(false);
+        }
         return true;
     }
 
@@ -787,10 +791,6 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         }
         return super.onOptionsItemSelected(item);
     }
-
-
-
-
 
 
 }

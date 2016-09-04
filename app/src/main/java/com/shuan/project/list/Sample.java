@@ -40,6 +40,11 @@ public class Sample {
         this.name = name;
     }
 
+    public Sample(String name, String level) {
+        this.name = name;
+        this.level = level;
+    }
+
     public Sample(String dis, String cty, String distrct, String state, String contry) {
         this.dis = dis;
         this.cty = cty;
@@ -49,7 +54,7 @@ public class Sample {
     }
 
 
-    public Sample(String dis, String orgName, String type, String addr, String land, String contry, String state, String cty, String pin,String distrct) {
+    public Sample(String dis, String orgName, String type, String addr, String land, String contry, String state, String cty, String pin, String distrct) {
         this.dis = dis;
         this.orgName = orgName;
         this.type = type;
@@ -59,7 +64,7 @@ public class Sample {
         this.state = state;
         this.cty = cty;
         this.pin = pin;
-        this.distrct=distrct;
+        this.distrct = distrct;
     }
 
     public Sample(String companyName, String proPic, String jId, String jTitle, String jSkill, String jLevel, String jLoc, String jCreate, String jView, String jApply, String jShare, String jFrmId, String jImp) {
@@ -77,6 +82,25 @@ public class Sample {
         this.jFrmId = jFrmId;
         this.jImp = jImp;
     }
+
+
+
+    public Sample(String companyName, String proPic, String jId, String jTitle, String jSkill, String jLevel, String jLoc, String jCreate, String jView, String jApply, String jShare) {
+        this.companyName = companyName;
+        this.proPic = proPic;
+        this.jId = jId;
+        this.jTitle = jTitle;
+        this.jSkill = jSkill;
+        this.jLevel = jLevel;
+        this.jLoc = jLoc;
+        this.jCreate = jCreate;
+        this.jView = jView;
+        this.jApply = jApply;
+        this.jShare = jShare;
+
+    }
+
+
 
     public String getU_id() {
         return u_id;

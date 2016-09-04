@@ -86,8 +86,9 @@
                             android:id="@+id/frm_time"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:editable="false"
                             android:hint="Contact Time From"
-                            android:imeOptions="actionDone"
+                            android:imeOptions="actionNext"
                             android:inputType="time" />
                     </android.support.design.widget.TextInputLayout>
                 </RelativeLayout>
@@ -106,6 +107,7 @@
                             android:id="@+id/to_time"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:editable="false"
                             android:hint="Contact Time To"
                             android:imeOptions="actionDone"
                             android:inputType="time" />

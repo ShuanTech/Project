@@ -134,6 +134,7 @@ public class LoginActivity extends AppCompatActivity {
                             mApp.getPreference().edit().putString(Common.u_id,uId).commit();
                             mApp.getPreference().edit().putString(Common.LEVEL, level).commit();
                             if (level.equalsIgnoreCase("3")) {
+                                mApp.getPreference().edit().putBoolean(Common.COMPANY,true).commit();
                                 startActivity(new Intent(LoginActivity.this, EmployerActivity.class));
                                 finish();
                             } else {

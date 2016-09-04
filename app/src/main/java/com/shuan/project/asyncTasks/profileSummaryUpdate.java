@@ -77,7 +77,6 @@ public class profileSummaryUpdate extends AsyncTask<String, String, String> {
             if (table.equalsIgnoreCase("skill")) {
                 int val=mApp.getPreference().getInt(Common.PROFILESTRENGTH,0);
                 mApp.getPreference().edit().putInt(Common.PROFILESTRENGTH, val+3).commit();
-                mApp.getPreference().edit().putBoolean(Common.SKILL,true).commit();
             }else if(table.equalsIgnoreCase("proSum")){
                 int val=mApp.getPreference().getInt(Common.PROFILESTRENGTH,0);
                 mApp.getPreference().edit().putInt(Common.PROFILESTRENGTH, val+5).commit();

@@ -593,7 +593,6 @@ public class ExpResumeGenerate extends AppCompatActivity implements View.OnClick
                                 doc.add(p6);
                                 doc.add(Chunk.NEWLINE);
 
-
                                 new getSkill().execute();
 
                             } catch (Exception e) {
@@ -690,7 +689,9 @@ public class ExpResumeGenerate extends AppCompatActivity implements View.OnClick
                             doc.add(table);
                             doc.add(Chunk.NEWLINE);
 
-                            new getProjectDetail().execute();
+
+
+                           new getProjectDetail().execute();
                         } catch (Exception e) {
                         }
                     }
@@ -812,6 +813,7 @@ public class ExpResumeGenerate extends AppCompatActivity implements View.OnClick
                                     doc.add(Chunk.NEWLINE);
                                 }
                                 doc.add(Chunk.NEWLINE);
+
 
                                 new getCertification().execute();
 

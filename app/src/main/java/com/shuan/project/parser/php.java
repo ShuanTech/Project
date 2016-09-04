@@ -88,8 +88,22 @@ public class php {
     public static final String chkEligible = "http://udyomitra.com/android/chk_eligible.php";
     public static final String updatePass = "http://udyomitra.com/android/update_pass.php";
     public static final String updateLevel = "http://udyomitra.com/android/update_level.php";
-    public static final String cmpnyServices="http://udyomitra.com/android/cmpny_services.php";
-    public static final String cmpnyPortfolio="http://udyomitra.com/android/cmpny_portfolio.php";
-    public static final String cmpnyTestmpnial="http://udyomitra.com/android/cmpny_testmonial.php";
-    public static final String cmpnyCnt="http://udyomitra.com/android/cmpny_cnt.php";
+    public static final String cmpnyServices = "http://udyomitra.com/android/cmpny_services.php";
+    public static final String cmpnyPortfolio = "http://udyomitra.com/android/cmpny_portfolio.php";
+    public static final String cmpnyTestmpnial = "http://udyomitra.com/android/cmpny_testmonial.php";
+    public static final String cmpnyCnt = "http://udyomitra.com/android/cmpny_cnt.php";
+    public static final String gpsEmpSearch = "http://udyomitra.com/android/get_gps_emp_search.php";
+    public static final String invitation = "http://udyomitra.com/android/inivite.php";
+    public static final String fav = "http://udyomitra.com/android/favorite.php";
+    public static final String emp_search = "http://udyomitra.com/android/employer_search.php";
+    public static final String emp_ser_result = "http://udyomitra.com/android/emp_ser_result.php";
+    public static final String gpsEmpSer = "http://udyomitra.com/android/gps_emp_ser.php";
+    public static final String employeeSer = "http://udyomitra.com/android/employee_ser.php";
+    public static final String emplySerResult = "http://udyomitra.com/android/emply_ser_result.php";
+    public static final String getFav = "http://udyomitra.com/android/get_fav.php";
+    public static final String reOpen = "http://udyomitra.com/android/re_open_post.php";
+    public static final String inviteList = "http://udyomitra.com/android/get_invite_list.php";
+    public static final String inviteDetail = "http://udyomitra.com/android/get_invite_detail.php";
+    public static final String frherDefault="http://udyomitra.com/android/fresher_default_follower.php";
+
 }

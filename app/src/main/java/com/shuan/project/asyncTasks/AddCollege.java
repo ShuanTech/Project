@@ -2,6 +2,7 @@ package com.shuan.project.asyncTasks;
 
 import android.content.Context;
 import android.os.AsyncTask;
+import android.widget.Toast;
 
 import com.shuan.project.Utils.Common;
 import com.shuan.project.parser.Connection;
@@ -19,7 +20,7 @@ public class AddCollege extends AsyncTask<String,String,String> {
 
     private Common mApp;
     private Context mContext;
-    private String u_id,clgName,univ,loc,conCent,agrt;
+    private String u_id,clgName,univ,loc,conCent,agrt,s;
     private HashMap<String, String> aData;
 
     public AddCollege(Context mContext, String u_id, String clgName, String univ, String loc, String conCent, String agrt) {
@@ -47,8 +48,21 @@ public class AddCollege extends AsyncTask<String,String,String> {
         try {
             JSONObject json = Connection.UrlConnection(php.qualify, aData);
             int succ = json.getInt("success");
+            if(succ==0){
+                s="false";
+            }else{
+                s="true";
+            }
         } catch (JSONException e) {
         }
         return null;
+    }
+
+    @Override
+    protected void onPostExecute(String s) {
+        super.onPostExecute(s);
+        if(s.equalsIgnoreCase("false")){
+            Toast.makeText(mContext,"Error! Try Again.",Toast.LENGTH_SHORT).show();
+        }
     }
 }

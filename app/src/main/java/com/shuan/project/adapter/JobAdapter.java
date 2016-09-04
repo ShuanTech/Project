@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.shuan.project.R;
 import com.shuan.project.Utils.Common;
 import com.shuan.project.asyncTasks.ClosePost;
+import com.shuan.project.asyncTasks.ReopenPost;
 import com.shuan.project.employer.ShortListActivity;
 import com.shuan.project.list.Sample;
 
@@ -60,31 +61,59 @@ public class JobAdapter extends BaseAdapter {
         TextView viewd = (TextView) convertView.findViewById(R.id.viewd);
         TextView applied = (TextView) convertView.findViewById(R.id.applied);
         TextView shared = (TextView) convertView.findViewById(R.id.shared);
-        Button close = (Button) convertView.findViewById(R.id.close);
+        final Button close = (Button) convertView.findViewById(R.id.close);
 
-        jId.setText(curr.getDis());
-        jTitle.setText(curr.getCty());
-        viewd.setText(curr.getDistrct() + " Viewed");
-        shared.setText(curr.getState() + " Shared");
-        applied.setText(curr.getContry() + " Applied");
+        jId.setText(curr.getU_id());
+        jTitle.setText(curr.getProPic());
+        viewd.setText(curr.getName() + " Viewed");
+        shared.setText(curr.getLevel() + " Shared");
+        applied.setText(curr.getPos() + " Applied");
+
+        if(curr.getCompanyName().equalsIgnoreCase("0")){
+            close.setText("Close");
+        }else{
+            close.setText("Reopen");
+        }
         close.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AlertDialog.Builder build = new AlertDialog.Builder(mContext)
-                        .setTitle("Confirmation")
-                        .setMessage("Are you sure want to close Job Post?");
-                build.setPositiveButton("CLOSE", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        new ClosePost(mContext, curr.getDis()).execute();
-                        dialog.cancel();
-                    }
-                }).setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.cancel();
-                    }
-                }).show();
+
+                if(close.getText().toString().equalsIgnoreCase("close")){
+                    AlertDialog.Builder build = new AlertDialog.Builder(mContext)
+                            .setTitle("Confirmation")
+                            .setMessage("Are you sure want to close Job Post?");
+                    build.setPositiveButton("CLOSE", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            new ClosePost(mContext, curr.getU_id()).execute();
+                            dialog.cancel();
+                        }
+                    }).setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.cancel();
+                        }
+                    }).show();
+
+                }else{
+                    AlertDialog.Builder build = new AlertDialog.Builder(mContext)
+                            .setTitle("Confirmation")
+                            .setMessage("Are you sure want to close Job Post?");
+                    build.setPositiveButton("REOPEN", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            new ReopenPost(mContext, curr.getU_id()).execute();
+                            dialog.cancel();
+                        }
+                    }).setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.cancel();
+                        }
+                    }).show();
+
+                }
+
 
 
             }
@@ -96,8 +125,8 @@ public class JobAdapter extends BaseAdapter {
                 Intent in = new Intent(mContext, ShortListActivity.class);
                 //in.putExtra("title", curr.getCty());
                 //in.putExtra("jId", curr.getDis());
-                mApp.getPreference().edit().putString("title", curr.getCty()).commit();
-                mApp.getPreference().edit().putString("jId", curr.getDis()).commit();
+                mApp.getPreference().edit().putString("title", curr.getProPic()).commit();
+                mApp.getPreference().edit().putString("jId", curr.getU_id()).commit();
                 in.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 mContext.startActivity(in);
             }

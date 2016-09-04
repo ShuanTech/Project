@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
@@ -25,7 +27,9 @@ import com.nostra13.universalimageloader.core.listener.SimpleImageLoadingListene
 import com.shuan.project.R;
 import com.shuan.project.Utils.CircleImageView;
 import com.shuan.project.Utils.Common;
+import com.shuan.project.asyncTasks.AddFavorite;
 import com.shuan.project.asyncTasks.Following;
+import com.shuan.project.asyncTasks.Sendinvite;
 import com.shuan.project.list.Sample;
 import com.shuan.project.parser.Connection;
 import com.shuan.project.parser.php;
@@ -55,6 +59,7 @@ public class ProfileViewActivity extends AppCompatActivity {
     private TextView mail, phNo;
     private String pro_pic, cover_pic, cmpny_name, c_type, landmark, country, year_of_establish, num_wrkers, c_desc, c_website, follow;
     private RelativeLayout msg;
+    private Button inivite;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -108,7 +113,7 @@ public class ProfileViewActivity extends AppCompatActivity {
         msg = (RelativeLayout) findViewById(R.id.msg);
         but3 = (Button) findViewById(R.id.but3);
         list = new ArrayList<Sample>();
-
+        inivite = (Button) findViewById(R.id.invite);
 
         new Profile().execute();
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -118,6 +123,17 @@ public class ProfileViewActivity extends AppCompatActivity {
             }
         });
 
+        if (mApp.getPreference().getString(Common.LEVEL, "").equalsIgnoreCase("3")) {
+            if (level.equalsIgnoreCase("1") || level.equalsIgnoreCase("2")) {
+                inivite.setVisibility(View.VISIBLE);
+            }else{
+                inivite.setVisibility(View.GONE);
+            }
+
+        } else {
+            inivite.setVisibility(View.GONE);
+        }
+
         bu1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -125,6 +141,13 @@ public class ProfileViewActivity extends AppCompatActivity {
                     new Following(ProfileViewActivity.this, u_id, mApp.getPreference().getString(Common.u_id, ""), bu1).execute();
                     bu1.setText("PENDING");
                 }
+            }
+        });
+
+        inivite.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new Sendinvite(ProfileViewActivity.this, u_id, mApp.getPreference().getString(Common.u_id, "")).execute();
             }
         });
 
@@ -595,5 +618,23 @@ public class ProfileViewActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.profile_view_menu, menu);
+        MenuItem item = menu.findItem(R.id.fav);
+        if (mApp.getPreference().getString(Common.LEVEL, "").equalsIgnoreCase("3")) {
+            item.setVisible(true);
+        } else {
+            item.setVisible(false);
+        }
+        return true;
+    }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.fav) {
+            new AddFavorite(ProfileViewActivity.this, u_id, mApp.getPreference().getString(Common.u_id, "")).execute();
+        }
+        return super.onOptionsItemSelected(item);
+    }
 }

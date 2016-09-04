@@ -314,6 +314,7 @@ public class UpdateJuniorResumeActivity extends AppCompatActivity implements Vie
             url = (EditText) findViewById(R.id.p_url);
             description = (EditText) findViewById(R.id.prjct_des);
             acd = (CheckBox) findViewById(R.id.acd);
+            p_update= (Button) findViewById(R.id.p_update);
 
             p_update.setOnClickListener(this);
             acd.setOnClickListener(this);
@@ -743,6 +744,7 @@ public class UpdateJuniorResumeActivity extends AppCompatActivity implements Vie
             et = new EditText(this);
             et.setHint("Extra Curricular Activity");
             et.setId(l);
+            et.setTypeface(helper.droid(getApplicationContext()));
             et.requestFocus();
             l2.addView(et);
             l++;
@@ -755,6 +757,7 @@ public class UpdateJuniorResumeActivity extends AppCompatActivity implements Vie
                 et = new EditText(this);
                 et.setHint("Extra Curricular Activity");
                 et.setId(l);
+                et.setTypeface(helper.droid(getApplicationContext()));
                 et.requestFocus();
                 l2.addView(et);
                 l++;
@@ -872,6 +875,9 @@ public class UpdateJuniorResumeActivity extends AppCompatActivity implements Vie
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
+                    int val = mApp.getPreference().getInt(Common.PROFILESTRENGTH, 0);
+
+                    mApp.getPreference().edit().putInt(Common.PROFILESTRENGTH, val + 4).commit();
                     mApp.getPreference().edit().putBoolean(Common.HOBBIES, true).commit();
                     Toast.makeText(getApplicationContext(), "Extra Curricular Activities Saved Successfully!...", Toast.LENGTH_SHORT).show();
 
@@ -1049,6 +1055,7 @@ public class UpdateJuniorResumeActivity extends AppCompatActivity implements Vie
 
             eData = new HashMap<String, String>();
             eData.put("u_id", mApp.getPreference().getString(Common.u_id, ""));
+            eData.put("level", "5");
             eData.put("concent", "SSLC");
             eData.put("hName", usName);
             eData.put("bName", usBoard);
@@ -1124,6 +1131,7 @@ public class UpdateJuniorResumeActivity extends AppCompatActivity implements Vie
         protected String doInBackground(String... params) {
             eData = new HashMap<String, String>();
             eData.put("u_id", mApp.getPreference().getString(Common.u_id, ""));
+            eData.put("level", "4");
             eData.put("concent", "HSC");
             eData.put("hName", uhname);
             eData.put("bName", uhbname);

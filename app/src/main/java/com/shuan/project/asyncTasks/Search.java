@@ -59,10 +59,11 @@ public class Search extends AsyncTask<String, String, String> {
                     JSONObject child = jsonArray.getJSONObject(i);
 
                     String uId = child.optString("u_id");
+                    String proPic=child.optString("pro_pic");
                     String full_name = child.optString("full_name");
                     String level = child.optString("level");
 
-                    sList.add(new Sample(uId, full_name, level));
+                    sList.add(new Sample(uId, proPic,full_name, level));
                 }
             }
 

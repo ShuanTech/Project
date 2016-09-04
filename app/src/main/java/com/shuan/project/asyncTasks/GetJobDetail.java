@@ -23,18 +23,19 @@ import java.util.HashMap;
 public class GetJobDetail extends AsyncTask<String, String, String> {
 
     private Context mContext;
-    private String uId, s;
+    private String uId, type,s;
     private ListView listView;
     private ProgressBar progressBar;
     private HashMap<String, String> jData;
     private JobAdapter adapter;
     private ArrayList<Sample> list;
 
-    public GetJobDetail(Context mContext, String uId, ListView listView, ProgressBar progressBar) {
+    public GetJobDetail(Context mContext, String uId, ListView listView, ProgressBar progressBar,String type) {
         this.mContext = mContext;
         this.uId = uId;
         this.listView = listView;
         this.progressBar = progressBar;
+        this.type=type;
         list = new ArrayList<Sample>();
     }
 
@@ -43,6 +44,7 @@ public class GetJobDetail extends AsyncTask<String, String, String> {
 
         jData = new HashMap<String, String>();
         jData.put("u_id", uId);
+        jData.put("type",type);
         try {
 
             JSONObject json = Connection.UrlConnection(php.job_detail, jData);
@@ -58,8 +60,9 @@ public class GetJobDetail extends AsyncTask<String, String, String> {
                     String viewed = child.optString("viewed");
                     String shared = child.optString("shared");
                     String applied = child.optString("applied");
+                    String close=child.optString("close");
 
-                    list.add(new Sample(job_id, title, viewed, shared, applied));
+                    list.add(new Sample(job_id, title, viewed, shared, applied,close));
                 }
             }
 

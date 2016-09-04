@@ -34,9 +34,9 @@ public class ServiceAdapter extends BaseAdapter {
         options = new DisplayImageOptions.Builder()
                 .cacheInMemory(true)
                 .cacheOnDisk(true)
-                .showImageOnLoading(R.drawable.logo)
-                .showImageForEmptyUri(R.drawable.logo)
-                .showImageOnFail(R.drawable.logo)
+                .showImageOnLoading(R.drawable.wall)
+                .showImageForEmptyUri(R.drawable.wall)
+                .showImageOnFail(R.drawable.wall)
                 .considerExifParams(true)
                 .bitmapConfig(Bitmap.Config.RGB_565)
                 .build();

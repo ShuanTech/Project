@@ -38,40 +38,43 @@
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-            <AutoCompleteTextView
-                android:id="@+id/orgname"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/standard_margin"
-                android:hint="@string/org_name"
-                android:imeOptions="actionNext"
-                android:inputType="text" />
+
+                <AutoCompleteTextView
+                    android:id="@+id/orgname"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/standard_margin"
+                    android:hint="@string/org_name"
+                    android:imeOptions="actionNext"
+                    android:inputType="text" />
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-            <EditText
-                android:id="@+id/location"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/standard_margin"
-                android:hint="@string/location"
-                android:imeOptions="actionNext"
-                android:inputType="text" />
+
+                <EditText
+                    android:id="@+id/location"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/standard_margin"
+                    android:hint="@string/location"
+                    android:imeOptions="actionNext"
+                    android:inputType="text" />
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-            <EditText
-                android:id="@+id/position"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/standard_margin"
-                android:hint="@string/desig"
-                android:imeOptions="actionNext"
-                android:inputType="text" />
+
+                <EditText
+                    android:id="@+id/position"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/standard_margin"
+                    android:hint="@string/desig"
+                    android:imeOptions="actionNext"
+                    android:inputType="text" />
             </android.support.design.widget.TextInputLayout>
 
 
@@ -97,6 +100,7 @@
                         android:id="@+id/f_yr"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:editable="false"
                         android:hint="From"
                         android:imeOptions="actionNext"
                         android:singleLine="true" />
@@ -127,8 +131,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:editable="false"
-                            android:text="Present"
-                            android:imeOptions="actionDone"/>
+                            android:imeOptions="actionDone"
+                            android:text="Present" />
 
 
                         <EditText

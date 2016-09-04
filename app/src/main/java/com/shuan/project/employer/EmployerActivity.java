@@ -20,9 +20,13 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
+import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -37,18 +41,22 @@ import com.shuan.project.Utils.CircleImageView;
 import com.shuan.project.Utils.Common;
 import com.shuan.project.Utils.Helper;
 import com.shuan.project.about.About;
-import com.shuan.project.about.Help;
+import com.shuan.project.asyncTasks.Feedback;
+import com.shuan.project.fragment.CompanyContactFragment;
 import com.shuan.project.fragment.EmployerAboutFragment;
 import com.shuan.project.fragment.EmployerHome;
+import com.shuan.project.fragment.FavoriteFragment;
 import com.shuan.project.fragment.FollowerFragment;
 import com.shuan.project.fragment.FollowingFragment;
 import com.shuan.project.fragment.NotifyFragment;
 import com.shuan.project.fragment.PortfolioFragment;
+import com.shuan.project.fragment.ReOpenPostFragment;
 import com.shuan.project.fragment.ServicesFragment;
 import com.shuan.project.fragment.ShortlistFragment;
 import com.shuan.project.fragment.TestmonialFragment;
 import com.shuan.project.launcher.LoginActivity;
 import com.shuan.project.profile.ProfileActivity;
+import com.shuan.project.search.EmployerSearchActivity;
 import com.shuan.project.search.SearchActivity;
 import com.shuan.project.setting.SettingActivity;
 
@@ -195,7 +203,7 @@ public class EmployerActivity extends AppCompatActivity {
                         selectd = 7;
                         return true;
                     case R.id.test:
-                        toolbar.setTitle("Portfolio");
+                        toolbar.setTitle("Testimonial");
                         mDrawerLayout.closeDrawers();
                         display(8);
                         selectd = 8;
@@ -220,9 +228,25 @@ public class EmployerActivity extends AppCompatActivity {
                         mDrawerLayout.closeDrawers();
                         startActivity(new Intent(getApplicationContext(), About.class));
                         return true;
-                    case R.id.help:
+                    case R.id.term:
                         mDrawerLayout.closeDrawers();
-                        startActivity(new Intent(getApplicationContext(), Help.class));
+                        showTerm();
+                        return true;
+                    case R.id.fav:
+                        toolbar.setTitle("Favorite Person");
+                        mDrawerLayout.closeDrawers();
+                        display(10);
+                        selectd = 10;
+                        return true;
+                    case R.id.reopen:
+                        toolbar.setTitle("Reopen Jobs");
+                        mDrawerLayout.closeDrawers();
+                        display(11);
+                        selectd = 11;
+                        return true;
+                    case R.id.feed:
+                        mDrawerLayout.closeDrawers();
+                        showFeedDialog();
                         return true;
                     default:
                         return true;
@@ -250,6 +274,29 @@ public class EmployerActivity extends AppCompatActivity {
         });
     }
 
+    private void showTerm() {
+        WebView myWebView = new WebView(EmployerActivity.this);
+        myWebView.loadUrl("file:///android_asset/privacy.html");
+        myWebView.setWebViewClient(new WebViewClient() {
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                view.loadUrl(url);
+                return true;
+            }
+        });
+
+        new AlertDialog.Builder(EmployerActivity.this).setView(myWebView)
+                .setTitle("Terms and Conditions")
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+
+                    }
+
+                }).show();
+    }
+
 
     private void showAlert() {
         AlertDialog.Builder build = new AlertDialog.Builder(EmployerActivity.this);
@@ -269,6 +316,35 @@ public class EmployerActivity extends AppCompatActivity {
         }).show();
     }
 
+
+    private void showFeedDialog() {
+        LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View v = inflater.inflate(R.layout.intro_dialog, null, false);
+        final EditText feed = (EditText) v.findViewById(R.id.intro);
+        feed.setHint("Enter FeedBack");
+        AlertDialog.Builder builder = new AlertDialog.Builder(EmployerActivity.this)
+                .setView(v);
+        builder.setTitle("FeedBack")
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        if (feed.getText().toString().length() == 0) {
+                            feed.setError("Filed Mandatory");
+                        } else {
+                            new Feedback(getApplicationContext(), mApp.getPreference().getString(Common.u_id, ""), feed.getText().toString()).execute();
+                            dialog.cancel();
+
+                        }
+                    }
+                }).setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        }).show();
+    }
+
+
     private void display(int i) {
         Fragment f = null;
         Bundle bundle = new Bundle();
@@ -279,15 +355,13 @@ public class EmployerActivity extends AppCompatActivity {
                 break;
             case 1:
                 f = new FollowerFragment();
-                f.setArguments(bundle);
+
                 break;
             case 2:
                 f = new FollowingFragment();
                 break;
             case 3:
                 f = new ShortlistFragment();
-                break;
-            case 4:
                 break;
             case 5:
                 f = new EmployerAboutFragment();
@@ -300,6 +374,15 @@ public class EmployerActivity extends AppCompatActivity {
                 break;
             case 8:
                 f = new TestmonialFragment();
+                break;
+            case 9:
+                f = new CompanyContactFragment();
+                break;
+            case 10:
+                f = new FavoriteFragment();
+                break;
+            case 11:
+                f = new ReOpenPostFragment();
                 break;
             case 14:
                 f = new NotifyFragment();
@@ -392,6 +475,9 @@ public class EmployerActivity extends AppCompatActivity {
                 break;
             case R.id.drawer:
                 mDrawerLayout.openDrawer(GravityCompat.END);
+                break;
+            case R.id.emp_search:
+                startActivity(new Intent(getApplicationContext(), EmployerSearchActivity.class));
                 break;
         }
 

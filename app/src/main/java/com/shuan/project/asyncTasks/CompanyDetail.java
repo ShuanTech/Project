@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.shuan.project.Utils.Common;
@@ -23,13 +24,12 @@ public class CompanyDetail extends AsyncTask<String, String, String> {
     private String uId, orgName, type, addr, land, city, ste, cntry, pin;
     private boolean ins;
     private HashMap<String, String> cData;
-    private String s;
+    private String s = "";
     private Common mApp;
-    private String district;
 
 
     public CompanyDetail(Context mContext, String u_id, String orgName, String type, String addr, String land, String city, String ste,
-                         String cntry, String pin, boolean ins, String district) {
+                         String cntry, String pin, boolean ins) {
         this.mContext = mContext;
         this.uId = u_id;
         this.orgName = orgName;
@@ -41,7 +41,6 @@ public class CompanyDetail extends AsyncTask<String, String, String> {
         this.cntry = cntry;
         this.pin = pin;
         this.ins = ins;
-        this.district = district;
         mApp = (Common) mContext.getApplicationContext();
     }
 
@@ -63,6 +62,7 @@ public class CompanyDetail extends AsyncTask<String, String, String> {
         } else {
             cData.put("insrt", "true");
         }
+
         try {
 
             JSONObject json = Connection.UrlConnection(php.cmpnyDetail, cData);
@@ -82,8 +82,9 @@ public class CompanyDetail extends AsyncTask<String, String, String> {
     protected void onPostExecute(String s) {
         super.onPostExecute(s);
         if (s.equalsIgnoreCase("true")) {
-            if (mApp.getPreference().getBoolean("frm", false)==false) {
+            if (mApp.getPreference().getBoolean("frm", false) == false) {
                 mApp.getPreference().edit().putBoolean("frm", true).commit();
+                mApp.getPreference().edit().putBoolean(Common.COMPANY, true).commit();
                 Intent in = new Intent(mContext, EmployerActivity.class);
                 in.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 mContext.startActivity(in);
@@ -96,7 +97,7 @@ public class CompanyDetail extends AsyncTask<String, String, String> {
                 ((AppCompatActivity) mContext).finish();
             }
 
-            new Follower(mContext, orgName, district).execute();
+            new Follower(mContext, orgName, city).execute();
         } else {
             Toast.makeText(mContext, "Something went wrong! Try again...", Toast.LENGTH_SHORT).show();
         }

@@ -115,7 +115,7 @@ public class AddCompanyInfoActivity extends AppCompatActivity {
                     mApp.getPreference().edit().putBoolean("frm", false).commit();
                     new CompanyDetail(AddCompanyInfoActivity.this, mApp.getPreference().getString(Common.u_id, ""), cmpname.getText().toString(),
                             cmpnyType.getText().toString(), doorno.getText().toString(), lctn.getText().toString(), city.getText().toString(), state.getText().toString(),
-                            cntry.getText().toString(), pin.getText().toString(), ins, district).execute();
+                            cntry.getText().toString(), pin.getText().toString(), ins).execute();
 
 
                 }

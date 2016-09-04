@@ -21,7 +21,7 @@ public class AboutCompany extends AsyncTask<String, String, String> {
 
     private Common mApp;
     private Context mContext;
-    private String uId,yrSt, noWk, cDes, s;
+    private String uId,yrSt, noWk, cDes, s="";
     private HashMap<String, String> aData;
 
     public AboutCompany(Context mContext, String u_id,String yrSt, String noWk, String cDes) {
