@@ -22,7 +22,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:visibility="gone">
+        android:visibility="visible">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -48,32 +48,26 @@
                         android:text="@string/profile_summary"
                         android:textAppearance="?android:textAppearanceMedium"
                         android:textColor="#333" />
+                    <EditText
+                        android:layout_marginTop="@dimen/standard_margin"
+                        android:id="@+id/summary"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/ps"
+                        android:hint="Eg: Professional with 10 years of experience in customer relationships and services "
+                        />
 
-                    <Button
-                        android:id="@+id/add_ps"
-                        android:layout_width="50dp"
-                        android:layout_height="30dp"
-                        android:layout_alignParentRight="true"
-                        android:layout_marginRight="@dimen/activity_horizontal_margin"
-                        android:background="@null"
-                        android:text="+"
-                        android:textColor="@color/colorAccent" />
 
 
                 </RelativeLayout>
 
-                <LinearLayout
-                    android:id="@+id/ps_container"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/c1"
-                    android:orientation="vertical"></LinearLayout>
+
 
                 <Button
                     android:id="@+id/ps_update"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/ps_container"
+                    android:layout_below="@+id/c1"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="@dimen/activity_horizontal_margin"
                     android:background="@null"
@@ -102,32 +96,23 @@
                         android:text="@string/work_exp"
                         android:textAppearance="?android:textAppearanceMedium"
                         android:textColor="#333" />
-
-                    <Button
-                        android:id="@+id/add_ws"
-                        android:layout_width="50dp"
-                        android:layout_height="30dp"
-                        android:layout_alignParentRight="true"
-                        android:layout_marginRight="@dimen/activity_horizontal_margin"
-                        android:background="@null"
-                        android:text="+"
-                        android:textColor="@color/colorAccent" />
+                    <EditText
+                        android:id="@+id/workexp"
+                        android:layout_below="@+id/ws"
+                        android:layout_marginTop="@dimen/standard_margin"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Eg: Team leader in the company for 2years"/>
 
 
                 </RelativeLayout>
 
-                <LinearLayout
-                    android:id="@+id/ws_container"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/c2"
-                    android:orientation="vertical"></LinearLayout>
 
                 <Button
                     android:id="@+id/ws_update"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/ws_container"
+                    android:layout_below="@+id/c2"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="@dimen/activity_horizontal_margin"
                     android:background="@null"
@@ -1233,7 +1218,7 @@
                 android:id="@+id/lay10"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:visibility="visible">
+                android:visibility="gone">
 
 
                 <TextView
