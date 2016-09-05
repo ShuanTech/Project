@@ -60,7 +60,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/standard_margin"
             android:hint="Retype Password"
-            android:imeOptions="actionNext"
+            android:imeOptions="actionDone"
             android:inputType="textPassword"
             android:singleLine="true" />
         </android.support.design.widget.TextInputLayout>

@@ -893,7 +893,7 @@
                             android:layout_marginTop="@dimen/standard_margin"
                             android:hint="Team Size"
                             android:imeOptions="actionNext"
-                            android:inputType="text"
+                            android:inputType="number"
                             android:singleLine="true" />
                     </android.support.design.widget.TextInputLayout>
 
@@ -908,7 +908,7 @@
                             android:layout_marginTop="@dimen/standard_margin"
                             android:hint="Project Duration (months)"
                             android:imeOptions="actionNext"
-                            android:inputType="text"
+                            android:inputType="number"
                             android:singleLine="true" />
                     </android.support.design.widget.TextInputLayout>
 

@@ -27,7 +27,8 @@
             android:layout_height="wrap_content"
             android:hint="Skill/Job title/Prefer City"
             android:textColor="#fff"
-            android:textColorHint="#f0f0f0"/>
+            android:textColorHint="#f0f0f0"
+            android:imeActionLabel="actionSearch"/>
 
     </android.support.v7.widget.Toolbar>
 

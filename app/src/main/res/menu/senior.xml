@@ -101,7 +101,7 @@
         <item
             android:id="@+id/term"
             android:icon="@drawable/ic_terms"
-            android:title="Term and Conditions"/>
+            android:title="Terms and Conditions"/>
         <!--<item
             android:id="@+id/help"
             android:icon="@drawable/ic_help"

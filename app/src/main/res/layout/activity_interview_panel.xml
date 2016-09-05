@@ -32,13 +32,14 @@
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-            <EditText
-                android:id="@+id/loc"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Interview Location"
-                android:imeOptions="actionNext"
-                android:singleLine="true" />
+
+                <EditText
+                    android:id="@+id/loc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Interview Location"
+                    android:imeOptions="actionNext"
+                    android:singleLine="true" />
             </android.support.design.widget.TextInputLayout>
 
             <LinearLayout
@@ -152,15 +153,16 @@
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-            <EditText
-                android:id="@+id/cmmnts"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="top"
-                android:hint="Enter Comments (if any)"
-                android:imeOptions="actionDone"
-                android:lines="2" />
-</android.support.design.widget.TextInputLayout>
+
+                <EditText
+                    android:id="@+id/cmmnts"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="top"
+                    android:hint="Enter Comments (if any)"
+                    android:imeOptions="actionDone"
+                    android:lines="2" />
+            </android.support.design.widget.TextInputLayout>
 
             <Button
                 android:id="@+id/set"

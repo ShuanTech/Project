@@ -37,7 +37,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/activity_horizontal_margin"
                 android:hint="Email / Phone Number"
-                android:inputType="textEmailAddress" />
+                android:inputType="textEmailAddress"
+                android:imeActionLabel="actionNext"/>
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
@@ -52,7 +53,8 @@
                 android:layout_below="@+id/lay_usr"
                 android:layout_marginTop="@dimen/standard_margin"
                 android:hint="@string/password"
-                android:inputType="textPassword" />
+                android:inputType="textPassword"
+                android:imeActionLabel="actionDone"/>
             </android.support.design.widget.TextInputLayout>
 
 
