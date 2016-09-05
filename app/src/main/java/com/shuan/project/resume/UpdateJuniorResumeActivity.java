@@ -145,6 +145,13 @@ public class UpdateJuniorResumeActivity extends AppCompatActivity implements Vie
     private void checkView() {
 
         if (mApp.getPreference().getBoolean(Common.QUALIFICATION, false) == false) {
+            lay1.setVisibility(View.VISIBLE);
+            lay2.setVisibility(View.GONE);
+            lay3.setVisibility(View.GONE);
+            lay4.setVisibility(View.GONE);
+            lay5.setVisibility(View.GONE);
+            lay6.setVisibility(View.GONE);
+            lay7.setVisibility(View.GONE);
 
             list = new ArrayList<Sample>();
             new getInstitution().execute();

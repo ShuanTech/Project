@@ -20,7 +20,7 @@ import java.util.HashMap;
 public class AddProject extends AsyncTask<String, String, String> {
 
     private Context mContext;
-    private String uId, title, pltfrm, role, teamSze, dur, url, desc, isAcd,type, s;
+    private String uId, title, pltfrm, role, teamSze, dur, url, desc, isAcd,type, s="";
     private HashMap<String, String> seniorData;
     private ProgressDialog pDialog;
     private Common mApp;
@@ -86,6 +86,7 @@ public class AddProject extends AsyncTask<String, String, String> {
         super.onPostExecute(s);
         pDialog.cancel();
         if (s.equalsIgnoreCase("true")) {
+            mApp.getPreference().edit().putBoolean(Common.PROJECT, true).commit();
             int val=mApp.getPreference().getInt(Common.PROFILESTRENGTH,0);
             mApp.getPreference().edit().putInt(Common.PROFILESTRENGTH, val+5).commit();
             Toast.makeText(mContext, "Successfully Project Details Added", Toast.LENGTH_SHORT).show();

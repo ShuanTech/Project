@@ -338,6 +338,7 @@
                 </LinearLayout>
 
 
+
                 <android.support.design.widget.TextInputLayout
                     android:id="@+id/lay_h_agrt"
                     android:layout_width="match_parent"
@@ -774,7 +775,8 @@
                     <android.support.design.widget.TextInputLayout
                         android:id="@+id/lay_hobby"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/standard_margin">
 
                         <EditText
                             android:id="@+id/hobby"
@@ -789,7 +791,8 @@
                     <android.support.design.widget.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_below="@+id/lay_hobby">
+                        android:layout_below="@+id/lay_hobby"
+                        android:layout_marginTop="@dimen/standard_margin">
 
                         <EditText
                             android:id="@+id/lang"
@@ -798,7 +801,7 @@
                             android:layout_below="@+id/lay_hobby"
                             android:hint="@string/lang_known"
                             android:inputType="text"
-                            android:imeOptions="actionNext"/>
+                            android:imeOptions="actionDone"/>
                     </android.support.design.widget.TextInputLayout>
 
                 </RelativeLayout>

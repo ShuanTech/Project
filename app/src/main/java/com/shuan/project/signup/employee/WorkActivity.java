@@ -26,6 +26,7 @@ import com.shuan.project.R;
 import com.shuan.project.Utils.Common;
 import com.shuan.project.Utils.Helper;
 import com.shuan.project.Utils.MonthYearPicker;
+import com.shuan.project.Utils.MonthYearPicker1;
 import com.shuan.project.asyncTasks.GetOrg;
 import com.shuan.project.parser.Connection;
 import com.shuan.project.parser.php;
@@ -50,7 +51,7 @@ public class WorkActivity extends AppCompatActivity implements View.OnClickListe
     private ProgressBar progressBar;
     private ScrollView scroll;
     private MonthYearPicker myp;
-    private MonthYearPicker myp1;
+    private MonthYearPicker1 myp1;
     private boolean cIns = false;
 
     @Override
@@ -76,11 +77,45 @@ public class WorkActivity extends AppCompatActivity implements View.OnClickListe
         to = (TextView) findViewById(R.id.to);
 
         myp = new MonthYearPicker(this);
-        myp1 = new MonthYearPicker(this);
+        myp.build(new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                fYr.setText(myp.getSelectedYear() + "-" + myp.getSelectedMonthShortName());
+            }
+        }, null);
+
+
+        myp1 = new MonthYearPicker1(this);
+
+        myp1.build(new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                tYr.setText(myp1.getSelectedYear() + "-" + myp1.getSelectedMonthShortName());
+            }
+        }, null);
+
+        fYr.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                    myp.show();
+                }
+                return false;
+            }
+        });
+
+        tYr.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                    myp1.show();
+                }
+                return false;
+            }
+        });
 
         wk_next = (Button) findViewById(R.id.wk_next);
         wk_skip = (Button) findViewById(R.id.wk_skip);
-
 
         orgname.addTextChangedListener(this);
         wrking.setOnClickListener(this);
@@ -101,40 +136,7 @@ public class WorkActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
 
-        fYr.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                    myp.build(new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            fYr.setText(myp.getSelectedYear() + "-" + myp.getSelectedMonthShortName());
-                        }
-                    }, null);
-                    myp.show();
 
-                }
-                return false;
-            }
-        });
-
-        tYr.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                    myp1.build(new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            tYr.setText(myp.getSelectedYear() + "-" + myp.getSelectedMonthShortName());
-                        }
-                    }, null);
-                    myp1.show();
-
-
-                }
-                return false;
-            }
-        });
 
 
     }
@@ -256,6 +258,8 @@ public class WorkActivity extends AppCompatActivity implements View.OnClickListe
                         @Override
                         public void run() {
                             mApp.getPreference().edit().putBoolean(Common.WORKINFO, true).commit();
+                            int val=mApp.getPreference().getInt(Common.PROFILESTRENGTH,0);
+                            mApp.getPreference().edit().putInt(Common.PROFILESTRENGTH, val+6).commit();
                             startActivity(new Intent(getApplicationContext(), EducationActivity.class));
                             finish();
                         }

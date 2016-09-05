@@ -19,7 +19,7 @@ import java.util.HashMap;
 
 public class ClosePost extends AsyncTask<String, String, String> {
     private Context mContext;
-    private String jId, s;
+    private String jId, s="";
     private HashMap<String, String> cData;
 
 

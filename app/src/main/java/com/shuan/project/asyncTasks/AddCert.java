@@ -20,7 +20,7 @@ import java.util.HashMap;
 public class AddCert extends AsyncTask<String, String, String> {
 
     private Context mContext;
-    private String uId, certName, certCentre, cetDur, type, s;
+    private String uId, certName, certCentre, cetDur, type, s="";
     private HashMap<String, String> seniorData;
     private ProgressDialog pDialog;
     private Common mApp;

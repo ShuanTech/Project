@@ -32,7 +32,8 @@
         android:layout_marginLeft="@dimen/standard_margin"
         android:layout_marginRight="@dimen/standard_margin"
         android:layout_marginTop="@dimen/activity_horizontal_margin"
-        android:scrollbars="none">
+        android:scrollbars="none"
+        android:visibility="gone">
 
         <LinearLayout
             android:layout_width="match_parent"

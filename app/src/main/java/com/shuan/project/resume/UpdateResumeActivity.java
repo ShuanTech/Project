@@ -3,6 +3,7 @@ package com.shuan.project.resume;
 import android.annotation.TargetApi;
 import android.app.FragmentTransaction;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Build;
 import android.os.Bundle;
@@ -11,6 +12,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
@@ -29,6 +31,7 @@ import com.shuan.project.R;
 import com.shuan.project.Utils.Common;
 import com.shuan.project.Utils.Helper;
 import com.shuan.project.Utils.MonthYearPicker;
+import com.shuan.project.Utils.MonthYearPicker1;
 import com.shuan.project.asyncTasks.AddAchieve;
 import com.shuan.project.asyncTasks.AddBasicInfo;
 import com.shuan.project.asyncTasks.AddCert;
@@ -81,7 +84,7 @@ public class UpdateResumeActivity extends AppCompatActivity implements View.OnCl
     private boolean visible = false;
     private String toDate;
     private MonthYearPicker myp;
-    private MonthYearPicker myp1;
+    private MonthYearPicker1 myp1;
     private boolean Ins=false;
 
     /* Work Summary Field */
@@ -202,23 +205,28 @@ public class UpdateResumeActivity extends AppCompatActivity implements View.OnCl
             to = (TextView) findViewById(R.id.to);
 
             myp = new MonthYearPicker(this);
-            myp1 = new MonthYearPicker(this);
+            myp.build(new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    fYr.setText(myp.getSelectedYear() + "-" + myp.getSelectedMonthShortName());
+                }
+            }, null);
 
 
-            wkDetails = (Button) findViewById(R.id.wk_detail);
+            myp1 = new MonthYearPicker1(this);
+
+            myp1.build(new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    tYr.setText(myp1.getSelectedYear() + "-" + myp1.getSelectedMonthShortName());
+                }
+            }, null);
 
             fYr.setOnTouchListener(new View.OnTouchListener() {
                 @Override
                 public boolean onTouch(View v, MotionEvent event) {
                     if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                        myp.build(new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                fYr.setText(myp.getSelectedYear() + "-" + myp.getSelectedMonthShortName());
-                            }
-                        }, null);
                         myp.show();
-
                     }
                     return false;
                 }
@@ -228,19 +236,15 @@ public class UpdateResumeActivity extends AppCompatActivity implements View.OnCl
                 @Override
                 public boolean onTouch(View v, MotionEvent event) {
                     if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                        myp1.build(new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                tYr.setText(myp.getSelectedYear() + "-" + myp.getSelectedMonthShortName());
-                            }
-                        }, null);
                         myp1.show();
-
-
                     }
                     return false;
                 }
             });
+
+            wkDetails = (Button) findViewById(R.id.wk_detail);
+
+
 
 
             new GetOrg(UpdateResumeActivity.this, progressBar, scroll, orgname).execute();
@@ -536,6 +540,8 @@ public class UpdateResumeActivity extends AppCompatActivity implements View.OnCl
                     state.setText(txt3.getText().toString());
                     country.setText(txt4.getText().toString());
                     ins = true;
+                    InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
                 }
             });
 

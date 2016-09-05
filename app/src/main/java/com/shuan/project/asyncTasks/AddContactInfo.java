@@ -20,7 +20,7 @@ import java.util.HashMap;
 public class AddContactInfo extends AsyncTask<String, String, String> {
 
     private Context mContext;
-    private String uId, addr, city, distrct, state, country, s;
+    private String uId, addr, city, distrct, state, country, s="";
     private boolean ins;
     private HashMap<String, String> seniorData;
     private ProgressDialog pDialog;
@@ -84,6 +84,8 @@ public class AddContactInfo extends AsyncTask<String, String, String> {
         if (s.equalsIgnoreCase("true")) {
             int val=mApp.getPreference().getInt(Common.PROFILESTRENGTH,0);
             mApp.getPreference().edit().putInt(Common.PROFILESTRENGTH, val+2).commit();
+            mApp.getPreference().edit().putBoolean(Common.HOBBIES,true).commit();
+            mApp.getPreference().edit().putBoolean(Common.PERSONALINFO,true).commit();
             Toast.makeText(mContext, "Successfully Contact Info Added", Toast.LENGTH_SHORT).show();
             if(mApp.getPreference().getString(Common.LEVEL,"").equalsIgnoreCase("1")){
                 new FrsherDefault(mContext,mApp.getPreference().getString(Common.u_id,""),city).execute();

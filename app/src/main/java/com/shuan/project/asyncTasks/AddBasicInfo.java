@@ -20,7 +20,7 @@ import java.util.HashMap;
 public class AddBasicInfo extends AsyncTask<String, String, String> {
 
     private Context mContext;
-    private String uId, dob, sex, fName, mName, rel, lang, hobby, s;
+    private String uId, dob, sex, fName, mName, rel, lang, hobby, s="";
     private HashMap<String, String> seniorData;
     private ProgressDialog pDialog;
     private Common mApp;

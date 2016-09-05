@@ -20,7 +20,7 @@ import java.util.HashMap;
 public class AddWrkDetail extends AsyncTask<String, String, String> {
 
     public Context mContext;
-    public String uId, org, loc, pos, frmDate, toDate, s;
+    public String uId, org, loc, pos, frmDate, toDate, s="";
     public HashMap<String, String> rData;
     public ProgressDialog pDialog;
     public Common mApp;
@@ -87,6 +87,7 @@ public class AddWrkDetail extends AsyncTask<String, String, String> {
         if (s.equalsIgnoreCase("true")) {
             if(mApp.getPreference().getString(Common.LEVEL,"").equalsIgnoreCase("1")){
                 new UpdateLevel(mContext,uId).execute();
+                mApp.getPreference().edit().putBoolean(Common.WORKINFO,true).commit();
                 mApp.getPreference().edit().putString(Common.LEVEL,"2").commit();
                 AppCompatActivity activity= (AppCompatActivity) mContext;
                 Intent i = activity.getBaseContext().getPackageManager()

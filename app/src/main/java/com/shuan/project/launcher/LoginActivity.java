@@ -148,6 +148,7 @@ public class LoginActivity extends AppCompatActivity {
                                 mApp.getPreference().edit().putBoolean(Common.WORKINFO, true).commit();
                                 mApp.getPreference().edit().putBoolean(Common.PROFILESUMMARY, true).commit();
                                 mApp.getPreference().edit().putBoolean(Common.WORKEXPERIENCE, true).commit();
+                                mApp.getPreference().edit().putInt(Common.PROFILESTRENGTH,62).commit();
                                 if(level.equalsIgnoreCase("2")){
                                     startActivity(new Intent(LoginActivity.this, SeniorActivity.class));
                                     finish();

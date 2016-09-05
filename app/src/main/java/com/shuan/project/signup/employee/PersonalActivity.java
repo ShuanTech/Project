@@ -166,12 +166,15 @@ public class PersonalActivity extends AppCompatActivity implements View.OnClickL
                 }
                 break;
             case R.id.po_skip:
+                mApp.getPreference().edit().putBoolean("intro",false).commit();
                 mApp.getPreference().edit().putBoolean(Common.HOBBIES, false).commit();
                 mApp.getPreference().edit().putBoolean(Common.PROJECT, false).commit();
                 mApp.getPreference().edit().putBoolean(Common.PERSONALINFO, false).commit();
-                mApp.getPreference().edit().putInt(Common.PROFILESTRENGTH, 25).commit();
+                int val=mApp.getPreference().getInt(Common.PROFILESTRENGTH,0);
+                mApp.getPreference().edit().putInt(Common.PROFILESTRENGTH, val+8).commit();
 
                 if (mApp.getPreference().getString(Common.LEVEL, "").equalsIgnoreCase("1")) {
+
                     mApp.getPreference().edit().putString(Common.RESUME, "junior").commit();
                     startActivity(new Intent(getApplicationContext(), JuniorActivity.class));
                 } else {
@@ -328,11 +331,13 @@ public class PersonalActivity extends AppCompatActivity implements View.OnClickL
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
+                            mApp.getPreference().edit().putBoolean("start",false).commit();
                             mApp.getPreference().edit().putBoolean(Common.PERSONALINFO, true).commit();
                             mApp.getPreference().edit().putBoolean(Common.HOBBIES, false).commit();
                             mApp.getPreference().edit().putBoolean(Common.PROJECT, false).commit();
                             mApp.getPreference().edit().putBoolean(Common.USRINFO, true).commit();
-                            mApp.getPreference().edit().putInt(Common.PROFILESTRENGTH, 25).commit();
+                            int val=mApp.getPreference().getInt(Common.PROFILESTRENGTH,0);
+                            mApp.getPreference().edit().putInt(Common.PROFILESTRENGTH, val+8).commit();
                             new GetInfo(getApplicationContext(), mApp.getPreference().getString(Common.u_id, "")).execute();
 
                             if (mApp.getPreference().getString(Common.LEVEL, "").equalsIgnoreCase("1")) {

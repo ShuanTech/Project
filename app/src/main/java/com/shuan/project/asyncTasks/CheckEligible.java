@@ -24,7 +24,7 @@ import java.util.HashMap;
 public class CheckEligible extends AsyncTask<String, String, String> {
 
     private Context mContext;
-    private String uId, jId, level, s;
+    private String uId, jId, level, s="";
     private HashMap<String, String> cData;
     private ProgressDialog pDialog;
     private AlertDialog.Builder builder;

@@ -20,7 +20,7 @@ import java.util.HashMap;
 public class AddSchool extends AsyncTask<String, String, String> {
 
     private Context mContext;
-    private String uId, level, conCent, sName, sBoard, sCty, frm, to, agrt, type, s;
+    private String uId, level, conCent, sName, sBoard, sCty, frm, to, agrt, type, s="";
     private boolean ins;
     private ProgressDialog pDialog;
     private HashMap<String, String> seniorData;

@@ -35,6 +35,7 @@ import com.shuan.project.R;
 import com.shuan.project.Utils.Common;
 import com.shuan.project.Utils.Helper;
 import com.shuan.project.Utils.MonthYearPicker;
+import com.shuan.project.Utils.MonthYearPicker1;
 import com.shuan.project.adapter.InstitutionAdapter;
 import com.shuan.project.adapter.LocationAdapter;
 import com.shuan.project.asyncTasks.Connect;
@@ -69,15 +70,14 @@ public class UpdateSeniorResumeActivity extends AppCompatActivity implements Vie
     private ScrollView scroll;
 
     /* Profile Summary Field */
-    private LinearLayout psContainer;
-    private Button addPS, psUpdate;
-    private String[] profile = new String[0];
+    private EditText summary;
     private TextView ps;
+    private Button psUpdate;
 
     /* Work Summary Field*/
-    private LinearLayout wkContainer;
-    private Button addws, wsUpdate;
-    private String[] work = new String[0];
+    private EditText workexp;
+    private Button wsUpdate;
+
     private TextView ws;
 
     /* Work Details Field */
@@ -89,8 +89,8 @@ public class UpdateSeniorResumeActivity extends AppCompatActivity implements Vie
     private boolean visible = false;
     private String toDate;
     private MonthYearPicker myp;
-    private MonthYearPicker myp1;
-    private boolean Ins=false;
+    private MonthYearPicker1 myp1;
+    private boolean Ins = false;
 
 
     /* College Fields */
@@ -191,12 +191,11 @@ public class UpdateSeniorResumeActivity extends AppCompatActivity implements Vie
             lay9.setVisibility(View.GONE);
             lay10.setVisibility(View.GONE);
 
-            psContainer = (LinearLayout) findViewById(R.id.ps_container);
-            addPS = (Button) findViewById(R.id.add_ps);
+            summary = (EditText) findViewById(R.id.summary);
+
             psUpdate = (Button) findViewById(R.id.ps_update);
 
 
-            addPS.setOnClickListener(this);
             psUpdate.setOnClickListener(this);
 
         } else if (mApp.getPreference().getBoolean(Common.WORKEXPERIENCE, false) == false) {
@@ -214,12 +213,9 @@ public class UpdateSeniorResumeActivity extends AppCompatActivity implements Vie
             lay9.setVisibility(View.GONE);
             lay10.setVisibility(View.GONE);
 
-            wkContainer = (LinearLayout) findViewById(R.id.ws_container);
-            addws = (Button) findViewById(R.id.add_ws);
+            workexp = (EditText) findViewById(R.id.workexp);
             wsUpdate = (Button) findViewById(R.id.ws_update);
 
-
-            addws.setOnClickListener(this);
             wsUpdate.setOnClickListener(this);
 
         } else if (mApp.getPreference().getBoolean(Common.WORKINFO, false) == false) {
@@ -247,22 +243,28 @@ public class UpdateSeniorResumeActivity extends AppCompatActivity implements Vie
             to = (TextView) findViewById(R.id.to);
 
             myp = new MonthYearPicker(this);
-            myp1 = new MonthYearPicker(this);
+            myp.build(new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    fYr.setText(myp.getSelectedYear() + "-" + myp.getSelectedMonthShortName());
+                }
+            }, null);
 
 
-            wkDetails = (Button) findViewById(R.id.wk_detail);
+            myp1 = new MonthYearPicker1(this);
+
+            myp1.build(new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    tYr.setText(myp1.getSelectedYear() + "-" + myp1.getSelectedMonthShortName());
+                }
+            }, null);
+
             fYr.setOnTouchListener(new View.OnTouchListener() {
                 @Override
                 public boolean onTouch(View v, MotionEvent event) {
                     if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                        myp.build(new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                fYr.setText(myp.getSelectedYear() + "-" + myp.getSelectedMonthShortName());
-                            }
-                        }, null);
                         myp.show();
-
                     }
                     return false;
                 }
@@ -272,19 +274,14 @@ public class UpdateSeniorResumeActivity extends AppCompatActivity implements Vie
                 @Override
                 public boolean onTouch(View v, MotionEvent event) {
                     if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                        myp1.build(new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                tYr.setText(myp.getSelectedYear() + "-" + myp.getSelectedMonthShortName());
-                            }
-                        }, null);
                         myp1.show();
-
-
                     }
                     return false;
                 }
             });
+
+
+            wkDetails = (Button) findViewById(R.id.wk_detail);
 
 
             new GetOrg(UpdateSeniorResumeActivity.this, progressBar, scroll, orgname).execute();
@@ -297,7 +294,7 @@ public class UpdateSeniorResumeActivity extends AppCompatActivity implements Vie
 
                     orgname.setText(txt1.getText().toString());
                     location.setText(txt4.getText().toString());
-                    Ins=true;
+                    Ins = true;
                 }
             });
 
@@ -567,17 +564,11 @@ public class UpdateSeniorResumeActivity extends AppCompatActivity implements Vie
     public void onClick(View view) {
 
         switch (view.getId()) {
-            case R.id.add_ps:
-                addProfileSummary();
-                break;
             case R.id.ps_update:
-                getProfileSummary(psContainer);
-                break;
-            case R.id.add_ws:
-                addWorkSummary();
+                new profileUpdate().execute();
                 break;
             case R.id.ws_update:
-                getWorkSummary(wkContainer);
+                new workUpdate().execute();
                 break;
             case R.id.wrking:
                 if (((CheckBox) view).isChecked()) {
@@ -1758,10 +1749,10 @@ public class UpdateSeniorResumeActivity extends AppCompatActivity implements Vie
             seniorData.put("frm", uFrm);
             seniorData.put("to", uTo);
             seniorData.put("type", "add");
-            if(Ins==true){
-                seniorData.put("ins","false");
-            }else{
-                seniorData.put("ins","true");
+            if (Ins == true) {
+                seniorData.put("ins", "false");
+            } else {
+                seniorData.put("ins", "true");
             }
 
 
@@ -1806,58 +1797,9 @@ public class UpdateSeniorResumeActivity extends AppCompatActivity implements Vie
     }
 
 
-    private void addWorkSummary() {
-        EditText et;
-
-        if (j == 0) {
-            et = new EditText(this);
-            et.setHint("Work Summary");
-            et.setTypeface(helper.droid(getApplicationContext()));
-            et.setId(j);
-            et.requestFocus();
-            wkContainer.addView(et);
-            j++;
-        } else {
-            int i = j - 1;
-            et = (EditText) this.findViewById(i);
-            if (et.getText().toString().length() == 0) {
-                et.setError("Field Mandatory");
-            } else {
-                et = new EditText(this);
-                et.setHint("Work Summary");
-                et.setTypeface(helper.droid(getApplicationContext()));
-                et.requestFocus();
-                et.setId(j);
-                wkContainer.addView(et);
-                j++;
-            }
-        }
-
-    }
-
-    private void getWorkSummary(ViewGroup parent) {
-        for (int i = 0; i < parent.getChildCount(); i++) {
-            View child = parent.getChildAt(i);
-            EditText et = (EditText) child;
-
-            if (et.getText().toString().length() == 0) {
-            } else {
-                work = new String[]{et.getText().toString()};
-            }
-
-
-        }
-
-        if (work.length == 0) {
-            Toast.makeText(getApplicationContext(), "Enter Work Summary", Toast.LENGTH_SHORT).show();
-        } else {
-            new workUpdate().execute();
-        }
-
-
-    }
-
     public class workUpdate extends AsyncTask<String, String, String> {
+
+        String wrk = workexp.getText().toString();
 
         @Override
         protected void onPreExecute() {
@@ -1871,16 +1813,17 @@ public class UpdateSeniorResumeActivity extends AppCompatActivity implements Vie
 
         @Override
         protected String doInBackground(String... params) {
-            for (int i = 0; i < work.length; i++) {
-                seniorData = new HashMap<String, String>();
-                seniorData.put("u_id", mApp.getPreference().getString(Common.u_id, ""));
-                seniorData.put("summary", work[i]);
-                try {
-                    JSONObject json = Connection.UrlConnection(php.work_experience, seniorData);
 
-                } catch (Exception e) {
-                }
+            seniorData = new HashMap<String, String>();
+            seniorData.put("u_id", mApp.getPreference().getString(Common.u_id, ""));
+            seniorData.put("summary", wrk);
+            seniorData.put("table", "wrkExp");
+            try {
+                JSONObject json = Connection.UrlConnection(php.profile_summary, seniorData);
+
+            } catch (Exception e) {
             }
+
             return null;
         }
 
@@ -1902,58 +1845,9 @@ public class UpdateSeniorResumeActivity extends AppCompatActivity implements Vie
     }
 
 
-    private void addProfileSummary() {
-        EditText et;
-        if (i == 0) {
-            et = new EditText(this);
-            et.setHint("Profile Summary");
-            et.setId(i);
-            et.setTypeface(helper.droid(getApplicationContext()));
-            et.requestFocus();
-            psContainer.addView(et);
-            i++;
-        } else {
-            int j = i - 1;
-            et = (EditText) this.findViewById(j);
-            if (et.getText().toString().length() == 0) {
-                et.setError("Filed Mandatory");
-            } else {
-                et = new EditText(this);
-                et.setHint("Profile Summary");
-                et.setTypeface(helper.droid(getApplicationContext()));
-                et.setId(i);
-                psContainer.addView(et);
-                i++;
-            }
-
-        }
-
-
-    }
-
-    private void getProfileSummary(ViewGroup psContainer) {
-
-        for (int i = 0; i < psContainer.getChildCount(); i++) {
-            View child = psContainer.getChildAt(i);
-            EditText et = (EditText) child;
-            if (et.getText().toString().length() == 0) {
-            } else {
-                profile = new String[]{et.getText().toString()};
-            }
-
-        }
-
-
-        if (profile.length == 0) {
-            Toast.makeText(getApplicationContext(), "Enter Profile Summary", Toast.LENGTH_SHORT).show();
-        } else {
-            new profileUpdate().execute();
-        }
-
-    }
-
-
     public class profileUpdate extends AsyncTask<String, String, String> {
+
+        String sum = summary.getText().toString();
 
         @Override
         protected void onPreExecute() {
@@ -1968,17 +1862,17 @@ public class UpdateSeniorResumeActivity extends AppCompatActivity implements Vie
         @Override
         protected String doInBackground(String... strings) {
 
-            for (int i = 0; i < profile.length; i++) {
-                seniorData = new HashMap<String, String>();
-                seniorData.put("u_id", mApp.getPreference().getString(Common.u_id, ""));
-                seniorData.put("summary", profile[i]);
-                seniorData.put("table", "proSum");
-                try {
-                    JSONObject json = Connection.UrlConnection(php.profile_summary, seniorData);
 
-                } catch (Exception e) {
-                }
+            seniorData = new HashMap<String, String>();
+            seniorData.put("u_id", mApp.getPreference().getString(Common.u_id, ""));
+            seniorData.put("summary", sum);
+            seniorData.put("table", "proSum");
+            try {
+                JSONObject json = Connection.UrlConnection(php.profile_summary, seniorData);
+
+            } catch (Exception e) {
             }
+
 
             return null;
         }

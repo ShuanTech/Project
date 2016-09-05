@@ -73,12 +73,6 @@ public class SharePost extends AsyncTask<String,String,String> {
         pDialog.cancel();
         if(s.equalsIgnoreCase("true")){
             Toast.makeText(mContext,"Successfully shared",Toast.LENGTH_SHORT).show();
-            AppCompatActivity activity= (AppCompatActivity) mContext;
-            Fragment f=new EmployerHome();
-            FragmentTransaction ft=activity.getSupportFragmentManager().beginTransaction().replace(R.id.container, f);
-            ft.detach(f);
-            ft.attach(f);
-            ft.commit();
         }else{
             Toast.makeText(mContext,"Failed Share.Try Again!...",Toast.LENGTH_SHORT).show();
         }

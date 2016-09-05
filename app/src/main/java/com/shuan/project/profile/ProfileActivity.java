@@ -87,6 +87,8 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
                 View.SYSTEM_UI_FLAG_LAYOUT_STABLE
                         | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
         mApp = (Common) getApplicationContext();
+
+        mApp.getPreference().edit().putBoolean("start",true).commit();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 

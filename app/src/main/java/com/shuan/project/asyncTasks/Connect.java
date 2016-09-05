@@ -16,7 +16,7 @@ public class Connect extends AsyncTask<String, String, String> {
 
     private Common mApp;
     private Context mContext;
-    private String u_id, level,clgName,course;
+    private String u_id, level,clgName,course,s;
     private HashMap<String, String> cData;
 
     public Connect(Context mContext, String u_id, String level,String clgName,String course) {
@@ -39,8 +39,15 @@ public class Connect extends AsyncTask<String, String, String> {
         try {
             JSONObject json = Connection.UrlConnection(php.defaultFollow, cData);
             int succ = json.getInt("success");
+
         } catch (Exception e) {
         }
         return null;
+    }
+
+    @Override
+    protected void onPostExecute(String s) {
+        super.onPostExecute(s);
+
     }
 }

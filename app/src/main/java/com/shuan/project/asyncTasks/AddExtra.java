@@ -20,7 +20,7 @@ import java.util.HashMap;
 public class AddExtra extends AsyncTask<String, String, String> {
 
     private Context mContext;
-    private String uId, extra, s;
+    private String uId, extra, s="";
     private HashMap<String, String> seniorData;
     private ProgressDialog pDialog;
     private Common mApp;

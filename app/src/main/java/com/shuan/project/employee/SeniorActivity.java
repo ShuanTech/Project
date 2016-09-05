@@ -45,6 +45,7 @@ import com.shuan.project.Utils.Helper;
 import com.shuan.project.about.About;
 import com.shuan.project.about.Help;
 import com.shuan.project.asyncTasks.Feedback;
+import com.shuan.project.asyncTasks.GetInfo;
 import com.shuan.project.fragment.AppliedFragment;
 import com.shuan.project.fragment.ConnectionFragment;
 import com.shuan.project.fragment.EmployerHome;
@@ -101,6 +102,10 @@ public class SeniorActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
 
         mApp = (Common) getApplicationContext();
+        if(mApp.getPreference().getBoolean("start",false)==false){
+            startActivity(new Intent(getApplicationContext(),ProfileActivity.class));
+        }
+        new GetInfo(SeniorActivity.this,mApp.getPreference().getString(Common.u_id,""));
 
         if (mApp.getPreference().getString(Common.Version, "").equalsIgnoreCase("true")) {
             builder = new AlertDialog.Builder(SeniorActivity.this)
@@ -191,6 +196,7 @@ public class SeniorActivity extends AppCompatActivity {
                         return true;
                     case R.id.strength:
                         startActivity(new Intent(getApplicationContext(), ResumeEditActivity.class));
+                        mDrawerLayout.closeDrawers();
                         return true;
                     case R.id.connect:
                         toolbar.setTitle("Connections");

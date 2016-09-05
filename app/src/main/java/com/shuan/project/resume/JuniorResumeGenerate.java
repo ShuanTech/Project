@@ -371,6 +371,16 @@ public class JuniorResumeGenerate extends AppCompatActivity {
                             PdfPTable table = new PdfPTable(2);
                             PdfPCell c1 = null, c2 = null, c3 = null, c4 = null, c5 = null, c6 = null, c7 = null, c8 = null;
 
+                            if (lang_known != null && !lang_known.trim().isEmpty()) {
+                                c3 = new PdfPCell(new Paragraph("Skills", content));
+                                c4 = new PdfPCell(new Paragraph(lang_known, content));
+                                c3.setBorder(Rectangle.NO_BORDER);
+                                c4.setBorder(Rectangle.NO_BORDER);
+                                c4.setColspan(4);
+                                table.addCell(c3);
+                                table.addCell(c4);
+                            }
+
                             if (interest != null && !interest.trim().isEmpty()) {
                                 c1 = new PdfPCell(new Paragraph("Area Of Interest", content));
                                 c2 = new PdfPCell(new Paragraph(interest, content));
@@ -380,15 +390,7 @@ public class JuniorResumeGenerate extends AppCompatActivity {
                                 table.addCell(c1);
                                 table.addCell(c2);
                             }
-                            if (lang_known != null && !lang_known.trim().isEmpty()) {
-                                c3 = new PdfPCell(new Paragraph("Programming Languages", content));
-                                c4 = new PdfPCell(new Paragraph(lang_known, content));
-                                c3.setBorder(Rectangle.NO_BORDER);
-                                c4.setBorder(Rectangle.NO_BORDER);
-                                c4.setColspan(4);
-                                table.addCell(c3);
-                                table.addCell(c4);
-                            }
+
                             if (dev != null && !dev.trim().isEmpty()) {
                                 c5 = new PdfPCell(new Paragraph("Development Environment", content));
                                 c6 = new PdfPCell(new Paragraph(dev, content));
@@ -745,59 +747,83 @@ public class JuniorResumeGenerate extends AppCompatActivity {
 
     private void personalInfo() {
         try {
-            Paragraph p16 = new Paragraph("PERSONAL INFO", heading);
-            p16.setAlignment(Paragraph.ALIGN_LEFT);
-            doc.add(p16);
+            if (fName != null && !fName.trim().isEmpty() || mName != null && !mName.trim().isEmpty() || dob != null && !dob.trim().isEmpty()
+                    || lang != null && !lang.trim().isEmpty() || hobbies != null && !hobbies.trim().isEmpty()) {
 
-            PdfPTable table1 = new PdfPTable(2);
+                Paragraph p16 = new Paragraph("PERSONAL INFO", heading);
+                p16.setAlignment(Paragraph.ALIGN_LEFT);
+                doc.add(p16);
 
-            PdfPCell c11 = new PdfPCell(new Paragraph("Father Name ", heading));
-            PdfPCell c12 = new PdfPCell(new Paragraph(fName, content));
-            PdfPCell c13 = new PdfPCell(new Paragraph("Mother Name", heading));
-            PdfPCell c14 = new PdfPCell(new Paragraph(mName, content));
-            PdfPCell c15 = new PdfPCell(new Paragraph("Date of Birth", heading));
-            PdfPCell c16 = new PdfPCell(new Paragraph(dob, content));
-            PdfPCell c17 = new PdfPCell(new Paragraph("Languages Known", heading));
-            PdfPCell c18 = new PdfPCell(new Paragraph(lang, content));
-            PdfPCell c19 = new PdfPCell(new Paragraph("Hobbies", heading));
-            PdfPCell c20 = new PdfPCell(new Paragraph(hobbies, content));
+                PdfPTable table1 = new PdfPTable(2);
 
-            c11.setBorder(Rectangle.NO_BORDER);
-            c11.setHorizontalAlignment(Element.ALIGN_MIDDLE);
-            c12.setBorder(Rectangle.NO_BORDER);
-            c13.setBorder(Rectangle.NO_BORDER);
-            c13.setHorizontalAlignment(Element.ALIGN_MIDDLE);
-            c14.setBorder(Rectangle.NO_BORDER);
-            c15.setBorder(Rectangle.NO_BORDER);
-            c15.setHorizontalAlignment(Element.ALIGN_MIDDLE);
-            c16.setBorder(Rectangle.NO_BORDER);
-            c17.setBorder(Rectangle.NO_BORDER);
-            c17.setHorizontalAlignment(Element.ALIGN_MIDDLE);
-            c18.setBorder(Rectangle.NO_BORDER);
-            c19.setBorder(Rectangle.NO_BORDER);
-            c19.setHorizontalAlignment(Element.ALIGN_MIDDLE);
-            c20.setBorder(Rectangle.NO_BORDER);
+                if (fName != null && !fName.trim().isEmpty()) {
+                    PdfPCell c11 = new PdfPCell(new Paragraph("Father Name ", heading));
+                    PdfPCell c12 = new PdfPCell(new Paragraph(fName, content));
+                    c11.setBorder(Rectangle.NO_BORDER);
+                    c11.setHorizontalAlignment(Element.ALIGN_MIDDLE);
+                    c12.setBorder(Rectangle.NO_BORDER);
+                    table1.addCell(c11);
+                    table1.addCell(c12);
+                }
 
-            table1.addCell(c11);
-            table1.addCell(c12);
-            table1.addCell(c13);
-            table1.addCell(c14);
-            table1.addCell(c15);
-            table1.addCell(c16);
-            table1.addCell(c17);
-            table1.addCell(c18);
-            table1.addCell(c19);
-            table1.addCell(c20);
-            table1.setHorizontalAlignment(Element.ALIGN_CENTER);
-            doc.add(table1);
-            doc.add(Chunk.NEWLINE);
+                if (mName != null && !mName.trim().isEmpty()) {
+                    PdfPCell c13 = new PdfPCell(new Paragraph("Mother Name", heading));
+                    PdfPCell c14 = new PdfPCell(new Paragraph(mName, content));
+                    c13.setBorder(Rectangle.NO_BORDER);
+                    c13.setHorizontalAlignment(Element.ALIGN_MIDDLE);
+                    c14.setBorder(Rectangle.NO_BORDER);
 
-            doc.add(Chunk.NEWLINE);
-            doc.add(Chunk.NEWLINE);
-            Paragraph p19 = new Paragraph("PLACE:  " + city);
-            p19.setAlignment(Paragraph.ALIGN_LEFT);
-            doc.add(p19);
-            doc.add(Chunk.NEWLINE);
+                    table1.addCell(c13);
+                    table1.addCell(c14);
+                }
+
+                if (dob != null && !dob.trim().isEmpty()) {
+                    PdfPCell c15 = new PdfPCell(new Paragraph("Date of Birth", heading));
+                    PdfPCell c16 = new PdfPCell(new Paragraph(dob, content));
+
+                    c15.setBorder(Rectangle.NO_BORDER);
+                    c15.setHorizontalAlignment(Element.ALIGN_MIDDLE);
+                    c16.setBorder(Rectangle.NO_BORDER);
+                    table1.addCell(c15);
+                    table1.addCell(c16);
+                }
+
+                if (lang != null && !lang.trim().isEmpty()) {
+                    PdfPCell c17 = new PdfPCell(new Paragraph("Languages Known", heading));
+                    PdfPCell c18 = new PdfPCell(new Paragraph(lang, content));
+                    c17.setBorder(Rectangle.NO_BORDER);
+                    c17.setHorizontalAlignment(Element.ALIGN_MIDDLE);
+                    c18.setBorder(Rectangle.NO_BORDER);
+                    table1.addCell(c17);
+                    table1.addCell(c18);
+                }
+
+                if (hobbies != null && !hobbies.trim().isEmpty()) {
+                    PdfPCell c19 = new PdfPCell(new Paragraph("Hobbies", heading));
+                    PdfPCell c20 = new PdfPCell(new Paragraph(hobbies, content));
+
+                    c19.setBorder(Rectangle.NO_BORDER);
+                    c19.setHorizontalAlignment(Element.ALIGN_MIDDLE);
+                    c20.setBorder(Rectangle.NO_BORDER);
+                    table1.addCell(c19);
+                    table1.addCell(c20);
+                }
+
+                table1.setHorizontalAlignment(Element.ALIGN_CENTER);
+                doc.add(table1);
+
+                doc.add(Chunk.NEWLINE);
+
+                doc.add(Chunk.NEWLINE);
+                doc.add(Chunk.NEWLINE);
+                if (city != null && !city.trim().isEmpty()) {
+                    Paragraph p19 = new Paragraph("PLACE:  " + city);
+                    p19.setAlignment(Paragraph.ALIGN_LEFT);
+                    doc.add(p19);
+                    doc.add(Chunk.NEWLINE);
+                }
+            }
+
             SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
             Date date = new Date();
             Paragraph p20 = new Paragraph("DATE:  " + format.format(date));
@@ -806,7 +832,6 @@ public class JuniorResumeGenerate extends AppCompatActivity {
             Paragraph p21 = new Paragraph(name);
             p21.setAlignment(Paragraph.ALIGN_RIGHT);
             doc.add(p21);
-
             doc.close();
             if (mApp.getPreference().getBoolean(Common.APPLY, false) == true) {
                 Toast.makeText(getApplicationContext(), "Upload start", Toast.LENGTH_SHORT).show();

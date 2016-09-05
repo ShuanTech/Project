@@ -1,0 +1,61 @@
+[05-Sep-2016 06:17:41 America/Chicago] PHP Parse error:  syntax error, unexpected '=' in /home/udyomitra/public_html/android/sam.php on line 7
+[05-Sep-2016 23:18:58 Asia/Calcutta] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/udyomitra/public_html/android/sam.php on line 16
+[05-Sep-2016 23:21:00 Asia/Calcutta] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/udyomitra/public_html/android/sam.php on line 16
+[05-Sep-2016 23:21:04 Asia/Calcutta] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/udyomitra/public_html/android/sam.php on line 16
+[05-Sep-2016 23:21:05 Asia/Calcutta] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/udyomitra/public_html/android/sam.php on line 16
+[05-Sep-2016 23:21:06 Asia/Calcutta] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/udyomitra/public_html/android/sam.php on line 16
+[05-Sep-2016 23:21:24 Asia/Calcutta] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/udyomitra/public_html/android/sam.php on line 16
+[05-Sep-2016 23:21:26 Asia/Calcutta] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/udyomitra/public_html/android/sam.php on line 16
+[05-Sep-2016 23:21:27 Asia/Calcutta] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/udyomitra/public_html/android/sam.php on line 16
+[05-Sep-2016 23:21:28 Asia/Calcutta] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/udyomitra/public_html/android/sam.php on line 16
+[05-Sep-2016 23:21:28 Asia/Calcutta] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/udyomitra/public_html/android/sam.php on line 16
+[05-Sep-2016 23:21:28 Asia/Calcutta] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/udyomitra/public_html/android/sam.php on line 16
+[05-Sep-2016 23:21:28 Asia/Calcutta] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/udyomitra/public_html/android/sam.php on line 16
+[05-Sep-2016 23:22:27 Asia/Calcutta] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/udyomitra/public_html/android/sam.php on line 16
+[05-Sep-2016 23:22:33 Asia/Calcutta] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/udyomitra/public_html/android/sam.php on line 16
+[05-Sep-2016 23:22:34 Asia/Calcutta] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/udyomitra/public_html/android/sam.php on line 16
+[05-Sep-2016 23:25:51 Asia/Calcutta] PHP Warning:  array_push() expects parameter 1 to be array, null given in /home/udyomitra/public_html/android/sam.php on line 20
+[05-Sep-2016 23:33:20 Asia/Calcutta] PHP Warning:  mysql_query(): Unable to save result set in /home/udyomitra/public_html/android/slct_candidate.php on line 22
+[05-Sep-2016 23:33:20 Asia/Calcutta] PHP Warning:  mysql_fetch_row() expects parameter 1 to be resource, boolean given in /home/udyomitra/public_html/android/slct_candidate.php on line 23
+[05-Sep-2016 13:15:27 America/Chicago] PHP Parse error:  syntax error, unexpected '$ress' (T_VARIABLE) in /home/udyomitra/public_html/android/sam.php on line 25
+[05-Sep-2016 23:47:46 Asia/Calcutta] PHP Warning:  mysql_fetch_row() expects parameter 1 to be resource, boolean given in /home/udyomitra/public_html/android/sam.php on line 26
+[05-Sep-2016 23:48:07 Asia/Calcutta] PHP Warning:  mysql_fetch_row() expects parameter 1 to be resource, boolean given in /home/udyomitra/public_html/android/sam.php on line 26
+[05-Sep-2016 23:48:43 Asia/Calcutta] PHP Warning:  mysql_fetch_row() expects parameter 1 to be resource, boolean given in /home/udyomitra/public_html/android/sam.php on line 26
+[05-Sep-2016 23:48:44 Asia/Calcutta] PHP Warning:  mysql_fetch_row() expects parameter 1 to be resource, boolean given in /home/udyomitra/public_html/android/sam.php on line 26
+[05-Sep-2016 23:48:45 Asia/Calcutta] PHP Warning:  mysql_fetch_row() expects parameter 1 to be resource, boolean given in /home/udyomitra/public_html/android/sam.php on line 26
+[05-Sep-2016 23:48:46 Asia/Calcutta] PHP Warning:  mysql_fetch_row() expects parameter 1 to be resource, boolean given in /home/udyomitra/public_html/android/sam.php on line 26
+[05-Sep-2016 23:48:53 Asia/Calcutta] PHP Warning:  mysql_fetch_row() expects parameter 1 to be resource, boolean given in /home/udyomitra/public_html/android/sam.php on line 26
+[05-Sep-2016 23:49:14 Asia/Calcutta] PHP Warning:  mysql_fetch_row() expects parameter 1 to be resource, boolean given in /home/udyomitra/public_html/android/sam.php on line 26
+[05-Sep-2016 23:49:15 Asia/Calcutta] PHP Warning:  mysql_fetch_row() expects parameter 1 to be resource, boolean given in /home/udyomitra/public_html/android/sam.php on line 26
+[05-Sep-2016 23:49:16 Asia/Calcutta] PHP Warning:  mysql_fetch_row() expects parameter 1 to be resource, boolean given in /home/udyomitra/public_html/android/sam.php on line 26
+[05-Sep-2016 23:49:17 Asia/Calcutta] PHP Warning:  mysql_fetch_row() expects parameter 1 to be resource, boolean given in /home/udyomitra/public_html/android/sam.php on line 26
+[05-Sep-2016 23:49:17 Asia/Calcutta] PHP Warning:  mysql_fetch_row() expects parameter 1 to be resource, boolean given in /home/udyomitra/public_html/android/sam.php on line 26
+[05-Sep-2016 23:49:33 Asia/Calcutta] PHP Warning:  mysql_fetch_row() expects parameter 1 to be resource, boolean given in /home/udyomitra/public_html/android/sam.php on line 26
+[05-Sep-2016 23:49:34 Asia/Calcutta] PHP Warning:  mysql_fetch_row() expects parameter 1 to be resource, boolean given in /home/udyomitra/public_html/android/sam.php on line 26
+[05-Sep-2016 23:49:34 Asia/Calcutta] PHP Warning:  mysql_fetch_row() expects parameter 1 to be resource, boolean given in /home/udyomitra/public_html/android/sam.php on line 26
+[05-Sep-2016 23:49:34 Asia/Calcutta] PHP Warning:  mysql_fetch_row() expects parameter 1 to be resource, boolean given in /home/udyomitra/public_html/android/sam.php on line 26
+[05-Sep-2016 23:49:34 Asia/Calcutta] PHP Warning:  mysql_fetch_row() expects parameter 1 to be resource, boolean given in /home/udyomitra/public_html/android/sam.php on line 26
+[05-Sep-2016 23:49:34 Asia/Calcutta] PHP Warning:  mysql_fetch_row() expects parameter 1 to be resource, boolean given in /home/udyomitra/public_html/android/sam.php on line 26
+[05-Sep-2016 23:49:34 Asia/Calcutta] PHP Warning:  mysql_fetch_row() expects parameter 1 to be resource, boolean given in /home/udyomitra/public_html/android/sam.php on line 26
+[05-Sep-2016 23:49:35 Asia/Calcutta] PHP Warning:  mysql_fetch_row() expects parameter 1 to be resource, boolean given in /home/udyomitra/public_html/android/sam.php on line 26
+[05-Sep-2016 23:49:35 Asia/Calcutta] PHP Warning:  mysql_fetch_row() expects parameter 1 to be resource, boolean given in /home/udyomitra/public_html/android/sam.php on line 26
+[05-Sep-2016 23:49:35 Asia/Calcutta] PHP Warning:  mysql_fetch_row() expects parameter 1 to be resource, boolean given in /home/udyomitra/public_html/android/sam.php on line 26
+[05-Sep-2016 23:49:35 Asia/Calcutta] PHP Warning:  mysql_fetch_row() expects parameter 1 to be resource, boolean given in /home/udyomitra/public_html/android/sam.php on line 26
+[05-Sep-2016 23:51:28 Asia/Calcutta] PHP Warning:  mysql_fetch_row() expects parameter 1 to be resource, boolean given in /home/udyomitra/public_html/android/sam.php on line 26
+[05-Sep-2016 13:29:17 America/Chicago] PHP Parse error:  syntax error, unexpected '$data' (T_VARIABLE) in /home/udyomitra/public_html/android/sam.php on line 25
+[05-Sep-2016 13:29:19 America/Chicago] PHP Parse error:  syntax error, unexpected '$data' (T_VARIABLE) in /home/udyomitra/public_html/android/sam.php on line 25
+[05-Sep-2016 13:29:20 America/Chicago] PHP Parse error:  syntax error, unexpected '$data' (T_VARIABLE) in /home/udyomitra/public_html/android/sam.php on line 25
+[05-Sep-2016 13:29:56 America/Chicago] PHP Parse error:  syntax error, unexpected '$data' (T_VARIABLE) in /home/udyomitra/public_html/android/sam.php on line 25
+[05-Sep-2016 13:29:58 America/Chicago] PHP Parse error:  syntax error, unexpected '$data' (T_VARIABLE) in /home/udyomitra/public_html/android/sam.php on line 25
+[05-Sep-2016 13:29:59 America/Chicago] PHP Parse error:  syntax error, unexpected '$data' (T_VARIABLE) in /home/udyomitra/public_html/android/sam.php on line 25
+[06-Sep-2016 00:16:08 Asia/Calcutta] PHP Warning:  mysql_query(): Unable to save result set in /home/udyomitra/public_html/android/slct_candidate.php on line 22
+[06-Sep-2016 00:16:08 Asia/Calcutta] PHP Warning:  mysql_fetch_row() expects parameter 1 to be resource, boolean given in /home/udyomitra/public_html/android/slct_candidate.php on line 23
+[06-Sep-2016 00:16:26 Asia/Calcutta] PHP Warning:  mysql_query(): Unable to save result set in /home/udyomitra/public_html/android/slct_candidate.php on line 22
+[06-Sep-2016 00:16:26 Asia/Calcutta] PHP Warning:  mysql_fetch_row() expects parameter 1 to be resource, boolean given in /home/udyomitra/public_html/android/slct_candidate.php on line 23
+[06-Sep-2016 00:21:54 Asia/Calcutta] PHP Warning:  mysql_query(): Unable to save result set in /home/udyomitra/public_html/android/slct_candidate.php on line 22
+[06-Sep-2016 00:21:54 Asia/Calcutta] PHP Warning:  mysql_fetch_row() expects parameter 1 to be resource, boolean given in /home/udyomitra/public_html/android/slct_candidate.php on line 23
+[06-Sep-2016 00:27:16 Asia/Calcutta] PHP Warning:  mysql_query(): Unable to save result set in /home/udyomitra/public_html/android/slct_candidate.php on line 22
+[06-Sep-2016 00:27:16 Asia/Calcutta] PHP Warning:  mysql_fetch_row() expects parameter 1 to be resource, boolean given in /home/udyomitra/public_html/android/slct_candidate.php on line 23
+[06-Sep-2016 00:34:21 Asia/Calcutta] PHP Fatal error:  Call to undefined function select_query() in /home/udyomitra/public_html/android/slct_candidate.php on line 18
+[06-Sep-2016 00:36:27 Asia/Calcutta] PHP Warning:  mysql_query(): Unable to save result set in /home/udyomitra/public_html/android/slct_candidate.php on line 65
+[06-Sep-2016 01:10:20 Asia/Calcutta] PHP Fatal error:  Call to undefined function select_query() in /home/udyomitra/public_html/android/favorite.php on line 6

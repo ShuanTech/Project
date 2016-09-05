@@ -55,7 +55,7 @@ public class ResumeEditActivity extends AppCompatActivity implements View.OnClic
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-        mApp= (Common) getApplicationContext();
+        mApp = (Common) getApplicationContext();
         if (mApp.getPreference().getString(Common.LEVEL, "").equalsIgnoreCase("1")) {
             setTheme(R.style.Junior);
         } else if (mApp.getPreference().getString(Common.LEVEL, "").equalsIgnoreCase("2")) {

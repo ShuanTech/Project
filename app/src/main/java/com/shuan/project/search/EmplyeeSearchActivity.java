@@ -208,7 +208,7 @@ public class EmplyeeSearchActivity extends AppCompatActivity implements GooglePl
     private void showGpsAlert() {
         AlertDialog.Builder build = new AlertDialog.Builder(EmplyeeSearchActivity.this);
         build.setTitle("Alert")
-                .setMessage("Turn On your GPS! Find the Employee")
+                .setMessage("Turn On your GPS! Find the Jobs & companies")
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {

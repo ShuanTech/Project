@@ -263,9 +263,13 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
                             mApp.getPreference().edit().putBoolean(Common.Login, true).commit();
                             mApp.getPreference().edit().putBoolean(Common.USRINFO, true).commit();
                             if (type.toString().equalsIgnoreCase("1")) {
+
+                                mApp.getPreference().edit().putInt(Common.PROFILESTRENGTH, 25).commit();
                                 startActivity(new Intent(getApplicationContext(), EducationActivity.class));
                                 finish();
                             } else if (type.toString().equalsIgnoreCase("2")) {
+
+                                mApp.getPreference().edit().putInt(Common.PROFILESTRENGTH, 25).commit();
                                 startActivity(new Intent(getApplicationContext(), WorkActivity.class));
                                 finish();
                             } else {

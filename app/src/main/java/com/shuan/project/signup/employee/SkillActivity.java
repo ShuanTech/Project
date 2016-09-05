@@ -169,6 +169,8 @@ public class SkillActivity extends AppCompatActivity implements View.OnClickList
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
+                            int val=mApp.getPreference().getInt(Common.PROFILESTRENGTH,0);
+                            mApp.getPreference().edit().putInt(Common.PROFILESTRENGTH, val+4).commit();
                             mApp.getPreference().edit().putBoolean(Common.SKILL, true).commit();
                             Toast.makeText(getApplicationContext(), "Your Skill Saved", Toast.LENGTH_SHORT).show();
                             startActivity(new Intent(getApplicationContext(), PersonalActivity.class));
@@ -214,6 +216,8 @@ public class SkillActivity extends AppCompatActivity implements View.OnClickList
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
+                            int val=mApp.getPreference().getInt(Common.PROFILESTRENGTH,0);
+                            mApp.getPreference().edit().putInt(Common.PROFILESTRENGTH, val+4).commit();
                             mApp.getPreference().edit().putBoolean(Common.CERITIFY, true).commit();
                             Toast.makeText(getApplicationContext(), "Certification Details Saved", Toast.LENGTH_SHORT).show();
 

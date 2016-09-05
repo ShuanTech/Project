@@ -15,7 +15,7 @@ import java.util.HashMap;
 public class Feedback extends AsyncTask<String, String, String> {
 
     private Context mContext;
-    private String uId, feed, s;
+    private String uId, feed, s="";
     private HashMap<String, String> fData;
 
     public Feedback(Context mContext, String uId, String feed) {

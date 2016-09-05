@@ -20,7 +20,7 @@ public class AddCollege extends AsyncTask<String,String,String> {
 
     private Common mApp;
     private Context mContext;
-    private String u_id,clgName,univ,loc,conCent,agrt,s;
+    private String u_id,clgName,univ,loc,conCent,agrt,s="";
     private HashMap<String, String> aData;
 
     public AddCollege(Context mContext, String u_id, String clgName, String univ, String loc, String conCent, String agrt) {

@@ -51,8 +51,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/activity_horizontal_margin"
-                        android:imeOptions="actionDone"
-                        android:hint="Profile Summary" />
+                        android:hint="Profile Summary"
+                        android:imeOptions="actionDone" />
                 </android.support.design.widget.TextInputLayout>
 
                 <Button
@@ -149,10 +149,10 @@
                             android:id="@+id/f_yr"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:editable="false"
                             android:hint="From"
                             android:imeOptions="actionNext"
-                            android:singleLine="true"
-                            android:editable="false"/>
+                            android:singleLine="true" />
 
 
                     </LinearLayout>
@@ -253,9 +253,9 @@
                         android:id="@+id/we_edit_txt"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:imeOptions="actionDone"
                         android:layout_marginTop="@dimen/activity_horizontal_margin"
-                        android:hint="Work Experience" />
+                        android:hint="Work Experience"
+                        android:imeOptions="actionDone" />
                 </android.support.design.widget.TextInputLayout>
 
                 <Button
@@ -841,9 +841,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/standard_margin"
-                        android:inputType="numberDecimal"
                         android:hint="@string/cer_dur"
-                        android:imeOptions="actionDone" />
+                        android:imeOptions="actionDone"
+                        android:inputType="numberDecimal" />
                 </android.support.design.widget.TextInputLayout>
 
                 <Button
@@ -885,8 +885,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/standard_margin"
-                        android:imeOptions="actionDone"
-                        android:hint="Enter Achievement" />
+                        android:hint="Enter Achievement"
+                        android:imeOptions="actionDone" />
                 </android.support.design.widget.TextInputLayout>
 
 
@@ -930,8 +930,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/standard_margin"
-                        android:imeOptions="actionDone"
-                        android:hint="Enter Extra Curricular" />
+                        android:hint="Enter Extra Curricular"
+                        android:imeOptions="actionDone" />
                 </android.support.design.widget.TextInputLayout>
 
 
@@ -1031,7 +1031,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/standard_margin"
                         android:hint="Country"
-                        android:imeOptions="actionNext"
+                        android:imeOptions="actionDone"
                         android:singleLine="true" />
                 </android.support.design.widget.TextInputLayout>
 
@@ -1071,7 +1071,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/standard_margin"
                     android:hint="@string/dob"
-                    android:imeOptions="actionNext" />
+                    android:imeOptions="actionNext"
+                    android:singleLine="true" />
 
                 <RadioGroup
                     android:id="@+id/sex"
@@ -1103,71 +1104,76 @@
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
-                <EditText
-                    android:id="@+id/f_name"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/standard_margin"
-                    android:hint="@string/f_name"
-                    android:imeOptions="actionNext"
-                    android:inputType="text"
-                    android:singleLine="true" />
+
+                    <EditText
+                        android:id="@+id/f_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/standard_margin"
+                        android:hint="@string/f_name"
+                        android:imeOptions="actionNext"
+                        android:inputType="text"
+                        android:singleLine="true" />
                 </android.support.design.widget.TextInputLayout>
 
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
-                <EditText
-                    android:id="@+id/m_name"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/standard_margin"
-                    android:hint="@string/m_name"
-                    android:imeOptions="actionNext"
-                    android:inputType="text"
-                    android:singleLine="true" />
+
+                    <EditText
+                        android:id="@+id/m_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/standard_margin"
+                        android:hint="@string/m_name"
+                        android:imeOptions="actionNext"
+                        android:inputType="text"
+                        android:singleLine="true" />
                 </android.support.design.widget.TextInputLayout>
 
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
-                <EditText
-                    android:id="@+id/rel"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/standard_margin"
-                    android:hint="Relationship Status"
-                    android:imeOptions="actionNext"
-                    android:inputType="text"
-                    android:singleLine="true" />
+
+                    <EditText
+                        android:id="@+id/rel"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/standard_margin"
+                        android:hint="Relationship Status"
+                        android:imeOptions="actionNext"
+                        android:inputType="text"
+                        android:singleLine="true" />
                 </android.support.design.widget.TextInputLayout>
 
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
-                <EditText
-                    android:id="@+id/lang"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/standard_margin"
-                    android:hint="Languages (ex: lang1,lang2)"
-                    android:imeOptions="actionNext"
-                    android:inputType="text"
-                    android:singleLine="true" />
+
+                    <EditText
+                        android:id="@+id/lang"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/standard_margin"
+                        android:hint="Languages (ex: lang1,lang2)"
+                        android:imeOptions="actionNext"
+                        android:inputType="text"
+                        android:singleLine="true" />
                 </android.support.design.widget.TextInputLayout>
 
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
-                <EditText
-                    android:id="@+id/hobby"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/standard_margin"
-                    android:hint="Hobbies (ex: hobby1,hobby2)"
-                    android:imeOptions="actionNext"
-                    android:inputType="text"
-                    android:singleLine="true" />
+
+                    <EditText
+                        android:id="@+id/hobby"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/standard_margin"
+                        android:hint="Hobbies (ex: hobby1,hobby2)"
+                        android:imeOptions="actionDone"
+                        android:inputType="text"
+                        android:singleLine="true" />
                 </android.support.design.widget.TextInputLayout>
 
                 <Button

@@ -138,7 +138,7 @@ public class ProfileViewActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (bu1.getText().toString().equalsIgnoreCase("Follow")) {
-                    new Following(ProfileViewActivity.this, u_id, mApp.getPreference().getString(Common.u_id, ""), bu1).execute();
+                    new Following(ProfileViewActivity.this, u_id, mApp.getPreference().getString(Common.u_id, ""), bu1,level).execute();
                     bu1.setText("PENDING");
                 }
             }

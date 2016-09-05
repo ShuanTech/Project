@@ -42,6 +42,7 @@ import com.shuan.project.Utils.Common;
 import com.shuan.project.Utils.Helper;
 import com.shuan.project.about.About;
 import com.shuan.project.asyncTasks.Feedback;
+import com.shuan.project.asyncTasks.GetInfo;
 import com.shuan.project.fragment.CompanyContactFragment;
 import com.shuan.project.fragment.EmployerAboutFragment;
 import com.shuan.project.fragment.EmployerHome;
@@ -91,7 +92,10 @@ public class EmployerActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         mApp = (Common) getApplicationContext();
-
+        if(mApp.getPreference().getBoolean("start",false)==false){
+            startActivity(new Intent(getApplicationContext(),ProfileActivity.class));
+        }
+        new GetInfo(EmployerActivity.this,mApp.getPreference().getString(Common.u_id,""));
         if (mApp.getPreference().getString(Common.Version, "").equalsIgnoreCase("true")) {
             builder = new AlertDialog.Builder(EmployerActivity.this)
                     .setTitle("Update")

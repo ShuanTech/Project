@@ -20,7 +20,7 @@ import java.util.HashMap;
 public class AddAchieve extends AsyncTask<String, String, String> {
 
     private Context mContext;
-    private String uId, achieve, s;
+    private String uId, achieve, s="";
     private HashMap<String, String> seniorData;
     private ProgressDialog pDialog;
     private Common mApp;

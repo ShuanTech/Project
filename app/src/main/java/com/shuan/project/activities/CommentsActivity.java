@@ -104,11 +104,13 @@ public class CommentsActivity extends AppCompatActivity implements View.OnClickL
                 cmtdata.setText("now");
                 cmnts.addView(vi);
 
-                cmtEdt.setText("");
+
                 scroll.fullScroll(View.FOCUS_DOWN);
 
                 new PostCommnts(CommentsActivity.this, mApp.getPreference().getString(Common.u_id, ""),
                         getIntent().getStringExtra("jId"), cmtEdt.getText().toString()).execute();
+
+                cmtEdt.setText("");
             }
         }
 

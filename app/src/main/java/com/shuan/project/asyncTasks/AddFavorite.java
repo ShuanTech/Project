@@ -16,7 +16,7 @@ import java.util.HashMap;
  */
 public class AddFavorite extends AsyncTask<String, String, String> {
     private Context mContext;
-    private String u_id, frm_id, s;
+    private String u_id, frm_id, s="";
     private HashMap<String, String> sData;
 
     public AddFavorite(Context mContext, String u_id, String frm_id) {

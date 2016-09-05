@@ -64,7 +64,7 @@ public class AboutCompany extends AsyncTask<String, String, String> {
     private void save(String s) {
         if(s.equalsIgnoreCase("true")){
             Toast.makeText(mContext,"Successfully Completed Your Signup Process. Let's begin",Toast.LENGTH_SHORT).show();
-            mApp.getPreference().edit().putBoolean(Common.USRINFO,true).commit();
+            mApp.getPreference().edit().putBoolean("start",false).commit();
             new GetInfo(mContext,mApp.getPreference().getString(Common.u_id,"")).execute();
             Intent in=new Intent(mContext, EmployerActivity.class);
             in.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

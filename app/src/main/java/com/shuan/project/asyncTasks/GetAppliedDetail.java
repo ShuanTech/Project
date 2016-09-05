@@ -5,6 +5,7 @@ import android.os.AsyncTask;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.shuan.project.adapter.AppliedDetailAdapter;
 import com.shuan.project.list.Sample;
@@ -27,6 +28,7 @@ public class GetAppliedDetail extends AsyncTask<String, String, String> {
     private HashMap<String, String> aData;
     private ArrayList<Sample> list;
     private AppliedDetailAdapter adapter;
+    private String s = "";
 
 
     public GetAppliedDetail(Context mContext, String jId, ListView listView, ProgressBar progressBar) {
@@ -47,6 +49,7 @@ public class GetAppliedDetail extends AsyncTask<String, String, String> {
             int succ = json.getInt("success");
 
             if (succ == 0) {
+                s = "false";
             } else {
 
                 JSONArray jsonArray = json.getJSONArray("job");
@@ -54,26 +57,33 @@ public class GetAppliedDetail extends AsyncTask<String, String, String> {
                     JSONObject child = jsonArray.getJSONObject(i);
                     String applied = child.optString("applied");
                     String refer = child.optString("refer");
-                    String a_id=child.optString("applied_usr");
-                    String r_id=child.optString("refer_id");
+                    String a_id = child.optString("applied_usr");
+                    String r_id = child.optString("refer_id");
                     String resume = child.optString("resume");
 
 
-                    list.add(new Sample(applied, refer,a_id,r_id,resume));
+                    list.add(new Sample(applied, refer, a_id, r_id, resume));
                 }
+                s = "true";
+
             }
 
         } catch (Exception e) {
         }
-        return null;
+        return s;
     }
 
     @Override
     protected void onPostExecute(String s) {
         super.onPostExecute(s);
         progressBar.setVisibility(View.GONE);
-        listView.setVisibility(View.VISIBLE);
-        adapter = new AppliedDetailAdapter(mContext, list);
-        listView.setAdapter(adapter);
+        if (s.equalsIgnoreCase("true")) {
+            listView.setVisibility(View.VISIBLE);
+            adapter = new AppliedDetailAdapter(mContext, list);
+            listView.setAdapter(adapter);
+        } else {
+            Toast.makeText(mContext, "No Data Found", Toast.LENGTH_SHORT).show();
+        }
+
     }
 }

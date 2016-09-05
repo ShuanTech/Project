@@ -163,8 +163,12 @@ public class EducationActivity extends AppCompatActivity implements View.OnClick
                 mApp.getPreference().edit().putBoolean(Common.HSC, false).commit();
                 mApp.getPreference().edit().putBoolean(Common.SSLC, false).commit();
                 if (mApp.getPreference().getString(Common.LEVEL, "").equalsIgnoreCase("1")) {
+                    int val=mApp.getPreference().getInt(Common.PROFILESTRENGTH,0);
+                    mApp.getPreference().edit().putInt(Common.PROFILESTRENGTH, val+5).commit();
                     startActivity(new Intent(getApplicationContext(), SkillActivity.class));
                 } else {
+                    int val=mApp.getPreference().getInt(Common.PROFILESTRENGTH,0);
+                    mApp.getPreference().edit().putInt(Common.PROFILESTRENGTH, val+5).commit();
                     startActivity(new Intent(getApplicationContext(), PersonalActivity.class));
                 }
                 finish();
@@ -361,6 +365,8 @@ public class EducationActivity extends AppCompatActivity implements View.OnClick
                             mApp.getPreference().edit().putBoolean(Common.QUALIFICATION, true).commit();
                             mApp.getPreference().edit().putBoolean(Common.HSC, false).commit();
                             mApp.getPreference().edit().putBoolean(Common.SSLC, false).commit();
+                            int val=mApp.getPreference().getInt(Common.PROFILESTRENGTH,0);
+                            mApp.getPreference().edit().putInt(Common.PROFILESTRENGTH, val+5).commit();
                             if (mApp.getPreference().getString(Common.LEVEL, "").equalsIgnoreCase("1")) {
                                 startActivity(new Intent(getApplicationContext(), SkillActivity.class));
                                 finish();
