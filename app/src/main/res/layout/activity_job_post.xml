@@ -42,7 +42,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
-                    <EditText
+                    <MultiAutoCompleteTextView
                         android:id="@+id/skill"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -52,19 +52,41 @@
                         android:inputType="textPersonName" />
                 </android.support.design.widget.TextInputLayout>
 
-                <android.support.design.widget.TextInputLayout
+                <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:hint="Job Type"
+                    android:paddingTop="@dimen/standard_margin"
+                    android:textAppearance="?android:textAppearanceMedium" />
 
-                    <EditText
-                        android:id="@+id/type"
-                        android:layout_width="match_parent"
+
+                <RadioGroup
+                    android:id="@+id/job_radio"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:orientation="horizontal">
+
+
+                    <RadioButton
+                        android:id="@+id/full"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/standard_margin"
-                        android:hint="Job Type (ex: Part,Full time)"
-                        android:imeOptions="actionNext"
-                        android:inputType="textPersonName" />
-                </android.support.design.widget.TextInputLayout>
+                        android:checked="true"
+                        android:hint="Full time" />
+
+                    <RadioButton
+                        android:id="@+id/part"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:hint="Parttime" />
+
+                    <RadioButton
+                        android:id="@+id/contr"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:hint="Contract" />
+                </RadioGroup>
 
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
@@ -98,7 +120,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
-                    <EditText
+                    <AutoCompleteTextView
                         android:id="@+id/location"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -108,19 +130,21 @@
                         android:inputType="textPersonName" />
                 </android.support.design.widget.TextInputLayout>
 
-                <android.support.design.widget.TextInputLayout
+                <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:hint="Job Level"
+                    android:paddingTop="@dimen/standard_margin"
+                    android:textAppearance="?android:textAppearanceMedium" />
 
-                    <EditText
-                        android:id="@+id/level"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/standard_margin"
-                        android:hint="Job Level (ex: fresher or frm - to years)"
-                        android:imeOptions="actionDone"
-                        android:inputType="text" />
-                </android.support.design.widget.TextInputLayout>
+                <Spinner
+                    android:id="@+id/job_level"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="@dimen/standard_margin">
+
+
+                </Spinner>
 
 
                 <LinearLayout
@@ -182,8 +206,8 @@
                     android:layout_height="wrap_content"
                     android:gravity="top"
                     android:hint="Job Description"
-                    android:lines="15"
-                    android:imeActionLabel="actionDone"/>
+                    android:imeActionLabel="actionDone"
+                    android:lines="15" />
 
                 <Button
                     android:id="@+id/post"

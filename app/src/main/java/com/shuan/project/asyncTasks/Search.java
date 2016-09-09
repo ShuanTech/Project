@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.shuan.project.adapter.SerachAdapter;
 import com.shuan.project.list.Sample;

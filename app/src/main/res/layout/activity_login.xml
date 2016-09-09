@@ -38,7 +38,7 @@
                 android:layout_marginTop="@dimen/activity_horizontal_margin"
                 android:hint="Email / Phone Number"
                 android:inputType="textEmailAddress"
-                android:imeActionLabel="actionNext"/>
+                android:imeOptions="actionNext"/>
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
@@ -54,7 +54,7 @@
                 android:layout_marginTop="@dimen/standard_margin"
                 android:hint="@string/password"
                 android:inputType="textPassword"
-                android:imeActionLabel="actionDone"/>
+                android:imeOptions="actionDone"/>
             </android.support.design.widget.TextInputLayout>
 
 
@@ -69,6 +69,15 @@
                 android:background="@drawable/signin_border"
                 android:text="Sign In"
                 android:textColor="#fff" />
+            <TextView
+                android:id="@+id/fp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="forgot password?"
+                android:layout_below="@+id/login"
+                android:gravity="center_horizontal"
+                android:paddingTop="18dp"
+                android:clickable="true"/>
 
 
         </RelativeLayout>

@@ -12,6 +12,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.shuan.project.Utils.Helper;
@@ -41,6 +42,7 @@ public class LoginActivity extends AppCompatActivity {
     private ProgressDialog pDialog;
     private Helper helper = new Helper();
     private TextInputLayout layout_usr;
+    private TextView fp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +58,7 @@ public class LoginActivity extends AppCompatActivity {
         pass = (EditText) findViewById(R.id.pass);
         reg = (Button) findViewById(R.id.reg);
         login = (Button) findViewById(R.id.login);
+        fp = (TextView) findViewById(R.id.fp);
 
 
         reg.setOnClickListener(new View.OnClickListener() {
@@ -78,6 +81,12 @@ public class LoginActivity extends AppCompatActivity {
                 } else {
                     new Login().execute();
                 }
+            }
+        });
+        fp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(),ForgotPassword.class));
             }
         });
 
@@ -122,7 +131,7 @@ public class LoginActivity extends AppCompatActivity {
                     JSONObject child = jsonArray.getJSONObject(0);
 
                     final String level = child.optString("level");
-                    final String uId=child.optString("u_id");
+                    final String uId = child.optString("u_id");
 
                     runOnUiThread(new Runnable() {
                         @Override
@@ -130,11 +139,11 @@ public class LoginActivity extends AppCompatActivity {
                             mApp.getPreference().edit().putBoolean(Common.Login, true).commit();
                             mApp.getPreference().edit().putBoolean(Common.USRINFO, true).commit();
 
-                            new GetInfo(getApplicationContext(),uId).execute();
-                            mApp.getPreference().edit().putString(Common.u_id,uId).commit();
+                            new GetInfo(getApplicationContext(), uId).execute();
+                            mApp.getPreference().edit().putString(Common.u_id, uId).commit();
                             mApp.getPreference().edit().putString(Common.LEVEL, level).commit();
                             if (level.equalsIgnoreCase("3")) {
-                                mApp.getPreference().edit().putBoolean(Common.COMPANY,true).commit();
+                                mApp.getPreference().edit().putBoolean(Common.COMPANY, true).commit();
                                 startActivity(new Intent(LoginActivity.this, EmployerActivity.class));
                                 finish();
                             } else {
@@ -148,11 +157,11 @@ public class LoginActivity extends AppCompatActivity {
                                 mApp.getPreference().edit().putBoolean(Common.WORKINFO, true).commit();
                                 mApp.getPreference().edit().putBoolean(Common.PROFILESUMMARY, true).commit();
                                 mApp.getPreference().edit().putBoolean(Common.WORKEXPERIENCE, true).commit();
-                                mApp.getPreference().edit().putInt(Common.PROFILESTRENGTH,62).commit();
-                                if(level.equalsIgnoreCase("2")){
+                                mApp.getPreference().edit().putInt(Common.PROFILESTRENGTH, 62).commit();
+                                if (level.equalsIgnoreCase("2")) {
                                     startActivity(new Intent(LoginActivity.this, SeniorActivity.class));
                                     finish();
-                                }else{
+                                } else {
                                     startActivity(new Intent(LoginActivity.this, JuniorActivity.class));
                                     finish();
                                 }

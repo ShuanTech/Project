@@ -73,8 +73,8 @@
 
         <activity
             android:name=".employee.JuniorActivity"
-            android:theme="@style/Junior.Profile"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait"
+            android:theme="@style/Junior.Profile" />
         <activity
             android:name=".resume.UpdateJuniorResumeActivity"
             android:screenOrientation="portrait"
@@ -95,8 +95,8 @@
 
         <activity
             android:name=".employee.SeniorActivity"
-            android:theme="@style/Senior"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait"
+            android:theme="@style/Senior" />
         <activity
             android:name=".resume.UpdateSeniorResumeActivity"
             android:screenOrientation="portrait"
@@ -168,12 +168,12 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".employer.ShortListActivity" />
         </activity>
-        <activity android:name=".employer.InterviewPanelActivity"
+        <activity
+            android:name=".employer.InterviewPanelActivity"
             android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".employer.ShortListActivity"/>
-
+                android:value=".employer.ShortListActivity" />
         </activity>
         <activity
             android:name=".profile.ProfileActivity"
@@ -248,6 +248,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".employee.SeniorActivity" />
         </activity>
+        <activity android:name=".launcher.ForgotPassword"></activity>
     </application>
 
 </manifest>
