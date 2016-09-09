@@ -62,6 +62,8 @@ public class JobAdapter extends BaseAdapter {
         TextView applied = (TextView) convertView.findViewById(R.id.applied);
         TextView shared = (TextView) convertView.findViewById(R.id.shared);
         final Button close = (Button) convertView.findViewById(R.id.close);
+        final Button edit = (Button) convertView.findViewById(R.id.edit);
+        final Button delete = (Button) convertView.findViewById(R.id.delete);
 
         jId.setText(curr.getU_id());
         jTitle.setText(curr.getProPic());
@@ -95,7 +97,8 @@ public class JobAdapter extends BaseAdapter {
                         }
                     }).show();
 
-                }else{
+                }
+                else{
                     AlertDialog.Builder build = new AlertDialog.Builder(mContext)
                             .setTitle("Confirmation")
                             .setMessage("Are you sure want to close Job Post?");

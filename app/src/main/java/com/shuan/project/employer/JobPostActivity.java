@@ -74,7 +74,7 @@ public class JobPostActivity extends AppCompatActivity implements View.OnClickLi
         job_level.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String get = job_level.getSelectedItem().toString();
+                j = job_level.getSelectedItem().toString();
 
             }
 
@@ -125,7 +125,7 @@ public class JobPostActivity extends AppCompatActivity implements View.OnClickLi
                     new PostJob(JobPostActivity.this, mApp.getPreference().getString(Common.u_id, ""),
                             title.getText().toString(), skill.getText().toString(), job.getText().toString(),
                             category.getText().toString(), salary.getText().toString(), location.getText().toString(),
-                            job_level.getSelectedItem().toString(), descr.getText().toString()).execute();
+                            j.toString(), descr.getText().toString()).execute();
                 }
                 break;
         }
