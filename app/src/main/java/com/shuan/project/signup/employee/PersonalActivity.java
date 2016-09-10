@@ -166,7 +166,8 @@ public class PersonalActivity extends AppCompatActivity implements View.OnClickL
                 }
                 break;
             case R.id.po_skip:
-                mApp.getPreference().edit().putBoolean("intro",false).commit();
+                new GetInfo(getApplicationContext(), mApp.getPreference().getString(Common.u_id, "")).execute();
+                mApp.getPreference().edit().putBoolean("start",false).commit();
                 mApp.getPreference().edit().putBoolean(Common.HOBBIES, false).commit();
                 mApp.getPreference().edit().putBoolean(Common.PROJECT, false).commit();
                 mApp.getPreference().edit().putBoolean(Common.PERSONALINFO, false).commit();
@@ -183,7 +184,7 @@ public class PersonalActivity extends AppCompatActivity implements View.OnClickL
                     mApp.getPreference().edit().putBoolean(Common.WORKEXPERIENCE, false).commit();
                     startActivity(new Intent(getApplicationContext(), SeniorActivity.class));
                 }
-                new GetInfo(getApplicationContext(), mApp.getPreference().getString(Common.u_id, "")).execute();
+
                 finish();
                 break;
 
@@ -331,18 +332,19 @@ public class PersonalActivity extends AppCompatActivity implements View.OnClickL
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
+                            new GetInfo(getApplicationContext(), mApp.getPreference().getString(Common.u_id, "")).execute();
                             mApp.getPreference().edit().putBoolean("start",false).commit();
                             mApp.getPreference().edit().putBoolean(Common.PERSONALINFO, true).commit();
                             mApp.getPreference().edit().putBoolean(Common.HOBBIES, false).commit();
                             mApp.getPreference().edit().putBoolean(Common.PROJECT, false).commit();
                             mApp.getPreference().edit().putBoolean(Common.USRINFO, true).commit();
                             int val=mApp.getPreference().getInt(Common.PROFILESTRENGTH,0);
-                            mApp.getPreference().edit().putInt(Common.PROFILESTRENGTH, val+8).commit();
-                            new GetInfo(getApplicationContext(), mApp.getPreference().getString(Common.u_id, "")).execute();
+                            mApp.getPreference().edit().putInt(Common.PROFILESTRENGTH, val+2).commit();
+
 
                             if (mApp.getPreference().getString(Common.LEVEL, "").equalsIgnoreCase("1")) {
                                 mApp.getPreference().edit().putString(Common.RESUME, "junior").commit();
-                                new FrsherDefault(PersonalActivity.this,mApp.getPreference().getString(Common.u_id,""),uct).execute();
+
                                 startActivity(new Intent(getApplicationContext(), JuniorActivity.class));
                             } else {
                                 mApp.getPreference().edit().putString(Common.RESUME, "senior").commit();
@@ -350,6 +352,7 @@ public class PersonalActivity extends AppCompatActivity implements View.OnClickL
                                 mApp.getPreference().edit().putBoolean(Common.WORKEXPERIENCE, false).commit();
                                 startActivity(new Intent(getApplicationContext(), SeniorActivity.class));
                             }
+                            new FrsherDefault(PersonalActivity.this,mApp.getPreference().getString(Common.u_id,""),uct).execute();
                             Toast.makeText(getApplicationContext(), "Successfully Completed Signup...", Toast.LENGTH_LONG).show();
 
 

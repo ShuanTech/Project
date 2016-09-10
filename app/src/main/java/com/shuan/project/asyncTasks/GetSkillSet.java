@@ -5,6 +5,7 @@ import android.os.AsyncTask;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.MultiAutoCompleteTextView;
 import android.widget.ProgressBar;
 import android.widget.ScrollView;
 
@@ -25,12 +26,12 @@ public class GetSkillSet extends AsyncTask<String, String, String> {
     private Context mContext;
     private ScrollView scroll;
     private ProgressBar progressBar;
-    private AutoCompleteTextView txt;
+    private MultiAutoCompleteTextView txt;
     private ArrayList<Sample> list;
     private String[] skll = new String[0];
     private HashMap<String, String> seniorData;
 
-    public GetSkillSet(Context mContext, ScrollView scroll, ProgressBar progressBar, AutoCompleteTextView txt) {
+    public GetSkillSet(Context mContext, ScrollView scroll, ProgressBar progressBar, MultiAutoCompleteTextView txt) {
         this.mContext = mContext;
         this.scroll = scroll;
         this.progressBar = progressBar;
@@ -69,8 +70,10 @@ public class GetSkillSet extends AsyncTask<String, String, String> {
         super.onPostExecute(s);
         progressBar.setVisibility(View.GONE);
         scroll.setVisibility(View.VISIBLE);
+        txt.setTokenizer(new MultiAutoCompleteTextView.CommaTokenizer());
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(mContext, R.layout.custom_auto_complete_item, R.id.display, skll);
         txt.setThreshold(1);
         txt.setAdapter(adapter);
+
     }
 }

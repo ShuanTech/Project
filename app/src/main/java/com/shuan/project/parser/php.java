@@ -104,6 +104,9 @@ public class php {
     public static final String reOpen = "http://udyomitra.com/android/re_open_post.php";
     public static final String inviteList = "http://udyomitra.com/android/get_invite_list.php";
     public static final String inviteDetail = "http://udyomitra.com/android/get_invite_detail.php";
-    public static final String frherDefault="http://udyomitra.com/android/fresher_default_follower.php";
+    public static final String frherDefault = "http://udyomitra.com/android/fresher_default_follower.php";
+    public static final String getJob = "http://udyomitra.com/android/get_job.php";
+    public static final String editJob = "http://udyomitra.com/android/edit_job.php";
+    public static final String jobTitle = "http://udyomitra.com/android/get_job_title.php";
 
 }

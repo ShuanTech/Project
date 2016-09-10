@@ -89,6 +89,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         mApp = (Common) getApplicationContext();
 
         mApp.getPreference().edit().putBoolean("start",true).commit();
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
@@ -137,6 +138,18 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         cover.setOnClickListener(this);
         proPic.setOnClickListener(this);
 
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
+
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
     }
 
     @Override

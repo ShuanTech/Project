@@ -20,13 +20,13 @@ import java.util.HashMap;
 public class AddWrkDetail extends AsyncTask<String, String, String> {
 
     public Context mContext;
-    public String uId, org, loc, pos, frmDate, toDate, s="";
+    public String uId, org, loc, pos, frmDate, toDate, s = "";
     public HashMap<String, String> rData;
     public ProgressDialog pDialog;
     public Common mApp;
     public boolean Ins;
 
-    public AddWrkDetail(Context mContext, String uId, String org, String loc, String pos, String frmDate, String toDate,boolean Ins) {
+    public AddWrkDetail(Context mContext, String uId, String org, String loc, String pos, String frmDate, String toDate, boolean Ins) {
         this.mContext = mContext;
         this.uId = uId;
         this.org = org;
@@ -34,7 +34,7 @@ public class AddWrkDetail extends AsyncTask<String, String, String> {
         this.pos = pos;
         this.frmDate = frmDate;
         this.toDate = toDate;
-        this.Ins=Ins;
+        this.Ins = Ins;
         this.mApp = (Common) mContext.getApplicationContext();
     }
 
@@ -60,10 +60,10 @@ public class AddWrkDetail extends AsyncTask<String, String, String> {
         rData.put("frm", frmDate);
         rData.put("to", toDate);
         rData.put("type", "add");
-        if(Ins==true){
-            rData.put("ins","false");
-        }else{
-            rData.put("ins","true");
+        if (Ins == true) {
+            rData.put("ins", "false");
+        } else {
+            rData.put("ins", "true");
         }
 
 
@@ -85,21 +85,22 @@ public class AddWrkDetail extends AsyncTask<String, String, String> {
         super.onPostExecute(s);
         pDialog.cancel();
         if (s.equalsIgnoreCase("true")) {
-            if(mApp.getPreference().getString(Common.LEVEL,"").equalsIgnoreCase("1")){
-                new UpdateLevel(mContext,uId).execute();
-                mApp.getPreference().edit().putBoolean(Common.WORKINFO,true).commit();
-                mApp.getPreference().edit().putString(Common.LEVEL,"2").commit();
-                AppCompatActivity activity= (AppCompatActivity) mContext;
+            int val = mApp.getPreference().getInt(Common.PROFILESTRENGTH, 0);
+            mApp.getPreference().edit().putInt(Common.PROFILESTRENGTH, val + 2).commit();
+
+            if (mApp.getPreference().getString(Common.LEVEL, "").equalsIgnoreCase("1")) {
+                new UpdateLevel(mContext, uId).execute();
+                mApp.getPreference().edit().putBoolean(Common.WORKINFO, true).commit();
+                mApp.getPreference().edit().putString(Common.LEVEL, "2").commit();
+                AppCompatActivity activity = (AppCompatActivity) mContext;
                 Intent i = activity.getBaseContext().getPackageManager()
-                        .getLaunchIntentForPackage( activity.getBaseContext().getPackageName() );
+                        .getLaunchIntentForPackage(activity.getBaseContext().getPackageName());
                 i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 activity.startActivity(i);
-            }else{
+            } else {
                 new GetInfo(mContext, uId).execute();
-                mApp.getPreference().edit().putBoolean(Common.WORKINFO,true).commit();
-                int val=mApp.getPreference().getInt(Common.PROFILESTRENGTH,0);
+                mApp.getPreference().edit().putBoolean(Common.WORKINFO, true).commit();
 
-                mApp.getPreference().edit().putInt(Common.PROFILESTRENGTH, val+6).commit();
 
                 Toast.makeText(mContext, "Successfully Work Details Added", Toast.LENGTH_SHORT).show();
                 Intent in = new Intent(mContext, ResumeEditActivity.class);

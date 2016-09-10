@@ -259,7 +259,7 @@ public class WorkActivity extends AppCompatActivity implements View.OnClickListe
                         public void run() {
                             mApp.getPreference().edit().putBoolean(Common.WORKINFO, true).commit();
                             int val=mApp.getPreference().getInt(Common.PROFILESTRENGTH,0);
-                            mApp.getPreference().edit().putInt(Common.PROFILESTRENGTH, val+6).commit();
+                            mApp.getPreference().edit().putInt(Common.PROFILESTRENGTH, val+3).commit();
                             startActivity(new Intent(getApplicationContext(), EducationActivity.class));
                             finish();
                         }

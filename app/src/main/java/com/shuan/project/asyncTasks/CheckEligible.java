@@ -65,7 +65,9 @@ public class CheckEligible extends AsyncTask<String, String, String> {
                 s = "same";
             } else if (succ == 2) {
                 s = "meet";
-            } else {
+            } else if(succ==4){
+                s="fresher";
+            }else {
                 JSONArray jsonArray = json.getJSONArray("refer");
                 referName = new String[jsonArray.length()];
                 referId = new String[jsonArray.length()];
@@ -93,7 +95,9 @@ public class CheckEligible extends AsyncTask<String, String, String> {
             Toast.makeText(mContext, "You are Working in the Same Company", Toast.LENGTH_SHORT).show();
         } else if (s.equalsIgnoreCase("meet")) {
             Toast.makeText(mContext, "You are not eligible for the job", Toast.LENGTH_SHORT).show();
-        } else {
+        } else if(s.equalsIgnoreCase("fresher")){
+            Toast.makeText(mContext, "You are Fresher. You cannot apply this job.", Toast.LENGTH_SHORT).show();
+        }else {
 
             final ArrayList<Integer> mSelectedItems = new ArrayList<Integer>();
             builder = new AlertDialog.Builder(mContext);

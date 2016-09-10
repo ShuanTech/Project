@@ -138,6 +138,7 @@ public class LoginActivity extends AppCompatActivity {
                         public void run() {
                             mApp.getPreference().edit().putBoolean(Common.Login, true).commit();
                             mApp.getPreference().edit().putBoolean(Common.USRINFO, true).commit();
+                            mApp.getPreference().edit().putBoolean("start",true).commit();
 
                             new GetInfo(getApplicationContext(), uId).execute();
                             mApp.getPreference().edit().putString(Common.u_id, uId).commit();

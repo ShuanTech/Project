@@ -20,7 +20,7 @@ import java.util.HashMap;
 public class AddBasicInfo extends AsyncTask<String, String, String> {
 
     private Context mContext;
-    private String uId, dob, sex, fName, mName, rel, lang, hobby, s="";
+    private String uId, dob, sex, fName, mName, rel, lang, hobby, s = "";
     private HashMap<String, String> seniorData;
     private ProgressDialog pDialog;
     private Common mApp;
@@ -35,7 +35,7 @@ public class AddBasicInfo extends AsyncTask<String, String, String> {
         this.rel = rel;
         this.lang = lang;
         this.hobby = hobby;
-        this.mApp= (Common) mContext.getApplicationContext();
+        this.mApp = (Common) mContext.getApplicationContext();
     }
 
     @Override
@@ -79,10 +79,10 @@ public class AddBasicInfo extends AsyncTask<String, String, String> {
         super.onPostExecute(s);
         pDialog.cancel();
         if (s.equalsIgnoreCase("true")) {
-            int val=mApp.getPreference().getInt(Common.PROFILESTRENGTH,0);
-            mApp.getPreference().edit().putInt(Common.PROFILESTRENGTH, val+8).commit();
-            mApp.getPreference().edit().putBoolean(Common.HOBBIES,true).commit();
-            mApp.getPreference().edit().putBoolean(Common.PERSONALINFO,true).commit();
+            int val = mApp.getPreference().getInt(Common.PROFILESTRENGTH, 0);
+            mApp.getPreference().edit().putInt(Common.PROFILESTRENGTH, val + 1).commit();
+            mApp.getPreference().edit().putBoolean(Common.HOBBIES, true).commit();
+            mApp.getPreference().edit().putBoolean(Common.PERSONALINFO, true).commit();
             Toast.makeText(mContext, "Successfully Contact Info Added", Toast.LENGTH_SHORT).show();
             Intent in = new Intent(mContext, ResumeEditActivity.class);
             in.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

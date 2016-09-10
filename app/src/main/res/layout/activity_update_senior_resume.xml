@@ -55,8 +55,8 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/ps"
                         android:layout_marginTop="@dimen/standard_margin"
-                        android:imeOptions="actionDone"
-                        android:hint="Eg: Professional with 10 years of experience in customer relationships and services " />
+                        android:hint="Eg: Professional with 10 years of experience in customer relationships and services "
+                        android:imeOptions="actionDone" />
 
 
                 </RelativeLayout>
@@ -102,8 +102,8 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/ws"
                         android:layout_marginTop="@dimen/standard_margin"
-                        android:imeOptions="actionDone"
-                        android:hint="Eg: Team leader in the company for 2years" />
+                        android:hint="Eg: Team leader in the company for 2years"
+                        android:imeOptions="actionDone" />
 
 
                 </RelativeLayout>
@@ -935,11 +935,10 @@
             <RelativeLayout
                 android:id="@+id/lay8"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:visibility="gone">
+                android:layout_height="wrap_content">
 
                 <RelativeLayout
-                    android:id="@+id/c6"
+                    android:id="@+id/c4"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
@@ -953,29 +952,30 @@
                         android:textAppearance="?android:textAppearanceMedium"
                         android:textColor="#333" />
 
-                    <Button
-                        android:id="@+id/add_achieve"
-                        android:layout_width="50dp"
-                        android:layout_height="30dp"
-                        android:layout_alignParentRight="true"
-                        android:layout_marginRight="@dimen/activity_horizontal_margin"
-                        android:background="@null"
-                        android:text="+"
-                        android:textColor="@color/colorAccent" />
                 </RelativeLayout>
 
-                <LinearLayout
-                    android:id="@+id/container"
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/ac"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/c6"
-                    android:orientation="vertical"></LinearLayout>
+                    android:layout_below="@+id/c4"
+                    android:layout_marginTop="@dimen/standard_margin">
+
+                    <EditText
+                        android:id="@+id/ach"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Enter Achievement"
+                        android:imeOptions="actionNext"
+                        android:inputType="textPersonName" />
+
+                </android.support.design.widget.TextInputLayout>
 
                 <RelativeLayout
-                    android:id="@+id/c7"
+                    android:id="@+id/c8"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/container"
+                    android:layout_below="@+id/ac"
                     android:layout_marginTop="@dimen/standard_margin">
 
                     <TextView
@@ -988,29 +988,30 @@
                         android:textAppearance="?android:textAppearanceMedium"
                         android:textColor="#333" />
 
-                    <Button
-                        android:id="@+id/add_extra"
-                        android:layout_width="50dp"
-                        android:layout_height="30dp"
-                        android:layout_alignParentRight="true"
-                        android:layout_marginRight="@dimen/activity_horizontal_margin"
-                        android:background="@null"
-                        android:text="+"
-                        android:textColor="@color/colorAccent" />
                 </RelativeLayout>
 
-                <LinearLayout
-                    android:id="@+id/extra_container"
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/ex"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/c7"
-                    android:orientation="vertical"></LinearLayout>
+                    android:layout_below="@+id/c8"
+                    android:layout_marginTop="@dimen/standard_margin">
+
+                    <EditText
+                        android:id="@+id/extra"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Enter Extra-curricular Activity"
+                        android:imeOptions="actionNext"
+                        android:inputType="textPersonName" />
+
+                </android.support.design.widget.TextInputLayout>
 
                 <RelativeLayout
-                    android:id="@+id/c8"
+                    android:id="@+id/c6"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/extra_container"
+                    android:layout_below="@+id/ex"
                     android:layout_marginTop="@dimen/standard_margin">
 
                     <TextView
@@ -1025,28 +1026,33 @@
                     <android.support.design.widget.TextInputLayout
                         android:id="@+id/lay_hobby"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/ot"
+                        android:layout_marginTop="@dimen/standard_margin">
 
                         <EditText
                             android:id="@+id/hobby"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/activity_horizontal_margin"
-                            android:hint="@string/hobby" />
+                            android:hint="@string/hobby"
+                            android:imeOptions="actionNext"
+                            android:inputType="text" />
                     </android.support.design.widget.TextInputLayout>
 
                     <android.support.design.widget.TextInputLayout
-                        android:id="@+id/lay_lang"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_below="@+id/lay_hobby">
+                        android:layout_below="@+id/lay_hobby"
+                        android:layout_marginTop="@dimen/standard_margin">
 
                         <EditText
                             android:id="@+id/lang"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_below="@+id/lay_hobby"
-                            android:hint="@string/lang_known" />
+                            android:hint="@string/lang_known"
+                            android:imeOptions="actionDone"
+                            android:inputType="text" />
                     </android.support.design.widget.TextInputLayout>
 
                 </RelativeLayout>
@@ -1056,13 +1062,12 @@
                     android:id="@+id/o_update"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/c8"
+                    android:layout_below="@+id/c6"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="@dimen/activity_horizontal_margin"
                     android:background="@null"
                     android:text="UPDATE"
                     android:textColor="@color/colorAccent" />
-
 
             </RelativeLayout>
 

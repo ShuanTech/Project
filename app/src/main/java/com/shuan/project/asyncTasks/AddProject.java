@@ -20,14 +20,14 @@ import java.util.HashMap;
 public class AddProject extends AsyncTask<String, String, String> {
 
     private Context mContext;
-    private String uId, title, pltfrm, role, teamSze, dur, url, desc, isAcd,type, s="";
+    private String uId, title, pltfrm, role, teamSze, dur, url, desc, isAcd, type, s = "";
     private HashMap<String, String> seniorData;
     private ProgressDialog pDialog;
     private Common mApp;
 
 
     public AddProject(Context mContext, String uId, String title, String pltfrm, String role, String teamSze, String dur, String url,
-                      String desc, String isAcd,String type) {
+                      String desc, String isAcd, String type) {
         this.mContext = mContext;
         this.uId = uId;
         this.title = title;
@@ -37,9 +37,9 @@ public class AddProject extends AsyncTask<String, String, String> {
         this.dur = dur;
         this.url = url;
         this.desc = desc;
-        this.isAcd=isAcd;
+        this.isAcd = isAcd;
         this.type = type;
-        this.mApp= (Common) mContext.getApplicationContext();
+        this.mApp = (Common) mContext.getApplicationContext();
     }
 
     @Override
@@ -64,7 +64,7 @@ public class AddProject extends AsyncTask<String, String, String> {
         seniorData.put("dur", dur);
         seniorData.put("desc", desc);
         seniorData.put("url", url);
-        seniorData.put("isAcd",isAcd);
+        seniorData.put("isAcd", isAcd);
         seniorData.put("type", type);
 
         try {
@@ -86,9 +86,13 @@ public class AddProject extends AsyncTask<String, String, String> {
         super.onPostExecute(s);
         pDialog.cancel();
         if (s.equalsIgnoreCase("true")) {
+            if (type.equalsIgnoreCase("add")) {
+                int val = mApp.getPreference().getInt(Common.PROFILESTRENGTH, 0);
+                mApp.getPreference().edit().putInt(Common.PROFILESTRENGTH, val + 2).commit();
+            }
             mApp.getPreference().edit().putBoolean(Common.PROJECT, true).commit();
-            int val=mApp.getPreference().getInt(Common.PROFILESTRENGTH,0);
-            mApp.getPreference().edit().putInt(Common.PROFILESTRENGTH, val+5).commit();
+            int val = mApp.getPreference().getInt(Common.PROFILESTRENGTH, 0);
+            mApp.getPreference().edit().putInt(Common.PROFILESTRENGTH, val + 5).commit();
             Toast.makeText(mContext, "Successfully Project Details Added", Toast.LENGTH_SHORT).show();
             Intent in = new Intent(mContext, ResumeEditActivity.class);
             in.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

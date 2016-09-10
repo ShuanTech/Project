@@ -20,12 +20,14 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.MultiAutoCompleteTextView;
 import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.shuan.project.R;
 import com.shuan.project.Utils.Common;
@@ -108,7 +110,7 @@ public class UpdateResumeActivity extends AppCompatActivity implements View.OnCl
     private Button h_update;
 
     /* Skill Set */
-    private AutoCompleteTextView skll;
+    private MultiAutoCompleteTextView skll;
     private Button addSkll;
 
     /* Project Field */
@@ -167,6 +169,7 @@ public class UpdateResumeActivity extends AppCompatActivity implements View.OnCl
         bsc = (LinearLayout) findViewById(R.id.bsc);
 
         AddDetail();
+
 
 
     }
@@ -420,19 +423,19 @@ public class UpdateResumeActivity extends AppCompatActivity implements View.OnCl
             scroll.setVisibility(View.GONE);
             progressBar.setVisibility(View.VISIBLE);
 
-            skll = (AutoCompleteTextView) findViewById(R.id.skills);
+            skll = (MultiAutoCompleteTextView) findViewById(R.id.skills);
             addSkll = (Button) findViewById(R.id.sk_add);
 
             new GetSkillSet(UpdateResumeActivity.this, scroll, progressBar, skll).execute();
 
-            skll.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+           /* skll.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     TextView txt = (TextView) view.findViewById(R.id.display);
                     skll.setText(txt.getText().toString());
                     sIns = true;
                 }
-            });
+            });*/
 
 
             addSkll.setOnClickListener(this);
@@ -737,6 +740,7 @@ public class UpdateResumeActivity extends AppCompatActivity implements View.OnCl
                     skll.setError("Field Mandatory");
                     skll.requestFocus();
                 } else {
+                    //Toast.makeText(getApplicationContext(),skll.getText().toString(),Toast.LENGTH_SHORT).show();
                     new profileSummaryUpdate(UpdateResumeActivity.this, mApp.getPreference().getString(Common.u_id, ""), skll.getText().toString(), "skill").execute();
                 }
                 break;

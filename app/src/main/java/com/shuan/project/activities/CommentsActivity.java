@@ -83,6 +83,19 @@ public class CommentsActivity extends AppCompatActivity implements View.OnClickL
 
         cmdSnd.setOnClickListener(this);
 
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
+
+    }
+
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
     }
 
     @Override

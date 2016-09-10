@@ -14,11 +14,12 @@ import java.util.HashMap;
 public class Follower extends AsyncTask<String, String, String> {
 
     private Context mContext;
-    private String cmpnyName, distrit;
+    private String uId,cmpnyName, distrit;
     private HashMap<String, String> cData;
 
-    public Follower(Context mContext, String cmpnyName, String distrit) {
+    public Follower(Context mContext, String uId,String cmpnyName, String distrit) {
         this.mContext = mContext;
+        this.uId=uId;
         this.cmpnyName = cmpnyName;
         this.distrit = distrit;
 
@@ -28,6 +29,7 @@ public class Follower extends AsyncTask<String, String, String> {
     protected String doInBackground(String... params) {
 
         cData = new HashMap<String, String>();
+        cData.put("u_id",uId);
         cData.put("cName", cmpnyName);
         cData.put("cDistrict", distrit);
         try {

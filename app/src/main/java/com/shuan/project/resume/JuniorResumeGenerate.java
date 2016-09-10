@@ -81,11 +81,19 @@ public class JuniorResumeGenerate extends AppCompatActivity {
             FILE = Environment.getExternalStorageDirectory() + "/" + mApp.getPreference().getString(Common.u_id, "") + "-"
                     + getIntent().getStringExtra("job_id") + "-" +
                     getIntent().getStringExtra("refer") + ".pdf";
+            chkInComplte();
+        } else if (mApp.getPreference().getBoolean("download", false) == true) {
+            FILE = Environment.getExternalStorageDirectory() + "/" + mApp.getPreference().getString("name", "") + ".pdf";
+            genrateResume("1", FILE);
         } else {
             FILE = Environment.getExternalStorageDirectory() + "/" + mApp.getPreference().getString(Common.u_id, "") + ".pdf";
+            chkInComplte();
         }
 
 
+    }
+
+    private void chkInComplte() {
         if (mApp.getPreference().getBoolean(Common.QUALIFICATION, false) == false) {
             Toast.makeText(getApplicationContext(), "We Need Some Details to Complete your Resume", Toast.LENGTH_SHORT).show();
             startActivity(new Intent(getApplicationContext(), UpdateJuniorResumeActivity.class));
@@ -119,8 +127,6 @@ public class JuniorResumeGenerate extends AppCompatActivity {
             genrateResume("1", FILE);
 
         }
-
-
     }
 
 
@@ -141,10 +147,16 @@ public class JuniorResumeGenerate extends AppCompatActivity {
             fout = new FileOutputStream(file);
             PdfWriter.getInstance(doc, fout);
             doc.open();
-            if (mApp.getPreference().getBoolean(Common.OBJECTIVE, false) == false) {
-                getObjective();
-            } else {
+            if (mApp.getPreference().getBoolean("download", false) == true) {
                 new getInfo().execute();
+            } else {
+                if (mApp.getPreference().getBoolean(Common.OBJECTIVE, false) == false) {
+                    getObjective();
+                } else {
+
+                    //new GetResumeData().execute();
+                    new getInfo().execute();
+                }
             }
 
         } catch (Exception e) {
@@ -234,14 +246,17 @@ public class JuniorResumeGenerate extends AppCompatActivity {
                                 doc.add(new LineSeparator(4, 100, BaseColor.BLACK, 0, 0));
                                 doc.add(Chunk.NEWLINE);
 
-                                Paragraph p3 = new Paragraph("OBJECTIVIES", heading);
-                                p3.setAlignment(Paragraph.ALIGN_LEFT);
-                                doc.add(p3);
-                                Paragraph p4 = new Paragraph(mApp.getPreference().getString(Common.OBJDATA, ""), content);
-                                p4.setAlignment(Paragraph.ALIGN_LEFT);
-                                doc.add(p4);
-                                doc.add(Chunk.NEWLINE);
+                                if (mApp.getPreference().getBoolean("download", false) == true) {
+                                } else {
+                                    Paragraph p3 = new Paragraph("OBJECTIVIES", heading);
+                                    p3.setAlignment(Paragraph.ALIGN_LEFT);
+                                    doc.add(p3);
+                                    Paragraph p4 = new Paragraph(mApp.getPreference().getString(Common.OBJDATA, ""), content);
+                                    p4.setAlignment(Paragraph.ALIGN_LEFT);
+                                    doc.add(p4);
+                                    doc.add(Chunk.NEWLINE);
 
+                                }
 
                                 new getEduInfo().execute();
 
@@ -272,7 +287,11 @@ public class JuniorResumeGenerate extends AppCompatActivity {
         protected String doInBackground(String... params) {
             list.clear();
             resumeData = new HashMap<String, String>();
-            resumeData.put("u_id", mApp.getPreference().getString(Common.u_id, ""));
+            if (mApp.getPreference().getBoolean("download", false) == true) {
+                resumeData.put("u_id", mApp.getPreference().getString("Id", ""));
+            } else {
+                resumeData.put("u_id", mApp.getPreference().getString(Common.u_id, ""));
+            }
             try {
                 JSONObject json = Connection.UrlConnection(php.getEduInfo, resumeData);
                 int succ = json.getInt("success");
@@ -338,7 +357,11 @@ public class JuniorResumeGenerate extends AppCompatActivity {
         @Override
         protected String doInBackground(String... params) {
             resumeData = new HashMap<String, String>();
-            resumeData.put("u_id", mApp.getPreference().getString(Common.u_id, ""));
+            if (mApp.getPreference().getBoolean("download", false) == true) {
+                resumeData.put("u_id", mApp.getPreference().getString("Id", ""));
+            } else {
+                resumeData.put("u_id", mApp.getPreference().getString(Common.u_id, ""));
+            }
             try {
 
                 JSONObject json = Connection.UrlConnection(php.getSkill, resumeData);
@@ -432,8 +455,15 @@ public class JuniorResumeGenerate extends AppCompatActivity {
         protected String doInBackground(String... params) {
             list.clear();
             resumeData = new HashMap<String, String>();
-            resumeData.put("u_id", mApp.getPreference().getString(Common.u_id, ""));
-            resumeData.put("level", "senior");
+
+            if (mApp.getPreference().getBoolean("download", false) == true) {
+                resumeData.put("u_id", mApp.getPreference().getString("Id", ""));
+                resumeData.put("level", "senior");
+            } else {
+                resumeData.put("u_id", mApp.getPreference().getString(Common.u_id, ""));
+                resumeData.put("level", "senior");
+            }
+
 
             try {
                 JSONObject json = Connection.UrlConnection(php.getProjectDetail, resumeData);
@@ -564,7 +594,11 @@ public class JuniorResumeGenerate extends AppCompatActivity {
         protected String doInBackground(String... params) {
             list.clear();
             resumeData = new HashMap<String, String>();
-            resumeData.put("u_id", mApp.getPreference().getString(Common.u_id, ""));
+            if (mApp.getPreference().getBoolean("download", false) == true) {
+                resumeData.put("u_id", mApp.getPreference().getString("Id", ""));
+            } else {
+                resumeData.put("u_id", mApp.getPreference().getString(Common.u_id, ""));
+            }
             try {
 
                 JSONObject json = Connection.UrlConnection(php.getCertify, resumeData);
@@ -630,7 +664,11 @@ public class JuniorResumeGenerate extends AppCompatActivity {
         protected String doInBackground(String... params) {
             list.clear();
             resumeData = new HashMap<String, String>();
-            resumeData.put("u_id", mApp.getPreference().getString(Common.u_id, ""));
+            if (mApp.getPreference().getBoolean("download", false) == true) {
+                resumeData.put("u_id", mApp.getPreference().getString("Id", ""));
+            } else {
+                resumeData.put("u_id", mApp.getPreference().getString(Common.u_id, ""));
+            }
             try {
 
                 JSONObject json = Connection.UrlConnection(php.getAchivmnt, resumeData);
@@ -690,7 +728,11 @@ public class JuniorResumeGenerate extends AppCompatActivity {
         protected String doInBackground(String... params) {
             list.clear();
             resumeData = new HashMap<String, String>();
-            resumeData.put("u_id", mApp.getPreference().getString(Common.u_id, ""));
+            if (mApp.getPreference().getBoolean("download", false) == true) {
+                resumeData.put("u_id", mApp.getPreference().getString("Id", ""));
+            } else {
+                resumeData.put("u_id", mApp.getPreference().getString(Common.u_id, ""));
+            }
             try {
 
                 JSONObject json = Connection.UrlConnection(php.getExtracurricular, resumeData);
@@ -837,6 +879,10 @@ public class JuniorResumeGenerate extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "Upload start", Toast.LENGTH_SHORT).show();
                 new UploadPicture(JuniorResumeGenerate.this, FILE, "resume", "junior", php.upload_resume).execute();
                 mApp.getPreference().edit().putBoolean(Common.APPLY, false).commit();
+            } else if (mApp.getPreference().getBoolean("download", false) == true) {
+                mApp.getPreference().edit().putBoolean("downlaod", false).commit();
+                Toast.makeText(getApplicationContext(), "Resume Saved in" + FILE, Toast.LENGTH_SHORT).show();
+                openPdf();
             } else {
                 Toast.makeText(getApplicationContext(), "Resume Saved in" + FILE, Toast.LENGTH_SHORT).show();
                 openPdf();

@@ -83,13 +83,13 @@ public class AddContactInfo extends AsyncTask<String, String, String> {
         pDialog.cancel();
         if (s.equalsIgnoreCase("true")) {
             int val=mApp.getPreference().getInt(Common.PROFILESTRENGTH,0);
-            mApp.getPreference().edit().putInt(Common.PROFILESTRENGTH, val+2).commit();
+            mApp.getPreference().edit().putInt(Common.PROFILESTRENGTH, val+1).commit();
             mApp.getPreference().edit().putBoolean(Common.HOBBIES,true).commit();
             mApp.getPreference().edit().putBoolean(Common.PERSONALINFO,true).commit();
             Toast.makeText(mContext, "Successfully Contact Info Added", Toast.LENGTH_SHORT).show();
-            if(mApp.getPreference().getString(Common.LEVEL,"").equalsIgnoreCase("1")){
-                new FrsherDefault(mContext,mApp.getPreference().getString(Common.u_id,""),city).execute();
-            }
+
+            new FrsherDefault(mContext,mApp.getPreference().getString(Common.u_id,""),city).execute();
+
             Intent in = new Intent(mContext, ResumeEditActivity.class);
             in.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             mContext.startActivity(in);

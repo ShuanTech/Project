@@ -76,8 +76,19 @@ public class InterViewActivity extends AppCompatActivity {
         note = (TextView) findViewById(R.id.note);
 
         new GetInterViewDetail().execute();
+
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+    }
 
     public class GetInterViewDetail extends AsyncTask<String, String, String> {
 

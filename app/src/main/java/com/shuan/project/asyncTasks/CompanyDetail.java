@@ -97,7 +97,7 @@ public class CompanyDetail extends AsyncTask<String, String, String> {
                 ((AppCompatActivity) mContext).finish();
             }
 
-            new Follower(mContext, orgName, city).execute();
+            new Follower(mContext, uId,orgName, city).execute();
         } else {
             Toast.makeText(mContext, "Something went wrong! Try again...", Toast.LENGTH_SHORT).show();
         }

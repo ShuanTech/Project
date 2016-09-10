@@ -366,7 +366,7 @@ public class EducationActivity extends AppCompatActivity implements View.OnClick
                             mApp.getPreference().edit().putBoolean(Common.HSC, false).commit();
                             mApp.getPreference().edit().putBoolean(Common.SSLC, false).commit();
                             int val=mApp.getPreference().getInt(Common.PROFILESTRENGTH,0);
-                            mApp.getPreference().edit().putInt(Common.PROFILESTRENGTH, val+5).commit();
+                            mApp.getPreference().edit().putInt(Common.PROFILESTRENGTH, val+2).commit();
                             if (mApp.getPreference().getString(Common.LEVEL, "").equalsIgnoreCase("1")) {
                                 startActivity(new Intent(getApplicationContext(), SkillActivity.class));
                                 finish();

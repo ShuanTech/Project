@@ -1,10 +1,7 @@
 package com.shuan.project.employer;
 
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -22,7 +19,6 @@ import com.shuan.project.asyncTasks.CheckEligible;
 import com.shuan.project.asyncTasks.PostView;
 import com.shuan.project.resume.ExpResumeGenerate;
 import com.shuan.project.resume.JuniorResumeGenerate;
-import com.shuan.project.resume.ResumeEditActivity;
 
 public class PostViewActivity extends AppCompatActivity {
 
@@ -42,6 +38,7 @@ public class PostViewActivity extends AppCompatActivity {
         getWindow().getDecorView().setSystemUiVisibility(
                 View.SYSTEM_UI_FLAG_LAYOUT_STABLE
                         | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post_view);
 
@@ -87,15 +84,24 @@ public class PostViewActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-
-                new CheckEligible(PostViewActivity.this,mApp.getPreference().getString(Common.u_id,""),getIntent().getStringExtra("jId"),
-                        mApp.getPreference().getString(Common.LEVEL,"")).execute();
-                mApp.getPreference().edit().putBoolean(Common.APPLY, true).commit();
+                if (!apply.getText().toString().equalsIgnoreCase("Applied")) {
+                    new CheckEligible(PostViewActivity.this, mApp.getPreference().getString(Common.u_id, ""), getIntent().getStringExtra("jId"),
+                            mApp.getPreference().getString(Common.LEVEL, "")).execute();
+                    mApp.getPreference().edit().putBoolean(Common.APPLY, true).commit();
+                }
 
 
             }
         });
+
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
     }
+
 
     private void CallResumeData(String jId, String frmId) {
 

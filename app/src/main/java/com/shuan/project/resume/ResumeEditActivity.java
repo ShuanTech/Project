@@ -20,6 +20,7 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.shuan.project.R;
 import com.shuan.project.Utils.Common;
@@ -140,6 +141,18 @@ public class ResumeEditActivity extends AppCompatActivity implements View.OnClic
         abtEdt.setOnClickListener(this);
         chkIntro();
 
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
+
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
     }
 
     private void chkIntro() {
@@ -155,9 +168,13 @@ public class ResumeEditActivity extends AppCompatActivity implements View.OnClic
         Intent in = new Intent(ResumeEditActivity.this, UpdateResumeActivity.class);
         switch (v.getId()) {
             case R.id.pro:
-                in.putExtra("what", "add");
-                in.putExtra("which", "proSum");
-                startActivity(in);
+                if(mApp.getPreference().getString(Common.LEVEL, "").equalsIgnoreCase("1")){
+                    Toast.makeText(getApplicationContext(), "You cannot Add Profile Summary. Until you are having job.", Toast.LENGTH_SHORT).show();
+                }else {
+                    in.putExtra("what", "add");
+                    in.putExtra("which", "proSum");
+                    startActivity(in);
+                }
                 break;
             case R.id.wrk_det:
                 in.putExtra("what", "add");
@@ -165,9 +182,14 @@ public class ResumeEditActivity extends AppCompatActivity implements View.OnClic
                 startActivity(in);
                 break;
             case R.id.wrk_exp:
-                in.putExtra("what", "add");
-                in.putExtra("which", "wrkExp");
-                startActivity(in);
+                if (mApp.getPreference().getString(Common.LEVEL, "").equalsIgnoreCase("1")) {
+                    Toast.makeText(getApplicationContext(), "You cannot Add Work Experience. Until you are having job.", Toast.LENGTH_SHORT).show();
+                } else {
+                    in.putExtra("what", "add");
+                    in.putExtra("which", "wrkExp");
+                    startActivity(in);
+                }
+
                 break;
             case R.id.add_clg:
                 in.putExtra("what", "add");

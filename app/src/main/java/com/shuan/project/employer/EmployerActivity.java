@@ -92,10 +92,10 @@ public class EmployerActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         mApp = (Common) getApplicationContext();
-        if(mApp.getPreference().getBoolean("start",false)==false){
-            startActivity(new Intent(getApplicationContext(),ProfileActivity.class));
+        if (mApp.getPreference().getBoolean("start", false) == false) {
+            startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
         }
-        new GetInfo(EmployerActivity.this,mApp.getPreference().getString(Common.u_id,""));
+       // new GetInfo(EmployerActivity.this, mApp.getPreference().getString(Common.u_id, ""));
         if (mApp.getPreference().getString(Common.Version, "").equalsIgnoreCase("true")) {
             builder = new AlertDialog.Builder(EmployerActivity.this)
                     .setTitle("Update")
@@ -224,9 +224,9 @@ public class EmployerActivity extends AppCompatActivity {
                     case R.id.logout:
                         mApp.getPreference().edit().clear().commit();
                         Intent intent = new Intent(EmployerActivity.this, LoginActivity.class);
-                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-                        startActivity(intent);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                         finish();
+                        startActivity(intent);
                         return true;
                     case R.id.about:
                         mDrawerLayout.closeDrawers();

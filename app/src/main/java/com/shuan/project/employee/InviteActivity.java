@@ -75,6 +75,13 @@ public class InviteActivity extends AppCompatActivity {
 
         new GetInvite().execute();
 
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
+
     }
 
     public class GetInvite extends AsyncTask<String, String, String> {
@@ -167,5 +174,10 @@ public class InviteActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
     }
 }

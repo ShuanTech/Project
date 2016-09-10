@@ -80,8 +80,8 @@
     <string name="dev_env">Development Environment</string>
     <string name="others">Others</string>
     <string name="achivement">Achievement</string>
-    <string name="lang_known">Language Known (lang1,lang2)</string>
-    <string name="hobby">Hobbies (hobby1,hobby2)</string>
+    <string name="lang_known">Language Known (tamil,english)</string>
+    <string name="hobby">Hobbies (dance,music)</string>
     <string name="project">Project Details</string>
     <string name="extra_c">Extra Curricular Activities</string>
     <string name="profile_summary">Profile Summary</string>

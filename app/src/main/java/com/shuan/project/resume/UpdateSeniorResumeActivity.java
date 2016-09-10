@@ -11,7 +11,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.AdapterView;
@@ -20,7 +19,6 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.MultiAutoCompleteTextView;
 import android.widget.ProgressBar;
 import android.widget.RadioButton;
@@ -124,12 +122,10 @@ public class UpdateSeniorResumeActivity extends AppCompatActivity implements Vie
     private TextView tex, tex1;
 
     /* Hobbies Field */
-    private LinearLayout l1, l2, l3;
-    private String[] achieve = new String[0];
-    private String[] extra = new String[0];
-    private EditText hobby, lang;
+
+    private EditText ach, extra, hobby, lang;
     private TextView ah, extra_c, ot;
-    private Button add_achieve, add_extra, o_update;
+    private Button o_update;
 
     /* Project Field */
     private EditText title, platform, role, team_sze, duration, url, description;
@@ -459,22 +455,17 @@ public class UpdateSeniorResumeActivity extends AppCompatActivity implements Vie
             lay9.setVisibility(View.GONE);
             lay10.setVisibility(View.GONE);
 
-            l1 = (LinearLayout) findViewById(R.id.container);
-            l2 = (LinearLayout) findViewById(R.id.extra_container);
 
+            ach = (EditText) findViewById(R.id.ach);
+            extra = (EditText) findViewById(R.id.extra);
             hobby = (EditText) findViewById(R.id.hobby);
             lang = (EditText) findViewById(R.id.lang);
-            add_achieve = (Button) findViewById(R.id.add_achieve);
             o_update = (Button) findViewById(R.id.o_update);
-            add_extra = (Button) findViewById(R.id.add_extra);
             ah = (TextView) findViewById(R.id.ah);
             extra_c = (TextView) findViewById(R.id.extra_c);
             ot = (TextView) findViewById(R.id.ot);
-
-
-            add_achieve.setOnClickListener(this);
             o_update.setOnClickListener(this);
-            add_extra.setOnClickListener(this);
+
         } else if (mApp.getPreference().getBoolean(Common.PROJECT, false) == false) {
             progressBar.setVisibility(View.GONE);
             scroll.setVisibility(View.VISIBLE);
@@ -698,14 +689,11 @@ public class UpdateSeniorResumeActivity extends AppCompatActivity implements Vie
                     }
                 }
                 break;
-            case R.id.add_achieve:
-                addAchieve();
-                break;
-            case R.id.add_extra:
-                addExtra();
-                break;
+
             case R.id.o_update:
-                getAchieve(l1, l2);
+                new achievement().execute();
+                new extraCurricular().execute();
+                new hobby().execute();
                 break;
             case R.id.acd:
                 if (((CheckBox) view).isChecked()) {
@@ -981,94 +969,6 @@ public class UpdateSeniorResumeActivity extends AppCompatActivity implements Vie
         }
     }
 
-    private void addExtra() {
-        EditText et;
-        if (l == 0) {
-            et = new EditText(this);
-            et.setHint("Extra Curricular Activity");
-            et.setId(l);
-            et.setTypeface(helper.droid(getApplicationContext()));
-            et.requestFocus();
-            l2.addView(et);
-            l++;
-        } else {
-            int i = l - 1;
-            et = (EditText) this.findViewById(i);
-            if (et.getText().toString().length() == 0) {
-                et.setError("Filed Mandatory");
-            } else {
-                et = new EditText(this);
-                et.setHint("Extra Curricular Activity");
-                et.setId(l);
-                et.setTypeface(helper.droid(getApplicationContext()));
-                et.requestFocus();
-                l2.addView(et);
-                l++;
-            }
-        }
-
-    }
-
-    private void getAchieve(ViewGroup parent, ViewGroup parent1) {
-
-        for (int i = 0; i < parent.getChildCount(); i++) {
-            View child = parent.getChildAt(i);
-            EditText et = (EditText) child;
-            if (et.getText().toString().length() == 0) {
-            } else {
-                achieve = new String[]{et.getText().toString()};
-            }
-
-        }
-
-        for (int j = 0; j < parent1.getChildCount(); j++) {
-            View child = parent1.getChildAt(j);
-            EditText et = (EditText) child;
-            if (et.getText().toString().length() == 0) {
-            } else {
-                extra = new String[]{et.getText().toString()};
-            }
-        }
-        if (hobby.getText().toString().length() == 0) {
-            hobby.setError("Field Mandatory");
-        } else if (lang.getText().toString().length() == 0) {
-            lang.setError("Field Mandatory");
-        } else {
-            new achievement().execute();
-            new extraCurricular().execute();
-            new hobby().execute();
-        }
-
-
-    }
-
-    private void addAchieve() {
-        EditText et;
-        if (k == 0) {
-            et = new EditText(this);
-            et.setHint("Achievement");
-            et.setId(k);
-            et.setTypeface(helper.droid(getApplicationContext()));
-            et.requestFocus();
-            l1.addView(et);
-            k++;
-        } else {
-            int i = k - 1;
-            et = (EditText) this.findViewById(i);
-            if (et.getText().toString().length() == 0) {
-                et.setError("Field Mandatory");
-            } else {
-                et = new EditText(this);
-                et.setHint("Achievement");
-                et.setId(k);
-                et.setTypeface(helper.droid(getApplicationContext()));
-                et.requestFocus();
-                l1.addView(et);
-                k++;
-            }
-        }
-
-    }
 
     public class hobby extends AsyncTask<String, String, String> {
         String uHobby = hobby.getText().toString();
@@ -1094,22 +994,23 @@ public class UpdateSeniorResumeActivity extends AppCompatActivity implements Vie
 
     public class extraCurricular extends AsyncTask<String, String, String> {
 
+        String ex = extra.getText().toString();
 
         @Override
         protected String doInBackground(String... params) {
 
-            for (int i = 0; i < extra.length; i++) {
-                seniorData = new HashMap<String, String>();
-                seniorData.put("u_id", mApp.getPreference().getString(Common.u_id, ""));
-                seniorData.put("extra", extra[i]);
-                try {
-                    JSONObject json = Connection.UrlConnection(php.extra, seniorData);
-                    int succ = json.getInt("success");
+
+            seniorData = new HashMap<String, String>();
+            seniorData.put("u_id", mApp.getPreference().getString(Common.u_id, ""));
+            seniorData.put("extra", ex);
+            try {
+                JSONObject json = Connection.UrlConnection(php.extra, seniorData);
+                int succ = json.getInt("success");
 
 
-                } catch (Exception e) {
-                }
+            } catch (Exception e) {
             }
+
 
             return null;
         }
@@ -1136,6 +1037,8 @@ public class UpdateSeniorResumeActivity extends AppCompatActivity implements Vie
 
     public class achievement extends AsyncTask<String, String, String> {
 
+        String ac = ach.getText().toString();
+
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
@@ -1149,18 +1052,18 @@ public class UpdateSeniorResumeActivity extends AppCompatActivity implements Vie
         @Override
         protected String doInBackground(String... params) {
 
-            for (int i = 0; i < achieve.length; i++) {
-                seniorData = new HashMap<String, String>();
-                seniorData.put("u_id", mApp.getPreference().getString(Common.u_id, ""));
-                seniorData.put("a_name", achieve[i]);
-                try {
-                    JSONObject json = Connection.UrlConnection(php.achievement, seniorData);
-                    int succ = json.getInt("success");
+
+            seniorData = new HashMap<String, String>();
+            seniorData.put("u_id", mApp.getPreference().getString(Common.u_id, ""));
+            seniorData.put("a_name", ac);
+            try {
+                JSONObject json = Connection.UrlConnection(php.achievement, seniorData);
+                int succ = json.getInt("success");
 
 
-                } catch (Exception e) {
-                }
+            } catch (Exception e) {
             }
+
 
             return null;
         }

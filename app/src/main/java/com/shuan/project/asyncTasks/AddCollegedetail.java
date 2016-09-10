@@ -20,7 +20,7 @@ import java.util.HashMap;
 public class AddCollegedetail extends AsyncTask<String, String, String> {
 
     private Context mContext;
-    private String uId, level, course, clg, univ, loc, frm, to, agrt, s="", type;
+    private String uId, level, course, clg, univ, loc, frm, to, agrt, s = "", type;
     private boolean ins, cIns;
     private HashMap<String, String> sData;
     private ProgressDialog pDialog;
@@ -102,9 +102,12 @@ public class AddCollegedetail extends AsyncTask<String, String, String> {
         super.onPostExecute(s);
         pDialog.cancel();
         if (s.equalsIgnoreCase("true")) {
+
+            if (type.equalsIgnoreCase("add")) {
+                int val = mApp.getPreference().getInt(Common.PROFILESTRENGTH, 0);
+                mApp.getPreference().edit().putInt(Common.PROFILESTRENGTH, val + 2).commit();
+            }
             mApp.getPreference().edit().putBoolean(Common.QUALIFICATION, true).commit();
-            int val = mApp.getPreference().getInt(Common.PROFILESTRENGTH, 0);
-            mApp.getPreference().edit().putInt(Common.PROFILESTRENGTH, val + 8).commit();
             new GetInfo(mContext, uId).execute();
             new Connect(mContext, uId, mApp.getPreference().getString(Common.LEVEL, ""),
                     clg, course).execute();

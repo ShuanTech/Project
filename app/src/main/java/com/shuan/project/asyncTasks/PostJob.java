@@ -20,11 +20,12 @@ public class PostJob extends AsyncTask<String, String, String> {
 
     private ProgressDialog pDialog;
     private Context mContext;
-    private String uId, title, skill, type, category, salary, location, level, descr;
+    private String uId, title, skill, type, category, salary, location, level, descr, what;
     private HashMap<String, String> jData;
     private String s;
 
-    public PostJob(Context mContext, String uId, String title, String skill, String type, String category, String salary, String location, String level, String descr) {
+    public PostJob(Context mContext, String uId, String title, String skill, String type, String category, String salary, String location,
+                   String level, String descr) {
         this.mContext = mContext;
         this.uId = uId;
         this.title = title;

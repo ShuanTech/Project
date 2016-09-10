@@ -138,7 +138,7 @@ public class PostView extends AsyncTask<String, String, String> {
             jType.setVisibility(View.VISIBLE);
             type.setText(tpe);
         }
-        if (pkg != null && pkg.trim().isEmpty()) {
+        if (pkg != null && !pkg.trim().isEmpty()) {
             jSal.setVisibility(View.VISIBLE);
             sal.setText(pkg);
         }

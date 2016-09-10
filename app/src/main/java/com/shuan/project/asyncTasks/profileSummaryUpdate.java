@@ -77,15 +77,15 @@ public class profileSummaryUpdate extends AsyncTask<String, String, String> {
             if (table.equalsIgnoreCase("skill")) {
                 mApp.getPreference().edit().putBoolean(Common.SKILL, true).commit();
                 int val=mApp.getPreference().getInt(Common.PROFILESTRENGTH,0);
-                mApp.getPreference().edit().putInt(Common.PROFILESTRENGTH, val+3).commit();
+                mApp.getPreference().edit().putInt(Common.PROFILESTRENGTH, val+1).commit();
             }else if(table.equalsIgnoreCase("proSum")){
                 mApp.getPreference().edit().putBoolean(Common.PROFILESUMMARY, true).commit();
                 int val=mApp.getPreference().getInt(Common.PROFILESTRENGTH,0);
-                mApp.getPreference().edit().putInt(Common.PROFILESTRENGTH, val+5).commit();
+                mApp.getPreference().edit().putInt(Common.PROFILESTRENGTH, val+1).commit();
             }else if(table.equalsIgnoreCase("wrkExp")){
                 mApp.getPreference().edit().putBoolean(Common.WORKEXPERIENCE, true).commit();
                 int val=mApp.getPreference().getInt(Common.PROFILESTRENGTH,0);
-                mApp.getPreference().edit().putInt(Common.PROFILESTRENGTH, val+4).commit();
+                mApp.getPreference().edit().putInt(Common.PROFILESTRENGTH, val+1).commit();
             }
             Toast.makeText(mContext, "Successfully Update Profile Summary", Toast.LENGTH_SHORT).show();
             Intent in = new Intent(mContext, ResumeEditActivity.class);

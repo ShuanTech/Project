@@ -48,6 +48,7 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
         new Search(SearchActivity.this, mApp.getPreference().getString(Common.u_id,""),list, progressBar, search).execute();
 
 
+
     }
 
     @Override

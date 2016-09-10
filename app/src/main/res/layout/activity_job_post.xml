@@ -5,7 +5,15 @@
     android:layout_height="match_parent"
     tools:context="com.shuan.project.employer.JobPostActivity">
 
+
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true" />
+
     <ScrollView
+        android:id="@+id/scroll"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
@@ -49,7 +57,9 @@
                         android:layout_marginTop="@dimen/standard_margin"
                         android:hint="Job Skill (ex: skill1,skill)"
                         android:imeOptions="actionNext"
-                        android:inputType="textPersonName" />
+                        android:inputType="textPersonName"
+                        android:singleLine="true" />
+
                 </android.support.design.widget.TextInputLayout>
 
                 <TextView
@@ -70,22 +80,26 @@
 
                     <RadioButton
                         android:id="@+id/full"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_weight="1"
                         android:checked="true"
-                        android:hint="Full time" />
+
+                        android:text="Full time" />
 
                     <RadioButton
                         android:id="@+id/part"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:hint="Parttime" />
+                        android:layout_weight="1"
+                        android:text="Part time" />
 
                     <RadioButton
                         android:id="@+id/contr"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:hint="Contract" />
+                        android:layout_weight="1"
+                        android:text="Contract" />
                 </RadioGroup>
 
                 <android.support.design.widget.TextInputLayout
@@ -126,7 +140,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/standard_margin"
                         android:hint="Job Location"
-                        android:imeOptions="actionNext"
+                        android:imeOptions="actionDone"
                         android:inputType="textPersonName" />
                 </android.support.design.widget.TextInputLayout>
 

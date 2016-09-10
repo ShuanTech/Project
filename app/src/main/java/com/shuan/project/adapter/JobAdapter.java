@@ -14,7 +14,9 @@ import android.widget.TextView;
 import com.shuan.project.R;
 import com.shuan.project.Utils.Common;
 import com.shuan.project.asyncTasks.ClosePost;
+import com.shuan.project.asyncTasks.DeleteDetail;
 import com.shuan.project.asyncTasks.ReopenPost;
+import com.shuan.project.employer.JobPostActivity;
 import com.shuan.project.employer.ShortListActivity;
 import com.shuan.project.list.Sample;
 
@@ -56,7 +58,7 @@ public class JobAdapter extends BaseAdapter {
 
         final Sample curr = list.get(position);
         convertView = inflater.inflate(R.layout.job_item, null);
-        TextView jId = (TextView) convertView.findViewById(R.id.j_id);
+        final TextView jId = (TextView) convertView.findViewById(R.id.j_id);
         TextView jTitle = (TextView) convertView.findViewById(R.id.title);
         TextView viewd = (TextView) convertView.findViewById(R.id.viewd);
         TextView applied = (TextView) convertView.findViewById(R.id.applied);
@@ -71,16 +73,52 @@ public class JobAdapter extends BaseAdapter {
         shared.setText(curr.getLevel() + " Shared");
         applied.setText(curr.getPos() + " Applied");
 
-        if(curr.getCompanyName().equalsIgnoreCase("0")){
+        if (curr.getCompanyName().equalsIgnoreCase("0")) {
             close.setText("Close");
-        }else{
+        } else {
             close.setText("Reopen");
         }
+
+        edit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent in = new Intent(mContext, JobPostActivity.class);
+                mApp.getPreference().edit().putString("jId", curr.getU_id()).commit();
+                mApp.getPreference().edit().putBoolean("jEdit", true).commit();
+                in.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                mContext.startActivity(in);
+            }
+        });
+
+        delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                AlertDialog.Builder build = new AlertDialog.Builder(mContext)
+                        .setTitle("Confirmation")
+                        .setMessage("Are you sure want to delete the Job Post?");
+                build.setPositiveButton("DELETE", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        new DeleteDetail(mContext, curr.getU_id(), "job").execute();
+                        dialog.cancel();
+                    }
+                }).setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                }).show();
+
+
+            }
+        });
+
         close.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                if(close.getText().toString().equalsIgnoreCase("close")){
+                if (close.getText().toString().equalsIgnoreCase("close")) {
                     AlertDialog.Builder build = new AlertDialog.Builder(mContext)
                             .setTitle("Confirmation")
                             .setMessage("Are you sure want to close Job Post?");
@@ -97,8 +135,7 @@ public class JobAdapter extends BaseAdapter {
                         }
                     }).show();
 
-                }
-                else{
+                } else {
                     AlertDialog.Builder build = new AlertDialog.Builder(mContext)
                             .setTitle("Confirmation")
                             .setMessage("Are you sure want to close Job Post?");
@@ -116,7 +153,6 @@ public class JobAdapter extends BaseAdapter {
                     }).show();
 
                 }
-
 
 
             }

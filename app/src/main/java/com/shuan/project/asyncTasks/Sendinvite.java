@@ -16,11 +16,12 @@ import java.util.HashMap;
  */
 public class Sendinvite extends AsyncTask<String, String, String> {
     private Context mContext;
-    private String u_id, frm_id, s;
+    private String u_id, frm_id, name, s;
     private HashMap<String, String> sData;
 
-    public Sendinvite(Context mContext, String u_id, String frm_id) {
+    public Sendinvite(Context mContext, String u_id, String frm_id, String name) {
         this.mContext = mContext;
+        this.name = name;
         this.u_id = u_id;
         this.frm_id = frm_id;
     }
@@ -28,17 +29,19 @@ public class Sendinvite extends AsyncTask<String, String, String> {
     @Override
     protected String doInBackground(String... params) {
         sData = new HashMap<String, String>();
-        sData.put("u_id",u_id);
-        sData.put("frm_id",frm_id);
-        try{
-            JSONObject json= Connection.UrlConnection(php.invitation,sData);
-            int succ=json.getInt("success");
-            if(succ==0){
-                s="false";
-            }else{
-                s="true";
+        sData.put("u_id", u_id);
+        sData.put("frm_id", frm_id);
+        sData.put("name", name);
+        try {
+            JSONObject json = Connection.UrlConnection(php.invitation, sData);
+            int succ = json.getInt("success");
+            if (succ == 0) {
+                s = "false";
+            } else {
+                s = "true";
             }
-        }catch (Exception e){}
+        } catch (Exception e) {
+        }
         return s;
     }
 

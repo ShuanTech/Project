@@ -1,6 +1,7 @@
 package com.shuan.project.profile;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.AsyncTask;
@@ -29,10 +30,12 @@ import com.shuan.project.Utils.CircleImageView;
 import com.shuan.project.Utils.Common;
 import com.shuan.project.asyncTasks.AddFavorite;
 import com.shuan.project.asyncTasks.Following;
-import com.shuan.project.asyncTasks.Sendinvite;
+import com.shuan.project.asyncTasks.GetInvitation;
 import com.shuan.project.list.Sample;
 import com.shuan.project.parser.Connection;
 import com.shuan.project.parser.php;
+import com.shuan.project.resume.ExpResumeGenerate;
+import com.shuan.project.resume.JuniorResumeGenerate;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -59,7 +62,11 @@ public class ProfileViewActivity extends AppCompatActivity {
     private TextView mail, phNo;
     private String pro_pic, cover_pic, cmpny_name, c_type, landmark, country, year_of_establish, num_wrkers, c_desc, c_website, follow;
     private RelativeLayout msg;
-    private Button inivite;
+    private Button inivite, resume;
+    private RelativeLayout followLay;
+    private LinearLayout extrabut;
+    private String fullname;
+    private LinearLayout about, cmpntDet, ser, service, port, portfolio, job, jobs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +77,16 @@ public class ProfileViewActivity extends AppCompatActivity {
         mApp = (Common) getApplicationContext();
         u_id = getIntent().getStringExtra("u_id");
         level = getIntent().getStringExtra("level");
+
+        if (mApp.getPreference().getString(Common.LEVEL, "").equalsIgnoreCase("1")) {
+            setTheme(R.style.Junior);
+        } else if (mApp.getPreference().getString(Common.LEVEL, "").equalsIgnoreCase("2")) {
+            setTheme(R.style.Senior);
+        } else {
+            setTheme(R.style.AppBaseTheme);
+        }
+
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile_view);
 
@@ -81,7 +98,7 @@ public class ProfileViewActivity extends AppCompatActivity {
 
         toolbar.setBackgroundColor(Color.TRANSPARENT);
 
-
+        followLay = (RelativeLayout) findViewById(R.id.follow);
         progressBar = (ProgressBar) findViewById(R.id.progress_bar);
         scroll = (RelativeLayout) findViewById(R.id.scroll);
         cover = (ImageView) findViewById(R.id.cover_img);
@@ -114,6 +131,17 @@ public class ProfileViewActivity extends AppCompatActivity {
         but3 = (Button) findViewById(R.id.but3);
         list = new ArrayList<Sample>();
         inivite = (Button) findViewById(R.id.invite);
+        extrabut = (LinearLayout) findViewById(R.id.extra_but);
+        resume = (Button) findViewById(R.id.resume);
+
+        about = (LinearLayout) findViewById(R.id.about);
+        ser = (LinearLayout) findViewById(R.id.ser);
+        service = (LinearLayout) findViewById(R.id.service);
+        port = (LinearLayout) findViewById(R.id.port);
+        portfolio = (LinearLayout) findViewById(R.id.portfolio);
+        job = (LinearLayout) findViewById(R.id.job);
+        jobs = (LinearLayout) findViewById(R.id.jobs);
+        cmpntDet = (LinearLayout) findViewById(R.id.cmpntDet);
 
         new Profile().execute();
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -125,20 +153,24 @@ public class ProfileViewActivity extends AppCompatActivity {
 
         if (mApp.getPreference().getString(Common.LEVEL, "").equalsIgnoreCase("3")) {
             if (level.equalsIgnoreCase("1") || level.equalsIgnoreCase("2")) {
-                inivite.setVisibility(View.VISIBLE);
-            }else{
-                inivite.setVisibility(View.GONE);
+                extrabut.setVisibility(View.VISIBLE);
+            } else {
+                extrabut.setVisibility(View.GONE);
             }
 
         } else {
-            inivite.setVisibility(View.GONE);
+            extrabut.setVisibility(View.GONE);
+        }
+
+        if (mApp.getPreference().getString(Common.LEVEL, "").equalsIgnoreCase("3")) {
+            followLay.setVisibility(View.GONE);
         }
 
         bu1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (bu1.getText().toString().equalsIgnoreCase("Follow")) {
-                    new Following(ProfileViewActivity.this, u_id, mApp.getPreference().getString(Common.u_id, ""), bu1,level).execute();
+                    new Following(ProfileViewActivity.this, u_id, mApp.getPreference().getString(Common.u_id, ""), bu1, level).execute();
                     bu1.setText("PENDING");
                 }
             }
@@ -147,10 +179,24 @@ public class ProfileViewActivity extends AppCompatActivity {
         inivite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new Sendinvite(ProfileViewActivity.this, u_id, mApp.getPreference().getString(Common.u_id, "")).execute();
+                new GetInvitation(ProfileViewActivity.this, u_id, mApp.getPreference().getString(Common.u_id, "")).execute();
+
             }
         });
 
+        resume.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mApp.getPreference().edit().putBoolean("download", true).commit();
+                mApp.getPreference().edit().putString("Id", u_id).commit();
+                mApp.getPreference().edit().putString("name", name.getText().toString()).commit();
+                if (level.equalsIgnoreCase("1")) {
+                    startActivity(new Intent(getApplicationContext(), JuniorResumeGenerate.class));
+                } else {
+                    startActivity(new Intent(getApplicationContext(), ExpResumeGenerate.class));
+                }
+            }
+        });
 
     }
 
@@ -195,7 +241,7 @@ public class ProfileViewActivity extends AppCompatActivity {
                         JSONObject info = child.getJSONObject("info");
                         JSONArray infoArray = info.getJSONArray("info");
                         JSONObject data = infoArray.getJSONObject(0);
-                        final String fullname = data.optString("full_name");
+                        fullname = data.optString("full_name");
                         final String email_id = data.optString("email_id");
                         final String ph_no = data.optString("ph_no");
                         final String pro_pic = data.optString("pro_pic");
@@ -489,6 +535,8 @@ public class ProfileViewActivity extends AppCompatActivity {
                             @Override
                             public void run() {
                                 cmpny.setVisibility(View.VISIBLE);
+                                about.setVisibility(View.VISIBLE);
+                                cmpntDet.setVisibility(View.VISIBLE);
                                 setImage(pro_pic, proPic);
                                 setCover(cover_pic, cover);
                                 name.setText(cmpny_name);
@@ -512,6 +560,88 @@ public class ProfileViewActivity extends AppCompatActivity {
                             }
                         });
 
+                        final JSONObject serv = child.getJSONObject("ser");
+                        JSONArray serArray = serv.getJSONArray("ser");
+                        for (int i = 0; i < serArray.length(); i++) {
+                            JSONObject data2 = serArray.getJSONObject(i);
+
+                            final String ser_name = data2.optString("ser_name");
+
+
+                            if (!ser_name.equalsIgnoreCase("")) {
+                                runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        ser.setVisibility(View.VISIBLE);
+                                        LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                                        View v = inflater.inflate(R.layout.wrk_lay, null);
+                                        ImageView img = (ImageView) v.findViewById(R.id.img);
+                                        TextView txt = (TextView) v.findViewById(R.id.wrk);
+                                        img.setImageResource(R.drawable.ic_services);
+                                        txt.setText(ser_name);
+                                        service.addView(v);
+                                    }
+                                });
+                            }
+
+
+                        }
+
+
+                        final JSONObject portf = child.getJSONObject("port");
+                        JSONArray portArray = portf.getJSONArray("port");
+                        for (int i = 0; i < portArray.length(); i++) {
+                            JSONObject data2 = portArray.getJSONObject(i);
+
+                            final String ser_name = data2.optString("p_title");
+
+
+                            if (!ser_name.equalsIgnoreCase("")) {
+                                runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        port.setVisibility(View.VISIBLE);
+                                        LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                                        View v = inflater.inflate(R.layout.wrk_lay, null);
+                                        ImageView img = (ImageView) v.findViewById(R.id.img);
+                                        TextView txt = (TextView) v.findViewById(R.id.wrk);
+                                        img.setImageResource(R.drawable.ic_portfolio);
+                                        txt.setText(ser_name);
+                                        portfolio.addView(v);
+                                    }
+                                });
+                            }
+
+
+                        }
+
+
+                        final JSONObject open = child.getJSONObject("job");
+                        JSONArray openArray = open.getJSONArray("job");
+                        for (int i = 0; i < openArray.length(); i++) {
+                            JSONObject data2 = openArray.getJSONObject(i);
+
+                            final String ser_name = data2.optString("title");
+
+
+                            if (!ser_name.equalsIgnoreCase("")) {
+                                runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        job.setVisibility(View.VISIBLE);
+                                        LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                                        View v = inflater.inflate(R.layout.wrk_lay, null);
+                                        ImageView img = (ImageView) v.findViewById(R.id.img);
+                                        TextView txt = (TextView) v.findViewById(R.id.wrk);
+                                        img.setImageResource(R.drawable.ic_work);
+                                        txt.setText(ser_name);
+                                        jobs.addView(v);
+                                    }
+                                });
+                            }
+
+
+                        }
 
                     }
 
@@ -623,7 +753,12 @@ public class ProfileViewActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.profile_view_menu, menu);
         MenuItem item = menu.findItem(R.id.fav);
         if (mApp.getPreference().getString(Common.LEVEL, "").equalsIgnoreCase("3")) {
-            item.setVisible(true);
+            if(level.equalsIgnoreCase("3")){
+                item.setVisible(false);
+            }else{
+                item.setVisible(true);
+            }
+
         } else {
             item.setVisible(false);
         }

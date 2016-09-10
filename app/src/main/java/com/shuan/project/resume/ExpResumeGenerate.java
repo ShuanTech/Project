@@ -102,11 +102,19 @@ public class ExpResumeGenerate extends AppCompatActivity implements View.OnClick
             FILE = Environment.getExternalStorageDirectory() + "/" + mApp.getPreference().getString(Common.u_id, "") + "-"
                     + getIntent().getStringExtra("job_id") + "-" +
                     getIntent().getStringExtra("refer") + ".pdf";
+            chkInComplte();
+        } else if (mApp.getPreference().getBoolean("download", false) == true) {
+            FILE = Environment.getExternalStorageDirectory() + "/" + mApp.getPreference().getString("name", "") + ".pdf";
+            genrateResume("1", FILE);
         } else {
             FILE = Environment.getExternalStorageDirectory() + "/" + mApp.getPreference().getString(Common.u_id, "") + ".pdf";
+            chkInComplte();
         }
 
 
+    }
+
+    private void chkInComplte() {
         if (mApp.getPreference().getBoolean(Common.PROFILESUMMARY, false) == false) {
             Toast.makeText(getApplicationContext(), "We Need Some Details to Complete your Resume", Toast.LENGTH_SHORT).show();
             startActivity(new Intent(getApplicationContext(), UpdateSeniorResumeActivity.class));
@@ -150,28 +158,6 @@ public class ExpResumeGenerate extends AppCompatActivity implements View.OnClick
         } else {
             genrateResume("1", FILE);
         }
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            if (mApp.getPreference().getBoolean(Common.APPLY, false) == true) {
-                apply.setVisibility(View.VISIBLE);
-                edt.setVisibility(View.VISIBLE);
-            } else {
-                apply.setVisibility(View.GONE);
-                edt.setVisibility(View.GONE);
-            }
-        } else {
-            prv.setVisibility(View.GONE);
-            nxt.setVisibility(View.GONE);
-            apply.setVisibility(View.GONE);
-            edt.setVisibility(View.GONE);
-        }
-
-
-        prev.setOnClickListener(this);
-        next.setOnClickListener(this);
-        applied.setOnClickListener(this);
-        edit.setOnClickListener(this);
-
     }
 
 
@@ -189,12 +175,16 @@ public class ExpResumeGenerate extends AppCompatActivity implements View.OnClick
             fout = new FileOutputStream(file);
             PdfWriter.getInstance(doc, fout);
             doc.open();
-            if (mApp.getPreference().getBoolean(Common.OBJECTIVE, false) == false) {
-                getObjective();
-            } else {
-
-                //new GetResumeData().execute();
+            if (mApp.getPreference().getBoolean("download", false) == true) {
                 new getInfo().execute();
+            } else {
+                if (mApp.getPreference().getBoolean(Common.OBJECTIVE, false) == false) {
+                    getObjective();
+                } else {
+
+                    //new GetResumeData().execute();
+                    new getInfo().execute();
+                }
             }
 
 
@@ -231,23 +221,7 @@ public class ExpResumeGenerate extends AppCompatActivity implements View.OnClick
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.prev:
-                currPage--;
-                render();
-                break;
-            case R.id.next:
-                currPage++;
-                render();
-                break;
-            case R.id.applied:
-                Toast.makeText(getApplicationContext(), "Upload start", Toast.LENGTH_SHORT).show();
-                new UploadPicture(ExpResumeGenerate.this, FILE, "resume", "senior", php.upload_resume).execute();
-                break;
-            case R.id.edit:
-                startActivity(new Intent(getApplicationContext(), ResumeEditActivity.class));
-                break;
-        }
+
     }
 
 
@@ -256,7 +230,12 @@ public class ExpResumeGenerate extends AppCompatActivity implements View.OnClick
         @Override
         protected String doInBackground(final String... params) {
             resumeData = new HashMap<String, String>();
-            resumeData.put("u_id", mApp.getPreference().getString(Common.u_id, ""));
+            if (mApp.getPreference().getBoolean("download", false) == true){
+                resumeData.put("u_id", mApp.getPreference().getString("Id", ""));
+            }else{
+                resumeData.put("u_id", mApp.getPreference().getString(Common.u_id, ""));
+            }
+
             try {
                 JSONObject json = Connection.UrlConnection(php.getInfo, resumeData);
                 int succ = json.getInt("success");
@@ -306,16 +285,17 @@ public class ExpResumeGenerate extends AppCompatActivity implements View.OnClick
                                 doc.add(Chunk.NEWLINE);
                                 doc.add(new LineSeparator(4, 100, BaseColor.BLACK, 0, 0));
                                 doc.add(Chunk.NEWLINE);
+                                if (mApp.getPreference().getBoolean("download", false) == true) {
+                                } else {
+                                    Paragraph p3 = new Paragraph("OBJECTIVIES", heading);
+                                    p3.setAlignment(Paragraph.ALIGN_LEFT);
+                                    doc.add(p3);
+                                    Paragraph p4 = new Paragraph(mApp.getPreference().getString(Common.OBJDATA, ""), content);
+                                    p4.setAlignment(Paragraph.ALIGN_LEFT);
+                                    doc.add(p4);
+                                    doc.add(Chunk.NEWLINE);
 
-                                Paragraph p3 = new Paragraph("OBJECTIVIES", heading);
-                                p3.setAlignment(Paragraph.ALIGN_LEFT);
-                                doc.add(p3);
-                                Paragraph p4 = new Paragraph(mApp.getPreference().getString(Common.OBJDATA, ""), content);
-                                p4.setAlignment(Paragraph.ALIGN_LEFT);
-                                doc.add(p4);
-                                doc.add(Chunk.NEWLINE);
-
-
+                                }
                                 new getProfileSummary().execute();
 
 
@@ -343,7 +323,12 @@ public class ExpResumeGenerate extends AppCompatActivity implements View.OnClick
         @Override
         protected String doInBackground(String... strings) {
             resumeData = new HashMap<String, String>();
-            resumeData.put("u_id", mApp.getPreference().getString(Common.u_id, ""));
+            if (mApp.getPreference().getBoolean("download", false) == true){
+                resumeData.put("u_id", mApp.getPreference().getString("Id", ""));
+            }else{
+                resumeData.put("u_id", mApp.getPreference().getString(Common.u_id, ""));
+            }
+
 
             try {
 
@@ -413,7 +398,12 @@ public class ExpResumeGenerate extends AppCompatActivity implements View.OnClick
         protected String doInBackground(String... strings) {
             list.clear();
             resumeData = new HashMap<String, String>();
-            resumeData.put("u_id", mApp.getPreference().getString(Common.u_id, ""));
+            if (mApp.getPreference().getBoolean("download", false) == true){
+                resumeData.put("u_id", mApp.getPreference().getString("Id", ""));
+            }else{
+                resumeData.put("u_id", mApp.getPreference().getString(Common.u_id, ""));
+            }
+
             try {
 
                 JSONObject json = Connection.UrlConnection(php.getWork_info, resumeData);
@@ -495,7 +485,12 @@ public class ExpResumeGenerate extends AppCompatActivity implements View.OnClick
         protected String doInBackground(String... params) {
             list.clear();
             resumeData = new HashMap<String, String>();
-            resumeData.put("u_id", mApp.getPreference().getString(Common.u_id, ""));
+            if (mApp.getPreference().getBoolean("download", false) == true){
+                resumeData.put("u_id", mApp.getPreference().getString("Id", ""));
+            }else{
+                resumeData.put("u_id", mApp.getPreference().getString(Common.u_id, ""));
+            }
+
             try {
                 JSONObject json = Connection.UrlConnection(php.getWorkExp, resumeData);
                 int succ = json.getInt("success");
@@ -554,7 +549,12 @@ public class ExpResumeGenerate extends AppCompatActivity implements View.OnClick
         protected String doInBackground(String... params) {
             list.clear();
             resumeData = new HashMap<String, String>();
-            resumeData.put("u_id", mApp.getPreference().getString(Common.u_id, ""));
+            if (mApp.getPreference().getBoolean("download", false) == true){
+                resumeData.put("u_id", mApp.getPreference().getString("Id", ""));
+            }else{
+                resumeData.put("u_id", mApp.getPreference().getString(Common.u_id, ""));
+            }
+
             try {
                 JSONObject json = Connection.UrlConnection(php.getEduInfo, resumeData);
                 int succ = json.getInt("success");
@@ -620,7 +620,12 @@ public class ExpResumeGenerate extends AppCompatActivity implements View.OnClick
         @Override
         protected String doInBackground(String... params) {
             resumeData = new HashMap<String, String>();
-            resumeData.put("u_id", mApp.getPreference().getString(Common.u_id, ""));
+            if (mApp.getPreference().getBoolean("download", false) == true){
+                resumeData.put("u_id", mApp.getPreference().getString("Id", ""));
+            }else{
+                resumeData.put("u_id", mApp.getPreference().getString(Common.u_id, ""));
+            }
+
             try {
 
                 JSONObject json = Connection.UrlConnection(php.getSkill, resumeData);
@@ -714,8 +719,14 @@ public class ExpResumeGenerate extends AppCompatActivity implements View.OnClick
         protected String doInBackground(String... params) {
             list.clear();
             resumeData = new HashMap<String, String>();
-            resumeData.put("u_id", mApp.getPreference().getString(Common.u_id, ""));
-            resumeData.put("level", "senior");
+            if (mApp.getPreference().getBoolean("download", false) == true){
+                resumeData.put("u_id", mApp.getPreference().getString("Id", ""));
+                resumeData.put("level","senior");
+            }else{
+                resumeData.put("u_id", mApp.getPreference().getString(Common.u_id, ""));
+                resumeData.put("level","senior");
+            }
+
 
             try {
                 JSONObject json = Connection.UrlConnection(php.getProjectDetail, resumeData);
@@ -846,7 +857,12 @@ public class ExpResumeGenerate extends AppCompatActivity implements View.OnClick
         protected String doInBackground(String... params) {
             list.clear();
             resumeData = new HashMap<String, String>();
-            resumeData.put("u_id", mApp.getPreference().getString(Common.u_id, ""));
+            if (mApp.getPreference().getBoolean("download", false) == true){
+                resumeData.put("u_id", mApp.getPreference().getString("Id", ""));
+            }else{
+                resumeData.put("u_id", mApp.getPreference().getString(Common.u_id, ""));
+            }
+
             try {
 
                 JSONObject json = Connection.UrlConnection(php.getCertify, resumeData);
@@ -912,7 +928,12 @@ public class ExpResumeGenerate extends AppCompatActivity implements View.OnClick
         protected String doInBackground(String... params) {
             list.clear();
             resumeData = new HashMap<String, String>();
-            resumeData.put("u_id", mApp.getPreference().getString(Common.u_id, ""));
+            if (mApp.getPreference().getBoolean("download", false) == true){
+                resumeData.put("u_id", mApp.getPreference().getString("Id", ""));
+            }else{
+                resumeData.put("u_id", mApp.getPreference().getString(Common.u_id, ""));
+            }
+
             try {
 
                 JSONObject json = Connection.UrlConnection(php.getAchivmnt, resumeData);
@@ -972,7 +993,12 @@ public class ExpResumeGenerate extends AppCompatActivity implements View.OnClick
         protected String doInBackground(String... params) {
             list.clear();
             resumeData = new HashMap<String, String>();
-            resumeData.put("u_id", mApp.getPreference().getString(Common.u_id, ""));
+            if (mApp.getPreference().getBoolean("download", false) == true){
+                resumeData.put("u_id", mApp.getPreference().getString("Id", ""));
+            }else{
+                resumeData.put("u_id", mApp.getPreference().getString(Common.u_id, ""));
+            }
+
             try {
 
                 JSONObject json = Connection.UrlConnection(php.getExtracurricular, resumeData);
@@ -1030,8 +1056,8 @@ public class ExpResumeGenerate extends AppCompatActivity implements View.OnClick
     private void personalInfo() {
         try {
 
-            if(fName != null && !fName.trim().isEmpty() || mName != null && !mName.trim().isEmpty() || dob != null && !dob.trim().isEmpty()
-                   || lang != null && !lang.trim().isEmpty() || hobbies != null && !hobbies.trim().isEmpty()) {
+            if (fName != null && !fName.trim().isEmpty() || mName != null && !mName.trim().isEmpty() || dob != null && !dob.trim().isEmpty()
+                    || lang != null && !lang.trim().isEmpty() || hobbies != null && !hobbies.trim().isEmpty()) {
 
                 Paragraph p16 = new Paragraph("PERSONAL INFO", heading);
                 p16.setAlignment(Paragraph.ALIGN_LEFT);
@@ -1039,7 +1065,7 @@ public class ExpResumeGenerate extends AppCompatActivity implements View.OnClick
 
                 PdfPTable table1 = new PdfPTable(2);
 
-                if(fName != null && !fName.trim().isEmpty()){
+                if (fName != null && !fName.trim().isEmpty()) {
                     PdfPCell c11 = new PdfPCell(new Paragraph("Father Name ", heading));
                     PdfPCell c12 = new PdfPCell(new Paragraph(fName, content));
                     c11.setBorder(Rectangle.NO_BORDER);
@@ -1049,7 +1075,7 @@ public class ExpResumeGenerate extends AppCompatActivity implements View.OnClick
                     table1.addCell(c12);
                 }
 
-                if(mName != null && !mName.trim().isEmpty()){
+                if (mName != null && !mName.trim().isEmpty()) {
                     PdfPCell c13 = new PdfPCell(new Paragraph("Mother Name", heading));
                     PdfPCell c14 = new PdfPCell(new Paragraph(mName, content));
                     c13.setBorder(Rectangle.NO_BORDER);
@@ -1060,7 +1086,7 @@ public class ExpResumeGenerate extends AppCompatActivity implements View.OnClick
                     table1.addCell(c14);
                 }
 
-                if(dob != null && !dob.trim().isEmpty()){
+                if (dob != null && !dob.trim().isEmpty()) {
                     PdfPCell c15 = new PdfPCell(new Paragraph("Date of Birth", heading));
                     PdfPCell c16 = new PdfPCell(new Paragraph(dob, content));
 
@@ -1071,7 +1097,7 @@ public class ExpResumeGenerate extends AppCompatActivity implements View.OnClick
                     table1.addCell(c16);
                 }
 
-                if(lang != null && !lang.trim().isEmpty()){
+                if (lang != null && !lang.trim().isEmpty()) {
                     PdfPCell c17 = new PdfPCell(new Paragraph("Languages Known", heading));
                     PdfPCell c18 = new PdfPCell(new Paragraph(lang, content));
                     c17.setBorder(Rectangle.NO_BORDER);
@@ -1081,7 +1107,7 @@ public class ExpResumeGenerate extends AppCompatActivity implements View.OnClick
                     table1.addCell(c18);
                 }
 
-                if(hobbies != null && !hobbies.trim().isEmpty()){
+                if (hobbies != null && !hobbies.trim().isEmpty()) {
                     PdfPCell c19 = new PdfPCell(new Paragraph("Hobbies", heading));
                     PdfPCell c20 = new PdfPCell(new Paragraph(hobbies, content));
 
@@ -1099,7 +1125,7 @@ public class ExpResumeGenerate extends AppCompatActivity implements View.OnClick
 
                 doc.add(Chunk.NEWLINE);
                 doc.add(Chunk.NEWLINE);
-                if(city!=null && !city.trim().isEmpty()){
+                if (city != null && !city.trim().isEmpty()) {
                     Paragraph p19 = new Paragraph("PLACE:  " + city);
                     p19.setAlignment(Paragraph.ALIGN_LEFT);
                     doc.add(p19);
@@ -1118,12 +1144,14 @@ public class ExpResumeGenerate extends AppCompatActivity implements View.OnClick
             doc.close();
 
 
-
-
             if (mApp.getPreference().getBoolean(Common.APPLY, false) == true) {
                 Toast.makeText(getApplicationContext(), "Upload start", Toast.LENGTH_SHORT).show();
                 new UploadPicture(ExpResumeGenerate.this, FILE, "resume", "senior", php.upload_resume).execute();
                 mApp.getPreference().edit().putBoolean(Common.APPLY, false).commit();
+            } else if (mApp.getPreference().getBoolean("download", false) == true) {
+                mApp.getPreference().edit().putBoolean("downlaod", false).commit();
+                Toast.makeText(getApplicationContext(), "Resume Saved in" + FILE, Toast.LENGTH_SHORT).show();
+                openPdf();
             } else {
                 Toast.makeText(getApplicationContext(), "Resume Saved in" + FILE, Toast.LENGTH_SHORT).show();
                 openPdf();

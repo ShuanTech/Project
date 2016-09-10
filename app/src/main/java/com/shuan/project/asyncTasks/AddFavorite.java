@@ -35,7 +35,9 @@ public class AddFavorite extends AsyncTask<String, String, String> {
             int succ = json.getInt("success");
             if (succ == 0) {
                 s = "false";
-            } else {
+            } else if(succ==2){
+                s="add";
+            }else {
                 s = "true";
             }
         } catch (Exception e) {
@@ -48,7 +50,9 @@ public class AddFavorite extends AsyncTask<String, String, String> {
         super.onPostExecute(s);
         if (s.equalsIgnoreCase("true")) {
             Toast.makeText(mContext, "Successfully Add to Favorite", Toast.LENGTH_SHORT).show();
-        } else {
+        } else if(s.equalsIgnoreCase("add")){
+            Toast.makeText(mContext, "Already in Favorite List.", Toast.LENGTH_SHORT).show();
+        }else {
             Toast.makeText(mContext, "Error! Try Again", Toast.LENGTH_SHORT).show();
         }
     }

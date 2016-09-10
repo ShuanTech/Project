@@ -16,12 +16,15 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.MultiAutoCompleteTextView;
+import android.widget.ProgressBar;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.shuan.project.R;
 import com.shuan.project.Utils.Common;
 import com.shuan.project.Utils.Helper;
+import com.shuan.project.asyncTasks.GetSkillSet;
 import com.shuan.project.parser.Connection;
 import com.shuan.project.parser.php;
 
@@ -40,7 +43,9 @@ public class SkillActivity extends AppCompatActivity implements View.OnClickList
     private Button s_skip, s_next;
     private HashMap<String, String> sData;
     private boolean exit = false;
-    private TextInputLayout layout_skill,layout_area,layout_dev_evn,layout_others,layout_cer_name,layout_cer_centre,layout_cer_duration;
+    private ScrollView scroll;
+    private ProgressBar progressBar;
+    private TextInputLayout layout_skill, layout_area, layout_dev_evn, layout_others, layout_cer_name, layout_cer_centre, layout_cer_duration;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +54,9 @@ public class SkillActivity extends AppCompatActivity implements View.OnClickList
         mApp = (Common) getApplicationContext();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_skill);
+
+        progressBar = (ProgressBar) findViewById(R.id.progress_bar);
+        scroll = (ScrollView) findViewById(R.id.scroll);
 
         layout_skill = (TextInputLayout) findViewById(R.id.layout_skill);
         layout_area = (TextInputLayout) findViewById(R.id.layout_area);
@@ -73,6 +81,8 @@ public class SkillActivity extends AppCompatActivity implements View.OnClickList
         cerDur = (EditText) findViewById(R.id.cer_duration);
         tv1 = (TextView) findViewById(R.id.tv1);
 
+
+        new GetSkillSet(SkillActivity.this, scroll, progressBar, skill).execute();
 
         skill.addTextChangedListener(this);
 
@@ -169,8 +179,8 @@ public class SkillActivity extends AppCompatActivity implements View.OnClickList
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            int val=mApp.getPreference().getInt(Common.PROFILESTRENGTH,0);
-                            mApp.getPreference().edit().putInt(Common.PROFILESTRENGTH, val+4).commit();
+                            int val = mApp.getPreference().getInt(Common.PROFILESTRENGTH, 0);
+                            mApp.getPreference().edit().putInt(Common.PROFILESTRENGTH, val + 1).commit();
                             mApp.getPreference().edit().putBoolean(Common.SKILL, true).commit();
                             Toast.makeText(getApplicationContext(), "Your Skill Saved", Toast.LENGTH_SHORT).show();
                             startActivity(new Intent(getApplicationContext(), PersonalActivity.class));
@@ -216,8 +226,8 @@ public class SkillActivity extends AppCompatActivity implements View.OnClickList
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            int val=mApp.getPreference().getInt(Common.PROFILESTRENGTH,0);
-                            mApp.getPreference().edit().putInt(Common.PROFILESTRENGTH, val+4).commit();
+                            int val = mApp.getPreference().getInt(Common.PROFILESTRENGTH, 0);
+                            mApp.getPreference().edit().putInt(Common.PROFILESTRENGTH, val + 1).commit();
                             mApp.getPreference().edit().putBoolean(Common.CERITIFY, true).commit();
                             Toast.makeText(getApplicationContext(), "Certification Details Saved", Toast.LENGTH_SHORT).show();
 

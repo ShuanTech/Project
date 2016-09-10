@@ -65,7 +65,7 @@ public class AddExtra extends AsyncTask<String, String, String> {
         pDialog.cancel();
         if (s.equalsIgnoreCase("true")) {
             int val=mApp.getPreference().getInt(Common.PROFILESTRENGTH,0);
-            mApp.getPreference().edit().putInt(Common.PROFILESTRENGTH, val+2).commit();
+            mApp.getPreference().edit().putInt(Common.PROFILESTRENGTH, val+1).commit();
             Toast.makeText(mContext, "Successfully Extra-Curricular Added", Toast.LENGTH_SHORT).show();
             Intent in = new Intent(mContext, ResumeEditActivity.class);
             in.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
