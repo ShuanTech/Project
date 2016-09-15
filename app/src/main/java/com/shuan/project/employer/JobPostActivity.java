@@ -159,16 +159,17 @@ public class JobPostActivity extends AppCompatActivity implements View.OnClickLi
                     descr.requestFocus();
                 } else {
                     // Toast.makeText(getApplicationContext(),job.getText().toString(), Toast.LENGTH_SHORT).show();
+                    post.setEnabled(false);
                     if (post.getText().toString().equalsIgnoreCase("Update")) {
                         new UpdateJob(JobPostActivity.this, mApp.getPreference().getString("jId", ""),
                                 title.getText().toString(), skill.getText().toString(), job.getText().toString(),
                                 category.getText().toString(), salary.getText().toString(), location.getText().toString(),
-                                j.toString(), descr.getText().toString()).execute();
+                                j.toString(), descr.getText().toString(),post).execute();
                     } else {
                         new PostJob(JobPostActivity.this, mApp.getPreference().getString(Common.u_id, ""),
                                 title.getText().toString(), skill.getText().toString(), job.getText().toString(),
                                 category.getText().toString(), salary.getText().toString(), location.getText().toString(),
-                                j.toString(), descr.getText().toString()).execute();
+                                j.toString(), descr.getText().toString(),post).execute();
                     }
 
                 }

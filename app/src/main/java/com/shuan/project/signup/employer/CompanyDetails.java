@@ -159,9 +159,10 @@ public class CompanyDetails extends AppCompatActivity implements TextWatcher, Vi
                     pin.requestFocus();
                 } else {
                     mApp.getPreference().edit().putBoolean("frm", true).commit();
+                    cd_next.setEnabled(false);
                     new CompanyDetail(CompanyDetails.this, mApp.getPreference().getString(Common.u_id, ""), cmpname.getText().toString(),
                             cmpnyType.getText().toString(), doorno.getText().toString(), lctn.getText().toString(), city.getText().toString(), state.getText().toString(),
-                            cntry.getText().toString(), pin.getText().toString(), ins).execute();
+                            cntry.getText().toString(), pin.getText().toString(), ins,cd_next).execute();
 
 
                 }

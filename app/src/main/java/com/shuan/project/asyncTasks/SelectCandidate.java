@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.shuan.project.Utils.Common;
@@ -21,8 +22,10 @@ public class SelectCandidate extends AsyncTask<String, String, String> {
     private String jId, aId, rId, loc, dt, tme, cmmts, s;
     private HashMap<String, String> sData;
     private Common mApp;
+    private Button but;
 
-    public SelectCandidate(Context mContext, String jId, String aId, String rId, String loc, String dt, String tme, String cmmts) {
+    public SelectCandidate(Context mContext, String jId, String aId, String rId, String loc, String dt, String tme, String cmmts,
+                           Button but) {
         this.mContext = mContext;
         this.jId = jId;
         this.aId = aId;
@@ -31,6 +34,7 @@ public class SelectCandidate extends AsyncTask<String, String, String> {
         this.dt = dt;
         this.tme = tme;
         this.cmmts = cmmts;
+        this.but=but;
         mApp = (Common) mContext.getApplicationContext();
     }
 
@@ -75,6 +79,7 @@ public class SelectCandidate extends AsyncTask<String, String, String> {
             activity.finish();
 
         } else {
+            but.setEnabled(true);
             Toast.makeText(mContext, "Something Wrong! Try Again", Toast.LENGTH_SHORT).show();
         }
     }

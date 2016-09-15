@@ -77,7 +77,7 @@ public class EmplySearchResAdapter extends BaseAdapter {
         convertView = inflater.inflate(R.layout.job_post_view, null);
 
         RelativeLayout comments = (RelativeLayout) convertView.findViewById(R.id.comment);
-        RelativeLayout apply = (RelativeLayout) convertView.findViewById(R.id.apply);
+        final RelativeLayout apply = (RelativeLayout) convertView.findViewById(R.id.apply);
         RelativeLayout share = (RelativeLayout) convertView.findViewById(R.id.share);
         RelativeLayout imp = (RelativeLayout) convertView.findViewById(R.id.imp);
         ImageView cImg = (ImageView) convertView.findViewById(R.id.cmpny_logo);
@@ -153,10 +153,9 @@ public class EmplySearchResAdapter extends BaseAdapter {
         apply.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 new CheckEligible(mContext, mApp.getPreference().getString(Common.u_id, ""), curr.getjId(),
                         mApp.getPreference().getString(Common.LEVEL, "")).execute();
-                mApp.getPreference().edit().putBoolean(Common.APPLY, true).commit();
+
 
 
             }

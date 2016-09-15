@@ -4,7 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.shuan.project.Utils.Common;
@@ -26,10 +26,10 @@ public class CompanyDetail extends AsyncTask<String, String, String> {
     private HashMap<String, String> cData;
     private String s = "";
     private Common mApp;
-
+    private Button but;
 
     public CompanyDetail(Context mContext, String u_id, String orgName, String type, String addr, String land, String city, String ste,
-                         String cntry, String pin, boolean ins) {
+                         String cntry, String pin, boolean ins, Button but) {
         this.mContext = mContext;
         this.uId = u_id;
         this.orgName = orgName;
@@ -41,6 +41,7 @@ public class CompanyDetail extends AsyncTask<String, String, String> {
         this.cntry = cntry;
         this.pin = pin;
         this.ins = ins;
+        this.but = but;
         mApp = (Common) mContext.getApplicationContext();
     }
 
@@ -97,8 +98,9 @@ public class CompanyDetail extends AsyncTask<String, String, String> {
                 ((AppCompatActivity) mContext).finish();
             }
 
-            new Follower(mContext, uId,orgName, city).execute();
+            new Follower(mContext, uId, orgName, city).execute();
         } else {
+            but.setEnabled(true);
             Toast.makeText(mContext, "Something went wrong! Try again...", Toast.LENGTH_SHORT).show();
         }
     }

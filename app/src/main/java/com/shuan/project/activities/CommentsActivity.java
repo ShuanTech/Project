@@ -119,9 +119,9 @@ public class CommentsActivity extends AppCompatActivity implements View.OnClickL
 
 
                 scroll.fullScroll(View.FOCUS_DOWN);
-
+                cmdSnd.setEnabled(false);
                 new PostCommnts(CommentsActivity.this, mApp.getPreference().getString(Common.u_id, ""),
-                        getIntent().getStringExtra("jId"), cmtEdt.getText().toString()).execute();
+                        getIntent().getStringExtra("jId"), cmtEdt.getText().toString(),cmdSnd).execute();
 
                 cmtEdt.setText("");
             }

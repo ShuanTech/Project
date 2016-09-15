@@ -2,6 +2,8 @@ package com.shuan.project.fragment;
 
 import android.content.Context;
 import android.os.AsyncTask;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.shuan.project.parser.Connection;
@@ -16,13 +18,15 @@ public class PostCommnts extends AsyncTask<String, String, String> {
 
     private Context mContext;
     private String uId, jId, cmnts, s;
+    private ImageButton but;
     private HashMap<String, String> cData;
 
-    public PostCommnts(Context mContext, String uId, String jId, String cmnts) {
+    public PostCommnts(Context mContext, String uId, String jId, String cmnts,ImageButton but) {
         this.mContext = mContext;
         this.uId = uId;
         this.jId=jId;
         this.cmnts = cmnts;
+        this.but=but;
     }
 
     @Override
@@ -50,8 +54,10 @@ public class PostCommnts extends AsyncTask<String, String, String> {
     protected void onPostExecute(String s) {
         super.onPostExecute(s);
         if (s.equalsIgnoreCase("true")) {
+            but.setEnabled(true);
             Toast.makeText(mContext, "Comment Successfully Post", Toast.LENGTH_SHORT).show();
         } else {
+            but.setEnabled(true);
             Toast.makeText(mContext, "Try Again.Comment not post", Toast.LENGTH_SHORT).show();
         }
     }

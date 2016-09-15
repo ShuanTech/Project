@@ -209,10 +209,10 @@ public class InterviewPanelActivity extends AppCompatActivity implements View.On
 
                     String dt = yr.getText().toString() + "-" + mnt.getText().toString() + "-" + dat.getText().toString();
                     String tme = frm_time.getText().toString() + "-" + to_time.getText().toString();
-
+                    set.setEnabled(false);
                     new SelectCandidate(InterviewPanelActivity.this,mApp.getPreference().getString("jId", ""), getIntent().getStringExtra("a_id"),
                             getIntent().getStringExtra("r_id"), loc.getText().toString(),
-                            dt,tme,cmmts.getText().toString()).execute();
+                            dt,tme,cmmts.getText().toString(),set).execute();
                 }
                 break;
         }

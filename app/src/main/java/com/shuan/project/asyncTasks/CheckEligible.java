@@ -8,6 +8,7 @@ import android.os.AsyncTask;
 import android.support.v7.app.AlertDialog;
 import android.widget.Toast;
 
+import com.shuan.project.Utils.Common;
 import com.shuan.project.parser.Connection;
 import com.shuan.project.parser.php;
 import com.shuan.project.resume.ExpResumeGenerate;
@@ -31,12 +32,14 @@ public class CheckEligible extends AsyncTask<String, String, String> {
     private String[] referName = new String[0];
     private String[] referId = new String[0];
     private String name = "";
+    private Common mApp;
 
     public CheckEligible(Context mContext, String uId, String jId, String level) {
         this.mContext = mContext;
         this.uId = uId;
         this.jId = jId;
         this.level = level;
+        mApp= (Common) mContext.getApplicationContext();
     }
 
     @Override
@@ -150,6 +153,7 @@ public class CheckEligible extends AsyncTask<String, String, String> {
                 }).setNegativeButton("APPLY", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                mApp.getPreference().edit().putBoolean(Common.APPLY, true).commit();
                 dialog.cancel();
                 if (level.equalsIgnoreCase("1")) {
                     Intent in = new Intent(mContext, JuniorResumeGenerate.class);

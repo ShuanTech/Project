@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.shuan.project.Utils.Common;
@@ -23,14 +24,16 @@ public class CompanyContactInfo extends AsyncTask<String, String, String> {
     private Context mContext;
     private String uId, cPrsn, cMail, cPh, cAvlTime, s="";
     private HashMap<String, String> cData;
+    private Button but;
 
-    public CompanyContactInfo(Context mContext, String uId, String cPrsn, String cMail, String cPh, String cAvlTime) {
+    public CompanyContactInfo(Context mContext, String uId, String cPrsn, String cMail, String cPh, String cAvlTime,Button but) {
         this.mContext = mContext;
         this.uId = uId;
         this.cPrsn = cPrsn;
         this.cMail = cMail;
         this.cPh = cPh;
         this.cAvlTime = cAvlTime;
+        this.but=but;
         mApp = (Common) mContext.getApplicationContext();
     }
 
@@ -68,6 +71,7 @@ public class CompanyContactInfo extends AsyncTask<String, String, String> {
             mContext.startActivity(in);
             ((AppCompatActivity)mContext).finish();
         } else {
+            but.setEnabled(true);
             Toast.makeText(mContext, "Something went wrong! Try Again...", Toast.LENGTH_SHORT).show();
         }
     }

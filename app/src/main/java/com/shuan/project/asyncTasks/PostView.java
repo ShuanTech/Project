@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -38,16 +39,17 @@ public class PostView extends AsyncTask<String, String, String> {
     private HashMap<String, String> pData;
     private DisplayImageOptions options;
     private Helper help;
-    private String pro_pic, cover_pic, cmpny_name, c_website, title, skll, tpe, category, pkg, level, location, description;
+    private String pro_pic, cover_pic, cmpny_name, c_website, title, skll, tpe, category, pkg, level, location, description,apply;
     private String vied, shred, appled, date_created, u_id;
     private LinearLayout jType, jSal, jCate, j_Id;
     private String cmpnyId;
+    private Button but;
 
 
     public PostView(Context mContext, String u_id, String j_id, RelativeLayout scroll, ProgressBar progressBar, ImageView coverImg,
                     ImageView cmpny_logo, TextView jTitle, TextView cmpny, TextView created, TextView viewd, TextView applied,
                     TextView shared, TextView skill, TextView desc, TextView type, TextView cate, TextView jId, LinearLayout jType,
-                    LinearLayout jSal, LinearLayout jCate, LinearLayout j_Id, TextView sal) {
+                    LinearLayout jSal, LinearLayout jCate, LinearLayout j_Id, TextView sal,Button but) {
         this.mContext = mContext;
         this.u_id = u_id;
         this.j_id = j_id;
@@ -71,6 +73,7 @@ public class PostView extends AsyncTask<String, String, String> {
         this.jCate = jCate;
         this.j_Id = j_Id;
         this.sal = sal;
+        this.but=but;
         help = new Helper();
     }
 
@@ -108,6 +111,7 @@ public class PostView extends AsyncTask<String, String, String> {
                 shred = child.optString("shared");
                 appled = child.optString("applied");
                 date_created = child.optString("date_created");
+                apply=child.optString("apply");
             }
 
         } catch (Exception e) {
@@ -165,6 +169,10 @@ public class PostView extends AsyncTask<String, String, String> {
                 mContext.startActivity(in);
             }
         });
+
+        if(apply.equalsIgnoreCase("1")){
+            but.setText("Applied");
+        }
 
 
     }

@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.shuan.project.employer.EmployerActivity;
@@ -23,9 +24,10 @@ public class PostJob extends AsyncTask<String, String, String> {
     private String uId, title, skill, type, category, salary, location, level, descr, what;
     private HashMap<String, String> jData;
     private String s;
+    private Button but;
 
     public PostJob(Context mContext, String uId, String title, String skill, String type, String category, String salary, String location,
-                   String level, String descr) {
+                   String level, String descr,Button but) {
         this.mContext = mContext;
         this.uId = uId;
         this.title = title;
@@ -87,6 +89,7 @@ public class PostJob extends AsyncTask<String, String, String> {
             mContext.startActivity(in);
             ((AppCompatActivity) mContext).finish();
         } else {
+            but.setEnabled(true);
             Toast.makeText(mContext, "Something went Wrong. Try again.", Toast.LENGTH_SHORT).show();
         }
     }

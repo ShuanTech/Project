@@ -106,8 +106,9 @@ public class AboutCompanyActivity extends AppCompatActivity implements View.OnCl
                     no_wrkr.setError("Field Mandatory");
                     no_wrkr.requestFocus();
                 }  else {
+                    ft_next.setEnabled(false);
                     new AboutCompany(AboutCompanyActivity.this, mApp.getPreference().getString(Common.u_id, ""),
-                            yr_st.getText().toString(), no_wrkr.getText().toString(), c_des.getText().toString()).execute();
+                            yr_st.getText().toString(), no_wrkr.getText().toString(), c_des.getText().toString(),ft_next).execute();
                 }
                 break;
             case R.id.ft_skip:

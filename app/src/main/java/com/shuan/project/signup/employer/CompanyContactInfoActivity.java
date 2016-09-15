@@ -134,10 +134,10 @@ public class CompanyContactInfoActivity extends AppCompatActivity implements Vie
                     to_time.requestFocus();
                 } else {
                     contctTime = frm_time.getText().toString() + " - " + to_time.getText().toString();
-
+                    cp_next.setEnabled(false);
                     new CompanyContactInfo(CompanyContactInfoActivity.this,mApp.getPreference().getString(Common.u_id,""),
                             cnt_prsn.getText().toString(),cnt_mail.getText().toString(),cnt_phn.getText().toString(),
-                            contctTime).execute();
+                            contctTime,cp_next).execute();
                 }
                 break;
             case R.id.cp_skip:
