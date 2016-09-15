@@ -8,6 +8,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -19,6 +20,7 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -31,6 +33,7 @@ import com.shuan.project.Utils.Common;
 import com.shuan.project.asyncTasks.AddFavorite;
 import com.shuan.project.asyncTasks.Following;
 import com.shuan.project.asyncTasks.GetInvitation;
+import com.shuan.project.employer.PostViewActivity;
 import com.shuan.project.list.Sample;
 import com.shuan.project.parser.Connection;
 import com.shuan.project.parser.php;
@@ -40,6 +43,7 @@ import com.shuan.project.resume.JuniorResumeGenerate;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.security.AccessController;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -622,6 +626,7 @@ public class ProfileViewActivity extends AppCompatActivity {
                             JSONObject data2 = openArray.getJSONObject(i);
 
                             final String ser_name = data2.optString("title");
+                            final String jobId=data2.optString("job_id");
 
 
                             if (!ser_name.equalsIgnoreCase("")) {
@@ -636,6 +641,17 @@ public class ProfileViewActivity extends AppCompatActivity {
                                         img.setImageResource(R.drawable.ic_work);
                                         txt.setText(ser_name);
                                         jobs.addView(v);
+                                        TypedValue val=new TypedValue();
+                                        getApplicationContext().getTheme().resolveAttribute(android.R.attr.selectableItemBackground,val,true);
+                                        v.setBackgroundResource(val.resourceId);
+                                        v.setOnClickListener(new View.OnClickListener() {
+                                            @Override
+                                            public void onClick(View v) {
+                                                Intent in=new Intent(getApplicationContext(), PostViewActivity.class);
+                                                in.putExtra("jId",jobId);
+                                                startActivity(in);
+                                            }
+                                        });
                                     }
                                 });
                             }

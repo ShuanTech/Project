@@ -1,6 +1,7 @@
 package com.shuan.project.asyncTasks;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.view.View;
@@ -19,6 +20,7 @@ import com.shuan.project.R;
 import com.shuan.project.Utils.Helper;
 import com.shuan.project.parser.Connection;
 import com.shuan.project.parser.php;
+import com.shuan.project.profile.ProfileViewActivity;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -39,6 +41,7 @@ public class PostView extends AsyncTask<String, String, String> {
     private String pro_pic, cover_pic, cmpny_name, c_website, title, skll, tpe, category, pkg, level, location, description;
     private String vied, shred, appled, date_created, u_id;
     private LinearLayout jType, jSal, jCate, j_Id;
+    private String cmpnyId;
 
 
     public PostView(Context mContext, String u_id, String j_id, RelativeLayout scroll, ProgressBar progressBar, ImageView coverImg,
@@ -92,6 +95,7 @@ public class PostView extends AsyncTask<String, String, String> {
                 cover_pic = child.optString("cover_pic");
                 cmpny_name = child.optString("cmpny_name");
                 c_website = child.optString("c_website");
+                cmpnyId = child.optString("u_id");
                 title = child.optString("title");
                 skll = child.optString("skill");
                 tpe = child.optString("type");
@@ -150,6 +154,17 @@ public class PostView extends AsyncTask<String, String, String> {
             j_Id.setVisibility(View.VISIBLE);
             jId.setText(j_id);
         }
+
+        cmpny_logo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent in = new Intent(mContext, ProfileViewActivity.class);
+                in.putExtra("u_id", cmpnyId);
+                in.putExtra("level", "3");
+                in.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                mContext.startActivity(in);
+            }
+        });
 
 
     }

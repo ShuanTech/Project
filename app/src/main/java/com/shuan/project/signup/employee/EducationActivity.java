@@ -153,6 +153,7 @@ public class EducationActivity extends AppCompatActivity implements View.OnClick
                     agrt.setError("Aggregate Mandatory");
                     agrt.requestFocus();
                 } else {
+                    q_next.setEnabled(false);
                     new Qualification().execute();
                 }
 

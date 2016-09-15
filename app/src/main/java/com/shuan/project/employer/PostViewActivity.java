@@ -72,9 +72,10 @@ public class PostViewActivity extends AppCompatActivity {
         if (mApp.getPreference().getString(Common.LEVEL, "").equalsIgnoreCase("3")) {
             apply.setVisibility(View.GONE);
         }
-        if (getIntent().getStringExtra("apply").equalsIgnoreCase("yes")) {
+
+       /* if (getIntent().getStringExtra("apply").equalsIgnoreCase("yes")) {
             apply.setText("Applied");
-        }
+        }*/
 
         new PostView(PostViewActivity.this, mApp.getPreference().getString(Common.u_id, ""), getIntent().getStringExtra("jId"), scroll, progressBar, coverImg, cmpny_logo, jTitle, cmpny,
                 created, viewd, applied, shared, skill, desc, type, cate, jId, jType, jSal, jCate, j_Id, sal).execute();

@@ -180,6 +180,7 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
                     Toast.makeText(getApplicationContext(), "Password miss match", Toast.LENGTH_SHORT).show();
                     //
                 } else if (agre) {
+                    signUp.setEnabled(false);
                     new Signup().execute();
                 } else {
                     Toast.makeText(getApplicationContext(), "Agree the Terms and Conditions.", Toast.LENGTH_SHORT).show();
