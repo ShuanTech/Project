@@ -11,9 +11,7 @@ import org.json.JSONObject;
 
 import java.util.HashMap;
 
-/**
- * Created by Android on 9/4/2016.
- */
+
 public class Sendinvite extends AsyncTask<String, String, String> {
     private Context mContext;
     private String u_id, frm_id, name, s;
