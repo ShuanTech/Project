@@ -354,6 +354,7 @@ public class EducationActivity extends AppCompatActivity implements View.OnClick
                         @Override
                         public void run() {
                             Toast.makeText(getApplicationContext(), "Error...Try Again!...", Toast.LENGTH_SHORT).show();
+                            q_next.setEnabled(true);
                         }
                     });
                 } else {

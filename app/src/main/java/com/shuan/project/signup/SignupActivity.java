@@ -229,6 +229,7 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
                         @Override
                         public void run() {
                             Toast.makeText(getApplicationContext(), "Error...Try Again!", Toast.LENGTH_SHORT).show();
+                            signUp.setEnabled(true);
 
                         }
                     });
@@ -238,6 +239,7 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
                         public void run() {
                             emailId.setError("Email Already Exist");
                             emailId.requestFocus();
+                            signUp.setEnabled(true);
                         }
                     });
 
@@ -247,6 +249,7 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
                         public void run() {
                             phNo.setError("Phone Already Exist");
                             phNo.requestFocus();
+                            signUp.setEnabled(true);
                         }
                     });
                 } else {

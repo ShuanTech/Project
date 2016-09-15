@@ -162,6 +162,7 @@ public class PersonalActivity extends AppCompatActivity implements View.OnClickL
                     pinNo.setError("Pincode Mandatory");
                     pinNo.requestFocus();
                 } else {
+                    po_next.setEnabled(false);
                     new Personal().execute();
                 }
                 break;
@@ -326,6 +327,7 @@ public class PersonalActivity extends AppCompatActivity implements View.OnClickL
                         @Override
                         public void run() {
                             Toast.makeText(getApplicationContext(), "Error... Try Again!", Toast.LENGTH_LONG).show();
+                            po_next.setEnabled(true);
                         }
                     });
                 } else {

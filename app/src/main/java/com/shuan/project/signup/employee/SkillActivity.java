@@ -114,6 +114,7 @@ public class SkillActivity extends AppCompatActivity implements View.OnClickList
                             new Certificate().execute();
                         }
                     } else {
+                        s_next.setEnabled(false);
                         new Skill().execute();
                     }
                 }
@@ -173,6 +174,7 @@ public class SkillActivity extends AppCompatActivity implements View.OnClickList
                         @Override
                         public void run() {
                             Toast.makeText(getApplicationContext(), "Error...Try Again!...", Toast.LENGTH_SHORT).show();
+                            s_next.setEnabled(true);
                         }
                     });
                 } else {

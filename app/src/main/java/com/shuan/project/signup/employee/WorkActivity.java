@@ -180,6 +180,7 @@ public class WorkActivity extends AppCompatActivity implements View.OnClickListe
                     }
 
 
+                    wk_next.setEnabled(false);
                     new Wrk().execute();
 
                 }
@@ -251,6 +252,7 @@ public class WorkActivity extends AppCompatActivity implements View.OnClickListe
                         @Override
                         public void run() {
                             Toast.makeText(getApplicationContext(), "Error...Try Again!...", Toast.LENGTH_SHORT).show();
+                            wk_next.setEnabled(true);
                         }
                     });
                 } else {
