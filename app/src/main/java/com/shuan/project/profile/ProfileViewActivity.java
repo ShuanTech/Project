@@ -82,13 +82,6 @@ public class ProfileViewActivity extends AppCompatActivity {
         u_id = getIntent().getStringExtra("u_id");
         level = getIntent().getStringExtra("level");
 
-        if (mApp.getPreference().getString(Common.LEVEL, "").equalsIgnoreCase("1")) {
-            setTheme(R.style.Junior);
-        } else if (mApp.getPreference().getString(Common.LEVEL, "").equalsIgnoreCase("2")) {
-            setTheme(R.style.Senior);
-        } else {
-            setTheme(R.style.AppBaseTheme);
-        }
 
 
         super.onCreate(savedInstanceState);
