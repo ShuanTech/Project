@@ -3,8 +3,9 @@ require('config.php');
 if(isset($_POST['u_id']) && isset($_POST['cDistrict'])){
 	$num=0;
 	$fnum=0;
+	$selDis=select_query("SELECT district FROM `location` WHERE city='".$_POST['cDistrict']."'");
 	
-	$frsher=select_query("SELECT u_id FROM `employer_info` WHERE `city`='".$_POST['cDistrict']."'");
+	$frsher=select_query("SELECT u_id FROM `employer_info` WHERE `district`='".$selDis[0]['district']."'");
 		$fcnt=count($frsher);
 		if($fcnt==''){
 			$response['message']="No Fresher";
@@ -26,7 +27,7 @@ if(isset($_POST['u_id']) && isset($_POST['cDistrict'])){
 		}
 	
 	
-	$get=select_query("SELECT l.u_id from login l,wrk_deatail w WHERE l.u_id=w.u_id and 
+	/* $get=select_query("SELECT l.u_id from login l,wrk_deatail w WHERE l.u_id=w.u_id and 
 		w.org_name='".$_POST['cName']."'");
 	$cnt=count($get);
 	if($cnt==''){
@@ -51,7 +52,7 @@ if(isset($_POST['u_id']) && isset($_POST['cDistrict'])){
 			$response['success']=1;
 			echo json_encode($response);
 		 
-	}
+	} */
 }else{
 	$response['message']="NO Data Post";
 	$response['success']=0;

@@ -111,6 +111,18 @@ if(isset($_POST['p_id']) && isset($_POST['table'])){
 			$response['success']=0;
 			echo json_encode($response);
 		}
+	}else if($_POST['table']=='job'){
+		$sql="delete from job_post where job_id='".$_POST['p_id']."'";
+		$res=mysql_query($sql);
+		if($res>0){
+			$response['message']='Successfully Deleted';
+			$response['success']=1;
+			echo json_encode($response);
+		}else{
+			$response['message']='Not Deleted';
+			$response['success']=0;
+			echo json_encode($response);
+		}
 	}
 	
 }else{

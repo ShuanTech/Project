@@ -7,18 +7,30 @@ if(isset($_POST['u_id']) && isset($_POST['j_id'])){
 	$sql=select_query("select follower from follower where u_id='".$_POST['u_id']."'");
 	for($i=0;$i<count($sql);$i++){
 		$get=implode("",$sql[$i]);
-		$share="insert into share_post(frm_id,to_id,post_id,status) values(
+		$chk=select_query("select * from share_post where to_id='".$get."' and post_id='".$_POST['j_id']."'");
+		if(count($chk)==''){
+			$share="insert into share_post(frm_id,to_id,post_id,status) values(
 					'".$_POST['u_id']."','".$get."','".$_POST['j_id']."',0)";
-		$res=mysql_query($share);
-		if($res>0){
-			$upt="update job_post set shared=shared+1 where job_id='".$_POST['j_id']."'";
-			$res1=mysql_query($upt);
+			$res=mysql_query($share);
+				/* if($res>0){ */
+					
+				//}
+		}else{
+		
+			$res=2;
 		}
+		
 	}
 	
-	if($res1>0){
+	if($res==1){
+		$upt="update job_post set shared=shared+1 where job_id='".$_POST['j_id']."'";
+		$res1=mysql_query($upt);
 		$response['message']="Shred Successfully";
 		$response['success']=1;
+		echo json_encode($response);
+	}else if($res==2){
+		$response['message']="Already Shred";
+		$response['success']=2;
 		echo json_encode($response);
 	}else{
 		$response['message']="Not Shred Successfully";

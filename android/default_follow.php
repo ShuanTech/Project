@@ -48,6 +48,16 @@ if(isset($_POST['u_id']) && isset($_POST['level']) && isset($_POST['clgName']) &
 						$res=mysql_query($ins);
 						$res1=mysql_query($ins1);
 					}
+					
+					$getJob=select_query("select job_id from job_post where u_id='".$row[0]."' and close=0");
+					for($i=0;$i<count($getJob);$i++){
+						$val=implode("",$getJob[$i]);
+						$sql="insert into share_post(frm_id,to_id,post_id,status) values(
+						'".$row[0]."','".$_POST['u_id']."','".$val."',0)";
+						$res=mysql_query($sql);
+						$upt="update job_post set shared=shared+1 where job_id='".$val."'";
+						$res1=mysql_query($upt);	
+					}
 				}
 				
 				

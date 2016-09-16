@@ -43,7 +43,7 @@ if(isset($_FILES['uploaded_file']['name'])){
 					$pres=mysql_query($pName);
 					$prow=mysql_fetch_row($pres);
 					
-			$cmpnyCotent=$prow[2].' :'.$arow[0].'applied on your post';
+			$cmpnyCotent=$prow[2].' :'.$arow[0].' applied on your post';
 			$seniorContent=$arow[0].' : Request to refer the job post of '.$prow[2];
 			
 			$sql="insert into job_applied(job_id,applied_usr,refer_id,resume) values(

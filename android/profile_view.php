@@ -190,6 +190,41 @@ if(isset($_POST['u_id']) && isset($_POST['level']) && isset($_POST['frm_id'])){
 					}
 				}
 			
+			$ser=select_query("select ser_name from services where u_id='".$_POST['u_id']."'");
+			
+			$cnt=count($ser);
+			if($cnt==''){
+				$data['ser']['ser'][]=array("ser_name"=>'');
+			}else{
+				for($i=0;$i<count($ser);$i++){
+					$data['ser']['ser'][]=$ser[$i];
+				}
+			}
+			
+			$port=select_query("select p_title from project_detail where u_id='".$_POST['u_id']."' and p_stus=1");
+			
+			$cnt=count($port);
+			if($cnt==''){
+				$data['port']['port'][]=array("p_title"=>'');
+			}else{
+				for($i=0;$i<count($port);$i++){
+					$data['port']['port'][]=$port[$i];
+				}
+			}
+			
+			$job=select_query("select job_id,title from job_post where u_id='".$_POST['u_id']."' and close=0");
+			
+			$cnt=count($job);
+			if($cnt==''){
+				$data['job']['job'][]=array("title"=>'');
+			}else{
+				for($i=0;$i<count($job);$i++){
+					$data['job']['job'][]=$job[$i];
+				}
+			}
+			
+			
+			
 		}
 	array_push($response['pro_view'],$data);
 	$response['success']=1;

@@ -30,50 +30,54 @@ if(isset($_POST['u_id']) && isset($_POST['summary']) && isset($_POST['table'])){
 		}
 		
 	}else if($_POST['table']=='skill'){
-		$chk=select_query("select skill from skill_tag where skill='".$_POST['summary']."' and 
-		u_id='".$_POST['u_id']."'");
-		$res=count($chk);
-		if($res!=''){
-			$upt="update skill_tag set del=0 where skill='".$_POST['summary']."' and
-			u_id='".$_POST['u_id']."'";
-			$result=mysql_query($upt);
-			if($result>0){
-				$response['msg']='Data Inserted';
-				$response['success']=1;
-				echo json_encode($response);
-			}else{
-				$response['msg']='Data Not Inserted';
-				$response['success']=0;
-				echo json_encode($response);
-			}
-		}else{ 
-			$sql="select lang_known from skill where u_id='".$_POST['u_id']."'";
-			$res=mysql_query($sql);
-			$row=mysql_fetch_row($res);
-			if($row>0){
-				$val=$row[0].','.$_POST['summary'];
+		$skill=array_map('trim',explode(',', $_POST['summary']));
+		for($i=0;$i<count($skill);$i++){
+			$chk=select_query("select skill from skill_tag where skill='".$skill[$i]."' and 
+				u_id='".$_POST['u_id']."'");
+				$res=count($chk);
+				if($res!=''){
+					$upt="update skill_tag set del=0 where skill='".$skill[$i]."' and
+						u_id='".$_POST['u_id']."'";
+					$result=mysql_query($upt);
+					if($result>0){
+						$response['msg']='Data Inserted';
+						$response['success']=1;
+						echo json_encode($response);
+					}else{
+						$response['msg']='Data Not Inserted';
+						$response['success']=0;
+						echo json_encode($response);
+					}
+				}else{ 
+					$sql="select lang_known from skill where u_id='".$_POST['u_id']."'";
+						$res=mysql_query($sql);
+						$row=mysql_fetch_row($res);
+						if($row>0){
+							$val=$row[0].','.$skill[$i];
+							$upt="update skill set lang_known='".$val."' where u_id='".$_POST['u_id']."'";
+							$res1=mysql_query($upt);
+						}else{
+							$inss="insert into skill(u_id,lang_known) values('".$_POST['u_id']."','".$_POST['summary']."')";
+							$ress=mysql_query($inss);
+						}
+						$ins="insert into skill_tag(u_id,skill) values('".$_POST['u_id']."',
+						'".$skill[$i]."')";
+						$result=mysql_query($ins);
+						if($result>0){
+							$response['msg']='Data Inserted';
+							$response['success']=1;
+							echo json_encode($response);
+						}else{
+							$response['msg']='Data Not Inserted';
+							$response['success']=0;
+							echo json_encode($response);
+						}
+				}
 				
-				$upt="update skill set lang_known='".$val."' where u_id='".$_POST['u_id']."'";
-				$res1=mysql_query($upt);
-			}else{
-				$inss="insert into skill(u_id,lang_known) values('".$_POST['u_id']."','".$_POST['summary']."')";
-				$ress=mysql_query($inss);
-			}
-			
-			
-			$ins="insert into skill_tag(u_id,skill) values('".$_POST['u_id']."',
-			'".$_POST['summary']."')";
-			$result=mysql_query($ins);
-			if($result>0){
-				$response['msg']='Data Inserted';
-				$response['success']=1;
-				echo json_encode($response);
-			}else{
-				$response['msg']='Data Not Inserted';
-				$response['success']=0;
-				echo json_encode($response);
-			}
+				
 		}
+		
+		
 	}
 	
 	

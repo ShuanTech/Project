@@ -1,12 +1,12 @@
 <?php 
 require('config.php');
-if(isset($_POST['u_id']) && isset($_POST['frm_id'])){
+if(isset($_POST['u_id']) && isset($_POST['frm_id']) && isset($_POST['name'])){
 	$response=array();
 	
 		$get="select cmpny_name from employer_info where u_id='".$_POST['frm_id']."'";
 			$res=mysql_query($get);
 			$row=mysql_fetch_row($res);
-		$content=$row[0].' : Send the Invitation for Job Openings.';
+		$content=$row[0].' : Send the Invitation for '.$_POST['name'].' Job Openings.';
 		
 		$sql1="insert into notify_access(frm_id,to_id,content,type) values('".$_POST['frm_id']."',
 			'".$_POST['u_id']."','".$content."',4)";

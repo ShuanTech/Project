@@ -1,11 +1,13 @@
 <?php
 require('config.php');
-if(isset($_POST['cName']) && isset($_POST['cDistrict'])){
+if(isset($_POST['u_id']) && isset($_POST['cName']) && isset($_POST['cDistrict'])){
 	$num=0;
 	$fnum=0;
 	
+	$selDis=select_query("SELECT district FROM `location` WHERE city='".$_POST['cDistrict']."'");
+	
 	$frsher=select_query("SELECT l.u_id FROM `usr_info` u,login l WHERE l.u_id=u.u_id 
-	and u.city='".$_POST['cDistrict']."' and l.level='1'");
+	and u.district='".$selDis[0]['district']."'");
 		$fcnt=count($frsher);
 		if($fcnt==''){
 			$response['message']="No Fresher";

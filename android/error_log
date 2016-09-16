@@ -59,3 +59,8 @@
 [06-Sep-2016 00:34:21 Asia/Calcutta] PHP Fatal error:  Call to undefined function select_query() in /home/udyomitra/public_html/android/slct_candidate.php on line 18
 [06-Sep-2016 00:36:27 Asia/Calcutta] PHP Warning:  mysql_query(): Unable to save result set in /home/udyomitra/public_html/android/slct_candidate.php on line 65
 [06-Sep-2016 01:10:20 Asia/Calcutta] PHP Fatal error:  Call to undefined function select_query() in /home/udyomitra/public_html/android/favorite.php on line 6
+[06-Sep-2016 01:38:05 Asia/Calcutta] PHP Fatal error:  Call to undefined function select_query() in /home/udyomitra/public_html/android/favorite.php on line 6
+[06-Sep-2016 01:40:58 Asia/Calcutta] PHP Fatal error:  Call to undefined function select_query() in /home/udyomitra/public_html/android/favorite.php on line 6
+[06-Sep-2016 01:43:05 Asia/Calcutta] PHP Fatal error:  Call to undefined function select_query() in /home/udyomitra/public_html/android/favorite.php on line 6
+[06-Sep-2016 01:44:14 Asia/Calcutta] PHP Fatal error:  Call to undefined function select_query() in /home/udyomitra/public_html/android/favorite.php on line 6
+[06-Sep-2016 01:52:35 Asia/Calcutta] PHP Fatal error:  Call to undefined function select_query() in /home/udyomitra/public_html/android/favorite.php on line 6

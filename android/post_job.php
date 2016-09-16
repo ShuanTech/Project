@@ -20,8 +20,8 @@ if(isset($_POST['u_id']) && isset($_POST['title']) && isset($_POST['skill'])&&
 					$sql="insert into share_post(frm_id,to_id,post_id,status) values(
 					'".$_POST['u_id']."','".$val."','".$jId."',0)";
 					$res=mysql_query($sql);
-					$upt="update job_post set shared=shared+1 where job_id='".$jId."'";
-					$res1=mysql_query($upt);	
+					/* $upt="update job_post set shared=shared+1 where job_id='".$jId."'";
+					$res1=mysql_query($upt);	 */
 				}
 				$sql="insert into share_post(frm_id,to_id,post_id,status) values(
 					'".$_POST['u_id']."','".$_POST['u_id']."','".$jId."',0)";

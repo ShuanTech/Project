@@ -57,7 +57,14 @@ if(isset($_POST['u_id']) && isset($_POST['j_id']) && isset($_POST['level'])){
 						,employer_info e,login l where e.cmpny_name=w.org_name and 
 						e.u_id='".$cmpnyName."' and w.u_id=l.u_id");
 							for($i=0;$i<count($sql);$i++){
-								array_push($response['refer'],$sql[$i]);
+								
+								$chkfollow=select_query("select * from following where 
+								u_id='".$_POST['u_id']."' and following='".$sql[$i]['u_id']."'");
+								if(count($chkfollow)!=''){
+									array_push($response['refer'],$sql[$i]);
+								}
+								
+								
 							}
 						
 						$response['success']=3;
@@ -74,15 +81,30 @@ if(isset($_POST['u_id']) && isset($_POST['j_id']) && isset($_POST['level'])){
 		
 	}else{
 						$response['refer']=array();
-						$sql=select_query("select l.u_id,l.full_name from wrk_deatail w
-						,employer_info e,login l where e.cmpny_name=w.org_name and 
-						e.u_id='".$cmpnyName."' and w.u_id=l.u_id");
-							for($i=0;$i<count($sql);$i++){
-								array_push($response['refer'],$sql[$i]);
-							}
 						
-						$response['success']=3;
-						echo json_encode($response);
+						$chkFrsh=select_query("select level from job_post where 
+						job_id='".$_POST['j_id']."'");
+						
+						if($chkFrsh[0]['level']=="fresher"){
+								$sql=select_query("select l.u_id,l.full_name from wrk_deatail w
+									,employer_info e,login l where e.cmpny_name=w.org_name and 
+									e.u_id='".$cmpnyName."' and w.u_id=l.u_id");
+										for($i=0;$i<count($sql);$i++){
+											$chkfollow=select_query("select * from following where 
+											u_id='".$_POST['u_id']."' and following='".$sql[$i]['u_id']."'");
+											if(count($chkfollow)!=''){
+												array_push($response['refer'],$sql[$i]);
+											}
+										}
+									
+									$response['success']=3;
+									echo json_encode($response);
+						}else{
+							$response['success']=4;
+							echo json_encode($response);
+						}
+						
+					
 	}
 
 

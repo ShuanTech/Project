@@ -6,10 +6,12 @@ if(isset($_POST['u_id']) && isset($_POST['compname']) && isset($_POST['compnytyp
 	isset($_POST['state']) && isset($_POST['city'])&& isset($_POST['pin']) && 
 	isset($_POST['insrt'])){
 		
+		$selDis=select_query("SELECT district FROM `location` WHERE city='".$_POST['city']."'");
+		
 		if($_POST['insrt']=='true'){
-			$ins="insert into organization(org_name,type,addr,land_mark,city,state,country,
+			$ins="insert into organization(org_name,type,addr,land_mark,city,dis,state,country,
 			pincode) values('".$_POST['compname']."','".$_POST['compnytype']."','".$_POST['cdoorno']."',
-			'".$_POST['location']."','".$_POST['city']."','".$_POST['state']."',
+			'".$_POST['location']."','".$_POST['city']."','".$selDis[0]['district']."','".$_POST['state']."',
 			'".$_POST['country']."','".$_POST['pin']."')";
 			$res=mysql_query($ins);
 		}
@@ -18,9 +20,9 @@ if(isset($_POST['u_id']) && isset($_POST['compname']) && isset($_POST['compnytyp
 		
 		$cnt=count($chk);
 		if($cnt==''){
-			$org="insert into employer_info(u_id,cmpny_name,c_type,addr,landmark,city,state,country,
+			$org="insert into employer_info(u_id,cmpny_name,c_type,addr,landmark,city,district,state,country,
 			pincode) values('".$_POST['u_id']."','".$_POST['compname']."','".$_POST['compnytype']."',
-			'".$_POST['cdoorno']."','".$_POST['location']."','".$_POST['city']."','".$_POST['state']."',
+			'".$_POST['cdoorno']."','".$_POST['location']."','".$_POST['city']."','".$selDis[0]['district']."','".$_POST['state']."',
 			'".$_POST['country']."','".$_POST['pin']."')";
 			
 			$result=mysql_query($org);
