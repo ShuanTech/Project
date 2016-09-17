@@ -49,14 +49,20 @@
                         android:textAppearance="?android:textAppearanceMedium"
                         android:textColor="#333" />
 
-                    <EditText
-                        android:id="@+id/summary"
+                    <android.support.design.widget.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_below="@+id/ps"
-                        android:layout_marginTop="@dimen/standard_margin"
-                        android:hint="Eg: Professional with 10 years of experience in customer relationships and services "
-                        android:imeOptions="actionDone" />
+                        android:layout_below="@+id/ps">
+
+                        <EditText
+                            android:id="@+id/summary"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/ps"
+                            android:layout_marginTop="@dimen/activity_horizontal_margin"
+                            android:hint="Eg: Professional with 10 years of experience in customer relationships and services "
+                            android:imeOptions="actionDone" />
+                    </android.support.design.widget.TextInputLayout>
 
 
                 </RelativeLayout>
@@ -935,7 +941,8 @@
             <RelativeLayout
                 android:id="@+id/lay8"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:visibility="gone">
 
                 <RelativeLayout
                     android:id="@+id/c4"

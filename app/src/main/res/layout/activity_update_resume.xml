@@ -51,7 +51,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/activity_horizontal_margin"
-                        android:hint="Profile Summary"
+                        android:hint="Eg: Professional with 10 years of experience in customer relationships and services"
                         android:imeOptions="actionDone" />
                 </android.support.design.widget.TextInputLayout>
 
