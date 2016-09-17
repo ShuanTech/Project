@@ -21,19 +21,20 @@ import java.util.HashMap;
 public class CompanyDetail extends AsyncTask<String, String, String> {
 
     private Context mContext;
-    private String uId, orgName, type, addr, land, city, ste, cntry, pin;
+    private String uId, orgName, cType, iType, addr, land, city, ste, cntry, pin;
     private boolean ins;
     private HashMap<String, String> cData;
     private String s = "";
     private Common mApp;
     private Button but;
 
-    public CompanyDetail(Context mContext, String u_id, String orgName, String type, String addr, String land, String city, String ste,
+    public CompanyDetail(Context mContext, String u_id, String orgName, String cType, String iType, String addr, String land, String city, String ste,
                          String cntry, String pin, boolean ins, Button but) {
         this.mContext = mContext;
         this.uId = u_id;
         this.orgName = orgName;
-        this.type = type;
+        this.cType = cType;
+        this.iType = iType;
         this.addr = addr;
         this.land = land;
         this.city = city;
@@ -51,7 +52,8 @@ public class CompanyDetail extends AsyncTask<String, String, String> {
         cData = new HashMap<String, String>();
         cData.put("u_id", uId);
         cData.put("compname", orgName);
-        cData.put("compnytype", type);
+        cData.put("compnytype", cType);
+        cData.put("indusType",iType);
         cData.put("cdoorno", addr);
         cData.put("location", land);
         cData.put("country", cntry);
@@ -83,20 +85,11 @@ public class CompanyDetail extends AsyncTask<String, String, String> {
     protected void onPostExecute(String s) {
         super.onPostExecute(s);
         if (s.equalsIgnoreCase("true")) {
-            if (mApp.getPreference().getBoolean("frm", false) == false) {
-                mApp.getPreference().edit().putBoolean("frm", true).commit();
                 mApp.getPreference().edit().putBoolean(Common.COMPANY, true).commit();
                 Intent in = new Intent(mContext, EmployerActivity.class);
                 in.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 mContext.startActivity(in);
                 ((AppCompatActivity) mContext).finish();
-            } else {
-                mApp.getPreference().edit().putBoolean(Common.COMPANY, true).commit();
-                Intent in = new Intent(mContext, CompanyContactInfoActivity.class);
-                in.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                mContext.startActivity(in);
-                ((AppCompatActivity) mContext).finish();
-            }
 
             new Follower(mContext, uId, orgName, city).execute();
         } else {

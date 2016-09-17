@@ -43,15 +43,36 @@
                 android:layout_below="@+id/prsnl"
                 android:orientation="vertical">
 
-                <EditText
-                    android:id="@+id/dob"
+                <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/standard_margin"
-                    android:editable="false"
-                    android:hint="@string/dob"
-                    android:imeOptions="actionNext"
-                    android:singleLine="true" />
+                    android:layout_height="wrap_content">
+
+                    <EditText
+                        android:id="@+id/fullName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/standard_margin"
+                        android:hint="Full Name"
+                        android:imeOptions="actionNext" />
+
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <EditText
+                        android:id="@+id/dob"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/standard_margin"
+                        android:editable="false"
+                        android:hint="@string/dob"
+                        android:imeOptions="actionNext"
+                        android:singleLine="true" />
+
+                </android.support.design.widget.TextInputLayout>
+
 
                 <RadioGroup
                     android:id="@+id/sex"
@@ -137,8 +158,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/standard_margin"
                         android:hint="@string/location"
-                        android:inputType="textAutoComplete"
-                        android:imeOptions="actionNext"/>
+                        android:imeOptions="actionNext"
+                        android:inputType="textAutoComplete" />
                 </android.support.design.widget.TextInputLayout>
 
 

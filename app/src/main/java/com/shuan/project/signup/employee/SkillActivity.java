@@ -59,13 +59,13 @@ public class SkillActivity extends AppCompatActivity implements View.OnClickList
         scroll = (ScrollView) findViewById(R.id.scroll);
 
         layout_skill = (TextInputLayout) findViewById(R.id.layout_skill);
-        layout_area = (TextInputLayout) findViewById(R.id.layout_area);
-        layout_dev_evn = (TextInputLayout) findViewById(R.id.layout_dev_env);
+        /*layout_area = (TextInputLayout) findViewById(R.id.layout_area);
+        layout_dev_evn = (TextInputLayout) findViewById(R.id.layout_dev_env);*/
         layout_others = (TextInputLayout) findViewById(R.id.layout_others);
 
         skill = (MultiAutoCompleteTextView) findViewById(R.id.skill);
-        workArea = (MultiAutoCompleteTextView) findViewById(R.id.area);
-        dev_env = (EditText) findViewById(R.id.dev_env);
+       // workArea = (MultiAutoCompleteTextView) findViewById(R.id.area);
+       // dev_env = (EditText) findViewById(R.id.dev_env);
         others = (EditText) findViewById(R.id.others);
         s_next = (Button) findViewById(R.id.s_next);
         s_skip = (Button) findViewById(R.id.s_skip);
@@ -97,9 +97,9 @@ public class SkillActivity extends AppCompatActivity implements View.OnClickList
 
         switch (v.getId()) {
             case R.id.s_next:
-                if (workArea.getText().toString().length() == 0) {
-                    workArea.setError("Interest Area Mandatory");
-                    workArea.requestFocus();
+                if (skill.getText().toString().length() == 0) {
+                    skill.setError("Field Mandatory");
+                    skill.requestFocus();
                 } else {
                     if (course.getText().toString().length() != 0) {
 
@@ -154,8 +154,8 @@ public class SkillActivity extends AppCompatActivity implements View.OnClickList
     public class Skill extends AsyncTask<String, String, String> {
 
         String sSkill = skill.getText().toString();
-        String sWorkArea = workArea.getText().toString();
-        String sDevEnv = dev_env.getText().toString();
+      /*  String sWorkArea = workArea.getText().toString();
+        String sDevEnv = dev_env.getText().toString();*/
         String sOther = others.getText().toString();
 
         @Override
@@ -163,8 +163,8 @@ public class SkillActivity extends AppCompatActivity implements View.OnClickList
             sData = new HashMap<String, String>();
             sData.put("u_id", mApp.getPreference().getString(Common.u_id, ""));
             sData.put("skill", sSkill);
-            sData.put("area", sWorkArea);
-            sData.put("devEnv", sDevEnv);
+          /*  sData.put("area", sWorkArea);
+            sData.put("devEnv", sDevEnv);*/
             sData.put("other", sOther);
             try {
                 JSONObject json = Connection.UrlConnection(php.skill, sData);

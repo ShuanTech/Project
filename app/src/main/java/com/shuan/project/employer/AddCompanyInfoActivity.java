@@ -1,40 +1,40 @@
 package com.shuan.project.employer;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.ScrollView;
+import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.shuan.project.R;
 import com.shuan.project.Utils.Common;
 import com.shuan.project.Utils.Helper;
 import com.shuan.project.asyncTasks.CompanyDetail;
-import com.shuan.project.asyncTasks.GetOrg;
-
-import java.util.HashMap;
+import com.shuan.project.asyncTasks.GetLocation;
 
 public class AddCompanyInfoActivity extends AppCompatActivity {
-
     private Helper helper = new Helper();
     private Common mApp;
-    private AutoCompleteTextView cmpname;
-    private HashMap<String, String> cData;
-    private EditText cmpnyType, doorno, lctn, cntry, city, state, pin;
-    private Button cUpt;
+    private AutoCompleteTextView city;
+    private EditText cmpname, doorno, lctn, cntry, state, pin;
     private ProgressBar progressBar;
     private ScrollView scroll;
     public boolean ins = false;
-    private String district;
+    private Button cUpt;
+    private Spinner cmpnyType, indusType;
+    private String[] cType;
+    private String[] iType ;
+    private String c, i;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,54 +46,80 @@ public class AddCompanyInfoActivity extends AppCompatActivity {
 
         progressBar = (ProgressBar) findViewById(R.id.progress_bar);
         scroll = (ScrollView) findViewById(R.id.scroll);
-        cmpname = (AutoCompleteTextView) findViewById(R.id.cmpn_name);
-        cmpnyType = (EditText) findViewById(R.id.cmpny_type);
+        cmpname = (EditText) findViewById(R.id.cmpn_name);
+        cmpnyType = (Spinner) findViewById(R.id.cmpny_type);
+        indusType = (Spinner) findViewById(R.id.indus_type);
         doorno = (EditText) findViewById(R.id.door_num);
         lctn = (EditText) findViewById(R.id.loc);
-        cntry = (EditText) findViewById(R.id.count);
         city = (AutoCompleteTextView) findViewById(R.id.city);
-        state = (AutoCompleteTextView) findViewById(R.id.state);
+        state = (EditText) findViewById(R.id.state);
+        cntry = (EditText) findViewById(R.id.count);
         pin = (EditText) findViewById(R.id.pin);
 
-        cUpt = (Button) findViewById(R.id.c_update);
+        cType=getResources().getStringArray(R.array.cmpny_type);
+        iType=getResources().getStringArray(R.array.industry_type);
+        new GetLocation(getApplicationContext(), scroll, city, progressBar).execute();
 
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.spinner_item, cType);
+        ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(getApplicationContext(), R.layout.spinner_item, iType);
 
-        new GetOrg(getApplicationContext(), progressBar, scroll, cmpname).execute();
+        cmpnyType.setAdapter(adapter);
+        indusType.setAdapter(adapter1);
+        cmpnyType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                c = cmpnyType.getSelectedItem().toString();
+            }
 
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
 
-        cmpname.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            }
+        });
+
+        indusType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                i = indusType.getSelectedItem().toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        city.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
                 TextView txt1 = (TextView) view.findViewById(R.id.ins_name);
                 TextView txt2 = (TextView) view.findViewById(R.id.univ);
                 TextView txt3 = (TextView) view.findViewById(R.id.loc);
                 TextView txt4 = (TextView) view.findViewById(R.id.txt1);
-                TextView txt5 = (TextView) view.findViewById(R.id.txt2);
-                TextView txt6 = (TextView) view.findViewById(R.id.txt3);
-                TextView txt7 = (TextView) view.findViewById(R.id.txt4);
-                TextView txt8 = (TextView) view.findViewById(R.id.txt5);
-                TextView txt9 = (TextView) view.findViewById(R.id.txt6);
 
-                cmpname.setText(txt1.getText().toString());
-                cmpnyType.setText(txt2.getText().toString());
-                doorno.setText(txt3.getText().toString());
-                lctn.setText(txt4.getText().toString());
-                city.setText(txt7.getText().toString());
-                state.setText(txt6.getText().toString());
-                cntry.setText(txt5.getText().toString());
-                pin.setText(txt8.getText().toString());
-                district = txt9.getText().toString();
+                city.setText(txt1.getText().toString());
+                state.setText(txt3.getText().toString());
+                cntry.setText(txt4.getText().toString());
                 ins = true;
-                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-                imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+                pin.requestFocus();
             }
         });
+
+
+        cUpt = (Button) findViewById(R.id.c_update);
 
         cUpt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (doorno.getText().toString().length() == 0) {
+                if (cmpname.getText().toString().length() == 0) {
+                    cmpname.setError("Company Name Mandatory");
+                } else if (c.equalsIgnoreCase("Select Company Type")) {
+                    cmpnyType.requestFocus();
+                    Toast.makeText(getApplicationContext(), "Select Company Type", Toast.LENGTH_SHORT).show();
+                } else if (i.equalsIgnoreCase("Select an Industry")) {
+                    indusType.requestFocus();
+                    Toast.makeText(getApplicationContext(), "Select Industry Type", Toast.LENGTH_SHORT).show();
+                } else if (doorno.getText().toString().length() == 0) {
                     doorno.setError("Address Mandatory");
                     doorno.requestFocus();
                 } else if (lctn.getText().toString().length() == 0) {
@@ -115,8 +141,8 @@ public class AddCompanyInfoActivity extends AppCompatActivity {
                     mApp.getPreference().edit().putBoolean("frm", false).commit();
                     cUpt.setEnabled(false);
                     new CompanyDetail(AddCompanyInfoActivity.this, mApp.getPreference().getString(Common.u_id, ""), cmpname.getText().toString(),
-                            cmpnyType.getText().toString(), doorno.getText().toString(), lctn.getText().toString(), city.getText().toString(), state.getText().toString(),
-                            cntry.getText().toString(), pin.getText().toString(), ins,cUpt).execute();
+                            c, i, doorno.getText().toString(), lctn.getText().toString(), city.getText().toString(), state.getText().toString(),
+                            cntry.getText().toString(), pin.getText().toString(), ins, cUpt).execute();
 
 
                 }

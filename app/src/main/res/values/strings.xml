@@ -3,7 +3,7 @@
     <string name="are_you">Are You ?</string>
     <string name="employee">Employee</string>
     <string name="employer">Employer</string>
-    <string name="full_name">Full Name</string>
+    <string name="full_name">User Name</string>
     <string name="email_id">Email-id</string>
     <string name="phone_no">Phone Number</string>
     <string name="password">Password</string>
@@ -90,55 +90,79 @@
     <string name="copyright">&#169; shuantech pvt. ltd.</string>
     <string name="reserved">All right reserved.</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="title_activity_setting">Settings</string>
-
-    <!-- Strings related to Settings -->
-
-    <!-- Example General settings -->
-    <string name="pref_header_general">General</string>
-
-    <string name="pref_title_social_recommendations">Enable social recommendations</string>
-    <string name="pref_description_social_recommendations">Recommendations for people to contact
-        based on your message history
-    </string>
-
-    <string name="pref_title_display_name">Display name</string>
-    <string name="pref_default_display_name">John Smith</string>
-
-    <string name="pref_title_add_friends_to_messages">Add friends to messages</string>
-    <string-array name="pref_example_list_titles">
-        <item>Always</item>
-        <item>When possible</item>
-        <item>Never</item>
-    </string-array>
-    <string-array name="pref_example_list_values">
-        <item>1</item>
-        <item>0</item>
-        <item>-1</item>
+    <string-array name="cmpny_type">
+        <item>Select Company Type</item>
+        <item>Private Limited Company</item>
+        <item>Public Limited Company</item>
+        <item>Unlimited Company</item>
+        <item>Limited Liability Partnership (LLP)</item>
+        <item>Partnership</item>
+        <item>Sole Proprietorship</item>
+        <item>Liaison Office / Representative Office</item>
+        <item>Project Office</item>
+        <item>Branch Office</item>
+        <item>Joint Venture Company</item>
+        <item>Subsidiary Company</item>
+        <item>Consultancy</item>
     </string-array>
 
-    <!-- Example settings for Data & Sync -->
-    <string name="pref_header_data_sync">Data &amp; sync</string>
-
-    <string name="pref_title_sync_frequency">Sync frequency</string>
-    <string-array name="pref_sync_frequency_titles">
-        <item>15 minutes</item>
-        <item>30 minutes</item>
-        <item>1 hour</item>
-        <item>3 hours</item>
-        <item>6 hours</item>
-        <item>Never</item>
+    <string-array name="industry_type">
+        <item>Select an Industry</item>
+        <item>Accessories/Apparel/Fashion Design</item>
+        <item>Accounting/Consulting/Taxation</item>
+        <item>Advertising/Event Management/PR</item>
+        <item>Agriculture/Dairy Technology</item>
+        <item>Airlines/Hotel/Hospitality/Travel/Tourism/Restaurants</item>
+        <item>Animation / Gaming</item>
+        <item>Architectural Services/ Interior Designing</item>
+        <item>Auto Ancillary/Automobiles/Components</item>
+        <item>Banking/Financial Services/Stockbroking/Securities</item>
+        <item>Banking/FinancialServices/Broking</item>
+        <item>Biotechnology/Pharmaceutical/Clinical Research</item>
+        <item>Brewery/Distillery</item>
+        <item>Cement/Construction/Engineering/Metals/Steel/Iron</item>
+        <item>Ceramics/Sanitaryware</item>
+        <item>Chemicals/Petro Chemicals/Plastics</item>
+        <item>Computer Hardware/Networking</item>
+        <item>Consumer FMCG/Foods/Beverages</item>
+        <item>Consumer Goods - Durables</item>
+        <item>Courier/Freight/Transportation/Warehousing</item>
+        <item>CRM/ IT Enabled Services/BPO</item>
+        <item>Education/Training/Teaching</item>
+        <item>Electricals/Switchgears</item>
+        <item>Employment Firms/Recruitment Services Firms</item>
+        <item>Entertainment/Media/Publishing/Dotcom</item>
+        <item>Export Houses/Textiles/Merchandise</item>
+        <item>FacilityManagement</item>
+        <item>Fertilizers/Pesticides</item>
+        <item>FoodProcessing</item>
+        <item>Gems and Jewellery</item>
+        <item>Glass</item>
+        <item>Government/Defence</item>
+        <item>Healthcare/Medicine</item>
+        <item>HeatVentilation/AirConditioning</item>
+        <item>Insurance</item>
+        <item>KPO/Research/Analytics</item>
+        <item>Law/Legal Firms</item>
+        <item>Machinery/Equipment Manufacturing/Industrial Products</item>
+        <item>Mining</item>
+        <item>NGO/Social Services</item>
+        <item>Office Automation</item>
+        <item>Others/Engg. Services/Service Providers</item>
+        <item>Petroleum/Oil and Gas/Projects/Infrastructure/Power/Non-conventional Energy</item>
+        <item>Printing/Packaging</item>
+        <item>Publishing</item>
+        <item>Real Estate</item>
+        <item>Retailing</item>
+        <item>Security/Law Enforcement</item>
+        <item>Shipping/Marine</item>
+        <item>Software Services</item>
+        <item>Steel</item>
+        <item>Strategy/ManagementConsultingFirms</item>
+        <item>Telecom Equipment/Electronics/Electronic Devices/RF/Mobile Network/Semi-conductor</item>
+        <item>Telecom/ISP</item>
+        <item>Tyres</item>
+        <item>WaterTreatment/WasteManagement</item>
+        <item>Wellness/Fitness/Sports</item>
     </string-array>
-    <string-array name="pref_sync_frequency_values">
-        <item>15</item>
-        <item>30</item>
-        <item>60</item>
-        <item>180</item>
-        <item>360</item>
-        <item>-1</item>
-    </string-array>
-
-
 </resources>

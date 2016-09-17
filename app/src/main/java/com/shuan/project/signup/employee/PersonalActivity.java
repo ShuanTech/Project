@@ -48,7 +48,7 @@ import java.util.HashMap;
 public class PersonalActivity extends AppCompatActivity implements View.OnClickListener, TextWatcher {
 
     public Common mApp;
-    public EditText dob, fName, mName, addr, pinNo;
+    public EditText fullName, dob, fName, mName, addr, pinNo;
     public AutoCompleteTextView loc, district, state, country;
     public RadioButton radio, r1, r2;
     public Button po_next, po_skip;
@@ -62,7 +62,7 @@ public class PersonalActivity extends AppCompatActivity implements View.OnClickL
     private Helper helper = new Helper();
     public boolean ins = false;
     public boolean exit = false;
-    private TextInputLayout layout_f_name,layout_m_name,layout_door,layout_location,layout_district,layout_state,layout_cntry,layout_pin;
+    private TextInputLayout layout_f_name, layout_m_name, layout_door, layout_location, layout_district, layout_state, layout_cntry, layout_pin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,16 +79,7 @@ public class PersonalActivity extends AppCompatActivity implements View.OnClickL
 
         new getLocation().execute();
 
-        layout_f_name = (TextInputLayout) findViewById(R.id.layout_f_name);
-        layout_m_name = (TextInputLayout) findViewById(R.id.layout_m_name);
-        layout_door = (TextInputLayout) findViewById(R.id.layout_door);
-        layout_location = (TextInputLayout) findViewById(R.id.layout_location);
-        layout_district = (TextInputLayout) findViewById(R.id.layout_district);
-        layout_state = (TextInputLayout) findViewById(R.id.layout_state);
-        layout_cntry = (TextInputLayout) findViewById(R.id.layout_cntry);
-        layout_pin = (TextInputLayout) findViewById(R.id.layout_pin);
-
-
+        fullName = (EditText) findViewById(R.id.fullName);
         dob = (EditText) findViewById(R.id.dob);
         r1 = (RadioButton) findViewById(R.id.male);
         r2 = (RadioButton) findViewById(R.id.female);
@@ -108,7 +99,6 @@ public class PersonalActivity extends AppCompatActivity implements View.OnClickL
         sex = (RadioGroup) findViewById(R.id.sex);
 
 
-
         dob.setOnTouchListener(new View.OnTouchListener() {
             @TargetApi(Build.VERSION_CODES.HONEYCOMB)
             @Override
@@ -123,7 +113,7 @@ public class PersonalActivity extends AppCompatActivity implements View.OnClickL
         });
 
 
-        dob.addTextChangedListener(this);
+        fullName.addTextChangedListener(this);
         po_next.setOnClickListener(this);
         po_skip.setOnClickListener(this);
 
@@ -168,12 +158,12 @@ public class PersonalActivity extends AppCompatActivity implements View.OnClickL
                 break;
             case R.id.po_skip:
                 new GetInfo(getApplicationContext(), mApp.getPreference().getString(Common.u_id, "")).execute();
-                mApp.getPreference().edit().putBoolean("start",false).commit();
+                mApp.getPreference().edit().putBoolean("start", false).commit();
                 mApp.getPreference().edit().putBoolean(Common.HOBBIES, false).commit();
                 mApp.getPreference().edit().putBoolean(Common.PROJECT, false).commit();
                 mApp.getPreference().edit().putBoolean(Common.PERSONALINFO, false).commit();
-                int val=mApp.getPreference().getInt(Common.PROFILESTRENGTH,0);
-                mApp.getPreference().edit().putInt(Common.PROFILESTRENGTH, val+8).commit();
+                int val = mApp.getPreference().getInt(Common.PROFILESTRENGTH, 0);
+                mApp.getPreference().edit().putInt(Common.PROFILESTRENGTH, val + 8).commit();
 
                 if (mApp.getPreference().getString(Common.LEVEL, "").equalsIgnoreCase("1")) {
 
@@ -206,7 +196,7 @@ public class PersonalActivity extends AppCompatActivity implements View.OnClickL
     @Override
     public void afterTextChanged(Editable s) {
 
-        if (dob.getText().toString().length() == 0) {
+        if (fullName.getText().toString().length() == 0) {
             po_next.setVisibility(View.GONE);
             po_skip.setVisibility(View.VISIBLE);
         } else {
@@ -287,7 +277,7 @@ public class PersonalActivity extends AppCompatActivity implements View.OnClickL
     }
 
     public class Personal extends AsyncTask<String, String, String> {
-
+        String uName = fullName.getText().toString();
         String uDob = dob.getText().toString();
         String usex = radio.getText().toString();
         String ufName = fName.getText().toString();
@@ -304,6 +294,7 @@ public class PersonalActivity extends AppCompatActivity implements View.OnClickL
         protected String doInBackground(String... params) {
             pData = new HashMap<String, String>();
             pData.put("u_id", mApp.getPreference().getString(Common.u_id, ""));
+            pData.put("name",uName);
             pData.put("dob", uDob);
             pData.put("gender", usex);
             pData.put("address", udno);
@@ -335,13 +326,13 @@ public class PersonalActivity extends AppCompatActivity implements View.OnClickL
                         @Override
                         public void run() {
                             new GetInfo(getApplicationContext(), mApp.getPreference().getString(Common.u_id, "")).execute();
-                            mApp.getPreference().edit().putBoolean("start",false).commit();
+                            mApp.getPreference().edit().putBoolean("start", false).commit();
                             mApp.getPreference().edit().putBoolean(Common.PERSONALINFO, true).commit();
                             mApp.getPreference().edit().putBoolean(Common.HOBBIES, false).commit();
                             mApp.getPreference().edit().putBoolean(Common.PROJECT, false).commit();
                             mApp.getPreference().edit().putBoolean(Common.USRINFO, true).commit();
-                            int val=mApp.getPreference().getInt(Common.PROFILESTRENGTH,0);
-                            mApp.getPreference().edit().putInt(Common.PROFILESTRENGTH, val+2).commit();
+                            int val = mApp.getPreference().getInt(Common.PROFILESTRENGTH, 0);
+                            mApp.getPreference().edit().putInt(Common.PROFILESTRENGTH, val + 2).commit();
 
 
                             if (mApp.getPreference().getString(Common.LEVEL, "").equalsIgnoreCase("1")) {
@@ -354,7 +345,7 @@ public class PersonalActivity extends AppCompatActivity implements View.OnClickL
                                 mApp.getPreference().edit().putBoolean(Common.WORKEXPERIENCE, false).commit();
                                 startActivity(new Intent(getApplicationContext(), SeniorActivity.class));
                             }
-                            new FrsherDefault(PersonalActivity.this,mApp.getPreference().getString(Common.u_id,""),uct).execute();
+                            new FrsherDefault(PersonalActivity.this, mApp.getPreference().getString(Common.u_id, ""), uct).execute();
                             Toast.makeText(getApplicationContext(), "Successfully Completed Signup...", Toast.LENGTH_LONG).show();
 
 
