@@ -234,11 +234,14 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".search.EmplyeeSearchActivity" />
         </activity>
+
         <activity
             android:name=".employee.InviteActivity"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"></activity>
 
-        </activity>
+        <activity
+            android:name=".launcher.ForgotPassword"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

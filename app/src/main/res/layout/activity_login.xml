@@ -31,14 +31,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/logo">
-            <EditText
-                android:id="@+id/usr"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/activity_horizontal_margin"
-                android:hint="Email / Phone Number"
-                android:inputType="textEmailAddress"
-                android:imeOptions="actionNext"/>
+
+                <EditText
+                    android:id="@+id/usr"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/activity_horizontal_margin"
+                    android:hint="Email / Phone Number"
+                    android:imeOptions="actionNext"
+                    android:inputType="textEmailAddress" />
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
@@ -46,15 +47,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/lay_usr">
-            <EditText
-                android:id="@+id/pass"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/lay_usr"
-                android:layout_marginTop="@dimen/standard_margin"
-                android:hint="@string/password"
-                android:inputType="textPassword"
-                android:imeOptions="actionDone"/>
+
+                <EditText
+                    android:id="@+id/pass"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/lay_usr"
+                    android:layout_marginTop="@dimen/standard_margin"
+                    android:hint="@string/password"
+                    android:imeOptions="actionDone"
+                    android:inputType="textPassword" />
             </android.support.design.widget.TextInputLayout>
 
 
@@ -69,15 +71,18 @@
                 android:background="@drawable/signin_border"
                 android:text="Sign In"
                 android:textColor="#fff" />
+
             <TextView
                 android:id="@+id/fp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="forgot password?"
+                android:layout_height="40dp"
                 android:layout_below="@+id/login"
-                android:gravity="center_horizontal"
-                android:paddingTop="18dp"
-                android:clickable="true"/>
+                android:layout_marginTop="@dimen/activity_horizontal_margin"
+                android:background="?android:selectableItemBackground"
+                android:gravity="center_horizontal|center_vertical"
+                android:text="Forget Password ?"
+                android:textAppearance="?android:textAppearanceSmall"
+                android:textColor="@color/junDark"/>
 
 
         </RelativeLayout>

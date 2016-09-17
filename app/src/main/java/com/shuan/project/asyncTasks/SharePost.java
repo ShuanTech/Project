@@ -54,7 +54,9 @@ public class SharePost extends AsyncTask<String, String, String> {
                 s = "false";
             } else if (succ == 2) {
                 s = "shared";
-            } else {
+            } else if(succ==3){
+                s="not";
+            }else {
                 s = "true";
             }
 
@@ -75,10 +77,10 @@ public class SharePost extends AsyncTask<String, String, String> {
             activity.startActivity(in);
             Toast.makeText(mContext, "Successfully shared", Toast.LENGTH_SHORT).show();
         } else if (s.equalsIgnoreCase("shared")) {
-
             Toast.makeText(mContext, "You have Already share this post.", Toast.LENGTH_SHORT).show();
-
-        } else {
+        } else if(s.equalsIgnoreCase("not")){
+            Toast.makeText(mContext,"You Cannot share this post right now. Still You don't have followers",Toast.LENGTH_SHORT).show();
+        }else {
             Toast.makeText(mContext, "Failed Share.Try Again!...", Toast.LENGTH_SHORT).show();
         }
     }
