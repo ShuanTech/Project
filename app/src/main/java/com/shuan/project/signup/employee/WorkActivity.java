@@ -80,7 +80,7 @@ public class WorkActivity extends AppCompatActivity implements View.OnClickListe
         myp.build(new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                fYr.setText(myp.getSelectedYear() + "-" + myp.getSelectedMonthShortName());
+                fYr.setText(myp.getSelectedYear() + ", " + myp.getSelectedMonthShortName());
             }
         }, null);
 
@@ -90,7 +90,7 @@ public class WorkActivity extends AppCompatActivity implements View.OnClickListe
         myp1.build(new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                tYr.setText(myp1.getSelectedYear() + "-" + myp1.getSelectedMonthShortName());
+                tYr.setText(myp1.getSelectedYear() + ", " + myp1.getSelectedMonthShortName());
             }
         }, null);
 

@@ -11,7 +11,6 @@ import com.shuan.project.Utils.Common;
 import com.shuan.project.employer.EmployerActivity;
 import com.shuan.project.parser.Connection;
 import com.shuan.project.parser.php;
-import com.shuan.project.signup.employer.CompanyContactInfoActivity;
 
 import org.json.JSONObject;
 
@@ -21,26 +20,24 @@ import java.util.HashMap;
 public class CompanyDetail extends AsyncTask<String, String, String> {
 
     private Context mContext;
-    private String uId, orgName, cType, iType, addr, land, city, ste, cntry, pin;
+    private String uId, orgName, cType, iType, city, dis, ste, cntry;
     private boolean ins;
     private HashMap<String, String> cData;
     private String s = "";
     private Common mApp;
     private Button but;
 
-    public CompanyDetail(Context mContext, String u_id, String orgName, String cType, String iType, String addr, String land, String city, String ste,
-                         String cntry, String pin, boolean ins, Button but) {
+    public CompanyDetail(Context mContext, String u_id, String orgName, String cType, String iType, String city, String dis, String ste,
+                         String cntry, boolean ins, Button but) {
         this.mContext = mContext;
         this.uId = u_id;
         this.orgName = orgName;
         this.cType = cType;
         this.iType = iType;
-        this.addr = addr;
-        this.land = land;
         this.city = city;
+        this.dis=dis;
         this.ste = ste;
         this.cntry = cntry;
-        this.pin = pin;
         this.ins = ins;
         this.but = but;
         mApp = (Common) mContext.getApplicationContext();
@@ -53,13 +50,11 @@ public class CompanyDetail extends AsyncTask<String, String, String> {
         cData.put("u_id", uId);
         cData.put("compname", orgName);
         cData.put("compnytype", cType);
-        cData.put("indusType",iType);
-        cData.put("cdoorno", addr);
-        cData.put("location", land);
+        cData.put("indusType", iType);
         cData.put("country", cntry);
         cData.put("state", ste);
+        cData.put("dis",dis);
         cData.put("city", city);
-        cData.put("pin", pin);
         if (ins == true) {
             cData.put("insrt", "false");
         } else {
@@ -85,11 +80,11 @@ public class CompanyDetail extends AsyncTask<String, String, String> {
     protected void onPostExecute(String s) {
         super.onPostExecute(s);
         if (s.equalsIgnoreCase("true")) {
-                mApp.getPreference().edit().putBoolean(Common.COMPANY, true).commit();
-                Intent in = new Intent(mContext, EmployerActivity.class);
-                in.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                mContext.startActivity(in);
-                ((AppCompatActivity) mContext).finish();
+            mApp.getPreference().edit().putBoolean(Common.COMPANY, true).commit();
+            Intent in = new Intent(mContext, EmployerActivity.class);
+            in.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            mContext.startActivity(in);
+            ((AppCompatActivity) mContext).finish();
 
             new Follower(mContext, uId, orgName, city).execute();
         } else {

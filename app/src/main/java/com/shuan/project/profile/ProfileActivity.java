@@ -62,7 +62,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
     private CircleImageView proPic;
     private TextView name, position, org, intro;
     private Button bu1, bu2;
-    private TextView abt, url, cate, sze, found;
+    private TextView abt, url, cate, sze, found,type;
     private ProgressBar progressBar;
     private RelativeLayout scroll;
     private HashMap<String, String> pData;
@@ -79,6 +79,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
     private Uri picUri;
     private File pic;
     private String Path;
+    private LinearLayout about, cmpntDet, ser, service, port, portfolio, job, jobs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -129,7 +130,18 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         cate = (TextView) findViewById(R.id.cate);
         sze = (TextView) findViewById(R.id.sze);
         found = (TextView) findViewById(R.id.found);
+        type= (TextView) findViewById(R.id.indus_type);
         exprience = (LinearLayout) findViewById(R.id.exprience);
+
+
+        about = (LinearLayout) findViewById(R.id.about);
+        ser = (LinearLayout) findViewById(R.id.ser);
+        service = (LinearLayout) findViewById(R.id.service);
+        port = (LinearLayout) findViewById(R.id.port);
+        portfolio = (LinearLayout) findViewById(R.id.portfolio);
+        job = (LinearLayout) findViewById(R.id.job);
+        jobs = (LinearLayout) findViewById(R.id.jobs);
+        cmpntDet = (LinearLayout) findViewById(R.id.cmpntDet);
 
         list = new ArrayList<Sample>();
 
@@ -655,7 +667,8 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
                         cover_pic = data.optString("cover_pic");
                         cmpny_name = data.optString("cmpny_name");
                         c_type = data.optString("c_type");
-                        landmark = data.optString("landmark");
+                        final String iType=data.optString("i_type");
+                        landmark = data.optString("city");
                         country = data.optString("country");
                         year_of_establish = data.optString("year_of_establish");
                         num_wrkers = data.optString("num_wrkers");
@@ -666,14 +679,20 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
                             @Override
                             public void run() {
                                 cmpny.setVisibility(View.VISIBLE);
+                                cmpntDet.setVisibility(View.VISIBLE);
                                 setImage(pro_pic, proPic);
                                 setCover(cover_pic, cover);
                                 name.setText(cmpny_name);
                                 position.setText(c_type);
                                 org.setText(landmark + "," + country);
-                                abt.setText(c_desc);
+
+                                if(c_desc!=null && !c_desc.trim().isEmpty()){
+                                    about.setVisibility(View.VISIBLE);
+                                    abt.setText(c_desc);
+                                }
                                 url.setText(c_website);
                                 cate.setText(c_type);
+                                type.setText(iType);
                                 sze.setText(num_wrkers);
                                 found.setText(year_of_establish);
 

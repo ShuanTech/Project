@@ -53,14 +53,15 @@ public class Common extends Application {
     public static final String COVER = "cover";
     public static final String CONNECTION = "connection";
     public static final String INTRO = "intro";
-    public static final String CLGNAME = "clg_name";
-    public static final String COURSE = "course";
     public static final String FOLLOWER="follower";
     public static final String FOLLOWING="following";
     public static final String APPLY="apply";
     public static final String ALERT="alert";
     public static final String PROFILESTRENGTH="strenght";
     public static final String PASSWRD="passwrd";
+    public static final String PAGE1="page1";
+    public static final String PAGE2="page2";
+    public static final String PAGE3="page3";
     public Context mContext;
     private String update = null;
     public static final String Version = "version";
@@ -102,17 +103,17 @@ public class Common extends Application {
         }
         new chkVersion().execute();
 
-        if (getPreference().getBoolean(Common.USRINFO, false) == true) {
-            /*if (getPreference().getString(Common.LEVEL, "").equalsIgnoreCase("1")) {
+       /* if (getPreference().getBoolean(Common.USRINFO, false) == true) {
+            *//*if (getPreference().getString(Common.LEVEL, "").equalsIgnoreCase("1")) {
                 new Connect(getApplicationContext(), getPreference().getString(Common.u_id, "")).execute();
             } else if (getPreference().getString(Common.LEVEL, "").equalsIgnoreCase("2")) {
                 new Connect(getApplicationContext(), getPreference().getString(Common.u_id, "")).execute();
             } else {
                 new Follower(getApplicationContext(), getPreference().getString(Common.u_id, "")).execute();
-            }*/
+            }*//*
 
             new GetInfo(getApplicationContext(), getPreference().getString(Common.u_id, "")).execute();
-        }
+        }*/
     }
 
 
@@ -158,4 +159,6 @@ public class Common extends Application {
             }
         }
     }
+
+
 }

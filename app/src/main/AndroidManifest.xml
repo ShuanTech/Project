@@ -124,20 +124,14 @@
         <activity
             android:name=".employer.PostViewActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppBaseTheme.Profile">
-
-        </activity>
+            android:theme="@style/AppBaseTheme.Profile"></activity>
         <activity
             android:name=".search.SearchActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysVisible">
-
-        </activity>
+            android:windowSoftInputMode="stateAlwaysVisible"></activity>
         <activity
             android:name=".resume.ResumeEditActivity"
-            android:screenOrientation="portrait">
-
-        </activity>
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name=".employer.ShortListActivity"
             android:launchMode="singleTop"
@@ -149,9 +143,7 @@
         <activity
             android:name=".resume.UpdateResumeActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysHidden">
-
-        </activity>
+            android:windowSoftInputMode="stateAlwaysHidden"></activity>
         <activity
             android:name=".employer.PdfViewActivity"
             android:screenOrientation="portrait">
@@ -165,25 +157,18 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".employer.ShortListActivity" />
-
         </activity>
         <activity
             android:name=".profile.ProfileActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/Junior.Profile">
-
-        </activity>
+            android:theme="@style/Junior.Profile"></activity>
         <activity
             android:name=".employee.InterViewActivity"
-            android:screenOrientation="portrait">
-
-        </activity>
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name=".activities.CommentsActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysHidden">
-
-        </activity>
+            android:windowSoftInputMode="stateAlwaysHidden"></activity>
         <activity
             android:name=".setting.SettingActivity"
             android:screenOrientation="portrait">
@@ -206,7 +191,6 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".employer.EmployerActivity" />
-
         </activity>
         <activity
             android:name=".search.EmployerSearchActivity"
@@ -234,14 +218,16 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".search.EmplyeeSearchActivity" />
         </activity>
-
         <activity
             android:name=".employee.InviteActivity"
-            android:screenOrientation="portrait"></activity>
-
+            android:screenOrientation="portrait" />
         <activity
             android:name=".launcher.ForgotPassword"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".signup.employee.CSLActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden"/>
     </application>
 
 </manifest>

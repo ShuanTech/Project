@@ -29,6 +29,7 @@ import com.shuan.project.Utils.EmailValidator;
 import com.shuan.project.Utils.Helper;
 import com.shuan.project.parser.Connection;
 import com.shuan.project.parser.php;
+import com.shuan.project.signup.employee.CSLActivity;
 import com.shuan.project.signup.employee.EducationActivity;
 import com.shuan.project.signup.employee.WorkActivity;
 import com.shuan.project.signup.employer.CompanyDetails;
@@ -269,7 +270,7 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
                             if (type.toString().equalsIgnoreCase("1")) {
 
                                 mApp.getPreference().edit().putInt(Common.PROFILESTRENGTH, 25).commit();
-                                startActivity(new Intent(getApplicationContext(), EducationActivity.class));
+                                startActivity(new Intent(getApplicationContext(), CSLActivity.class));
                                 finish();
                             } else if (type.toString().equalsIgnoreCase("2")) {
 

@@ -27,8 +27,117 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-
             <LinearLayout
+                android:id="@+id/lay1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <EditText
+                        android:id="@+id/cmpn_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/standard_margin"
+                        android:hint="@string/cmpn_name"
+                        android:imeOptions="actionNext"
+                        android:inputType="textAutoComplete" />
+                </android.support.design.widget.TextInputLayout>
+
+
+                <Spinner
+                    android:id="@+id/cmpny_type"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/standard_margin" />
+
+                <Spinner
+                    android:id="@+id/indus_type"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/standard_margin" />
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/standard_margin">
+
+                    <AutoCompleteTextView
+                        android:id="@+id/city"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/city"
+                        android:imeOptions="actionNext"
+                        android:inputType="textAutoComplete" />
+                </android.support.design.widget.TextInputLayout>
+
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/standard_margin">
+
+                    <AutoCompleteTextView
+                        android:id="@+id/district"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="District"
+                        android:imeOptions="actionNext"
+                        android:inputType="textAutoComplete" />
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/standard_margin">
+
+                    <EditText
+                        android:id="@+id/state"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/state"
+                        android:imeOptions="actionNext"
+                        android:inputType="textAutoComplete" />
+                </android.support.design.widget.TextInputLayout>
+
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/standard_margin">
+
+                    <EditText
+                        android:id="@+id/count"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/cntry"
+                        android:imeOptions="actionNext"
+                        android:inputType="textAutoComplete" />
+
+                </android.support.design.widget.TextInputLayout>
+
+
+                <Button
+                    android:id="@+id/next"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="@dimen/activity_horizontal_margin"
+                    android:background="@drawable/signin_border"
+                    android:text="START"
+                    android:textAppearance="?android:textAppearanceMedium"
+                    android:textColor="#fff"
+                    android:textStyle="bold" />
+
+
+            </LinearLayout>
+
+
+            <!--<LinearLayout
                 android:id="@+id/lay1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -238,7 +347,7 @@
                     </RelativeLayout>
                 </LinearLayout>
 
-            </LinearLayout>
+            </LinearLayout>-->
 
         </RelativeLayout>
 

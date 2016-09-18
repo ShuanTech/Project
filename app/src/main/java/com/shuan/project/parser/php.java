@@ -109,5 +109,6 @@ public class php {
     public static final String editJob = "http://udyomitra.com/android/edit_job.php";
     public static final String jobTitle = "http://udyomitra.com/android/get_job_title.php";
     public static final String forgetPasswrd="http://udyomitra.com/android/forget_passwrd.php";
+    public static final String cslIns="http://udyomitra.com/android/csl_ins.php";
 
 }

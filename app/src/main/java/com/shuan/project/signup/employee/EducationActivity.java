@@ -95,7 +95,6 @@ public class EducationActivity extends AppCompatActivity implements View.OnClick
 
 
         ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(getApplicationContext(), R.layout.spinner_item, qulify);
-
         level.setAdapter(adapter1);
         level.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
