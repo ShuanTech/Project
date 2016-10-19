@@ -114,24 +114,45 @@
                                 android:layout_marginRight="@dimen/activity_horizontal_margin"
                                 android:layout_marginTop="@dimen/standard_margin">
 
-                                <Button
-                                    android:id="@+id/but1"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:background="@color/junDark"
-                                    android:text=""
-                                    android:textColor="#fff"
-                                    android:textStyle="bold" />
+                                <RelativeLayout
+                                    android:id="@+id/relat"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:visibility="visible">
 
-                                <Button
-                                    android:id="@+id/but2"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:background="@drawable/but_border"
-                                    android:text="Followed"
-                                    android:textColor="@color/junPrimary"
-                                    android:textStyle="bold"
-                                    android:visibility="gone" />
+                                    <ImageView
+                                        android:id="@+id/imgfollow"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="50dp"
+                                        android:src="@drawable/follow" />
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_below="@+id/imgfollow"
+                                        android:layout_centerInParent="true"
+                                        android:text="Follow" />
+                                </RelativeLayout>
+
+                                <RelativeLayout
+                                    android:id="@+id/relat1"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:visibility="gone">
+
+                                    <ImageView
+                                        android:id="@+id/imgunflw"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="50dp"
+                                        android:src="@drawable/unfollow" />
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_below="@+id/imgunflw"
+                                        android:layout_centerInParent="true"
+                                        android:text="Following" />
+                                </RelativeLayout>
 
                             </RelativeLayout>
 
@@ -152,15 +173,49 @@
                                 android:layout_marginRight="@dimen/activity_horizontal_margin"
                                 android:layout_marginTop="@dimen/standard_margin">
 
-                                <Button
-                                    android:id="@+id/but3"
+                                <ImageView
+                                    android:id="@+id/imgmsg"
                                     android:layout_width="match_parent"
+                                    android:layout_height="50dp"
+                                    android:src="@drawable/message" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:background="@color/junDark"
                                     android:text="Message"
-                                    android:textColor="#fff"
-                                    android:textStyle="bold" />
+                                    android:layout_below="@+id/imgmsg"
+                                    android:layout_centerInParent="true" />
                             </RelativeLayout>
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:id="@+id/call"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1">
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="@dimen/standard_margin"
+                                android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                                android:layout_marginRight="@dimen/activity_horizontal_margin"
+                                android:layout_marginTop="@dimen/standard_margin">
+
+                                <ImageView
+                                    android:id="@+id/imgcall"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="50dp"
+                                    android:src="@drawable/call" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_below="@+id/imgcall"
+                                    android:layout_centerInParent="true"
+                                    android:text="Call" />
+                            </RelativeLayout>
+
 
                         </RelativeLayout>
 
@@ -330,7 +385,7 @@
                     android:layout_marginTop="@dimen/activity_horizontal_margin"
                     android:background="@drawable/pro_bac"
                     android:orientation="vertical"
-                   android:visibility="gone">
+                    android:visibility="gone">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -410,6 +465,7 @@
                         </RelativeLayout>
 
                     </LinearLayout>
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
