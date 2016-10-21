@@ -108,7 +108,6 @@ public class AddCollegedetail extends AsyncTask<String, String, String> {
                 mApp.getPreference().edit().putInt(Common.PROFILESTRENGTH, val + 2).commit();
             }
             mApp.getPreference().edit().putBoolean(Common.QUALIFICATION, true).commit();
-            new GetInfo(mContext, uId).execute();
             new Connect(mContext, uId, mApp.getPreference().getString(Common.LEVEL, ""),
                     clg, course).execute();
             Toast.makeText(mContext, "Successfully Updated", Toast.LENGTH_SHORT).show();

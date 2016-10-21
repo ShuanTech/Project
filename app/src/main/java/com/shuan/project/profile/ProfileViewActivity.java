@@ -103,8 +103,8 @@ public class ProfileViewActivity extends AppCompatActivity {
         name = (TextView) findViewById(R.id.name);
         position = (TextView) findViewById(R.id.position);
         org = (TextView) findViewById(R.id.company_name);
-        bu1 = (Button) findViewById(R.id.but1);
-        bu2 = (Button) findViewById(R.id.but2);
+        /*bu1 = (Button) findViewById(R.id.but1);
+        bu2 = (Button) findViewById(R.id.but2);*/
         noData = (LinearLayout) findViewById(R.id.no_data);
         cmpny = (LinearLayout) findViewById(R.id.cmpny);
         employee = (LinearLayout) findViewById(R.id.employee);
@@ -125,7 +125,7 @@ public class ProfileViewActivity extends AppCompatActivity {
         found = (TextView) findViewById(R.id.found);
         exprience = (LinearLayout) findViewById(R.id.exprience);
         msg = (RelativeLayout) findViewById(R.id.msg);
-        but3 = (Button) findViewById(R.id.but3);
+       /* but3 = (Button) findViewById(R.id.but3);*/
         list = new ArrayList<Sample>();
         inivite = (Button) findViewById(R.id.invite);
         type= (TextView) findViewById(R.id.indus_type);
@@ -239,7 +239,7 @@ public class ProfileViewActivity extends AppCompatActivity {
                         JSONObject info = child.getJSONObject("info");
                         JSONArray infoArray = info.getJSONArray("info");
                         JSONObject data = infoArray.getJSONObject(0);
-                        fullname = data.optString("full_name");
+
                         final String email_id = data.optString("email_id");
                         final String ph_no = data.optString("ph_no");
                         final String pro_pic = data.optString("pro_pic");
@@ -248,6 +248,7 @@ public class ProfileViewActivity extends AppCompatActivity {
                         JSONObject cntInfo = child.getJSONObject("cnt");
                         JSONArray cntArray = cntInfo.getJSONArray("cnt");
                         JSONObject data1 = cntArray.getJSONObject(0);
+                        fullname = data1.optString("full_name");
                         final String city = data1.optString("city");
                         final String country = data1.optString("country");
 

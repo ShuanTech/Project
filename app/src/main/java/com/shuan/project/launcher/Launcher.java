@@ -22,6 +22,7 @@ import com.shuan.project.employer.EmployerActivity;
 import com.shuan.project.parser.Connection;
 import com.shuan.project.parser.php;
 import com.shuan.project.signup.employee.CSLActivity;
+import com.shuan.project.signup.employee.WorkActivity;
 import com.shuan.project.signup.employer.CompanyDetails;
 
 import org.json.JSONArray;
@@ -110,9 +111,7 @@ public class Launcher extends AppCompatActivity {
         }
 
     }
-
     private void check() {
-
         if (mApp.getPreference().getBoolean(Common.Login, false) == false) {
             Intent i = new Intent(Launcher.this, LoginActivity.class);
             startActivity(i);
@@ -134,7 +133,14 @@ public class Launcher extends AppCompatActivity {
                     }
 
                 } else {
-                    startActivity(new Intent(Launcher.this, SeniorActivity.class));
+
+                    if (mApp.getPreference().getBoolean(Common.PAGE2, false) == false) {
+                        startActivity(new Intent(getApplicationContext(), WorkActivity.class));
+                    }else if(mApp.getPreference().getBoolean(Common.PAGE1, false) == false){
+                        startActivity(new Intent(getApplicationContext(),CSLActivity.class));
+                    }else{
+                        startActivity(new Intent(Launcher.this, SeniorActivity.class));
+                    }
                 }
 
 

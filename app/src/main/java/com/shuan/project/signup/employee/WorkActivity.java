@@ -1,5 +1,6 @@
 package com.shuan.project.signup.employee;
 
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -35,12 +36,12 @@ import org.json.JSONObject;
 
 import java.util.HashMap;
 
-public class WorkActivity extends AppCompatActivity implements View.OnClickListener, TextWatcher {
+public class WorkActivity extends AppCompatActivity implements View.OnClickListener {
 
     private Helper helper = new Helper();
     private Common mApp;
     private AutoCompleteTextView orgname;
-    private Button wk_skip, wk_next;
+    private Button next,wk_skip, wk_next;
     private HashMap<String, String> wData;
     private TextView frm, to;
     private EditText postition, location, fYr, tYr, present;
@@ -53,6 +54,7 @@ public class WorkActivity extends AppCompatActivity implements View.OnClickListe
     private MonthYearPicker myp;
     private MonthYearPicker1 myp1;
     private boolean cIns = false;
+    private ProgressDialog pDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -114,21 +116,23 @@ public class WorkActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
 
-        wk_next = (Button) findViewById(R.id.wk_next);
-        wk_skip = (Button) findViewById(R.id.wk_skip);
+        next= (Button) findViewById(R.id.next);
 
-        orgname.addTextChangedListener(this);
+       /* wk_next = (Button) findViewById(R.id.wk_next);
+        wk_skip = (Button) findViewById(R.id.wk_skip);*/
+
+        //orgname.addTextChangedListener(this);
         wrking.setOnClickListener(this);
-        wk_next.setOnClickListener(this);
+    /*    wk_next.setOnClickListener(this);
         wk_skip.setOnClickListener(this);
-
+*/
         new GetOrg(WorkActivity.this, progressBar, scroll, orgname).execute();
 
         orgname.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 TextView txt1 = (TextView) view.findViewById(R.id.ins_name);
-                TextView txt4 = (TextView) view.findViewById(R.id.txt1);
+                TextView txt4 = (TextView) view.findViewById(R.id.univ);
 
                 orgname.setText(txt1.getText().toString());
                 location.setText(txt4.getText().toString());
@@ -136,7 +140,7 @@ public class WorkActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
 
-
+        next.setOnClickListener(this);
 
 
     }
@@ -156,7 +160,7 @@ public class WorkActivity extends AppCompatActivity implements View.OnClickListe
                     visible = true;
                 }
                 break;
-            case R.id.wk_next:
+            case R.id.next:
                 if (postition.getText().toString().length() == 0) {
                     postition.setError("Position Mandatory");
                     postition.requestFocus();
@@ -180,43 +184,23 @@ public class WorkActivity extends AppCompatActivity implements View.OnClickListe
                     }
 
 
-                    wk_next.setEnabled(false);
+                    next.setEnabled(false);
                     new Wrk().execute();
 
                 }
 
                 break;
-            case R.id.wk_skip:
+            /*case R.id.wk_skip:
                 mApp.getPreference().edit().putBoolean(Common.WORKINFO, false).commit();
                 startActivity(new Intent(getApplicationContext(), EducationActivity.class));
                 finish();
-                break;
+                break;*/
         }
 
 
     }
 
-    @Override
-    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
-    }
-
-    @Override
-    public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-    }
-
-    @Override
-    public void afterTextChanged(Editable s) {
-
-        if (orgname.getText().toString().length() == 0) {
-            wk_skip.setVisibility(View.VISIBLE);
-            wk_next.setVisibility(View.GONE);
-        } else {
-            wk_skip.setVisibility(View.GONE);
-            wk_next.setVisibility(View.VISIBLE);
-        }
-    }
 
     public class Wrk extends AsyncTask<String, String, String> {
 
@@ -225,6 +209,16 @@ public class WorkActivity extends AppCompatActivity implements View.OnClickListe
         String uLocation = location.getText().toString();
         String uFrm = fYr.getText().toString();
 
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            pDialog=new ProgressDialog(WorkActivity.this);
+            pDialog.setIndeterminate(false);
+            pDialog.setCancelable(false);
+            pDialog.setMessage("Please Wait...");
+            pDialog.show();
+        }
 
         @Override
         protected String doInBackground(String... params) {
@@ -260,9 +254,10 @@ public class WorkActivity extends AppCompatActivity implements View.OnClickListe
                         @Override
                         public void run() {
                             mApp.getPreference().edit().putBoolean(Common.WORKINFO, true).commit();
+                            mApp.getPreference().edit().putBoolean(Common.PAGE2, true).commit();
                             int val=mApp.getPreference().getInt(Common.PROFILESTRENGTH,0);
                             mApp.getPreference().edit().putInt(Common.PROFILESTRENGTH, val+3).commit();
-                            startActivity(new Intent(getApplicationContext(), EducationActivity.class));
+                            startActivity(new Intent(getApplicationContext(), CSLActivity.class));
                             finish();
                         }
                     });
@@ -274,11 +269,18 @@ public class WorkActivity extends AppCompatActivity implements View.OnClickListe
             }
             return null;
         }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+            pDialog.cancel();
+        }
     }
 
     @Override
     public void onBackPressed() {
         if (exit) {
+            mApp.getPreference().edit().putBoolean(Common.PAGE2, false).commit();
             super.onBackPressed();
             return;
         } else {

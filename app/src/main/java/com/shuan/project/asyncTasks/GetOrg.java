@@ -57,17 +57,11 @@ public class GetOrg extends AsyncTask<String, String, String> {
                 for(int i=0;i<jsonArray.length();i++){
                     JSONObject child=jsonArray.getJSONObject(i);
 
-                    String orgNme=child.optString("org_name");
-                    String type=child.optString("type");
-                    String addr=child.optString("addr");
-                    String country=child.optString("country");
-                    String state=child.optString("state");
-                    String city=child.optString("city");
-                    String land=child.optString("land_mark");
-                    String pin=child.optString("pincode");
-                    String district=child.optString("dis");
+                    String orgNme=child.optString("cmpny_name");
+                    String land=child.optString("city");
 
-                    list.add(new Sample(orgNme+", "+land,orgNme,type,addr,land,city,state,country,pin,district));
+
+                    list.add(new Sample(orgNme+", "+land,orgNme,land));
 
                 }
             }

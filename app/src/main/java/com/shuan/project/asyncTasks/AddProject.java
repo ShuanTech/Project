@@ -26,8 +26,8 @@ public class AddProject extends AsyncTask<String, String, String> {
     private Common mApp;
 
 
-    public AddProject(Context mContext, String uId, String title, String pltfrm, String role, String teamSze, String dur, String url,
-                      String desc, String isAcd, String type) {
+    public AddProject(Context mContext, String uId, String title, String pltfrm, String role, String teamSze, String dur, String desc,
+                      String type) {
         this.mContext = mContext;
         this.uId = uId;
         this.title = title;
@@ -35,9 +35,7 @@ public class AddProject extends AsyncTask<String, String, String> {
         this.role = role;
         this.teamSze = teamSze;
         this.dur = dur;
-        this.url = url;
         this.desc = desc;
-        this.isAcd = isAcd;
         this.type = type;
         this.mApp = (Common) mContext.getApplicationContext();
     }
@@ -63,8 +61,7 @@ public class AddProject extends AsyncTask<String, String, String> {
         seniorData.put("teamSze", teamSze);
         seniorData.put("dur", dur);
         seniorData.put("desc", desc);
-        seniorData.put("url", url);
-        seniorData.put("isAcd", isAcd);
+        seniorData.put("isAcd", "0");
         seniorData.put("type", type);
 
         try {

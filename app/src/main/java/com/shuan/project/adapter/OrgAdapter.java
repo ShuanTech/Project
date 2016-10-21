@@ -53,24 +53,17 @@ public class OrgAdapter extends ArrayAdapter<Sample> implements Filterable {
         TextView display = (TextView) convertView.findViewById(R.id.display);
         TextView insName = (TextView) convertView.findViewById(R.id.ins_name);
         TextView univ = (TextView) convertView.findViewById(R.id.univ);
-        TextView loc = (TextView) convertView.findViewById(R.id.loc);
+       /* TextView loc = (TextView) convertView.findViewById(R.id.loc);
         TextView txt1 = (TextView) convertView.findViewById(R.id.txt1);
         TextView txt2 = (TextView) convertView.findViewById(R.id.txt2);
         TextView txt3 = (TextView) convertView.findViewById(R.id.txt3);
         TextView txt4 = (TextView) convertView.findViewById(R.id.txt4);
         TextView txt5 = (TextView) convertView.findViewById(R.id.txt5);
-        TextView txt6 = (TextView) convertView.findViewById(R.id.txt6);
+        TextView txt6 = (TextView) convertView.findViewById(R.id.txt6);*/
 
-        display.setText(curr.getDis());
-        insName.setText(curr.getOrgName());
-        univ.setText(curr.getType());
-        loc.setText(curr.getAddr());
-        txt1.setText(curr.getLand());
-        txt2.setText(curr.getCty());
-        txt3.setText(curr.getState());
-        txt4.setText(curr.getContry());
-        txt5.setText(curr.getPin());
-        txt6.setText(curr.getDistrct());
+        display.setText(curr.getU_id());
+        insName.setText(curr.getName());
+        univ.setText(curr.getLevel());
 
         return convertView;
     }
@@ -110,7 +103,7 @@ public class OrgAdapter extends ArrayAdapter<Sample> implements Filterable {
                 ArrayList<Sample> newValues = new ArrayList<Sample>(count);
                 for (int i = 0; i < count; i++) {
                     Sample item = val.get(i);
-                    if (item.getDis().toLowerCase().contains(constraint.toString().toLowerCase())) {
+                    if (item.getU_id().toLowerCase().contains(constraint.toString().toLowerCase())) {
                         newValues.add(item);
                     }
 

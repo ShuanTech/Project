@@ -1,11 +1,16 @@
 package com.shuan.project.asyncTasks;
 
+import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
+import com.shuan.project.Utils.Common;
 import com.shuan.project.parser.Connection;
 import com.shuan.project.parser.php;
+import com.shuan.project.resume.ResumeEditActivity;
 
 import org.json.JSONObject;
 
@@ -17,11 +22,23 @@ public class UpdateStatus extends AsyncTask<String, String, String> {
     private Context mContext;
     private String u_id, status, s;
     private HashMap<String, String> uData;
-
+    private ProgressDialog pDialog;
+    private Common mApp;
     public UpdateStatus(Context mContext, String u_id, String status) {
         this.mContext = mContext;
         this.u_id = u_id;
         this.status = status;
+        this.mApp = (Common) mContext.getApplicationContext();
+    }
+
+    @Override
+    protected void onPreExecute() {
+        super.onPreExecute();
+        pDialog = new ProgressDialog(mContext);
+        pDialog.setMessage("Updating");
+        pDialog.setIndeterminate(false);
+        pDialog.setCancelable(false);
+        pDialog.show();
     }
 
     @Override
@@ -49,8 +66,15 @@ public class UpdateStatus extends AsyncTask<String, String, String> {
     @Override
     protected void onPostExecute(String s) {
         super.onPostExecute(s);
+        pDialog.cancel();
         if(s.equalsIgnoreCase("true")){
             Toast.makeText(mContext,"Status Updated Successfully",Toast.LENGTH_SHORT).show();
+            int val = mApp.getPreference().getInt(Common.PROFILESTRENGTH, 0);
+            mApp.getPreference().edit().putInt(Common.PROFILESTRENGTH, val + 2).commit();
+            Intent in = new Intent(mContext, ResumeEditActivity.class);
+            in.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            mContext.startActivity(in);
+            ((AppCompatActivity) mContext).finish();
         }else{
             Toast.makeText(mContext,"Something Went Wrong! Status couldn't update",Toast.LENGTH_SHORT).show();
         }

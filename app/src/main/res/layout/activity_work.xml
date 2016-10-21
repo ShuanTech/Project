@@ -19,7 +19,8 @@
         android:id="@+id/scroll"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true">
+        android:layout_centerInParent="true"
+        android:visibility="gone">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -163,38 +164,18 @@
                 android:checked="true"
                 android:text="@string/wrking" />
 
-            <RelativeLayout
-                android:layout_width="match_parent"
+
+            <Button
+                android:id="@+id/next"
+                android:layout_width="150dp"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
                 android:layout_marginTop="@dimen/activity_horizontal_margin"
-                android:orientation="horizontal">
-
-                <RelativeLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1" />
-
-                <Button
-                    android:id="@+id/wk_skip"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginRight="@dimen/activity_horizontal_margin"
-                    android:background="@null"
-                    android:text="SKIP"
-                    android:textColor="@color/colorAccent" />
-
-                <Button
-                    android:id="@+id/wk_next"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginRight="@dimen/activity_horizontal_margin"
-                    android:background="@color/colorAccent"
-                    android:text="NEXT"
-                    android:textColor="@android:color/white"
-                    android:visibility="gone" />
-            </RelativeLayout>
+                android:background="@drawable/signin_border"
+                android:text="NEXT"
+                android:textAppearance="?android:textAppearanceMedium"
+                android:textColor="#fff"
+                android:textStyle="bold" />
         </LinearLayout>
 
     </ScrollView>

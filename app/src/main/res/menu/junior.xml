@@ -61,6 +61,12 @@
         <item android:title="Activities">
             <menu>
                 <group android:checkableBehavior="single">
+
+                    <item
+                        android:id="@+id/port"
+                        android:icon="@drawable/ic_portfolio"
+                        android:title="Portfolio" />
+
                     <item
                         android:id="@+id/offer"
                         android:icon="@drawable/ic_offers"

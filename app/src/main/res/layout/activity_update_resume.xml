@@ -254,7 +254,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/activity_horizontal_margin"
-                        android:hint="Work Experience"
+                        android:hint="Work Experience (Eg. Well Knowledge in Java) "
                         android:imeOptions="actionDone" />
                 </android.support.design.widget.TextInputLayout>
 
@@ -284,7 +284,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:text="@string/qual"
+                    android:text="Qualification"
                     android:textAppearance="?android:textAppearanceMedium"
                     android:textColor="#333" />
 
@@ -369,7 +369,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="From :"
+                            android:text="Joined"
                             android:textColor="#000"
                             android:textStyle="bold" />
 
@@ -378,6 +378,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="@dimen/small_margin"
+                            android:hint="Year"
                             android:imeOptions="actionNext"
                             android:inputType="numberDecimal"
                             android:maxLength="4"
@@ -394,7 +395,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="To :"
+                            android:text="Passed"
                             android:textColor="#000"
                             android:textStyle="bold" />
 
@@ -403,6 +404,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="@dimen/small_margin"
+                            android:hint="Year"
                             android:imeOptions="actionNext"
                             android:inputType="numberDecimal"
                             android:maxLength="4"
@@ -453,7 +455,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:text="Add School Detail"
+                    android:text="Schooling"
                     android:textAppearance="?android:textAppearanceMedium"
                     android:textColor="#333" />
 
@@ -461,14 +463,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
-                    <EditText
+                    <Spinner
                         android:id="@+id/mode"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/standard_margin"
-                        android:hint="Mode of School (ex: HSC OR SSLC)"
-                        android:imeOptions="actionNext"
-                        android:singleLine="true" />
+                        android:layout_marginTop="@dimen/standard_margin" />
                 </android.support.design.widget.TextInputLayout>
 
                 <android.support.design.widget.TextInputLayout
@@ -531,7 +530,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="From :"
+                            android:text="Joined"
                             android:textColor="#000"
                             android:textStyle="bold" />
 
@@ -556,7 +555,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="To :"
+                            android:text="Passed"
                             android:textColor="#000"
                             android:textStyle="bold" />
 
@@ -659,7 +658,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:text="@string/project"
+                    android:text="Academic Project"
                     android:textAppearance="?android:textAppearanceMedium"
                     android:textColor="#333" />
 
@@ -737,20 +736,7 @@
                         android:singleLine="true" />
                 </android.support.design.widget.TextInputLayout>
 
-                <android.support.design.widget.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
 
-                    <EditText
-                        android:id="@+id/p_url"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/standard_margin"
-                        android:hint="Project URL"
-                        android:imeOptions="actionNext"
-                        android:inputType="textWebEditText"
-                        android:singleLine="true" />
-                </android.support.design.widget.TextInputLayout>
 
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
@@ -761,19 +747,13 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/standard_margin"
+                        android:lines="2"
                         android:hint="Project Description"
                         android:imeOptions="actionDone"
                         android:inputType="text" />
                 </android.support.design.widget.TextInputLayout>
 
-                <CheckBox
-                    android:id="@+id/acd"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="@dimen/standard_margin"
-                    android:checked="true"
-                    android:text="Academic Project" />
+
 
                 <Button
                     android:id="@+id/p_update"
@@ -816,6 +796,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/standard_margin"
                         android:hint="@string/cert"
+                        android:singleLine="true"
                         android:imeOptions="actionNext"
                         android:inputType="textPersonName" />
                 </android.support.design.widget.TextInputLayout>
@@ -830,6 +811,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/standard_margin"
                         android:hint="@string/cer_centre"
+                        android:singleLine="true"
                         android:imeOptions="actionNext" />
                 </android.support.design.widget.TextInputLayout>
 
@@ -843,6 +825,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/standard_margin"
                         android:hint="@string/cer_dur"
+                        android:singleLine="true"
                         android:imeOptions="actionDone"
                         android:inputType="numberDecimal" />
                 </android.support.design.widget.TextInputLayout>
@@ -887,6 +870,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/standard_margin"
                         android:hint="Enter Achievement"
+                        android:singleLine="true"
                         android:imeOptions="actionDone" />
                 </android.support.design.widget.TextInputLayout>
 
@@ -932,6 +916,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/standard_margin"
                         android:hint="Enter Extra Curricular"
+                        android:singleLine="true"
                         android:imeOptions="actionDone" />
                 </android.support.design.widget.TextInputLayout>
 
@@ -948,106 +933,6 @@
 
             </LinearLayout>
 
-
-            <LinearLayout
-                android:id="@+id/cntInfo"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="@dimen/activity_horizontal_margin"
-                android:orientation="vertical"
-                android:visibility="gone">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/small_margin"
-                    android:gravity="center_horizontal"
-                    android:text="Contact Info"
-                    android:textAppearance="?android:textAppearanceMedium"
-                    android:textColor="#333" />
-
-                <android.support.design.widget.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <EditText
-                        android:id="@+id/addr"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/standard_margin"
-                        android:hint="Address"
-                        android:imeOptions="actionNext"
-                        android:singleLine="true" />
-                </android.support.design.widget.TextInputLayout>
-
-                <android.support.design.widget.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <AutoCompleteTextView
-                        android:id="@+id/city"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/standard_margin"
-                        android:hint="City"
-                        android:imeOptions="actionNext"
-                        android:singleLine="true" />
-                </android.support.design.widget.TextInputLayout>
-
-                <android.support.design.widget.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <EditText
-                        android:id="@+id/district"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/standard_margin"
-                        android:hint="District"
-                        android:imeOptions="actionNext"
-                        android:singleLine="true" />
-                </android.support.design.widget.TextInputLayout>
-
-                <android.support.design.widget.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <EditText
-                        android:id="@+id/state"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/standard_margin"
-                        android:hint="State"
-                        android:imeOptions="actionNext"
-                        android:singleLine="true" />
-                </android.support.design.widget.TextInputLayout>
-
-                <android.support.design.widget.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <EditText
-                        android:id="@+id/country"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/standard_margin"
-                        android:hint="Country"
-                        android:imeOptions="actionDone"
-                        android:singleLine="true" />
-                </android.support.design.widget.TextInputLayout>
-
-                <Button
-                    android:id="@+id/cnt_add"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="@dimen/activity_horizontal_margin"
-                    android:background="@null"
-                    android:text="Update"
-                    android:textColor="@color/colorAccent" />
-
-
-            </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/bsc"
@@ -1188,6 +1073,171 @@
                     android:textColor="@color/colorAccent" />
 
             </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/cntInfo"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_alignParentBottom="true"
+                android:layout_toRightOf="@+id/ps_edit"
+                android:layout_toEndOf="@+id/ps_edit"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/small_margin"
+                    android:gravity="center_horizontal"
+                    android:text="Contact Info"
+                    android:textAppearance="?android:textAppearanceMedium"
+                    android:textColor="#333" />
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <EditText
+                        android:id="@+id/addr"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/standard_margin"
+                        android:hint="Address"
+                        android:imeOptions="actionNext"
+                        android:singleLine="true" />
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <AutoCompleteTextView
+                        android:id="@+id/city"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/standard_margin"
+                        android:hint="City"
+                        android:imeOptions="actionNext"
+                        android:singleLine="true" />
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <EditText
+                        android:id="@+id/district"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/standard_margin"
+                        android:hint="District"
+                        android:imeOptions="actionNext"
+                        android:singleLine="true" />
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <EditText
+                        android:id="@+id/state"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/standard_margin"
+                        android:hint="State"
+                        android:imeOptions="actionNext"
+                        android:singleLine="true" />
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <EditText
+                        android:id="@+id/country"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/standard_margin"
+                        android:hint="Country"
+                        android:imeOptions="actionNext"
+                        android:singleLine="true" />
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <EditText
+                        android:id="@+id/pin_code"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/standard_margin"
+                        android:hint="Pincode"
+                        android:inputType="numberDecimal"
+                        android:maxLength="6"
+                        android:imeOptions="actionDone"
+                        android:singleLine="true" />
+                </android.support.design.widget.TextInputLayout>
+
+                <Button
+                    android:id="@+id/cnt_add"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="@dimen/activity_horizontal_margin"
+                    android:background="@null"
+                    android:text="Update"
+                    android:textColor="@color/colorAccent" />
+
+
+            </LinearLayout>
+
+
+
+            <LinearLayout
+                android:id="@+id/objec"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <TextView
+                    android:id="@+id/Objective"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="@dimen/small_margin"
+                    android:gravity="center_horizontal"
+                    android:text="@string/profile_summary"
+                    android:textAppearance="?android:textAppearanceMedium"
+                    android:textColor="#333" />
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <EditText
+                        android:id="@+id/obj"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/activity_horizontal_margin"
+                        android:hint="Objective"
+                        android:imeOptions="actionDone" />
+                </android.support.design.widget.TextInputLayout>
+
+                <Button
+                    android:id="@+id/obj_edt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="@dimen/activity_horizontal_margin"
+                    android:background="@null"
+                    android:text="UPDATE"
+                    android:textColor="@color/colorAccent" />
+
+            </LinearLayout>
+
+
 
         </RelativeLayout>
 

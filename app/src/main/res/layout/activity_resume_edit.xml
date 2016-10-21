@@ -329,7 +329,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:layout_marginLeft="@dimen/standard_margin"
-                        android:text="PROJECT DETAILS"
+                        android:text="ACADEMIC PROJECT DETAILS"
                         android:textColor="#333"
                         android:textStyle="bold" />
 
@@ -347,7 +347,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center_horizontal"
-                        android:text="Add Project"
+                        android:text="Add Academic Project"
                         android:textColor="@color/junPrimary"
                         android:textStyle="bold" />
 
@@ -761,6 +761,43 @@
 
                         <TextView
                             android:id="@+id/cntry"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/standard_margin"
+                            android:text=""
+                            android:textColor="#000" />
+
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/small_margin"
+                    android:orientation="horizontal">
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/standard_margin"
+                            android:text="Pincode"
+                            android:textColor="#333" />
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
+
+                        <TextView
+                            android:id="@+id/pin_code"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="@dimen/standard_margin"

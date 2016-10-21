@@ -49,7 +49,7 @@ public class ResumeEditActivity extends AppCompatActivity implements View.OnClic
     private ArrayList<Sample> list;
     private PopupMenu popupMenu;
     private ImageView cntEdt, bscEdt, abtEdt;
-    private TextView email, phno, addr, cty, ste, cntry, dob, gen, fName, mName, rel, lang, hooby, abtTxt;
+    private TextView email, phno, addr, cty, ste, cntry, dob, gen, fName, mName, rel, lang, hooby, abtTxt,pin;
     private EditText about;
     private String disrct;
 
@@ -61,10 +61,7 @@ public class ResumeEditActivity extends AppCompatActivity implements View.OnClic
             setTheme(R.style.Junior);
         } else if (mApp.getPreference().getString(Common.LEVEL, "").equalsIgnoreCase("2")) {
             setTheme(R.style.Senior);
-        } else {
-            setTheme(R.style.AppBaseTheme);
         }
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_resume_edit);
 
@@ -75,8 +72,6 @@ public class ResumeEditActivity extends AppCompatActivity implements View.OnClic
             toolbar.setBackgroundColor(getResources().getColor(R.color.junPrimary));
         } else if (mApp.getPreference().getString(Common.LEVEL, "").equalsIgnoreCase("2")) {
             toolbar.setBackgroundColor(getResources().getColor(R.color.senPrimary));
-        } else {
-            toolbar.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
         }
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
@@ -117,6 +112,7 @@ public class ResumeEditActivity extends AppCompatActivity implements View.OnClic
         rel = (TextView) findViewById(R.id.rel);
         lang = (TextView) findViewById(R.id.lang);
         hooby = (TextView) findViewById(R.id.hobby);
+        pin= (TextView) findViewById(R.id.pin_code);
         abt = (LinearLayout) findViewById(R.id.abt);
         abtEdt = (ImageView) findViewById(R.id.abt_edt);
         abtTxt = (TextView) findViewById(R.id.abt_txt);
@@ -139,7 +135,7 @@ public class ResumeEditActivity extends AppCompatActivity implements View.OnClic
         cntEdt.setOnClickListener(this);
         bscEdt.setOnClickListener(this);
         abtEdt.setOnClickListener(this);
-        chkIntro();
+        //chkIntro();
 
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -155,13 +151,13 @@ public class ResumeEditActivity extends AppCompatActivity implements View.OnClic
         super.onBackPressed();
     }
 
-    private void chkIntro() {
+    /*private void chkIntro() {
         if (mApp.getPreference().getString(Common.INTRO, "").equalsIgnoreCase("")) {
             abt.setVisibility(View.GONE);
         } else {
             abtTxt.setText(mApp.getPreference().getString(Common.INTRO, ""));
         }
-    }
+    }*/
 
     @Override
     public void onClick(View v) {
@@ -234,6 +230,7 @@ public class ResumeEditActivity extends AppCompatActivity implements View.OnClic
                 mApp.getPreference().edit().putString("state", ste.getText().toString()).commit();
                 mApp.getPreference().edit().putString("distrct", disrct).commit();
                 mApp.getPreference().edit().putString("country", cntry.getText().toString()).commit();
+                mApp.getPreference().edit().putString("picode",pin.getText().toString());
                 startActivity(in);
                 break;
             case R.id.bsc_edt:
@@ -249,7 +246,11 @@ public class ResumeEditActivity extends AppCompatActivity implements View.OnClic
                 startActivity(in);
                 break;
             case R.id.abt_edt:
-                getIntro();
+                in.putExtra("what","add");
+                in.putExtra("which","obj");
+                mApp.getPreference().edit().putString("obj", abtTxt.getText().toString()).commit();
+                startActivity(in);
+                //getIntro();
                 break;
 
 
@@ -374,6 +375,8 @@ public class ResumeEditActivity extends AppCompatActivity implements View.OnClic
                                                             mApp.getPreference().edit().putString("pos", position).commit();
                                                             mApp.getPreference().edit().putString("org", org_name).commit();
                                                             mApp.getPreference().edit().putString("loc", location).commit();
+                                                            mApp.getPreference().edit().putString("frm",from_date).commit();
+                                                            mApp.getPreference().edit().putString("to",to_date).commit();
                                                             in.putExtra("what", "edit");
                                                             in.putExtra("which", "wrkDet");
                                                             startActivity(in);
@@ -461,6 +464,8 @@ public class ResumeEditActivity extends AppCompatActivity implements View.OnClic
                         final String aggregate = data.optString("aggregate");
                         final String level = data.optString("level");
                         final String univ = data.optString("board");
+                        final String frm=data.optString("frm_date");
+                        final String to=data.optString("to_date");
 
                         if (pId.equalsIgnoreCase("")) {
                         } else {
@@ -493,7 +498,8 @@ public class ResumeEditActivity extends AppCompatActivity implements View.OnClic
                                                             mApp.getPreference().edit().putString("univ", univ).commit();
                                                             mApp.getPreference().edit().putString("location", location).commit();
                                                             mApp.getPreference().edit().putString("aggrt", aggregate).commit();
-
+                                                            mApp.getPreference().edit().putString("frm",frm).commit();
+                                                            mApp.getPreference().edit().putString("to",to).commit();
                                                             in.putExtra("what", "edit");
                                                             if (level.equalsIgnoreCase("1") || level.equalsIgnoreCase("2") ||
                                                                     level.equalsIgnoreCase("3")) {
@@ -770,6 +776,8 @@ public class ResumeEditActivity extends AppCompatActivity implements View.OnClic
                     final String married_status = data.optString("married_status");
                     final String language = data.optString("language");
                     final String hobbies = data.optString("hobbies");
+                    final String pinCode=data.optString("pincode");
+                    final String objc=data.optString("objective");
 
                     runOnUiThread(new Runnable() {
                         @Override
@@ -788,6 +796,14 @@ public class ResumeEditActivity extends AppCompatActivity implements View.OnClic
                             rel.setText(married_status);
                             lang.setText(language);
                             hooby.setText(hobbies);
+                            pin.setText(pinCode);
+                            if(objc.toString().length()==0){
+                                abt.setVisibility(View.GONE);
+                            }else{
+                                abt.setVisibility(View.VISIBLE);
+                                abtTxt.setText(objc);
+                            }
+
 
                         }
                     });
@@ -807,7 +823,7 @@ public class ResumeEditActivity extends AppCompatActivity implements View.OnClic
         }
     }
 
-    private void getIntro() {
+/*    private void getIntro() {
         LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View v = inflater.inflate(R.layout.intro_dialog, null, false);
         about = (EditText) v.findViewById(R.id.intro);
@@ -834,5 +850,5 @@ public class ResumeEditActivity extends AppCompatActivity implements View.OnClic
                 dialog.cancel();
             }
         }).show();
-    }
+    }*/
 }

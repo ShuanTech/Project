@@ -53,6 +53,7 @@ public class EditWrkDetail extends AsyncTask<String,String,String>{
         rData.put("frm", frmDate);
         rData.put("to", toDate);
         rData.put("type","edit");
+        rData.put("ins","false");
 
         try {
             JSONObject json = Connection.UrlConnection(php.work_info, rData);

@@ -20,13 +20,13 @@ import java.util.HashMap;
 public class AddContactInfo extends AsyncTask<String, String, String> {
 
     private Context mContext;
-    private String uId, addr, city, distrct, state, country, s="";
+    private String uId, addr, city, distrct, state, country,pin, s="";
     private boolean ins;
     private HashMap<String, String> seniorData;
     private ProgressDialog pDialog;
     private Common mApp;
 
-    public AddContactInfo(Context mContext, String uId, String addr, String city, String distrct, String state, String country, boolean ins) {
+    public AddContactInfo(Context mContext, String uId, String addr, String city, String distrct, String state, String country, String pin,boolean ins) {
         this.mContext = mContext;
         this.uId = uId;
         this.addr = addr;
@@ -34,6 +34,7 @@ public class AddContactInfo extends AsyncTask<String, String, String> {
         this.distrct = distrct;
         this.state = state;
         this.country = country;
+        this.pin=pin;
         this.ins = ins;
         this.mApp= (Common) mContext.getApplicationContext();
     }
@@ -58,6 +59,7 @@ public class AddContactInfo extends AsyncTask<String, String, String> {
         seniorData.put("district", distrct);
         seniorData.put("state", state);
         seniorData.put("country", country);
+        seniorData.put("pin",pin);
         if (ins == true) {
             seniorData.put("insrt", "false");
         } else {

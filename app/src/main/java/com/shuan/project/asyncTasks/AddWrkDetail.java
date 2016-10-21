@@ -98,7 +98,6 @@ public class AddWrkDetail extends AsyncTask<String, String, String> {
                 i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 activity.startActivity(i);
             } else {
-                new GetInfo(mContext, uId).execute();
                 mApp.getPreference().edit().putBoolean(Common.WORKINFO, true).commit();
 
 

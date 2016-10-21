@@ -5,9 +5,12 @@ import android.app.FragmentTransaction;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
@@ -51,6 +54,7 @@ import com.shuan.project.asyncTasks.GetLocation;
 import com.shuan.project.asyncTasks.GetOrg;
 import com.shuan.project.asyncTasks.GetSchool;
 import com.shuan.project.asyncTasks.GetSkillSet;
+import com.shuan.project.asyncTasks.UpdateStatus;
 import com.shuan.project.asyncTasks.profileSummaryUpdate;
 import com.shuan.project.fragment.DateDialog;
 
@@ -60,9 +64,9 @@ public class UpdateResumeActivity extends AppCompatActivity implements View.OnCl
 
     private String what, which;
     private Common mApp;
-    private int i = 0, j = 0, k = 0, l = 0;
+    private int i = 0, j = 0,k=0,l=0;
     private Helper helper = new Helper();
-    private LinearLayout psEdt, wrkDet, wrkExp, clg, sch, skill, prjct, cert, ach, exc, cntInfo, bsc;
+    private LinearLayout psEdt, wrkDet, wrkExp, clg, sch, skill, prjct, cert, ach, exc, cntInfo, bsc,objec;
     private HashMap<String, String> seniorData;
     private ProgressDialog pDialog;
     private ProgressBar progressBar;
@@ -87,7 +91,7 @@ public class UpdateResumeActivity extends AppCompatActivity implements View.OnCl
     private String toDate;
     private MonthYearPicker myp;
     private MonthYearPicker1 myp1;
-    private boolean Ins=false;
+    private boolean Ins = false;
 
     /* Work Summary Field */
     private EditText weEdtTxt;
@@ -98,15 +102,18 @@ public class UpdateResumeActivity extends AppCompatActivity implements View.OnCl
     private EditText univ, loc, frm_yr, to_yr, agrt;
     private String[] cours = new String[0];
     private boolean cIns = false;
-    private String[] qulify = new String[]{"PG", "UG", "DIPLOMA"};
-    private String q;
+    private String[] qulify = new String[]{"Select Qualification", "PG", "UG", "DIPLOMA"};
+    private String q,get;
     private Spinner level;
     private Button q_update;
     private TextView frm, to, qfy;
 
     /* School Fields */
     private AutoCompleteTextView h_name;
-    private EditText mode, board, cty, sFrmyr, sTYr, hAgrt;
+    private EditText board, cty, sFrmyr, sTYr, hAgrt;
+    private Spinner mode;
+    private String[] schl=new String[]{"Mode of School","HSC","SSLC"};
+    private String s,set;
     private Button h_update;
 
     /* Skill Set */
@@ -133,7 +140,7 @@ public class UpdateResumeActivity extends AppCompatActivity implements View.OnCl
     private Button addEx;
 
     /* Contact Info */
-    private EditText addr, district, state, country;
+    private EditText addr, district, state, country,pin;
     private AutoCompleteTextView city;
     private Button cntAdd;
 
@@ -142,6 +149,10 @@ public class UpdateResumeActivity extends AppCompatActivity implements View.OnCl
     public RadioButton radio, r1, r2;
     public RadioGroup sex;
     public Button bscAdd;
+
+    /* Objective */
+    public EditText obj;
+    public Button objEdt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -167,9 +178,9 @@ public class UpdateResumeActivity extends AppCompatActivity implements View.OnCl
         exc = (LinearLayout) findViewById(R.id.extra);
         cntInfo = (LinearLayout) findViewById(R.id.cntInfo);
         bsc = (LinearLayout) findViewById(R.id.bsc);
+        objec= (LinearLayout) findViewById(R.id.objec);
 
         AddDetail();
-
 
 
     }
@@ -211,7 +222,7 @@ public class UpdateResumeActivity extends AppCompatActivity implements View.OnCl
             myp.build(new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-                    fYr.setText(myp.getSelectedYear() + "-" + myp.getSelectedMonthShortName());
+                    fYr.setText(myp.getSelectedYear() + ", " + myp.getSelectedMonthShortName());
                 }
             }, null);
 
@@ -221,7 +232,7 @@ public class UpdateResumeActivity extends AppCompatActivity implements View.OnCl
             myp1.build(new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-                    tYr.setText(myp1.getSelectedYear() + "-" + myp1.getSelectedMonthShortName());
+                    tYr.setText(myp1.getSelectedYear() + ", " + myp1.getSelectedMonthShortName());
                 }
             }, null);
 
@@ -248,19 +259,17 @@ public class UpdateResumeActivity extends AppCompatActivity implements View.OnCl
             wkDetails = (Button) findViewById(R.id.wk_detail);
 
 
-
-
             new GetOrg(UpdateResumeActivity.this, progressBar, scroll, orgname).execute();
 
             orgname.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     TextView txt1 = (TextView) view.findViewById(R.id.ins_name);
-                    TextView txt4 = (TextView) view.findViewById(R.id.txt1);
+                    TextView txt4 = (TextView) view.findViewById(R.id.univ);
 
                     orgname.setText(txt1.getText().toString());
                     location.setText(txt4.getText().toString());
-                    Ins=true;
+                    Ins = true;
                 }
             });
 
@@ -268,6 +277,20 @@ public class UpdateResumeActivity extends AppCompatActivity implements View.OnCl
                 orgname.setText(mApp.getPreference().getString("org", ""));
                 postition.setText(mApp.getPreference().getString("pos", ""));
                 location.setText(mApp.getPreference().getString("loc", ""));
+                fYr.setText(mApp.getPreference().getString("frm", ""));
+                if(mApp.getPreference().getString("to", "").equalsIgnoreCase("present")){
+                    present.setVisibility(View.VISIBLE);
+                    tYr.setVisibility(View.GONE);
+                    visible = false;
+                    //tYr.setText(mApp.getPreference().getString("to", ""));
+                    wrking.setChecked(true);
+                }else{
+                    present.setVisibility(View.GONE);
+                    tYr.setVisibility(View.VISIBLE);
+                    visible = true;
+                    tYr.setText(mApp.getPreference().getString("to", ""));
+                    wrking.setChecked(false);
+                }
 
             }
 
@@ -313,7 +336,7 @@ public class UpdateResumeActivity extends AppCompatActivity implements View.OnCl
             level.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                    String get = level.getSelectedItem().toString();
+                    get = level.getSelectedItem().toString();
                     if (get.equalsIgnoreCase("PG")) {
                         q = "1";
                     } else if (get.equalsIgnoreCase("UG")) {
@@ -359,18 +382,56 @@ public class UpdateResumeActivity extends AppCompatActivity implements View.OnCl
 
             if (what.equalsIgnoreCase("edit")) {
                 if (mApp.getPreference().getString("level", "").equalsIgnoreCase("1")) {
-                    level.setSelection(0);
-                } else if (mApp.getPreference().getString("level", "").equalsIgnoreCase("2")) {
                     level.setSelection(1);
-                } else {
+                } else if (mApp.getPreference().getString("level", "").equalsIgnoreCase("2")) {
                     level.setSelection(2);
+                } else {
+                    level.setSelection(3);
                 }
                 clgName.setText(mApp.getPreference().getString("insName", ""));
                 univ.setText(mApp.getPreference().getString("univ", ""));
                 loc.setText(mApp.getPreference().getString("location", ""));
                 conCent.setText(mApp.getPreference().getString("conCent", ""));
                 agrt.setText(mApp.getPreference().getString("aggrt", ""));
+                frm_yr.setText(mApp.getPreference().getString("frm", ""));
+                to_yr.setText(mApp.getPreference().getString("to", ""));
+                i=Integer.parseInt(mApp.getPreference().getString("frm", ""));
+                j=Integer.parseInt(mApp.getPreference().getString("to", ""));
             }
+
+            frm_yr.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                }
+
+                @Override
+                public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                }
+
+                @Override
+                public void afterTextChanged(Editable s) {
+                    i=Integer.parseInt(frm_yr.getText().toString());
+                }
+            });
+
+            to_yr.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                }
+
+                @Override
+                public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                }
+
+                @Override
+                public void afterTextChanged(Editable s) {
+                    j=Integer.parseInt(to_yr.getText().toString());
+                }
+            });
 
 
             q_update.setOnClickListener(this);
@@ -380,7 +441,7 @@ public class UpdateResumeActivity extends AppCompatActivity implements View.OnCl
             scroll.setVisibility(View.GONE);
             progressBar.setVisibility(View.VISIBLE);
 
-            mode = (EditText) findViewById(R.id.mode);
+            mode = (Spinner) findViewById(R.id.mode);
             h_name = (AutoCompleteTextView) findViewById(R.id.h_name);
             board = (EditText) findViewById(R.id.board);
             cty = (EditText) findViewById(R.id.cty);
@@ -390,6 +451,27 @@ public class UpdateResumeActivity extends AppCompatActivity implements View.OnCl
 
 
             h_update = (Button) findViewById(R.id.h_update);
+
+            ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(getApplicationContext(), R.layout.spinner_item, schl);
+
+            mode.setAdapter(adapter1);
+            mode.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                    set = mode.getSelectedItem().toString();
+                    if (set.equalsIgnoreCase("HSC")) {
+                        s = "4";
+                    } else {
+                        s= "5";
+                    }
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+            });
+
 
 
             new GetSchool(UpdateResumeActivity.this, scroll, progressBar, h_name).execute();
@@ -407,13 +489,63 @@ public class UpdateResumeActivity extends AppCompatActivity implements View.OnCl
                 }
             });
 
+
+
+
+
+
             if (what.equalsIgnoreCase("edit")) {
-                mode.setText(mApp.getPreference().getString("conCent", ""));
+                if(mApp.getPreference().getString("level", "").equalsIgnoreCase("4")){
+                    mode.setSelection(1);
+                }else{
+                    mode.setSelection(2);
+                }
                 h_name.setText(mApp.getPreference().getString("insName", ""));
                 board.setText(mApp.getPreference().getString("univ", ""));
                 cty.setText(mApp.getPreference().getString("location", ""));
                 hAgrt.setText(mApp.getPreference().getString("aggrt", ""));
+                sFrmyr.setText(mApp.getPreference().getString("frm",""));
+                sTYr.setText(mApp.getPreference().getString("to",""));
+
+                k=Integer.parseInt(mApp.getPreference().getString("frm",""));
+                l=Integer.parseInt(mApp.getPreference().getString("to",""));
+
+
             }
+
+            sFrmyr.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                }
+
+                @Override
+                public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                }
+
+                @Override
+                public void afterTextChanged(Editable s) {
+                    k=Integer.parseInt(sFrmyr.getText().toString());
+                }
+            });
+
+            sTYr.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                }
+
+                @Override
+                public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                }
+
+                @Override
+                public void afterTextChanged(Editable s) {
+                    l=Integer.parseInt(sTYr.getText().toString());
+                }
+            });
 
 
             h_update.setOnClickListener(this);
@@ -427,16 +559,6 @@ public class UpdateResumeActivity extends AppCompatActivity implements View.OnCl
             addSkll = (Button) findViewById(R.id.sk_add);
 
             new GetSkillSet(UpdateResumeActivity.this, scroll, progressBar, skll).execute();
-
-           /* skll.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    TextView txt = (TextView) view.findViewById(R.id.display);
-                    skll.setText(txt.getText().toString());
-                    sIns = true;
-                }
-            });*/
-
 
             addSkll.setOnClickListener(this);
 
@@ -453,7 +575,7 @@ public class UpdateResumeActivity extends AppCompatActivity implements View.OnCl
             duration = (EditText) findViewById(R.id.dur);
             url = (EditText) findViewById(R.id.p_url);
             description = (EditText) findViewById(R.id.prjct_des);
-            acd = (CheckBox) findViewById(R.id.acd);
+
 
             p_update = (Button) findViewById(R.id.p_update);
 
@@ -463,18 +585,13 @@ public class UpdateResumeActivity extends AppCompatActivity implements View.OnCl
                 role.setText(mApp.getPreference().getString("role", ""));
                 team_sze.setText(mApp.getPreference().getString("team", ""));
                 duration.setText(mApp.getPreference().getString("dur", ""));
-                url.setText(mApp.getPreference().getString("url", ""));
                 description.setText(mApp.getPreference().getString("desc", ""));
 
-                if (mApp.getPreference().getString("stus", "").equalsIgnoreCase("0")) {
-                    acd.setChecked(true);
-                } else {
-                    acd.setChecked(false);
-                }
+
             }
 
             p_update.setOnClickListener(this);
-            acd.setOnClickListener(this);
+
 
         } else if (which.equalsIgnoreCase("cert")) {
             cert.setVisibility(View.VISIBLE);
@@ -520,6 +637,7 @@ public class UpdateResumeActivity extends AppCompatActivity implements View.OnCl
             district = (EditText) findViewById(R.id.district);
             state = (EditText) findViewById(R.id.state);
             country = (EditText) findViewById(R.id.country);
+            pin= (EditText) findViewById(R.id.pin_code);
             cntAdd = (Button) findViewById(R.id.cnt_add);
 
             addr.setText(mApp.getPreference().getString("addr", ""));
@@ -527,6 +645,7 @@ public class UpdateResumeActivity extends AppCompatActivity implements View.OnCl
             district.setText(mApp.getPreference().getString("distrct", ""));
             state.setText(mApp.getPreference().getString("state", ""));
             country.setText(mApp.getPreference().getString("country", ""));
+            pin.setText(mApp.getPreference().getString("picode",""));
 
             new GetLocation(UpdateResumeActivity.this, scroll, city, progressBar).execute();
 
@@ -543,8 +662,9 @@ public class UpdateResumeActivity extends AppCompatActivity implements View.OnCl
                     state.setText(txt3.getText().toString());
                     country.setText(txt4.getText().toString());
                     ins = true;
-                    InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                    InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                     imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+                    pin.requestFocus();
                 }
             });
 
@@ -594,6 +714,17 @@ public class UpdateResumeActivity extends AppCompatActivity implements View.OnCl
             }
 
             bscAdd.setOnClickListener(this);
+
+        }else if(which.equalsIgnoreCase("obj")){
+            scroll.setVisibility(View.VISIBLE);
+            objec.setVisibility(View.VISIBLE);
+            progressBar.setVisibility(View.GONE);
+            obj= (EditText) findViewById(R.id.obj);
+            objEdt= (Button) findViewById(R.id.obj_edt);
+
+            obj.setText(mApp.getPreference().getString("obj",""));
+
+            objEdt.setOnClickListener(this);
 
         }
     }
@@ -647,7 +778,7 @@ public class UpdateResumeActivity extends AppCompatActivity implements View.OnCl
                     if (what.equalsIgnoreCase("add")) {
                         new AddWrkDetail(UpdateResumeActivity.this, mApp.getPreference().getString(Common.u_id, ""),
                                 orgname.getText().toString(), location.getText().toString(), postition.getText().toString(),
-                                fYr.getText().toString(), toDate,Ins).execute();
+                                fYr.getText().toString(), toDate, Ins).execute();
                     } else {
                         new EditWrkDetail(UpdateResumeActivity.this, mApp.getPreference().getString("eId", ""),
                                 orgname.getText().toString(), location.getText().toString(), postition.getText().toString(),
@@ -667,7 +798,13 @@ public class UpdateResumeActivity extends AppCompatActivity implements View.OnCl
                 }
                 break;
             case R.id.q_update:
-                if (univ.getText().toString().length() == 0) {
+                if(get.equalsIgnoreCase("Select Qualification")){
+                    Toast.makeText(getApplicationContext(),"Select Qualification",Toast.LENGTH_SHORT).show();
+                    level.requestFocus();
+                }else if(clgName.getText().toString().length()==0){
+                    clgName.setError("Field Mandatory");
+                    clgName.requestFocus();
+                }else if (univ.getText().toString().length() == 0) {
                     univ.setError("University Mandatory");
                     univ.requestFocus();
                 } else if (loc.getText().toString().length() == 0) {
@@ -680,12 +817,13 @@ public class UpdateResumeActivity extends AppCompatActivity implements View.OnCl
                 } else if (conCent.getText().toString().length() == 0) {
                     conCent.setError("Concentration Mandatory");
                     conCent.requestFocus();
-                } else if (agrt.getText().toString().length() == 0) {
+                } else if(i>j){
+                    to_yr.setError("Passed out year less than joined year");
+                    to_yr.requestFocus();
+                }else if (agrt.getText().toString().length() == 0) {
                     agrt.setError("Aggregate Mandatory");
                     agrt.requestFocus();
                 } else {
-
-
                     if (what.equalsIgnoreCase("add")) {
                         new AddCollegedetail(UpdateResumeActivity.this, mApp.getPreference().getString(Common.u_id, ""), q, conCent.getText().toString(),
                                 clgName.getText().toString(), univ.getText().toString(), loc.getText().toString(),
@@ -698,8 +836,9 @@ public class UpdateResumeActivity extends AppCompatActivity implements View.OnCl
                 }
                 break;
             case R.id.h_update:
-                if (mode.getText().toString().length() == 0) {
-                    mode.setError("Field Mandatory");
+                if (set.equalsIgnoreCase("Mode of School")) {
+                   Toast.makeText(getApplicationContext(),"Select Mode of School",Toast.LENGTH_SHORT).show();
+                    mode.requestFocus();
                 } else if (h_name.getText().toString().length() == 0) {
                     h_name.setError("Field Mandatory");
                 } else if (board.getText().toString().length() == 0) {
@@ -712,24 +851,21 @@ public class UpdateResumeActivity extends AppCompatActivity implements View.OnCl
                 } else if (sTYr.getText().toString().length() == 0) {
                     sTYr.setError("Field Mandatory");
                     sTYr.requestFocus();
-                } else if (hAgrt.getText().toString().length() == 0) {
+                } else if(k>l){
+                    sTYr.setError("Passed out year less than joined year");
+                    sTYr.requestFocus();
+                }else if (hAgrt.getText().toString().length() == 0) {
                     hAgrt.setError("Field Mandatory");
                 } else {
 
-                    String sLevel;
-                    if (mode.getText().toString().equalsIgnoreCase("hsc")) {
-                        sLevel = "4";
-                    } else {
-                        sLevel = "5";
-                    }
 
                     if (what.equalsIgnoreCase("add")) {
-                        new AddSchool(UpdateResumeActivity.this, mApp.getPreference().getString(Common.u_id, ""), sLevel,
-                                mode.getText().toString(), h_name.getText().toString(), board.getText().toString(), cty.getText().toString(),
+                        new AddSchool(UpdateResumeActivity.this, mApp.getPreference().getString(Common.u_id, ""), s,
+                               set, h_name.getText().toString(), board.getText().toString(), cty.getText().toString(),
                                 sFrmyr.getText().toString(), sTYr.getText().toString(), hAgrt.getText().toString(), "add", ins).execute();
                     } else {
-                        new AddSchool(UpdateResumeActivity.this, mApp.getPreference().getString("eId", ""), sLevel,
-                                mode.getText().toString(), h_name.getText().toString(), board.getText().toString(), cty.getText().toString(),
+                        new AddSchool(UpdateResumeActivity.this, mApp.getPreference().getString("eId", ""), s,
+                              set, h_name.getText().toString(), board.getText().toString(), cty.getText().toString(),
                                 sFrmyr.getText().toString(), sTYr.getText().toString(), hAgrt.getText().toString(), "edit", ins).execute();
                     }
 
@@ -744,13 +880,7 @@ public class UpdateResumeActivity extends AppCompatActivity implements View.OnCl
                     new profileSummaryUpdate(UpdateResumeActivity.this, mApp.getPreference().getString(Common.u_id, ""), skll.getText().toString(), "skill").execute();
                 }
                 break;
-            case R.id.acd:
-                if (((CheckBox) v).isChecked()) {
-                    isAcd = "0";
-                } else {
-                    isAcd = "1";
-                }
-                break;
+
             case R.id.p_update:
                 if (title.getText().toString().length() == 0) {
                     title.setError("Field Mandatory");
@@ -764,11 +894,11 @@ public class UpdateResumeActivity extends AppCompatActivity implements View.OnCl
                     if (what.equalsIgnoreCase("add")) {
                         new AddProject(UpdateResumeActivity.this, mApp.getPreference().getString(Common.u_id, ""), title.getText().toString(),
                                 platform.getText().toString(), role.getText().toString(), team_sze.getText().toString(), duration.getText().toString(),
-                                url.getText().toString(), description.getText().toString(), isAcd, "add").execute();
+                                 description.getText().toString(),  "add").execute();
                     } else {
                         new AddProject(UpdateResumeActivity.this, mApp.getPreference().getString("eId", ""), title.getText().toString(),
                                 platform.getText().toString(), role.getText().toString(), team_sze.getText().toString(), duration.getText().toString(),
-                                url.getText().toString(), description.getText().toString(), isAcd, "edit").execute();
+                                description.getText().toString(), "edit").execute();
 
                     }
 
@@ -825,10 +955,13 @@ public class UpdateResumeActivity extends AppCompatActivity implements View.OnCl
                 } else if (country.getText().toString().length() == 0) {
                     country.setError("Field Mandatory");
                     country.requestFocus();
-                } else {
+                } else if(pin.getText().toString().length()==0){
+                    pin.setError("Field Mandatory");
+                    pin.requestFocus();
+                }else {
                     new AddContactInfo(UpdateResumeActivity.this, mApp.getPreference().getString(Common.u_id, ""),
                             addr.getText().toString(), city.getText().toString(), district.getText().toString(), state.getText().toString(),
-                            country.getText().toString(), ins).execute();
+                            country.getText().toString(), pin.getText().toString(),ins).execute();
                 }
                 break;
             case R.id.bc_add:
@@ -858,6 +991,16 @@ public class UpdateResumeActivity extends AppCompatActivity implements View.OnCl
                             mName.getText().toString(), rel.getText().toString(), lang.getText().toString(), hobby.getText().toString()).execute();
                 }
                 break;
+            case R.id.obj_edt:
+                if(obj.getText().toString().length()==0){
+                    obj.setError("Field Mandatory");
+                    obj.requestFocus();
+                }else{
+                    new UpdateStatus(UpdateResumeActivity.this, mApp.getPreference().getString(Common.u_id, ""), obj.getText().toString()).execute();
+                }
+                break;
+
+
 
         }
     }
