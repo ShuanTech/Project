@@ -60,8 +60,9 @@ public class GetConnection extends AsyncTask<String, String, String> {
                     String pro_pic=child.optString("pro_pic");
                     String name=child.optString("full_name");
                     String level=child.optString("level");
+                    String sec=child.optString("sec");
 
-                    list.add(new Sample(u_id,pro_pic,name,level));
+                    list.add(new Sample(u_id,pro_pic,name,level,sec));
                 }
                 s="true";
 

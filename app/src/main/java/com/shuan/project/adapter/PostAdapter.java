@@ -9,8 +9,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -25,6 +27,7 @@ import com.shuan.project.asyncTasks.CheckEligible;
 import com.shuan.project.asyncTasks.SavePost;
 import com.shuan.project.asyncTasks.SharePost;
 import com.shuan.project.list.Sample;
+import com.shuan.project.profile.ProfileViewActivity;
 
 import java.util.ArrayList;
 
@@ -33,7 +36,7 @@ public class PostAdapter extends BaseAdapter {
     private Context mContext;
     private ArrayList<Sample> list;
     private LayoutInflater inflater;
-    private DisplayImageOptions options;
+    private DisplayImageOptions options,options1;
     private Helper help = new Helper();
     private Common mApp;
 
@@ -47,6 +50,15 @@ public class PostAdapter extends BaseAdapter {
                 .showImageOnLoading(R.drawable.logo)
                 .showImageForEmptyUri(R.drawable.logo)
                 .showImageOnFail(R.drawable.logo)
+                .considerExifParams(true)
+                .bitmapConfig(Bitmap.Config.RGB_565)
+                .build();
+        options1 = new DisplayImageOptions.Builder()
+                .cacheInMemory(true)
+                .cacheOnDisk(true)
+                .showImageOnLoading(R.drawable.user)
+                .showImageForEmptyUri(R.drawable.user)
+                .showImageOnFail(R.drawable.user)
                 .considerExifParams(true)
                 .bitmapConfig(Bitmap.Config.RGB_565)
                 .build();
@@ -74,6 +86,7 @@ public class PostAdapter extends BaseAdapter {
         final Sample curr = list.get(position);
         convertView = inflater.inflate(R.layout.job_post_view, null);
 
+        LinearLayout shred= (LinearLayout) convertView.findViewById(R.id.shred);
         RelativeLayout comments = (RelativeLayout) convertView.findViewById(R.id.comment);
         RelativeLayout apply = (RelativeLayout) convertView.findViewById(R.id.apply);
         RelativeLayout share = (RelativeLayout) convertView.findViewById(R.id.share);
@@ -89,7 +102,10 @@ public class PostAdapter extends BaseAdapter {
         TextView cApplied = (TextView) convertView.findViewById(R.id.applied);
         TextView cShared = (TextView) convertView.findViewById(R.id.shared);
         TextView cFrmId = (TextView) convertView.findViewById(R.id.frm_id);
-        ImageView cImpt = (ImageView) convertView.findViewById(R.id.imprtnt);
+        final ImageView cImpt = (ImageView) convertView.findViewById(R.id.imprtnt);
+        ImageView fp= (ImageView) convertView.findViewById(R.id.frm_img);
+        TextView fs= (TextView) convertView.findViewById(R.id.shr_txt);
+        TextView fl= (TextView) convertView.findViewById(R.id.fl);
 
         cName.setText(curr.getCompanyName());
         jId.setText(curr.getjId());
@@ -101,6 +117,50 @@ public class PostAdapter extends BaseAdapter {
         cApplied.setText(curr.getjApply());
         cShared.setText(curr.getjShare());
         cFrmId.setText(curr.getjFrmId());
+
+        if(curr.getFs()!=null && !curr.getFs().trim().isEmpty()){
+            shred.setVisibility(View.VISIBLE);
+            fs.setText(curr.getFs());
+            fl.setText(curr.getFl());
+            ImageLoader.getInstance().displayImage(curr.getFp(), fp, options1, new SimpleImageLoadingListener() {
+                @Override
+                public void onLoadingStarted(String imageUri, View view) {
+                    super.onLoadingStarted(imageUri, view);
+                }
+
+                @Override
+                public void onLoadingFailed(String imageUri, View view, FailReason failReason) {
+                    super.onLoadingFailed(imageUri, view, failReason);
+                }
+
+                @Override
+                public void onLoadingCancelled(String imageUri, View view) {
+                    super.onLoadingCancelled(imageUri, view);
+                }
+
+                @Override
+                public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
+                    super.onLoadingComplete(imageUri, view, loadedImage);
+                }
+            }, new ImageLoadingProgressListener() {
+                @Override
+                public void onProgressUpdate(String s, View view, int i, int i1) {
+
+                }
+            });
+
+            shred.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    Intent in=new Intent(mContext, ProfileViewActivity.class);
+                    in.putExtra("u_id",curr.getjFrmId());
+                    in.putExtra("level",curr.getFl());
+                    in.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    mContext.startActivity(in);
+                }
+            });
+        }
 
         if (curr.getjImp().equalsIgnoreCase("1")) {
             //Drawable getDraw=mContext.getResources().getDrawable(R.drawable.ic_important);
@@ -178,7 +238,7 @@ public class PostAdapter extends BaseAdapter {
         imp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new SavePost(mContext, mApp.getPreference().getString(Common.u_id, ""), curr.getjId()).execute();
+                new SavePost(mContext, mApp.getPreference().getString(Common.u_id, ""), curr.getjId(),cImpt).execute();
             }
         });
 

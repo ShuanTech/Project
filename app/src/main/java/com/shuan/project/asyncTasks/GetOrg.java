@@ -76,7 +76,7 @@ public class GetOrg extends AsyncTask<String, String, String> {
         super.onPostExecute(s);
         progressBar.setVisibility(View.GONE);
         scroll.setVisibility(View.VISIBLE);
-        txt.setThreshold(3);
+        txt.setThreshold(1);
         adapter=new OrgAdapter(mContext, R.layout.custom_auto_complete_item,R.id.display,list);
         txt.setAdapter(adapter);
     }

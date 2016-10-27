@@ -25,11 +25,11 @@ public class PostViewActivity extends AppCompatActivity {
     private Toolbar toolbar;
     private Common mApp;
     private ImageView coverImg, cmpny_logo;
-    private TextView jTitle, cmpny, created, viewd, applied, shared, skill, desc, type, cate, jId, sal;
+    private TextView jTitle, cmpny, created, viewd, applied, shared, skill, desc, type, cate, jId, sal,loc,exp,qua;
     private Button apply;
     private RelativeLayout scroll;
     private ProgressBar progressBar;
-    private LinearLayout jType, jSal, jCate, j_Id;
+    private LinearLayout jType, jSal, jCate, j_Id,jLoc,jExp,jQua;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +68,12 @@ public class PostViewActivity extends AppCompatActivity {
         jId = (TextView) findViewById(R.id.jId);
         apply = (Button) findViewById(R.id.apply);
         sal = (TextView) findViewById(R.id.sal);
+        jLoc= (LinearLayout) findViewById(R.id.j_loc);
+        jExp= (LinearLayout) findViewById(R.id.j_exp);
+        jQua= (LinearLayout) findViewById(R.id.j_qua);
+        loc= (TextView) findViewById(R.id.loc);
+        exp= (TextView) findViewById(R.id.exp);
+        qua= (TextView) findViewById(R.id.qua);
 
         if (mApp.getPreference().getString(Common.LEVEL, "").equalsIgnoreCase("3")) {
             apply.setVisibility(View.GONE);
@@ -76,7 +82,7 @@ public class PostViewActivity extends AppCompatActivity {
 
 
         new PostView(PostViewActivity.this, mApp.getPreference().getString(Common.u_id, ""), getIntent().getStringExtra("jId"), scroll, progressBar, coverImg, cmpny_logo, jTitle, cmpny,
-                created, viewd, applied, shared, skill, desc, type, cate, jId, jType, jSal, jCate, j_Id, sal,apply).execute();
+                created, viewd, applied, shared, skill, desc, type, cate, jId, jType, jSal, jCate, j_Id, sal,apply,jLoc,jExp,jQua,loc,exp,qua).execute();
 
 
         apply.setOnClickListener(new View.OnClickListener() {

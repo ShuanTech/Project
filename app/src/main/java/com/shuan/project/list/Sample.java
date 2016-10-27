@@ -6,8 +6,8 @@ public class Sample {
     String u_id, proPic, name, pos, companyName, level;
     String cty, distrct, state, contry;
     String orgName, type, addr, land, pin;
-    String jId, jTitle, jSkill, jLevel, jLoc, jCreate, jView, jApply, jShare, jFrmId, jImp;
-
+    String jId, jTitle, jSkill, jLevel, jLoc, jCreate, jView, jApply, jShare, jFrmId, jImp,fp,fs,fl;
+    String id,frmId,toId,postId,content,vwed;
 
     public Sample() {
     }
@@ -67,7 +67,18 @@ public class Sample {
         this.distrct = distrct;
     }
 
-    public Sample(String companyName, String proPic, String jId, String jTitle, String jSkill, String jLevel, String jLoc, String jCreate, String jView, String jApply, String jShare, String jFrmId, String jImp) {
+    public Sample(String id, String frmId, String toId, String postId, String content, String type, String vwed,String level) {
+        this.id = id;
+        this.frmId = frmId;
+        this.toId = toId;
+        this.postId = postId;
+        this.content = content;
+        this.type = type;
+        this.vwed = vwed;
+        this.level=level;
+    }
+
+    public Sample(String companyName, String proPic, String jId, String jTitle, String jSkill, String jLevel, String jLoc, String jCreate, String jView, String jApply, String jShare, String jFrmId, String jImp,String fp,String fs,String fl) {
         this.companyName = companyName;
         this.proPic = proPic;
         this.jId = jId;
@@ -81,6 +92,9 @@ public class Sample {
         this.jShare = jShare;
         this.jFrmId = jFrmId;
         this.jImp = jImp;
+        this.fp=fp;
+        this.fs=fs;
+        this.fl=fl;
     }
 
 
@@ -97,6 +111,7 @@ public class Sample {
         this.jView = jView;
         this.jApply = jApply;
         this.jShare = jShare;
+
 
     }
 
@@ -341,5 +356,77 @@ public class Sample {
 
     public void setjImp(String jImp) {
         this.jImp = jImp;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getFrmId() {
+        return frmId;
+    }
+
+    public void setFrmId(String frmId) {
+        this.frmId = frmId;
+    }
+
+    public String getToId() {
+        return toId;
+    }
+
+    public void setToId(String toId) {
+        this.toId = toId;
+    }
+
+    public String getPostId() {
+        return postId;
+    }
+
+    public void setPostId(String postId) {
+        this.postId = postId;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public String getVwed() {
+        return vwed;
+    }
+
+    public void setVwed(String vwed) {
+        this.vwed = vwed;
+    }
+
+    public String getFp() {
+        return fp;
+    }
+
+    public void setFp(String fp) {
+        this.fp = fp;
+    }
+
+    public String getFs() {
+        return fs;
+    }
+
+    public void setFs(String fs) {
+        this.fs = fs;
+    }
+
+    public String getFl() {
+        return fl;
+    }
+
+    public void setFl(String fl) {
+        this.fl = fl;
     }
 }

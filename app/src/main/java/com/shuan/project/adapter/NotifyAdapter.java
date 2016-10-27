@@ -10,6 +10,8 @@ import android.widget.TextView;
 import com.shuan.project.R;
 import com.shuan.project.list.Sample;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 
 
@@ -46,17 +48,29 @@ public class NotifyAdapter extends BaseAdapter {
         Sample curr = list.get(position);
         convertView = inflater.inflate(R.layout.notify_list_item, null);
 
+        TextView nId= (TextView) convertView.findViewById(R.id.n_id);
+        TextView nFrmId = (TextView) convertView.findViewById(R.id.frm_id);
+        TextView nToId = (TextView) convertView.findViewById(R.id.to_id);
+        TextView nPost = (TextView) convertView.findViewById(R.id.post_id);
         TextView nContent = (TextView) convertView.findViewById(R.id.content);
         TextView nType = (TextView) convertView.findViewById(R.id.notify_type);
-        TextView nFrmId = (TextView) convertView.findViewById(R.id.frm_id);
-        TextView nTitle = (TextView) convertView.findViewById(R.id.title);
-        TextView nPost = (TextView) convertView.findViewById(R.id.post_id);
+        TextView nLevel= (TextView) convertView.findViewById(R.id.n_levl);
+        TextView nVwe= (TextView) convertView.findViewById(R.id.n_vwe);
 
-        nContent.setText(curr.getState());
-        nType.setText(curr.getContry());
-        nFrmId.setText(curr.getCty());
-        nTitle.setText(curr.getDis());
-        nPost.setText(curr.getDistrct());
+
+
+        nId.setText(curr.getId());
+        nFrmId.setText(curr.getFrmId());
+        nToId.setText(curr.getToId());
+        nPost.setText(curr.getPostId());
+        nContent.setText(curr.getContent());
+        nType.setText(curr.getType());
+        nLevel.setText(curr.getLevel());
+        nVwe.setText(curr.getVwed());
+
+        if(curr.getVwed().equalsIgnoreCase("0")){
+            convertView.setBackgroundColor(mContext.getResources().getColor(R.color.notify_color));
+        }
 
         return convertView;
     }

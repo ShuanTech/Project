@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".search.EmployerSearchActivity">
 
+
     <ProgressBar
         android:id="@+id/progress_bar"
         android:layout_width="wrap_content"
@@ -29,7 +30,7 @@
             android:singleLine="true"
             android:textColor="#fff"
             android:textColorHint="#f0f0f0"
-            android:imeOptions="actionGo"/>
+            android:imeOptions="actionSearch"/>
 
     </android.support.v7.widget.Toolbar>
 

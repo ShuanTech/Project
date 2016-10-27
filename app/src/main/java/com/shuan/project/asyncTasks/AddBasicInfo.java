@@ -20,12 +20,12 @@ import java.util.HashMap;
 public class AddBasicInfo extends AsyncTask<String, String, String> {
 
     private Context mContext;
-    private String uId, dob, sex, fName, mName, rel, lang, hobby, s = "";
+    private String uId, dob, sex, fName, mName, rel, lang, hobby, age,s = "";
     private HashMap<String, String> seniorData;
     private ProgressDialog pDialog;
     private Common mApp;
 
-    public AddBasicInfo(Context mContext, String uId, String dob, String sex, String fName, String mName, String rel, String lang, String hobby) {
+    public AddBasicInfo(Context mContext, String uId, String dob, String sex, String fName, String mName, String rel, String lang, String hobby,String age) {
         this.mContext = mContext;
         this.uId = uId;
         this.dob = dob;
@@ -35,6 +35,7 @@ public class AddBasicInfo extends AsyncTask<String, String, String> {
         this.rel = rel;
         this.lang = lang;
         this.hobby = hobby;
+        this.age=age;
         this.mApp = (Common) mContext.getApplicationContext();
     }
 
@@ -60,7 +61,7 @@ public class AddBasicInfo extends AsyncTask<String, String, String> {
         seniorData.put("rel", rel);
         seniorData.put("lang", lang);
         seniorData.put("hobby", hobby);
-
+        seniorData.put("age",age);
         try {
             JSONObject json = Connection.UrlConnection(php.basicInfo, seniorData);
             int succ = json.getInt("success");

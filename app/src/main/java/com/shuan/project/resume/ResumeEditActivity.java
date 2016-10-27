@@ -12,6 +12,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -19,13 +21,14 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.shuan.project.R;
 import com.shuan.project.Utils.Common;
 import com.shuan.project.asyncTasks.DeleteDetail;
-import com.shuan.project.asyncTasks.UpdateStatus;
+import com.shuan.project.asyncTasks.profileStatus;
 import com.shuan.project.list.Sample;
 import com.shuan.project.parser.Connection;
 import com.shuan.project.parser.php;
@@ -49,9 +52,14 @@ public class ResumeEditActivity extends AppCompatActivity implements View.OnClic
     private ArrayList<Sample> list;
     private PopupMenu popupMenu;
     private ImageView cntEdt, bscEdt, abtEdt;
-    private TextView email, phno, addr, cty, ste, cntry, dob, gen, fName, mName, rel, lang, hooby, abtTxt,pin;
+    private TextView email, phno, addr, cty, ste, cntry, dob, gen, fName, mName, rel, lang, hooby, abtTxt, pin;
     private EditText about;
     private String disrct;
+    private LinearLayout stus;
+    private TextView status;
+    private String db,age;
+    final String[] stuss={"Looking for job.","In Work.","In Notice period.","In Internship.","Doing Course.","In Training."};
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -112,13 +120,14 @@ public class ResumeEditActivity extends AppCompatActivity implements View.OnClic
         rel = (TextView) findViewById(R.id.rel);
         lang = (TextView) findViewById(R.id.lang);
         hooby = (TextView) findViewById(R.id.hobby);
-        pin= (TextView) findViewById(R.id.pin_code);
+        pin = (TextView) findViewById(R.id.pin_code);
         abt = (LinearLayout) findViewById(R.id.abt);
         abtEdt = (ImageView) findViewById(R.id.abt_edt);
         abtTxt = (TextView) findViewById(R.id.abt_txt);
         cntEdt = (ImageView) findViewById(R.id.cnt_edt);
         bscEdt = (ImageView) findViewById(R.id.bsc_edt);
-
+        stus= (LinearLayout) findViewById(R.id.stus);
+        status= (TextView) findViewById(R.id.statu);
         list = new ArrayList<Sample>();
         new GetResumeData().execute();
 
@@ -135,7 +144,12 @@ public class ResumeEditActivity extends AppCompatActivity implements View.OnClic
         cntEdt.setOnClickListener(this);
         bscEdt.setOnClickListener(this);
         abtEdt.setOnClickListener(this);
-        //chkIntro();
+        stus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showStusDialog();
+            }
+        });
 
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -144,6 +158,37 @@ public class ResumeEditActivity extends AppCompatActivity implements View.OnClic
             }
         });
 
+
+    }
+
+    private void showStusDialog() {
+
+
+        AlertDialog.Builder build=new AlertDialog.Builder(ResumeEditActivity.this);
+        build.setTitle("Choose your status");
+
+        build.setSingleChoiceItems(stuss, -1, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+
+            }
+        }).setPositiveButton("UPDATE", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                String st = "";
+                int selectedPosition = ((AlertDialog)dialog).getListView().getCheckedItemPosition();
+                st=stuss[selectedPosition].toString();
+                new profileStatus(ResumeEditActivity.this,mApp.getPreference().getString(Common.u_id,""),st).execute();
+                status.setText(st);
+                dialog.cancel();
+            }
+        }).setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        }).show();
     }
 
     @Override
@@ -164,9 +209,9 @@ public class ResumeEditActivity extends AppCompatActivity implements View.OnClic
         Intent in = new Intent(ResumeEditActivity.this, UpdateResumeActivity.class);
         switch (v.getId()) {
             case R.id.pro:
-                if(mApp.getPreference().getString(Common.LEVEL, "").equalsIgnoreCase("1")){
+                if (mApp.getPreference().getString(Common.LEVEL, "").equalsIgnoreCase("1")) {
                     Toast.makeText(getApplicationContext(), "You cannot Add Profile Summary. Until you are having job.", Toast.LENGTH_SHORT).show();
-                }else {
+                } else {
                     in.putExtra("what", "add");
                     in.putExtra("which", "proSum");
                     startActivity(in);
@@ -230,13 +275,14 @@ public class ResumeEditActivity extends AppCompatActivity implements View.OnClic
                 mApp.getPreference().edit().putString("state", ste.getText().toString()).commit();
                 mApp.getPreference().edit().putString("distrct", disrct).commit();
                 mApp.getPreference().edit().putString("country", cntry.getText().toString()).commit();
-                mApp.getPreference().edit().putString("picode",pin.getText().toString());
+                mApp.getPreference().edit().putString("picode", pin.getText().toString());
                 startActivity(in);
                 break;
             case R.id.bsc_edt:
                 in.putExtra("what", "add");
                 in.putExtra("which", "bsc");
-                mApp.getPreference().edit().putString("dob", dob.getText().toString()).commit();
+                mApp.getPreference().edit().putString("dob", db).commit();
+                mApp.getPreference().edit().putString("age", age).commit();
                 mApp.getPreference().edit().putString("gen", gen.getText().toString()).commit();
                 mApp.getPreference().edit().putString("fName", fName.getText().toString()).commit();
                 mApp.getPreference().edit().putString("mName", mName.getText().toString()).commit();
@@ -246,8 +292,8 @@ public class ResumeEditActivity extends AppCompatActivity implements View.OnClic
                 startActivity(in);
                 break;
             case R.id.abt_edt:
-                in.putExtra("what","add");
-                in.putExtra("which","obj");
+                in.putExtra("what", "add");
+                in.putExtra("which", "obj");
                 mApp.getPreference().edit().putString("obj", abtTxt.getText().toString()).commit();
                 startActivity(in);
                 //getIntro();
@@ -283,6 +329,21 @@ public class ResumeEditActivity extends AppCompatActivity implements View.OnClic
                     JSONArray jsonArray = json.getJSONArray("resume");
 
                     JSONObject child = jsonArray.getJSONObject(0);
+
+                    JSONObject st=child.getJSONObject("stus");
+                    JSONArray stArray=st.getJSONArray("stus");
+                    final JSONObject stt=stArray.getJSONObject(0);
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            if(!stt.optString("status").equalsIgnoreCase("")){
+                                status.setText(stt.optString("status"));
+                            }else{
+                                status.setText("Update profile status");
+                            }
+                        }
+                    });
+
 
                     final JSONObject pro = child.getJSONObject("pro");
                     JSONArray proArray = pro.getJSONArray("summary");
@@ -375,8 +436,8 @@ public class ResumeEditActivity extends AppCompatActivity implements View.OnClic
                                                             mApp.getPreference().edit().putString("pos", position).commit();
                                                             mApp.getPreference().edit().putString("org", org_name).commit();
                                                             mApp.getPreference().edit().putString("loc", location).commit();
-                                                            mApp.getPreference().edit().putString("frm",from_date).commit();
-                                                            mApp.getPreference().edit().putString("to",to_date).commit();
+                                                            mApp.getPreference().edit().putString("frm", from_date).commit();
+                                                            mApp.getPreference().edit().putString("to", to_date).commit();
                                                             in.putExtra("what", "edit");
                                                             in.putExtra("which", "wrkDet");
                                                             startActivity(in);
@@ -464,8 +525,8 @@ public class ResumeEditActivity extends AppCompatActivity implements View.OnClic
                         final String aggregate = data.optString("aggregate");
                         final String level = data.optString("level");
                         final String univ = data.optString("board");
-                        final String frm=data.optString("frm_date");
-                        final String to=data.optString("to_date");
+                        final String frm = data.optString("frm_date");
+                        final String to = data.optString("to_date");
 
                         if (pId.equalsIgnoreCase("")) {
                         } else {
@@ -498,8 +559,8 @@ public class ResumeEditActivity extends AppCompatActivity implements View.OnClic
                                                             mApp.getPreference().edit().putString("univ", univ).commit();
                                                             mApp.getPreference().edit().putString("location", location).commit();
                                                             mApp.getPreference().edit().putString("aggrt", aggregate).commit();
-                                                            mApp.getPreference().edit().putString("frm",frm).commit();
-                                                            mApp.getPreference().edit().putString("to",to).commit();
+                                                            mApp.getPreference().edit().putString("frm", frm).commit();
+                                                            mApp.getPreference().edit().putString("to", to).commit();
                                                             in.putExtra("what", "edit");
                                                             if (level.equalsIgnoreCase("1") || level.equalsIgnoreCase("2") ||
                                                                     level.equalsIgnoreCase("3")) {
@@ -530,12 +591,12 @@ public class ResumeEditActivity extends AppCompatActivity implements View.OnClic
 
                     JSONObject skill = child.getJSONObject("skill");
                     JSONArray skillArray = skill.getJSONArray("skill");
-                    for (int i = 0; i < skillArray.length(); i++) {
-                        JSONObject data = skillArray.getJSONObject(i);
-                        final String lang_known = data.optString("skill");
-                        final String pId = data.optString("id");
 
-                        if (pId.equalsIgnoreCase("")) {
+                        final JSONObject data10 = skillArray.getJSONObject(0);
+
+
+
+                        if (data10.optString("skill").equalsIgnoreCase("")) {
                         } else {
                             runOnUiThread(new Runnable() {
                                 @Override
@@ -544,20 +605,21 @@ public class ResumeEditActivity extends AppCompatActivity implements View.OnClic
                                     View v = inflater.inflate(R.layout.skill_item, null);
                                     TextView txt = (TextView) v.findViewById(R.id.skill);
                                     ImageButton img = (ImageButton) v.findViewById(R.id.close);
-                                    txt.setText(lang_known);
-                                    img.setOnClickListener(new View.OnClickListener() {
+                                    img.setVisibility(View.GONE);
+                                    txt.setText(data10.optString("skill"));
+                                    /*img.setOnClickListener(new View.OnClickListener() {
                                         @Override
                                         public void onClick(View v) {
-                                            new DeleteDetail(ResumeEditActivity.this, pId, "skill").execute();
+                                            new DeleteDetail(ResumeEditActivity.this, lang_known, "skill").execute();
                                         }
-                                    });
+                                    });*/
 
-
+                                    mApp.getPreference().edit().putString("skill",data10.optString("skill")).commit();
                                     skll.addView(v);
                                 }
                             });
                         }
-                    }
+
 
                     JSONObject pjct = child.getJSONObject("project");
                     JSONArray pjctArray = pjct.getJSONArray("project");
@@ -760,9 +822,10 @@ public class ResumeEditActivity extends AppCompatActivity implements View.OnClic
                     final JSONObject prsnl = child.getJSONObject("prsnl");
                     JSONArray prsnlArray = prsnl.getJSONArray("prsnl");
 
-                    JSONObject data = prsnlArray.getJSONObject(0);
+                    final JSONObject data = prsnlArray.getJSONObject(0);
                     final String full_name = data.optString("full_name");
-                    final String db = data.optString("dob");
+                    db = data.optString("dob");
+                    age=data.optString("age");
                     final String gender = data.optString("gender");
                     final String address = data.optString("address");
                     final String city = data.optString("city");
@@ -776,8 +839,8 @@ public class ResumeEditActivity extends AppCompatActivity implements View.OnClic
                     final String married_status = data.optString("married_status");
                     final String language = data.optString("language");
                     final String hobbies = data.optString("hobbies");
-                    final String pinCode=data.optString("pincode");
-                    final String objc=data.optString("objective");
+                    final String pinCode = data.optString("pincode");
+                    final String objc = data.optString("objective");
 
                     runOnUiThread(new Runnable() {
                         @Override
@@ -789,7 +852,7 @@ public class ResumeEditActivity extends AppCompatActivity implements View.OnClic
                             cty.setText(city);
                             ste.setText(state);
                             cntry.setText(country);
-                            dob.setText(db);
+                            dob.setText(db+" & "+age+" years old");
                             gen.setText(gender);
                             fName.setText(father_name);
                             mName.setText(mother_name);
@@ -797,9 +860,9 @@ public class ResumeEditActivity extends AppCompatActivity implements View.OnClic
                             lang.setText(language);
                             hooby.setText(hobbies);
                             pin.setText(pinCode);
-                            if(objc.toString().length()==0){
+                            if (objc.toString().length() == 0) {
                                 abt.setVisibility(View.GONE);
-                            }else{
+                            } else {
                                 abt.setVisibility(View.VISIBLE);
                                 abtTxt.setText(objc);
                             }

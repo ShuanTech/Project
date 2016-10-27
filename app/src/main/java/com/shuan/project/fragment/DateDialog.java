@@ -30,16 +30,22 @@ public class DateDialog extends DialogFragment implements DatePickerDialog.OnDat
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
 
+
         final Calendar c=Calendar.getInstance();
         int year=c.get(Calendar.YEAR);
         int month=c.get(Calendar.MONTH);
         int day=c.get(Calendar.DAY_OF_MONTH);
-        return new DatePickerDialog(getActivity(),this,year,month,day);
+        Calendar minPickerDate = Calendar.getInstance();
+        minPickerDate.set(Calendar.YEAR, 1950);
+        DatePickerDialog picker= new DatePickerDialog(getActivity(),this,year,month,day);
+        picker.getDatePicker().setMinDate(minPickerDate.getTimeInMillis());
+        picker.getDatePicker().setMaxDate(c.getTimeInMillis());
+        return  picker;
     }
 
     @Override
     public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-        String date=(monthOfYear+1)+"/"+dayOfMonth+"/"+year;
+        String date=dayOfMonth+"-"+(monthOfYear+1)+"-"+year;
         txtDate.setText(date);
     }
 }

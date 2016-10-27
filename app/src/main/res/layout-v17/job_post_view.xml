@@ -7,16 +7,55 @@
     <RelativeLayout
         android:id="@+id/main"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/standard_margin"
-        android:layout_marginRight="@dimen/standard_margin"
-        android:layout_marginTop="@dimen/standard_margin">
+        android:layout_height="wrap_content">
 
+        <LinearLayout
+            android:id="@+id/shred"
+            android:layout_width="match_parent"
+            android:layout_height="42dp"
+            android:background="?android:selectableItemBackground"
+            android:orientation="horizontal"
+            android:visibility="gone"
+            android:layout_marginTop="@dimen/small_margin">
+
+            <ImageView
+                android:id="@+id/frm_img"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginBottom="@dimen/small_margin"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="@dimen/small_margin"
+                android:scaleType="fitXY"
+                android:src="@drawable/user" />
+
+            <TextView
+                android:id="@+id/shr_txt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/small_margin"
+                android:layout_marginRight="@dimen/standard_margin"
+                android:alpha="0.8"
+                android:ellipsize="end"
+                android:maxLines="2"
+                android:text="Nazim Shared Shuan Tech's Post"
+                android:textColor="#000" />
+
+            <TextView
+                android:id="@+id/fl"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone" />
+
+        </LinearLayout>
 
         <RelativeLayout
             android:id="@id/root"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/shred"
+            android:layout_marginLeft="@dimen/standard_margin"
+            android:layout_marginRight="@dimen/standard_margin">
 
             <android.support.v7.widget.CardView
                 android:id="@+id/post"

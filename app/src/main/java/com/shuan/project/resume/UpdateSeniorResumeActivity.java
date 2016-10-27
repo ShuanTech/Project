@@ -9,6 +9,8 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
@@ -39,6 +41,7 @@ import com.shuan.project.adapter.LocationAdapter;
 import com.shuan.project.asyncTasks.Connect;
 import com.shuan.project.asyncTasks.GetInfo;
 import com.shuan.project.asyncTasks.GetOrg;
+import com.shuan.project.asyncTasks.GetSkillSet;
 import com.shuan.project.fragment.DateDialog;
 import com.shuan.project.list.Sample;
 import com.shuan.project.parser.Connection;
@@ -48,7 +51,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 
 public class UpdateSeniorResumeActivity extends AppCompatActivity implements View.OnClickListener {
@@ -89,6 +94,7 @@ public class UpdateSeniorResumeActivity extends AppCompatActivity implements Vie
     private MonthYearPicker myp;
     private MonthYearPicker1 myp1;
     private boolean Ins = false;
+    private int yr1,yr2;
 
 
     /* College Fields */
@@ -135,7 +141,7 @@ public class UpdateSeniorResumeActivity extends AppCompatActivity implements Vie
     private String isAcd = "0";
 
     /* Personal Field */
-    public EditText dob, fName, mName, addr, pinNo;
+    public EditText dob, fName, mName, addr, pinNo,age;
     public AutoCompleteTextView locate, district, state, country;
     public RadioButton radio, r1, r2;
     public RadioGroup sex;
@@ -242,7 +248,8 @@ public class UpdateSeniorResumeActivity extends AppCompatActivity implements Vie
             myp.build(new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-                    fYr.setText(myp.getSelectedYear() + "-" + myp.getSelectedMonthShortName());
+                    fYr.setText(myp.getSelectedMonthShortName() + ", " + myp.getSelectedYear());
+                    yr1=myp.getSelectedYear();
                 }
             }, null);
 
@@ -252,7 +259,8 @@ public class UpdateSeniorResumeActivity extends AppCompatActivity implements Vie
             myp1.build(new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-                    tYr.setText(myp1.getSelectedYear() + "-" + myp1.getSelectedMonthShortName());
+                    tYr.setText(myp1.getSelectedMonthShortName() + ", " + myp1.getSelectedYear());
+                    yr2=myp1.getSelectedYear();
                 }
             }, null);
 
@@ -427,9 +435,7 @@ public class UpdateSeniorResumeActivity extends AppCompatActivity implements Vie
             lay10.setVisibility(View.GONE);
 
             skill = (MultiAutoCompleteTextView) findViewById(R.id.skill);
-            workArea = (MultiAutoCompleteTextView) findViewById(R.id.area);
-            dev_env = (EditText) findViewById(R.id.dev_env);
-            others = (EditText) findViewById(R.id.others);
+
             cercourse = (EditText) findViewById(R.id.cer_name);
             cerCentre = (EditText) findViewById(R.id.cer_centre);
             cerDur = (EditText) findViewById(R.id.cer_duration);
@@ -437,7 +443,7 @@ public class UpdateSeniorResumeActivity extends AppCompatActivity implements Vie
             tex = (TextView) findViewById(R.id.tex);
             tex1 = (TextView) findViewById(R.id.tex1);
 
-
+            new GetSkillSet(UpdateSeniorResumeActivity.this, scroll, progressBar, skill).execute();
             sk_update.setOnClickListener(this);
 
         } else if (mApp.getPreference().getBoolean(Common.HOBBIES, false) == false) {
@@ -485,9 +491,9 @@ public class UpdateSeniorResumeActivity extends AppCompatActivity implements Vie
             role = (EditText) findViewById(R.id.role);
             team_sze = (EditText) findViewById(R.id.team_sze);
             duration = (EditText) findViewById(R.id.dur);
-            url = (EditText) findViewById(R.id.p_url);
+
             description = (EditText) findViewById(R.id.prjct_des);
-            acd = (CheckBox) findViewById(R.id.acd);
+
             p_update = (Button) findViewById(R.id.p_update);
             p_update.setOnClickListener(this);
             acd.setOnClickListener(this);
@@ -513,6 +519,7 @@ public class UpdateSeniorResumeActivity extends AppCompatActivity implements Vie
             new getLocation().execute();
 
             dob = (EditText) findViewById(R.id.dob);
+            age= (EditText) findViewById(R.id.age);
             r1 = (RadioButton) findViewById(R.id.male);
             r2 = (RadioButton) findViewById(R.id.female);
             fName = (EditText) findViewById(R.id.f_name);
@@ -540,6 +547,23 @@ public class UpdateSeniorResumeActivity extends AppCompatActivity implements Vie
                 }
             });
 
+            dob.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                }
+
+                @Override
+                public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                }
+
+                @Override
+                public void afterTextChanged(Editable s) {
+                    calcAge(dob.getText().toString());
+                }
+            });
+
             pr_update = (Button) findViewById(R.id.pr_update);
             pr_update.setOnClickListener(this);
 
@@ -549,6 +573,19 @@ public class UpdateSeniorResumeActivity extends AppCompatActivity implements Vie
             finish();
         }
 
+    }
+
+    private void calcAge(String db) {
+        SimpleDateFormat format=new SimpleDateFormat("dd-MM-yyyy");
+        Date dt=new Date();
+        try{
+            dt=format.parse(db);
+            Date today=new Date();
+            int by=dt.getYear();
+            int ty=today.getYear();
+            age.setText(String.valueOf(ty-by));
+
+        }catch (Exception e){}
     }
 
     @Override
@@ -583,23 +620,26 @@ public class UpdateSeniorResumeActivity extends AppCompatActivity implements Vie
                 } else if (fYr.getText().toString().length() == 0) {
                     fYr.setError("Field Mandatory");
                     fYr.requestFocus();
-                } else {
-                    if (visible) {
-                        if (tYr.getText().toString().length() == 0) {
-                            tYr.setError("Field Mandatory");
-                            tYr.requestFocus();
-                        } else {
-                            toDate = tYr.getText().toString();
-                        }
-                    } else {
-                        toDate = "present";
-                    }
-                    if (toDate != null) {
+                } else if(visible){
+
+                    if (tYr.getText().toString().length() == 0) {
+                        tYr.setError("Field Mandatory");
+                        tYr.requestFocus();
+                    } else if(fYr.getText().toString().equalsIgnoreCase(tYr.getText().toString())){
+                        tYr.setError("From & To year are not same.");
+                        tYr.requestFocus();
+                    } else if(yr1>yr2){
+                        tYr.setError("Check From & To Year");
+                        tYr.requestFocus();
+                    }else {
+                        toDate = tYr.getText().toString();
                         new Wrk().execute();
+
                     }
-
-
-                }
+                } else if(!visible){
+                    toDate = "present";
+                    new Wrk().execute();
+                }else{}
                 break;
             case R.id.q_update:
                 if (clgName.getText().toString().length() == 0) {
@@ -668,9 +708,6 @@ public class UpdateSeniorResumeActivity extends AppCompatActivity implements Vie
             case R.id.sk_update:
                 if (skill.getText().toString().length() == 0) {
                     skill.setError("Skill Mandatory");
-                } else if (workArea.getText().toString().length() == 0) {
-                    workArea.setError("Interest Area Mandatory");
-                    workArea.requestFocus();
                 } else {
                     if (cercourse.getText().toString().length() != 0) {
 
@@ -695,13 +732,7 @@ public class UpdateSeniorResumeActivity extends AppCompatActivity implements Vie
                 new extraCurricular().execute();
                 new hobby().execute();
                 break;
-            case R.id.acd:
-                if (((CheckBox) view).isChecked()) {
-                    isAcd = "0";
-                } else {
-                    isAcd = "1";
-                }
-                break;
+
             case R.id.p_update:
                 if (title.getText().toString().length() == 0) {
                     title.setError("Field Mandatory");
@@ -756,6 +787,7 @@ public class UpdateSeniorResumeActivity extends AppCompatActivity implements Vie
     public class Personal extends AsyncTask<String, String, String> {
 
         String uDob = dob.getText().toString();
+        String uAge=age.getText().toString();
         String usex = radio.getText().toString();
         String ufName = fName.getText().toString();
         String umName = mName.getText().toString();
@@ -781,6 +813,7 @@ public class UpdateSeniorResumeActivity extends AppCompatActivity implements Vie
             seniorData = new HashMap<String, String>();
             seniorData.put("u_id", mApp.getPreference().getString(Common.u_id, ""));
             seniorData.put("dob", uDob);
+            seniorData.put("age",uAge);
             seniorData.put("gender", usex);
             seniorData.put("address", udno);
             seniorData.put("city", uct);
@@ -909,7 +942,7 @@ public class UpdateSeniorResumeActivity extends AppCompatActivity implements Vie
         String uTeamSze = team_sze.getText().toString();
         String uDur = duration.getText().toString();
         String udesc = description.getText().toString();
-        String uUrl = url.getText().toString();
+
 
         @Override
         protected void onPreExecute() {
@@ -931,8 +964,6 @@ public class UpdateSeniorResumeActivity extends AppCompatActivity implements Vie
             seniorData.put("teamSze", uTeamSze);
             seniorData.put("dur", uDur);
             seniorData.put("desc", udesc);
-            seniorData.put("url", uUrl);
-            seniorData.put("isAcd", isAcd);
             seniorData.put("type", "add");
 
             try {
@@ -1081,9 +1112,7 @@ public class UpdateSeniorResumeActivity extends AppCompatActivity implements Vie
     public class Skill extends AsyncTask<String, String, String> {
 
         String sSkill = skill.getText().toString();
-        String sWorkArea = workArea.getText().toString();
-        String sDevEnv = dev_env.getText().toString();
-        String sOther = others.getText().toString();
+
 
         @Override
         protected void onPreExecute() {
@@ -1100,9 +1129,7 @@ public class UpdateSeniorResumeActivity extends AppCompatActivity implements Vie
             seniorData = new HashMap<String, String>();
             seniorData.put("u_id", mApp.getPreference().getString(Common.u_id, ""));
             seniorData.put("skill", sSkill);
-            seniorData.put("area", sWorkArea);
-            seniorData.put("devEnv", sDevEnv);
-            seniorData.put("other", sOther);
+
             try {
                 JSONObject json = Connection.UrlConnection(php.skill, seniorData);
                 int succ = json.getInt("success");
@@ -1595,8 +1622,8 @@ public class UpdateSeniorResumeActivity extends AppCompatActivity implements Vie
                         @Override
                         public void run() {
                             new GetInfo(UpdateSeniorResumeActivity.this, mApp.getPreference().getString(Common.u_id, "")).execute();
-                            new Connect(UpdateSeniorResumeActivity.this, mApp.getPreference().getString(Common.u_id, ""), mApp.getPreference().getString(Common.LEVEL, ""),
-                                    clgName.getText().toString(), conCent.getText().toString()).execute();
+                            /*new Connect(UpdateSeniorResumeActivity.this, mApp.getPreference().getString(Common.u_id, ""), mApp.getPreference().getString(Common.LEVEL, ""),
+                                    clgName.getText().toString(), conCent.getText().toString()).execute();*/
 
                             int val = mApp.getPreference().getInt(Common.PROFILESTRENGTH, 0);
                             mApp.getPreference().edit().putInt(Common.PROFILESTRENGTH, val + 8).commit();

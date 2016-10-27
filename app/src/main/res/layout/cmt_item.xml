@@ -26,9 +26,10 @@
                 android:id="@+id/usr_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text=""
+                android:text="nazim"
                 android:textAppearance="?android:textAppearanceMedium"
-                android:textColor="#000" />
+                android:textColor="#000"
+                android:layout_marginTop="-5dp"/>
 
             <TextView
                 android:id="@+id/usr_cmts"
@@ -37,7 +38,7 @@
                 android:layout_gravity="left"
                 android:layout_marginLeft="@dimen/standard_margin"
                 android:alpha="0.9"
-                android:text=""
+                android:text="checkinh mail"
                 android:textColor="#000" />
 
             <TextView

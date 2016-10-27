@@ -59,8 +59,7 @@ public class JuniorResumeGenerate extends AppCompatActivity {
     private File file;
     private FileOutputStream fout;
     private HashMap<String, String> resumeData;
-    private String name, dob, addr, city, pincode, emailId, phNo, fName, mName, mStatus, lang, country, hobbies;
-    private String dor, ste, cty, pincde;
+    private String name, dob, gen,addr, city,dis,ste,country, pincode, emailId, phNo, fName, mName, mStatus, lang,hobbies,obj;
     private ArrayList<ResumeList> list;
     private ProgressBar progressBar;
     private Common mApp;
@@ -147,7 +146,8 @@ public class JuniorResumeGenerate extends AppCompatActivity {
             fout = new FileOutputStream(file);
             PdfWriter.getInstance(doc, fout);
             doc.open();
-            if (mApp.getPreference().getBoolean("download", false) == true) {
+            new getInfo().execute();
+           /* if (mApp.getPreference().getBoolean("download", false) == true) {
                 new getInfo().execute();
             } else {
                 if (mApp.getPreference().getBoolean(Common.OBJECTIVE, false) == false) {
@@ -157,7 +157,7 @@ public class JuniorResumeGenerate extends AppCompatActivity {
                     //new GetResumeData().execute();
                     new getInfo().execute();
                 }
-            }
+            }*/
 
         } catch (Exception e) {
         }
@@ -195,8 +195,12 @@ public class JuniorResumeGenerate extends AppCompatActivity {
         @Override
         protected String doInBackground(final String... params) {
             resumeData = new HashMap<String, String>();
-            resumeData.put("u_id", mApp.getPreference().getString(Common.u_id, ""));
-            //mApp.getPreference().getString(Common.u_id,"")
+            if (mApp.getPreference().getBoolean("download", false) == true){
+                resumeData.put("u_id", mApp.getPreference().getString("Id", ""));
+            }else{
+                resumeData.put("u_id", mApp.getPreference().getString(Common.u_id, ""));
+            }
+
             try {
                 JSONObject json = Connection.UrlConnection(php.getInfo, resumeData);
                 int succ = json.getInt("success");
@@ -208,13 +212,18 @@ public class JuniorResumeGenerate extends AppCompatActivity {
                             new getEduInfo().execute();
                         }
                     });
+
                 } else {
                     JSONArray jsonArray = json.getJSONArray("info");
                     JSONObject child = jsonArray.getJSONObject(0);
                     name = child.optString("full_name");
                     dob = child.optString("dob");
+                    gen=child.optString("gender");
                     addr = child.optString("address");
                     city = child.optString("city");
+                    dis=child.optString("district");
+                    ste=child.optString("state");
+                    country=child.optString("country");
                     pincode = child.optString("pincode");
                     emailId = child.optString("email_id");
                     phNo = child.optString("ph_no");
@@ -223,11 +232,10 @@ public class JuniorResumeGenerate extends AppCompatActivity {
                     mStatus = child.optString("married_status");
                     lang = child.optString("language");
                     hobbies = child.optString("hobbies");
-
+                    obj=child.optString("objective");
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-
                             try {
 
                                 Paragraph p1 = new Paragraph(name, nameFont);
@@ -235,8 +243,8 @@ public class JuniorResumeGenerate extends AppCompatActivity {
 
                                 Paragraph p2 = new Paragraph();
 
-                                p2.add(new Paragraph(addr, content));
-                                p2.add(new Paragraph(city + " - " + pincode, content));
+
+                                p2.add(new Paragraph(city + ", " + country, content));
                                 p2.add(new Paragraph("EmailId : " + emailId, content));
                                 p2.add(new Paragraph("Phone No : " + phNo, content));
 
@@ -245,18 +253,16 @@ public class JuniorResumeGenerate extends AppCompatActivity {
                                 doc.add(Chunk.NEWLINE);
                                 doc.add(new LineSeparator(4, 100, BaseColor.BLACK, 0, 0));
                                 doc.add(Chunk.NEWLINE);
-
-                                if (mApp.getPreference().getBoolean("download", false) == true) {
-                                } else {
-                                    Paragraph p3 = new Paragraph("OBJECTIVIES", heading);
+                                if(obj!=null && !obj.trim().isEmpty()){
+                                    Paragraph p3 = new Paragraph("OBJECTIVE", heading);
                                     p3.setAlignment(Paragraph.ALIGN_LEFT);
                                     doc.add(p3);
-                                    Paragraph p4 = new Paragraph(mApp.getPreference().getString(Common.OBJDATA, ""), content);
-                                    p4.setAlignment(Paragraph.ALIGN_LEFT);
+                                    Paragraph p4 = new Paragraph(obj, content);
+                                    p4.setAlignment(Paragraph.ALIGN_CENTER);
                                     doc.add(p4);
-                                    doc.add(Chunk.NEWLINE);
-
                                 }
+
+                                doc.add(Chunk.NEWLINE);
 
                                 new getEduInfo().execute();
 
@@ -282,16 +288,16 @@ public class JuniorResumeGenerate extends AppCompatActivity {
 
 
     public class getEduInfo extends AsyncTask<String, String, String> {
-
         @Override
         protected String doInBackground(String... params) {
             list.clear();
             resumeData = new HashMap<String, String>();
-            if (mApp.getPreference().getBoolean("download", false) == true) {
+            if (mApp.getPreference().getBoolean("download", false) == true){
                 resumeData.put("u_id", mApp.getPreference().getString("Id", ""));
-            } else {
+            }else{
                 resumeData.put("u_id", mApp.getPreference().getString(Common.u_id, ""));
             }
+
             try {
                 JSONObject json = Connection.UrlConnection(php.getEduInfo, resumeData);
                 int succ = json.getInt("success");
@@ -299,21 +305,22 @@ public class JuniorResumeGenerate extends AppCompatActivity {
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            new getSkill().execute();
+                            new getProjectDetail().execute();
                         }
                     });
                 } else {
                     JSONArray jsonArray = json.getJSONArray("edu");
                     for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject child = jsonArray.getJSONObject(i);
-                        String instname = child.optString("ins_name");
-                        String board = child.optString("board");
                         String concentration = child.optString("concentration");
+                        String instname = child.optString("ins_name");
                         String location = child.optString("location");
+                        String frm = child.optString("frm_date");
+                        String to=child.optString("to_date");
                         String aggregate = child.optString("aggregate");
 
 
-                        list.add(new ResumeList(instname, board, concentration, location, aggregate));
+                        list.add(new ResumeList(concentration, instname, location, frm, to,aggregate));
                     }
 
                     runOnUiThread(new Runnable() {
@@ -328,14 +335,14 @@ public class JuniorResumeGenerate extends AppCompatActivity {
                                 p6.setListSymbol(new Chunk("•", bulletFont));
                                 for (int j = 0; j < list.size(); j++) {
                                     ResumeList currItem = list.get(j);
-                                    p6.add(new ListItem(currItem.getConcentration() + " ," + currItem.getIns_name() + " at " + currItem.getLocation() + " with " + currItem.getAggregate() + " %"));
+                                    p6.add(new ListItem(currItem.getOrgName() + " at " + currItem.getPos() + ", " + currItem.getLoc() +" during "+currItem.getFrm_dat()+" - "+ currItem.getTo_dat()+" with " + currItem.getStus() + " %"));
                                 }
 
                                 doc.add(p6);
                                 doc.add(Chunk.NEWLINE);
 
 
-                                new getSkill().execute();
+                                new getProjectDetail().execute();
 
                             } catch (Exception e) {
                             }
@@ -357,11 +364,12 @@ public class JuniorResumeGenerate extends AppCompatActivity {
         @Override
         protected String doInBackground(String... params) {
             resumeData = new HashMap<String, String>();
-            if (mApp.getPreference().getBoolean("download", false) == true) {
+            if (mApp.getPreference().getBoolean("download", false) == true){
                 resumeData.put("u_id", mApp.getPreference().getString("Id", ""));
-            } else {
+            }else{
                 resumeData.put("u_id", mApp.getPreference().getString(Common.u_id, ""));
             }
+
             try {
 
                 JSONObject json = Connection.UrlConnection(php.getSkill, resumeData);
@@ -370,7 +378,7 @@ public class JuniorResumeGenerate extends AppCompatActivity {
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            new getProjectDetail().execute();
+                            new getCertification().execute();
                         }
                     });
 
@@ -378,9 +386,7 @@ public class JuniorResumeGenerate extends AppCompatActivity {
                     JSONArray jsonArray = json.getJSONArray("skill");
                     JSONObject child = jsonArray.getJSONObject(0);
                     lang_known = child.optString("lang_known");
-                    dev = child.optString("dev_envrnmnt");
-                    interest = child.optString("area_interest");
-                    others = child.optString("others");
+
                 }
                 runOnUiThread(new Runnable() {
                     @Override
@@ -390,54 +396,14 @@ public class JuniorResumeGenerate extends AppCompatActivity {
                             Paragraph p7 = new Paragraph("SKILLS", heading);
                             p7.setAlignment(Paragraph.ALIGN_LEFT);
                             doc.add(p7);
-
-                            PdfPTable table = new PdfPTable(2);
-                            PdfPCell c1 = null, c2 = null, c3 = null, c4 = null, c5 = null, c6 = null, c7 = null, c8 = null;
-
-                            if (lang_known != null && !lang_known.trim().isEmpty()) {
-                                c3 = new PdfPCell(new Paragraph("Skills", content));
-                                c4 = new PdfPCell(new Paragraph(lang_known, content));
-                                c3.setBorder(Rectangle.NO_BORDER);
-                                c4.setBorder(Rectangle.NO_BORDER);
-                                c4.setColspan(4);
-                                table.addCell(c3);
-                                table.addCell(c4);
-                            }
-
-                            if (interest != null && !interest.trim().isEmpty()) {
-                                c1 = new PdfPCell(new Paragraph("Area Of Interest", content));
-                                c2 = new PdfPCell(new Paragraph(interest, content));
-                                c1.setBorder(Rectangle.NO_BORDER);
-                                c2.setBorder(Rectangle.NO_BORDER);
-                                c2.setColspan(4);
-                                table.addCell(c1);
-                                table.addCell(c2);
-                            }
-
-                            if (dev != null && !dev.trim().isEmpty()) {
-                                c5 = new PdfPCell(new Paragraph("Development Environment", content));
-                                c6 = new PdfPCell(new Paragraph(dev, content));
-                                c5.setBorder(Rectangle.NO_BORDER);
-                                c6.setBorder(Rectangle.NO_BORDER);
-                                c6.setColspan(4);
-                                table.addCell(c5);
-                                table.addCell(c6);
-                            }
-                            if (others != null && !others.trim().isEmpty()) {
-                                c7 = new PdfPCell(new Paragraph("Others", content));
-                                c8 = new PdfPCell(new Paragraph(others, content));
-                                c7.setBorder(Rectangle.NO_BORDER);
-                                c8.setBorder(Rectangle.NO_BORDER);
-                                c8.setColspan(4);
-                                table.addCell(c7);
-                                table.addCell(c8);
-                            }
-
-                            table.setHorizontalAlignment(Element.ALIGN_LEFT);
-                            doc.add(table);
+                            List p8 = new List(List.UNORDERED, 10);
+                            p8.setListSymbol(new Chunk("•", bulletFont));
+                            p8.add(new ListItem(lang_known));
+                            doc.add(p8);
                             doc.add(Chunk.NEWLINE);
 
-                            new getProjectDetail().execute();
+
+                            new getCertification().execute();
                         } catch (Exception e) {
                         }
                     }
@@ -455,13 +421,12 @@ public class JuniorResumeGenerate extends AppCompatActivity {
         protected String doInBackground(String... params) {
             list.clear();
             resumeData = new HashMap<String, String>();
-
-            if (mApp.getPreference().getBoolean("download", false) == true) {
+            if (mApp.getPreference().getBoolean("download", false) == true){
                 resumeData.put("u_id", mApp.getPreference().getString("Id", ""));
-                resumeData.put("level", "senior");
-            } else {
+                resumeData.put("level","senior");
+            }else{
                 resumeData.put("u_id", mApp.getPreference().getString(Common.u_id, ""));
-                resumeData.put("level", "senior");
+                resumeData.put("level","senior");
             }
 
 
@@ -472,7 +437,7 @@ public class JuniorResumeGenerate extends AppCompatActivity {
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            new getCertification().execute();
+                            new getSkill().execute();
                         }
                     });
                 } else {
@@ -480,14 +445,10 @@ public class JuniorResumeGenerate extends AppCompatActivity {
                     for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject child = jsonArray.getJSONObject(i);
                         String title = child.optString("p_title");
-                        String platform = child.optString("p_platform");
-                        String role = child.optString("p_role");
-                        String team = child.optString("p_team_mem");
-                        String dur = child.optString("p_dur");
                         String desc = child.optString("p_description");
-                        String stus = child.optString("p_stus");
 
-                        list.add(new ResumeList(title, platform, role, team, dur, desc, stus));
+
+                        list.add(new ResumeList(title,desc));
                     }
                     runOnUiThread(new Runnable() {
                         @Override
@@ -503,71 +464,18 @@ public class JuniorResumeGenerate extends AppCompatActivity {
                                 for (int j = 0; j < list.size(); j++) {
                                     ResumeList curr = list.get(j);
 
-                                    PdfPTable table = new PdfPTable(2);
-                                    PdfPCell c1, c2, c3, c4, c5 = null, c6 = null, c7 = null, c8 = null, c9, c10;
-
-
-                                    c1 = new PdfPCell(new Paragraph("Title", heading));
-                                    c2 = new PdfPCell(new Paragraph(curr.getTitle(), content));
-                                    c3 = new PdfPCell(new Paragraph("Platform", heading));
-                                    c4 = new PdfPCell(new Paragraph(curr.getPlatform(), content));
-
-                                    c1.setBorder(Rectangle.NO_BORDER);
-                                    c1.setHorizontalAlignment(Element.ALIGN_MIDDLE);
-                                    c2.setBorder(Rectangle.NO_BORDER);
-                                    c3.setBorder(Rectangle.NO_BORDER);
-                                    c3.setHorizontalAlignment(Element.ALIGN_MIDDLE);
-                                    c4.setBorder(Rectangle.NO_BORDER);
-                                    table.addCell(c1);
-                                    table.addCell(c2);
-                                    table.addCell(c3);
-                                    table.addCell(c4);
-
-                                    if (curr.getRole() != null && !curr.getRole().trim().isEmpty()) {
-                                        c5 = new PdfPCell(new Paragraph("Role", heading));
-                                        c6 = new PdfPCell(new Paragraph(curr.getRole(), content));
-
-                                        c5.setBorder(Rectangle.NO_BORDER);
-                                        c5.setHorizontalAlignment(Element.ALIGN_MIDDLE);
-                                        c6.setBorder(Rectangle.NO_BORDER);
-
-                                        table.addCell(c5);
-                                        table.addCell(c6);
-                                    }
-
-                                    if (!curr.getTeam_mem().equalsIgnoreCase("0")) {
-                                        c7 = new PdfPCell(new Paragraph("Team-Size", heading));
-                                        c8 = new PdfPCell(new Paragraph(curr.getTeam_mem(), content));
-                                        c7.setBorder(Rectangle.NO_BORDER);
-                                        c7.setHorizontalAlignment(Element.ALIGN_MIDDLE);
-                                        c8.setBorder(Rectangle.NO_BORDER);
-                                        table.addCell(c7);
-                                        table.addCell(c8);
-                                    }
-
-                                    if (curr.getDur() != null && !curr.getDur().trim().isEmpty()) {
-                                        c9 = new PdfPCell(new Paragraph("Duration", heading));
-                                        c10 = new PdfPCell(new Paragraph(curr.getDur() + " Months", content));
-                                        c9.setBorder(Rectangle.NO_BORDER);
-                                        c9.setHorizontalAlignment(Element.ALIGN_MIDDLE);
-                                        c10.setBorder(Rectangle.NO_BORDER);
-                                        table.addCell(c9);
-                                        table.addCell(c10);
-                                    }
-
-
-                                    table.setHorizontalAlignment(Element.ALIGN_CENTER);
-                                    doc.add(table);
-                                    if (curr.getDesc() != null && !curr.getDesc().trim().isEmpty()) {
-                                        Paragraph p15 = new Paragraph(curr.getDesc(), content);
-                                        doc.add(p15);
-                                    }
-
-                                    doc.add(Chunk.NEWLINE);
+                                    Paragraph p15=new Paragraph(curr.getCerName()+" : ",heading);
+                                    doc.add(p15);
+                                    Paragraph p16=new Paragraph(curr.getCerCentre(),content);
+                                    p16.setAlignment(Element.ALIGN_LEFT);
+                                    p16.setIndentationLeft(20);
+                                    doc.add(p16);
+                                    //doc.add(Chunk.NEWLINE);
                                 }
                                 doc.add(Chunk.NEWLINE);
 
-                                new getCertification().execute();
+
+                                new getSkill().execute();
 
                             } catch (Exception e) {
                             }
@@ -594,11 +502,12 @@ public class JuniorResumeGenerate extends AppCompatActivity {
         protected String doInBackground(String... params) {
             list.clear();
             resumeData = new HashMap<String, String>();
-            if (mApp.getPreference().getBoolean("download", false) == true) {
+            if (mApp.getPreference().getBoolean("download", false) == true){
                 resumeData.put("u_id", mApp.getPreference().getString("Id", ""));
-            } else {
+            }else{
                 resumeData.put("u_id", mApp.getPreference().getString(Common.u_id, ""));
             }
+
             try {
 
                 JSONObject json = Connection.UrlConnection(php.getCertify, resumeData);
@@ -620,8 +529,9 @@ public class JuniorResumeGenerate extends AppCompatActivity {
                         JSONObject child = jsonArray.getJSONObject(i);
                         cName = child.optString("cer_name");
                         cCentre = child.optString("cer_centre");
+                        String dur=child.optString("cer_dur");
 
-                        list.add(new ResumeList(cName, cCentre));
+                        list.add(new ResumeList(cName, cCentre,dur));
                     }
                     runOnUiThread(new Runnable() {
                         @Override
@@ -635,7 +545,7 @@ public class JuniorResumeGenerate extends AppCompatActivity {
                                 p9.setListSymbol(new Chunk("•", bulletFont));
                                 for (int j = 0; j < list.size(); j++) {
                                     ResumeList currItem = list.get(j);
-                                    p9.add(new ListItem(currItem.getCerName() + " in " + currItem.getCerCentre()));
+                                    p9.add(new ListItem("\" "+currItem.getCerName() + " \""+" from " + currItem.getCerCentre()+", "+currItem.getDur()+" months."));
 
                                 }
 
@@ -694,7 +604,7 @@ public class JuniorResumeGenerate extends AppCompatActivity {
                         @Override
                         public void run() {
                             try {
-                                Paragraph p10 = new Paragraph("ACHIVEMENT", heading);
+                                Paragraph p10 = new Paragraph("ACHIEVEMENT", heading);
 
                                 p10.setAlignment(Paragraph.ALIGN_LEFT);
                                 doc.add(p10);
@@ -789,8 +699,10 @@ public class JuniorResumeGenerate extends AppCompatActivity {
 
     private void personalInfo() {
         try {
+
             if (fName != null && !fName.trim().isEmpty() || mName != null && !mName.trim().isEmpty() || dob != null && !dob.trim().isEmpty()
-                    || lang != null && !lang.trim().isEmpty() || hobbies != null && !hobbies.trim().isEmpty()) {
+                    || lang != null && !lang.trim().isEmpty() || hobbies != null && !hobbies.trim().isEmpty() || gen!=null && !gen.trim().isEmpty()
+                    || mStatus!=null && !mStatus.trim().isEmpty()) {
 
                 Paragraph p16 = new Paragraph("PERSONAL INFO", heading);
                 p16.setAlignment(Paragraph.ALIGN_LEFT);
@@ -830,6 +742,29 @@ public class JuniorResumeGenerate extends AppCompatActivity {
                     table1.addCell(c16);
                 }
 
+                if(gen!=null && !gen.trim().isEmpty()){
+                    PdfPCell c26 = new PdfPCell(new Paragraph("Gender", heading));
+                    PdfPCell c27 = new PdfPCell(new Paragraph(gen, content));
+
+                    c26.setBorder(Rectangle.NO_BORDER);
+                    c26.setHorizontalAlignment(Element.ALIGN_MIDDLE);
+                    c27.setBorder(Rectangle.NO_BORDER);
+                    table1.addCell(c26);
+                    table1.addCell(c27);
+                }
+
+                if(mStatus!=null && !mStatus.trim().isEmpty()){
+                    PdfPCell c28 = new PdfPCell(new Paragraph("Martial Status", heading));
+                    PdfPCell c29 = new PdfPCell(new Paragraph(mStatus, content));
+
+                    c28.setBorder(Rectangle.NO_BORDER);
+                    c28.setHorizontalAlignment(Element.ALIGN_MIDDLE);
+                    c29.setBorder(Rectangle.NO_BORDER);
+                    table1.addCell(c28);
+                    table1.addCell(c29);
+                }
+
+
                 if (lang != null && !lang.trim().isEmpty()) {
                     PdfPCell c17 = new PdfPCell(new Paragraph("Languages Known", heading));
                     PdfPCell c18 = new PdfPCell(new Paragraph(lang, content));
@@ -843,6 +778,17 @@ public class JuniorResumeGenerate extends AppCompatActivity {
                 if (hobbies != null && !hobbies.trim().isEmpty()) {
                     PdfPCell c19 = new PdfPCell(new Paragraph("Hobbies", heading));
                     PdfPCell c20 = new PdfPCell(new Paragraph(hobbies, content));
+
+                    c19.setBorder(Rectangle.NO_BORDER);
+                    c19.setHorizontalAlignment(Element.ALIGN_MIDDLE);
+                    c20.setBorder(Rectangle.NO_BORDER);
+                    table1.addCell(c19);
+                    table1.addCell(c20);
+                }
+
+                if(addr!=null && !addr.trim().isEmpty()){
+                    PdfPCell c19 = new PdfPCell(new Paragraph("Address", heading));
+                    PdfPCell c20 = new PdfPCell(new Paragraph(addr+"\n"+city+" - "+pincode+"\n"+dis+", "+ste+"\n"+country+".", content));
 
                     c19.setBorder(Rectangle.NO_BORDER);
                     c19.setHorizontalAlignment(Element.ALIGN_MIDDLE);
@@ -875,9 +821,11 @@ public class JuniorResumeGenerate extends AppCompatActivity {
             p21.setAlignment(Paragraph.ALIGN_RIGHT);
             doc.add(p21);
             doc.close();
+
+
             if (mApp.getPreference().getBoolean(Common.APPLY, false) == true) {
                 Toast.makeText(getApplicationContext(), "Upload start", Toast.LENGTH_SHORT).show();
-                new UploadPicture(JuniorResumeGenerate.this, FILE, "resume", "junior", php.upload_resume).execute();
+                new UploadPicture(JuniorResumeGenerate.this, FILE, "resume", "senior", php.upload_resume).execute();
                 mApp.getPreference().edit().putBoolean(Common.APPLY, false).commit();
             } else if (mApp.getPreference().getBoolean("download", false) == true) {
                 mApp.getPreference().edit().putBoolean("downlaod", false).commit();
@@ -888,24 +836,6 @@ public class JuniorResumeGenerate extends AppCompatActivity {
                 openPdf();
             }
 
-
-            /*
-
-            openPdf();*/
-
-           /* if (mApp.getPreference().getBoolean(Common.APPLY, false) == true) {
-
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    progressBar.setVisibility(View.GONE);
-                    scroll.setVisibility(View.VISIBLE);
-                    render();
-                } else {
-                    Toast.makeText(getApplicationContext(), "Upload start", Toast.LENGTH_SHORT).show();
-                    new UploadPicture(ExpResumeGenerate.this, FILE, "resume", "senior", php.upload_resume).execute();
-                }
-            } else {
-                render();
-            }*/
 
         } catch (Exception e) {
         }

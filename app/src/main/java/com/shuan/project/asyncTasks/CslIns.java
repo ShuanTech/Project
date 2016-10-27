@@ -101,9 +101,9 @@ public class CslIns extends AsyncTask<String, String, String> {
             mApp.getPreference().edit().putBoolean(Common.PAGE1, true).commit();
             new Connect(mContext, mApp.getPreference().getString(Common.u_id, ""),
                     mApp.getPreference().getString(Common.LEVEL, ""),
-                    clgName, conCent).execute();
+                    clgName, conCent,loc,skill).execute();
             new GetInfo(mContext, mApp.getPreference().getString(Common.u_id, "")).execute();
-            new FrsherDefault(mContext, mApp.getPreference().getString(Common.u_id, ""), loc).execute();
+            //new FrsherDefault(mContext, mApp.getPreference().getString(Common.u_id, ""), loc).execute();
             mApp.getPreference().edit().putBoolean(Common.QUALIFICATION, true).commit();
             mApp.getPreference().edit().putBoolean(Common.HSC, false).commit();
             mApp.getPreference().edit().putBoolean(Common.SSLC, false).commit();

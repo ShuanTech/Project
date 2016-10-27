@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.Matrix;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -427,7 +428,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
                         JSONObject info = child.getJSONObject("info");
                         JSONArray infoArray = info.getJSONArray("info");
-                        JSONObject data = infoArray.getJSONObject(0);
+                        final JSONObject data = infoArray.getJSONObject(0);
 
                         final String pro_pic = data.optString("pro_pic");
                         final String cover_pic = data.optString("cover_pic");
@@ -451,6 +452,11 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
                                 name.setText(data8.optString("full_name"));
                                 position.setText(data1.optString("sec"));
+                                if(!data.optString("status").equalsIgnoreCase("")){
+                                    org.setTextColor(getResources().getColor(R.color.stus));
+                                    org.setTypeface(null, Typeface.BOLD);
+                                    org.setText(data.optString("status"));
+                                }
                                 if(!data8.optString("email_id").equalsIgnoreCase("") || !data8.optString("ph_no").equalsIgnoreCase("")){
                                     contact.setVisibility(View.VISIBLE);
                                     if(!data8.optString("email_id").equalsIgnoreCase("")){
@@ -553,7 +559,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
                         JSONObject info = child.getJSONObject("info");
                         JSONArray infoArray = info.getJSONArray("info");
-                        JSONObject data = infoArray.getJSONObject(0);
+                        final JSONObject data = infoArray.getJSONObject(0);
 
                         final String pro_pic = data.optString("pro_pic");
                         final String cover_pic = data.optString("cover_pic");
@@ -577,6 +583,11 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
                                 name.setText(data8.optString("full_name"));
                                 position.setText(data1.optString("sec"));
+                                if(!data.optString("status").equalsIgnoreCase("")){
+                                    org.setTextColor(getResources().getColor(R.color.stus));
+                                    org.setTypeface(null, Typeface.BOLD);
+                                    org.setText(data.optString("status"));
+                                }
                                 if(!data8.optString("email_id").equalsIgnoreCase("") || !data8.optString("ph_no").equalsIgnoreCase("")){
                                     contact.setVisibility(View.VISIBLE);
                                     if(!data8.optString("email_id").equalsIgnoreCase("")){
@@ -865,8 +876,6 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
 
                         }
-
-
 
                     }
 

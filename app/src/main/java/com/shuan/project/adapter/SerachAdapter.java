@@ -18,14 +18,12 @@ import com.shuan.project.R;
 import com.shuan.project.Utils.CircleImageView;
 import com.shuan.project.Utils.Common;
 import com.shuan.project.list.Sample;
+import com.shuan.project.profile.ProfileActivity;
 import com.shuan.project.profile.ProfileViewActivity;
 
 import java.util.ArrayList;
 import java.util.Locale;
 
-/**
- * Created by Android on 8/19/2016.
- */
 public class SerachAdapter extends BaseAdapter {
     private Context mContext;
     private LayoutInflater inflater;
@@ -76,13 +74,15 @@ public class SerachAdapter extends BaseAdapter {
         TextView searc = (TextView) convertView.findViewById(R.id.saerch);
         TextView u_id = (TextView) convertView.findViewById(R.id.u_id);
         TextView level = (TextView) convertView.findViewById(R.id.level);
+        TextView sec= (TextView) convertView.findViewById(R.id.sec);
 
-        searc.setText(curr.getBoard());
+        searc.setText(curr.getDistrct());
         u_id.setText(curr.getDis());
-        level.setText(curr.getLoc());
+        level.setText(curr.getState());
+        sec.setText(curr.getContry());
 
 
-        ImageLoader.getInstance().displayImage(curr.getInsName(), usrImg, options, new SimpleImageLoadingListener() {
+        ImageLoader.getInstance().displayImage(curr.getCty(), usrImg, options, new SimpleImageLoadingListener() {
 
             @Override
             public void onLoadingStarted(String imageUri, View view) {
@@ -114,9 +114,14 @@ public class SerachAdapter extends BaseAdapter {
         convertView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent in = new Intent(mContext, ProfileViewActivity.class);
-                in.putExtra("u_id", curr.getDis());
-                in.putExtra("level", curr.getLoc());
+                Intent in = null;
+                if(mApp.getPreference().getString(Common.u_id,"").equalsIgnoreCase(curr.getDis())){
+                    in = new Intent(mContext, ProfileActivity.class);
+                }else{
+                    in = new Intent(mContext, ProfileViewActivity.class);
+                    in.putExtra("u_id", curr.getDis());
+                    in.putExtra("level", curr.getState());
+                }
 
                 in.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 mContext.startActivity(in);
@@ -134,7 +139,7 @@ public class SerachAdapter extends BaseAdapter {
             list.addAll(temp);
         } else {
             for (Sample wp : temp) {
-                if (wp.getBoard().toLowerCase(Locale.getDefault()).contains(str)) {
+                if (wp.getDistrct().toLowerCase(Locale.getDefault()).contains(str)) {
                     list.add(wp);
                 }
             }

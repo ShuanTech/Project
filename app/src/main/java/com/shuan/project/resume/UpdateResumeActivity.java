@@ -58,6 +58,8 @@ import com.shuan.project.asyncTasks.UpdateStatus;
 import com.shuan.project.asyncTasks.profileSummaryUpdate;
 import com.shuan.project.fragment.DateDialog;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 
 public class UpdateResumeActivity extends AppCompatActivity implements View.OnClickListener {
@@ -92,7 +94,7 @@ public class UpdateResumeActivity extends AppCompatActivity implements View.OnCl
     private MonthYearPicker myp;
     private MonthYearPicker1 myp1;
     private boolean Ins = false;
-
+    private int yr1,yr2;
     /* Work Summary Field */
     private EditText weEdtTxt;
     private Button weEdtBut;
@@ -145,7 +147,7 @@ public class UpdateResumeActivity extends AppCompatActivity implements View.OnCl
     private Button cntAdd;
 
     /* Basic Info */
-    public EditText dob, fName, mName, rel, lang, hobby;
+    public EditText dob, fName, mName, rel, lang, hobby,age;
     public RadioButton radio, r1, r2;
     public RadioGroup sex;
     public Button bscAdd;
@@ -222,7 +224,8 @@ public class UpdateResumeActivity extends AppCompatActivity implements View.OnCl
             myp.build(new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-                    fYr.setText(myp.getSelectedYear() + ", " + myp.getSelectedMonthShortName());
+                    fYr.setText(myp.getSelectedMonthShortName() + ", " + myp.getSelectedYear());
+                    yr1=myp.getSelectedYear();
                 }
             }, null);
 
@@ -232,7 +235,8 @@ public class UpdateResumeActivity extends AppCompatActivity implements View.OnCl
             myp1.build(new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-                    tYr.setText(myp1.getSelectedYear() + ", " + myp1.getSelectedMonthShortName());
+                    tYr.setText(myp1.getSelectedMonthShortName() + ", " + myp1.getSelectedYear());
+                    yr2=myp1.getSelectedYear();
                 }
             }, null);
 
@@ -558,6 +562,11 @@ public class UpdateResumeActivity extends AppCompatActivity implements View.OnCl
             skll = (MultiAutoCompleteTextView) findViewById(R.id.skills);
             addSkll = (Button) findViewById(R.id.sk_add);
 
+            if(mApp.getPreference().getString("skill","")!=null && !mApp.getPreference().getString("skill","").trim().isEmpty()){
+                skll.setText(mApp.getPreference().getString("skill","")+", ");
+            }
+
+
             new GetSkillSet(UpdateResumeActivity.this, scroll, progressBar, skll).execute();
 
             addSkll.setOnClickListener(this);
@@ -573,7 +582,7 @@ public class UpdateResumeActivity extends AppCompatActivity implements View.OnCl
             role = (EditText) findViewById(R.id.role);
             team_sze = (EditText) findViewById(R.id.team_sze);
             duration = (EditText) findViewById(R.id.dur);
-            url = (EditText) findViewById(R.id.p_url);
+
             description = (EditText) findViewById(R.id.prjct_des);
 
 
@@ -683,6 +692,7 @@ public class UpdateResumeActivity extends AppCompatActivity implements View.OnCl
             rel = (EditText) findViewById(R.id.rel);
             lang = (EditText) findViewById(R.id.lang);
             hobby = (EditText) findViewById(R.id.hobby);
+            age= (EditText) findViewById(R.id.age);
             bscAdd = (Button) findViewById(R.id.bc_add);
 
             dob.setOnTouchListener(new View.OnTouchListener() {
@@ -695,12 +705,31 @@ public class UpdateResumeActivity extends AppCompatActivity implements View.OnCl
                         DateDialog dialog = new DateDialog(v);
                         FragmentTransaction ft = getFragmentManager().beginTransaction();
                         dialog.show(ft, "DataPicker");
+
                     }
                     return false;
                 }
             });
 
+            dob.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                }
+
+                @Override
+                public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                }
+
+                @Override
+                public void afterTextChanged(Editable s) {
+                    calcAge(dob.getText().toString());
+                }
+            });
+
             dob.setText(mApp.getPreference().getString("dob", ""));
+            age.setText(mApp.getPreference().getString("age", ""));
             fName.setText(mApp.getPreference().getString("fName", ""));
             mName.setText(mApp.getPreference().getString("mName", ""));
             rel.setText(mApp.getPreference().getString("rel", ""));
@@ -729,6 +758,19 @@ public class UpdateResumeActivity extends AppCompatActivity implements View.OnCl
         }
     }
 
+    private void calcAge(String db) {
+        SimpleDateFormat format=new SimpleDateFormat("dd-MM-yyyy");
+        Date dt=new Date();
+        try{
+            dt=format.parse(db);
+            Date today=new Date();
+            int by=dt.getYear();
+            int ty=today.getYear();
+            age.setText(String.valueOf(ty-by));
+
+        }catch (Exception e){}
+    }
+
 
     @Override
     public void onClick(View v) {
@@ -746,6 +788,7 @@ public class UpdateResumeActivity extends AppCompatActivity implements View.OnCl
                 if (((CheckBox) v).isChecked()) {
                     present.setVisibility(View.VISIBLE);
                     tYr.setVisibility(View.GONE);
+                    tYr.setText("");
                     visible = false;
                 } else {
                     present.setVisibility(View.GONE);
@@ -763,18 +806,32 @@ public class UpdateResumeActivity extends AppCompatActivity implements View.OnCl
                 } else if (fYr.getText().toString().length() == 0) {
                     fYr.setError("Field Mandatory");
                     fYr.requestFocus();
-                } else {
-                    if (visible) {
+                } else if(visible){
+
                         if (tYr.getText().toString().length() == 0) {
                             tYr.setError("Field Mandatory");
                             tYr.requestFocus();
-                        } else {
+                        } else if(fYr.getText().toString().equalsIgnoreCase(tYr.getText().toString())){
+                            tYr.setError("From & To year are not same.");
+                            tYr.requestFocus();
+                        } else if(yr1>yr2){
+                            tYr.setError("Check From & To Year");
+                            tYr.requestFocus();
+                        }else {
                             toDate = tYr.getText().toString();
-                        }
-                    } else {
-                        toDate = "present";
-                    }
 
+                            if (what.equalsIgnoreCase("add")) {
+                                new AddWrkDetail(UpdateResumeActivity.this, mApp.getPreference().getString(Common.u_id, ""),
+                                        orgname.getText().toString(), location.getText().toString(), postition.getText().toString(),
+                                        fYr.getText().toString(), toDate, Ins).execute();
+                            } else {
+                                new EditWrkDetail(UpdateResumeActivity.this, mApp.getPreference().getString("eId", ""),
+                                        orgname.getText().toString(), location.getText().toString(), postition.getText().toString(),
+                                        fYr.getText().toString(), toDate).execute();
+                            }
+                        }
+                } else if(!visible){
+                        toDate = "present";
                     if (what.equalsIgnoreCase("add")) {
                         new AddWrkDetail(UpdateResumeActivity.this, mApp.getPreference().getString(Common.u_id, ""),
                                 orgname.getText().toString(), location.getText().toString(), postition.getText().toString(),
@@ -784,9 +841,7 @@ public class UpdateResumeActivity extends AppCompatActivity implements View.OnCl
                                 orgname.getText().toString(), location.getText().toString(), postition.getText().toString(),
                                 fYr.getText().toString(), toDate).execute();
                     }
-
-
-                }
+                }else{}
                 break;
             case R.id.we_edit_but:
                 if (what.equalsIgnoreCase("add")) {
@@ -988,7 +1043,7 @@ public class UpdateResumeActivity extends AppCompatActivity implements View.OnCl
                 } else {
                     new AddBasicInfo(UpdateResumeActivity.this, mApp.getPreference().getString(Common.u_id, ""),
                             dob.getText().toString(), radio.getText().toString(), fName.getText().toString(),
-                            mName.getText().toString(), rel.getText().toString(), lang.getText().toString(), hobby.getText().toString()).execute();
+                            mName.getText().toString(), rel.getText().toString(), lang.getText().toString(), hobby.getText().toString(),age.getText().toString()).execute();
                 }
                 break;
             case R.id.obj_edt:

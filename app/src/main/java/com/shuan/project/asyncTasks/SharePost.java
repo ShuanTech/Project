@@ -33,7 +33,7 @@ public class SharePost extends AsyncTask<String, String, String> {
     protected void onPreExecute() {
         super.onPreExecute();
         pDialog = new ProgressDialog(mContext);
-        pDialog.setMessage("Sharing Post...");
+        pDialog.setMessage("Sharing ...");
         pDialog.setIndeterminate(false);
         pDialog.setCancelable(false);
         pDialog.show();

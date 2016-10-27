@@ -360,9 +360,9 @@ public class EducationActivity extends AppCompatActivity implements View.OnClick
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            new Connect(getApplicationContext(), mApp.getPreference().getString(Common.u_id, ""),
+                          /*  new Connect(getApplicationContext(), mApp.getPreference().getString(Common.u_id, ""),
                                     mApp.getPreference().getString(Common.LEVEL, ""),
-                                    clgName.getText().toString(),conCent.getText().toString()).execute();
+                                    clgName.getText().toString(),conCent.getText().toString()).execute();*/
                             mApp.getPreference().edit().putBoolean(Common.QUALIFICATION, true).commit();
                             mApp.getPreference().edit().putBoolean(Common.HSC, false).commit();
                             mApp.getPreference().edit().putBoolean(Common.SSLC, false).commit();

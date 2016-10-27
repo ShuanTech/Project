@@ -39,7 +39,7 @@ public class profileSummaryUpdate extends AsyncTask<String, String, String> {
     protected void onPreExecute() {
         super.onPreExecute();
         pDialog = new ProgressDialog(mContext);
-        pDialog.setMessage("Updating Profile Summary");
+        pDialog.setMessage("Updating");
         pDialog.setIndeterminate(false);
         pDialog.setCancelable(false);
         pDialog.show();
@@ -87,7 +87,7 @@ public class profileSummaryUpdate extends AsyncTask<String, String, String> {
                 int val=mApp.getPreference().getInt(Common.PROFILESTRENGTH,0);
                 mApp.getPreference().edit().putInt(Common.PROFILESTRENGTH, val+1).commit();
             }
-            Toast.makeText(mContext, "Successfully Update Profile Summary", Toast.LENGTH_SHORT).show();
+            Toast.makeText(mContext, "Successfully Updated", Toast.LENGTH_SHORT).show();
             Intent in = new Intent(mContext, ResumeEditActivity.class);
             in.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             mContext.startActivity(in);

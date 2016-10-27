@@ -79,6 +79,7 @@ public class CommentsActivity extends AppCompatActivity implements View.OnClickL
         cmtEdt = (EditText) findViewById(R.id.entr_area);
         cmdSnd = (ImageButton) findViewById(R.id.cmt_snd);
 
+
         new GetComments().execute();
 
         cmdSnd.setOnClickListener(this);
@@ -87,6 +88,14 @@ public class CommentsActivity extends AppCompatActivity implements View.OnClickL
             @Override
             public void onClick(View v) {
                 onBackPressed();
+            }
+        });
+
+        scroll.post(new Runnable() {
+            @Override
+            public void run() {
+                scroll.fullScroll(View.FOCUS_DOWN);
+
             }
         });
 
@@ -118,12 +127,21 @@ public class CommentsActivity extends AppCompatActivity implements View.OnClickL
                 cmnts.addView(vi);
 
 
-                scroll.fullScroll(View.FOCUS_DOWN);
+
                 cmdSnd.setEnabled(false);
                 new PostCommnts(CommentsActivity.this, mApp.getPreference().getString(Common.u_id, ""),
                         getIntent().getStringExtra("jId"), cmtEdt.getText().toString(),cmdSnd).execute();
+                scroll.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        scroll.fullScroll(View.FOCUS_DOWN);
 
+                    }
+                });
                 cmtEdt.setText("");
+
+
+
             }
         }
 
@@ -182,7 +200,13 @@ public class CommentsActivity extends AppCompatActivity implements View.OnClickL
             super.onPostExecute(s);
             progressBar.setVisibility(View.GONE);
             scroll.setVisibility(View.VISIBLE);
-            scroll.fullScroll(View.FOCUS_DOWN);
+            scroll.post(new Runnable() {
+                @Override
+                public void run() {
+                    scroll.fullScroll(View.FOCUS_DOWN);
+
+                }
+            });
         }
     }
 

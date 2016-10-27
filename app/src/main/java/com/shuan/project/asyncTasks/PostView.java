@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
+import android.text.Html;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -33,15 +34,15 @@ public class PostView extends AsyncTask<String, String, String> {
     private Context mContext;
     private String j_id;
     private ImageView coverImg, cmpny_logo;
-    private TextView jTitle, cmpny, created, viewd, applied, shared, skill, desc, type, cate, jId, sal;
+    private TextView jTitle, cmpny, created, viewd, applied, shared, skill, desc, type, cate, jId, sal, loc, exp, qua;
     private RelativeLayout scroll;
     private ProgressBar progressBar;
     private HashMap<String, String> pData;
     private DisplayImageOptions options;
     private Helper help;
-    private String pro_pic, cover_pic, cmpny_name, c_website, title, skll, tpe, category, pkg, level, location, description,apply;
-    private String vied, shred, appled, date_created, u_id;
-    private LinearLayout jType, jSal, jCate, j_Id;
+    private String pro_pic, cover_pic, cmpny_name, c_website, title, skll, tpe, category, pkg, level, location, description, apply, qulify;
+    private String vied, shred, appled, date_created, u_id, cLoc;
+    private LinearLayout jType, jSal, jCate, j_Id, jLoc, jExp, jQua;
     private String cmpnyId;
     private Button but;
 
@@ -49,7 +50,8 @@ public class PostView extends AsyncTask<String, String, String> {
     public PostView(Context mContext, String u_id, String j_id, RelativeLayout scroll, ProgressBar progressBar, ImageView coverImg,
                     ImageView cmpny_logo, TextView jTitle, TextView cmpny, TextView created, TextView viewd, TextView applied,
                     TextView shared, TextView skill, TextView desc, TextView type, TextView cate, TextView jId, LinearLayout jType,
-                    LinearLayout jSal, LinearLayout jCate, LinearLayout j_Id, TextView sal,Button but) {
+                    LinearLayout jSal, LinearLayout jCate, LinearLayout j_Id, TextView sal, Button but, LinearLayout jLoc, LinearLayout jExp,
+                    LinearLayout jQua, TextView loc, TextView exp, TextView qua) {
         this.mContext = mContext;
         this.u_id = u_id;
         this.j_id = j_id;
@@ -73,7 +75,13 @@ public class PostView extends AsyncTask<String, String, String> {
         this.jCate = jCate;
         this.j_Id = j_Id;
         this.sal = sal;
-        this.but=but;
+        this.but = but;
+        this.jLoc = jLoc;
+        this.jExp = jExp;
+        this.jQua = jQua;
+        this.loc = loc;
+        this.exp = exp;
+        this.qua = qua;
         help = new Helper();
     }
 
@@ -98,6 +106,7 @@ public class PostView extends AsyncTask<String, String, String> {
                 cover_pic = child.optString("cover_pic");
                 cmpny_name = child.optString("cmpny_name");
                 c_website = child.optString("c_website");
+                cLoc = child.optString("city");
                 cmpnyId = child.optString("u_id");
                 title = child.optString("title");
                 skll = child.optString("skill");
@@ -105,13 +114,14 @@ public class PostView extends AsyncTask<String, String, String> {
                 category = child.optString("category");
                 pkg = child.optString("package");
                 level = child.optString("level");
+                qulify = child.optString("qualification");
                 location = child.optString("location");
                 description = child.optString("description");
                 vied = child.optString("viewed");
                 shred = child.optString("shared");
                 appled = child.optString("applied");
                 date_created = child.optString("date_created");
-                apply=child.optString("apply");
+                apply = child.optString("apply");
             }
 
         } catch (Exception e) {
@@ -124,23 +134,23 @@ public class PostView extends AsyncTask<String, String, String> {
         super.onPostExecute(s);
         progressBar.setVisibility(View.GONE);
         scroll.setVisibility(View.VISIBLE);
-        setData(pro_pic, cover_pic, cmpny_name, c_website, title, skll, tpe, category, pkg, level, location, description,
-                vied, shred, appled, date_created);
+        setData(pro_pic, cover_pic, cmpny_name, c_website, cLoc, title, skll, tpe, category, pkg, level, location, description,
+                vied, shred, appled, date_created, qulify);
 
     }
 
-    private void setData(String pro_pic, String cover_pic, String cmpny_name, String c_website, String title, String skll, String tpe, String category, String pkg, String level, String location, String description, String vied, String shred, String appled, String date_created) {
+    private void setData(String pro_pic, String cover_pic, String cmpny_name, String c_website, String cLoc, String title, String skll, String tpe, String category, String pkg, String level, String location, String description, String vied, String shred, String appled, String date_created, String qualify) {
 
         setImage(pro_pic, cmpny_logo);
         setCover(cover_pic, coverImg);
         jTitle.setText(title);
-        cmpny.setText(cmpny_name + ", " + location);
+        cmpny.setText(cmpny_name + ", " + cLoc);
         created.setText("Posted on " + help.getTimeAgo(mContext, date_created));
         viewd.setText(vied + " Viewed");
         shared.setText(shred + " Shared");
         applied.setText(appled + " Applied");
-        skill.setText("Skill: " + skll);
-        desc.setText(description);
+        skill.setText("Skill Required: " + skll);
+        desc.setText(Html.fromHtml(description));
 
         if (tpe != null && !tpe.trim().isEmpty()) {
             jType.setVisibility(View.VISIBLE);
@@ -148,7 +158,7 @@ public class PostView extends AsyncTask<String, String, String> {
         }
         if (pkg != null && !pkg.trim().isEmpty()) {
             jSal.setVisibility(View.VISIBLE);
-            sal.setText(pkg);
+            sal.setText(mContext.getResources().getString(R.string.rs)+" "+pkg+" /Year");
         }
         if (category != null && !category.trim().isEmpty()) {
             jCate.setVisibility(View.VISIBLE);
@@ -159,6 +169,20 @@ public class PostView extends AsyncTask<String, String, String> {
             jId.setText(j_id);
         }
 
+        if (location != null && !location.trim().isEmpty()) {
+            jLoc.setVisibility(View.VISIBLE);
+            loc.setText(location);
+        }
+
+        if (level != null && !level.trim().isEmpty()) {
+            jExp.setVisibility(View.VISIBLE);
+            exp.setText(level);
+        }
+
+        if (qualify != null && !qualify.trim().isEmpty()) {
+            jQua.setVisibility(View.VISIBLE);
+            qua.setText(qualify);
+        }
         cmpny_logo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -170,7 +194,7 @@ public class PostView extends AsyncTask<String, String, String> {
             }
         });
 
-        if(apply.equalsIgnoreCase("1")){
+        if (apply.equalsIgnoreCase("1")) {
             but.setText("Applied");
         }
 

@@ -35,8 +35,10 @@ public class Sendinvite extends AsyncTask<String, String, String> {
             int succ = json.getInt("success");
             if (succ == 0) {
                 s = "false";
-            } else {
+            } else if (succ == 1) {
                 s = "true";
+            } else {
+                s = "send";
             }
         } catch (Exception e) {
         }
@@ -48,8 +50,10 @@ public class Sendinvite extends AsyncTask<String, String, String> {
         super.onPostExecute(s);
         if (s.equalsIgnoreCase("true")) {
             Toast.makeText(mContext, "Invitation Send Successfully", Toast.LENGTH_SHORT).show();
-        } else {
+        } else if (s.equalsIgnoreCase("false")) {
             Toast.makeText(mContext, "Error! Try Again", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(mContext, "Invitation Already send this job post", Toast.LENGTH_SHORT).show();
         }
     }
 }

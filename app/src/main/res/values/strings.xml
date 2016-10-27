@@ -89,6 +89,7 @@
     <string name="wrking">I currently work here</string>
     <string name="copyright">&#169; shuantech pvt. ltd.</string>
     <string name="reserved">All right reserved.</string>
+    <string name="rs">\u20B9</string>
 
     <string-array name="cmpny_type">
         <item>Select Company Type</item>
@@ -185,6 +186,12 @@
         <item>Wellness/Fitness/Sports</item>-->
     </string-array>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string-array name="stus">
+        <item>Looking for job.</item>
+        <item>In Work.</item>
+        <item>In Notice period.</item>
+        <item>In Internship.</item>
+        <item>Doing Course.</item>
+        <item>In Training.</item>
+    </string-array>
 </resources>

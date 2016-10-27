@@ -108,8 +108,8 @@ public class AddCollegedetail extends AsyncTask<String, String, String> {
                 mApp.getPreference().edit().putInt(Common.PROFILESTRENGTH, val + 2).commit();
             }
             mApp.getPreference().edit().putBoolean(Common.QUALIFICATION, true).commit();
-            new Connect(mContext, uId, mApp.getPreference().getString(Common.LEVEL, ""),
-                    clg, course).execute();
+            /*new Connect(mContext, uId, mApp.getPreference().getString(Common.LEVEL, ""),
+                    clg, course).execute();*/
             Toast.makeText(mContext, "Successfully Updated", Toast.LENGTH_SHORT).show();
             Intent in = new Intent(mContext, ResumeEditActivity.class);
             in.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

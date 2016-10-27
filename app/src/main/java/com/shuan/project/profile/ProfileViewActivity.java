@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -43,7 +44,6 @@ import com.shuan.project.resume.JuniorResumeGenerate;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.security.AccessController;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -56,21 +56,24 @@ public class ProfileViewActivity extends AppCompatActivity {
     private CircleImageView proPic;
     private TextView name, position, org, intro;
     private Button bu1, bu2, but3;
-    private TextView abt, url, cate, sze, found,type;
+    private TextView abt;
     private ProgressBar progressBar;
     private RelativeLayout scroll;
     private HashMap<String, String> pData;
     private DisplayImageOptions options;
     private ArrayList<Sample> list;
-    private LinearLayout noData, cmpny, employee, exprience, exp, education, edut, skill, skll, project, prjct, contact;
-    private TextView mail, phNo;
-    private String pro_pic, cover_pic, cmpny_name, c_type, landmark, country, year_of_establish, num_wrkers, c_desc, c_website, follow;
-    private RelativeLayout msg;
+    private LinearLayout noData, cmpny, employee, exprience, exp, education, edut, skill, skll, project, prjct, contact, objective, web;
+    private LinearLayout c_type, i_type, c_sze, c_fnd, c_mail, c_ph, cntDet, cntt, cnt_mail, cnt_ph, cnt_tm;
+    private TextView url, cate, indus_type, sze, found, cmail, cph, cnt_per, cnt_mail_id, cnt_ph_no, cnt_tme;
+    private TextView mail, phNo, obj;
+    private RelativeLayout msg, call;
     private Button inivite, resume;
     private RelativeLayout followLay;
     private LinearLayout extrabut;
     private String fullname;
     private LinearLayout about, cmpntDet, ser, service, port, portfolio, job, jobs;
+    private RelativeLayout flow, unflow, flows;
+    private LinearLayout fms;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,7 +84,6 @@ public class ProfileViewActivity extends AppCompatActivity {
         mApp = (Common) getApplicationContext();
         u_id = getIntent().getStringExtra("u_id");
         level = getIntent().getStringExtra("level");
-
 
 
         super.onCreate(savedInstanceState);
@@ -95,7 +97,7 @@ public class ProfileViewActivity extends AppCompatActivity {
 
         toolbar.setBackgroundColor(Color.TRANSPARENT);
 
-        followLay = (RelativeLayout) findViewById(R.id.follow);
+
         progressBar = (ProgressBar) findViewById(R.id.progress_bar);
         scroll = (RelativeLayout) findViewById(R.id.scroll);
         cover = (ImageView) findViewById(R.id.cover_img);
@@ -103,11 +105,11 @@ public class ProfileViewActivity extends AppCompatActivity {
         name = (TextView) findViewById(R.id.name);
         position = (TextView) findViewById(R.id.position);
         org = (TextView) findViewById(R.id.company_name);
-        /*bu1 = (Button) findViewById(R.id.but1);
-        bu2 = (Button) findViewById(R.id.but2);*/
         noData = (LinearLayout) findViewById(R.id.no_data);
         cmpny = (LinearLayout) findViewById(R.id.cmpny);
         employee = (LinearLayout) findViewById(R.id.employee);
+        objective = (LinearLayout) findViewById(R.id.objective);
+        obj = (TextView) findViewById(R.id.obj);
         exp = (LinearLayout) findViewById(R.id.exp);
         education = (LinearLayout) findViewById(R.id.education);
         edut = (LinearLayout) findViewById(R.id.edu);
@@ -125,10 +127,10 @@ public class ProfileViewActivity extends AppCompatActivity {
         found = (TextView) findViewById(R.id.found);
         exprience = (LinearLayout) findViewById(R.id.exprience);
         msg = (RelativeLayout) findViewById(R.id.msg);
-       /* but3 = (Button) findViewById(R.id.but3);*/
         list = new ArrayList<Sample>();
         inivite = (Button) findViewById(R.id.invite);
-        type= (TextView) findViewById(R.id.indus_type);
+        call = (RelativeLayout) findViewById(R.id.call);
+
         extrabut = (LinearLayout) findViewById(R.id.extra_but);
         resume = (Button) findViewById(R.id.resume);
 
@@ -140,6 +142,33 @@ public class ProfileViewActivity extends AppCompatActivity {
         job = (LinearLayout) findViewById(R.id.job);
         jobs = (LinearLayout) findViewById(R.id.jobs);
         cmpntDet = (LinearLayout) findViewById(R.id.cmpntDet);
+        web = (LinearLayout) findViewById(R.id.web);
+        url = (TextView) findViewById(R.id.url);
+        c_type = (LinearLayout) findViewById(R.id.c_type);
+        cate = (TextView) findViewById(R.id.cate);
+        i_type = (LinearLayout) findViewById(R.id.i_type);
+        indus_type = (TextView) findViewById(R.id.indus_type);
+        c_sze = (LinearLayout) findViewById(R.id.c_sze);
+        sze = (TextView) findViewById(R.id.sze);
+        c_fnd = (LinearLayout) findViewById(R.id.c_fnd);
+        found = (TextView) findViewById(R.id.found);
+        c_mail = (LinearLayout) findViewById(R.id.c_mail);
+        cmail = (TextView) findViewById(R.id.cmail);
+        c_ph = (LinearLayout) findViewById(R.id.c_ph);
+        cph = (TextView) findViewById(R.id.cph);
+        cntDet = (LinearLayout) findViewById(R.id.cntDet);
+        cntt = (LinearLayout) findViewById(R.id.cnt);
+        cnt_per = (TextView) findViewById(R.id.cnt_per);
+        cnt_mail = (LinearLayout) findViewById(R.id.cnt_mail);
+        cnt_mail_id = (TextView) findViewById(R.id.cnt_mail_id);
+        cnt_ph = (LinearLayout) findViewById(R.id.cnt_ph);
+        cnt_ph_no = (TextView) findViewById(R.id.cnt_ph_no);
+        cnt_tm = (LinearLayout) findViewById(R.id.cnt_tm);
+        cnt_tme = (TextView) findViewById(R.id.cnt_tme);
+        flow = (RelativeLayout) findViewById(R.id.folw);
+        unflow = (RelativeLayout) findViewById(R.id.unflow);
+        flows = (RelativeLayout) findViewById(R.id.flows);
+        fms = (LinearLayout) findViewById(R.id.fmc);
 
         new Profile().execute();
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -160,11 +189,27 @@ public class ProfileViewActivity extends AppCompatActivity {
             extrabut.setVisibility(View.GONE);
         }
 
-        if (mApp.getPreference().getString(Common.LEVEL, "").equalsIgnoreCase("3")) {
-            followLay.setVisibility(View.GONE);
-        }
+        msg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getApplicationContext(), "Coming Soon", Toast.LENGTH_SHORT).show();
+            }
+        });
 
-        bu1.setOnClickListener(new View.OnClickListener() {
+        call.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getApplicationContext(), "Coming Soon", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        fms.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new Following(ProfileViewActivity.this, u_id, mApp.getPreference().getString(Common.u_id, ""), flow, unflow, level).execute();
+            }
+        });
+        /*bu1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (bu1.getText().toString().equalsIgnoreCase("Follow")) {
@@ -172,7 +217,7 @@ public class ProfileViewActivity extends AppCompatActivity {
                     bu1.setText("PENDING");
                 }
             }
-        });
+        });*/
 
         inivite.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -238,20 +283,19 @@ public class ProfileViewActivity extends AppCompatActivity {
 
                         JSONObject info = child.getJSONObject("info");
                         JSONArray infoArray = info.getJSONArray("info");
-                        JSONObject data = infoArray.getJSONObject(0);
+                        final JSONObject data = infoArray.getJSONObject(0);
 
-                        final String email_id = data.optString("email_id");
-                        final String ph_no = data.optString("ph_no");
                         final String pro_pic = data.optString("pro_pic");
                         final String cover_pic = data.optString("cover_pic");
 
-                        JSONObject cntInfo = child.getJSONObject("cnt");
-                        JSONArray cntArray = cntInfo.getJSONArray("cnt");
-                        JSONObject data1 = cntArray.getJSONObject(0);
-                        fullname = data1.optString("full_name");
-                        final String city = data1.optString("city");
-                        final String country = data1.optString("country");
+                        final JSONObject sec = child.getJSONObject("sec");
+                        JSONArray secArray = sec.getJSONArray("sec");
+                        final JSONObject data1 = secArray.getJSONObject(0);
 
+
+                        JSONObject cnt = child.getJSONObject("cnt");
+                        JSONArray cntArray = cnt.getJSONArray("cnt");
+                        final JSONObject data8 = cntArray.getJSONObject(0);
 
                         runOnUiThread(new Runnable() {
                             @Override
@@ -259,22 +303,41 @@ public class ProfileViewActivity extends AppCompatActivity {
                                 setImage(pro_pic, proPic);
                                 setCover(cover_pic, cover);
                                 contact.setVisibility(View.VISIBLE);
-                                name.setText(fullname);
-                                if (!city.equalsIgnoreCase("")) {
-                                    position.setText(city + " ," + country);
+                                name.setText(data8.optString("full_name"));
+                                if(mApp.getPreference().getString(Common.LEVEL,"").equalsIgnoreCase("3")){
+                                    if (!data.optString("status").equalsIgnoreCase("")) {
+                                        org.setTextColor(getResources().getColor(R.color.stus));
+                                        org.setTypeface(null, Typeface.BOLD);
+                                        org.setText(data.optString("status"));
+                                    }
                                 }
-                                mail.setText(email_id);
-                                phNo.setText(ph_no);
 
-                                if (following.equalsIgnoreCase("1") && follower.equalsIgnoreCase("1")) {
-                                    bu1.setText("Follow");
-                                } else if (following.equalsIgnoreCase("0") && follower.equalsIgnoreCase("0")) {
-                                    bu1.setVisibility(View.GONE);
-                                    bu2.setVisibility(View.VISIBLE);
-                                } else if (following.equalsIgnoreCase("0") && follower.equalsIgnoreCase("1")) {
-                                    bu1.setText("Following");
+                                position.setText(data1.optString("sec"));
+                                if (!data8.optString("email_id").equalsIgnoreCase("") || !data8.optString("ph_no").equalsIgnoreCase("")) {
+                                    contact.setVisibility(View.VISIBLE);
+                                    if (!data8.optString("email_id").equalsIgnoreCase("")) {
+                                        mail.setText(data8.optString("email_id"));
+                                    }
+                                    if (!data8.optString("ph_no").equalsIgnoreCase("")) {
+                                        phNo.setText(data8.optString("ph_no"));
+                                    }
+                                }
+
+
+                                if (mApp.getPreference().getString(Common.LEVEL, "").equalsIgnoreCase("3")) {
+                                    if (follower.equalsIgnoreCase("1")) {
+                                        flows.setVisibility(View.VISIBLE);
+                                    }
                                 } else {
-                                    bu1.setText("Follow");
+                                    if (following.equalsIgnoreCase("1")) {
+                                        unflow.setVisibility(View.VISIBLE);
+                                    } else {
+                                        flow.setVisibility(View.VISIBLE);
+                                    }
+                                }
+                                if (!data8.optString("objective").equalsIgnoreCase("")) {
+                                    objective.setVisibility(View.VISIBLE);
+                                    obj.setText(data8.optString("objective"));
                                 }
                             }
                         });
@@ -365,19 +428,19 @@ public class ProfileViewActivity extends AppCompatActivity {
 
                         JSONObject info = child.getJSONObject("info");
                         JSONArray infoArray = info.getJSONArray("info");
-                        JSONObject data = infoArray.getJSONObject(0);
-                        final String fullname = data.optString("full_name");
-                        final String email_id = data.optString("email_id");
-                        final String ph_no = data.optString("ph_no");
+                        final JSONObject data = infoArray.getJSONObject(0);
+
                         final String pro_pic = data.optString("pro_pic");
                         final String cover_pic = data.optString("cover_pic");
 
-                        JSONObject cntInfo = child.getJSONObject("cnt");
-                        JSONArray cntArray = cntInfo.getJSONArray("cnt");
-                        JSONObject data1 = cntArray.getJSONObject(0);
-                        final String org_name = data1.optString("org_name");
-                        final String pos = data1.optString("position");
-                        final String loc = data1.optString("location");
+                        final JSONObject sec = child.getJSONObject("sec");
+                        JSONArray secArray = sec.getJSONArray("sec");
+                        final JSONObject data1 = secArray.getJSONObject(0);
+
+
+                        JSONObject cnt = child.getJSONObject("cnt");
+                        JSONArray cntArray = cnt.getJSONArray("cnt");
+                        final JSONObject data8 = cntArray.getJSONObject(0);
 
                         runOnUiThread(new Runnable() {
                             @Override
@@ -385,22 +448,40 @@ public class ProfileViewActivity extends AppCompatActivity {
                                 setImage(pro_pic, proPic);
                                 setCover(cover_pic, cover);
                                 contact.setVisibility(View.VISIBLE);
-                                name.setText(fullname);
-                                if (!org_name.equalsIgnoreCase("")) {
-                                    position.setText(pos);
-                                    org.setText(org_name + " ," + loc);
+                                name.setText(data8.optString("full_name"));
+                                position.setText(data1.optString("sec"));
+                                if(mApp.getPreference().getString(Common.LEVEL,"").equalsIgnoreCase("3")){
+                                    if (!data.optString("status").equalsIgnoreCase("")) {
+                                        org.setTextColor(getResources().getColor(R.color.stus));
+                                        org.setTypeface(null, Typeface.BOLD);
+                                        org.setText(data.optString("status"));
+                                    }
                                 }
-                                mail.setText(email_id);
-                                phNo.setText(ph_no);
-                                if (following.equalsIgnoreCase("1") && follower.equalsIgnoreCase("1")) {
-                                    bu1.setText("Follow");
-                                } else if (following.equalsIgnoreCase("0") && follower.equalsIgnoreCase("0")) {
-                                    bu1.setVisibility(View.GONE);
-                                    bu2.setVisibility(View.VISIBLE);
-                                } else if (following.equalsIgnoreCase("0") && follower.equalsIgnoreCase("1")) {
-                                    bu1.setText("Following");
+                                if (!data8.optString("email_id").equalsIgnoreCase("") || !data8.optString("ph_no").equalsIgnoreCase("")) {
+                                    contact.setVisibility(View.VISIBLE);
+                                    if (!data8.optString("email_id").equalsIgnoreCase("")) {
+                                        mail.setText(data8.optString("email_id"));
+                                    }
+                                    if (!data8.optString("ph_no").equalsIgnoreCase("")) {
+                                        phNo.setText(data8.optString("ph_no"));
+                                    }
+                                }
+
+
+                                if (mApp.getPreference().getString(Common.LEVEL, "").equalsIgnoreCase("3")) {
+                                    if (follower.equalsIgnoreCase("1")) {
+                                        flows.setVisibility(View.VISIBLE);
+                                    }
                                 } else {
-                                    bu1.setText("Follow");
+                                    if (following.equalsIgnoreCase("1")) {
+                                        unflow.setVisibility(View.VISIBLE);
+                                    } else {
+                                        flow.setVisibility(View.VISIBLE);
+                                    }
+                                }
+                                if (!data8.optString("objective").equalsIgnoreCase("")) {
+                                    objective.setVisibility(View.VISIBLE);
+                                    obj.setText(data8.optString("objective"));
                                 }
                             }
                         });
@@ -519,49 +600,95 @@ public class ProfileViewActivity extends AppCompatActivity {
                         JSONObject info = child.getJSONObject("info");
                         JSONArray infoArray = info.getJSONArray("info");
                         JSONObject data = infoArray.getJSONObject(0);
-                        pro_pic = data.optString("pro_pic");
-                        cover_pic = data.optString("cover_pic");
-                        cmpny_name = data.optString("cmpny_name");
-                        c_type = data.optString("c_type");
-                        final String iType=data.optString("i_type");
-                        landmark = data.optString("city");
-                        country = data.optString("country");
-                        year_of_establish = data.optString("year_of_establish");
-                        num_wrkers = data.optString("num_wrkers");
-                        c_desc = data.optString("c_desc");
-                        c_website = data.optString("c_website");
+                        final String pro_pic = data.optString("pro_pic");
+                        final String cover_pic = data.optString("cover_pic");
 
+                        JSONObject cnt = child.getJSONObject("cnt");
+                        JSONArray cntArray = cnt.getJSONArray("cnt");
+                        final JSONObject data1 = cntArray.getJSONObject(0);
 
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
                                 cmpny.setVisibility(View.VISIBLE);
-                                cmpntDet.setVisibility(View.VISIBLE);
                                 setImage(pro_pic, proPic);
                                 setCover(cover_pic, cover);
-                                name.setText(cmpny_name);
-                                position.setText(c_type);
-                                org.setText(landmark + "," + country);
+                                name.setText(data1.optString("cmpny_name"));
+                                position.setText(data1.optString("i_type"));
 
-                                if(c_desc!=null && !c_desc.trim().isEmpty()){
+                                org.setText(data1.optString("city") + "," + data1.optString("country"));
+
+
+                                if (data1.optString("c_desc") != null && !data1.optString("c_desc").trim().isEmpty()) {
                                     about.setVisibility(View.VISIBLE);
-                                    abt.setText(c_desc);
+                                    abt.setText(data1.optString("c_desc"));
                                 }
 
-                                url.setText(c_website);
-                                cate.setText(c_type);
-                                type.setText(iType);
-                                sze.setText(num_wrkers);
-                                found.setText(year_of_establish);
+                                if (!data1.optString("c_type").equalsIgnoreCase("") || !data1.optString("i_type").equalsIgnoreCase("") ||
+                                        !data1.optString("mail").equalsIgnoreCase("") || !data1.optString("ph_no").equalsIgnoreCase("") ||
+                                        !data1.optString("c_website").equalsIgnoreCase("") || !data1.optString("year_of_establish").equalsIgnoreCase("")) {
 
-                                if (follow.equalsIgnoreCase("1")) {
-                                    bu1.setVisibility(View.VISIBLE);
-                                    bu1.setText("Follow");
+                                    cmpntDet.setVisibility(View.VISIBLE);
+                                    if (!data1.optString("c_type").equalsIgnoreCase("")) {
+                                        c_type.setVisibility(View.VISIBLE);
+                                        cate.setText(data1.optString("c_type"));
+                                    }
+                                    if (!data1.optString("i_type").equalsIgnoreCase("")) {
+                                        i_type.setVisibility(View.VISIBLE);
+                                        indus_type.setText(data1.optString("i_type"));
+                                    }
+                                    if (!data1.optString("mail").equalsIgnoreCase("")) {
+                                        c_mail.setVisibility(View.VISIBLE);
+                                        cmail.setText(data1.optString("mail"));
+                                    }
+                                    if (!data1.optString("ph_no").equalsIgnoreCase("")) {
+                                        c_ph.setVisibility(View.VISIBLE);
+                                        cph.setText(data1.optString("ph_no"));
+                                    }
+                                    if (!data1.optString("c_website").equalsIgnoreCase("")) {
+                                        web.setVisibility(View.VISIBLE);
+                                        url.setText(data1.optString("c_website"));
+                                    }
+
+                                    if (!data1.optString("year_of_establish").equalsIgnoreCase("")) {
+                                        c_fnd.setVisibility(View.VISIBLE);
+                                        found.setText(data1.optString("year_of_establish"));
+                                    }
+                                }
+
+                                if (!data1.optString("contact_person").equalsIgnoreCase("") || !data1.optString("contact_mail").equalsIgnoreCase("") ||
+                                        !data1.optString("contact_ph").equalsIgnoreCase("") || !data1.optString("contact_time").equalsIgnoreCase("")) {
+                                    cntDet.setVisibility(View.VISIBLE);
+                                    if (!data1.optString("contact_person").equalsIgnoreCase("")) {
+                                        cntt.setVisibility(View.VISIBLE);
+                                        cnt_per.setText(data1.optString("contact_person"));
+                                    }
+                                    if (!data1.optString("contact_mail").equalsIgnoreCase("")) {
+                                        cnt_mail.setVisibility(View.VISIBLE);
+                                        cnt_mail_id.setText(data1.optString("contact_mail"));
+                                    }
+
+                                    if (!data1.optString("contact_ph").equalsIgnoreCase("")) {
+                                        cnt_ph.setVisibility(View.VISIBLE);
+                                        cnt_ph_no.setText(data1.optString("contact_ph"));
+                                    }
+
+                                    if (!data1.optString("contact_time").equalsIgnoreCase("")) {
+                                        cnt_tm.setVisibility(View.VISIBLE);
+                                        cnt_tme.setText(data1.optString("contact_time"));
+                                    }
+
+                                }
+
+                                if (mApp.getPreference().getString(Common.LEVEL, "").equalsIgnoreCase("3") && level.equalsIgnoreCase("3")) {
+                                    fms.setVisibility(View.GONE);
                                 } else {
-                                    bu1.setVisibility(View.GONE);
-                                    bu2.setVisibility(View.VISIBLE);
-                                    msg.setVisibility(View.GONE);
-                                    bu2.setText("Followed");
+                                    fms.setVisibility(View.VISIBLE);
+                                    if (follow.equalsIgnoreCase("1")) {
+                                        unflow.setVisibility(View.VISIBLE);
+                                    } else {
+                                        flow.setVisibility(View.VISIBLE);
+                                    }
                                 }
                             }
                         });
@@ -590,9 +717,7 @@ public class ProfileViewActivity extends AppCompatActivity {
                                 });
                             }
 
-
                         }
-
 
                         final JSONObject portf = child.getJSONObject("port");
                         JSONArray portArray = portf.getJSONArray("port");
@@ -628,7 +753,7 @@ public class ProfileViewActivity extends AppCompatActivity {
                             JSONObject data2 = openArray.getJSONObject(i);
 
                             final String ser_name = data2.optString("title");
-                            final String jobId=data2.optString("job_id");
+                            final String jobId = data2.optString("job_id");
 
 
                             if (!ser_name.equalsIgnoreCase("")) {
@@ -643,14 +768,14 @@ public class ProfileViewActivity extends AppCompatActivity {
                                         img.setImageResource(R.drawable.ic_work);
                                         txt.setText(ser_name);
                                         jobs.addView(v);
-                                        TypedValue val=new TypedValue();
-                                        getApplicationContext().getTheme().resolveAttribute(android.R.attr.selectableItemBackground,val,true);
+                                        TypedValue val = new TypedValue();
+                                        getApplicationContext().getTheme().resolveAttribute(android.R.attr.selectableItemBackground, val, true);
                                         v.setBackgroundResource(val.resourceId);
                                         v.setOnClickListener(new View.OnClickListener() {
                                             @Override
                                             public void onClick(View v) {
-                                                Intent in=new Intent(getApplicationContext(), PostViewActivity.class);
-                                                in.putExtra("jId",jobId);
+                                                Intent in = new Intent(getApplicationContext(), PostViewActivity.class);
+                                                in.putExtra("jId", jobId);
                                                 startActivity(in);
                                             }
                                         });
@@ -771,9 +896,9 @@ public class ProfileViewActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.profile_view_menu, menu);
         MenuItem item = menu.findItem(R.id.fav);
         if (mApp.getPreference().getString(Common.LEVEL, "").equalsIgnoreCase("3")) {
-            if(level.equalsIgnoreCase("3")){
+            if (level.equalsIgnoreCase("3")) {
                 item.setVisible(false);
-            }else{
+            } else {
                 item.setVisible(true);
             }
 

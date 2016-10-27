@@ -16,10 +16,13 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
+import android.text.InputType;
 import android.text.TextWatcher;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.AutoCompleteTextView;
@@ -89,32 +92,58 @@ public class EmplyeeSearchActivity extends AppCompatActivity implements GooglePl
 
         new GetEmployeeSerach(EmplyeeSearchActivity.this, progressBar, preferSearch).execute();
 
+        preferSearch.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if(actionId== EditorInfo.IME_ACTION_SEARCH){
+                    InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(v.getApplicationWindowToken(), 0);
+                    preferSearch.dismissDropDown();
+                    progressBar.setVisibility(View.VISIBLE);
+                    new EmployeeSerchResult(EmplyeeSearchActivity.this, progressBar, list, preferSearch.getText().toString(),
+                            "all").execute();
+                }
+                return false;
+            }
+        });
+
         preferSearch.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(view.getApplicationWindowToken(), 0);
                 TextView txt = (TextView) view.findViewById(R.id.display);
                 TextView txt1 = (TextView) view.findViewById(R.id.ins_name);
-
                 preferSearch.setText(txt.getText().toString());
-                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-                imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
                 progressBar.setVisibility(View.VISIBLE);
-
                 new EmployeeSerchResult(EmplyeeSearchActivity.this, progressBar, list, txt.getText().toString(),
                         txt1.getText().toString()).execute();
             }
         });
 
+        preferSearch.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                list.setAdapter(null);
+            }
+        });
 
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 TextView txt = (TextView) view.findViewById(R.id.jId);
-
                 Intent in = new Intent(getApplicationContext(), PostViewActivity.class);
                 in.putExtra("jId", txt.getText().toString());
-
                 in.putExtra("apply", "no");
                 startActivity(in);
             }
@@ -168,7 +197,7 @@ public class EmplyeeSearchActivity extends AppCompatActivity implements GooglePl
             pDialog = new ProgressDialog(EmplyeeSearchActivity.this);
             pDialog.setIndeterminate(false);
             pDialog.setCancelable(false);
-            pDialog.setMessage("Searching Details");
+            pDialog.setMessage("Searching");
             pDialog.show();
         }
 

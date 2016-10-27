@@ -3,6 +3,7 @@ package com.shuan.project.asyncTasks;
 
 import android.content.Context;
 import android.os.AsyncTask;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.ProgressBar;
@@ -30,6 +31,8 @@ public class GetPost extends AsyncTask<String, String, String> {
     private PostAdapter adapter;
     private String u_id,type;
 
+
+
     public GetPost(Context mContext, ListView listView, ProgressBar progressBar, String u_id,String type) {
         this.mContext = mContext;
         this.listView = listView;
@@ -37,6 +40,7 @@ public class GetPost extends AsyncTask<String, String, String> {
         this.u_id = u_id;
         this.type=type;
         list = new ArrayList<Sample>();
+
     }
 
     @Override
@@ -67,8 +71,11 @@ public class GetPost extends AsyncTask<String, String, String> {
                     String jApplied = child.optString("applied");
                     String jFrmId = child.optString("frm_id");
                     String jImp = child.optString("is_important");
+                    String fPropic=child.optString("fp");
+                    String flvl=child.optString("lvl");
+                    String fshrd=child.optString("shred");
 
-                    list.add(new Sample(cName, pPic, jId, jTitle, jSkill, jLevel, jLoc, jDated, jView, jApplied, jShare, jFrmId,jImp));
+                    list.add(new Sample(cName, pPic, jId, jTitle, jSkill, jLevel, jLoc, jDated, jView, jApplied, jShare, jFrmId,jImp,fPropic,fshrd,flvl));
                 }
             }
 
@@ -85,6 +92,7 @@ public class GetPost extends AsyncTask<String, String, String> {
         listView.setVisibility(View.VISIBLE);
         adapter = new PostAdapter(mContext, list);
         listView.setAdapter(adapter);
+
 
     }
 }

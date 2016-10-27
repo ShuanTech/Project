@@ -14,9 +14,10 @@ import java.util.Calendar;
  * Created by Android on 9/2/2016.
  */
 public class MonthYearPicker {
-    private static final int MIN_YEAR = 1970;
+    Calendar calendar = Calendar.getInstance();
+    private static final int MIN_YEAR = 1950;
 
-    private static final int MAX_YEAR = 2099;
+    private static final int MAX_YEAR = 0;
 
     private static final String[] PICKER_DISPLAY_MONTHS_NAMES = new String[] { "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct",
             "Nov", "Dec" };
@@ -107,7 +108,7 @@ public class MonthYearPicker {
 
         yearNumberPicker = (NumberPicker) view.findViewById(R.id.yearNumberPicker);
         yearNumberPicker.setMinValue(MIN_YEAR);
-        yearNumberPicker.setMaxValue(MAX_YEAR);
+        yearNumberPicker.setMaxValue(calendar.get(calendar.YEAR));
 
         monthNumberPicker.setValue(selectedMonth);
         yearNumberPicker.setValue(selectedYear);

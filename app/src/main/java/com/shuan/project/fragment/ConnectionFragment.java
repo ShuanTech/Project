@@ -53,21 +53,6 @@ public class ConnectionFragment extends Fragment {
 
         new GetConnection(getActivity(), listView, progressBar, mApp.getPreference().getString(Common.u_id,"")).execute();
 
-
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                TextView txt = (TextView) view.findViewById(R.id.u_id);
-                TextView txt2 = (TextView) view.findViewById(R.id.level);
-                //Toast.makeText(getActivity(),txt.getText().toString(),Toast.LENGTH_SHORT).show();
-                Intent in = new Intent(getActivity(), ProfileViewActivity.class);
-                in.putExtra("u_id", txt.getText().toString());
-                in.putExtra("level", txt2.getText().toString());
-                startActivity(in);
-
-            }
-        });
-
         return view;
     }
 

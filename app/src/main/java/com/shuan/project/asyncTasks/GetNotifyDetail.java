@@ -52,13 +52,16 @@ public class GetNotifyDetail extends AsyncTask<String, String, String> {
                 JSONArray jsonArray = json.getJSONArray("notify");
                 for (int i = 0; i < jsonArray.length(); i++) {
                     JSONObject child = jsonArray.getJSONObject(i);
-                    String title = child.optString("title");
-                    String frm_id = child.optString("frm_id");
+                    String id=child.optString("id");
+                    String frmId = child.optString("frm_id");
+                    String to_id = child.optString("to_id");
                     String post_id = child.optString("post_id");
                     String content = child.optString("content");
                     String type = child.optString("type");
+                    String vwed=child.optString("vwed");
+                    String level=child.optString("level");
 
-                    list.add(new Sample(title, frm_id, post_id, content, type));
+                    list.add(new Sample(id,frmId, to_id, post_id, content, type,vwed,level));
                 }
                 s = "true";
             }

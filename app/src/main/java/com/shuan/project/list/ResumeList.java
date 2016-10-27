@@ -27,6 +27,12 @@ public class ResumeList {
         this.cerCentre = cerCentre;
     }
 
+    public ResumeList(String cerName, String cerCentre, String dur) {
+        this.cerName = cerName;
+        this.cerCentre = cerCentre;
+        this.dur = dur;
+    }
+
     public ResumeList(String aName) {
         this.aName = aName;
     }

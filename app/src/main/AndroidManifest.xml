@@ -14,8 +14,7 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:supportsRtl="true"
-        android:theme="@style/AppBaseTheme">
+        android:supportsRtl="true">
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
@@ -32,11 +31,13 @@
         </activity>
         <activity
             android:name=".signup.SelectionActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/Profile"/>
         <activity
             android:name=".signup.SignupActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysHidden" />
+            android:windowSoftInputMode="stateAlwaysHidden"
+            android:theme="@style/Profile"/>
         <activity
             android:name=".signup.employee.EducationActivity"
             android:screenOrientation="portrait"
@@ -52,15 +53,18 @@
         <activity
             android:name=".signup.employee.WorkActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysHidden" />
+            android:windowSoftInputMode="stateAlwaysHidden"
+            android:theme="@style/Profile"/>
         <activity
             android:name=".signup.employer.CompanyDetails"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysHidden" />
+            android:windowSoftInputMode="stateAlwaysHidden"
+            android:theme="@style/Profile"/>
         <activity
             android:name=".launcher.LoginActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysHidden" />
+            android:windowSoftInputMode="stateAlwaysHidden"
+            android:theme="@style/Profile"/>
 
         <!-- Employer Activities -->
 
@@ -78,14 +82,16 @@
         <activity
             android:name=".resume.UpdateJuniorResumeActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysHidden">
+            android:windowSoftInputMode="stateAlwaysHidden"
+            android:theme="@style/Junior">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".employee.JuniorActivity" />
         </activity>
         <activity
             android:name=".resume.JuniorResumeGenerate"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:theme="@style/Junior">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".employee.JuniorActivity" />
@@ -100,42 +106,54 @@
         <activity
             android:name=".resume.UpdateSeniorResumeActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysHidden">
+            android:windowSoftInputMode="stateAlwaysHidden"
+            android:theme="@style/Senior">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".employee.SeniorActivity" />
         </activity>
         <activity
             android:name=".resume.ExpResumeGenerate"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:theme="@style/Senior">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".employee.SeniorActivity" />
         </activity>
-        <activity android:name=".about.About" />
-        <activity android:name=".about.Help" />
+        <activity android:name=".about.About"
+            android:theme="@style/Profile"/>
+        <activity android:name=".about.Help"
+            android:theme="@style/Profile"/>
         <activity
             android:name=".profile.ProfileViewActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Junior.Profile" />
-        <activity android:name=".signup.employer.CompanyContactInfoActivity" />
-        <activity android:name=".signup.employer.AboutCompanyActivity" />
-        <activity android:name=".employer.JobPostActivity" />
+        <activity android:name=".signup.employer.CompanyContactInfoActivity"
+            android:theme="@style/AppBaseTheme"/>
+        <activity android:name=".signup.employer.AboutCompanyActivity"
+            android:theme="@style/AppBaseTheme"/>
+        <activity android:name=".employer.JobPostActivity"
+            android:theme="@style/AppBaseTheme"/>
+
         <activity
             android:name=".employer.PostViewActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppBaseTheme.Profile"></activity>
+
         <activity
             android:name=".search.SearchActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysVisible"></activity>
+            android:windowSoftInputMode="stateAlwaysHidden"></activity>
+
         <activity
             android:name=".resume.ResumeEditActivity"
             android:screenOrientation="portrait"></activity>
+
         <activity
             android:name=".employer.ShortListActivity"
             android:launchMode="singleTop"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:theme="@style/AppBaseTheme">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".employer.EmployerActivity" />
@@ -143,7 +161,8 @@
         <activity
             android:name=".resume.UpdateResumeActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysHidden"></activity>
+            android:windowSoftInputMode="stateAlwaysHidden"
+            android:theme="@style/Senior"></activity>
         <activity
             android:name=".employer.PdfViewActivity"
             android:screenOrientation="portrait">

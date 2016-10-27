@@ -104,7 +104,7 @@ public class EmplySearchResAdapter extends BaseAdapter {
         cShared.setText(curr.getjShare());
 
 
-
+        imp.setVisibility(View.GONE);
 
         ImageLoader.getInstance().displayImage(curr.getProPic(), cImg, options, new SimpleImageLoadingListener() {
 
@@ -171,12 +171,12 @@ public class EmplySearchResAdapter extends BaseAdapter {
             }
         });
 
-        imp.setOnClickListener(new View.OnClickListener() {
+       /* imp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 new SavePost(mContext, mApp.getPreference().getString(Common.u_id, ""), curr.getjId()).execute();
             }
-        });
+        });*/
 
         return convertView;
     }

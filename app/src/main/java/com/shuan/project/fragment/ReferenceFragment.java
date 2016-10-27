@@ -55,7 +55,7 @@ public class ReferenceFragment extends Fragment {
         new GetRerfenceList(getActivity(), listView, progressBar, mApp.getPreference().getString(Common.u_id,"")).execute();
 
 
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+       /* listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 TextView txt = (TextView) view.findViewById(R.id.u_id);
@@ -67,7 +67,7 @@ public class ReferenceFragment extends Fragment {
                 startActivity(in);
 
             }
-        });
+        });*/
         return view;
     }
 

@@ -60,10 +60,13 @@ public class GetInvitation extends AsyncTask<String, String, String> {
             } else {
                 JSONArray jsonArray = json.getJSONArray("job");
                 title = new String[jsonArray.length()];
+
                 for (int i = 0; i < jsonArray.length(); i++) {
                     JSONObject child = jsonArray.getJSONObject(i);
+
                     String tile = child.optString("title");
                     title[i] = tile;
+
 
                 }
                 s = "true";
@@ -82,7 +85,7 @@ public class GetInvitation extends AsyncTask<String, String, String> {
 
             final ArrayList<Integer> mSelectedItems = new ArrayList<Integer>();
             builder = new AlertDialog.Builder(mContext);
-            builder.setTitle("select the Job to send Invitation");
+            builder.setTitle("select the Job to Invite");
 
 
             builder.setSingleChoiceItems(title, -1, new DialogInterface.OnClickListener() {
@@ -94,10 +97,12 @@ public class GetInvitation extends AsyncTask<String, String, String> {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     name = "";
+
                     for (int i = 0; i < mSelectedItems.size(); i++) {
                         name = title[i];
+
                     }
-                    //Toast.makeText(mContext,name.toString(),Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(mContext,name.toString()+jb.toString(),Toast.LENGTH_SHORT).show();
                     new Sendinvite(mContext, frmId, uId, name).execute();
                     dialog.cancel();
                 }

@@ -15,4 +15,7 @@
     <color name="senDark">#2c374d</color>
     <color name="senAccent">#01579B</color>
 
+    <color name="stus">#009688</color>
+    <color name="notify_color">#D3DDEA</color>
+
 </resources>

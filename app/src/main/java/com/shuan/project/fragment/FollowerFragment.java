@@ -55,7 +55,7 @@ public class FollowerFragment extends Fragment {
         new GetFollower(getActivity(), listView, progressBar, mApp.getPreference().getString(Common.u_id,"")).execute();
 
 
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+     /*   listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 TextView txt = (TextView) view.findViewById(R.id.u_id);
@@ -66,7 +66,7 @@ public class FollowerFragment extends Fragment {
                 startActivity(in);
 
             }
-        });
+        });*/
 
         return view;
     }

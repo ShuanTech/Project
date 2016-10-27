@@ -835,45 +835,6 @@
                     </android.support.design.widget.TextInputLayout>
 
 
-                    <android.support.design.widget.TextInputLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-
-                        <MultiAutoCompleteTextView
-                            android:id="@+id/area"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:hint="@string/work_area"
-                            android:imeOptions="actionDone" />
-                    </android.support.design.widget.TextInputLayout>
-
-                    <android.support.design.widget.TextInputLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-
-                        <EditText
-                            android:id="@+id/dev_env"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:hint="@string/dev_env"
-                            android:imeOptions="actionDone"
-                            android:inputType="text" />
-                    </android.support.design.widget.TextInputLayout>
-
-                    <android.support.design.widget.TextInputLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-
-                        <EditText
-                            android:id="@+id/others"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:hint="@string/others"
-                            android:imeOptions="actionDone"
-                            android:inputType="text" />
-                    </android.support.design.widget.TextInputLayout>
-
-
                     <TextView
                         android:id="@+id/tex1"
                         android:layout_width="wrap_content"
@@ -1177,20 +1138,7 @@
                             android:singleLine="true" />
                     </android.support.design.widget.TextInputLayout>
 
-                    <android.support.design.widget.TextInputLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
 
-                        <EditText
-                            android:id="@+id/p_url"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/standard_margin"
-                            android:hint="Project URL"
-                            android:imeOptions="actionNext"
-                            android:inputType="textWebEditText"
-                            android:singleLine="true" />
-                    </android.support.design.widget.TextInputLayout>
 
                     <android.support.design.widget.TextInputLayout
                         android:layout_width="match_parent"
@@ -1206,14 +1154,6 @@
                             android:inputType="text" />
                     </android.support.design.widget.TextInputLayout>
 
-                    <CheckBox
-                        android:id="@+id/acd"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:layout_marginTop="@dimen/standard_margin"
-                        android:checked="true"
-                        android:text="Academic Project" />
 
                     <Button
                         android:id="@+id/p_update"
@@ -1252,13 +1192,43 @@
                     android:layout_marginTop="@dimen/standard_margin"
                     android:orientation="vertical">
 
-                    <EditText
-                        android:id="@+id/dob"
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/standard_margin"
-                        android:hint="@string/dob"
-                        android:imeOptions="actionNext" />
+                        android:orientation="horizontal">
+
+                        <RelativeLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1">
+
+                            <EditText
+                                android:id="@+id/dob"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/standard_margin"
+                                android:hint="@string/dob"
+                                android:imeOptions="actionNext"
+                                android:singleLine="true" />
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1">
+
+                            <EditText
+                                android:id="@+id/age"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/standard_margin"
+                                android:editable="false"
+                                android:hint="Age"
+                                android:imeOptions="actionNext" />
+
+                        </RelativeLayout>
+
+                    </LinearLayout>
 
                     <RadioGroup
                         android:id="@+id/sex"

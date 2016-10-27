@@ -42,11 +42,13 @@ public class CheckEligible extends AsyncTask<String, String, String> {
         mApp= (Common) mContext.getApplicationContext();
     }
 
+
+
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
         pDialog = new ProgressDialog(mContext);
-        pDialog.setMessage("Check Eligibility...");
+        pDialog.setMessage("Checking...");
         pDialog.setIndeterminate(false);
         pDialog.setCancelable(false);
         pDialog.show();
@@ -101,40 +103,62 @@ public class CheckEligible extends AsyncTask<String, String, String> {
         } else if(s.equalsIgnoreCase("fresher")){
             Toast.makeText(mContext, "You are Fresher. You cannot apply this job.", Toast.LENGTH_SHORT).show();
         }else {
-
-            final ArrayList<Integer> mSelectedItems = new ArrayList<Integer>();
-            builder = new AlertDialog.Builder(mContext);
-            builder.setTitle("select the Reference");
-            builder.setMultiChoiceItems(referName, null, new DialogInterface.OnMultiChoiceClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which, boolean isChecked) {
-                    if (isChecked) {
-                        mSelectedItems.add(which);
+            if(referName.length==0){
+                builder = new AlertDialog.Builder(mContext);
+                builder.setTitle("Select the Reference");
+                builder.setMessage("There is no reference Available").setPositiveButton("Apply", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        new Apply(mContext,uId,jId,"refer").execute();
+                        // dialog.cancel();
                     }
+                }).show();
 
-                }
-            }).setPositiveButton("Refer", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    name = "";
-                    for (int i = 0; i < mSelectedItems.size(); i++) {
-                        if (i == mSelectedItems.size() - 1) {
-                            name += referId[i];
-                        } else {
-                            name += referId[i] + ",";
+            }else{
+                final ArrayList<Integer> mSelectedItems = new ArrayList<Integer>();
+                builder = new AlertDialog.Builder(mContext);
+                builder.setTitle("Select the Reference");
+                builder.setMultiChoiceItems(referName, null, new DialogInterface.OnMultiChoiceClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which, boolean isChecked) {
+                        if (isChecked) {
+                            mSelectedItems.add(which);
                         }
 
                     }
-                    conformDialog(name);
-                    dialog.cancel();
-                }
-            }).setNegativeButton("Direct", new DialogInterface.OnClickListener() {
+                }).setPositiveButton("Apply", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        name = "";
+                        for (int i = 0; i < mSelectedItems.size(); i++) {
+                            if (i == mSelectedItems.size() - 1) {
+                                name += referId[i];
+                            } else {
+                                name += referId[i] + ",";
+                            }
+
+                        }
+                        // conformDialog(name);
+                        if(name.equalsIgnoreCase("")){
+                            new Apply(mContext,uId,jId,"refer").execute();
+                        }else{
+                            new Apply(mContext,uId,jId,name).execute();
+
+                        }
+
+                        // dialog.cancel();
+                    }
+                }).show();
+            }
+
+
+            /*.setNegativeButton("Direct", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     conformDialog("refer");
                     dialog.cancel();
                 }
-            }).show();
+            })*/
         }
     }
 

@@ -110,5 +110,7 @@ public class php {
     public static final String jobTitle = "http://udyomitra.com/android/get_job_title.php";
     public static final String forgetPasswrd="http://udyomitra.com/android/forget_passwrd.php";
     public static final String cslIns="http://udyomitra.com/android/csl_ins.php";
+    public static final String profileUpdate="http://udyomitra.com/android/profile_upt.php";
+    public static final String applyPost="http://udyomitra.com/android/apply.php";
 
 }

@@ -1,13 +1,16 @@
 package com.shuan.project.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -16,6 +19,7 @@ import com.nostra13.universalimageloader.core.listener.ImageLoadingProgressListe
 import com.nostra13.universalimageloader.core.listener.SimpleImageLoadingListener;
 import com.shuan.project.R;
 import com.shuan.project.list.Sample;
+import com.shuan.project.profile.ProfileViewActivity;
 
 import java.util.ArrayList;
 
@@ -61,24 +65,31 @@ public class ConnectAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        Sample curr = list.get(position);
+        final Sample curr = list.get(position);
 
         convertView = inflater.inflate(R.layout.recycler_list_item, parent, false);
 
         ImageView usrImg = (ImageView) convertView.findViewById(R.id.usr_img);
         TextView uId = (TextView) convertView.findViewById(R.id.u_id);
         TextView name = (TextView) convertView.findViewById(R.id.name);
-        /*TextView pos = (TextView) convertView.findViewById(R.id.position);
-        TextView companyName = (TextView) convertView.findViewById(R.id.place);*/
+        TextView pos = (TextView) convertView.findViewById(R.id.sec);
+        /*TextView companyName = (TextView) convertView.findViewById(R.id.place);*/
         TextView level = (TextView) convertView.findViewById(R.id.level);
-
+        ImageButton chat= (ImageButton) convertView.findViewById(R.id.chat);
         uId.setText(curr.getDis());
-        name.setText(curr.getBoard());
-       /* pos.setText(curr.getPos());
-        companyName.setText(curr.getCompanyName());*/
-        level.setText(curr.getLoc());
+        name.setText(curr.getDistrct());
+        pos.setText(curr.getContry());
+       /* companyName.setText(curr.getCompanyName());*/
+        level.setText(curr.getState());
 
-        ImageLoader.getInstance().displayImage(curr.getInsName(), usrImg, options, new SimpleImageLoadingListener() {
+        chat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(mContext, "Coming soon.", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        ImageLoader.getInstance().displayImage(curr.getCty(), usrImg, options, new SimpleImageLoadingListener() {
 
             @Override
             public void onLoadingStarted(String imageUri, View view) {
@@ -106,6 +117,16 @@ public class ConnectAdapter extends BaseAdapter {
             }
         });
 
+        convertView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent in=new Intent(mContext, ProfileViewActivity.class);
+                in.putExtra("u_id",curr.getDis());
+                in.putExtra("level",curr.getState());
+                in.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                mContext.startActivity(in);
+            }
+        });
 
         return convertView;
     }
