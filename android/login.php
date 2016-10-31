@@ -13,7 +13,6 @@ if(isset($_POST['usr']) && isset($_POST['pass'])){
 				}else{
 					
 					for($i=0;$i<$cnt;$i++){
-						//$nattuvartha=$select_nattu_vartha[$i];
 						array_push($response["login"],$slctCity[$i]);
 					}
 					$response['success']=1;

@@ -6,11 +6,11 @@ if(isset($_POST['u_id']) && isset($_POST['org_name']) && isset($_POST['position'
 	
 	if($_POST['type']=='add'){
 		
-		if($_POST['ins']=='true'){
+		/* if($_POST['ins']=='true'){
 			$oIns="insert into organization(org_name,land_mark) values('".$_POST['org_name']."',
 				'".$_POST['loc']."')";
 					$res=mysql_query($oIns);
-		}
+		} */
 			
 		$ins="insert into wrk_deatail(u_id,org_name,position,location,from_date,to_date) values(
 		'".$_POST['u_id']."','".$_POST['org_name']."','".$_POST['position']."',

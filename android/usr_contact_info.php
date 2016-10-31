@@ -2,7 +2,7 @@
 require('config.php');
 if(isset($_POST['u_id']) && isset($_POST['address']) && isset($_POST['city']) && 
 	isset($_POST['district']) && isset($_POST['state']) && isset($_POST['country']) && 
-	isset($_POST['insrt'])){
+	isset($_POST['pin']) && isset($_POST['insrt'])){
 		
 	
 	$sql=select_query("select * from usr_info where u_id='".$_POST['u_id']."'");
@@ -17,9 +17,9 @@ if(isset($_POST['u_id']) && isset($_POST['address']) && isset($_POST['city']) &&
 		}
 		
 		$ins="INSERT INTO usr_info(u_id,full_name,address,city,district,state,country,
-		email_id,ph_no) VALUES ('".$_POST['u_id']."','".$name."','".$_POST['address']."',
+		email_id,ph_no,pincode) VALUES ('".$_POST['u_id']."','".$name."','".$_POST['address']."',
 		'".$_POST['city']."','".$_POST['district']."','".$_POST['state']."','".$_POST['country']."',
-		'".$mail."','".$phno."')";
+		'".$mail."','".$phno."','".$_POST['pin']."')";
 			
 			$result=mysql_query($ins);
 			if($result>0){
@@ -41,7 +41,7 @@ if(isset($_POST['u_id']) && isset($_POST['address']) && isset($_POST['city']) &&
 		
 		$ins1="update usr_info set address='".$_POST['address']."',
 		city='".$_POST['city']."',state='".$_POST['state']."',country='".$_POST['country']."',
-		 where u_id='".$_POST['u_id']."'";
+		pincode='".$_POST['pin']."' where u_id='".$_POST['u_id']."'";
 		
 		$result1=mysql_query($ins1);
 			if($result1>0){

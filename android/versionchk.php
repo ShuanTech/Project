@@ -2,7 +2,7 @@
 $response=array();
 if(isset($_POST['ver'])){
 
-	$version='2.1.3';						
+	$version='2.1.6';						
 							if($version>$_POST['ver']){
 								$response["message"]="greater";
 								$response["success"]=1;

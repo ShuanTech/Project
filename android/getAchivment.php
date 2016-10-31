@@ -2,7 +2,7 @@
 require('config.php');
 if(isset($_POST['u_id'])){
 	$response['achivmnt']=array();
-	$getInfo=select_query("select * from achivmnt where u_id='".$_POST['u_id']."'");
+	$getInfo=select_query("select * from achivmnt where u_id='".$_POST['u_id']."' order by id desc");
 	$count=count($getInfo);
 	if($count==''){
 		$response['msg']='No data found';

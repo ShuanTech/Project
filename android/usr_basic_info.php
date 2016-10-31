@@ -2,7 +2,7 @@
 require('config.php');
 if(isset($_POST['u_id']) && isset($_POST['dob']) && isset($_POST['gender']) && 
 	isset($_POST['father_name']) && isset($_POST['mother_name']) && isset($_POST['rel'])
-	&& isset($_POST['lang']) && isset($_POST['hobby'])){
+	&& isset($_POST['lang']) && isset($_POST['hobby']) && isset($_POST['age'])){
 
 	$sql=select_query("select * from usr_info where u_id='".$_POST['u_id']."'");
 	$count=count($sql);
@@ -17,10 +17,10 @@ if(isset($_POST['u_id']) && isset($_POST['dob']) && isset($_POST['gender']) &&
 		}
 		
 		$ins="INSERT INTO `usr_info`(`u_id`,`full_name`,`dob`,`gender`,`email_id`,`ph_no`,
-		`father_name`,`mother_name`,married_status,language,hobbies) VALUES (
+		`father_name`,`mother_name`,married_status,language,hobbies,age) VALUES (
 		'".$_POST['u_id']."','".$name."','".$_POST['dob']."','".$_POST['gender']."',
 		'".$mail."','".$phno."','".$_POST['father_name']."','".$_POST['mother_name']."',
-		'".$_POST['rel']."','".$_POST['lang']."','".$_POST['hobby']."')";
+		'".$_POST['rel']."','".$_POST['lang']."','".$_POST['hobby']."','".$_POST['age']."')";
 			
 			$result=mysql_query($ins);
 			if($result>0){
@@ -45,7 +45,7 @@ if(isset($_POST['u_id']) && isset($_POST['dob']) && isset($_POST['gender']) &&
 		gender='".$_POST['gender']."',email_id='".$mail."',ph_no='".$phno."',
 		father_name='".$_POST['father_name']."',mother_name='".$_POST['mother_name']."',
 		married_status='".$_POST['rel']."',language='".$_POST['lang']."',
-		hobbies='".$_POST['hobby']."' where u_id='".$_POST['u_id']."'";
+		hobbies='".$_POST['hobby']."',age='".$_POST['age']."' where u_id='".$_POST['u_id']."'";
 		
 		$result1=mysql_query($ins1);
 			if($result1>0){

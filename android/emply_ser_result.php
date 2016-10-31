@@ -40,10 +40,29 @@ $response['result']=array();
 					$response['success']=1;
 					echo json_encode($response); 
 				} 
-	}else{
+	}else if($_POST['type']=='loc'){
 		$sql=select_query("SELECT  e.cmpny_name,l.pro_pic,j.job_id,j.title,j.skill,j.level,
 			j.location,j.date_created,j.viewed,j.shared,j.applied FROM employer_info e,login l,`job_post` j WHERE 
 			e.u_id=l.u_id and j.u_id=l.u_id  and j.location LIKE '%".$_POST['ser']."%' and 
+			j.close=0");
+				
+				$cnt=count($sql);
+				if($cnt==""){
+					$response["message"]="No Data";
+					$response["success"]=0;
+					echo json_encode($response);
+				}else{
+					for($i=0;$i<$cnt;$i++){
+						array_push($response['result'],$sql[$i]);
+					}
+					
+					$response['success']=1;
+					echo json_encode($response); 
+				} 
+	}else{
+		$sql=select_query("SELECT  e.cmpny_name,l.pro_pic,j.job_id,j.title,j.skill,j.level,
+			j.location,j.date_created,j.viewed,j.shared,j.applied FROM employer_info e,login l,`job_post` j WHERE 
+			e.u_id=l.u_id and j.u_id=l.u_id and (j.location LIKE '%".$_POST['ser']."%' or j.title='".$_POST['ser']."' or j.skill LIKE '%".$_POST['ser']."%') and 
 			j.close=0");
 				
 				$cnt=count($sql);

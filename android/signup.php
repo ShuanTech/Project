@@ -24,8 +24,8 @@ if(isset($_POST['name']) && isset($_POST['email']) && isset($_POST['phno']) && i
 					$uId="U".$d->format("Hisu");
 				$ins="insert into login(u_id,full_name,email_id,ph_no,passwrd,c_pass,level,deleted)
 				values('".$uId."','".$_POST['name']."','".$_POST['email']."','".$_POST['phno']."','".$_POST['pass']."','".$_POST['cnfrmpass']."','".$_POST['level']."',0)";
-				$inss="insert into usr_info(u_id,full_name,email_id,ph_no) values('".$uId."','".$_POST['name']."','".$_POST['email']."','".$_POST['phno']."')";
-					$ress=mysql_query($inss);
+				/* $inss="insert into usr_info(u_id,full_name,email_id,ph_no) values('".$uId."','".$_POST['name']."','".$_POST['email']."','".$_POST['phno']."')";
+					$ress=mysql_query($inss); */
 				$result=mysql_query($ins);
 				if($result>0){
 					if(!file_exists('../photos')){

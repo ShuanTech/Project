@@ -1,7 +1,7 @@
 <?php 
 require('config.php');
 if(isset($_POST['id'])){
-	$slctCity=select_query("select org_name,type,addr,land_mark,city,dis,state,country,pincode from organization");
+	$slctCity=select_query("select distinct cmpny_name,city from employer_info");
 	$cnt=count($slctCity);
 	$response['org']=array();
 				if($cnt==""){

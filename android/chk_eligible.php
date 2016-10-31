@@ -53,9 +53,9 @@ if(isset($_POST['u_id']) && isset($_POST['j_id']) && isset($_POST['level'])){
 					
 					if($match<$cnt){
 						$response['refer']=array();
-						$sql=select_query("select l.u_id,l.full_name from wrk_deatail w
-						,employer_info e,login l where e.cmpny_name=w.org_name and 
-						e.u_id='".$cmpnyName."' and w.u_id=l.u_id");
+						$sql=select_query("select l.u_id,u.full_name from wrk_deatail w
+									,employer_info e,login l,usr_info u where e.cmpny_name=w.org_name and 
+									e.u_id='".$cmpnyName."' and w.u_id=l.u_id and u.u_id=l.u_id and w.u_id=u.u_id");
 							for($i=0;$i<count($sql);$i++){
 								
 								$chkfollow=select_query("select * from following where 
@@ -86,9 +86,9 @@ if(isset($_POST['u_id']) && isset($_POST['j_id']) && isset($_POST['level'])){
 						job_id='".$_POST['j_id']."'");
 						
 						if($chkFrsh[0]['level']=="fresher"){
-								$sql=select_query("select l.u_id,l.full_name from wrk_deatail w
-									,employer_info e,login l where e.cmpny_name=w.org_name and 
-									e.u_id='".$cmpnyName."' and w.u_id=l.u_id");
+								$sql=select_query("select l.u_id,u.full_name from wrk_deatail w
+									,employer_info e,login l,usr_info u where e.cmpny_name=w.org_name and 
+									e.u_id='".$cmpnyName."' and w.u_id=l.u_id and u.u_id=l.u_id and w.u_id=u.u_id");
 										for($i=0;$i<count($sql);$i++){
 											$chkfollow=select_query("select * from following where 
 											u_id='".$_POST['u_id']."' and following='".$sql[$i]['u_id']."'");

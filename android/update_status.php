@@ -2,11 +2,11 @@
 require('config.php');
 if(isset($_POST['u_id']) && isset($_POST['status'])){
 	
-	$chk="select * from user_imgs where u_id='".$_POST['u_id']."'";
+	$chk=select_query("select objective from usr_info where u_id='".$_POST['u_id']."'");
 	$cnt=count($chk);
 	
-	if($cnt==''){
-		$ins="insert into user_imgs(u_id,status) values('".$_POST['u_id']."','".$_POST['status']."')";
+	if($cnt==0){
+		$ins="insert into usr_info(u_id,objective) values('".$_POST['u_id']."','".$_POST['status']."')";
 		$res=mysql_query($ins);
 			if($res>0){
 				$response['message']="Inserted";
@@ -18,7 +18,7 @@ if(isset($_POST['u_id']) && isset($_POST['status'])){
 				echo json_encode($response);
 			}
 	}else{
-		$upt="update user_imgs set status='".$_POST['status']."' where u_id='".$_POST['u_id']."'";
+		$upt="update usr_info set objective='".$_POST['status']."' where u_id='".$_POST['u_id']."'";
 		$res=mysql_query($upt);
 			if($res>0){
 				$response['message']="Inserted";

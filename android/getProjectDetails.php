@@ -2,11 +2,11 @@
 require('config.php');
 if(isset($_POST['u_id']) && isset($_POST['level'])){
 	$response['project']=array();
-	if($_POST['level']=='junior'){
+	/* if($_POST['level']=='junior'){
 		$getInfo=select_query("select * from project_detail where u_id='".$_POST['u_id']."' and p_stus=1");
-	}else{
-		$getInfo=select_query("select * from project_detail where u_id='".$_POST['u_id']."' and p_stus=0");
-	}
+	}else{ */
+		$getInfo=select_query("select * from project_detail where u_id='".$_POST['u_id']."' order by id desc");
+	//}
 	
 	$count=count($getInfo);
 	if($count==''){

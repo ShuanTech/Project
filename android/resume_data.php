@@ -6,6 +6,15 @@ if(isset($_POST['u_id']) && isset($_POST['level'])){
 	$response['resume']=array();
 	$data=array();
 	
+		$stus=select_query("select status from login where u_id='".$_POST['u_id']."'");
+		$cnt=count($stus);
+		if($cnt==0){
+			$data['stus']['stus'][]=array("stus"=>'');
+		}else{
+			for($i=0;$i<count($stus);$i++){
+				$data['stus']['stus'][]=$stus[$i];
+			}
+		}
 		
 		$pro=select_query("select * from profile_summary where u_id='".$_POST['u_id']."'");
 		$cnt=count($pro);
@@ -51,16 +60,17 @@ if(isset($_POST['u_id']) && isset($_POST['level'])){
 					$data['edu']['edu'][]=$edu[$i];
 				}
 			}
-		$skill=select_query("select * from skill_tag where u_id='".$_POST['u_id']."' and del=0");
+		$skill=select_query("select lang_known as skill from skill where u_id='".$_POST['u_id']."'");
 			$cnt=count($skill);
 			if($cnt==''){
-				$data['skill']['skill'][]=array("id"=>'');
+				$data['skill']['skill'][]=array("skill"=>'');
 			}else{
+				
 				for($i=0;$i<count($skill);$i++){
 					$data['skill']['skill'][]=$skill[$i];
 				}
 			}
-		$pjct=select_query("select * from project_detail where u_id='".$_POST['u_id']."'");
+		$pjct=select_query("select * from project_detail where u_id='".$_POST['u_id']."' and p_stus=0");
 			$cnt=count($pjct);
 			if($cnt==''){
 				$data['project']['project'][]=array("p_title"=>'');

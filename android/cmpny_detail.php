@@ -1,29 +1,26 @@
 <?php 
 require('config.php');
 
-if(isset($_POST['u_id']) && isset($_POST['compname']) && isset($_POST['compnytype']) && 
-	isset($_POST['cdoorno']) && isset($_POST['location']) && isset($_POST['country']) && 
-	isset($_POST['state']) && isset($_POST['city'])&& isset($_POST['pin']) && 
+if(isset($_POST['u_id']) && isset($_POST['compname']) && isset($_POST['compnytype']) && isset($_POST['indusType']) &&
+	isset($_POST['country']) && isset($_POST['state']) && isset($_POST['dis']) && isset($_POST['city']) && 
 	isset($_POST['insrt'])){
 		
-		$selDis=select_query("SELECT district FROM `location` WHERE city='".$_POST['city']."'");
+		//$selDis=select_query("SELECT district FROM `location` WHERE city='".$_POST['city']."'");
 		
-		if($_POST['insrt']=='true'){
-			$ins="insert into organization(org_name,type,addr,land_mark,city,dis,state,country,
-			pincode) values('".$_POST['compname']."','".$_POST['compnytype']."','".$_POST['cdoorno']."',
-			'".$_POST['location']."','".$_POST['city']."','".$selDis[0]['district']."','".$_POST['state']."',
-			'".$_POST['country']."','".$_POST['pin']."')";
-			$res=mysql_query($ins);
-		}
+		 if($_POST['insrt']=='true'){
+			$insLoc="insert into location(city,district,state,country) values('".$_POST['city']."',
+				'".$_POST['dis']."','".$_POST['state']."','".$_POST['country']."')";
+			$res=mysql_query($insLoc);
+		} 
 		
-		$chk=select_query("select * from employer_info where u_id='".$_POST['u_id']."'");
+		//$chk=select_query("select * from employer_info where u_id='".$_POST['u_id']."'");
 		
-		$cnt=count($chk);
-		if($cnt==''){
-			$org="insert into employer_info(u_id,cmpny_name,c_type,addr,landmark,city,district,state,country,
-			pincode) values('".$_POST['u_id']."','".$_POST['compname']."','".$_POST['compnytype']."',
-			'".$_POST['cdoorno']."','".$_POST['location']."','".$_POST['city']."','".$selDis[0]['district']."','".$_POST['state']."',
-			'".$_POST['country']."','".$_POST['pin']."')";
+		//$cnt=count($chk);
+		//if($cnt==''){
+			$org="insert into employer_info(u_id,cmpny_name,c_type,i_type,city,district,state,country)
+			values('".$_POST['u_id']."','".$_POST['compname']."','".$_POST['compnytype']."',
+			'".$_POST['indusType']."','".$_POST['city']."','".$_POST['dis']."','".$_POST['state']."',
+			'".$_POST['country']."')";
 			
 			$result=mysql_query($org);
 			if($result>0){
@@ -35,24 +32,24 @@ if(isset($_POST['u_id']) && isset($_POST['compname']) && isset($_POST['compnytyp
 				$response['success']=0;
 				echo json_encode($response);
 			}
-		}else{
+		//}else{
 			
-			$org="update employer_info set cmpny_name='".$_POST['compname']."',c_type='".$_POST['compnytype']."',
-			addr='".$_POST['cdoorno']."',landmark='".$_POST['location']."',city='".$_POST['city']."',
-			state='".$_POST['state']."',country='".$_POST['country']."',pincode='".$_POST['pin']."' 
-			where u_id='".$_POST['u_id']."'";
-			$result=mysql_query($org);
-			if($result>0){
-				$response['msg']='Data Inserted';
-				$response['success']=1;
-				echo json_encode($response);
-			}else{
-				$response['msg']='Not Inserted';
-				$response['success']=0;
-				echo json_encode($response);
-			}
+		//	$org="update employer_info set cmpny_name='".$_POST['compname']."',c_type='".$_POST['compnytype']."',
+		//	addr='".$_POST['cdoorno']."',landmark='".$_POST['location']."',city='".$_POST['city']."',
+		//	state='".$_POST['state']."',country='".$_POST['country']."',pincode='".$_POST['pin']."' 
+		//	where u_id='".$_POST['u_id']."'";
+		//	$result=mysql_query($org);
+		//	if($result>0){
+		//		$response['msg']='Data Inserted';
+		//		$response['success']=1;
+			//	echo json_encode($response);
+		//	}else{
+		//		$response['msg']='Not Inserted';
+			//	$response['success']=0;
+			//	echo json_encode($response);
+			//}
 			
-		}
+		//}
 		
 		
 		

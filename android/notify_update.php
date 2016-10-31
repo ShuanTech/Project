@@ -3,8 +3,7 @@ require('config.php');
 if(isset($_POST['u_id']) && isset($_POST['postId'])){
 	$response=array();
 	
-		$sql1="update notify_access set vwed=1 where to_id='".$_POST['u_id']."' and
-		post_id='".$_POST['postId']."'";
+		$sql1="update notify_access set vwed=1 where id='".$_POST['postId']."'";
 		$res1=mysql_query($sql1);
 		if($res1>0){
 			$response['message']="updated";

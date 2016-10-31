@@ -4,13 +4,13 @@ require('config.php');
 if(isset($_POST['u_id']) && isset($_POST['level']) && isset($_POST['frm_id'])){
 	$response['pro_view']=array();
 	$data=array();
-
+			
 		if($_POST['level']=='1'){
 			
 			$following=select_query("select * from following where u_id='".$_POST['frm_id']."' 
-						and following='".$_POST['u_id']."'");
+						and following='".$_POST['u_id']."' and close=0");
 					$cnt=count($following);
-					if($cnt==''){
+					if($cnt!=0){
 						$data['following']='1';
 					}else{
 						$data['following']='0';
@@ -25,29 +25,39 @@ if(isset($_POST['u_id']) && isset($_POST['level']) && isset($_POST['frm_id'])){
 						$data['follower']='0';
 					}
 			
-			$info=select_query("select full_name,email_id,ph_no,pro_pic,cover_pic from login where 
-			u_id='".$_POST['u_id']."'");
+			$info=select_query("select pro_pic,cover_pic,status from login where u_id='".$_POST['u_id']."'");
 			$cnt=count($info);
 			if($cnt==''){
-				$data['info']['info'][]=array("full_name"=>'');
+				$data['info']['info'][]=array("pro_pic"=>'');
 			}else{
 				for($i=0;$i<count($info);$i++){
 					$data['info']['info'][]=$info[$i];
 				}
 			}
-			$cntInfo=select_query("select city,country from usr_info where
-			u_id='".$_POST['u_id']."'");
+			$secc=select_query("select ins_name,location from education where u_id='".$_POST['u_id']."' order by level asc");
+			if(count($secc)==0){
+				$secc=select_query("select city,country from usr_info u_id='".$_POST['u_id']."'");
+				if(count($secc)==0){
+					$data['sec']['sec'][]=array("sec"=>'');
+				}else{
+					$data['sec']['sec'][]=array("sec"=>$secc[0]['city'].', '.$secc[0]['country']);
+				}
+			}else{
+				$data['sec']['sec'][]=array("sec"=>$secc[0]['ins_name'].', '.$secc[0]['location']);
+			}
+			
+			$cntInfo=select_query("select * from usr_info where u_id='".$_POST['u_id']."'");
 			$cnt=count($cntInfo);
 			if($cnt==''){
 				$data['cnt']['cnt'][]=array("city"=>'');
 			}else{
-				for($i=0;$i<count($info);$i++){
+				for($i=0;$i<count($cntInfo);$i++){
 					$data['cnt']['cnt'][]=$cntInfo[$i];
 				}
 			}
 			
-			$edu=select_query("select concentration,ins_name,location,substr(frm_date,1,4) as frmDat,
-			substr(to_date,1,4) as toDat from education where u_id='".$_POST['u_id']."' order by level asc");
+			$edu=select_query("select concentration,ins_name,location,frm_date as frmDat,
+			to_date as toDat from education where u_id='".$_POST['u_id']."' order by level asc");
 			
 			$cnt=count($edu);
 			if($cnt==''){
@@ -58,13 +68,14 @@ if(isset($_POST['u_id']) && isset($_POST['level']) && isset($_POST['frm_id'])){
 				}
 			}
 			
-			$skill=select_query("select skill from skill_tag where u_id='".$_POST['u_id']."' and del=0");
+			$skill=select_query("select lang_known as skill from skill where u_id='".$_POST['u_id']."'");
 			$cnt=count($skill);
 			if($cnt==''){
 				$data['skill']['skill'][]=array("skill"=>'');
 			}else{
-				for($i=0;$i<count($skill);$i++){
-					$data['skill']['skill'][]=$skill[$i];
+				$split=explode(",",$skill[0]['skill']);
+				for($i=0;$i<count($split);$i++){
+					$data['skill']['skill'][]=array("skill"=>$split[$i]);
 				}
 			}
 			
@@ -83,9 +94,9 @@ if(isset($_POST['u_id']) && isset($_POST['level']) && isset($_POST['frm_id'])){
 		}else if($_POST['level']=='2'){
 			
 			$following=select_query("select * from following where u_id='".$_POST['frm_id']."' 
-						and following='".$_POST['u_id']."'");
+						and following='".$_POST['u_id']."' and close=0");
 					$cnt=count($following);
-					if($cnt==''){
+					if($cnt!=0){
 						$data['following']='1';
 					}else{
 						$data['following']='0';
@@ -99,32 +110,43 @@ if(isset($_POST['u_id']) && isset($_POST['level']) && isset($_POST['frm_id'])){
 					}else{
 						$data['follower']='0';
 					}
-			$info=select_query("select full_name,email_id,ph_no,pro_pic,cover_pic from 
-			login where u_id='".$_POST['u_id']."'");
-				
-				$cnt=count($info);
-				if($cnt==''){
-					$data['info']['info'][]=array("full_name"=>'');
-				}else{
-					for($i=0;$i<count($info);$i++){
-						$data['info']['info'][]=$info[$i];
-					}
+			$info=select_query("select pro_pic,cover_pic,status from login where u_id='".$_POST['u_id']."'");
+			$cnt=count($info);
+			if($cnt==''){
+				$data['info']['info'][]=array("pro_pic"=>'');
+			}else{
+				for($i=0;$i<count($info);$i++){
+					$data['info']['info'][]=$info[$i];
 				}
-				
-			$cntInfo=select_query("select org_name,position,location from wrk_deatail 
-			where to_date='present' and u_id='".$_POST['u_id']."'");
-				$cnt=count($cntInfo);
-				if($cnt==''){
-					$data['cnt']['cnt'][]=array("org_name"=>'');
-				}else{
-					for($i=0;$i<count($info);$i++){
-						$data['cnt']['cnt'][]=$cntInfo[$i];
+			}
+			$secc=select_query("select org_name,position,location from wrk_deatail where u_id='".$_POST['u_id']."' order by id desc limit 1");
+			if(count($secc)==0){
+				$secc=select_query("select ins_name,location from education where u_id='".$_POST['u_id']."' order by level asc");
+				if(count($secc)==0){
+					$secc=select_query("select city,country from usr_info u_id='".$_POST['u_id']."'");
+					if(count($secc)==0){
+						$data['sec']['sec'][]=array("sec"=>'');
+					}else{
+						$data['sec']['sec'][]=array("sec"=>$secc[0]['city'].', '.$secc[0]['country']);
 					}
+				}else{
+					$data['sec']['sec'][]=array("sec"=>$secc[0]['ins_name'].', '.$secc[0]['location']);
+					
 				}
+			}else{
+				$data['sec']['sec'][]=array("sec"=>$secc[0]['position'].' at '.$secc[0]['org_name'].', '.$secc[0]['location']);
+			}
+			$cntInfo=select_query("select * from usr_info where u_id='".$_POST['u_id']."'");
+			$cnt=count($cntInfo);
+			if($cnt==''){
+				$data['cnt']['cnt'][]=array("city"=>'');
+			}else{
+				for($i=0;$i<count($cntInfo);$i++){
+					$data['cnt']['cnt'][]=$cntInfo[$i];
+				}
+			}
 				
-				
-			$wrk=select_query("select org_name,position,location,substr(from_date,1,8) as frmDat,
-			substr(to_date,1,8) as toDat from wrk_deatail where u_id='".$_POST['u_id']."'");
+			$wrk=select_query("select org_name,position,location,from_date as frmDat,to_date as toDat from wrk_deatail where u_id='".$_POST['u_id']."' order by id desc");
 		
 			$cnt=count($wrk);
 			if($cnt==''){
@@ -135,8 +157,8 @@ if(isset($_POST['u_id']) && isset($_POST['level']) && isset($_POST['frm_id'])){
 				}
 			}
 			
-			$edu=select_query("select concentration,ins_name,location,substr(frm_date,1,4) as frmDat,
-			substr(to_date,1,4) as toDat from education where u_id='".$_POST['u_id']."' order by level asc");
+			$edu=select_query("select concentration,ins_name,location,frm_date as frmDat,
+			to_date as toDat from education where u_id='".$_POST['u_id']."' order by level asc");
 			
 			$cnt=count($edu);
 			if($cnt==''){
@@ -147,13 +169,14 @@ if(isset($_POST['u_id']) && isset($_POST['level']) && isset($_POST['frm_id'])){
 				}
 			}
 			
-			$skill=select_query("select skill from skill_tag where u_id='".$_POST['u_id']."' and del=0");
+			$skill=select_query("select lang_known as skill from skill where u_id='".$_POST['u_id']."'");
 			$cnt=count($skill);
 			if($cnt==''){
 				$data['skill']['skill'][]=array("skill"=>'');
 			}else{
-				for($i=0;$i<count($skill);$i++){
-					$data['skill']['skill'][]=$skill[$i];
+				$split=explode(",",$skill[0]['skill']);
+				for($i=0;$i<count($split);$i++){
+					$data['skill']['skill'][]=array("skill"=>$split[$i]);
 				}
 			}
 			
@@ -170,25 +193,33 @@ if(isset($_POST['u_id']) && isset($_POST['level']) && isset($_POST['frm_id'])){
 		}else{
 			
 			$sql=select_query("select * from following where 
-					u_id='".$_POST['frm_id']."' and following='".$_POST['u_id']."'");
+					u_id='".$_POST['frm_id']."' and following='".$_POST['u_id']."' and close=0");
 				$cnt=count($sql);
-				if($cnt==''){
+				if($cnt!=0){
 					$data['follow']='1';
 				}else{
 					$data['follow']='0';
 				}
 				
-			$info=select_query("select l.pro_pic,l.cover_pic,e.cmpny_name,e.c_type,e.landmark,
-				e.country,e.year_of_establish,e.num_wrkers,e.c_desc,e.c_website from 
-				login l,employer_info e where l.u_id=e.u_id and l.u_id='".$_POST['u_id']."'");
-				$cnt=count($info);
-				if($cnt==''){
-					$data['info']['info'][]=array("pro_pic"=>'');
-				}else{
-					for($i=0;$i<count($info);$i++){
-						$data['info']['info'][]=$info[$i];
-					}
+			$info=select_query("select pro_pic,cover_pic from login where u_id='".$_POST['u_id']."'");
+			$cnt=count($info);
+			if($cnt==''){
+				$data['info']['info'][]=array("pro_pic"=>'');
+			}else{
+				for($i=0;$i<count($info);$i++){
+					$data['info']['info'][]=$info[$i];
 				}
+			}
+			
+			$cntInfo=select_query("select * from employer_info where u_id='".$_POST['u_id']."'");
+			$cnt=count($cntInfo);
+			if($cnt==''){
+				$data['cnt']['cnt'][]=array("city"=>'');
+			}else{
+				for($i=0;$i<count($cntInfo);$i++){
+					$data['cnt']['cnt'][]=$cntInfo[$i];
+				}
+			}
 			
 			$ser=select_query("select ser_name from services where u_id='".$_POST['u_id']."'");
 			

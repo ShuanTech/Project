@@ -1,6 +1,6 @@
 <?php
 require('config.php');
-if(isset($_POST['u_id']) && isset($_POST['dob']) && isset($_POST['gender']) && 
+if(isset($_POST['u_id']) && isset($_POST['name']) && isset($_POST['dob']) && isset($_POST['age']) && isset($_POST['gender']) && 
 	isset($_POST['address']) && isset($_POST['city']) && isset($_POST['district']) && 
 	isset($_POST['state']) && isset($_POST['country']) && isset($_POST['pincode']) &&
 	isset($_POST['father_name']) && isset($_POST['mother_name']) && isset($_POST['insrt'])){
@@ -26,11 +26,11 @@ if(isset($_POST['u_id']) && isset($_POST['dob']) && isset($_POST['gender']) &&
 		}
 		
 		$ins="INSERT INTO `usr_info`(`u_id`,`full_name`,`dob`,`gender`,`address`,`city`,`district`,
-		`state`,`country`,`pincode`,`email_id`,`ph_no`,`father_name`,`mother_name`) VALUES (
-		'".$_POST['u_id']."','".$name."','".$_POST['dob']."','".$_POST['gender']."',
+		`state`,`country`,`pincode`,`email_id`,`ph_no`,`father_name`,`mother_name`,age) VALUES (
+		'".$_POST['u_id']."','".$_POST['name']."','".$_POST['dob']."','".$_POST['gender']."',
 		'".$_POST['address']."','".$_POST['city']."','".$_POST['district']."','".$_POST['state']."',
 		'".$_POST['country']."','".$_POST['pincode']."','".$mail."','".$phno."',
-		'".$_POST['father_name']."','".$_POST['mother_name']."')";
+		'".$_POST['father_name']."','".$_POST['mother_name']."','".$_POST['age']."')";
 			
 			$result=mysql_query($ins);
 			if($result>0){
@@ -51,11 +51,11 @@ if(isset($_POST['u_id']) && isset($_POST['dob']) && isset($_POST['gender']) &&
 			$mail=$row[1];
 			$phno=$row[2];
 		}
-		$ins1="update usr_info set full_name='".$name."',dob='".$_POST['dob']."',
+		$ins1="update usr_info set full_name='".$_POST['name']."',dob='".$_POST['dob']."',
 		gender='".$_POST['gender']."',address='".$_POST['address']."',city='".$_POST['city']."',
 		state='".$_POST['state']."',country='".$_POST['country']."',pincode='".$_POST['pincode']."',
 		email_id='".$mail."',ph_no='".$phno."',father_name='".$_POST['father_name']."',
-		mother_name='".$_POST['mother_name']."' where u_id='".$_POST['u_id']."'";
+		mother_name='".$_POST['mother_name']."',age='".$_POST['age']."' where u_id='".$_POST['u_id']."'";
 		
 		$result1=mysql_query($ins1);
 			if($result1>0){

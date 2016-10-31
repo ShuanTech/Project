@@ -24,6 +24,9 @@ if(isset($_POST['u_id']) && isset($_POST['cDistrict'])){
 					$fnum=$fnum+1;
 				}
 			}
+			$response['message']="success";
+			$response['success']=1;
+			echo json_encode($response);
 		}
 	
 	

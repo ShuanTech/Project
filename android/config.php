@@ -1,6 +1,6 @@
 <?php
 $host="localhost";
-$usrname="udyomitra";
+$usrname="udyomitra_app";
 $pass="Palakkad@321";
 $database="udyomitra_app";
 

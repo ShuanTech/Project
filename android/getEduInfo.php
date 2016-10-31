@@ -2,7 +2,7 @@
 require('config.php');
 if(isset($_POST['u_id'])){
 	$response['edu']=array();
-	$getInfo=select_query("select concentration,ins_name,board,location,aggregate from education where u_id='".$_POST['u_id']."' order by level asc");
+	$getInfo=select_query("select * from education where u_id='".$_POST['u_id']."' order by level asc");
 	$count=count($getInfo);
 	if($count==''){
 		$response['msg']='No data found';

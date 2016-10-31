@@ -2,7 +2,7 @@
 require('config.php');
 if(isset($_POST['u_id'])){
 	$response['curricular']=array();
-	$getInfo=select_query("select * from extra_curricular where u_id='".$_POST['u_id']."'");
+	$getInfo=select_query("select * from extra_curricular where u_id='".$_POST['u_id']."' order by id desc");
 	$count=count($getInfo);
 	if($count==''){
 		$response['msg']='No data found';
