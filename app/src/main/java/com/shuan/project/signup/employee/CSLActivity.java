@@ -1,6 +1,7 @@
 package com.shuan.project.signup.employee;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
@@ -29,6 +30,8 @@ import com.shuan.project.asyncTasks.GetCollege;
 import com.shuan.project.asyncTasks.GetCourse;
 import com.shuan.project.asyncTasks.GetLocation;
 import com.shuan.project.asyncTasks.GetSkillSet;
+import com.shuan.project.employee.JuniorActivity;
+import com.shuan.project.employee.SeniorActivity;
 
 public class CSLActivity extends AppCompatActivity {
 
@@ -195,7 +198,13 @@ public class CSLActivity extends AppCompatActivity {
                 } else {
                     new CslIns(CSLActivity.this, mApp.getPreference().getString(Common.u_id, ""), fullName.getText().toString(), q,
                             clgName.getText().toString(), conCent.getText().toString(), frm_yr.getText().toString(), to_yr.getText().toString(),
-                            skill.getText().toString(), loc.getText().toString(),ins,cIns).execute();
+                            skill.getText().toString(), loc.getText().toString(), ins, cIns).execute();
+                    if (mApp.getPreference().getString(Common.LEVEL, "").equalsIgnoreCase("1")) {
+
+                    startActivity(new Intent(getApplicationContext(), JuniorActivity.class));
+                } else {
+                        startActivity(new Intent(getApplicationContext(), SeniorActivity.class));
+                    }
                 }
             }
         });
