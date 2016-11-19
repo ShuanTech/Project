@@ -168,43 +168,49 @@ public class CSLActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                if (fullName.getText().toString().length() == 0) {
-                    fullName.setError("Field Mandatory");
-                    fullName.requestFocus();
-                } else if (get.equalsIgnoreCase("Select Highest Qualification")) {
-                    level.requestFocus();
-                    Toast.makeText(getApplicationContext(), "select Qualification", Toast.LENGTH_SHORT).show();
-                } else if (clgName.getText().toString().length() == 0) {
-                    clgName.setError("Field Mandatory");
-                    clgName.requestFocus();
-                } else if (conCent.getText().toString().length() == 0) {
-                    conCent.setError("Field Mandatory");
-                    conCent.requestFocus();
-                } else if (frm_yr.getText().toString().length() == 0) {
-                    frm_yr.setError("Field Mandatory");
-                    frm_yr.requestFocus();
-                } else if (to_yr.getText().toString().length() == 0) {
-                    to_yr.setError("Field Mandatory");
-                    to_yr.requestFocus();
-                } else if (i > j) {
-                    to_yr.setError("Passed out year less than join year");
-                    to_yr.requestFocus();
-                } else if (skill.getText().toString().length() == 0) {
-                    skill.setError("Field Mandatory");
-                    skill.requestFocus();
-                } else if (loc.getText().toString().length() == 0) {
-                    loc.setError("Field Mandatory");
-                    loc.requestFocus();
-                } else {
-                    new CslIns(CSLActivity.this, mApp.getPreference().getString(Common.u_id, ""), fullName.getText().toString(), q,
-                            clgName.getText().toString(), conCent.getText().toString(), frm_yr.getText().toString(), to_yr.getText().toString(),
-                            skill.getText().toString(), loc.getText().toString(), ins, cIns).execute();
-                    if (mApp.getPreference().getString(Common.LEVEL, "").equalsIgnoreCase("1")) {
+                switch (v.getId()) {
+                    case R.id.next:
 
-                    startActivity(new Intent(getApplicationContext(), JuniorActivity.class));
-                } else {
-                        startActivity(new Intent(getApplicationContext(), SeniorActivity.class));
-                    }
+                        if (fullName.getText().toString().length() == 0) {
+                            fullName.setError("Field Mandatory");
+                            fullName.requestFocus();
+                        } else if (get.equalsIgnoreCase("Select Highest Qualification")) {
+                            level.requestFocus();
+                            Toast.makeText(getApplicationContext(), "select Qualification", Toast.LENGTH_SHORT).show();
+                        } else if (clgName.getText().toString().length() == 0) {
+                            clgName.setError("Field Mandatory");
+                            clgName.requestFocus();
+                        } else if (conCent.getText().toString().length() == 0) {
+                            conCent.setError("Field Mandatory");
+                            conCent.requestFocus();
+                        } else if (frm_yr.getText().toString().length() == 0) {
+                            frm_yr.setError("Field Mandatory");
+                            frm_yr.requestFocus();
+                        } else if (to_yr.getText().toString().length() == 0) {
+                            to_yr.setError("Field Mandatory");
+                            to_yr.requestFocus();
+                        } else if (i > j) {
+                            to_yr.setError("Passed out year less than join year");
+                            to_yr.requestFocus();
+                        } else if (skill.getText().toString().length() == 0) {
+                            skill.setError("Field Mandatory");
+                            skill.requestFocus();
+                        } else if (loc.getText().toString().length() == 0) {
+                            loc.setError("Field Mandatory");
+                            loc.requestFocus();
+                        } else {
+                            next.setEnabled(false);
+                            new CslIns(CSLActivity.this, mApp.getPreference().getString(Common.u_id, ""), fullName.getText().toString(), q,
+                                    clgName.getText().toString(), conCent.getText().toString(), frm_yr.getText().toString(), to_yr.getText().toString(),
+                                    skill.getText().toString(), loc.getText().toString(), ins, cIns).execute();
+                            if (mApp.getPreference().getString(Common.LEVEL, "").equalsIgnoreCase("1")) {
+
+                                startActivity(new Intent(getApplicationContext(), JuniorActivity.class));
+                            } else {
+                                startActivity(new Intent(getApplicationContext(), SeniorActivity.class));
+                            }
+                        }
+                        break;
                 }
             }
         });

@@ -66,9 +66,9 @@ public class CheckEligible extends AsyncTask<String, String, String> {
 
             JSONObject json = Connection.UrlConnection(php.chkEligible, cData);
             int succ = json.getInt("success");
-            if (succ == 1) {
+            if (succ == 2) {
                 s = "same";
-            } else if (succ == 2) {
+            } else if (succ == 1) {
                 s = "meet";
             } else if(succ==4){
                 s="fresher";
@@ -100,6 +100,8 @@ public class CheckEligible extends AsyncTask<String, String, String> {
             Toast.makeText(mContext, "You are Working in the Same Company", Toast.LENGTH_SHORT).show();
         } else if (s.equalsIgnoreCase("meet")) {
             Toast.makeText(mContext, "You are not eligible for the job", Toast.LENGTH_SHORT).show();
+        } else if (s.equalsIgnoreCase("ok")){
+            Toast.makeText(mContext,"You Are Eligible . Applying..",Toast.LENGTH_SHORT).show();
         } else if(s.equalsIgnoreCase("fresher")){
             Toast.makeText(mContext, "You are Fresher. You cannot apply this job.", Toast.LENGTH_SHORT).show();
         }else {
