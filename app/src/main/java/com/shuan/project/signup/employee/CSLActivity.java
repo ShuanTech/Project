@@ -210,7 +210,7 @@ public class CSLActivity extends AppCompatActivity {
                                 startActivity(new Intent(getApplicationContext(), SeniorActivity.class));
                             }
                         }
-                        break;
+                        finish();
                 }
             }
         });

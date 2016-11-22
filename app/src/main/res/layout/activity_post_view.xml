@@ -197,6 +197,14 @@
                     android:textStyle="bold" />
 
                 <TextView
+                    android:id="@+id/desc"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/small_margin"
+                    android:layout_marginRight="@dimen/small_margin"
+                    android:layout_marginTop="@dimen/standard_margin"
+                    android:textColor="#333" />
+                <TextView
                     android:id="@+id/skill"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -207,14 +215,6 @@
                     android:text=""
                     android:textColor="#000" />
 
-                <TextView
-                    android:id="@+id/desc"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="@dimen/small_margin"
-                    android:layout_marginRight="@dimen/small_margin"
-                    android:layout_marginTop="@dimen/standard_margin"
-                    android:textColor="#333" />
 
 
             </LinearLayout>

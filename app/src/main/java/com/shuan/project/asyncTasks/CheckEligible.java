@@ -66,13 +66,16 @@ public class CheckEligible extends AsyncTask<String, String, String> {
 
             JSONObject json = Connection.UrlConnection(php.chkEligible, cData);
             int succ = json.getInt("success");
-            if (succ == 2) {
+            if (succ == 1) {
                 s = "same";
-            } else if (succ == 1) {
+            } else if (succ == 2) {
                 s = "meet";
-            } else if(succ==4){
+            } else if(succ == 4){
                 s="fresher";
-            }else {
+            } else if (succ == 5){
+                s="alrdy";
+            }
+            else {
                 JSONArray jsonArray = json.getJSONArray("refer");
                 referName = new String[jsonArray.length()];
                 referId = new String[jsonArray.length()];
@@ -100,11 +103,12 @@ public class CheckEligible extends AsyncTask<String, String, String> {
             Toast.makeText(mContext, "You are Working in the Same Company", Toast.LENGTH_SHORT).show();
         } else if (s.equalsIgnoreCase("meet")) {
             Toast.makeText(mContext, "You are not eligible for the job", Toast.LENGTH_SHORT).show();
-        } else if (s.equalsIgnoreCase("ok")){
-            Toast.makeText(mContext,"You Are Eligible . Applying..",Toast.LENGTH_SHORT).show();
         } else if(s.equalsIgnoreCase("fresher")){
-            Toast.makeText(mContext, "You are Fresher. You cannot apply this job.", Toast.LENGTH_SHORT).show();
-        }else {
+            Toast.makeText(mContext, "You are a Fresher. You cannot apply for this job.", Toast.LENGTH_SHORT).show();
+        } else if (s.equalsIgnoreCase("alrdy")){
+            Toast.makeText(mContext, "You have already Applied for this job", Toast.LENGTH_SHORT).show();
+        }
+        else {
             if(referName.length==0){
                 builder = new AlertDialog.Builder(mContext);
                 builder.setTitle("Select the Reference");
