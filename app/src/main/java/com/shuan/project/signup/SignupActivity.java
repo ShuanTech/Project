@@ -27,6 +27,8 @@ import com.shuan.project.R;
 import com.shuan.project.Utils.Common;
 import com.shuan.project.Utils.EmailValidator;
 import com.shuan.project.Utils.Helper;
+import com.shuan.project.Utils.PasswordValidator;
+import com.shuan.project.Utils.TextfieldValidator;
 import com.shuan.project.parser.Connection;
 import com.shuan.project.parser.php;
 import com.shuan.project.signup.employee.CSLActivity;
@@ -52,6 +54,8 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
     private ProgressDialog pDialog;
     private String select;
     private EmailValidator emailValidator;
+    private PasswordValidator pasval;
+    private TextfieldValidator textfieldValidator;
     private CheckBox agree;
     private TextView term;
     private boolean agre=true;
@@ -75,6 +79,8 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
         r2 = (RadioButton) findViewById(R.id.r2);
         signUp = (Button) findViewById(R.id.sign_up);
         emailValidator = new EmailValidator();
+        pasval = new PasswordValidator();
+        textfieldValidator = new TextfieldValidator();
         agree = (CheckBox) findViewById(R.id.agree);
 
         term = (TextView) findViewById(R.id.term);
@@ -161,6 +167,10 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
                 if (name.getText().toString().length() == 0) {
                     name.setError("Name Mandatory");
                     name.requestFocus();
+                }
+                else if (!textfieldValidator.validate(name.getText().toString())){
+                    name.setError("Enter a Valid Name");
+                    name.requestFocus();
                 } else if (emailId.getText().toString().length() == 0) {
                     emailId.setError("Email Id Mandatory");
                     emailId.requestFocus();
@@ -174,6 +184,9 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
                     phNo.requestFocus();
                 } else if (pass.getText().toString().length() == 0) {
                     pass.setError("Password Mandatory");
+                    pass.requestFocus();
+                }else if (!pasval.validate(pass.getText().toString())) {
+                    pass.setError("Password must contain an Alphabet and a Number");
                     pass.requestFocus();
                 } else if (confrmPass.getText().toString().length() == 0) {
                     confrmPass.setError("Conform Password Mandatory");

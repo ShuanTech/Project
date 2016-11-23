@@ -25,6 +25,7 @@ import android.widget.Toast;
 
 import com.shuan.project.R;
 import com.shuan.project.Utils.Common;
+import com.shuan.project.Utils.TextfieldValidator;
 import com.shuan.project.asyncTasks.CslIns;
 import com.shuan.project.asyncTasks.GetCollege;
 import com.shuan.project.asyncTasks.GetCourse;
@@ -47,6 +48,7 @@ public class CSLActivity extends AppCompatActivity {
     private boolean ins = false;
     private boolean cIns = false;
     private Button next;
+    private TextfieldValidator textfieldValidator;
     private int i = 0, j = 0;
     private boolean exit = false;
     private String get;
@@ -68,6 +70,7 @@ public class CSLActivity extends AppCompatActivity {
         to_yr = (EditText) findViewById(R.id.to_yr);
         skill = (MultiAutoCompleteTextView) findViewById(R.id.skill);
         loc = (AutoCompleteTextView) findViewById(R.id.location);
+        textfieldValidator = new TextfieldValidator();
         next = (Button) findViewById(R.id.next);
 
         frm_yr.addTextChangedListener(new TextWatcher() {
@@ -174,7 +177,11 @@ public class CSLActivity extends AppCompatActivity {
                         if (fullName.getText().toString().length() == 0) {
                             fullName.setError("Field Mandatory");
                             fullName.requestFocus();
-                        } else if (get.equalsIgnoreCase("Select Highest Qualification")) {
+                        } else if(!textfieldValidator.validate(fullName.getText().toString())){
+                            fullName.setError("Enter a Valid Name");
+                            fullName.requestFocus();
+                        }
+                        else if (get.equalsIgnoreCase("Select Highest Qualification")) {
                             level.requestFocus();
                             Toast.makeText(getApplicationContext(), "select Qualification", Toast.LENGTH_SHORT).show();
                         } else if (clgName.getText().toString().length() == 0) {

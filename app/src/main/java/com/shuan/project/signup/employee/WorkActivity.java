@@ -28,6 +28,7 @@ import com.shuan.project.Utils.Common;
 import com.shuan.project.Utils.Helper;
 import com.shuan.project.Utils.MonthYearPicker;
 import com.shuan.project.Utils.MonthYearPicker1;
+import com.shuan.project.Utils.TextfieldValidator;
 import com.shuan.project.asyncTasks.GetOrg;
 import com.shuan.project.parser.Connection;
 import com.shuan.project.parser.php;
@@ -72,6 +73,8 @@ public class WorkActivity extends AppCompatActivity implements View.OnClickListe
         location = (EditText) findViewById(R.id.location);
         fYr = (EditText) findViewById(R.id.f_yr);
         tYr = (EditText) findViewById(R.id.t_yr);
+
+
 
         wrking = (CheckBox) findViewById(R.id.wrking);
         present = (EditText) findViewById(R.id.present);

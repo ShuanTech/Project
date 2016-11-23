@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -28,6 +29,7 @@ public class ForgotPassword extends AppCompatActivity implements View.OnClickLis
     private ProgressDialog pDialog;
     private HashMap<String, String> fData;
     private String uId;
+    private boolean exit = false;
 
 
     @Override
@@ -201,6 +203,26 @@ public class ForgotPassword extends AppCompatActivity implements View.OnClickLis
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
             pDialog.dismiss();
+        }
+    }
+
+    @Override
+
+    public void onBackPressed(){
+
+        if (exit){
+            super.onBackPressed();
+            return;
+        }else {
+            Toast.makeText(this, "Press Back again to Cancel the Process.", Toast.LENGTH_SHORT).show();
+            exit = true;
+
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    exit = false;
+                }
+            }, 2000);
         }
     }
 
