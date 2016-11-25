@@ -29,6 +29,7 @@ import com.shuan.project.Utils.EmailValidator;
 import com.shuan.project.Utils.Helper;
 import com.shuan.project.Utils.PasswordValidator;
 import com.shuan.project.Utils.TextfieldValidator;
+import com.shuan.project.Utils.UsernameValidator;
 import com.shuan.project.parser.Connection;
 import com.shuan.project.parser.php;
 import com.shuan.project.signup.employee.CSLActivity;
@@ -56,6 +57,7 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
     private EmailValidator emailValidator;
     private PasswordValidator pasval;
     private TextfieldValidator textfieldValidator;
+    private UsernameValidator usernameValidator;
     private CheckBox agree;
     private TextView term;
     private boolean agre=true;
@@ -81,6 +83,7 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
         emailValidator = new EmailValidator();
         pasval = new PasswordValidator();
         textfieldValidator = new TextfieldValidator();
+        usernameValidator = new UsernameValidator();
         agree = (CheckBox) findViewById(R.id.agree);
 
         term = (TextView) findViewById(R.id.term);
@@ -168,10 +171,14 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
                     name.setError("Name Mandatory");
                     name.requestFocus();
                 }
-                else if (!textfieldValidator.validate(name.getText().toString())){
+                else if (!usernameValidator.validate(name.getText().toString())){
                     name.setError("Enter a Valid Name");
                     name.requestFocus();
-                } else if (emailId.getText().toString().length() == 0) {
+                }else if (name.getText().toString().length()<5){
+                    name.setError("User Name must contain 5 characters");
+                    name.requestFocus();
+                }
+                else if (emailId.getText().toString().length() == 0) {
                     emailId.setError("Email Id Mandatory");
                     emailId.requestFocus();
                 } else if (!emailValidator.validate(emailId.getText().toString())) {
