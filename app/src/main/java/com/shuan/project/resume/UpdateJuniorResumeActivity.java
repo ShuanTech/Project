@@ -601,7 +601,7 @@ public class UpdateJuniorResumeActivity extends AppCompatActivity implements Vie
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(getApplicationContext(), "Successfully Update", Toast.LENGTH_LONG).show();
+                            Toast.makeText(getApplicationContext(), "Successfully Updated", Toast.LENGTH_LONG).show();
                             mApp.getPreference().edit().putBoolean(Common.PERSONALINFO, true).commit();
                             checkView();
                         }
@@ -729,7 +729,7 @@ public class UpdateJuniorResumeActivity extends AppCompatActivity implements Vie
                         @Override
                         public void run() {
                             mApp.getPreference().edit().putBoolean(Common.PROJECT, true).commit();
-                            Toast.makeText(getApplicationContext(), "Successfully Update Project Details", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "Successfully Updated Project Details", Toast.LENGTH_SHORT).show();
 
 
                         }
@@ -1358,7 +1358,7 @@ public class UpdateJuniorResumeActivity extends AppCompatActivity implements Vie
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(getApplicationContext(), "Successfully Update Qualification!...", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "Successfully Updated Qualification!...", Toast.LENGTH_SHORT).show();
                             mApp.getPreference().edit().putBoolean(Common.QUALIFICATION, true).commit();
                             ins = false;
 

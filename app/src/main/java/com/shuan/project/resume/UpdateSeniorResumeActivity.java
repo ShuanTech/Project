@@ -38,7 +38,6 @@ import com.shuan.project.Utils.MonthYearPicker;
 import com.shuan.project.Utils.MonthYearPicker1;
 import com.shuan.project.adapter.InstitutionAdapter;
 import com.shuan.project.adapter.LocationAdapter;
-import com.shuan.project.asyncTasks.Connect;
 import com.shuan.project.asyncTasks.GetInfo;
 import com.shuan.project.asyncTasks.GetOrg;
 import com.shuan.project.asyncTasks.GetSkillSet;
@@ -979,7 +978,7 @@ public class UpdateSeniorResumeActivity extends AppCompatActivity implements Vie
 
                             mApp.getPreference().edit().putInt(Common.PROFILESTRENGTH, val + 6).commit();
                             mApp.getPreference().edit().putBoolean(Common.PROJECT, true).commit();
-                            Toast.makeText(getApplicationContext(), "Successfully Update Project Details", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "Successfully Updated Project Details", Toast.LENGTH_SHORT).show();
 
 
                         }
@@ -1351,7 +1350,7 @@ public class UpdateSeniorResumeActivity extends AppCompatActivity implements Vie
 
                             mApp.getPreference().edit().putInt(Common.PROFILESTRENGTH, val + 6).commit();
                             mApp.getPreference().edit().putBoolean(Common.HSC, true).commit();
-                            Toast.makeText(getApplicationContext(), "Successfully Update HSC Details!...", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "Successfully Updated HSC Details!...", Toast.LENGTH_SHORT).show();
                             ins = false;
                         }
                     });
@@ -1627,7 +1626,7 @@ public class UpdateSeniorResumeActivity extends AppCompatActivity implements Vie
 
                             int val = mApp.getPreference().getInt(Common.PROFILESTRENGTH, 0);
                             mApp.getPreference().edit().putInt(Common.PROFILESTRENGTH, val + 8).commit();
-                            Toast.makeText(getApplicationContext(), "Successfully Update Qualification!...", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "Successfully Updated Qualification!...", Toast.LENGTH_SHORT).show();
                             mApp.getPreference().edit().putBoolean(Common.QUALIFICATION, true).commit();
                             ins = false;
 
@@ -1766,7 +1765,7 @@ public class UpdateSeniorResumeActivity extends AppCompatActivity implements Vie
                 public void run() {
                     int val = mApp.getPreference().getInt(Common.PROFILESTRENGTH, 0);
                     mApp.getPreference().edit().putInt(Common.PROFILESTRENGTH, val + 4).commit();
-                    Toast.makeText(getApplicationContext(), "Work Summary Updated", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Work Summary Updated Successfully", Toast.LENGTH_SHORT).show();
                     mApp.getPreference().edit().putBoolean(Common.WORKEXPERIENCE, true).commit();
                     checkView();
                 }

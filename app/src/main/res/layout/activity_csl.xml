@@ -143,7 +143,7 @@
                     android:id="@+id/skill"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Your Technical Skill"
+                    android:hint="Enter Your Skills"
                     android:imeOptions="actionNext"
                     android:inputType="text" />
             </android.support.design.widget.TextInputLayout>

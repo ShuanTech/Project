@@ -84,7 +84,7 @@ public class AddBasicInfo extends AsyncTask<String, String, String> {
             mApp.getPreference().edit().putInt(Common.PROFILESTRENGTH, val + 1).commit();
             mApp.getPreference().edit().putBoolean(Common.HOBBIES, true).commit();
             mApp.getPreference().edit().putBoolean(Common.PERSONALINFO, true).commit();
-            Toast.makeText(mContext, "Successfully Contact Info Added", Toast.LENGTH_SHORT).show();
+            Toast.makeText(mContext, "Successfully Basic Info Added", Toast.LENGTH_SHORT).show();
             Intent in = new Intent(mContext, ResumeEditActivity.class);
             in.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             mContext.startActivity(in);

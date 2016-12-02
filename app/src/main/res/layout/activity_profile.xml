@@ -149,7 +149,7 @@
                         android:layout_gravity="left"
                         android:layout_marginLeft="@dimen/standard_margin"
                         android:layout_marginTop="@dimen/small_margin"
-                        android:text="About"
+                        android:text="Objective"
                         android:textColor="#000"
                         android:textStyle="bold" />
 

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">UdyoMitra</string>
+    <string name="app_name">Udyomitra</string>
     <string name="are_you">Are You ?</string>
     <string name="employee">Employee</string>
     <string name="employer">Employer</string>
@@ -187,11 +187,11 @@
     </string-array>
 
     <string-array name="stus">
-        <item>Looking for job.</item>
-        <item>In Work.</item>
-        <item>In Notice period.</item>
-        <item>In Internship.</item>
-        <item>Doing Course.</item>
-        <item>In Training.</item>
+        <item>Looking for job</item>
+        <item>In Work</item>
+        <item>In Notice period</item>
+        <item>In Internship</item>
+        <item>Doing Course</item>
+        <item>In Training</item>
     </string-array>
 </resources>

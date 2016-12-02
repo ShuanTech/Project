@@ -28,12 +28,12 @@ import com.shuan.project.Utils.Common;
 import com.shuan.project.Utils.EmailValidator;
 import com.shuan.project.Utils.Helper;
 import com.shuan.project.Utils.PasswordValidator;
+import com.shuan.project.Utils.PhoneNumberValidator;
 import com.shuan.project.Utils.TextfieldValidator;
 import com.shuan.project.Utils.UsernameValidator;
 import com.shuan.project.parser.Connection;
 import com.shuan.project.parser.php;
 import com.shuan.project.signup.employee.CSLActivity;
-import com.shuan.project.signup.employee.EducationActivity;
 import com.shuan.project.signup.employee.WorkActivity;
 import com.shuan.project.signup.employer.CompanyDetails;
 
@@ -57,10 +57,11 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
     private EmailValidator emailValidator;
     private PasswordValidator pasval;
     private TextfieldValidator textfieldValidator;
+    private PhoneNumberValidator phoneNumberValidator;
     private UsernameValidator usernameValidator;
     private CheckBox agree;
     private TextView term;
-    private boolean agre=true;
+    private boolean agre = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,6 +85,7 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
         pasval = new PasswordValidator();
         textfieldValidator = new TextfieldValidator();
         usernameValidator = new UsernameValidator();
+        phoneNumberValidator = new PhoneNumberValidator();
         agree = (CheckBox) findViewById(R.id.agree);
 
         term = (TextView) findViewById(R.id.term);
@@ -141,7 +143,7 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
 
         agree.setOnClickListener(this);
 
-       signUp.setOnClickListener(this);
+        signUp.setOnClickListener(this);
 
     }
 
@@ -170,15 +172,13 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
                 if (name.getText().toString().length() == 0) {
                     name.setError("Name Mandatory");
                     name.requestFocus();
-                }
-                else if (!usernameValidator.validate(name.getText().toString())){
+                } else if (!usernameValidator.validate(name.getText().toString())) {
                     name.setError("Enter a Valid Name");
                     name.requestFocus();
-                }else if (name.getText().toString().length()<5){
+                } else if (name.getText().toString().length() < 5) {
                     name.setError("User Name must contain 5 characters");
                     name.requestFocus();
-                }
-                else if (emailId.getText().toString().length() == 0) {
+                } else if (emailId.getText().toString().length() == 0) {
                     emailId.setError("Email Id Mandatory");
                     emailId.requestFocus();
                 } else if (!emailValidator.validate(emailId.getText().toString())) {
@@ -186,19 +186,23 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
                 } else if (phNo.getText().toString().length() == 0) {
                     phNo.setError("Phone Number Mandatory");
                     phNo.requestFocus();
+                } else if (!phoneNumberValidator.validate(phNo.getText().toString())) {
+                    phNo.setError("Enter a valid Phone Number");
+                    phNo.requestFocus();
                 } else if (phNo.getText().length() < 10) {
                     phNo.setError("Invalid Phone Number");
                     phNo.requestFocus();
                 } else if (pass.getText().toString().length() == 0) {
                     pass.setError("Password Mandatory");
                     pass.requestFocus();
-                }else if (!pasval.validate(pass.getText().toString())) {
+                } else if (!pasval.validate(pass.getText().toString())) {
                     pass.setError("Password must contain an Alphabet and a Number");
                     pass.requestFocus();
                 } else if (confrmPass.getText().toString().length() == 0) {
                     confrmPass.setError("Conform Password Mandatory");
                 } else if (!pass.getText().toString().equals(confrmPass.getText().toString())) {
-                    Toast.makeText(getApplicationContext(), "Password miss match", Toast.LENGTH_SHORT).show();
+                    confrmPass.setError("Password Miss match");
+                    confrmPass.requestFocus();
                     //
                 } else if (agre) {
                     signUp.setEnabled(false);
@@ -282,7 +286,7 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Log.d("uId",u_id);
+                            Log.d("uId", u_id);
                             mApp.getPreference().edit().putString(Common.u_id, u_id).commit();
                             mApp.getPreference().edit().putString(Common.LEVEL, type).commit();
                             mApp.getPreference().edit().putBoolean(Common.Login, true).commit();

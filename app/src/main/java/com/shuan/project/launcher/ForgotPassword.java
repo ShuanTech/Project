@@ -206,24 +206,5 @@ public class ForgotPassword extends AppCompatActivity implements View.OnClickLis
         }
     }
 
-    @Override
-
-    public void onBackPressed(){
-
-        if (exit){
-            super.onBackPressed();
-            return;
-        }else {
-            Toast.makeText(this, "Press Back again to Cancel the Process.", Toast.LENGTH_SHORT).show();
-            exit = true;
-
-            new Handler().postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    exit = false;
-                }
-            }, 2000);
-        }
-    }
 
 }

@@ -24,6 +24,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.shuan.project.R;
+import com.shuan.project.Utils.AlphabetValidator;
 import com.shuan.project.Utils.Common;
 import com.shuan.project.Utils.TextfieldValidator;
 import com.shuan.project.asyncTasks.CslIns;
@@ -49,6 +50,7 @@ public class CSLActivity extends AppCompatActivity {
     private boolean cIns = false;
     private Button next;
     private TextfieldValidator textfieldValidator;
+    private AlphabetValidator alphabetValidator;
     private int i = 0, j = 0;
     private boolean exit = false;
     private String get;
@@ -71,6 +73,7 @@ public class CSLActivity extends AppCompatActivity {
         skill = (MultiAutoCompleteTextView) findViewById(R.id.skill);
         loc = (AutoCompleteTextView) findViewById(R.id.location);
         textfieldValidator = new TextfieldValidator();
+        alphabetValidator = new AlphabetValidator();
         next = (Button) findViewById(R.id.next);
 
         frm_yr.addTextChangedListener(new TextWatcher() {
@@ -177,11 +180,10 @@ public class CSLActivity extends AppCompatActivity {
                         if (fullName.getText().toString().length() == 0) {
                             fullName.setError("Field Mandatory");
                             fullName.requestFocus();
-                        } else if(!textfieldValidator.validate(fullName.getText().toString())){
+                        } else if(!alphabetValidator.validate(fullName.getText().toString())){
                             fullName.setError("Enter a Valid Name");
                             fullName.requestFocus();
-                        }
-                        else if (get.equalsIgnoreCase("Select Highest Qualification")) {
+                        } else if (get.equalsIgnoreCase("Select Highest Qualification")) {
                             level.requestFocus();
                             Toast.makeText(getApplicationContext(), "select Qualification", Toast.LENGTH_SHORT).show();
                         } else if (clgName.getText().toString().length() == 0) {
@@ -196,16 +198,23 @@ public class CSLActivity extends AppCompatActivity {
                         } else if (to_yr.getText().toString().length() == 0) {
                             to_yr.setError("Field Mandatory");
                             to_yr.requestFocus();
-                        } else if (i > j) {
+                        } else if (i >= j) {
                             to_yr.setError("Passed out year less than join year");
                             to_yr.requestFocus();
                         } else if (skill.getText().toString().length() == 0) {
                             skill.setError("Field Mandatory");
                             skill.requestFocus();
-                        } else if (loc.getText().toString().length() == 0) {
+                        } else if (!textfieldValidator.validate(skill.getText().toString())){
+                            skill.setError("Enter a Valid Skill");
+                            skill.requestFocus();
+                        }
+                        else if (loc.getText().toString().length() == 0) {
                             loc.setError("Field Mandatory");
                             loc.requestFocus();
-                        } else {
+                        } else if (!textfieldValidator.validate(loc.getText().toString())){
+                            loc.setError("Enter a Valid Location");
+                        }
+                        else {
                             next.setEnabled(false);
                             new CslIns(CSLActivity.this, mApp.getPreference().getString(Common.u_id, ""), fullName.getText().toString(), q,
                                     clgName.getText().toString(), conCent.getText().toString(), frm_yr.getText().toString(), to_yr.getText().toString(),
@@ -213,11 +222,14 @@ public class CSLActivity extends AppCompatActivity {
                             if (mApp.getPreference().getString(Common.LEVEL, "").equalsIgnoreCase("1")) {
 
                                 startActivity(new Intent(getApplicationContext(), JuniorActivity.class));
+                                finish();
                             } else {
                                 startActivity(new Intent(getApplicationContext(), SeniorActivity.class));
-                            }
+                                finish();
+                            }finish();
                         }
-                        finish();
+                        break;
+
                 }
             }
         });
