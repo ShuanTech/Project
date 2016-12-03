@@ -1,4 +1,4 @@
-package com.shuan.project.employer;
+package com.shuan.Project.employer;
 
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -20,15 +20,15 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.shuan.project.R;
-import com.shuan.project.Utils.Common;
-import com.shuan.project.asyncTasks.GetLocation;
-import com.shuan.project.asyncTasks.GetSkillSet;
-import com.shuan.project.asyncTasks.PostJob;
-import com.shuan.project.asyncTasks.UpdateJob;
-import com.shuan.project.list.Sample;
-import com.shuan.project.parser.Connection;
-import com.shuan.project.parser.php;
+import com.shuan.Project.R;
+import com.shuan.Project.Utils.Common;
+import com.shuan.Project.asyncTasks.GetLocation;
+import com.shuan.Project.asyncTasks.GetSkillSet;
+import com.shuan.Project.asyncTasks.PostJob;
+import com.shuan.Project.asyncTasks.UpdateJob;
+import com.shuan.Project.list.Sample;
+import com.shuan.Project.parser.Connection;
+import com.shuan.Project.parser.php;
 
 import org.json.JSONArray;
 import org.json.JSONObject;

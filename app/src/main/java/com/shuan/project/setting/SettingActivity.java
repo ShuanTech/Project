@@ -1,4 +1,4 @@
-package com.shuan.project.setting;
+package com.shuan.Project.setting;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,8 +7,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.LinearLayout;
 
-import com.shuan.project.R;
-import com.shuan.project.Utils.Common;
+import com.shuan.Project.R;
+import com.shuan.Project.Utils.Common;
 
 public class SettingActivity extends AppCompatActivity implements View.OnClickListener {
 

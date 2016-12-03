@@ -1,4 +1,4 @@
-package com.shuan.project.employer;
+package com.shuan.Project.employer;
 
 import android.annotation.TargetApi;
 import android.content.Context;
@@ -15,9 +15,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TimePicker;
 
-import com.shuan.project.R;
-import com.shuan.project.Utils.Common;
-import com.shuan.project.asyncTasks.SelectCandidate;
+import com.shuan.Project.R;
+import com.shuan.Project.Utils.Common;
+import com.shuan.Project.asyncTasks.SelectCandidate;
 
 import java.util.Calendar;
 

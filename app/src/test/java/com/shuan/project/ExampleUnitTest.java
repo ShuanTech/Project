@@ -1,4 +1,4 @@
-package com.shuan.project;
+package com.shuan.Project;
 
 import org.junit.Test;
 

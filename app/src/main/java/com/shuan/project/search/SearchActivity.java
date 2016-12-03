@@ -1,4 +1,4 @@
-package com.shuan.project.search;
+package com.shuan.Project.search;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -8,10 +8,10 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 
-import com.shuan.project.R;
-import com.shuan.project.Utils.Common;
-import com.shuan.project.adapter.SerachAdapter;
-import com.shuan.project.asyncTasks.Search;
+import com.shuan.Project.R;
+import com.shuan.Project.Utils.Common;
+import com.shuan.Project.adapter.SerachAdapter;
+import com.shuan.Project.asyncTasks.Search;
 
 public class SearchActivity extends AppCompatActivity implements View.OnClickListener {
 

@@ -1,5 +1,5 @@
 
-package com.shuan.project.Utils;
+package com.shuan.Project.Utils;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -22,7 +22,7 @@ import android.support.annotation.DrawableRes;
 import android.util.AttributeSet;
 import android.widget.ImageView;
 
-import com.shuan.project.R;
+import com.shuan.Project.R;
 
 
 public class CircleImageView extends ImageView {

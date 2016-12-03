@@ -1,4 +1,4 @@
-package com.shuan.project.Utils;
+package com.shuan.Project.Utils;
 
 import android.app.Activity;
 import android.content.DialogInterface;
@@ -6,7 +6,7 @@ import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.NumberPicker;
 
-import com.shuan.project.R;
+import com.shuan.Project.R;
 
 import java.util.Calendar;
 

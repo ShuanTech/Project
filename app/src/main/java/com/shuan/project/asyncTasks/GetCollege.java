@@ -1,4 +1,4 @@
-package com.shuan.project.asyncTasks;
+package com.shuan.Project.asyncTasks;
 
 
 import android.content.Context;
@@ -8,11 +8,11 @@ import android.widget.AutoCompleteTextView;
 import android.widget.ProgressBar;
 import android.widget.ScrollView;
 
-import com.shuan.project.R;
-import com.shuan.project.adapter.InstitutionAdapter;
-import com.shuan.project.list.Sample;
-import com.shuan.project.parser.Connection;
-import com.shuan.project.parser.php;
+import com.shuan.Project.R;
+import com.shuan.Project.adapter.InstitutionAdapter;
+import com.shuan.Project.list.Sample;
+import com.shuan.Project.parser.Connection;
+import com.shuan.Project.parser.php;
 
 import org.json.JSONArray;
 import org.json.JSONObject;

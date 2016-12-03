@@ -1,13 +1,12 @@
-package com.shuan.project.fragment;
+package com.shuan.Project.fragment;
 
 import android.content.Context;
 import android.os.AsyncTask;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
-import com.shuan.project.parser.Connection;
-import com.shuan.project.parser.php;
+import com.shuan.Project.parser.Connection;
+import com.shuan.Project.parser.php;
 
 import org.json.JSONObject;
 

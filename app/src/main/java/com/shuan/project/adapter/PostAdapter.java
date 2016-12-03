@@ -1,4 +1,4 @@
-package com.shuan.project.adapter;
+package com.shuan.Project.adapter;
 
 
 import android.content.Context;
@@ -12,22 +12,21 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.assist.FailReason;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingProgressListener;
 import com.nostra13.universalimageloader.core.listener.SimpleImageLoadingListener;
-import com.shuan.project.R;
-import com.shuan.project.Utils.Common;
-import com.shuan.project.Utils.Helper;
-import com.shuan.project.activities.CommentsActivity;
-import com.shuan.project.asyncTasks.CheckEligible;
-import com.shuan.project.asyncTasks.SavePost;
-import com.shuan.project.asyncTasks.SharePost;
-import com.shuan.project.list.Sample;
-import com.shuan.project.profile.ProfileViewActivity;
+import com.shuan.Project.R;
+import com.shuan.Project.Utils.Common;
+import com.shuan.Project.Utils.Helper;
+import com.shuan.Project.activities.CommentsActivity;
+import com.shuan.Project.asyncTasks.CheckEligible;
+import com.shuan.Project.asyncTasks.SavePost;
+import com.shuan.Project.asyncTasks.SharePost;
+import com.shuan.Project.list.Sample;
+import com.shuan.Project.profile.ProfileViewActivity;
 
 import java.util.ArrayList;
 

@@ -1,5 +1,5 @@
 
-package com.shuan.project.Utils;
+package com.shuan.Project.Utils;
 
 import android.content.Context;
 import android.media.MediaMetadataRetriever;

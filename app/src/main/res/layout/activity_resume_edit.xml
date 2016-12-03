@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#fff"
-    tools:context="com.shuan.project.resume.ResumeEditActivity">
+    tools:context="com.shuan.Project.resume.ResumeEditActivity">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/app_bar"

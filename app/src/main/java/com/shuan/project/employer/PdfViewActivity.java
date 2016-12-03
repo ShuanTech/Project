@@ -1,4 +1,4 @@
-package com.shuan.project.employer;
+package com.shuan.Project.employer;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -6,9 +6,8 @@ import android.support.v7.widget.Toolbar;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.widget.Toast;
 
-import com.shuan.project.R;
+import com.shuan.Project.R;
 
 public class PdfViewActivity extends AppCompatActivity {
 

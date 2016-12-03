@@ -1,4 +1,4 @@
-package com.shuan.project.profile;
+package com.shuan.Project.profile;
 
 import android.content.Context;
 import android.content.Intent;
@@ -28,18 +28,18 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.assist.FailReason;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingProgressListener;
 import com.nostra13.universalimageloader.core.listener.SimpleImageLoadingListener;
-import com.shuan.project.R;
-import com.shuan.project.Utils.CircleImageView;
-import com.shuan.project.Utils.Common;
-import com.shuan.project.asyncTasks.AddFavorite;
-import com.shuan.project.asyncTasks.Following;
-import com.shuan.project.asyncTasks.GetInvitation;
-import com.shuan.project.employer.PostViewActivity;
-import com.shuan.project.list.Sample;
-import com.shuan.project.parser.Connection;
-import com.shuan.project.parser.php;
-import com.shuan.project.resume.ExpResumeGenerate;
-import com.shuan.project.resume.JuniorResumeGenerate;
+import com.shuan.Project.R;
+import com.shuan.Project.Utils.CircleImageView;
+import com.shuan.Project.Utils.Common;
+import com.shuan.Project.asyncTasks.AddFavorite;
+import com.shuan.Project.asyncTasks.Following;
+import com.shuan.Project.asyncTasks.GetInvitation;
+import com.shuan.Project.employer.PostViewActivity;
+import com.shuan.Project.list.Sample;
+import com.shuan.Project.parser.Connection;
+import com.shuan.Project.parser.php;
+import com.shuan.Project.resume.ExpResumeGenerate;
+import com.shuan.Project.resume.JuniorResumeGenerate;
 
 import org.json.JSONArray;
 import org.json.JSONObject;

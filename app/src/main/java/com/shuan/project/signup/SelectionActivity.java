@@ -1,4 +1,4 @@
-package com.shuan.project.signup;
+package com.shuan.Project.signup;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,9 +9,9 @@ import android.view.WindowManager;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import com.shuan.project.R;
-import com.shuan.project.Utils.Common;
-import com.shuan.project.Utils.Helper;
+import com.shuan.Project.R;
+import com.shuan.Project.Utils.Common;
+import com.shuan.Project.Utils.Helper;
 
 public class SelectionActivity extends AppCompatActivity implements View.OnClickListener {
 

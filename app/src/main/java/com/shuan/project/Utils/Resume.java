@@ -1,4 +1,4 @@
-package com.shuan.project.Utils;
+package com.shuan.Project.Utils;
 
 /**
  * Created by Android on 6/16/2016.

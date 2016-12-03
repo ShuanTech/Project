@@ -1,4 +1,4 @@
-package com.shuan.project.fragment;
+package com.shuan.Project.fragment;
 
 
 import android.content.Context;
@@ -12,10 +12,10 @@ import android.widget.ProgressBar;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
-import com.shuan.project.R;
-import com.shuan.project.Utils.Common;
-import com.shuan.project.parser.Connection;
-import com.shuan.project.parser.php;
+import com.shuan.Project.R;
+import com.shuan.Project.Utils.Common;
+import com.shuan.Project.parser.Connection;
+import com.shuan.Project.parser.php;
 
 import org.json.JSONArray;
 import org.json.JSONObject;

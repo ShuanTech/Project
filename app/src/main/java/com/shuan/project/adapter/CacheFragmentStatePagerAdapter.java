@@ -1,4 +1,4 @@
-package com.shuan.project.adapter;
+package com.shuan.Project.adapter;
 
 import android.os.Bundle;
 import android.os.Parcelable;

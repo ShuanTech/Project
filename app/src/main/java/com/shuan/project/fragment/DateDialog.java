@@ -1,4 +1,4 @@
-package com.shuan.project.fragment;
+package com.shuan.Project.fragment;
 
 import android.annotation.TargetApi;
 import android.app.DatePickerDialog;

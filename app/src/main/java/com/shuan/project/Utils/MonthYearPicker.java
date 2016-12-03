@@ -1,4 +1,4 @@
-package com.shuan.project.Utils;
+package com.shuan.Project.Utils;
 
 import android.app.Activity;
 import android.content.DialogInterface;
@@ -6,7 +6,7 @@ import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.NumberPicker;
 
-import com.shuan.project.R;
+import com.shuan.Project.R;
 
 import java.util.Calendar;
 
@@ -17,7 +17,7 @@ public class MonthYearPicker {
     Calendar calendar = Calendar.getInstance();
     private static final int MIN_YEAR = 1950;
 
-    private static final int MAX_YEAR = 0;
+    private static final int MAX_YEAR = 2017;
 
     private static final String[] PICKER_DISPLAY_MONTHS_NAMES = new String[] { "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct",
             "Nov", "Dec" };

@@ -1,4 +1,4 @@
-package com.shuan.project.search;
+package com.shuan.Project.search;
 
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
@@ -8,11 +8,11 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
-import com.shuan.project.R;
-import com.shuan.project.Utils.Common;
-import com.shuan.project.adapter.CacheFragmentStatePagerAdapter;
-import com.shuan.project.fragment.ExperiencedFragment;
-import com.shuan.project.fragment.FresherFragment;
+import com.shuan.Project.R;
+import com.shuan.Project.Utils.Common;
+import com.shuan.Project.adapter.CacheFragmentStatePagerAdapter;
+import com.shuan.Project.fragment.ExperiencedFragment;
+import com.shuan.Project.fragment.FresherFragment;
 
 public class EmployerSearchResultActivity extends AppCompatActivity {
 

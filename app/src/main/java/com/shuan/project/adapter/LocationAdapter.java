@@ -1,4 +1,4 @@
-package com.shuan.project.adapter;
+package com.shuan.Project.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -9,8 +9,8 @@ import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.TextView;
 
-import com.shuan.project.R;
-import com.shuan.project.list.Sample;
+import com.shuan.Project.R;
+import com.shuan.Project.list.Sample;
 
 import java.util.ArrayList;
 

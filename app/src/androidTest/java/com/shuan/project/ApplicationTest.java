@@ -1,4 +1,4 @@
-package com.shuan.project;
+package com.shuan.Project;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

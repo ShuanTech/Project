@@ -1,4 +1,4 @@
-package com.shuan.project.resume;
+package com.shuan.Project.resume;
 
 import android.annotation.TargetApi;
 import android.app.FragmentTransaction;
@@ -31,20 +31,20 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.shuan.project.R;
-import com.shuan.project.Utils.Common;
-import com.shuan.project.Utils.Helper;
-import com.shuan.project.Utils.MonthYearPicker;
-import com.shuan.project.Utils.MonthYearPicker1;
-import com.shuan.project.adapter.InstitutionAdapter;
-import com.shuan.project.adapter.LocationAdapter;
-import com.shuan.project.asyncTasks.GetInfo;
-import com.shuan.project.asyncTasks.GetOrg;
-import com.shuan.project.asyncTasks.GetSkillSet;
-import com.shuan.project.fragment.DateDialog;
-import com.shuan.project.list.Sample;
-import com.shuan.project.parser.Connection;
-import com.shuan.project.parser.php;
+import com.shuan.Project.R;
+import com.shuan.Project.Utils.Common;
+import com.shuan.Project.Utils.Helper;
+import com.shuan.Project.Utils.MonthYearPicker;
+import com.shuan.Project.Utils.MonthYearPicker1;
+import com.shuan.Project.adapter.InstitutionAdapter;
+import com.shuan.Project.adapter.LocationAdapter;
+import com.shuan.Project.asyncTasks.GetInfo;
+import com.shuan.Project.asyncTasks.GetOrg;
+import com.shuan.Project.asyncTasks.GetSkillSet;
+import com.shuan.Project.fragment.DateDialog;
+import com.shuan.Project.list.Sample;
+import com.shuan.Project.parser.Connection;
+import com.shuan.Project.parser.php;
 
 import org.json.JSONArray;
 import org.json.JSONException;

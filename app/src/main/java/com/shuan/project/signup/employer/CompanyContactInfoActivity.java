@@ -1,4 +1,4 @@
-package com.shuan.project.signup.employer;
+package com.shuan.Project.signup.employer;
 
 import android.annotation.TargetApi;
 import android.content.Context;
@@ -19,15 +19,14 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
-import com.shuan.project.R;
-import com.shuan.project.Utils.Common;
-import com.shuan.project.Utils.EmailValidator;
-import com.shuan.project.Utils.Helper;
-import com.shuan.project.asyncTasks.CompanyContactInfo;
+import com.shuan.Project.R;
+import com.shuan.Project.Utils.Common;
+import com.shuan.Project.Utils.EmailValidator;
+import com.shuan.Project.Utils.Helper;
+import com.shuan.Project.asyncTasks.CompanyContactInfo;
 
 public class CompanyContactInfoActivity extends AppCompatActivity implements View.OnClickListener {
 

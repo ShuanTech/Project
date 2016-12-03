@@ -1,13 +1,13 @@
-package com.shuan.project.asyncTasks;
+package com.shuan.Project.asyncTasks;
 
 import android.content.Context;
 import android.os.AsyncTask;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 
-import com.shuan.project.R;
-import com.shuan.project.parser.Connection;
-import com.shuan.project.parser.php;
+import com.shuan.Project.R;
+import com.shuan.Project.parser.Connection;
+import com.shuan.Project.parser.php;
 
 import org.json.JSONArray;
 import org.json.JSONObject;

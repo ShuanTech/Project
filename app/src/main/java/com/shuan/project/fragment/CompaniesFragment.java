@@ -1,4 +1,4 @@
-package com.shuan.project.fragment;
+package com.shuan.Project.fragment;
 
 
 import android.content.Intent;
@@ -12,9 +12,9 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.shuan.project.R;
-import com.shuan.project.asyncTasks.GetEmployeeResult;
-import com.shuan.project.profile.ProfileViewActivity;
+import com.shuan.Project.R;
+import com.shuan.Project.asyncTasks.GetEmployeeResult;
+import com.shuan.Project.profile.ProfileViewActivity;
 
 /**
  * A simple {@link Fragment} subclass.

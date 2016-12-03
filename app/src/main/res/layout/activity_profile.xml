@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.shuan.project.profile.ProfileViewActivity">
+    tools:context="com.shuan.Project.profile.ProfileViewActivity">
 
 
     <RelativeLayout
@@ -39,7 +39,7 @@
 
             </RelativeLayout>
 
-            <com.shuan.project.Utils.CircleImageView
+            <com.shuan.Project.Utils.CircleImageView
                 android:id="@+id/pro_img"
                 android:layout_width="100dp"
                 android:layout_height="100dp"

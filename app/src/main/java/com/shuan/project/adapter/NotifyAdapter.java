@@ -1,4 +1,4 @@
-package com.shuan.project.adapter;
+package com.shuan.Project.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -7,10 +7,8 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import com.shuan.project.R;
-import com.shuan.project.list.Sample;
-
-import org.w3c.dom.Text;
+import com.shuan.Project.R;
+import com.shuan.Project.list.Sample;
 
 import java.util.ArrayList;
 

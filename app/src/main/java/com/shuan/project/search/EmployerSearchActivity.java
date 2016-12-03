@@ -1,4 +1,4 @@
-package com.shuan.project.search;
+package com.shuan.Project.search;
 
 import android.app.ProgressDialog;
 import android.content.ContentResolver;
@@ -30,10 +30,10 @@ import com.google.android.gms.common.GooglePlayServicesClient;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationClient;
 import com.google.android.gms.location.LocationRequest;
-import com.shuan.project.R;
-import com.shuan.project.asyncTasks.EmployerSerchResult;
-import com.shuan.project.asyncTasks.GetEmployerSerach;
-import com.shuan.project.profile.ProfileViewActivity;
+import com.shuan.Project.R;
+import com.shuan.Project.asyncTasks.EmployerSerchResult;
+import com.shuan.Project.asyncTasks.GetEmployerSerach;
+import com.shuan.Project.profile.ProfileViewActivity;
 
 import java.util.List;
 import java.util.Locale;

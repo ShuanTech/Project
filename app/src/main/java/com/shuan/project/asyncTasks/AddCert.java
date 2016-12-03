@@ -1,4 +1,4 @@
-package com.shuan.project.asyncTasks;
+package com.shuan.Project.asyncTasks;
 
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -7,10 +7,10 @@ import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
-import com.shuan.project.Utils.Common;
-import com.shuan.project.parser.Connection;
-import com.shuan.project.parser.php;
-import com.shuan.project.resume.ResumeEditActivity;
+import com.shuan.Project.Utils.Common;
+import com.shuan.Project.parser.Connection;
+import com.shuan.Project.parser.php;
+import com.shuan.Project.resume.ResumeEditActivity;
 
 import org.json.JSONException;
 import org.json.JSONObject;

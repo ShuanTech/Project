@@ -1,4 +1,4 @@
-package com.shuan.project.signup.employee;
+package com.shuan.Project.signup.employee;
 
 import android.annotation.TargetApi;
 import android.content.Intent;
@@ -21,12 +21,12 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.shuan.project.R;
-import com.shuan.project.Utils.Common;
-import com.shuan.project.Utils.Helper;
-import com.shuan.project.asyncTasks.GetSkillSet;
-import com.shuan.project.parser.Connection;
-import com.shuan.project.parser.php;
+import com.shuan.Project.R;
+import com.shuan.Project.Utils.Common;
+import com.shuan.Project.Utils.Helper;
+import com.shuan.Project.asyncTasks.GetSkillSet;
+import com.shuan.Project.parser.Connection;
+import com.shuan.Project.parser.php;
 
 import org.json.JSONException;
 import org.json.JSONObject;

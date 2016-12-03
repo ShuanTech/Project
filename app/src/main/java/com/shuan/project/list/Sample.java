@@ -1,4 +1,4 @@
-package com.shuan.project.list;
+package com.shuan.Project.list;
 
 
 public class Sample {

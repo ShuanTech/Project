@@ -9,7 +9,7 @@
         android:scaleType="centerCrop"
         android:src="@drawable/header" />
 
-    <com.shuan.project.Utils.CircleImageView
+    <com.shuan.Project.Utils.CircleImageView
         android:id="@+id/profile"
         android:layout_width="72dp"
         android:layout_height="72dp"

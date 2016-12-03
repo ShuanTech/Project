@@ -1,4 +1,4 @@
-package com.shuan.project.resume;
+package com.shuan.Project.resume;
 
 import android.content.Context;
 import android.content.DialogInterface;
@@ -12,8 +12,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -21,17 +19,16 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.shuan.project.R;
-import com.shuan.project.Utils.Common;
-import com.shuan.project.asyncTasks.DeleteDetail;
-import com.shuan.project.asyncTasks.profileStatus;
-import com.shuan.project.list.Sample;
-import com.shuan.project.parser.Connection;
-import com.shuan.project.parser.php;
+import com.shuan.Project.R;
+import com.shuan.Project.Utils.Common;
+import com.shuan.Project.asyncTasks.DeleteDetail;
+import com.shuan.Project.asyncTasks.profileStatus;
+import com.shuan.Project.list.Sample;
+import com.shuan.Project.parser.Connection;
+import com.shuan.Project.parser.php;
 
 import org.json.JSONArray;
 import org.json.JSONObject;

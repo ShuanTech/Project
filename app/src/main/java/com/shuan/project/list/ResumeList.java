@@ -1,4 +1,4 @@
-package com.shuan.project.list;
+package com.shuan.Project.list;
 
 /**
  * Created by Android on 7/14/2016.

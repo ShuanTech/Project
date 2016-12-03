@@ -1,4 +1,4 @@
-package com.shuan.project.signup.employee;
+package com.shuan.Project.signup.employee;
 
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
@@ -7,8 +7,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
@@ -23,15 +21,14 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.shuan.project.R;
-import com.shuan.project.Utils.Common;
-import com.shuan.project.Utils.Helper;
-import com.shuan.project.Utils.MonthYearPicker;
-import com.shuan.project.Utils.MonthYearPicker1;
-import com.shuan.project.Utils.TextfieldValidator;
-import com.shuan.project.asyncTasks.GetOrg;
-import com.shuan.project.parser.Connection;
-import com.shuan.project.parser.php;
+import com.shuan.Project.R;
+import com.shuan.Project.Utils.Common;
+import com.shuan.Project.Utils.Helper;
+import com.shuan.Project.Utils.MonthYearPicker;
+import com.shuan.Project.Utils.MonthYearPicker1;
+import com.shuan.Project.asyncTasks.GetOrg;
+import com.shuan.Project.parser.Connection;
+import com.shuan.Project.parser.php;
 
 import org.json.JSONObject;
 

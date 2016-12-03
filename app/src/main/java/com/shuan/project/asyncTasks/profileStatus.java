@@ -1,16 +1,15 @@
-package com.shuan.project.asyncTasks;
+package com.shuan.Project.asyncTasks;
 
 import android.content.Context;
 import android.os.AsyncTask;
 import android.widget.Toast;
 
-import com.shuan.project.parser.Connection;
-import com.shuan.project.parser.php;
+import com.shuan.Project.parser.Connection;
+import com.shuan.Project.parser.php;
 
 import org.json.JSONObject;
 
 import java.util.HashMap;
-import java.util.concurrent.ExecutionException;
 
 /**
  * Created by Android on 10/24/2016.

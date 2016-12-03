@@ -1,4 +1,4 @@
-package com.shuan.project.fragment;
+package com.shuan.Project.fragment;
 
 
 import android.content.Context;
@@ -6,8 +6,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,18 +14,17 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.shuan.project.R;
-import com.shuan.project.Utils.Common;
-import com.shuan.project.asyncTasks.GetNotifyDetail;
-import com.shuan.project.asyncTasks.Refer;
-import com.shuan.project.asyncTasks.UpdateNotify;
-import com.shuan.project.employee.InterViewActivity;
-import com.shuan.project.employee.InviteActivity;
-import com.shuan.project.employer.PostViewActivity;
-import com.shuan.project.employer.ShortListActivity;
-import com.shuan.project.profile.ProfileViewActivity;
+import com.shuan.Project.R;
+import com.shuan.Project.Utils.Common;
+import com.shuan.Project.asyncTasks.GetNotifyDetail;
+import com.shuan.Project.asyncTasks.Refer;
+import com.shuan.Project.asyncTasks.UpdateNotify;
+import com.shuan.Project.employee.InterViewActivity;
+import com.shuan.Project.employee.InviteActivity;
+import com.shuan.Project.employer.PostViewActivity;
+import com.shuan.Project.employer.ShortListActivity;
+import com.shuan.Project.profile.ProfileViewActivity;
 
 
 public class NotifyFragment extends Fragment {

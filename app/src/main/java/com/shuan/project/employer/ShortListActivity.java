@@ -1,4 +1,4 @@
-package com.shuan.project.employer;
+package com.shuan.Project.employer;
 
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
@@ -8,12 +8,12 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
-import com.shuan.project.R;
-import com.shuan.project.Utils.Common;
-import com.shuan.project.adapter.CacheFragmentStatePagerAdapter;
-import com.shuan.project.fragment.ActionFragment;
-import com.shuan.project.fragment.RejectedListFragment;
-import com.shuan.project.fragment.SelectedListFragment;
+import com.shuan.Project.R;
+import com.shuan.Project.Utils.Common;
+import com.shuan.Project.adapter.CacheFragmentStatePagerAdapter;
+import com.shuan.Project.fragment.ActionFragment;
+import com.shuan.Project.fragment.RejectedListFragment;
+import com.shuan.Project.fragment.SelectedListFragment;
 
 public class ShortListActivity extends AppCompatActivity {
 

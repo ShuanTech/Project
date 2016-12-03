@@ -1,4 +1,4 @@
-package com.shuan.project.search;
+package com.shuan.Project.search;
 
 import android.app.ProgressDialog;
 import android.content.ContentResolver;
@@ -16,7 +16,6 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
-import android.text.InputType;
 import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.view.Menu;
@@ -36,11 +35,11 @@ import com.google.android.gms.common.GooglePlayServicesClient;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationClient;
 import com.google.android.gms.location.LocationRequest;
-import com.shuan.project.R;
-import com.shuan.project.Utils.Common;
-import com.shuan.project.asyncTasks.EmployeeSerchResult;
-import com.shuan.project.asyncTasks.GetEmployeeSerach;
-import com.shuan.project.employer.PostViewActivity;
+import com.shuan.Project.R;
+import com.shuan.Project.Utils.Common;
+import com.shuan.Project.asyncTasks.EmployeeSerchResult;
+import com.shuan.Project.asyncTasks.GetEmployeeSerach;
+import com.shuan.Project.employer.PostViewActivity;
 
 import java.util.List;
 import java.util.Locale;

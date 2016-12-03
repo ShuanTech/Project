@@ -1,4 +1,4 @@
-package com.shuan.project.asyncTasks;
+package com.shuan.Project.asyncTasks;
 
 import android.content.Context;
 import android.content.Intent;
@@ -18,11 +18,11 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.assist.FailReason;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingProgressListener;
 import com.nostra13.universalimageloader.core.listener.SimpleImageLoadingListener;
-import com.shuan.project.R;
-import com.shuan.project.Utils.Helper;
-import com.shuan.project.parser.Connection;
-import com.shuan.project.parser.php;
-import com.shuan.project.profile.ProfileViewActivity;
+import com.shuan.Project.R;
+import com.shuan.Project.Utils.Helper;
+import com.shuan.Project.parser.Connection;
+import com.shuan.Project.parser.php;
+import com.shuan.Project.profile.ProfileViewActivity;
 
 import org.json.JSONArray;
 import org.json.JSONObject;

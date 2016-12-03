@@ -1,4 +1,4 @@
-package com.shuan.project.adapter;
+package com.shuan.Project.adapter;
 
 import android.content.Context;
 import android.content.DialogInterface;
@@ -11,14 +11,14 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.shuan.project.R;
-import com.shuan.project.Utils.Common;
-import com.shuan.project.asyncTasks.ClosePost;
-import com.shuan.project.asyncTasks.DeleteDetail;
-import com.shuan.project.asyncTasks.ReopenPost;
-import com.shuan.project.employer.JobPostActivity;
-import com.shuan.project.employer.ShortListActivity;
-import com.shuan.project.list.Sample;
+import com.shuan.Project.R;
+import com.shuan.Project.Utils.Common;
+import com.shuan.Project.asyncTasks.ClosePost;
+import com.shuan.Project.asyncTasks.DeleteDetail;
+import com.shuan.Project.asyncTasks.ReopenPost;
+import com.shuan.Project.employer.JobPostActivity;
+import com.shuan.Project.employer.ShortListActivity;
+import com.shuan.Project.list.Sample;
 
 import java.util.ArrayList;
 

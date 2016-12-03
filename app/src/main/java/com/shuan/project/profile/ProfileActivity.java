@@ -1,4 +1,4 @@
-package com.shuan.project.profile;
+package com.shuan.Project.profile;
 
 import android.content.ActivityNotFoundException;
 import android.content.Context;
@@ -20,7 +20,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -33,15 +32,15 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.assist.FailReason;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingProgressListener;
 import com.nostra13.universalimageloader.core.listener.SimpleImageLoadingListener;
-import com.shuan.project.R;
-import com.shuan.project.Utils.CircleImageView;
-import com.shuan.project.Utils.Common;
-import com.shuan.project.asyncTasks.UploadPicture;
-import com.shuan.project.list.Sample;
-import com.shuan.project.parser.Connection;
-import com.shuan.project.parser.php;
-import com.shuan.project.resume.ResumeEditActivity;
-import com.shuan.project.search.SearchActivity;
+import com.shuan.Project.R;
+import com.shuan.Project.Utils.CircleImageView;
+import com.shuan.Project.Utils.Common;
+import com.shuan.Project.asyncTasks.UploadPicture;
+import com.shuan.Project.list.Sample;
+import com.shuan.Project.parser.Connection;
+import com.shuan.Project.parser.php;
+import com.shuan.Project.resume.ResumeEditActivity;
+import com.shuan.Project.search.SearchActivity;
 
 import org.json.JSONArray;
 import org.json.JSONObject;

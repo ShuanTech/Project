@@ -7,7 +7,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.shuan.project.about.Help">
+    tools:context="com.shuan.Project.about.Help">
 
     <TextView
         android:layout_centerInParent="true"

@@ -1,4 +1,4 @@
-package com.shuan.project.asyncTasks;
+package com.shuan.Project.asyncTasks;
 
 import android.content.Context;
 import android.os.AsyncTask;
@@ -7,10 +7,10 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import com.shuan.project.adapter.NotifyAdapter;
-import com.shuan.project.list.Sample;
-import com.shuan.project.parser.Connection;
-import com.shuan.project.parser.php;
+import com.shuan.Project.adapter.NotifyAdapter;
+import com.shuan.Project.list.Sample;
+import com.shuan.Project.parser.Connection;
+import com.shuan.Project.parser.php;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -81,7 +81,7 @@ public class GetNotifyDetail extends AsyncTask<String, String, String> {
             adapter = new NotifyAdapter(mContext, list);
             listView.setAdapter(adapter);
         }else{
-            Toast.makeText(mContext,"No Data Found",Toast.LENGTH_SHORT).show();
+            Toast.makeText(mContext,"No Notifications yet",Toast.LENGTH_SHORT).show();
         }
 
 

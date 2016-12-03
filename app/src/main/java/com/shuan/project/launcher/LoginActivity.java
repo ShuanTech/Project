@@ -1,4 +1,4 @@
-package com.shuan.project.launcher;
+package com.shuan.Project.launcher;
 
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -15,18 +15,16 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.shuan.project.Utils.Helper;
-import com.shuan.project.asyncTasks.Connect;
-import com.shuan.project.asyncTasks.Follower;
-import com.shuan.project.asyncTasks.GetInfo;
-import com.shuan.project.employee.JuniorActivity;
-import com.shuan.project.R;
-import com.shuan.project.Utils.Common;
-import com.shuan.project.employee.SeniorActivity;
-import com.shuan.project.employer.EmployerActivity;
-import com.shuan.project.parser.Connection;
-import com.shuan.project.parser.php;
-import com.shuan.project.signup.SelectionActivity;
+import com.shuan.Project.Utils.Helper;
+import com.shuan.Project.asyncTasks.GetInfo;
+import com.shuan.Project.employee.JuniorActivity;
+import com.shuan.Project.R;
+import com.shuan.Project.Utils.Common;
+import com.shuan.Project.employee.SeniorActivity;
+import com.shuan.Project.employer.EmployerActivity;
+import com.shuan.Project.parser.Connection;
+import com.shuan.Project.parser.php;
+import com.shuan.Project.signup.SelectionActivity;
 
 import org.json.JSONArray;
 import org.json.JSONObject;

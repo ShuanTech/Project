@@ -1,4 +1,4 @@
-package com.shuan.project.asyncTasks;
+package com.shuan.Project.asyncTasks;
 
 import android.content.Context;
 import android.content.Intent;
@@ -7,9 +7,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.shuan.project.Utils.Common;
-import com.shuan.project.employee.JuniorActivity;
-import com.shuan.project.employee.SeniorActivity;
+import com.shuan.Project.Utils.Common;
+import com.shuan.Project.employee.JuniorActivity;
+import com.shuan.Project.employee.SeniorActivity;
 
 import org.json.JSONArray;
 import org.json.JSONObject;

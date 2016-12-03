@@ -1,4 +1,4 @@
-package com.shuan.project.setting;
+package com.shuan.Project.setting;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -14,11 +14,11 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
-import com.shuan.project.R;
-import com.shuan.project.Utils.Common;
-import com.shuan.project.launcher.LoginActivity;
-import com.shuan.project.parser.Connection;
-import com.shuan.project.parser.php;
+import com.shuan.Project.R;
+import com.shuan.Project.Utils.Common;
+import com.shuan.Project.launcher.LoginActivity;
+import com.shuan.Project.parser.Connection;
+import com.shuan.Project.parser.php;
 
 import org.json.JSONObject;
 

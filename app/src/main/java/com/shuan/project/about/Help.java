@@ -1,9 +1,9 @@
-package com.shuan.project.about;
+package com.shuan.Project.about;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-import com.shuan.project.R;
+import com.shuan.Project.R;
 
 public class Help extends AppCompatActivity {
 

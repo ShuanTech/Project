@@ -15,7 +15,7 @@
         android:background="?android:attr/selectableItemBackground"
         android:orientation="horizontal">
 
-        <com.shuan.project.Utils.CircleImageView
+        <com.shuan.Project.Utils.CircleImageView
             android:id="@+id/usr_img"
             android:layout_width="56dp"
             android:layout_height="56dp"

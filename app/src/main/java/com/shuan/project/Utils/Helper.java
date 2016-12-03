@@ -1,10 +1,9 @@
-package com.shuan.project.Utils;
+package com.shuan.Project.Utils;
 
 import android.content.Context;
 import android.graphics.Typeface;
 import android.util.Log;
 
-import java.security.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;

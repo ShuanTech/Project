@@ -1,4 +1,4 @@
-package com.shuan.project.fragment;
+package com.shuan.Project.fragment;
 
 
 import android.content.Context;
@@ -14,15 +14,13 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.shuan.project.R;
-import com.shuan.project.Utils.Common;
-import com.shuan.project.adapter.ConnectAdapter;
-import com.shuan.project.asyncTasks.GetHome;
-import com.shuan.project.asyncTasks.GetPost;
-import com.shuan.project.employer.PostViewActivity;
-import com.shuan.project.list.Sample;
+import com.shuan.Project.R;
+import com.shuan.Project.Utils.Common;
+import com.shuan.Project.adapter.ConnectAdapter;
+import com.shuan.Project.asyncTasks.GetHome;
+import com.shuan.Project.employer.PostViewActivity;
+import com.shuan.Project.list.Sample;
 
 import java.util.ArrayList;
 import java.util.HashMap;

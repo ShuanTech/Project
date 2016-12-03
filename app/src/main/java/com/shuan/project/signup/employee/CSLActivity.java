@@ -1,4 +1,4 @@
-package com.shuan.project.signup.employee;
+package com.shuan.Project.signup.employee;
 
 import android.content.Context;
 import android.content.Intent;
@@ -23,17 +23,17 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.shuan.project.R;
-import com.shuan.project.Utils.AlphabetValidator;
-import com.shuan.project.Utils.Common;
-import com.shuan.project.Utils.TextfieldValidator;
-import com.shuan.project.asyncTasks.CslIns;
-import com.shuan.project.asyncTasks.GetCollege;
-import com.shuan.project.asyncTasks.GetCourse;
-import com.shuan.project.asyncTasks.GetLocation;
-import com.shuan.project.asyncTasks.GetSkillSet;
-import com.shuan.project.employee.JuniorActivity;
-import com.shuan.project.employee.SeniorActivity;
+import com.shuan.Project.R;
+import com.shuan.Project.Utils.AlphabetValidator;
+import com.shuan.Project.Utils.Common;
+import com.shuan.Project.Utils.TextfieldValidator;
+import com.shuan.Project.asyncTasks.CslIns;
+import com.shuan.Project.asyncTasks.GetCollege;
+import com.shuan.Project.asyncTasks.GetCourse;
+import com.shuan.Project.asyncTasks.GetLocation;
+import com.shuan.Project.asyncTasks.GetSkillSet;
+import com.shuan.Project.employee.JuniorActivity;
+import com.shuan.Project.employee.SeniorActivity;
 
 public class CSLActivity extends AppCompatActivity {
 
@@ -45,6 +45,7 @@ public class CSLActivity extends AppCompatActivity {
     public ProgressBar progressBar;
     private String q;
     private Spinner level;
+    private int ab = 1990;
     public EditText fullName, frm_yr, to_yr;
     private boolean ins = false;
     private boolean cIns = false;
@@ -180,7 +181,7 @@ public class CSLActivity extends AppCompatActivity {
                         if (fullName.getText().toString().length() == 0) {
                             fullName.setError("Field Mandatory");
                             fullName.requestFocus();
-                        } else if(!alphabetValidator.validate(fullName.getText().toString())){
+                        } else if (!alphabetValidator.validate(fullName.getText().toString())) {
                             fullName.setError("Enter a Valid Name");
                             fullName.requestFocus();
                         } else if (get.equalsIgnoreCase("Select Highest Qualification")) {
@@ -201,20 +202,24 @@ public class CSLActivity extends AppCompatActivity {
                         } else if (i >= j) {
                             to_yr.setError("Passed out year less than join year");
                             to_yr.requestFocus();
+                        } else if (i <= ab) {
+                            frm_yr.setError("Enter a valid Year");
+                            frm_yr.requestFocus();
+                        } else if (j <= ab) {
+                            to_yr.setError("Enter a valid Year");
+                            to_yr.requestFocus();
                         } else if (skill.getText().toString().length() == 0) {
                             skill.setError("Field Mandatory");
                             skill.requestFocus();
-                        } else if (!textfieldValidator.validate(skill.getText().toString())){
+                        } else if (!textfieldValidator.validate(skill.getText().toString())) {
                             skill.setError("Enter a Valid Skill");
                             skill.requestFocus();
-                        }
-                        else if (loc.getText().toString().length() == 0) {
+                        } else if (loc.getText().toString().length() == 0) {
                             loc.setError("Field Mandatory");
                             loc.requestFocus();
-                        } else if (!textfieldValidator.validate(loc.getText().toString())){
+                        } else if (!textfieldValidator.validate(loc.getText().toString())) {
                             loc.setError("Enter a Valid Location");
-                        }
-                        else {
+                        } else {
                             next.setEnabled(false);
                             new CslIns(CSLActivity.this, mApp.getPreference().getString(Common.u_id, ""), fullName.getText().toString(), q,
                                     clgName.getText().toString(), conCent.getText().toString(), frm_yr.getText().toString(), to_yr.getText().toString(),
@@ -226,7 +231,8 @@ public class CSLActivity extends AppCompatActivity {
                             } else {
                                 startActivity(new Intent(getApplicationContext(), SeniorActivity.class));
                                 finish();
-                            }finish();
+                            }
+                            finish();
                         }
                         break;
 

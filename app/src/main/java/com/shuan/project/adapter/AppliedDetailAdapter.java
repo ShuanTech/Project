@@ -1,4 +1,4 @@
-package com.shuan.project.adapter;
+package com.shuan.Project.adapter;
 
 import android.content.Context;
 import android.content.DialogInterface;
@@ -12,11 +12,11 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import com.shuan.project.R;
-import com.shuan.project.asyncTasks.RejectCandidate;
-import com.shuan.project.employer.InterviewPanelActivity;
-import com.shuan.project.employer.PdfViewActivity;
-import com.shuan.project.list.Sample;
+import com.shuan.Project.R;
+import com.shuan.Project.asyncTasks.RejectCandidate;
+import com.shuan.Project.employer.InterviewPanelActivity;
+import com.shuan.Project.employer.PdfViewActivity;
+import com.shuan.Project.list.Sample;
 
 import java.util.ArrayList;
 

@@ -1,4 +1,4 @@
-package com.shuan.project.signup;
+package com.shuan.Project.signup;
 
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
@@ -23,19 +23,19 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.shuan.project.R;
-import com.shuan.project.Utils.Common;
-import com.shuan.project.Utils.EmailValidator;
-import com.shuan.project.Utils.Helper;
-import com.shuan.project.Utils.PasswordValidator;
-import com.shuan.project.Utils.PhoneNumberValidator;
-import com.shuan.project.Utils.TextfieldValidator;
-import com.shuan.project.Utils.UsernameValidator;
-import com.shuan.project.parser.Connection;
-import com.shuan.project.parser.php;
-import com.shuan.project.signup.employee.CSLActivity;
-import com.shuan.project.signup.employee.WorkActivity;
-import com.shuan.project.signup.employer.CompanyDetails;
+import com.shuan.Project.R;
+import com.shuan.Project.Utils.Common;
+import com.shuan.Project.Utils.EmailValidator;
+import com.shuan.Project.Utils.Helper;
+import com.shuan.Project.Utils.PasswordValidator;
+import com.shuan.Project.Utils.PhoneNumberValidator;
+import com.shuan.Project.Utils.TextfieldValidator;
+import com.shuan.Project.Utils.UsernameValidator;
+import com.shuan.Project.parser.Connection;
+import com.shuan.Project.parser.php;
+import com.shuan.Project.signup.employee.CSLActivity;
+import com.shuan.Project.signup.employee.WorkActivity;
+import com.shuan.Project.signup.employer.CompanyDetails;
 
 import org.json.JSONArray;
 import org.json.JSONObject;

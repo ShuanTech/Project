@@ -1,4 +1,4 @@
-package com.shuan.project.employer;
+package com.shuan.Project.employer;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,12 +13,12 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.shuan.project.R;
-import com.shuan.project.Utils.Common;
-import com.shuan.project.asyncTasks.CheckEligible;
-import com.shuan.project.asyncTasks.PostView;
-import com.shuan.project.resume.ExpResumeGenerate;
-import com.shuan.project.resume.JuniorResumeGenerate;
+import com.shuan.Project.R;
+import com.shuan.Project.Utils.Common;
+import com.shuan.Project.asyncTasks.CheckEligible;
+import com.shuan.Project.asyncTasks.PostView;
+import com.shuan.Project.resume.ExpResumeGenerate;
+import com.shuan.Project.resume.JuniorResumeGenerate;
 
 public class PostViewActivity extends AppCompatActivity {
 

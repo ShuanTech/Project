@@ -1,4 +1,4 @@
-package com.shuan.project.employer;
+package com.shuan.Project.employer;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -16,11 +16,10 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.shuan.project.R;
-import com.shuan.project.Utils.Common;
-import com.shuan.project.Utils.Helper;
-import com.shuan.project.asyncTasks.CompanyDetail;
-import com.shuan.project.asyncTasks.GetLocation;
+import com.shuan.Project.R;
+import com.shuan.Project.Utils.Common;
+import com.shuan.Project.Utils.Helper;
+import com.shuan.Project.asyncTasks.GetLocation;
 
 public class AddCompanyInfoActivity extends AppCompatActivity {
     private Helper helper = new Helper();

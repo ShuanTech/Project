@@ -1,4 +1,4 @@
-package com.shuan.project.Utils;
+package com.shuan.Project.Utils;
 
 import android.app.Application;
 import android.content.Context;
@@ -13,11 +13,8 @@ import com.nostra13.universalimageloader.cache.memory.impl.WeakMemoryCache;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
-import com.shuan.project.asyncTasks.Connect;
-import com.shuan.project.asyncTasks.Follower;
-import com.shuan.project.asyncTasks.GetInfo;
-import com.shuan.project.parser.Connection;
-import com.shuan.project.parser.php;
+import com.shuan.Project.parser.Connection;
+import com.shuan.Project.parser.php;
 
 import org.json.JSONObject;
 

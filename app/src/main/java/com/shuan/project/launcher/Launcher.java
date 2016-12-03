@@ -1,4 +1,4 @@
-package com.shuan.project.launcher;
+package com.shuan.Project.launcher;
 
 import android.content.Context;
 import android.content.DialogInterface;
@@ -12,18 +12,18 @@ import android.view.WindowManager;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.shuan.project.R;
-import com.shuan.project.Utils.Common;
-import com.shuan.project.Utils.Helper;
-import com.shuan.project.Utils.NetworkUtil;
-import com.shuan.project.employee.JuniorActivity;
-import com.shuan.project.employee.SeniorActivity;
-import com.shuan.project.employer.EmployerActivity;
-import com.shuan.project.parser.Connection;
-import com.shuan.project.parser.php;
-import com.shuan.project.signup.employee.CSLActivity;
-import com.shuan.project.signup.employee.WorkActivity;
-import com.shuan.project.signup.employer.CompanyDetails;
+import com.shuan.Project.R;
+import com.shuan.Project.Utils.Common;
+import com.shuan.Project.Utils.Helper;
+import com.shuan.Project.Utils.NetworkUtil;
+import com.shuan.Project.employee.JuniorActivity;
+import com.shuan.Project.employee.SeniorActivity;
+import com.shuan.Project.employer.EmployerActivity;
+import com.shuan.Project.parser.Connection;
+import com.shuan.Project.parser.php;
+import com.shuan.Project.signup.employee.CSLActivity;
+import com.shuan.Project.signup.employee.WorkActivity;
+import com.shuan.Project.signup.employer.CompanyDetails;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
