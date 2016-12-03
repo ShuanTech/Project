@@ -79,7 +79,7 @@ public class GetPortfolio extends AsyncTask<String, String, String> {
             adpter = new ServiceAdapter(mContext, list);
             listView.setAdapter(adpter);
         } else {
-            Toast.makeText(mContext, "No services Available.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(mContext, "No Portfolio Available.", Toast.LENGTH_SHORT).show();
         }
     }
 }

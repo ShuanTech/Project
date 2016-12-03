@@ -175,8 +175,8 @@ public class EmployerActivity extends AppCompatActivity {
                         display(1);
                         selectd = 1;
                         return true;
-                    case R.id.following:
-                        toolbar.setTitle("Following");
+                    case R.id.ourteam:
+                        toolbar.setTitle("Our Team");
                         mDrawerLayout.closeDrawers();
                         display(2);
                         selectd = 2;
@@ -188,7 +188,7 @@ public class EmployerActivity extends AppCompatActivity {
                         selectd = 3;
                         return true;
                     case R.id.abt:
-                        toolbar.setTitle("About Me");
+                        toolbar.setTitle("About Company");
                         mDrawerLayout.closeDrawers();
                         display(5);
                         selectd = 5;
@@ -205,12 +205,12 @@ public class EmployerActivity extends AppCompatActivity {
                         display(7);
                         selectd = 7;
                         return true;
-                    case R.id.test:
+                    /*case R.id.test:
                         toolbar.setTitle("Testimonial");
                         mDrawerLayout.closeDrawers();
                         display(8);
                         selectd = 8;
-                        return true;
+                        return true;*/
                     case R.id.contact:
                         toolbar.setTitle("Contact");
                         mDrawerLayout.closeDrawers();

@@ -16,10 +16,10 @@
             android:title="Follower"
             app:actionViewClass="android.widget.TextView" />
 
-        <!--<item android:id="@+id/following"
-            android:icon="@drawable/ic_follower"
-            android:title="Following"
-            app:actionViewClass="android.widget.TextView"/>-->
+        <item android:id="@+id/ourteam"
+            android:icon="@drawable/ic_ourteam"
+            android:title="Our Team"
+            app:actionViewClass="android.widget.TextView"/>
 
         <item android:title="Activities">
             <menu>
@@ -62,10 +62,10 @@
                         android:id="@+id/port"
                         android:icon="@drawable/ic_portfolio"
                         android:title="Portfolio" />
-                    <item
+                   <!-- <item
                         android:id="@+id/test"
                         android:icon="@drawable/ic_testimonial"
-                        android:title="Testimonial" />
+                        android:title="Testimonial" />-->
 
                     <item
                         android:id="@+id/contact"
@@ -81,10 +81,10 @@
         <item android:title="Others">
             <menu>
                 <group android:checkableBehavior="single">
-                    <item
+                   <!-- <item
                         android:id="@+id/promote"
                         android:icon="@drawable/ic_promotion"
-                        android:title="Promotion" />
+                        android:title="Promotion" />-->
                     <item
                         android:id="@+id/act"
                         android:icon="@drawable/ic_payment"
