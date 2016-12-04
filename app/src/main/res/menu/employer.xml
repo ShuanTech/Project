@@ -13,13 +13,13 @@
         <item
             android:id="@+id/follower"
             android:icon="@drawable/ic_following"
-            android:title="Follower"
+            android:title="Followers"
             app:actionViewClass="android.widget.TextView" />
 
-        <item android:id="@+id/ourteam"
+        <!--<item android:id="@+id/ourteam"
             android:icon="@drawable/ic_ourteam"
             android:title="Our Team"
-            app:actionViewClass="android.widget.TextView"/>
+            app:actionViewClass="android.widget.TextView"/>-->
 
         <item android:title="Activities">
             <menu>
@@ -32,7 +32,7 @@
                     <item
                         android:id="@+id/fav"
                         android:icon="@drawable/refer"
-                        android:title="Favorite"/>
+                        android:title="Favourite"/>
 
                     <item
                         android:id="@+id/reopen"

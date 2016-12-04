@@ -170,17 +170,17 @@ public class EmployerActivity extends AppCompatActivity {
                         selectd = 0;
                         return true;
                     case R.id.follower:
-                        toolbar.setTitle("Follower");
+                        toolbar.setTitle("Followers");
                         mDrawerLayout.closeDrawers();
                         display(1);
                         selectd = 1;
                         return true;
-                    case R.id.ourteam:
+                   /* case R.id.ourteam:
                         toolbar.setTitle("Our Team");
                         mDrawerLayout.closeDrawers();
                         display(2);
                         selectd = 2;
-                        return true;
+                        return true;*/
                     case R.id.action:
                         toolbar.setTitle("Action");
                         mDrawerLayout.closeDrawers();
@@ -236,7 +236,7 @@ public class EmployerActivity extends AppCompatActivity {
                         showTerm();
                         return true;
                     case R.id.fav:
-                        toolbar.setTitle("Favorite Person");
+                        toolbar.setTitle("Favourite Person");
                         mDrawerLayout.closeDrawers();
                         display(10);
                         selectd = 10;

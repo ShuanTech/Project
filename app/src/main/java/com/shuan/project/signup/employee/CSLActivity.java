@@ -45,7 +45,7 @@ public class CSLActivity extends AppCompatActivity {
     public ProgressBar progressBar;
     private String q;
     private Spinner level;
-    private int ab = 1990;
+    private int ab = 1950;
     public EditText fullName, frm_yr, to_yr;
     private boolean ins = false;
     private boolean cIns = false;
@@ -202,10 +202,10 @@ public class CSLActivity extends AppCompatActivity {
                         } else if (i >= j) {
                             to_yr.setError("Passed out year less than join year");
                             to_yr.requestFocus();
-                        } else if (i <= ab) {
+                        } else if (i < ab) {
                             frm_yr.setError("Enter a valid Year");
                             frm_yr.requestFocus();
-                        } else if (j <= ab) {
+                        } else if (j < ab) {
                             to_yr.setError("Enter a valid Year");
                             to_yr.requestFocus();
                         } else if (skill.getText().toString().length() == 0) {

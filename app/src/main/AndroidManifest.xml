@@ -165,7 +165,8 @@
             android:theme="@style/Senior"></activity>
         <activity
             android:name="com.shuan.Project.employer.PdfViewActivity"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:theme="@style/AppBaseTheme">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.shuan.Project.employer.ShortListActivity" />
@@ -221,7 +222,8 @@
         </activity>
         <activity
             android:name="com.shuan.Project.search.EmployerSearchResultActivity"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:theme="@style/AppBaseTheme">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.shuan.Project.search.EmployerSearchActivity" />

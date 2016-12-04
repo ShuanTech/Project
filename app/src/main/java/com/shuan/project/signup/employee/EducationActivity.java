@@ -46,6 +46,7 @@ public class EducationActivity extends AppCompatActivity implements View.OnClick
     private AutoCompleteTextView clgName, conCent;
     private EditText univ, loc, frm_yr, to_yr, agrt;
     private TextView frm, to, qfy;
+    private int i = 0, j = 0, ab = 1950;
     private Button q_next, q_skip;
     private HashMap<String, String> eData;
     private ProgressBar progressBar;
@@ -91,8 +92,6 @@ public class EducationActivity extends AppCompatActivity implements View.OnClick
         qfy = (TextView) findViewById(R.id.qfy);
 
 
-
-
         ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(getApplicationContext(), R.layout.spinner_item, qulify);
         level.setAdapter(adapter1);
         level.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -114,6 +113,39 @@ public class EducationActivity extends AppCompatActivity implements View.OnClick
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
 
+            }
+        });
+        frm_yr.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                i = Integer.parseInt(frm_yr.getText().toString());
+
+            }
+        });
+        to_yr.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                j = Integer.parseInt(to_yr.getText().toString());
             }
         });
 
@@ -142,9 +174,21 @@ public class EducationActivity extends AppCompatActivity implements View.OnClick
                     loc.requestFocus();
                 } else if (frm_yr.getText().toString().length() == 0) {
                     frm_yr.setError("Field Mandatory");
+                    frm_yr.requestFocus();
+                } else if (i < ab) {
+                    frm_yr.setError("Enter a valid year");
+                    frm_yr.requestFocus();
                 } else if (to_yr.getText().toString().length() == 0) {
                     to_yr.setError("Field Mandatory");
-                } else if (conCent.getText().toString().length() == 0) {
+                    to_yr.requestFocus();
+                } else if (j < ab) {
+                    to_yr.setError("Enter a valid year");
+                    to_yr.requestFocus();
+                } else if(i>=j){
+                    to_yr.setError("Check your pass out year and joined year");
+                    to_yr.requestFocus();
+                }
+                else if (conCent.getText().toString().length() == 0) {
                     conCent.setError("Concentration Mandatory");
                     conCent.requestFocus();
                 } else if (agrt.getText().toString().length() == 0) {
@@ -162,12 +206,12 @@ public class EducationActivity extends AppCompatActivity implements View.OnClick
                 mApp.getPreference().edit().putBoolean(Common.HSC, false).commit();
                 mApp.getPreference().edit().putBoolean(Common.SSLC, false).commit();
                 if (mApp.getPreference().getString(Common.LEVEL, "").equalsIgnoreCase("1")) {
-                    int val=mApp.getPreference().getInt(Common.PROFILESTRENGTH,0);
-                    mApp.getPreference().edit().putInt(Common.PROFILESTRENGTH, val+5).commit();
+                    int val = mApp.getPreference().getInt(Common.PROFILESTRENGTH, 0);
+                    mApp.getPreference().edit().putInt(Common.PROFILESTRENGTH, val + 5).commit();
                     startActivity(new Intent(getApplicationContext(), SkillActivity.class));
                 } else {
-                    int val=mApp.getPreference().getInt(Common.PROFILESTRENGTH,0);
-                    mApp.getPreference().edit().putInt(Common.PROFILESTRENGTH, val+5).commit();
+                    int val = mApp.getPreference().getInt(Common.PROFILESTRENGTH, 0);
+                    mApp.getPreference().edit().putInt(Common.PROFILESTRENGTH, val + 5).commit();
                     startActivity(new Intent(getApplicationContext(), PersonalActivity.class));
                 }
                 finish();
@@ -314,8 +358,8 @@ public class EducationActivity extends AppCompatActivity implements View.OnClick
         String uUniv = univ.getText().toString();
         String uLoc = loc.getText().toString();
         String uConcent = conCent.getText().toString();
-        String uFrm=frm_yr.getText().toString();
-        String uTo=to_yr.getText().toString();
+        String uFrm = frm_yr.getText().toString();
+        String uTo = to_yr.getText().toString();
         String uAgrt = agrt.getText().toString();
 
         @Override
@@ -365,8 +409,8 @@ public class EducationActivity extends AppCompatActivity implements View.OnClick
                             mApp.getPreference().edit().putBoolean(Common.QUALIFICATION, true).commit();
                             mApp.getPreference().edit().putBoolean(Common.HSC, false).commit();
                             mApp.getPreference().edit().putBoolean(Common.SSLC, false).commit();
-                            int val=mApp.getPreference().getInt(Common.PROFILESTRENGTH,0);
-                            mApp.getPreference().edit().putInt(Common.PROFILESTRENGTH, val+2).commit();
+                            int val = mApp.getPreference().getInt(Common.PROFILESTRENGTH, 0);
+                            mApp.getPreference().edit().putInt(Common.PROFILESTRENGTH, val + 2).commit();
                             if (mApp.getPreference().getString(Common.LEVEL, "").equalsIgnoreCase("1")) {
                                 startActivity(new Intent(getApplicationContext(), SkillActivity.class));
                                 finish();

@@ -386,6 +386,34 @@
                         android:orientation="vertical" />
 
                 </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/evnt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginTop="@dimen/activity_horizontal_margin"
+                    android:background="@drawable/pro_bac"
+                    android:visibility="gone">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="@dimen/small_margin"
+                        android:layout_marginLeft="@dimen/standard_margin"
+                        android:layout_marginTop="@dimen/standard_margin"
+                        android:text="Events"
+                        android:textAppearance="?android:textAppearanceMedium"
+                        android:textColor="#000"
+                        android:textStyle="bold"/>
+                    <LinearLayout
+                        android:id="@+id/events"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/small_margin"
+                        android:layout_marginLeft="@dimen/standard_margin"
+                        android:orientation="vertical" />
+
+
+                </LinearLayout>
 
                 <LinearLayout
                     android:id="@+id/cmpntDet"

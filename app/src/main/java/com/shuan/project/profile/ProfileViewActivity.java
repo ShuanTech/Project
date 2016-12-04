@@ -71,7 +71,7 @@ public class ProfileViewActivity extends AppCompatActivity {
     private RelativeLayout followLay;
     private LinearLayout extrabut;
     private String fullname;
-    private LinearLayout about, cmpntDet, ser, service, port, portfolio, job, jobs;
+    private LinearLayout about, cmpntDet, ser, service, port, portfolio, job, jobs, evnt, events;
     private RelativeLayout flow, unflow, flows;
     private LinearLayout fms;
 
@@ -141,6 +141,8 @@ public class ProfileViewActivity extends AppCompatActivity {
         portfolio = (LinearLayout) findViewById(R.id.portfolio);
         job = (LinearLayout) findViewById(R.id.job);
         jobs = (LinearLayout) findViewById(R.id.jobs);
+        evnt = (LinearLayout) findViewById(R.id.evnt);
+        events = (LinearLayout) findViewById(R.id.events);
         cmpntDet = (LinearLayout) findViewById(R.id.cmpntDet);
         web = (LinearLayout) findViewById(R.id.web);
         url = (TextView) findViewById(R.id.url);

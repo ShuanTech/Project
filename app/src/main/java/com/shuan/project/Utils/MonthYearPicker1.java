@@ -17,7 +17,7 @@ public class MonthYearPicker1 {
     Calendar calendar = Calendar.getInstance();
     private static final int MIN_YEAR = 1970;
 
-    private static final int MAX_YEAR = 2099;
+    private static final int MAX_YEAR = 0;
 
     private static final String[] PICKER_DISPLAY_MONTHS_NAMES = new String[] { "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct",
             "Nov", "Dec" };
@@ -175,8 +175,9 @@ public class MonthYearPicker1 {
      * Gets the current year.
      *
      * @return the current year
+     * @param year
      */
-    public int getCurrentYear() {
+    public int getCurrentYear(int year) {
         return currentYear;
     }
 
@@ -227,5 +228,6 @@ public class MonthYearPicker1 {
      */
     public void setYearWrapSelectorWheel(boolean wrapSelectorWheel) {
         yearNumberPicker.setWrapSelectorWheel(wrapSelectorWheel);
+
     }
 }
