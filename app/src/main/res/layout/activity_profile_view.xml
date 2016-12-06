@@ -883,6 +883,16 @@
                     android:visibility="gone">
 
                     <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="left"
+                        android:layout_marginLeft="@dimen/standard_margin"
+                        android:layout_marginTop="@dimen/small_margin"
+                        android:text="Objective"
+                        android:textAppearance="?android:textAppearanceMedium"
+                        android:textColor="#000"
+                        android:textStyle="bold"/>
+                    <TextView
                         android:id="@+id/obj"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"

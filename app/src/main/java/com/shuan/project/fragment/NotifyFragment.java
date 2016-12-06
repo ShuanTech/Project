@@ -33,6 +33,7 @@ public class NotifyFragment extends Fragment {
     private Context mContext;
     private ProgressBar progressBar;
     private ListView list;
+    private String nId;
 
 
     public NotifyFragment() {

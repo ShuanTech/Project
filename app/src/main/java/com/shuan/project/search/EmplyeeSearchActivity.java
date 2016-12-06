@@ -248,7 +248,7 @@ public class EmplyeeSearchActivity extends AppCompatActivity implements GooglePl
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.cancel();
-                Toast.makeText(getApplicationContext(), "Can't Find Employee", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Can't Find Employer", Toast.LENGTH_SHORT).show();
             }
         }).show();
     }

@@ -16,7 +16,7 @@
     <string name="school">Name Of School</string>
     <string name="board">Name of Board</string>
     <string name="univ">University Name</string>
-    <string name="location">City / Town / Location</string>
+    <string name="location">City / Town </string>
     <string name="frm">From :</string>
     <string name="to">To :</string>
     <string name="concent">Course</string>

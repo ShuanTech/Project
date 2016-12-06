@@ -53,6 +53,7 @@ import com.shuan.Project.fragment.ImportanceFragment;
 import com.shuan.Project.fragment.InviteFragment;
 import com.shuan.Project.fragment.NotifyFragment;
 import com.shuan.Project.fragment.OffersFragment;
+import com.shuan.Project.fragment.PortfolioFragment;
 import com.shuan.Project.fragment.ReferenceFragment;
 import com.shuan.Project.fragment.SuggestionFragment;
 import com.shuan.Project.launcher.LoginActivity;
@@ -267,6 +268,12 @@ public class SeniorActivity extends AppCompatActivity {
                         display(12);
                         selected = 12;
                         return true;
+                    case R.id.port:
+                        toolbar.setTitle("Portfolio");
+                        mDrawerLayout.closeDrawers();
+                        display(13);
+                        selected = 13;
+                        return true;
                     /*case R.id.help:
                         mDrawerLayout.closeDrawers();
                         startActivity(new Intent(getApplicationContext(), Help.class));
@@ -391,6 +398,10 @@ public class SeniorActivity extends AppCompatActivity {
                 break;
             case 12:
                 f=new InviteFragment();
+                break;
+            case 13:
+                f=new PortfolioFragment();
+                Toast.makeText(getApplicationContext(),"Use website for adding portfolio",Toast.LENGTH_SHORT).show();
                 break;
         }
 
