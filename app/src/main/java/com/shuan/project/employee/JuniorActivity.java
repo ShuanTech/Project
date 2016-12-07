@@ -356,7 +356,7 @@ public class JuniorActivity extends AppCompatActivity {
                 f = new GetReadyFragment();
                 break;
             case 11:
-                toolbar.setTitle("Notification");
+                toolbar.setTitle("Notifications");
                 f = new NotifyFragment();
                 break;
             case 12:

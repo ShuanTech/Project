@@ -3,6 +3,7 @@ package com.shuan.Project.asyncTasks;
 
 import android.content.Context;
 import android.os.AsyncTask;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.ProgressBar;
@@ -32,7 +33,7 @@ public class GetPost extends AsyncTask<String, String, String> {
 
 
 
-    public GetPost(Context mContext, ListView listView, ProgressBar progressBar, String u_id,String type) {
+    public GetPost(Context mContext, ListView listView, ProgressBar progressBar, String u_id, String type, SwipeRefreshLayout swipe) {
         this.mContext = mContext;
         this.listView = listView;
         this.progressBar = progressBar;

@@ -221,7 +221,7 @@ public class SeniorActivity extends AppCompatActivity {
                         selected = 5;
                         return true;
                     case R.id.imp:
-                        toolbar.setTitle("Importance");
+                        toolbar.setTitle("Important");
                         mDrawerLayout.closeDrawers();
                         display(6);
                         selected = 6;

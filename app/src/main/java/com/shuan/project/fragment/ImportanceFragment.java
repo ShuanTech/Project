@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,6 +36,7 @@ public class ImportanceFragment extends Fragment {
     private Common mApp;
     private Context mContext;
     private ProgressBar progressBar;
+    private SwipeRefreshLayout swipe;
 
 
 
@@ -51,12 +53,13 @@ public class ImportanceFragment extends Fragment {
         mApp= (Common) mContext.getApplicationContext();
         View view = inflater.inflate(R.layout.fragment_employer_home, container, false);
 
+        swipe = (SwipeRefreshLayout) view.findViewById(R.id.swipe);
         listView = (ListView) view.findViewById(R.id.post);
         progressBar = (ProgressBar) view.findViewById(R.id.progress_bar);
 
         list = new ArrayList<Sample>();
 
-        new GetPost(getActivity(), listView, progressBar, mApp.getPreference().getString(Common.u_id,""),"imp").execute();
+        new GetPost(getActivity(), listView, progressBar, mApp.getPreference().getString(Common.u_id,""),"imp", swipe).execute();
 
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -69,6 +72,14 @@ public class ImportanceFragment extends Fragment {
                 in.putExtra("frmId",txt1.getText().toString());
                 in.putExtra("apply","no");
                 startActivity(in);
+            }
+        });
+        swipe.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                new GetPost(getActivity(), listView, progressBar, mApp.getPreference().getString(Common.u_id,""),"imp", swipe).execute();
+                swipe.setRefreshing(false);
+
             }
         });
 

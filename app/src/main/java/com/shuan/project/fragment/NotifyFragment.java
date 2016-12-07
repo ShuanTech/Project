@@ -6,6 +6,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -33,7 +35,6 @@ public class NotifyFragment extends Fragment {
     private Context mContext;
     private ProgressBar progressBar;
     private ListView list;
-    private String nId;
 
 
     public NotifyFragment() {
@@ -66,19 +67,19 @@ public class NotifyFragment extends Fragment {
                     if(vewd.getText().toString().equalsIgnoreCase("0")){
                         showDialog(txt2.getText().toString());
                     }else{
-                       /* Fragment frg=new InviteFragment();
+                        Fragment frg=new InviteFragment();
                         FragmentManager frgmg=getActivity().getSupportFragmentManager();
                         FragmentTransaction frgtra=frgmg.beginTransaction();
                         frgtra.replace(R.id.container,frg);
                         frgtra.addToBackStack(null);
                         frgtra.commit();
-                        getActivity().setTitle("Invitations");*/
+                        getActivity().setTitle("Invitations");
                     }
 
                 } else if (type.getText().toString().equalsIgnoreCase("1")) {
 
                     Intent in = new Intent(getActivity(), InterViewActivity.class);
-                    in.putExtra("title", txt.getText().toString());
+                    /*in.putExtra("title", txt.getText().toString());*/
                     in.putExtra("post", txt1.getText().toString());
                     new UpdateNotify(getActivity(), mApp.getPreference().getString(Common.u_id, ""),
                             nId.getText().toString()).execute();
@@ -90,7 +91,7 @@ public class NotifyFragment extends Fragment {
                             nId.getText().toString()).execute();
                     startActivity(in);
                 } else if(type.getText().toString().equalsIgnoreCase("3")){
-                    mApp.getPreference().edit().putString("title", txt.getText().toString()).commit();
+                   /* mApp.getPreference().edit().putString("title", txt.getText().toString()).commit();*/
                     mApp.getPreference().edit().putString("jId", txt1.getText().toString()).commit();
                     new UpdateNotify(getActivity(), mApp.getPreference().getString(Common.u_id, ""),
                             nId.getText().toString()).execute();

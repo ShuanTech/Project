@@ -117,7 +117,7 @@ public class InviteActivity extends AppCompatActivity {
                             cntMail.setText(cMail);
                             cntPh.setText(cPh);
                             cntTme.setText(cTme);
-                            note.setText(" I found your profile on Udyomita. If You are interested, contact to discussing current Openings.");
+                            note.setText(" I found your profile on Udyomita. If You are interested, contact for a discussion .");
                             setImage(cImg, cmpnyImg);
                         }
                     });
