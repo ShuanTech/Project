@@ -34,6 +34,9 @@ import com.shuan.Project.Utils.Common;
 import com.shuan.Project.asyncTasks.AddFavorite;
 import com.shuan.Project.asyncTasks.Following;
 import com.shuan.Project.asyncTasks.GetInvitation;
+import com.shuan.Project.employee.EventViewActivity;
+import com.shuan.Project.employee.PortfolioViewActivity;
+import com.shuan.Project.employee.ServiceViewActivity;
 import com.shuan.Project.employer.PostViewActivity;
 import com.shuan.Project.list.Sample;
 import com.shuan.Project.parser.Connection;
@@ -701,6 +704,7 @@ public class ProfileViewActivity extends AppCompatActivity {
                             JSONObject data2 = serArray.getJSONObject(i);
 
                             final String ser_name = data2.optString("ser_name");
+                            final String uId = data2.optString(u_id);
 
 
                             if (!ser_name.equalsIgnoreCase("")) {
@@ -715,6 +719,17 @@ public class ProfileViewActivity extends AppCompatActivity {
                                         img.setImageResource(R.drawable.ic_services);
                                         txt.setText(ser_name);
                                         service.addView(v);
+                                        TypedValue val = new TypedValue();
+                                        getApplicationContext().getTheme().resolveAttribute(android.R.attr.selectableItemBackground, val, true);
+                                        v.setBackgroundResource(val.resourceId);
+                                        v.setOnClickListener(new View.OnClickListener() {
+                                            @Override
+                                            public void onClick(View v) {
+                                                Intent in = new Intent(getApplicationContext(), ServiceViewActivity.class);
+                                                in.putExtra("u_id",uId );
+                                                startActivity(in);
+                                            }
+                                        });
                                     }
                                 });
                             }
@@ -727,6 +742,7 @@ public class ProfileViewActivity extends AppCompatActivity {
                             JSONObject data2 = portArray.getJSONObject(i);
 
                             final String ser_name = data2.optString("p_title");
+                            final String uId = data2.optString("u_id");
 
 
                             if (!ser_name.equalsIgnoreCase("")) {
@@ -741,6 +757,18 @@ public class ProfileViewActivity extends AppCompatActivity {
                                         img.setImageResource(R.drawable.ic_portfolio);
                                         txt.setText(ser_name);
                                         portfolio.addView(v);
+                                        TypedValue val = new TypedValue();
+                                        getApplicationContext().getTheme().resolveAttribute(android.R.attr.selectableItemBackground, val, true);
+                                        v.setBackgroundResource(val.resourceId);
+                                        v.setOnClickListener(new View.OnClickListener() {
+                                            @Override
+                                            public void onClick(View v) {
+                                                Intent in = new Intent(getApplicationContext(), PortfolioViewActivity.class);
+                                                in.putExtra("u_id",uId );
+                                                startActivity(in);
+                                            }
+                                        });
+
                                     }
                                 });
                             }
@@ -786,6 +814,44 @@ public class ProfileViewActivity extends AppCompatActivity {
                             }
 
 
+                        }
+
+                        final JSONObject event= child.getJSONObject("evnt");
+                        JSONArray eventArray= event.getJSONArray("evnt");
+                        for (int i=0;i<eventArray.length();i++){
+                            JSONObject data2= eventArray.getJSONObject(i);
+
+                            final String ser_name= data2.optString("name");
+                            final String evntId= data2.optString("evnt_id");
+
+                            if (!ser_name.equalsIgnoreCase("")){
+                                runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        evnt.setVisibility(View.VISIBLE);
+                                        LayoutInflater inflater=(LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                                        View v = inflater.inflate(R.layout.wrk_lay,null);
+                                        ImageView img= (ImageView) v.findViewById(R.id.img);
+                                        TextView txt= (TextView) v.findViewById(R.id.wrk);
+                                        img.setImageResource(R.drawable.ic_event);
+                                        txt.setText(ser_name);
+                                        events.addView(v);
+                                        TypedValue val = new TypedValue();
+                                        getApplicationContext().getTheme().resolveAttribute(android.R.attr.selectableItemBackground, val, true);
+                                        v.setBackgroundResource(val.resourceId);
+                                        v.setOnClickListener(new View.OnClickListener() {
+                                            @Override
+                                            public void onClick(View v) {
+                                                Intent in = new Intent(getApplicationContext(), EventViewActivity.class);
+                                                in.putExtra("event_id",evntId);
+                                                startActivity(in);
+                                            }
+                                        });
+
+
+                                    }
+                                });
+                            }
                         }
 
                     }

@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import com.shuan.Project.R;
 import com.shuan.Project.Utils.Common;
+import com.shuan.Project.activities.CommentsActivity;
 import com.shuan.Project.asyncTasks.CheckEligible;
 import com.shuan.Project.asyncTasks.PostView;
 import com.shuan.Project.resume.ExpResumeGenerate;
@@ -25,11 +26,11 @@ public class PostViewActivity extends AppCompatActivity {
     private Toolbar toolbar;
     private Common mApp;
     private ImageView coverImg, cmpny_logo;
-    private TextView jTitle, cmpny, created, viewd, applied, shared, skill, desc, type, cate, jId, sal,loc,exp,qua;
+    private TextView jTitle, cmpny, created, viewd, applied, shared, skill, desc, type, cate, jId, sal,loc,exp,qua,cmnt;
     private Button apply;
     private RelativeLayout scroll;
     private ProgressBar progressBar;
-    private LinearLayout jType, jSal, jCate, j_Id,jLoc,jExp,jQua;
+    private LinearLayout jType, jSal, jCate, j_Id,jLoc,jExp,jQua,lay4;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +54,7 @@ public class PostViewActivity extends AppCompatActivity {
         jSal = (LinearLayout) findViewById(R.id.j_sal);
         jCate = (LinearLayout) findViewById(R.id.j_cate);
         j_Id = (LinearLayout) findViewById(R.id.j_id);
+
         coverImg = (ImageView) findViewById(R.id.cover_img);
         cmpny_logo = (ImageView) findViewById(R.id.cmpny_logo);
         jTitle = (TextView) findViewById(R.id.jTitle);
@@ -68,12 +70,15 @@ public class PostViewActivity extends AppCompatActivity {
         jId = (TextView) findViewById(R.id.jId);
         apply = (Button) findViewById(R.id.apply);
         sal = (TextView) findViewById(R.id.sal);
+
         jLoc= (LinearLayout) findViewById(R.id.j_loc);
         jExp= (LinearLayout) findViewById(R.id.j_exp);
         jQua= (LinearLayout) findViewById(R.id.j_qua);
         loc= (TextView) findViewById(R.id.loc);
+
         exp= (TextView) findViewById(R.id.exp);
         qua= (TextView) findViewById(R.id.qua);
+        lay4= (LinearLayout) findViewById(R.id.lay4);
 
         if (mApp.getPreference().getString(Common.LEVEL, "").equalsIgnoreCase("3")) {
             apply.setVisibility(View.GONE);
@@ -96,6 +101,14 @@ public class PostViewActivity extends AppCompatActivity {
                 }
 
 
+            }
+        });
+        lay4.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplication(), CommentsActivity.class));
+                return;
             }
         });
 

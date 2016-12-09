@@ -193,6 +193,16 @@ public class PostView extends AsyncTask<String, String, String> {
                 mContext.startActivity(in);
             }
         });
+        cmpny.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent in = new Intent(mContext, ProfileViewActivity.class);
+                in.putExtra("u_id", cmpnyId);
+                in.putExtra("level","3");
+                in.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                mContext.startActivity(in);
+            }
+        });
 
         if (apply.equalsIgnoreCase("1")) {
             but.setText("Applied");

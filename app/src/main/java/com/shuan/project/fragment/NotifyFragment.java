@@ -91,7 +91,7 @@ public class NotifyFragment extends Fragment {
                             nId.getText().toString()).execute();
                     startActivity(in);
                 } else if(type.getText().toString().equalsIgnoreCase("3")){
-                   /* mApp.getPreference().edit().putString("title", txt.getText().toString()).commit();*/
+                    mApp.getPreference().edit().putString("title", txt.getText().toString()).commit();
                     mApp.getPreference().edit().putString("jId", txt1.getText().toString()).commit();
                     new UpdateNotify(getActivity(), mApp.getPreference().getString(Common.u_id, ""),
                             nId.getText().toString()).execute();

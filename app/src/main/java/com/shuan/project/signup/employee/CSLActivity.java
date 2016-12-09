@@ -200,7 +200,7 @@ public class CSLActivity extends AppCompatActivity {
                             to_yr.setError("Field Mandatory");
                             to_yr.requestFocus();
                         } else if (i >= j) {
-                            to_yr.setError("Passed out year less than join year");
+                            to_yr.setError("Check pass out year");
                             to_yr.requestFocus();
                         } else if (i < ab) {
                             frm_yr.setError("Enter a valid Year");

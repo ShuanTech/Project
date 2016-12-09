@@ -10,7 +10,7 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
-        android:name="com.shuan.Project.Utils.Common"
+        android:name=".Utils.Common"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -20,7 +20,7 @@
             android:value="@integer/google_play_services_version" />
 
         <activity
-            android:name="com.shuan.Project.launcher.Launcher"
+            android:name=".launcher.Launcher"
             android:screenOrientation="portrait"
             android:theme="@style/Profile">
             <intent-filter>
@@ -30,66 +30,66 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.shuan.Project.signup.SelectionActivity"
+            android:name=".signup.SelectionActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/Profile"/>
+            android:theme="@style/Profile" />
         <activity
-            android:name="com.shuan.Project.signup.SignupActivity"
+            android:name=".signup.SignupActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysHidden"
-            android:theme="@style/Profile"/>
+            android:theme="@style/Profile"
+            android:windowSoftInputMode="stateAlwaysHidden" />
         <activity
-            android:name="com.shuan.Project.signup.employee.EducationActivity"
+            android:name=".signup.employee.EducationActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden" />
         <activity
-            android:name="com.shuan.Project.signup.employee.SkillActivity"
+            android:name=".signup.employee.SkillActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden" />
         <activity
-            android:name="com.shuan.Project.signup.employee.PersonalActivity"
+            android:name=".signup.employee.PersonalActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden" />
         <activity
-            android:name="com.shuan.Project.signup.employee.WorkActivity"
+            android:name=".signup.employee.WorkActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysHidden"
-            android:theme="@style/Profile"/>
+            android:theme="@style/Profile"
+            android:windowSoftInputMode="stateAlwaysHidden" />
         <activity
-            android:name="com.shuan.Project.signup.employer.CompanyDetails"
+            android:name=".signup.employer.CompanyDetails"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysHidden"
-            android:theme="@style/Profile"/>
+            android:theme="@style/Profile"
+            android:windowSoftInputMode="stateAlwaysHidden" />
         <activity
-            android:name="com.shuan.Project.launcher.LoginActivity"
+            android:name=".launcher.LoginActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysHidden"
-            android:theme="@style/Profile"/>
+            android:theme="@style/Profile"
+            android:windowSoftInputMode="stateAlwaysHidden" />
 
         <!-- Employer Activities -->
 
         <activity
-            android:name="com.shuan.Project.employer.EmployerActivity"
+            android:name=".employer.EmployerActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppBaseTheme.Profile" />
 
         <!-- Junior Activities -->
 
         <activity
-            android:name="com.shuan.Project.employee.JuniorActivity"
+            android:name=".employee.JuniorActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Junior.Profile" />
         <activity
-            android:name="com.shuan.Project.resume.UpdateJuniorResumeActivity"
+            android:name=".resume.UpdateJuniorResumeActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysHidden"
-            android:theme="@style/Junior">
+            android:theme="@style/Junior"
+            android:windowSoftInputMode="stateAlwaysHidden">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.shuan.Project.employee.JuniorActivity" />
         </activity>
         <activity
-            android:name="com.shuan.Project.resume.JuniorResumeGenerate"
+            android:name=".resume.JuniorResumeGenerate"
             android:screenOrientation="portrait"
             android:theme="@style/Junior">
             <meta-data
@@ -100,57 +100,58 @@
         <!-- Senior Activities -->
 
         <activity
-            android:name="com.shuan.Project.employee.SeniorActivity"
+            android:name=".employee.SeniorActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Senior" />
         <activity
-            android:name="com.shuan.Project.resume.UpdateSeniorResumeActivity"
+            android:name=".resume.UpdateSeniorResumeActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysHidden"
+            android:theme="@style/Senior"
+            android:windowSoftInputMode="stateAlwaysHidden">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.shuan.Project.employee.SeniorActivity" />
+        </activity>
+        <activity
+            android:name=".resume.ExpResumeGenerate"
+            android:screenOrientation="portrait"
             android:theme="@style/Senior">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.shuan.Project.employee.SeniorActivity" />
         </activity>
         <activity
-            android:name="com.shuan.Project.resume.ExpResumeGenerate"
-            android:screenOrientation="portrait"
-            android:theme="@style/Senior">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.shuan.Project.employee.SeniorActivity" />
-        </activity>
-        <activity android:name="com.shuan.Project.about.About"
-            android:theme="@style/Profile"/>
-        <activity android:name="com.shuan.Project.about.Help"
-            android:theme="@style/Profile"/>
+            android:name=".about.About"
+            android:theme="@style/AppBaseTheme" />
         <activity
-            android:name="com.shuan.Project.profile.ProfileViewActivity"
+            android:name=".about.Help"
+            android:theme="@style/Profile" />
+        <activity
+            android:name=".profile.ProfileViewActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Junior.Profile" />
-        <activity android:name="com.shuan.Project.signup.employer.CompanyContactInfoActivity"
-            android:theme="@style/AppBaseTheme"/>
-        <activity android:name="com.shuan.Project.signup.employer.AboutCompanyActivity"
-            android:theme="@style/AppBaseTheme"/>
-        <activity android:name="com.shuan.Project.employer.JobPostActivity"
-            android:theme="@style/AppBaseTheme"/>
-
         <activity
-            android:name="com.shuan.Project.employer.PostViewActivity"
+            android:name=".signup.employer.CompanyContactInfoActivity"
+            android:theme="@style/AppBaseTheme" />
+        <activity
+            android:name=".signup.employer.AboutCompanyActivity"
+            android:theme="@style/AppBaseTheme" />
+        <activity
+            android:name=".employer.JobPostActivity"
+            android:theme="@style/AppBaseTheme" />
+        <activity
+            android:name=".employer.PostViewActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppBaseTheme.Profile"></activity>
-
+            android:theme="@style/AppBaseTheme.Profile" />
         <activity
-            android:name="com.shuan.Project.search.SearchActivity"
+            android:name=".search.SearchActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysHidden"></activity>
-
+            android:windowSoftInputMode="stateAlwaysHidden" />
         <activity
-            android:name="com.shuan.Project.resume.ResumeEditActivity"
-            android:screenOrientation="portrait"></activity>
-
+            android:name=".resume.ResumeEditActivity"
+            android:screenOrientation="portrait" />
         <activity
-            android:name="com.shuan.Project.employer.ShortListActivity"
+            android:name=".employer.ShortListActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/AppBaseTheme">
@@ -159,20 +160,12 @@
                 android:value="com.shuan.Project.employer.EmployerActivity" />
         </activity>
         <activity
-            android:name="com.shuan.Project.resume.UpdateResumeActivity"
+            android:name=".resume.UpdateResumeActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysHidden"
-            android:theme="@style/Senior"></activity>
+            android:theme="@style/Senior"
+            android:windowSoftInputMode="stateAlwaysHidden" />
         <activity
-            android:name="com.shuan.Project.employer.PdfViewActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppBaseTheme">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.shuan.Project.employer.ShortListActivity" />
-        </activity>
-        <activity
-            android:name="com.shuan.Project.employer.InterviewPanelActivity"
+            android:name=".employer.PdfViewActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppBaseTheme">
             <meta-data
@@ -180,25 +173,33 @@
                 android:value="com.shuan.Project.employer.ShortListActivity" />
         </activity>
         <activity
-            android:name="com.shuan.Project.profile.ProfileActivity"
+            android:name=".employer.InterviewPanelActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/Junior.Profile"></activity>
+            android:theme="@style/AppBaseTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.shuan.Project.employer.ShortListActivity" />
+        </activity>
         <activity
-            android:name="com.shuan.Project.employee.InterViewActivity"
-            android:screenOrientation="portrait"></activity>
-        <activity
-            android:name="com.shuan.Project.activities.CommentsActivity"
+            android:name=".profile.ProfileActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysHidden"></activity>
+            android:theme="@style/Junior.Profile" />
         <activity
-            android:name="com.shuan.Project.setting.SettingActivity"
+            android:name=".employee.InterViewActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.CommentsActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+        <activity
+            android:name=".setting.SettingActivity"
             android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.shuan.Project.employee.SeniorActivity" />
         </activity>
         <activity
-            android:name="com.shuan.Project.setting.ChangePasswrd"
+            android:name=".setting.ChangePasswrd"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden">
             <meta-data
@@ -206,7 +207,7 @@
                 android:value="com.shuan.Project.setting.SettingActivity" />
         </activity>
         <activity
-            android:name="com.shuan.Project.employer.AddCompanyInfoActivity"
+            android:name=".employer.AddCompanyInfoActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden">
             <meta-data
@@ -214,7 +215,7 @@
                 android:value="com.shuan.Project.employer.EmployerActivity" />
         </activity>
         <activity
-            android:name="com.shuan.Project.search.EmployerSearchActivity"
+            android:name=".search.EmployerSearchActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppBaseTheme">
             <meta-data
@@ -222,7 +223,7 @@
                 android:value="com.shuan.Project.employer.EmployerActivity" />
         </activity>
         <activity
-            android:name="com.shuan.Project.search.EmployerSearchResultActivity"
+            android:name=".search.EmployerSearchResultActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppBaseTheme">
             <meta-data
@@ -230,29 +231,36 @@
                 android:value="com.shuan.Project.search.EmployerSearchActivity" />
         </activity>
         <activity
-            android:name="com.shuan.Project.search.EmplyeeSearchActivity"
+            android:name=".search.EmplyeeSearchActivity"
             android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.shuan.Project.employee.SeniorActivity" />
         </activity>
-        <activity android:name="com.shuan.Project.search.EmployeeSearchResultActivity">
+        <activity android:name=".search.EmployeeSearchResultActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.shuan.Project.search.EmplyeeSearchActivity" />
         </activity>
         <activity
-            android:name="com.shuan.Project.employee.InviteActivity"
+            android:name=".employee.InviteActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.shuan.Project.launcher.ForgotPassword"
+            android:name=".launcher.ForgotPassword"
             android:screenOrientation="portrait"
-            android:theme="@style/Profile"/>
+            android:theme="@style/Profile" />
         <activity
-            android:name="com.shuan.Project.signup.employee.CSLActivity"
+            android:name=".signup.employee.CSLActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysHidden"
-            android:theme="@style/Profile"/>
+            android:theme="@style/Profile"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+        <activity
+            android:name=".employee.EventViewActivity"
+            android:theme="@style/AppBaseTheme.Profile" />
+        <activity android:name=".employee.PortfolioViewActivity"
+            android:theme="@style/AppBaseTheme.Profile"/>
+        <activity android:name=".employee.ServiceViewActivity"
+            android:theme="@style/AppBaseTheme.Profile"></activity>
     </application>
 
 </manifest>

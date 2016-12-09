@@ -78,6 +78,7 @@ public class AppliedFragment extends Fragment {
             @Override
             public void onRefresh() {
                 new GetPost(getActivity(), listView, progressBar, mApp.getPreference().getString(Common.u_id,""),"applied",swipe).execute();
+                swipe.setRefreshing(false);
             }
         });
 

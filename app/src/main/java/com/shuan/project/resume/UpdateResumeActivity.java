@@ -811,7 +811,7 @@ public class UpdateResumeActivity extends AppCompatActivity implements View.OnCl
                             tYr.setError("Field Mandatory");
                             tYr.requestFocus();
                         } else if(fYr.getText().toString().equalsIgnoreCase(tYr.getText().toString())){
-                            tYr.setError("From & To year are not same.");
+                            tYr.setError("From & To year are same.");
                             tYr.requestFocus();
                         } else if(yr1>yr2){
                             tYr.setError("Check From & To Year");
@@ -871,12 +871,12 @@ public class UpdateResumeActivity extends AppCompatActivity implements View.OnCl
                 } else if (conCent.getText().toString().length() == 0) {
                     conCent.setError("Concentration Mandatory");
                     conCent.requestFocus();
-                } else if(i>j){
-                    to_yr.setError("Passed out year less than joined year");
+                } else if(i>=j){
+                    to_yr.setError("Check pass out year");
                     to_yr.requestFocus();
-                }else if (agrt.getText().toString().length() == 0) {
+               /* }else if (agrt.getText().toString().length() == 0) {
                     agrt.setError("Aggregate Mandatory");
-                    agrt.requestFocus();
+                    agrt.requestFocus();*/
                 } else {
                     if (what.equalsIgnoreCase("add")) {
                         new AddCollegedetail(UpdateResumeActivity.this, mApp.getPreference().getString(Common.u_id, ""), q, conCent.getText().toString(),
@@ -905,11 +905,11 @@ public class UpdateResumeActivity extends AppCompatActivity implements View.OnCl
                 } else if (sTYr.getText().toString().length() == 0) {
                     sTYr.setError("Field Mandatory");
                     sTYr.requestFocus();
-                } else if(k>l){
-                    sTYr.setError("Passed out year less than joined year");
+                } else if(k>=l){
+                    sTYr.setError("Check pass out year");
                     sTYr.requestFocus();
-                }else if (hAgrt.getText().toString().length() == 0) {
-                    hAgrt.setError("Field Mandatory");
+                /*}else if (hAgrt.getText().toString().length() == 0) {
+                    hAgrt.setError("Field Mandatory");*/
                 } else {
 
 
