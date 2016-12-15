@@ -843,7 +843,7 @@ public class ProfileViewActivity extends AppCompatActivity {
                                             @Override
                                             public void onClick(View v) {
                                                 Intent in = new Intent(getApplicationContext(), EventViewActivity.class);
-                                                in.putExtra("event_id",evntId);
+                                                in.putExtra("evntId",evntId);
                                                 startActivity(in);
                                             }
                                         });

@@ -37,7 +37,7 @@
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="@dimen/small_margin"
                 android:singleLine="true"
-                android:imeOptions="actionDone">
+                android:imeOptions="actionSearch">
 
                 <requestFocus />
 

@@ -804,7 +804,7 @@ public class UpdateJuniorResumeActivity extends AppCompatActivity implements Vie
                 public void run() {
                     int val = mApp.getPreference().getInt(Common.PROFILESTRENGTH, 0);
 
-                    mApp.getPreference().edit().putInt(Common.PROFILESTRENGTH, val + 4).commit();
+                    mApp.getPreference().edit().putInt(Common.PROFILESTRENGTH, val + 5).commit();
                     mApp.getPreference().edit().putBoolean(Common.HOBBIES, true).commit();
                     Toast.makeText(getApplicationContext(), "Extra Curricular Activities Saved Successfully!...", Toast.LENGTH_SHORT).show();
 

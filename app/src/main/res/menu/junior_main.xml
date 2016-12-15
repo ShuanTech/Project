@@ -38,7 +38,7 @@
                 android:id="@+id/resume"
                 android:icon="@drawable/ic_resume_generate"
                 android:orderInCategory="101"
-                android:title="Resume Generation" />
+                android:title="Resume" />
 
             <!--   <item
                    android:id="@+id/chat"

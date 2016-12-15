@@ -2,6 +2,7 @@ package com.shuan.Project.asyncTasks;
 
 import android.content.Context;
 import android.os.AsyncTask;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.ProgressBar;
@@ -29,7 +30,7 @@ public class GetNotifyDetail extends AsyncTask<String, String, String> {
     private NotifyAdapter adapter;
     private HashMap<String, String> nData;
 
-    public GetNotifyDetail(Context mContext, String uId, ListView listView, ProgressBar progressBar) {
+    public GetNotifyDetail(Context mContext, String uId, ListView listView, ProgressBar progressBar, SwipeRefreshLayout swipe) {
         this.mContext = mContext;
         this.uId = uId;
         this.listView = listView;

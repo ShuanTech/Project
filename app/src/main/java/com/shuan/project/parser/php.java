@@ -112,5 +112,7 @@ public class php {
     public static final String cslIns="http://udyomitra.com/android/csl_ins.php";
     public static final String profileUpdate="http://udyomitra.com/android/profile_upt.php";
     public static final String applyPost="http://udyomitra.com/android/apply.php";
+    public static final String evntView="http://udyomitra.com/android/event.php";
+    public static final String portView ="http://udyomitra.com/android/portView.php";
 
 }

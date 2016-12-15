@@ -4,12 +4,50 @@
     android:id="@+id/activity_portfolio_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.shuan.Project.employee.PortfolioViewActivity">
-    <TextView
+
+    <ProgressBar
+        android:id="@+id/progress_bar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Coming soon"
-        android:gravity="center_vertical"/>
+        android:layout_centerInParent="true" />
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true">
+
+        <ImageView
+            android:id="@+id/img"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:src="@drawable/logo"/>
+        <TextView
+            android:id="@+id/heading"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/img"
+            android:textAppearance="?android:textAppearanceMedium"
+            android:gravity="center_horizontal"
+            android:textStyle="bold"
+            android:text=""
+            android:textColor="#000"/>
+        <TextView
+            android:id="@+id/desc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/heading"
+            android:text="Description"
+            android:textAppearance="?android:textAppearanceMedium"
+            android:textColor="#000"
+            android:padding="@dimen/standard_margin"/>
+        <TextView
+            android:id="@+id/description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/desc"
+            android:textAppearance="?android:textAppearanceSmall"
+            android:text="" />
+
+    </RelativeLayout>
 </RelativeLayout>

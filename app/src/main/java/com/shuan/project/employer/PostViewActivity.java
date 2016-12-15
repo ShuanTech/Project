@@ -107,8 +107,11 @@ public class PostViewActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getApplication(), CommentsActivity.class));
+                /*startActivity(new Intent(getApplicationContext(), CommentsActivity.class));*/
+                Intent in = new Intent(getApplicationContext(), CommentsActivity.class);
+                startActivity(in);
                 return;
+
             }
         });
 

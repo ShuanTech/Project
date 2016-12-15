@@ -156,7 +156,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/small_margin"
                     android:text="I Agree the"
-                    android:textColor="#000" />
+                    android:textColor="#000"
+                    android:textAppearance="?android:textAppearanceSmall"/>
 
                 <TextView
                     android:id="@+id/term"
@@ -165,14 +166,16 @@
                     android:layout_marginLeft="@dimen/small_margin"
                     android:text="Terms &amp; Conditions"
                     android:textColor="@color/junDark"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:textAppearance="?android:textAppearanceSmall"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/small_margin"
                     android:text="of Udyomitra."
-                    android:textColor="#000"/>
+                    android:textColor="#000"
+                    android:textAppearance="?android:textAppearanceSmall"/>
 
             </LinearLayout>
 

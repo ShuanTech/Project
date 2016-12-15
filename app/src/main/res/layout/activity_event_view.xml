@@ -59,6 +59,7 @@
                         android:layout_height="wrap_content">
 
                         <LinearLayout
+                            android:id="@+id/cmpany"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_centerHorizontal="true"
@@ -83,6 +84,17 @@
                                 android:textAppearance="?android:textAppearanceMedium"
                                 android:textColor="#000"
                                 android:textStyle="bold" />
+                            <TextView
+                                android:id="@+id/evntname"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/small_margin"
+                                android:gravity="center_horizontal"
+                                android:text=""
+                                android:textAppearance="?android:textAppearanceMedium"
+                                android:textColor="#000"
+                                android:textStyle="bold"
+                                />
 
 
                             <TextView

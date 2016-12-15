@@ -72,7 +72,7 @@
                 android:layout_marginLeft="@dimen/standard_margin"
                 android:layout_marginRight="@dimen/small_margin"
                 android:layout_toLeftOf="@+id/cmt_snd"
-                android:hint="Enter Comments" />
+                android:hint="Enter Comment" />
 
 
         </RelativeLayout>

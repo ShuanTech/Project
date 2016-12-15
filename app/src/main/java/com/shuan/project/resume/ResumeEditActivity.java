@@ -55,7 +55,7 @@ public class ResumeEditActivity extends AppCompatActivity implements View.OnClic
     private LinearLayout stus;
     private TextView status;
     private String db,age;
-    final String[] stuss={"Looking for job.","In Work.","In Notice period.","In Internship.","Doing Course.","In Training."};
+    final String[] stuss={"Looking for job","In Work","In Notice period","In Internship","Doing Course","In Training"};
 
 
     @Override
@@ -534,7 +534,11 @@ public class ResumeEditActivity extends AppCompatActivity implements View.OnClic
                                     LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                                     View v = inflater.inflate(R.layout.resume_data, null);
                                     TextView txt = (TextView) v.findViewById(R.id.wrk);
-                                    txt.setText(concentration + " , " + ins_name + " at " + location + " with " + aggregate + "%");
+                                    if (aggregate.toString().length()==1) {
+                                        txt.setText(concentration + " at " + ins_name + " , " + location );
+                                    }else{
+                                        txt.setText(concentration + " at " + ins_name + " , " + location + " with " + aggregate + "%");
+                                    }
 
 
                                     final RelativeLayout lay = (RelativeLayout) v.findViewById(R.id.col);
@@ -849,7 +853,11 @@ public class ResumeEditActivity extends AppCompatActivity implements View.OnClic
                             cty.setText(city);
                             ste.setText(state);
                             cntry.setText(country);
-                            dob.setText(db+" & "+age+" years old");
+                            if (age.toString().length()==1) {
+                                dob.setText(db);
+                            }else {
+                                dob.setText(db + " & " + age + " years old ");
+                            }
                             gen.setText(gender);
                             fName.setText(father_name);
                             mName.setText(mother_name);

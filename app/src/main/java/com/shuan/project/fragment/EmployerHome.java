@@ -57,7 +57,7 @@ public class EmployerHome extends Fragment implements AbsListView.OnScrollListen
         swipe = (SwipeRefreshLayout) view.findViewById(R.id.swipe);
         list = new ArrayList<Sample>();
 
-        new GetHome(getActivity(), listView, progressBar, mApp.getPreference().getString(Common.u_id, ""), "all",swipe).execute();
+        new GetHome(getActivity(), listView, progressBar, mApp.getPreference().getString(Common.u_id, ""), "all", swipe).execute();
 
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -71,13 +71,13 @@ public class EmployerHome extends Fragment implements AbsListView.OnScrollListen
             }
         });
 
+        listView.setOnScrollListener(this);
         swipe.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                new GetHome(getActivity(), listView, progressBar, mApp.getPreference().getString(Common.u_id, ""), "all",swipe).execute();
+                new GetHome(getActivity(), listView, progressBar, mApp.getPreference().getString(Common.u_id, ""), "all", swipe).execute();
             }
         });
-        listView.setOnScrollListener(this);
         return view;
     }
 

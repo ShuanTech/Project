@@ -218,10 +218,7 @@
                     android:id="@+id/descr"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="top"
-                    android:hint="Job Description"
-                    android:imeActionLabel="actionDone"
-                    android:lines="15" />
+                    android:hint="Job Description" />
 
                 <Button
                     android:id="@+id/post"

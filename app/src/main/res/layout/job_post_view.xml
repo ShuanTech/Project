@@ -67,7 +67,6 @@
                 android:maxLines="2"
                 android:text="Nazim Shared Shuan Tech's Post"
                 android:textColor="#000" />
-
             <TextView
                 android:id="@+id/fl"
                 android:layout_width="wrap_content"
