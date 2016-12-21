@@ -48,7 +48,7 @@ public class JobPostActivity extends AppCompatActivity implements View.OnClickLi
     private String j;
     private RadioGroup job_radio;
     private RadioButton job, part, full, contr;
-    private String[] exprnc = new String[]{"Fresher", "1-2 years", "2-3 years", "3-4 years", "4-5 years", "5-6 years", "6-7 years", "7-8 years", "8-9 years", "9-10 years", "above 10 years"};
+    private String[] exprnc = new String[]{"Job level","Fresher", "1-2 years", "2-3 years", "3-4 years", "4-5 years", "5-6 years", "6-7 years", "7-8 years", "8-9 years", "9-10 years", "above 10 years"};
     private ArrayList<Sample> list;
     private ScrollView scroll;
     private ProgressBar progressBar;
@@ -148,7 +148,10 @@ public class JobPostActivity extends AppCompatActivity implements View.OnClickLi
                 } else if (location.getText().toString().length() == 0) {
                     location.setError("Job Location Mandatory");
                     location.requestFocus();
-                } else {
+                }else if(j.equalsIgnoreCase("Job level")){
+                    Toast.makeText(getApplicationContext(),"Select Job level", Toast.LENGTH_SHORT).show();
+                }
+                else {
                     jobLay.setVisibility(View.GONE);
                     descLay.setVisibility(View.VISIBLE);
                 }

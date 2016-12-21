@@ -35,8 +35,6 @@ import com.shuan.Project.asyncTasks.AddFavorite;
 import com.shuan.Project.asyncTasks.Following;
 import com.shuan.Project.asyncTasks.GetInvitation;
 import com.shuan.Project.employee.EventViewActivity;
-import com.shuan.Project.employee.PortfolioViewActivity;
-import com.shuan.Project.employee.ServiceViewActivity;
 import com.shuan.Project.employer.PostViewActivity;
 import com.shuan.Project.list.Sample;
 import com.shuan.Project.parser.Connection;
@@ -722,14 +720,14 @@ public class ProfileViewActivity extends AppCompatActivity {
                                         TypedValue val = new TypedValue();
                                         getApplicationContext().getTheme().resolveAttribute(android.R.attr.selectableItemBackground, val, true);
                                         v.setBackgroundResource(val.resourceId);
-                                        v.setOnClickListener(new View.OnClickListener() {
+                                     /*   v.setOnClickListener(new View.OnClickListener() {
                                             @Override
                                             public void onClick(View v) {
                                                 Intent in = new Intent(getApplicationContext(), ServiceViewActivity.class);
                                                 in.putExtra("u_id",uId );
                                                 startActivity(in);
                                             }
-                                        });
+                                        });*/
                                     }
                                 });
                             }
@@ -760,14 +758,14 @@ public class ProfileViewActivity extends AppCompatActivity {
                                         TypedValue val = new TypedValue();
                                         getApplicationContext().getTheme().resolveAttribute(android.R.attr.selectableItemBackground, val, true);
                                         v.setBackgroundResource(val.resourceId);
-                                        v.setOnClickListener(new View.OnClickListener() {
+                                    /*    v.setOnClickListener(new View.OnClickListener() {
                                             @Override
                                             public void onClick(View v) {
                                                 Intent in = new Intent(getApplicationContext(), PortfolioViewActivity.class);
                                                 in.putExtra("u_id",uId );
                                                 startActivity(in);
                                             }
-                                        });
+                                        });*/
 
                                     }
                                 });

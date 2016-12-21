@@ -137,6 +137,7 @@ public class NotifyFragment extends Fragment {
             @Override
             public void onRefresh() {
                 new GetNotifyDetail(getActivity(), mApp.getPreference().getString(Common.u_id, ""), list, progressBar, swipe).execute();
+                swipe.setRefreshing(false);
 
             }
         });

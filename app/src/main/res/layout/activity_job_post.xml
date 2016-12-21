@@ -144,13 +144,6 @@
                         android:inputType="textPersonName" />
                 </android.support.design.widget.TextInputLayout>
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Job Level"
-                    android:paddingTop="@dimen/standard_margin"
-                    android:textAppearance="?android:textAppearanceMedium" />
-
                 <Spinner
                     android:id="@+id/job_level"
                     android:layout_width="match_parent"
@@ -164,7 +157,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/standard_margin"
+                    android:layout_marginTop="15dp"
                     android:orientation="horizontal">
 
                     <RelativeLayout

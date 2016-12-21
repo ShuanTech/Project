@@ -78,6 +78,12 @@ public class EventViewActivity extends AppCompatActivity {
                 
             }
         });
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
         Toast.makeText(getApplicationContext(),"Under Processing",Toast.LENGTH_SHORT).show();
 
 

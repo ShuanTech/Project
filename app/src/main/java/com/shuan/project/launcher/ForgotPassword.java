@@ -12,6 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.shuan.Project.R;
+import com.shuan.Project.Utils.PasswordValidator;
 import com.shuan.Project.parser.Connection;
 import com.shuan.Project.parser.php;
 
@@ -29,6 +30,7 @@ public class ForgotPassword extends AppCompatActivity implements View.OnClickLis
     private HashMap<String, String> fData;
     private String uId;
     private boolean exit = false;
+    private PasswordValidator passval;
 
 
     @Override
@@ -49,6 +51,7 @@ public class ForgotPassword extends AppCompatActivity implements View.OnClickLis
         confirm = (Button) findViewById(R.id.confirm);
         get_code = (Button) findViewById(R.id.get_code);
         submit = (Button) findViewById(R.id.submit);
+        passval = new PasswordValidator();
         //discard = (Button) findViewById(R.id.discard);
 
 
@@ -84,7 +87,14 @@ public class ForgotPassword extends AppCompatActivity implements View.OnClickLis
 
                 break;
             case R.id.submit:
-                if (!new_pass.getText().toString().equalsIgnoreCase(con_new_pass.getText().toString())) {
+                if (new_pass.getText().toString().length() == 0) {
+                    new_pass.setError("Field Cannot be Empty");
+                    new_pass.requestFocus();
+                } else if (!passval.validate(new_pass.getText().toString())) {
+                    new_pass.setError("Password must contain an Alphabet and a Number");
+                    new_pass.requestFocus();
+
+                } else if (!new_pass.getText().toString().equalsIgnoreCase(con_new_pass.getText().toString())) {
                     con_new_pass.setError("Password mismatch");
                     con_new_pass.requestFocus();
                 } else {
@@ -114,31 +124,32 @@ public class ForgotPassword extends AppCompatActivity implements View.OnClickLis
 
         @Override
         protected String doInBackground(String... params) {
-            fData=new HashMap<String, String>();
-            fData.put("usr",uId);
-            fData.put("type","update");
-            fData.put("pass",pass);
-            try{
-                JSONObject json=Connection.UrlConnection(php.forgetPasswrd,fData);
-                int succ=json.getInt("success");
-                if(succ==0){
+            fData = new HashMap<String, String>();
+            fData.put("usr", uId);
+            fData.put("type", "update");
+            fData.put("pass", pass);
+            try {
+                JSONObject json = Connection.UrlConnection(php.forgetPasswrd, fData);
+                int succ = json.getInt("success");
+                if (succ == 0) {
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(getApplicationContext(),"Failed!Try Again",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "Failed!Try Again", Toast.LENGTH_SHORT).show();
                         }
                     });
-                }else{
+                } else {
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(getApplicationContext(),"Successfully Update Password",Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(getApplicationContext(),LoginActivity.class));
+                            Toast.makeText(getApplicationContext(), "Successfully Update Password", Toast.LENGTH_SHORT).show();
+                            startActivity(new Intent(getApplicationContext(), LoginActivity.class));
                             finish();
                         }
                     });
                 }
-            }catch (Exception e){}
+            } catch (Exception e) {
+            }
             return null;
         }
 
