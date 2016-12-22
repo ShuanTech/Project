@@ -16,6 +16,7 @@ import com.shuan.Project.R;
 import com.shuan.Project.Utils.Common;
 import com.shuan.Project.Utils.Helper;
 import com.shuan.Project.Utils.NetworkUtil;
+import com.shuan.Project.WelcomeActivity;
 import com.shuan.Project.employee.JuniorActivity;
 import com.shuan.Project.employee.SeniorActivity;
 import com.shuan.Project.employer.EmployerActivity;
@@ -113,7 +114,7 @@ public class Launcher extends AppCompatActivity {
     }
     private void check() {
         if (mApp.getPreference().getBoolean(Common.Login, false) == false) {
-            Intent i = new Intent(Launcher.this, LoginActivity.class);
+            Intent i = new Intent(Launcher.this, WelcomeActivity.class);
             startActivity(i);
         } else {
             if (mApp.getPreference().getString(Common.LEVEL, "").equalsIgnoreCase("3")) {

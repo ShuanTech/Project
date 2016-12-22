@@ -91,6 +91,11 @@
     <string name="reserved">All right reserved.</string>
     <string name="rs">\u20B9</string>
 
+
+    <string name="next">NEXT</string>
+    <string name="skip">SKIP</string>
+    <string name="start">GOT IT</string>
+
     <string-array name="cmpny_type">
         <item>Select Company Type</item>
         <item>Private Limited Company</item>
