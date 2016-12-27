@@ -92,6 +92,10 @@
     </group>
 
     <group android:checkableBehavior="single">
+       <!-- <item
+            android:id="@+id/intr"
+            android:title="Invite"
+            android:icon="@drawable/comment"/>-->
         <item
             android:id="@+id/feed"
             android:icon="@drawable/ic_feed_back"

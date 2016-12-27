@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.shuan.Project.R;
 import com.shuan.Project.Utils.Common;
@@ -38,6 +39,7 @@ public class ServicesFragment extends Fragment {
         progressBar = (ProgressBar) v.findViewById(R.id.progress_bar);
         list = (ListView) v.findViewById(R.id.services);
 
+        Toast.makeText(getActivity(),"Use website for adding more Services",Toast.LENGTH_SHORT).show();
         new GetServices(getActivity(), mApp.getPreference().getString(Common.u_id, ""), progressBar, list).execute();
 
         return v;

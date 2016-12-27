@@ -20,6 +20,7 @@ import com.nostra13.universalimageloader.core.listener.ImageLoadingProgressListe
 import com.nostra13.universalimageloader.core.listener.SimpleImageLoadingListener;
 import com.shuan.Project.R;
 import com.shuan.Project.Utils.Helper;
+import com.shuan.Project.activities.CommentsActivity;
 import com.shuan.Project.parser.Connection;
 import com.shuan.Project.parser.php;
 import com.shuan.Project.profile.ProfileViewActivity;
@@ -42,7 +43,7 @@ public class PostView extends AsyncTask<String, String, String> {
     private Helper help;
     private String pro_pic, cover_pic, cmpny_name, c_website, title, skll, tpe, category, pkg, level, location, description, apply, qulify;
     private String vied, shred, appled, date_created, u_id, cLoc;
-    private LinearLayout jType, jSal, jCate, j_Id, jLoc, jExp, jQua;
+    private LinearLayout jType, jSal, jCate, j_Id, jLoc, jExp, jQua,lay4;
     private String cmpnyId;
     private Button but;
 
@@ -51,7 +52,7 @@ public class PostView extends AsyncTask<String, String, String> {
                     ImageView cmpny_logo, TextView jTitle, TextView cmpny, TextView created, TextView viewd, TextView applied,
                     TextView shared, TextView skill, TextView desc, TextView type, TextView cate, TextView jId, LinearLayout jType,
                     LinearLayout jSal, LinearLayout jCate, LinearLayout j_Id, TextView sal, Button but, LinearLayout jLoc, LinearLayout jExp,
-                    LinearLayout jQua, TextView loc, TextView exp, TextView qua) {
+                    LinearLayout jQua, TextView loc, TextView exp, TextView qua, LinearLayout lay4) {
         this.mContext = mContext;
         this.u_id = u_id;
         this.j_id = j_id;
@@ -82,6 +83,7 @@ public class PostView extends AsyncTask<String, String, String> {
         this.loc = loc;
         this.exp = exp;
         this.qua = qua;
+        this.lay4 = lay4;
         help = new Helper();
     }
 
@@ -149,7 +151,7 @@ public class PostView extends AsyncTask<String, String, String> {
         viewd.setText(vied + " Viewed");
         shared.setText(shred + " Shared");
         applied.setText(appled + " Applied");
-        skill.setText("Skill Required: " + skll);
+        skill.setText( skll);
         desc.setText(Html.fromHtml(description));
 
         if (tpe != null && !tpe.trim().isEmpty()) {
@@ -199,6 +201,15 @@ public class PostView extends AsyncTask<String, String, String> {
                 Intent in = new Intent(mContext, ProfileViewActivity.class);
                 in.putExtra("u_id", cmpnyId);
                 in.putExtra("level","3");
+                in.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                mContext.startActivity(in);
+            }
+        });
+        lay4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent in = new Intent(mContext, CommentsActivity.class);
+                in.putExtra("j_id",j_id);
                 in.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 mContext.startActivity(in);
             }

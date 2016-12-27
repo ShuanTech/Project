@@ -15,7 +15,6 @@ import android.widget.TextView;
 
 import com.shuan.Project.R;
 import com.shuan.Project.Utils.Common;
-import com.shuan.Project.activities.CommentsActivity;
 import com.shuan.Project.asyncTasks.CheckEligible;
 import com.shuan.Project.asyncTasks.PostView;
 import com.shuan.Project.resume.ExpResumeGenerate;
@@ -87,7 +86,7 @@ public class PostViewActivity extends AppCompatActivity {
 
 
         new PostView(PostViewActivity.this, mApp.getPreference().getString(Common.u_id, ""), getIntent().getStringExtra("jId"), scroll, progressBar, coverImg, cmpny_logo, jTitle, cmpny,
-                created, viewd, applied, shared, skill, desc, type, cate, jId, jType, jSal, jCate, j_Id, sal,apply,jLoc,jExp,jQua,loc,exp,qua).execute();
+                created, viewd, applied, shared, skill, desc, type, cate, jId, jType, jSal, jCate, j_Id, sal,apply,jLoc,jExp,jQua,loc,exp,qua,lay4).execute();
 
 
         apply.setOnClickListener(new View.OnClickListener() {
@@ -103,18 +102,19 @@ public class PostViewActivity extends AppCompatActivity {
 
             }
         });
-        lay4.setOnClickListener(new View.OnClickListener() {
+        /*lay4.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
-                /*startActivity(new Intent(getApplicationContext(), CommentsActivity.class));*/
+                *//*startActivity(new Intent(getApplicationContext(), CommentsActivity.class));*//*
                 Intent in = new Intent(getApplicationContext(), CommentsActivity.class);
+                in.putExtra("jId",jId.getText());
                 startActivity(in);
-                return;
+
 
             }
         });
-
+*/
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

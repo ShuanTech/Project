@@ -69,7 +69,7 @@ public class EventViewActivity extends AppCompatActivity {
             attend.setVisibility(View.GONE);
         }
 
-        new EventView(EventViewActivity.this, mApp.getPreference().getString(Common.u_id,""),getIntent().getStringExtra("evntId"),scroll,progressBar,coverImg,cmpny,cmpny_logo,evntname,
+        new EventView(EventViewActivity.this, getIntent().getStringExtra("evnt_id"),scroll,progressBar,coverImg, cmpny_logo,evntname,
                 created,evntdesc,evntloc,evntdate,evntime).execute();
 
         attend.setOnClickListener(new View.OnClickListener() {

@@ -35,6 +35,8 @@ import com.shuan.Project.asyncTasks.AddFavorite;
 import com.shuan.Project.asyncTasks.Following;
 import com.shuan.Project.asyncTasks.GetInvitation;
 import com.shuan.Project.employee.EventViewActivity;
+import com.shuan.Project.employee.PortfolioViewActivity;
+import com.shuan.Project.employee.ServiceViewActivity;
 import com.shuan.Project.employer.PostViewActivity;
 import com.shuan.Project.list.Sample;
 import com.shuan.Project.parser.Connection;
@@ -307,7 +309,7 @@ public class ProfileViewActivity extends AppCompatActivity {
                                 setCover(cover_pic, cover);
                                 contact.setVisibility(View.VISIBLE);
                                 name.setText(data8.optString("full_name"));
-                                if(mApp.getPreference().getString(Common.LEVEL,"").equalsIgnoreCase("3")){
+                                if (mApp.getPreference().getString(Common.LEVEL, "").equalsIgnoreCase("3")) {
                                     if (!data.optString("status").equalsIgnoreCase("")) {
                                         org.setTextColor(getResources().getColor(R.color.stus));
                                         org.setTypeface(null, Typeface.BOLD);
@@ -453,7 +455,7 @@ public class ProfileViewActivity extends AppCompatActivity {
                                 contact.setVisibility(View.VISIBLE);
                                 name.setText(data8.optString("full_name"));
                                 position.setText(data1.optString("sec"));
-                                if(mApp.getPreference().getString(Common.LEVEL,"").equalsIgnoreCase("3")){
+                                if (mApp.getPreference().getString(Common.LEVEL, "").equalsIgnoreCase("3")) {
                                     if (!data.optString("status").equalsIgnoreCase("")) {
                                         org.setTextColor(getResources().getColor(R.color.stus));
                                         org.setTypeface(null, Typeface.BOLD);
@@ -593,7 +595,59 @@ public class ProfileViewActivity extends AppCompatActivity {
                                 });
                             }
                         }
-                    } else {
+                    } /*else if (level.equalsIgnoreCase("4")) {
+                        JSONArray jsonArray = json.getJSONArray("pro_view");
+                        JSONObject child = jsonArray.getJSONObject(0);
+                        final String follow = child.optString("follow");
+
+                        JSONObject info = child.getJSONObject("info");
+                        JSONArray infoArray = info.getJSONArray("info");
+                        JSONObject data = infoArray.getJSONObject(0);
+                        final String pro_pic = data.optString("pro_pic");
+                        final String cover_pic = data.optString("cover_pic");
+
+                        JSONObject cnt = child.getJSONObject("cnt");
+                        JSONArray cntArray = cnt.getJSONArray("cnt");
+                        final JSONObject data1 = cntArray.getJSONObject(0);
+
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                cmpny.setVisibility(View.VISIBLE);
+                                setImage(pro_pic, proPic);
+                                setCover(cover_pic, cover);
+                                name.setText(data1.optString("cmpny_name"));
+
+                                org.setText(data1.optString("city") + "," + data1.optString("country"));
+
+
+                                if (!data1.optString("contact_person").equalsIgnoreCase("") || !data1.optString("contact_mail").equalsIgnoreCase("") ||
+                                        !data1.optString("contact_ph").equalsIgnoreCase("") || !data1.optString("contact_time").equalsIgnoreCase("")) {
+                                    cntDet.setVisibility(View.VISIBLE);
+                                    if (!data1.optString("contact_person").equalsIgnoreCase("")) {
+                                        cntt.setVisibility(View.VISIBLE);
+                                        cnt_per.setText(data1.optString("contact_person"));
+                                    }
+                                    if (!data1.optString("contact_mail").equalsIgnoreCase("")) {
+                                        cnt_mail.setVisibility(View.VISIBLE);
+                                        cnt_mail_id.setText(data1.optString("contact_mail"));
+                                    }
+
+                                    if (!data1.optString("contact_ph").equalsIgnoreCase("")) {
+                                        cnt_ph.setVisibility(View.VISIBLE);
+                                        cnt_ph_no.setText(data1.optString("contact_ph"));
+                                    }
+
+                                    if (!data1.optString("contact_time").equalsIgnoreCase("")) {
+                                        cnt_tm.setVisibility(View.VISIBLE);
+                                        cnt_tme.setText(data1.optString("contact_time"));
+                                    }
+
+                                }
+                            }
+                        });
+
+                    }*/ else {
 
 
                         JSONArray jsonArray = json.getJSONArray("pro_view");
@@ -720,14 +774,14 @@ public class ProfileViewActivity extends AppCompatActivity {
                                         TypedValue val = new TypedValue();
                                         getApplicationContext().getTheme().resolveAttribute(android.R.attr.selectableItemBackground, val, true);
                                         v.setBackgroundResource(val.resourceId);
-                                     /*   v.setOnClickListener(new View.OnClickListener() {
+                                        v.setOnClickListener(new View.OnClickListener() {
                                             @Override
                                             public void onClick(View v) {
                                                 Intent in = new Intent(getApplicationContext(), ServiceViewActivity.class);
                                                 in.putExtra("u_id",uId );
                                                 startActivity(in);
                                             }
-                                        });*/
+                                        });
                                     }
                                 });
                             }
@@ -758,14 +812,14 @@ public class ProfileViewActivity extends AppCompatActivity {
                                         TypedValue val = new TypedValue();
                                         getApplicationContext().getTheme().resolveAttribute(android.R.attr.selectableItemBackground, val, true);
                                         v.setBackgroundResource(val.resourceId);
-                                    /*    v.setOnClickListener(new View.OnClickListener() {
+                                        v.setOnClickListener(new View.OnClickListener() {
                                             @Override
                                             public void onClick(View v) {
                                                 Intent in = new Intent(getApplicationContext(), PortfolioViewActivity.class);
                                                 in.putExtra("u_id",uId );
                                                 startActivity(in);
                                             }
-                                        });*/
+                                        });
 
                                     }
                                 });
@@ -785,52 +839,53 @@ public class ProfileViewActivity extends AppCompatActivity {
 
 
                             if (!ser_name.equalsIgnoreCase("")) {
-                                runOnUiThread(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        job.setVisibility(View.VISIBLE);
-                                        LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                                        View v = inflater.inflate(R.layout.wrk_lay, null);
-                                        ImageView img = (ImageView) v.findViewById(R.id.img);
-                                        TextView txt = (TextView) v.findViewById(R.id.wrk);
-                                        img.setImageResource(R.drawable.ic_work);
-                                        txt.setText(ser_name);
-                                        jobs.addView(v);
-                                        TypedValue val = new TypedValue();
-                                        getApplicationContext().getTheme().resolveAttribute(android.R.attr.selectableItemBackground, val, true);
-                                        v.setBackgroundResource(val.resourceId);
-                                        v.setOnClickListener(new View.OnClickListener() {
-                                            @Override
-                                            public void onClick(View v) {
-                                                Intent in = new Intent(getApplicationContext(), PostViewActivity.class);
-                                                in.putExtra("jId", jobId);
-                                                startActivity(in);
-                                            }
-                                        });
-                                    }
-                                });
+
+                                    runOnUiThread(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            job.setVisibility(View.VISIBLE);
+                                            LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                                            View v = inflater.inflate(R.layout.wrk_lay, null);
+                                            ImageView img = (ImageView) v.findViewById(R.id.img);
+                                            TextView txt = (TextView) v.findViewById(R.id.wrk);
+                                            img.setImageResource(R.drawable.ic_work);
+                                            txt.setText(ser_name);
+                                            jobs.addView(v);
+                                            TypedValue val = new TypedValue();
+                                            getApplicationContext().getTheme().resolveAttribute(android.R.attr.selectableItemBackground, val, true);
+                                            v.setBackgroundResource(val.resourceId);
+                                            v.setOnClickListener(new View.OnClickListener() {
+                                                @Override
+                                                public void onClick(View v) {
+                                                    Intent in = new Intent(getApplicationContext(), PostViewActivity.class);
+                                                    in.putExtra("jId", jobId);
+                                                    startActivity(in);
+                                                }
+                                            });
+                                        }
+                                    });
                             }
 
 
                         }
 
-                        final JSONObject event= child.getJSONObject("evnt");
-                        JSONArray eventArray= event.getJSONArray("evnt");
-                        for (int i=0;i<eventArray.length();i++){
-                            JSONObject data2= eventArray.getJSONObject(i);
+                        final JSONObject event = child.getJSONObject("evnt");
+                        JSONArray eventArray = event.getJSONArray("evnt");
+                        for (int i = 0; i < eventArray.length(); i++) {
+                            JSONObject data2 = eventArray.getJSONObject(i);
 
-                            final String ser_name= data2.optString("name");
-                            final String evntId= data2.optString("evnt_id");
+                            final String ser_name = data2.optString("name");
+                            final String evntId = data2.optString("evnt_id");
 
-                            if (!ser_name.equalsIgnoreCase("")){
+                            if (!ser_name.equalsIgnoreCase("")) {
                                 runOnUiThread(new Runnable() {
                                     @Override
                                     public void run() {
                                         evnt.setVisibility(View.VISIBLE);
-                                        LayoutInflater inflater=(LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                                        View v = inflater.inflate(R.layout.wrk_lay,null);
-                                        ImageView img= (ImageView) v.findViewById(R.id.img);
-                                        TextView txt= (TextView) v.findViewById(R.id.wrk);
+                                        LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                                        View v = inflater.inflate(R.layout.wrk_lay, null);
+                                        ImageView img = (ImageView) v.findViewById(R.id.img);
+                                        TextView txt = (TextView) v.findViewById(R.id.wrk);
                                         img.setImageResource(R.drawable.ic_event);
                                         txt.setText(ser_name);
                                         events.addView(v);
@@ -841,7 +896,7 @@ public class ProfileViewActivity extends AppCompatActivity {
                                             @Override
                                             public void onClick(View v) {
                                                 Intent in = new Intent(getApplicationContext(), EventViewActivity.class);
-                                                in.putExtra("evntId",evntId);
+                                                in.putExtra("evnt_id", evntId);
                                                 startActivity(in);
                                             }
                                         });

@@ -481,6 +481,7 @@ public class EmployerActivity extends AppCompatActivity {
                 break;
             case R.id.emp_search:
                 startActivity(new Intent(getApplicationContext(), EmployerSearchActivity.class));
+                Toast.makeText(getApplicationContext(), "Wait until the initialisation", Toast.LENGTH_SHORT).show();
                 break;
         }
 

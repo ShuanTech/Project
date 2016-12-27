@@ -32,18 +32,18 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_toRightOf="@+id/jId"
-        android:layout_toEndOf="@+id/jId">
+        android:layout_toEndOf="@+id/jId"
+        android:layout_toRightOf="@+id/jId">
 
 
         <LinearLayout
             android:id="@+id/shred"
             android:layout_width="match_parent"
             android:layout_height="42dp"
+            android:layout_marginTop="@dimen/small_margin"
             android:background="?android:selectableItemBackground"
             android:orientation="horizontal"
-            android:visibility="gone"
-            android:layout_marginTop="@dimen/small_margin">
+            android:visibility="gone">
 
             <ImageView
                 android:id="@+id/frm_img"
@@ -67,6 +67,7 @@
                 android:maxLines="2"
                 android:text="Nazim Shared Shuan Tech's Post"
                 android:textColor="#000" />
+
             <TextView
                 android:id="@+id/fl"
                 android:layout_width="wrap_content"
@@ -371,9 +372,37 @@
                     android:alpha="0.7"
                     android:src="@drawable/ic_important" />
             </RelativeLayout>
+            <!-- <RelativeLayout
+                 android:id="@+id/shrwth"
+                 android:layout_width="0dp"
+                 android:layout_height="wrap_content"
+                 android:layout_weight="1">
+                 <ImageView
+                     android:id="@+id/sharwth"
+                     android:layout_width="24dp"
+                     android:layout_height="24dp"
+                     android:src="@drawable/sharewith"/>
+             </RelativeLayout>-->
         </LinearLayout>
 
     </RelativeLayout>
+<!--
+    <RelativeLayout
+        android:id="@+id/welcome"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/main"
+        android:paddingTop="@dimen/standard_margin">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="wlecome to Udyomira"
+            android:textStyle="bold"
+            android:textSize="?android:textAppearanceLarge"/>
+
+
+    </RelativeLayout>
+-->
 
 
 </RelativeLayout>

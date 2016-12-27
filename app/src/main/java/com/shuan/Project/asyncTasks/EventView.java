@@ -24,6 +24,8 @@ import org.json.JSONObject;
 
 import java.util.HashMap;
 
+import static com.shuan.Project.Utils.Common.u_id;
+
 /**
  * Created by Android on 12/9/2016.
  */
@@ -42,10 +44,10 @@ public class EventView extends AsyncTask<String, String, String> {
     private String pro_pic, covr_pic,cmpny_name, c_website, cloc,cmpnyId,evnttile,location,description,cmpny,attend,date_created;
     private Helper help;
 
-    public EventView(Context mContext, String string, String evntId, RelativeLayout scroll, ProgressBar progressBar, ImageView coverImg, TextView cmpny, ImageView cmpny_logo, TextView evntname, TextView created, TextView evntdesc, TextView evntloc, TextView evntdate, TextView evntime) {
+    public EventView(Context mContext, String evnt_id, RelativeLayout scroll, ProgressBar progressBar, ImageView coverImg, ImageView cmpny_logo, TextView evntname, TextView created, TextView evntdesc, TextView evntloc, TextView evntdate, TextView evntime) {
 
         this.mContext = mContext;
-        this.evntId = evntId;
+        this.evntId = evnt_id;
         this.scroll = scroll;
         this.progressBar = progressBar;
         this.coverImg = coverImg;
@@ -64,6 +66,7 @@ public class EventView extends AsyncTask<String, String, String> {
 
         eData = new HashMap<String, String>();
         eData.put("evnt_id", evntId);
+        eData.put("u_id", u_id);
 
         try {
             JSONObject json = Connection.UrlConnection(php.evntView, eData);
@@ -102,10 +105,10 @@ public class EventView extends AsyncTask<String, String, String> {
         progressBar.setVisibility(View.GONE);
         scroll.setVisibility(View.VISIBLE);
 
-        setData(pro_pic, covr_pic, cmpny, c_website, cloc, cmpnyId, evnttile, location, description );
+        setData(pro_pic, covr_pic, evnttile, location, description );
     }
 
-    private void setData(String pro_pic, String covr_pic, String cmpny_name, String c_website, String cloc, String cmpnyId, String evnttile, String location, String description) {
+    private void setData(String pro_pic, String covr_pic, String evnttile, String location, String description) {
 
         setImage(pro_pic, cmpny_logo);
         setCover(covr_pic, coverImg);
