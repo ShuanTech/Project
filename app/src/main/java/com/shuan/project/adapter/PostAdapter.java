@@ -119,7 +119,7 @@ public class PostAdapter extends BaseAdapter {
 
         if(curr.getFs()!=null && !curr.getFs().trim().isEmpty()){
             shred.setVisibility(View.VISIBLE);
-            fs.setText(curr.getFs() + "Shared");
+            fs.setText(curr.getFs() +" \t" + "Shared");
             fl.setText(curr.getFl());
             ImageLoader.getInstance().displayImage(curr.getFp(), fp, options1, new SimpleImageLoadingListener() {
                 @Override

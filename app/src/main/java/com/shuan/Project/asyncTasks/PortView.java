@@ -2,8 +2,11 @@ package com.shuan.Project.asyncTasks;
 
 import android.content.Context;
 import android.os.AsyncTask;
+import android.support.v7.widget.Toolbar;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.shuan.Project.adapter.ServiceAdapter;
 import com.shuan.Project.employee.PortfolioViewActivity;
@@ -33,10 +36,10 @@ public class PortView extends AsyncTask<String, String, String> {
     private HashMap<String, String> pData;
 
 
-    public PortView(PortfolioViewActivity portfolioViewActivity, String string) {
+    public PortView(PortfolioViewActivity portfolioViewActivity, String s, String string, TextView heading, ImageView img, ProgressBar progressBar, TextView discr, Toolbar toolbar) {
         this.mContext = mContext;
         this.uId = uId;
-        this.progressBar = progressBar;
+        this.progressBar = this.progressBar;
         this.listView = listView;
         list = new ArrayList<Sample>();
 

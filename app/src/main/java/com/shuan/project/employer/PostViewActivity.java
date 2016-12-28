@@ -20,7 +20,7 @@ import com.shuan.Project.asyncTasks.PostView;
 import com.shuan.Project.resume.ExpResumeGenerate;
 import com.shuan.Project.resume.JuniorResumeGenerate;
 
-public class PostViewActivity extends AppCompatActivity {
+public class  PostViewActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
     private Common mApp;

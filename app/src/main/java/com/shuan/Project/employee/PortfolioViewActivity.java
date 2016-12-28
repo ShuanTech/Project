@@ -35,7 +35,7 @@ public class PortfolioViewActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        new PortView(PortfolioViewActivity.this, mApp.getPreference().getString(Common.u_id, "")).execute();
+        new PortView(PortfolioViewActivity.this, mApp.getPreference().getString(Common.u_id, ""), getIntent().getStringExtra("p_title"),heading,img,progressBar,discr,toolbar).execute();
 
     }
 
