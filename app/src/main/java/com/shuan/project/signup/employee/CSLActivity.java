@@ -1,7 +1,6 @@
 package com.shuan.Project.signup.employee;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
@@ -32,8 +31,6 @@ import com.shuan.Project.asyncTasks.GetCollege;
 import com.shuan.Project.asyncTasks.GetCourse;
 import com.shuan.Project.asyncTasks.GetLocation;
 import com.shuan.Project.asyncTasks.GetSkillSet;
-import com.shuan.Project.employee.JuniorActivity;
-import com.shuan.Project.employee.SeniorActivity;
 
 public class CSLActivity extends AppCompatActivity {
 
@@ -45,7 +42,7 @@ public class CSLActivity extends AppCompatActivity {
     public ProgressBar progressBar;
     private String q;
     private Spinner level;
-    private int ab = 1950;
+    private int ab = 1990;
     public EditText fullName, frm_yr, to_yr;
     private boolean ins = false;
     private boolean cIns = false;
@@ -200,12 +197,12 @@ public class CSLActivity extends AppCompatActivity {
                             to_yr.setError("Field Mandatory");
                             to_yr.requestFocus();
                         } else if (i >= j) {
-                            to_yr.setError("Check pass out year");
+                            to_yr.setError("Passed out year less than join year");
                             to_yr.requestFocus();
-                        } else if (i < ab) {
+                        } else if (i <= ab) {
                             frm_yr.setError("Enter a valid Year");
                             frm_yr.requestFocus();
-                        } else if (j < ab) {
+                        } else if (j <= ab) {
                             to_yr.setError("Enter a valid Year");
                             to_yr.requestFocus();
                         } else if (skill.getText().toString().length() == 0) {
@@ -224,18 +221,10 @@ public class CSLActivity extends AppCompatActivity {
                             new CslIns(CSLActivity.this, mApp.getPreference().getString(Common.u_id, ""), fullName.getText().toString(), q,
                                     clgName.getText().toString(), conCent.getText().toString(), frm_yr.getText().toString(), to_yr.getText().toString(),
                                     skill.getText().toString(), loc.getText().toString(), ins, cIns).execute();
-                            if (mApp.getPreference().getString(Common.LEVEL, "").equalsIgnoreCase("1")) {
-
-                                startActivity(new Intent(getApplicationContext(), JuniorActivity.class));
-                                finish();
-                            } else {
-                                startActivity(new Intent(getApplicationContext(), SeniorActivity.class));
-                                finish();
-                            }
-                            finish();
+                                    /*startActivity(new Intent(getApplicationContext(), MailVerify.class));
+                            finish();*/
                         }
                         break;
-
                 }
             }
         });

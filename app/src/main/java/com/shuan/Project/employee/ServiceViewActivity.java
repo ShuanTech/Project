@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.shuan.Project.R;
 import com.shuan.Project.Utils.Common;
+import com.shuan.Project.asyncTasks.ServiceView;
 
 public class ServiceViewActivity extends AppCompatActivity {
 
@@ -34,6 +35,6 @@ public class ServiceViewActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        /*new ServiceView(ServiceViewActivity.this, mApp.getPreference().getString(Common.u_id, "")).execute();*/
+        new ServiceView(ServiceViewActivity.this, mApp.getPreference().getString(Common.u_id, ""),getIntent().getStringExtra("ser_name"),heading,img,progressBar,discr,toolbar).execute();
     }
 }

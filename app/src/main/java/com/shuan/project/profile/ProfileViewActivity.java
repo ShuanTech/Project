@@ -326,8 +326,9 @@ public class ProfileViewActivity extends AppCompatActivity {
                                     if (!data8.optString("ph_no").equalsIgnoreCase("")) {
                                         phNo.setText(data8.optString("ph_no"));
                                     }
+                                }else {
+                                    contact.setVisibility(View.GONE);
                                 }
-
 
                                 if (mApp.getPreference().getString(Common.LEVEL, "").equalsIgnoreCase("3")) {
                                     if (follower.equalsIgnoreCase("1")) {
@@ -470,6 +471,8 @@ public class ProfileViewActivity extends AppCompatActivity {
                                     if (!data8.optString("ph_no").equalsIgnoreCase("")) {
                                         phNo.setText(data8.optString("ph_no"));
                                     }
+                                }else {
+                                    contact.setVisibility(View.GONE);
                                 }
 
 
@@ -771,13 +774,14 @@ public class ProfileViewActivity extends AppCompatActivity {
                                         img.setImageResource(R.drawable.ic_services);
                                         txt.setText(ser_name);
                                         service.addView(v);
-                                        TypedValue val = new TypedValue();
+                                       /* TypedValue val = new TypedValue();
                                         getApplicationContext().getTheme().resolveAttribute(android.R.attr.selectableItemBackground, val, true);
-                                        v.setBackgroundResource(val.resourceId);
+                                        v.setBackgroundResource(val.resourceId);*/
                                         v.setOnClickListener(new View.OnClickListener() {
                                             @Override
                                             public void onClick(View v) {
                                                 Intent in = new Intent(getApplicationContext(), ServiceViewActivity.class);
+                                                in.putExtra("ser_name",ser_name);
                                                 in.putExtra("u_id",uId );
                                                 startActivity(in);
                                             }
@@ -805,7 +809,7 @@ public class ProfileViewActivity extends AppCompatActivity {
                                         LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                                         View v = inflater.inflate(R.layout.wrk_lay, null);
                                         ImageView img = (ImageView) v.findViewById(R.id.img);
-                                        TextView txt = (TextView) v.findViewById(R.id.wrk);
+                                        final TextView txt = (TextView) v.findViewById(R.id.wrk);
                                         img.setImageResource(R.drawable.ic_portfolio);
                                         txt.setText(ser_name);
                                         portfolio.addView(v);
@@ -815,9 +819,11 @@ public class ProfileViewActivity extends AppCompatActivity {
                                         v.setOnClickListener(new View.OnClickListener() {
                                             @Override
                                             public void onClick(View v) {
-                                                Intent in = new Intent(getApplicationContext(), PortfolioViewActivity.class);
-                                                in.putExtra("u_id",uId );
-                                                startActivity(in);
+                                                Toast.makeText(getApplicationContext(),ser_name.toString(),Toast.LENGTH_SHORT).show();
+                                                Intent in= new Intent(getApplicationContext(), PortfolioViewActivity.class);
+                                                in.putExtra("p_title", ser_name);
+                                                in.putExtra("u_id",uId);
+                                                ProfileViewActivity.this.startActivity(in);
                                             }
                                         });
 
@@ -900,7 +906,6 @@ public class ProfileViewActivity extends AppCompatActivity {
                                                 startActivity(in);
                                             }
                                         });
-
 
                                     }
                                 });

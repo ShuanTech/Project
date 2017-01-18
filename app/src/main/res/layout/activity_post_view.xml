@@ -427,7 +427,7 @@
                     android:layout_marginLeft="@dimen/small_margin"
                     android:layout_marginRight="@dimen/small_margin"
                     android:layout_marginTop="@dimen/standard_margin"
-                    android:visibility="gone">
+                    android:visibility="visible">
 
                     <RelativeLayout
                         android:layout_width="0dp"
@@ -499,6 +499,46 @@
                     </RelativeLayout>
 
                 </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/j_vac"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/small_margin"
+                    android:layout_marginRight="@dimen/small_margin"
+                    android:layout_marginTop="@dimen/standard_margin"
+                    android:layout_marginBottom="@dimen/small_margin"
+                    android:visibility="gone">
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                            android:text="Vacancy"
+                            android:textColor="#333"
+                            android:textStyle="bold" />
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
+
+                        <TextView
+                            android:id="@+id/vac"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text=""
+                            android:textColor="#333"
+                            android:textStyle="bold" />
+                    </RelativeLayout>
+
+                </LinearLayout>
 
 
                 <LinearLayout
@@ -541,6 +581,7 @@
                     </RelativeLayout>
 
                 </LinearLayout>
+
 
 
 

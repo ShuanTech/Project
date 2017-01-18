@@ -173,7 +173,7 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
                     name.setError("Name Mandatory");
                     name.requestFocus();
                 } else if (!usernameValidator.validate(name.getText().toString())) {
-                    name.setError("Enter a Valid Name");
+                    name.setError("Enter a Valid Name(remove white spaces)");
                     name.requestFocus();
                 } else if (name.getText().toString().length() < 5) {
                     name.setError("User Name must contain 5 characters");
@@ -293,12 +293,12 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
                             mApp.getPreference().edit().putBoolean(Common.USRINFO, true).commit();
                             if (type.toString().equalsIgnoreCase("1")) {
 
-                                mApp.getPreference().edit().putInt(Common.PROFILESTRENGTH, 25).commit();
+                                mApp.getPreference().edit().putInt(Common.PROFILESTRENGTH, 35).commit();
                                 startActivity(new Intent(getApplicationContext(), CSLActivity.class));
                                 finish();
                             } else if (type.toString().equalsIgnoreCase("2")) {
 
-                                mApp.getPreference().edit().putInt(Common.PROFILESTRENGTH, 25).commit();
+                                mApp.getPreference().edit().putInt(Common.PROFILESTRENGTH, 35).commit();
                                 startActivity(new Intent(getApplicationContext(), WorkActivity.class));
                                 finish();
                             } else {

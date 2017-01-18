@@ -65,8 +65,7 @@
                 android:alpha="0.8"
                 android:ellipsize="end"
                 android:maxLines="2"
-                android:text="Nazim Shared Shuan Tech's Post"
-                android:textColor="#000" />
+                android:text="Nazim Shared Shuan Tech's Post" />
 
             <TextView
                 android:id="@+id/fl"
@@ -115,6 +114,7 @@
                     android:layout_marginRight="@dimen/standard_margin"
                     android:layout_marginTop="@dimen/small_margin"
                     android:gravity="left"
+                    android:singleLine="true"
                     android:text=""
                     android:textAppearance="?android:textAppearanceMedium"
                     android:textColor="#000" />
@@ -128,6 +128,7 @@
                     android:layout_marginLeft="@dimen/standard_margin"
                     android:layout_marginTop="2dp"
                     android:text=""
+                    android:singleLine="true"
                     android:textColor="#000" />
 
             </RelativeLayout>

@@ -56,12 +56,13 @@ public class GetFavorite extends AsyncTask<String,String,String> {
                 for(int i=0;i<jsonArray.length();i++){
                     JSONObject child=jsonArray.getJSONObject(i);
 
-                    String u_id=child.optString("u_id");
-                    String pro_pic=child.optString("pro_pic");
-                    String name=child.optString("full_name");
-                    String level=child.optString("level");
+                    String u_id = child.optString("u_id");
+                    String pro_pic = child.optString("pro_pic");
+                    String name = child.optString("full_name");
+                    String level = child.optString("level");
+                    String sec = child.optString("sec");
 
-                    list.add(new Sample(u_id,pro_pic,name,level));
+                    list.add(new Sample(u_id,pro_pic,name,level,sec));
                 }
                 s="true";
 
@@ -77,8 +78,9 @@ public class GetFavorite extends AsyncTask<String,String,String> {
         progressBar.setVisibility(View.GONE);
         if(s.equalsIgnoreCase("true")){
             listView.setVisibility(View.VISIBLE);
-            adapter=new ConnectAdapter(mContext,list);
+            adapter = new ConnectAdapter(mContext,list);
             listView.setAdapter(adapter);
+
         }else{
             Toast.makeText(mContext,"No Data",Toast.LENGTH_SHORT).show();
         }

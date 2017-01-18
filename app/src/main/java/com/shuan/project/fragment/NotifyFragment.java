@@ -17,6 +17,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.shuan.Project.R;
 import com.shuan.Project.Utils.Common;
@@ -66,6 +67,7 @@ public class NotifyFragment extends Fragment {
                 TextView txt1 = (TextView) view.findViewById(R.id.post_id);
                 TextView txt2 = (TextView) view.findViewById(R.id.frm_id);
                 TextView levl = (TextView) view.findViewById(R.id.n_levl);
+                TextView txt3 = (TextView) view.findViewById(R.id.to_id);
                 TextView vewd = (TextView) view.findViewById(R.id.n_vwe);
                 if (type.getText().toString().equalsIgnoreCase("2")) {
                     if (vewd.getText().toString().equalsIgnoreCase("0")) {
@@ -95,8 +97,9 @@ public class NotifyFragment extends Fragment {
                             nId.getText().toString()).execute();
                     startActivity(in);
                 } else if (type.getText().toString().equalsIgnoreCase("3")) {
-                    mApp.getPreference().edit().putString("title", txt.getText().toString()).commit();
-                    mApp.getPreference().edit().putString("jId", txt1.getText().toString()).commit();
+                    /*mApp.getPreference().edit().putString("title", txt.getText().toString()).commit();
+                    mApp.getPreference().edit().putString("jId", txt1.getText().toString()).commit();*/
+                    //in.putExtra("level",levl.getText().toString());
                     new UpdateNotify(getActivity(), mApp.getPreference().getString(Common.u_id, ""),
                             nId.getText().toString()).execute();
                     startActivity(new Intent(getActivity(), ShortListActivity.class));
@@ -116,18 +119,30 @@ public class NotifyFragment extends Fragment {
                     startActivity(in);
                 }else if (type.getText().toString().equalsIgnoreCase("8")){
                     Intent in = new Intent(mContext, EventViewActivity.class);
-                    in.putExtra("evnt_id", txt2.getText().toString());
+                    in.putExtra("evnt_id",txt1.getText().toString());
+                  /*  in.putExtra("u_id"),txt2.getText().toString();*/
                     in.putExtra("level", levl.getText().toString());
                     new UpdateNotify(getActivity(), mApp.getPreference().getString(Common.u_id,""),
                             nId.getText().toString()).execute();
                     startActivity(in);
+                }else if (type.getText().toString().equalsIgnoreCase("9")){
+                    Toast.makeText(getActivity(),"Verification Successful",Toast.LENGTH_SHORT).show();
+                    new UpdateNotify(getActivity(), mApp.getPreference().getString(Common.u_id,""),
+                            nId.getText().toString()).execute();
                 }
                 else {
-                    Intent in = new Intent(mContext, PostViewActivity.class);
-                    in.putExtra("jId", txt1.getText().toString());
-                    new UpdateNotify(getActivity(), mApp.getPreference().getString(Common.u_id, ""),
-                            nId.getText().toString()).execute();
-                    startActivity(in);
+                    if (txt1.getText() ==""){
+                        Toast.makeText(getActivity(),"Does not exists what are you Looking for",Toast.LENGTH_SHORT).show();
+                        new UpdateNotify(getActivity(), mApp.getPreference().getString(Common.u_id, ""),
+                                nId.getText().toString()).execute();
+
+                    }else {
+                        Intent in = new Intent(mContext, PostViewActivity.class);
+                        in.putExtra("jId", txt1.getText().toString());
+                        new UpdateNotify(getActivity(), mApp.getPreference().getString(Common.u_id, ""),
+                                nId.getText().toString()).execute();
+                        startActivity(in);
+                    }
                 }
 
 

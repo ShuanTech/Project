@@ -22,6 +22,7 @@ import android.widget.Toast;
 
 import com.shuan.Project.R;
 import com.shuan.Project.Utils.Common;
+import com.shuan.Project.asyncTasks.GetCourse;
 import com.shuan.Project.asyncTasks.GetLocation;
 import com.shuan.Project.asyncTasks.GetSkillSet;
 import com.shuan.Project.asyncTasks.PostJob;
@@ -39,21 +40,22 @@ import java.util.HashMap;
 public class JobPostActivity extends AppCompatActivity implements View.OnClickListener {
 
     private Common mApp;
-    private EditText title, category, salary, descr;
-    private AutoCompleteTextView location;
+    private EditText title, salary, descr, vacancy;
     private MultiAutoCompleteTextView skill;
-    private LinearLayout jobLay, descLay;
-    private Button cancel, save, post;
-    private Spinner job_level;
-    private String j;
+    private AutoCompleteTextView qual, location;
+    private LinearLayout jobLay, descLay, mLayout;
+    private Button cancel, save, post, addloc;
+    private Spinner job_level, job_cat;
+    private String j, category;
     private RadioGroup job_radio;
     private RadioButton job, part, full, contr;
-    private String[] exprnc = new String[]{"Job level","Fresher", "1-2 years", "2-3 years", "3-4 years", "4-5 years", "5-6 years", "6-7 years", "7-8 years", "8-9 years", "9-10 years", "above 10 years"};
+    private String[] exprnc = new String[]{"Select a Job level", "Fresher", "1-2 years", "2-3 years", "3-4 years", "4-5 years", "5-6 years", "6-7 years", "7-8 years", "8-9 years", "9-10 years", "above 10 years"};
+    private String[] jobcat = new String[]{"Select an Industry Type", "Airline", "Banking/FinancialServices/Broking", "IT- Software Services", "IT- Hardware/ Networking", "Medical/ Healthcare/ Hospitality", "Education/Teaching/Training", "Education/Teaching/Training", "Engineering/ Construction", "Real Estate/ Property", "Travel/ Hotels/ Restaurants/ Tourism", "ITES- BPO/ Call center", "Advertising/PR/MR/Event Management", "Textiles/ Garments/ Accessories", "Media/ Entertainment", "Insurance", "Accounting/ Taxation", "Law/ Legal Firms", "Gems/ Jewellery"};
     private ArrayList<Sample> list;
     private ScrollView scroll;
     private ProgressBar progressBar;
     private HashMap<String, String> jData;
-    private ArrayAdapter<String> adapter1;
+    private ArrayAdapter<String> adapter1, adapter2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,16 +73,18 @@ public class JobPostActivity extends AppCompatActivity implements View.OnClickLi
 
         job_level = (Spinner) findViewById(R.id.job_level);
         job_radio = (RadioGroup) findViewById(R.id.job_radio);
+        job_cat = (Spinner) findViewById(R.id.job_cat);
         part = (RadioButton) findViewById(R.id.part);
         full = (RadioButton) findViewById(R.id.full);
         contr = (RadioButton) findViewById(R.id.part);
 
         title = (EditText) findViewById(R.id.title);
         skill = (MultiAutoCompleteTextView) findViewById(R.id.skill);
-        category = (EditText) findViewById(R.id.category);
         salary = (EditText) findViewById(R.id.salary);
+        vacancy = (EditText) findViewById(R.id.no_ofvc);
         location = (AutoCompleteTextView) findViewById(R.id.location);
         descr = (EditText) findViewById(R.id.descr);
+        qual = (AutoCompleteTextView) findViewById(R.id.qualify);
 
         cancel = (Button) findViewById(R.id.cancel);
         save = (Button) findViewById(R.id.save);
@@ -94,6 +98,7 @@ public class JobPostActivity extends AppCompatActivity implements View.OnClickLi
 
 
         adapter1 = new ArrayAdapter<String>(getApplicationContext(), R.layout.spinner_item, exprnc);
+        adapter2 = new ArrayAdapter<String>(getApplicationContext(), R.layout.spinner_item, jobcat);
 
         job_level.setAdapter(adapter1);
         job_level.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -110,12 +115,25 @@ public class JobPostActivity extends AppCompatActivity implements View.OnClickLi
         });
         new GetSkillSet(JobPostActivity.this, scroll, progressBar, skill).execute();
         new GetLocation(getApplicationContext(), scroll, location, progressBar).execute();
+        new GetCourse(getApplicationContext(), qual).execute();
 
         location.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 TextView txt1 = (TextView) view.findViewById(R.id.ins_name);
                 location.setText(txt1.getText().toString());
+            }
+        });
+        job_cat.setAdapter(adapter2);
+        job_cat.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                category = job_cat.getSelectedItem().toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
             }
         });
 
@@ -142,19 +160,21 @@ public class JobPostActivity extends AppCompatActivity implements View.OnClickLi
                 } else if (skill.getText().length() == 0) {
                     skill.setError("Job Skill Mandatory");
                     skill.requestFocus();
-                } else if (category.getText().toString().length() == 0) {
-                    category.setError("Job Category Mandatory");
-                    category.requestFocus();
+                } else if (qual.getText().toString().length() == 0) {
+                    qual.setError("Qualification is Mandatory");
+                    qual.requestFocus();
+                } else if (category.equalsIgnoreCase("Select an Industry Type")){
+                    Toast.makeText(getApplicationContext(), "Select an Industry Type", Toast.LENGTH_SHORT).show();
                 } else if (location.getText().toString().length() == 0) {
                     location.setError("Job Location Mandatory");
                     location.requestFocus();
-                }else if(j.equalsIgnoreCase("Job level")){
-                    Toast.makeText(getApplicationContext(),"Select Job level", Toast.LENGTH_SHORT).show();
-                }
-                else {
+                } else if (j.equalsIgnoreCase("Job level")) {
+                    Toast.makeText(getApplicationContext(), "Select a Job level", Toast.LENGTH_SHORT).show();
+                } else {
                     jobLay.setVisibility(View.GONE);
                     descLay.setVisibility(View.VISIBLE);
                 }
+
                 break;
             case R.id.post:
                 if (descr.getText().toString().length() == 0) {
@@ -166,13 +186,13 @@ public class JobPostActivity extends AppCompatActivity implements View.OnClickLi
                     if (post.getText().toString().equalsIgnoreCase("Update")) {
                         new UpdateJob(JobPostActivity.this, mApp.getPreference().getString("jId", ""),
                                 title.getText().toString(), skill.getText().toString(), job.getText().toString(),
-                                category.getText().toString(), salary.getText().toString(), location.getText().toString(),
-                                j.toString(), descr.getText().toString(),post).execute();
+                                category.toString(), salary.getText().toString(), location.getText().toString(),
+                                j.toString(), qual.getText().toString(), descr.getText().toString(), vacancy.getText().toString(), post).execute();
                     } else {
                         new PostJob(JobPostActivity.this, mApp.getPreference().getString(Common.u_id, ""),
                                 title.getText().toString(), skill.getText().toString(), job.getText().toString(),
-                                category.getText().toString(), salary.getText().toString(), location.getText().toString(),
-                                j.toString(), descr.getText().toString(),post).execute();
+                                category.toString(), salary.getText().toString(), location.getText().toString(),
+                                j.toString(), qual.getText().toString(), descr.getText().toString(), vacancy.getText().toString(), post).execute();
                     }
 
                 }
@@ -208,12 +228,15 @@ public class JobPostActivity extends AppCompatActivity implements View.OnClickLi
                             } else {
                                 contr.setChecked(true);
                             }
-                            category.setText(child.optString("category"));
                             salary.setText("package");
                             location.setText(child.optString("location"));
                             int spinPos = adapter1.getPosition(child.optString("type"));
                             job_level.setSelection(spinPos);
+                            int spinpos1 = adapter2.getPosition(child.optString("type"));
+                            job_cat.setSelection(spinpos1);
+                            qual.setText(child.optString("qual"));
                             descr.setText(child.optString("description"));
+                            vacancy.setText("vacancy");
                         }
                     });
 

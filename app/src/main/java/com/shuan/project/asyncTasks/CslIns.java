@@ -8,10 +8,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
 import com.shuan.Project.Utils.Common;
-import com.shuan.Project.employee.JuniorActivity;
-import com.shuan.Project.employee.SeniorActivity;
 import com.shuan.Project.parser.Connection;
 import com.shuan.Project.parser.php;
+import com.shuan.Project.signup.MailVerify;
 
 import org.json.JSONObject;
 
@@ -119,13 +118,13 @@ public class CslIns extends AsyncTask<String, String, String> {
 
             if (mApp.getPreference().getString(Common.LEVEL, "").equalsIgnoreCase("1")) {
                 mApp.getPreference().edit().putString(Common.RESUME, "junior").commit();
-                in = new Intent(mContext, JuniorActivity.class);
+                in = new Intent(mContext, MailVerify.class);
                 in.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
             } else {
                 mApp.getPreference().edit().putString(Common.RESUME, "senior").commit();
                 mApp.getPreference().edit().putBoolean(Common.PROFILESUMMARY, false).commit();
                 mApp.getPreference().edit().putBoolean(Common.WORKEXPERIENCE, false).commit();
-                in = new Intent(mContext, SeniorActivity.class);
+                in = new Intent(mContext, MailVerify.class);
                 in.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
             }
             mContext.startActivity(in);

@@ -9,7 +9,10 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
 
         <ProgressBar
             android:id="@+id/progress_bar"
@@ -84,6 +87,7 @@
                                 android:textAppearance="?android:textAppearanceMedium"
                                 android:textColor="#000"
                                 android:textStyle="bold" />
+
                             <TextView
                                 android:id="@+id/evntname"
                                 android:layout_width="match_parent"
@@ -93,18 +97,7 @@
                                 android:text=""
                                 android:textAppearance="?android:textAppearanceMedium"
                                 android:textColor="#000"
-                                android:textStyle="bold"
-                                />
-
-
-                            <TextView
-                                android:id="@+id/created"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center_horizontal"
-                                android:layout_marginTop="@dimen/small_margin"
-                                android:text=""
-                                android:textColor="#333" />
+                                android:textStyle="bold" />
 
 
                             <Button
@@ -120,11 +113,25 @@
                                 android:textAppearance="?android:textAppearanceMedium"
                                 android:textColor="#fff"
                                 android:textStyle="bold" />
+                          <!--  <Button
+                                android:id="@+id/cancel"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="@dimen/small_margin"
+                                android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                                android:layout_marginRight="@dimen/activity_horizontal_margin"
+                                android:layout_marginTop="@dimen/small_margin"
+                                android:background="@drawable/signin_border"
+                                android:text="Cancel"
+                                android:textAppearance="?android:textAppearanceMedium"
+                                android:textColor="#fff"
+                                android:textStyle="bold" />-->
 
                         </LinearLayout>
                     </RelativeLayout>
                 </android.support.v7.widget.CardView>
             </RelativeLayout>
+
 
             <LinearLayout
                 android:id="@+id/lay2"
@@ -146,142 +153,178 @@
                         android:textAppearance="?android:textAppearanceMedium"
                         android:textColor="#000"
                         android:textStyle="bold" />
+
                     <TextView
                         android:id="@+id/evntdesc"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/evnt"
-                        android:text=""/>
+                        android:text="" />
                 </RelativeLayout>
 
             </LinearLayout>
 
-            <LinearLayout
-                android:id="@+id/lay3"
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/lay2"
-                android:layout_marginLeft="@dimen/small_margin"
-                android:layout_marginRight="@dimen/small_margin"
-                android:layout_marginTop="@dimen/small_margin"
-                android:visibility="visible">
+                android:padding="@dimen/standard_margin">
 
-                <RelativeLayout
-                    android:layout_width="0dp"
+                <android.support.v7.widget.CardView
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1">
+                    app:cardElevation="@dimen/small_margin">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                        android:text="Location"
-                        android:textColor="#333"
-                        android:textStyle="bold" />
-
-                </RelativeLayout>
-
-                <RelativeLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1">
-
-                    <TextView
-                        android:id="@+id/evntloc"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text=""
-                        android:textColor="#333"
-                        android:textStyle="bold" />
-
-                </RelativeLayout>
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
 
 
-            </LinearLayout>
-            <LinearLayout
-                android:id="@+id/lay4"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/lay3"
-                android:layout_marginLeft="@dimen/small_margin"
-                android:layout_marginRight="@dimen/small_margin"
-                android:layout_marginTop="@dimen/small_margin"
-                android:visibility="visible">
+                        <LinearLayout
+                            android:id="@+id/lay3"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/small_margin"
+                            android:layout_marginRight="@dimen/small_margin"
+                            android:layout_marginTop="@dimen/small_margin"
+                            android:visibility="visible">
 
-                <RelativeLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1">
+                            <RelativeLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                        android:text="Date"
-                        android:textColor="#333"
-                        android:textStyle="bold" />
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                                    android:text="Location"
+                                    android:textAppearance="?android:textAppearanceMedium"
+                                    android:textColor="#333"
+                                    android:textStyle="bold" />
 
-                </RelativeLayout>
+                            </RelativeLayout>
 
-                <RelativeLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1">
+                            <RelativeLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1">
 
-                    <TextView
-                        android:id="@+id/evntdate"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text=""
-                        android:textColor="#333"
-                        android:textStyle="bold" />
+                                <TextView
+                                    android:id="@+id/evntloc"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text=""
+                                    android:textAppearance="?android:textAppearanceMedium"
+                                    android:textColor="#333"
+                                    android:textStyle="bold" />
 
-                </RelativeLayout>
-
-
-            </LinearLayout>
-            <LinearLayout
-                android:id="@+id/lay5"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/lay4"
-                android:layout_marginLeft="@dimen/small_margin"
-                android:layout_marginRight="@dimen/small_margin"
-                android:layout_marginTop="@dimen/small_margin"
-                android:visibility="visible">
-
-                <RelativeLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                        android:text="Time"
-                        android:textColor="#333"
-                        android:textStyle="bold" />
-
-                </RelativeLayout>
-
-                <RelativeLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1">
-
-                    <TextView
-                        android:id="@+id/evntime"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text=""
-                        android:textColor="#333"
-                        android:textStyle="bold" />
-
-                </RelativeLayout>
+                            </RelativeLayout>
 
 
-            </LinearLayout>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/lay4"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/lay3"
+                            android:layout_marginLeft="@dimen/small_margin"
+                            android:layout_marginRight="@dimen/small_margin"
+                            android:layout_marginTop="@dimen/small_margin"
+                            android:visibility="visible">
+
+                            <RelativeLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1">
+
+                                <TextView
+                                    android:paddingTop="14dp"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                                    android:text="Date"
+                                    android:textAppearance="?android:textAppearanceMedium"
+                                    android:textColor="#333"
+                                    android:textStyle="bold" />
+
+                            </RelativeLayout>
+
+                            <RelativeLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1">
+
+                                <TextView
+                                    android:paddingTop="14dp"
+                                    android:id="@+id/evntdate"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text=""
+                                    android:textAppearance="?android:textAppearanceMedium"
+                                    android:textColor="#333"
+                                    android:textStyle="bold" />
+
+                            </RelativeLayout>
+
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/lay5"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/lay4"
+                            android:layout_marginLeft="@dimen/small_margin"
+                            android:layout_marginRight="@dimen/small_margin"
+                            android:layout_marginTop="@dimen/small_margin"
+                            android:visibility="visible">
+
+                            <RelativeLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1">
+
+                                <TextView
+                                    android:paddingTop="14dp"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                                    android:text="Time"
+                                    android:textAppearance="?android:textAppearanceMedium"
+                                    android:textColor="#333"
+                                    android:textStyle="bold"
+                                    android:paddingBottom="14dp"/>
+
+                            </RelativeLayout>
+
+                            <RelativeLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1">
+
+                                <TextView
+                                    android:paddingTop="14dp"
+                                    android:id="@+id/evntime"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text=""
+                                    android:textAppearance="?android:textAppearanceMedium"
+                                    android:textColor="#333"
+                                    android:textStyle="bold"
+                                    android:paddingBottom="14dp"/>
+
+                            </RelativeLayout>
+
+
+                        </LinearLayout>
+                    </RelativeLayout>
+                </android.support.v7.widget.CardView>
+
+            </RelativeLayout>
+
+
         </RelativeLayout>
     </RelativeLayout>
 </RelativeLayout>

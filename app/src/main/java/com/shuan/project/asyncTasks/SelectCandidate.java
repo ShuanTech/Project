@@ -70,7 +70,7 @@ public class SelectCandidate extends AsyncTask<String, String, String> {
     protected void onPostExecute(String s) {
         super.onPostExecute(s);
         if (s.equalsIgnoreCase("true")) {
-            Toast.makeText(mContext, "Successfully Interview Set", Toast.LENGTH_SHORT).show();
+            Toast.makeText(mContext, "Interview Scheduled Successfully ", Toast.LENGTH_SHORT).show();
             new GetInfo(mContext, mApp.getPreference().getString(Common.u_id, "")).execute();
             AppCompatActivity activity = (AppCompatActivity) mContext;
             Intent in = new Intent(mContext, ShortListActivity.class);

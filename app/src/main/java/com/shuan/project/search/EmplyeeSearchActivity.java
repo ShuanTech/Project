@@ -1,11 +1,11 @@
 package com.shuan.Project.search;
 
+
 import android.app.ProgressDialog;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationManager;
@@ -207,7 +207,7 @@ public class EmplyeeSearchActivity extends AppCompatActivity implements GooglePl
 
             Geocoder geocoder = new Geocoder(EmplyeeSearchActivity.this, Locale.getDefault());
             Location loc = currentLocation;
-            List<Address> addresses;
+            List<android.location.Address> addresses;
             try {
                 addresses = geocoder.getFromLocation(loc.getLatitude(), loc.getLongitude(), 1);
 

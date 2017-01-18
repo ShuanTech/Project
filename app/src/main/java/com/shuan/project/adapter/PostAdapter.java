@@ -106,6 +106,7 @@ public class PostAdapter extends BaseAdapter {
         TextView fs= (TextView) convertView.findViewById(R.id.shr_txt);
         TextView fl= (TextView) convertView.findViewById(R.id.fl);
 
+
         cName.setText(curr.getCompanyName());
         jId.setText(curr.getjId());
         cDated.setText(help.getTimeAgo(mContext, curr.getjCreate()));
@@ -119,7 +120,7 @@ public class PostAdapter extends BaseAdapter {
 
         if(curr.getFs()!=null && !curr.getFs().trim().isEmpty()){
             shred.setVisibility(View.VISIBLE);
-            fs.setText(curr.getFs() +" \t" + "Shared");
+            fs.setText(curr.getFs() +" \t" + "Shared a post");
             fl.setText(curr.getFl());
             ImageLoader.getInstance().displayImage(curr.getFp(), fp, options1, new SimpleImageLoadingListener() {
                 @Override

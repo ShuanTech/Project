@@ -98,6 +98,7 @@ public class ExpResumeGenerate extends AppCompatActivity implements View.OnClick
         list = new ArrayList<ResumeList>();
         if (mApp.getPreference().getBoolean(Common.APPLY, false) == true) {
 
+
             FILE = Environment.getExternalStorageDirectory() + "/" + mApp.getPreference().getString(Common.u_id, "") + "-"
                     + getIntent().getStringExtra("job_id") + "-" +
                     getIntent().getStringExtra("refer") + ".pdf";
@@ -293,7 +294,7 @@ public class ExpResumeGenerate extends AppCompatActivity implements View.OnClick
                                         p3.setAlignment(Paragraph.ALIGN_LEFT);
                                         doc.add(p3);
                                         Paragraph p4 = new Paragraph(obj, content);
-                                        p4.setAlignment(Paragraph.ALIGN_CENTER);
+                                        p4.setAlignment(Paragraph.ALIGN_LEFT);
                                         doc.add(p4);
                                     }
 

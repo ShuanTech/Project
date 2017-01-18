@@ -26,6 +26,7 @@ public class GetCourse extends AsyncTask<String, String, String> {
         this.txt = txt;
     }
 
+
     @Override
     protected String doInBackground(String... params) {
         seniorData = new HashMap<String, String>();

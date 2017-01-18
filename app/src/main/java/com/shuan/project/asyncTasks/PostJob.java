@@ -21,13 +21,13 @@ public class PostJob extends AsyncTask<String, String, String> {
 
     private ProgressDialog pDialog;
     private Context mContext;
-    private String uId, title, skill, type, category, salary, location, level, descr, what;
+    private String uId, title, skill, type, category, salary, location, level, descr, what, qual, vacancy;
     private HashMap<String, String> jData;
     private String s;
     private Button but;
 
     public PostJob(Context mContext, String uId, String title, String skill, String type, String category, String salary, String location,
-                   String level, String descr,Button but) {
+                   String level, String qual, String descr,  String vacancy, Button but) {
         this.mContext = mContext;
         this.uId = uId;
         this.title = title;
@@ -37,7 +37,10 @@ public class PostJob extends AsyncTask<String, String, String> {
         this.salary = salary;
         this.location = location;
         this.level = level;
+        this.qual = qual;
         this.descr = descr;
+        this.vacancy = vacancy;
+
     }
 
     @Override
@@ -62,7 +65,9 @@ public class PostJob extends AsyncTask<String, String, String> {
         jData.put("sal", salary);
         jData.put("loc", location);
         jData.put("level", level);
+        jData.put("qual",qual);
         jData.put("descr", descr);
+        jData.put("vacancy",vacancy);
 
         try {
             JSONObject json = Connection.UrlConnection(php.jobPost, jData);

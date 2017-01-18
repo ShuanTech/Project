@@ -78,6 +78,7 @@ public class GetFollower extends AsyncTask<String,String,String>{
             listView.setVisibility(View.VISIBLE);
             adapter=new FollowAdapter(mContext,list);
             listView.setAdapter(adapter);
+
         }else{
 
             Toast.makeText(mContext,"No Data",Toast.LENGTH_SHORT).show();

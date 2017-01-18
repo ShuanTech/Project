@@ -36,6 +36,7 @@ public class EmployerHome extends Fragment implements AbsListView.OnScrollListen
     private Common mApp;
     private Context mContext;
     private ProgressBar progressBar;
+
     private int preLast;
     private SwipeRefreshLayout swipe;
 
@@ -51,6 +52,7 @@ public class EmployerHome extends Fragment implements AbsListView.OnScrollListen
         mContext = getActivity();
         mApp = (Common) mContext.getApplicationContext();
         View view = inflater.inflate(R.layout.fragment_employer_home, container, false);
+
 
         listView = (ListView) view.findViewById(R.id.post);
         progressBar = (ProgressBar) view.findViewById(R.id.progress_bar);

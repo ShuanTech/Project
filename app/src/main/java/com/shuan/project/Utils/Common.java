@@ -59,6 +59,7 @@ public class Common extends Application {
     public static final String PAGE1="page1";
     public static final String PAGE2="page2";
     public static final String PAGE3="page3";
+    public static final String ATTEND ="attend";
     public Context mContext;
     private String update = null;
     public static final String Version = "version";

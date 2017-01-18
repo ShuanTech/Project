@@ -102,18 +102,39 @@
                         android:text="Contract" />
                 </RadioGroup>
 
+                <Spinner
+                    android:id="@+id/job_cat"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="@dimen/standard_margin">
+
+
+                </Spinner>
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
-                    <EditText
-                        android:id="@+id/category"
+                    <AutoCompleteTextView
+                        android:id="@+id/qualify"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:hint="Qualification(BA.English/B.com/etc.)"
                         android:layout_marginTop="@dimen/standard_margin"
-                        android:hint="Job Category (ex: IT,Marketing)"
                         android:imeOptions="actionNext"
-                        android:inputType="textPersonName" />
+                        android:singleLine="true"/>
+
+                </android.support.design.widget.TextInputLayout>
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <EditText
+                        android:id="@+id/no_ofvc"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Number of Vacancy"
+                        android:inputType="number"
+                        android:imeOptions="actionNext"
+                        android:layout_marginTop="@dimen/standard_margin"/>
                 </android.support.design.widget.TextInputLayout>
 
                 <android.support.design.widget.TextInputLayout
@@ -134,14 +155,15 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
-                    <AutoCompleteTextView
+                    <MultiAutoCompleteTextView
                         android:id="@+id/location"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/standard_margin"
                         android:hint="Job Location"
                         android:imeOptions="actionDone"
-                        android:inputType="textPersonName" />
+                        android:inputType="textPersonName"
+                        android:singleLine="true"/>
                 </android.support.design.widget.TextInputLayout>
 
                 <Spinner

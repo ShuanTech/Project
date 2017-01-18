@@ -8,9 +8,9 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.shuan.Project.Utils.Common;
-import com.shuan.Project.employer.EmployerActivity;
 import com.shuan.Project.parser.Connection;
 import com.shuan.Project.parser.php;
+import com.shuan.Project.signup.MailVerify;
 
 import org.json.JSONObject;
 
@@ -81,7 +81,7 @@ public class CompanyDetail extends AsyncTask<String, String, String> {
         super.onPostExecute(s);
         if (s.equalsIgnoreCase("true")) {
             mApp.getPreference().edit().putBoolean(Common.COMPANY, true).commit();
-            Intent in = new Intent(mContext, EmployerActivity.class);
+            Intent in = new Intent(mContext, MailVerify.class);
             in.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             mContext.startActivity(in);
             ((AppCompatActivity) mContext).finish();

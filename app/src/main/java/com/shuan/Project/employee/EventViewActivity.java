@@ -11,11 +11,12 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.shuan.Project.R;
 import com.shuan.Project.Utils.Common;
 import com.shuan.Project.asyncTasks.EventView;
+import com.shuan.Project.asyncTasks.eventAttend;
+import com.shuan.Project.asyncTasks.eventCancel;
 
 public class EventViewActivity extends AppCompatActivity {
 
@@ -24,7 +25,7 @@ public class EventViewActivity extends AppCompatActivity {
     private ImageView coverImg, cmpny_logo;
     private RelativeLayout scroll;
     private ProgressBar progressBar;
-    private Button attend;
+    private Button attend,cancel;
     private LinearLayout cmpany,lay2,lay3,lay4,lay5;
     private TextView evntname,evntdesc,evntloc,evntdate,evntime,created,cmpny;
 
@@ -69,13 +70,22 @@ public class EventViewActivity extends AppCompatActivity {
             attend.setVisibility(View.GONE);
         }
 
-        new EventView(EventViewActivity.this, getIntent().getStringExtra("evnt_id"),scroll,progressBar,coverImg, cmpny_logo,evntname,
-                created,evntdesc,evntloc,evntdate,evntime).execute();
+        new EventView(EventViewActivity.this,mApp.getPreference().getString(Common.u_id, ""), getIntent().getStringExtra("evnt_id"),scroll,progressBar,coverImg, cmpny_logo,cmpny,evntname,
+                evntdesc,evntloc,evntdate,evntime).execute();
 
         attend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                
+                if (!attend.getText().toString().equalsIgnoreCase("Attending")){
+                    new eventAttend(EventViewActivity.this,mApp.getPreference().getString(Common.u_id, ""),getIntent().getStringExtra("evnt_id")).execute();
+                    mApp.getPreference().edit().putBoolean(Common.ATTEND, true).commit();
+                    attend.setText("Attending");
+
+                }else {
+                    new eventCancel(EventViewActivity.this,mApp.getPreference().getString(Common.u_id, ""),getIntent().getStringExtra("evnt_id")).execute();
+                    mApp.getPreference().edit().putBoolean(Common.ATTEND, false).commit();
+                    attend.setText("Attend");
+                }
             }
         });
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -84,7 +94,6 @@ public class EventViewActivity extends AppCompatActivity {
                 onBackPressed();
             }
         });
-        Toast.makeText(getApplicationContext(),"Under Processing",Toast.LENGTH_SHORT).show();
 
 
     }

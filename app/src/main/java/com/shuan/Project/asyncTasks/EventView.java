@@ -1,8 +1,10 @@
 package com.shuan.Project.asyncTasks;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
+import android.text.Html;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -18,13 +20,12 @@ import com.shuan.Project.R;
 import com.shuan.Project.Utils.Helper;
 import com.shuan.Project.parser.Connection;
 import com.shuan.Project.parser.php;
+import com.shuan.Project.profile.ProfileViewActivity;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.HashMap;
-
-import static com.shuan.Project.Utils.Common.u_id;
 
 /**
  * Created by Android on 12/9/2016.
@@ -41,19 +42,32 @@ public class EventView extends AsyncTask<String, String, String> {
     private ProgressBar progressBar;
     private HashMap<String, String> eData;
     private DisplayImageOptions options;
-    private String pro_pic, covr_pic,cmpny_name, c_website, cloc,cmpnyId,evnttile,location,description,cmpny,attend,date_created;
+    private String pro_pic;
+    private String covr_pic;
+    private String cmpny_name;
+    private String c_website;
+    private String cloc;
+    private String cmpnyId,u_id;
+    private String evnttile;
+    private String location;
+    private String description,date,time;
+    private TextView cmpny;
+    private String attend;
+    private String date_created;
     private Helper help;
 
-    public EventView(Context mContext, String evnt_id, RelativeLayout scroll, ProgressBar progressBar, ImageView coverImg, ImageView cmpny_logo, TextView evntname, TextView created, TextView evntdesc, TextView evntloc, TextView evntdate, TextView evntime) {
+    public EventView(Context mContext, String u_id, String evnt_id, RelativeLayout scroll, ProgressBar progressBar, ImageView coverImg, ImageView cmpny_logo, TextView cmpny, TextView evntname, TextView evntdesc, TextView evntloc, TextView evntdate, TextView evntime) {
 
         this.mContext = mContext;
+        this.u_id = u_id ;
         this.evntId = evnt_id;
         this.scroll = scroll;
         this.progressBar = progressBar;
         this.coverImg = coverImg;
         this.cmpny_logo = cmpny_logo;
+        this.cmpny = cmpny;
         this.evntname = evntname;
-        this.created = created;
+        //this.created = created;
         this.evntdesc = evntdesc;
         this.evntloc = evntloc;
         this.evntdate = evntdate;
@@ -61,11 +75,13 @@ public class EventView extends AsyncTask<String, String, String> {
         help = new Helper();
     }
 
+
+
     @Override
     protected String doInBackground(String... params) {
 
         eData = new HashMap<String, String>();
-        eData.put("evnt_id", evntId);
+        eData.put("evntId", evntId);
         eData.put("u_id", u_id);
 
         try {
@@ -81,14 +97,14 @@ public class EventView extends AsyncTask<String, String, String> {
                 pro_pic = child.optString("pro_pic");
                 covr_pic = child.optString("cover_pic");
                 cmpny_name = child.optString("cmpny_name");
-                c_website = child.optString("c_website");
                 cloc = child.optString("city");
                 cmpnyId = child.optString("u_id");
                 evnttile = child.optString("name");
                 location = child.optString("location");
-                description = child.optString("desc");
-               /* attend = child.optString("attend");
-                date_created = child.optString("date_created");*/
+                description = child.optString("decs");
+                date = child.optString("date");
+                time = child.optString("time");
+                attend = child.optString("attend");
             }
 
 
@@ -105,18 +121,46 @@ public class EventView extends AsyncTask<String, String, String> {
         progressBar.setVisibility(View.GONE);
         scroll.setVisibility(View.VISIBLE);
 
-        setData(pro_pic, covr_pic, evnttile, location, description );
+        setData(pro_pic, covr_pic,cmpny_name,cloc, evnttile, location, description , evntdate,evntime);
     }
 
-    private void setData(String pro_pic, String covr_pic, String evnttile, String location, String description) {
-
+    private void setData(String pro_pic, String covr_pic, String cmpny_name, String cloc, String evnttile, String location, String description, TextView evntdate, TextView evntime) {
         setImage(pro_pic, cmpny_logo);
         setCover(covr_pic, coverImg);
 
+        cmpny.setText(cmpny_name + "\n " + cloc);
         evntname.setText(evnttile);
-        /*created.setText("Posted on " + help.getTimeAgo(mContext, date_created));*/
+        evntloc.setText(location);
+        evntdesc.setText(Html.fromHtml(description));
+        evntdate.setText(date);
+        evntime.setText(time);
+        //attend.replace();
 
+
+        cmpny_logo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent in = new Intent(mContext, ProfileViewActivity.class);
+                in.putExtra("u_id", cmpnyId);
+                in.putExtra("level", "3");
+                in.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                mContext.startActivity(in);
+            }
+        });
+        cmpny.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent in = new Intent(mContext, ProfileViewActivity.class);
+                in.putExtra("u_id", cmpnyId);
+                in.putExtra("level","3");
+                in.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                mContext.startActivity(in);
+            }
+        });
+       /* if (attend.equals("1")){
+        }*/
     }
+
     private void setImage(String path, ImageView img) {
 
         options = new DisplayImageOptions.Builder()

@@ -35,15 +35,15 @@ public class PostView extends AsyncTask<String, String, String> {
     private Context mContext;
     private String j_id;
     private ImageView coverImg, cmpny_logo;
-    private TextView jTitle, cmpny, created, viewd, applied, shared, skill, desc, type, cate, jId, sal, loc, exp, qua;
+    private TextView jTitle, cmpny, created, viewd, applied, shared, skill, desc, type, cate, jId, sal, loc, exp, qua,vac;
     private RelativeLayout scroll;
     private ProgressBar progressBar;
     private HashMap<String, String> pData;
     private DisplayImageOptions options;
     private Helper help;
     private String pro_pic, cover_pic, cmpny_name, c_website, title, skll, tpe, category, pkg, level, location, description, apply, qulify;
-    private String vied, shred, appled, date_created, u_id, cLoc;
-    private LinearLayout jType, jSal, jCate, j_Id, jLoc, jExp, jQua,lay4;
+    private String vied, shred, appled, date_created, u_id, cLoc,vacancy;
+    private LinearLayout jType, jSal, jCate, j_Id, jLoc, jExp, jQua,jVac,lay4;
     private String cmpnyId;
     private Button but;
 
@@ -51,8 +51,8 @@ public class PostView extends AsyncTask<String, String, String> {
     public PostView(Context mContext, String u_id, String j_id, RelativeLayout scroll, ProgressBar progressBar, ImageView coverImg,
                     ImageView cmpny_logo, TextView jTitle, TextView cmpny, TextView created, TextView viewd, TextView applied,
                     TextView shared, TextView skill, TextView desc, TextView type, TextView cate, TextView jId, LinearLayout jType,
-                    LinearLayout jSal, LinearLayout jCate, LinearLayout j_Id, TextView sal, Button but, LinearLayout jLoc, LinearLayout jExp,
-                    LinearLayout jQua, TextView loc, TextView exp, TextView qua, LinearLayout lay4) {
+                    LinearLayout jSal, LinearLayout jCate, LinearLayout j_Id, TextView sal, Button but, LinearLayout jVac, LinearLayout jLoc, LinearLayout jExp,
+                    LinearLayout jQua, TextView loc, TextView exp, TextView qua,TextView vac, LinearLayout lay4) {
         this.mContext = mContext;
         this.u_id = u_id;
         this.j_id = j_id;
@@ -68,6 +68,7 @@ public class PostView extends AsyncTask<String, String, String> {
         this.shared = shared;
         this.skill = skill;
         this.desc = desc;
+        this.vac = vac;
         this.type = type;
         this.cate = cate;
         this.jId = jId;
@@ -117,6 +118,7 @@ public class PostView extends AsyncTask<String, String, String> {
                 pkg = child.optString("package");
                 level = child.optString("level");
                 qulify = child.optString("qualification");
+                vacancy = child.optString("vacancy");
                 location = child.optString("location");
                 description = child.optString("description");
                 vied = child.optString("viewed");
@@ -137,22 +139,24 @@ public class PostView extends AsyncTask<String, String, String> {
         progressBar.setVisibility(View.GONE);
         scroll.setVisibility(View.VISIBLE);
         setData(pro_pic, cover_pic, cmpny_name, c_website, cLoc, title, skll, tpe, category, pkg, level, location, description,
-                vied, shred, appled, date_created, qulify);
+                vied, shred, appled, date_created, qulify,vacancy);
 
     }
 
-    private void setData(String pro_pic, String cover_pic, String cmpny_name, String c_website, String cLoc, String title, String skll, String tpe, String category, String pkg, String level, String location, String description, String vied, String shred, String appled, String date_created, String qualify) {
+    private void setData(String pro_pic, String cover_pic, String cmpny_name, String c_website, String cLoc, String title, String skll, String tpe, String category, String pkg, String level, String location, String description, String vied, String shred, String appled, String date_created, String qualify, String vacancy) {
 
         setImage(pro_pic, cmpny_logo);
         setCover(cover_pic, coverImg);
         jTitle.setText(title);
-        cmpny.setText(cmpny_name + ", " + cLoc);
-        created.setText("Posted on " + help.getTimeAgo(mContext, date_created));
+        cmpny.setText(cmpny_name + " \n " + cLoc);
+        created.setText("Posted " + help.getTimeAgo(mContext, date_created));
         viewd.setText(vied + " Viewed");
         shared.setText(shred );
         applied.setText(appled + " Applied");
         skill.setText( skll);
         desc.setText(Html.fromHtml(description));
+        loc.setText(location);
+        vac.setText(vacancy);
 
         if (tpe != null && !tpe.trim().isEmpty()) {
             jType.setVisibility(View.VISIBLE);
@@ -171,10 +175,10 @@ public class PostView extends AsyncTask<String, String, String> {
             jId.setText(j_id);
         }
 
-        if (location != null && !location.trim().isEmpty()) {
+      /*  if (location != null && !location.trim().isEmpty()) {
             jLoc.setVisibility(View.VISIBLE);
             loc.setText(location);
-        }
+        }*/
 
         if (level != null && !level.trim().isEmpty()) {
             jExp.setVisibility(View.VISIBLE);

@@ -19,6 +19,8 @@ import com.shuan.Project.list.Sample;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import static com.shuan.Project.Utils.Common.u_id;
+
 
 public class FollowerFragment extends Fragment {
 
@@ -48,7 +50,8 @@ public class FollowerFragment extends Fragment {
 
         list = new ArrayList<Sample>();
 
-        new GetFollower(getActivity(), listView, progressBar, mApp.getPreference().getString(Common.u_id,"")).execute();
+        new GetFollower(getActivity(), listView, progressBar, mApp.getPreference().getString(u_id,"")).execute();
+
 
 
      /*   listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {

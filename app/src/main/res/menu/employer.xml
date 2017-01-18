@@ -85,10 +85,10 @@
                         android:id="@+id/promote"
                         android:icon="@drawable/ic_promotion"
                         android:title="Promotion" />-->
-                    <item
+                   <!-- <item
                         android:id="@+id/act"
                         android:icon="@drawable/ic_payment"
-                        android:title="Account" />
+                        android:title="Account" />-->
 
                     <item
                         android:id="@+id/setting"

@@ -31,7 +31,7 @@ public class GetSuggest extends AsyncTask<String, String, String> {
     private Common mApp;
     private ArrayList<Sample> list;
     private FollowAdapter adapter;
-    private String u_id,s;
+    private String u_id, s;
     private int len;
 
     public GetSuggest(Context mContext, ListView listView, ProgressBar progressBar, String u_id) {
@@ -52,24 +52,24 @@ public class GetSuggest extends AsyncTask<String, String, String> {
             JSONObject json = Connection.UrlConnection(php.suggest, cData);
             int succ = json.getInt("success");
 
+            if (succ == 0) {
+                s = "false";
+            } else {
                 JSONArray jsonArray = json.getJSONArray("suggest");
-                len = jsonArray.length();
-                if (len == 0) {
-                  s="false";
-                } else {
+                for (int i = 0; i < jsonArray.length(); i++) {
+                    JSONObject child = jsonArray.getJSONObject(i);
 
-                    for (int i = 0; i < jsonArray.length(); i++) {
-                        JSONObject child = jsonArray.getJSONObject(i);
+                    String u_id = child.optString("u_id");
+                    String pro_pic = child.optString("pro_pic");
+                    String name = child.optString("full_name");
+                    String level = child.optString("level");
+                    String sec = child.optString("sec");
 
-                        String u_id = child.optString("u_id");
-                        String pro_pic = child.optString("pro_pic");
-                        String name = child.optString("full_name");
-                        String level = child.optString("level");
-                        String sec=child.optString("sec");
-                        list.add(new Sample(u_id, pro_pic, name, level,sec));
-                    }
-                    s="true";
+
+                   list.add(new Sample(u_id, pro_pic, name, level, sec));
                 }
+                s = "true";
+            }
 
         } catch (Exception e) {
         }
@@ -81,14 +81,13 @@ public class GetSuggest extends AsyncTask<String, String, String> {
     protected void onPostExecute(String s) {
         super.onPostExecute(s);
         progressBar.setVisibility(View.GONE);
-        if(s.equalsIgnoreCase("true")){
+        if (s.equalsIgnoreCase("true")) {
             listView.setVisibility(View.VISIBLE);
             adapter = new FollowAdapter(mContext, list);
             listView.setAdapter(adapter);
-        }else{
-            Toast.makeText(mContext,"No Data",Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(mContext, "No Data", Toast.LENGTH_SHORT).show();
         }
-
 
 
     }

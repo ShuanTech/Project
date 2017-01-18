@@ -1,8 +1,8 @@
 <resources>
     <string name="app_name">Udyomitra</string>
     <string name="are_you">Are You ?</string>
-    <string name="employee">Employee</string>
-    <string name="employer">Employer</string>
+    <string name="employee">Professional</string>
+    <string name="employer">Organization</string>
     <string name="full_name">User Name</string>
     <string name="email_id">Email-id</string>
     <string name="phone_no">Phone Number</string>
@@ -199,4 +199,7 @@
         <item>Doing Course</item>
         <item>In Training</item>
     </string-array>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

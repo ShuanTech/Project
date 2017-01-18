@@ -314,7 +314,7 @@
                         android:layout_marginTop="@dimen/standard_margin"
                         android:text="Services"
                         android:textAppearance="?android:textAppearanceMedium"
-                        android:textColor="#000"
+                        android:textColor="#f9590a"
                         android:textStyle="bold" />
 
                     <LinearLayout
@@ -344,7 +344,7 @@
                         android:layout_marginTop="@dimen/standard_margin"
                         android:text="Portfolio"
                         android:textAppearance="?android:textAppearanceMedium"
-                        android:textColor="#000"
+                        android:textColor="#f9590a"
                         android:textStyle="bold" />
 
                     <LinearLayout
@@ -374,7 +374,7 @@
                         android:layout_marginTop="@dimen/standard_margin"
                         android:text="Current Openings"
                         android:textAppearance="?android:textAppearanceMedium"
-                        android:textColor="#000"
+                        android:textColor="#f9590a"
                         android:textStyle="bold" />
 
                     <LinearLayout
@@ -402,7 +402,7 @@
                         android:layout_marginTop="@dimen/standard_margin"
                         android:text="Events"
                         android:textAppearance="?android:textAppearanceMedium"
-                        android:textColor="#000"
+                        android:textColor="#f9590a"
                         android:textStyle="bold"/>
                     <LinearLayout
                         android:id="@+id/events"
@@ -896,10 +896,8 @@
                         android:id="@+id/obj"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
                         android:layout_margin="8dp"
                         android:alpha="0.8"
-                        android:gravity="center"
                         android:text=""
                         android:textColor="#000" />
 
