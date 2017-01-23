@@ -110,7 +110,7 @@ public class UpdateJuniorResumeActivity extends AppCompatActivity implements Vie
     private String isAcd = "0";
 
     /* Personal Field */
-    public EditText dob, fName, mName, addr, pinNo,age;
+    public EditText dob, fName, mName, addr, pinNo, age;
     public AutoCompleteTextView locate, district, state, country;
     public RadioButton radio, r1, r2;
     public RadioGroup sex;
@@ -332,7 +332,7 @@ public class UpdateJuniorResumeActivity extends AppCompatActivity implements Vie
 
             prsnl = (TextView) findViewById(R.id.prsnl);
             dob = (EditText) findViewById(R.id.dob);
-            age= (EditText) findViewById(R.id.age);
+            age = (EditText) findViewById(R.id.age);
             r1 = (RadioButton) findViewById(R.id.male);
             r2 = (RadioButton) findViewById(R.id.female);
             fName = (EditText) findViewById(R.id.f_name);
@@ -389,16 +389,17 @@ public class UpdateJuniorResumeActivity extends AppCompatActivity implements Vie
     }
 
     private void calcAge(String db) {
-        SimpleDateFormat format=new SimpleDateFormat("dd-MM-yyyy");
-        Date dt=new Date();
-        try{
-            dt=format.parse(db);
-            Date today=new Date();
-            int by=dt.getYear();
-            int ty=today.getYear();
-            age.setText(String.valueOf(ty-by));
+        SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
+        Date dt = new Date();
+        try {
+            dt = format.parse(db);
+            Date today = new Date();
+            int by = dt.getYear();
+            int ty = today.getYear();
+            age.setText(String.valueOf(ty - by));
 
-        }catch (Exception e){}
+        } catch (Exception e) {
+        }
     }
 
     @Override
@@ -416,8 +417,16 @@ public class UpdateJuniorResumeActivity extends AppCompatActivity implements Vie
                     loc.requestFocus();
                 } else if (frm_yr.getText().toString().length() == 0) {
                     frm_yr.setError("Field Mandatory");
-                } else if (to_yr.getText().toString().length() == 0) {
+                    frm_yr.requestFocus();
+                } else if (frm_yr.getText().toString().length() < 4) {
+                    frm_yr.setError("Enter a valid year");
+                    frm_yr.requestFocus();
+                }else if (to_yr.getText().toString().length() == 0) {
                     to_yr.setError("Field Mandatory");
+                    to_yr.requestFocus();
+                }else if (to_yr.getText().toString().length() < 4) {
+                    to_yr.setError("Enter a valid year");
+                    to_yr.requestFocus();
                 } else if (conCent.getText().toString().length() == 0) {
                     conCent.setError("Concentration Mandatory");
                     conCent.requestFocus();
@@ -439,8 +448,14 @@ public class UpdateJuniorResumeActivity extends AppCompatActivity implements Vie
                 } else if (sFrmyr.getText().toString().length() == 0) {
                     sFrmyr.setError("Field Mandatory");
                     sFrmyr.requestFocus();
-                } else if (sTYr.getText().toString().length() == 0) {
+                } else if (sFrmyr.getText().toString().length() < 4) {
+                    sFrmyr.setError("Enter a valid year");
+                    sFrmyr.requestFocus();
+                }else if (sTYr.getText().toString().length() == 0) {
                     sTYr.setError("Field Mandatory");
+                    sTYr.requestFocus();
+                }else if (sTYr.getText().toString().length() < 4) {
+                    sTYr.setError("Enter a valid year");
                     sTYr.requestFocus();
                 } else if (hAgrt.getText().toString().length() == 0) {
                     hAgrt.setError("Field Mandatory");
@@ -458,8 +473,14 @@ public class UpdateJuniorResumeActivity extends AppCompatActivity implements Vie
                 } else if (ssFrmyr.getText().toString().length() == 0) {
                     ssFrmyr.setError("Field Mandatory");
                     ssFrmyr.requestFocus();
+                } else if (ssFrmyr.getText().toString().length() < 4) {
+                    ssFrmyr.setError("Enter a valid year");
+                    ssFrmyr.requestFocus();
                 } else if (ssTYr.getText().toString().length() == 0) {
                     ssTYr.setError("Field Mandatory");
+                    ssTYr.requestFocus();
+                } else if (ssTYr.getText().toString().length() < 4) {
+                    ssTYr.setError("Enter a valid year");
                     ssTYr.requestFocus();
                 } else if (sAgrt.getText().toString().length() == 0) {
                     sAgrt.setError("Field Mandatory");
@@ -471,7 +492,7 @@ public class UpdateJuniorResumeActivity extends AppCompatActivity implements Vie
             case R.id.sk_update:
                 if (skill.getText().toString().length() == 0) {
                     skill.setError("Skill Mandatory");
-                }  else {
+                } else {
                     if (cercourse.getText().toString().length() != 0) {
 
                         if (cerCentre.getText().toString().length() == 0) {
@@ -546,7 +567,7 @@ public class UpdateJuniorResumeActivity extends AppCompatActivity implements Vie
     public class Personal extends AsyncTask<String, String, String> {
 
         String uDob = dob.getText().toString();
-        String uAge=age.getText().toString();
+        String uAge = age.getText().toString();
         String usex = radio.getText().toString();
         String ufName = fName.getText().toString();
         String umName = mName.getText().toString();
@@ -572,7 +593,7 @@ public class UpdateJuniorResumeActivity extends AppCompatActivity implements Vie
             eData = new HashMap<String, String>();
             eData.put("u_id", mApp.getPreference().getString(Common.u_id, ""));
             eData.put("dob", uDob);
-            eData.put("age",uAge);
+            eData.put("age", uAge);
             eData.put("gender", usex);
             eData.put("address", udno);
             eData.put("city", uct);
@@ -834,16 +855,16 @@ public class UpdateJuniorResumeActivity extends AppCompatActivity implements Vie
         protected String doInBackground(String... params) {
 
 
-                eData = new HashMap<String, String>();
-                eData.put("u_id", mApp.getPreference().getString(Common.u_id, ""));
-                eData.put("a_name", ac);
-                try {
-                    JSONObject json = Connection.UrlConnection(php.achievement, eData);
-                    int succ = json.getInt("success");
+            eData = new HashMap<String, String>();
+            eData.put("u_id", mApp.getPreference().getString(Common.u_id, ""));
+            eData.put("a_name", ac);
+            try {
+                JSONObject json = Connection.UrlConnection(php.achievement, eData);
+                int succ = json.getInt("success");
 
 
-                } catch (Exception e) {
-                }
+            } catch (Exception e) {
+            }
 
 
             return null;

@@ -31,7 +31,7 @@
 
                     <item
                         android:id="@+id/fav"
-                        android:icon="@drawable/refer"
+                        android:icon="@drawable/ic_favorite"
                         android:title="Favourite"/>
 
                     <item

@@ -65,6 +65,7 @@ public class ChangePasswrd extends AppCompatActivity {
         newPass = (EditText) findViewById(R.id.new_pass);
         cnfrmPass = (EditText) findViewById(R.id.cnfrm_pass);
 
+
         change = (Button) findViewById(R.id.update);
 
         oldPass.addTextChangedListener(new TextWatcher() {

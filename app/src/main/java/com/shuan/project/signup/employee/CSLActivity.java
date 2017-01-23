@@ -38,12 +38,14 @@ public class CSLActivity extends AppCompatActivity {
     private AutoCompleteTextView clgName, conCent, loc;
     private MultiAutoCompleteTextView skill;
     private String[] qulify = new String[]{"Select Highest Qualification", "PG", "UG", "DIPLOMA"};
+    public String abc, abcd;
     public ScrollView scrollView;
     public ProgressBar progressBar;
     private String q;
     private Spinner level;
     private int ab = 1990;
     public EditText fullName, frm_yr, to_yr;
+    public TextView tv1, tv2;
     private boolean ins = false;
     private boolean cIns = false;
     private Button next;
@@ -68,6 +70,8 @@ public class CSLActivity extends AppCompatActivity {
         conCent = (AutoCompleteTextView) findViewById(R.id.concent);
         frm_yr = (EditText) findViewById(R.id.frm_yr);
         to_yr = (EditText) findViewById(R.id.to_yr);
+        tv1 = (TextView) findViewById(R.id.tv1);
+        tv2 = (TextView) findViewById(R.id.tv2);
         skill = (MultiAutoCompleteTextView) findViewById(R.id.skill);
         loc = (AutoCompleteTextView) findViewById(R.id.location);
         textfieldValidator = new TextfieldValidator();
@@ -82,12 +86,15 @@ public class CSLActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-
+                abc = frm_yr.getText().toString();
+                tv1.setText(abc);
             }
 
             @Override
             public void afterTextChanged(Editable s) {
-                i = Integer.parseInt(frm_yr.getText().toString());
+                //i = Integer.parseInt(frm_yr.getText().toString());
+                i = Integer.parseInt(tv1.getText().toString());
+
             }
         });
 
@@ -99,12 +106,14 @@ public class CSLActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-
+                abcd = to_yr.getText().toString();
+                tv2.setText(abcd);
             }
 
             @Override
             public void afterTextChanged(Editable s) {
-                j = Integer.parseInt(to_yr.getText().toString());
+                //j = Integer.parseInt(to_yr.getText().toString());
+                j = Integer.parseInt(tv2.getText().toString());
             }
         });
 
@@ -196,8 +205,11 @@ public class CSLActivity extends AppCompatActivity {
                         } else if (to_yr.getText().toString().length() == 0) {
                             to_yr.setError("Field Mandatory");
                             to_yr.requestFocus();
-                        } else if (i >= j) {
+                        } else if (i > j) {
                             to_yr.setError("Passed out year less than join year");
+                            to_yr.requestFocus();
+                        } else if (i == j) {
+                            to_yr.setError("Check the year entered");
                             to_yr.requestFocus();
                         } else if (i <= ab) {
                             frm_yr.setError("Enter a valid Year");

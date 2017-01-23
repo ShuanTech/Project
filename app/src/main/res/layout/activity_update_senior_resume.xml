@@ -46,10 +46,12 @@
                         android:layout_centerHorizontal="true"
                         android:layout_marginTop="@dimen/small_margin"
                         android:text="@string/profile_summary"
-                        android:textAppearance="?android:textAppearanceMedium"
+                        android:textStyle="bold"
+                        android:textAppearance="?android:textAppearanceLarge"
                         android:textColor="#333" />
 
                     <android.support.design.widget.TextInputLayout
+                        android:paddingTop="30dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/ps">
@@ -99,7 +101,8 @@
                         android:layout_centerHorizontal="true"
                         android:layout_marginTop="@dimen/small_margin"
                         android:text="@string/work_exp"
-                        android:textAppearance="?android:textAppearanceMedium"
+                        android:textStyle="bold"
+                        android:textAppearance="?android:textAppearanceLarge"
                         android:textColor="#333" />
 
                     <EditText
@@ -146,10 +149,13 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:text="Add Work Detail"
-                        android:textAppearance="?android:textAppearanceMedium" />
+                        android:textStyle="bold"
+                        android:textColor="#333"
+                        android:textAppearance="?android:textAppearanceLarge" />
 
 
                     <android.support.design.widget.TextInputLayout
+                        android:paddingTop="30dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
 
@@ -304,7 +310,8 @@
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
                     android:text="@string/qual"
-                    android:textAppearance="?android:textAppearanceMedium"
+                    android:textStyle="bold"
+                    android:textAppearance="?android:textAppearanceLarge"
                     android:textColor="#333" />
 
 
@@ -490,11 +497,13 @@
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
                     android:text="Add Higher Secondary School"
-                    android:textAppearance="?android:textAppearanceMedium"
+                    android:textStyle="bold"
+                    android:textAppearance="?android:textAppearanceLarge"
                     android:textColor="#333" />
 
 
                 <android.support.design.widget.TextInputLayout
+                    android:paddingTop="30dp"
                     android:id="@+id/lay_h_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -652,10 +661,12 @@
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
                     android:text="Add Secondary School"
-                    android:textAppearance="?android:textAppearanceMedium"
+                    android:textStyle="bold"
+                    android:textAppearance="?android:textAppearanceLarge"
                     android:textColor="#333" />
 
                 <android.support.design.widget.TextInputLayout
+                    android:paddingTop="30dp"
                     android:id="@+id/lay_s_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -817,10 +828,12 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
                         android:text="@string/extra"
-                        android:textAppearance="?android:textAppearanceMedium"
+                        android:textStyle="bold"
+                        android:textAppearance="?android:textAppearanceLarge"
                         android:textColor="#333" />
 
                     <android.support.design.widget.TextInputLayout
+                        android:paddingTop="30dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
 
@@ -842,7 +855,8 @@
                         android:layout_gravity="center_horizontal"
                         android:layout_marginTop="@dimen/activity_horizontal_margin"
                         android:text="@string/cer_detail"
-                        android:textAppearance="?android:textAppearanceMedium"
+                        android:textStyle="bold"
+                        android:textAppearance="?android:textAppearanceLarge"
                         android:textColor="#333" />
 
                     <android.support.design.widget.TextInputLayout
@@ -917,12 +931,14 @@
                         android:layout_centerHorizontal="true"
                         android:layout_marginTop="@dimen/small_margin"
                         android:text="@string/achivement"
-                        android:textAppearance="?android:textAppearanceMedium"
+                        android:textStyle="bold"
+                        android:textAppearance="?android:textAppearanceLarge"
                         android:textColor="#333" />
 
                 </RelativeLayout>
 
                 <android.support.design.widget.TextInputLayout
+                    android:paddingTop="30dp"
                     android:id="@+id/ac"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -933,7 +949,7 @@
                         android:id="@+id/ach"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Enter Achievement"
+                        android:hint="Eg: Won first prize in paper presentation"
                         android:imeOptions="actionNext"
                         android:inputType="textPersonName" />
 
@@ -953,12 +969,14 @@
                         android:layout_centerHorizontal="true"
                         android:layout_marginTop="@dimen/small_margin"
                         android:text="@string/extra_c"
-                        android:textAppearance="?android:textAppearanceMedium"
+                        android:textStyle="bold"
+                        android:textAppearance="?android:textAppearanceLarge"
                         android:textColor="#333" />
 
                 </RelativeLayout>
 
                 <android.support.design.widget.TextInputLayout
+                    android:paddingTop="30dp"
                     android:id="@+id/ex"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -969,7 +987,7 @@
                         android:id="@+id/extra"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Enter Extra-curricular Activity"
+                        android:hint="Eg: paper presentation"
                         android:imeOptions="actionNext"
                         android:inputType="textPersonName" />
 
@@ -988,10 +1006,12 @@
                         android:layout_height="wrap_content"
                         android:layout_centerHorizontal="true"
                         android:text="@string/others"
-                        android:textAppearance="?android:textAppearanceMedium"
+                        android:textStyle="bold"
+                        android:textAppearance="?android:textAppearanceLarge"
                         android:textColor="#333" />
 
                     <android.support.design.widget.TextInputLayout
+                        android:paddingTop="30dp"
                         android:id="@+id/lay_hobby"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -1060,11 +1080,13 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_horizontal"
                             android:text="@string/project"
-                            android:textAppearance="?android:textAppearanceMedium"
+                            android:textStyle="bold"
+                            android:textAppearance="?android:textAppearanceLarge"
                             android:textColor="#333" />
                     </android.support.design.widget.TextInputLayout>
 
                     <android.support.design.widget.TextInputLayout
+                        android:paddingTop="30dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
 
@@ -1181,7 +1203,8 @@
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
                     android:text="@string/prsnl"
-                    android:textAppearance="?android:textAppearanceMedium"
+                    android:textStyle="bold"
+                    android:textAppearance="?android:textAppearanceLarge"
                     android:textColor="#333" />
 
                 <LinearLayout

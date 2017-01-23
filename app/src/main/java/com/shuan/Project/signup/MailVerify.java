@@ -1,8 +1,6 @@
 package com.shuan.Project.signup;
 
 import android.app.ProgressDialog;
-import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -12,14 +10,7 @@ import android.widget.Toast;
 
 import com.shuan.Project.R;
 import com.shuan.Project.Utils.Common;
-import com.shuan.Project.employee.JuniorActivity;
-import com.shuan.Project.employee.SeniorActivity;
-import com.shuan.Project.employer.EmployerActivity;
-import com.shuan.Project.parser.Connection;
-import com.shuan.Project.parser.php;
-
-import org.json.JSONException;
-import org.json.JSONObject;
+import com.shuan.Project.asyncTasks.mail_verify;
 
 import java.util.HashMap;
 
@@ -30,6 +21,8 @@ public class MailVerify extends AppCompatActivity implements View.OnClickListene
     private Button verify;
     private ProgressDialog pDialog;
     private HashMap<String, String> mData;
+    private String s,vercode;
+    private boolean exit=false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,69 +47,19 @@ public class MailVerify extends AppCompatActivity implements View.OnClickListene
             code.setError("Check entered code");
             code.requestFocus();
         }else {
-            verify.setEnabled(false);
-            new verifymail().execute();
+            verify.setEnabled(true);
+            vercode = code.getText().toString();
+            new mail_verify(MailVerify.this,mApp.getPreference().getString(Common.u_id, ""),vercode).execute();
         }
     }
-    public class verifymail extends AsyncTask<String,String,String>{
-
-        String vcode = code.getText().toString();
-
-        @Override
-        protected void onPreExecute(){
-            super.onPreExecute();
-            pDialog = new ProgressDialog(MailVerify.this);
-            pDialog.setMessage("Verifying...!");
-            pDialog.setIndeterminate(false);
-            pDialog.setCancelable(false);
-            pDialog.show();
-
-        }
-        @Override
-        protected String doInBackground(String... params) {
-
-            mData = new HashMap<String, String>();
-            mData.put("code",vcode);
-
-            try{
-                JSONObject json = Connection.UrlConnection(php.verifymail,mData);
-                int succ = json.getInt("success");
-
-                if (succ == 0) {
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            Toast.makeText(getApplicationContext(), "Error...Try Again!", Toast.LENGTH_SHORT).show();
-                            verify.setEnabled(true);
-                        }
-                    });
-                }else if(succ == 1){
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            if (mApp.getPreference().getString(Common.LEVEL, "").equalsIgnoreCase("1")) {
-                               /* Intent in = new Intent(getApplicationContext(), JuniorActivity.class);
-                                startActivity(in);*/
-
-                                startActivity(new Intent(getApplicationContext(), JuniorActivity.class));
-                                finish();
-                            } else if (mApp.getPreference().getString(Common.LEVEL,"").equalsIgnoreCase("2")){
-                                startActivity(new Intent(getApplicationContext(), SeniorActivity.class));
-                                finish();
-                            }else {
-                                startActivity(new Intent(getApplicationContext(), EmployerActivity.class));
-                                finish();
-                            }
 
 
-                        }
-                    });
-                }
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-
-            return null;
+    @Override
+    public void onBackPressed() {
+        if (exit) {
+            mApp.getPreference().edit().putBoolean(Common.PAGE1, false).commit();
+            super.onBackPressed();
+            return;
         }
     }
 

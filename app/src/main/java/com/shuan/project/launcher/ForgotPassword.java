@@ -94,6 +94,9 @@ public class ForgotPassword extends AppCompatActivity implements View.OnClickLis
                     new_pass.setError("Password must contain an Alphabet and a Number");
                     new_pass.requestFocus();
 
+                } else if (new_pass.getText().toString().length() < 8) {
+                    new_pass.setError("Password must contain at least 8 Characters");
+                    new_pass.requestFocus();
                 } else if (!new_pass.getText().toString().equalsIgnoreCase(con_new_pass.getText().toString())) {
                     con_new_pass.setError("Password mismatch");
                     con_new_pass.requestFocus();

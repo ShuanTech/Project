@@ -1,14 +1,17 @@
 package com.shuan.Project.profile;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.Html;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -35,8 +38,6 @@ import com.shuan.Project.asyncTasks.AddFavorite;
 import com.shuan.Project.asyncTasks.Following;
 import com.shuan.Project.asyncTasks.GetInvitation;
 import com.shuan.Project.employee.EventViewActivity;
-import com.shuan.Project.employee.PortfolioViewActivity;
-import com.shuan.Project.employee.ServiceViewActivity;
 import com.shuan.Project.employer.PostViewActivity;
 import com.shuan.Project.list.Sample;
 import com.shuan.Project.parser.Connection;
@@ -55,6 +56,7 @@ public class ProfileViewActivity extends AppCompatActivity {
     private Toolbar toolbar;
     private Common mApp;
     private String u_id, level;
+    private AlertDialog.Builder builder;
     private ImageView cover;
     private CircleImageView proPic;
     private TextView name, position, org, intro;
@@ -308,7 +310,7 @@ public class ProfileViewActivity extends AppCompatActivity {
                                 setImage(pro_pic, proPic);
                                 setCover(cover_pic, cover);
                                 contact.setVisibility(View.VISIBLE);
-                                name.setText(data8.optString("full_name"));
+                                name.setText(data.optString("full_name"));
                                 if (mApp.getPreference().getString(Common.LEVEL, "").equalsIgnoreCase("3")) {
                                     if (!data.optString("status").equalsIgnoreCase("")) {
                                         org.setTextColor(getResources().getColor(R.color.stus));
@@ -454,7 +456,7 @@ public class ProfileViewActivity extends AppCompatActivity {
                                 setImage(pro_pic, proPic);
                                 setCover(cover_pic, cover);
                                 contact.setVisibility(View.VISIBLE);
-                                name.setText(data8.optString("full_name"));
+                                name.setText(data.optString("full_name"));
                                 position.setText(data1.optString("sec"));
                                 if (mApp.getPreference().getString(Common.LEVEL, "").equalsIgnoreCase("3")) {
                                     if (!data.optString("status").equalsIgnoreCase("")) {
@@ -759,7 +761,8 @@ public class ProfileViewActivity extends AppCompatActivity {
                             JSONObject data2 = serArray.getJSONObject(i);
 
                             final String ser_name = data2.optString("ser_name");
-                            final String uId = data2.optString(u_id);
+                            final String uId = data2.optString("u_id");
+                            final String desc = data2.optString(String.valueOf(Html.fromHtml("ser_desc")));
 
 
                             if (!ser_name.equalsIgnoreCase("")) {
@@ -769,21 +772,33 @@ public class ProfileViewActivity extends AppCompatActivity {
                                         ser.setVisibility(View.VISIBLE);
                                         LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                                         View v = inflater.inflate(R.layout.wrk_lay, null);
-                                        ImageView img = (ImageView) v.findViewById(R.id.img);
+                                        final ImageView img = (ImageView) v.findViewById(R.id.img);
                                         TextView txt = (TextView) v.findViewById(R.id.wrk);
                                         img.setImageResource(R.drawable.ic_services);
                                         txt.setText(ser_name);
                                         service.addView(v);
-                                       /* TypedValue val = new TypedValue();
+                                        TypedValue val = new TypedValue();
                                         getApplicationContext().getTheme().resolveAttribute(android.R.attr.selectableItemBackground, val, true);
-                                        v.setBackgroundResource(val.resourceId);*/
+                                        v.setBackgroundResource(val.resourceId);
                                         v.setOnClickListener(new View.OnClickListener() {
                                             @Override
                                             public void onClick(View v) {
-                                                Intent in = new Intent(getApplicationContext(), ServiceViewActivity.class);
+                                                builder = new AlertDialog.Builder(ProfileViewActivity.this)
+                                                        .setTitle(ser_name)
+                                                        .setCancelable(false)
+                                                        .setMessage(desc);
+                                                builder.setPositiveButton("Close", new DialogInterface.OnClickListener() {
+                                                    @Override
+                                                    public void onClick(DialogInterface dialog, int which) {
+                                                        dialog.cancel();
+                                                    }
+                                                }).show();
+
+                                                /*Intent in = new Intent(getApplicationContext(), ServiceViewActivity.class);
                                                 in.putExtra("ser_name",ser_name);
                                                 in.putExtra("u_id",uId );
-                                                startActivity(in);
+                                                startActivity(in);*/
+                                               // Toast.makeText(getApplicationContext(),ser_name.toString(),Toast.LENGTH_SHORT).show();
                                             }
                                         });
                                     }
@@ -799,6 +814,7 @@ public class ProfileViewActivity extends AppCompatActivity {
 
                             final String ser_name = data2.optString("p_title");
                             final String uId = data2.optString("u_id");
+                            final String desc = data2.optString(String.valueOf(Html.fromHtml("p_description")));
 
 
                             if (!ser_name.equalsIgnoreCase("")) {
@@ -808,7 +824,7 @@ public class ProfileViewActivity extends AppCompatActivity {
                                         port.setVisibility(View.VISIBLE);
                                         LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                                         View v = inflater.inflate(R.layout.wrk_lay, null);
-                                        ImageView img = (ImageView) v.findViewById(R.id.img);
+                                        final ImageView img = (ImageView) v.findViewById(R.id.img);
                                         final TextView txt = (TextView) v.findViewById(R.id.wrk);
                                         img.setImageResource(R.drawable.ic_portfolio);
                                         txt.setText(ser_name);
@@ -819,11 +835,22 @@ public class ProfileViewActivity extends AppCompatActivity {
                                         v.setOnClickListener(new View.OnClickListener() {
                                             @Override
                                             public void onClick(View v) {
-                                                Toast.makeText(getApplicationContext(),ser_name.toString(),Toast.LENGTH_SHORT).show();
-                                                Intent in= new Intent(getApplicationContext(), PortfolioViewActivity.class);
-                                                in.putExtra("p_title", ser_name);
-                                                in.putExtra("u_id",uId);
-                                                ProfileViewActivity.this.startActivity(in);
+                                                builder = new AlertDialog.Builder(ProfileViewActivity.this)
+                                                        .setTitle(ser_name)
+                                                        .setCancelable(false)
+                                                        .setMessage(desc);
+                                                builder.setPositiveButton("Close", new DialogInterface.OnClickListener() {
+                                                    @Override
+                                                    public void onClick(DialogInterface dialog, int which) {
+                                                        dialog.cancel();
+                                                    }
+                                                }).show();
+
+                                                //Toast.makeText(getApplicationContext(),uId.toString(),Toast.LENGTH_SHORT).show();
+                                                /*Intent in= new Intent(getApplicationContext(), PortfolioViewActivity.class);
+                                                in.putExtra("p_title", ser_name.toString());
+                                                in.putExtra("u_id",uId.toString());
+                                                startActivity(in);*/
                                             }
                                         });
 
@@ -1021,15 +1048,16 @@ public class ProfileViewActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.profile_view_menu, menu);
         MenuItem item = menu.findItem(R.id.fav);
+        //MenuItem item1 = menu.findItem(R.id.unfav);
         if (mApp.getPreference().getString(Common.LEVEL, "").equalsIgnoreCase("3")) {
             if (level.equalsIgnoreCase("3")) {
-                item.setVisible(false);
+                item.setVisible(true);
             } else {
                 item.setVisible(true);
             }
 
         } else {
-            item.setVisible(false);
+            item.setVisible(true);
         }
         return true;
     }

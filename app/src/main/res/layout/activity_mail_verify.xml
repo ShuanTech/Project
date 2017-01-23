@@ -25,7 +25,7 @@
                 android:layout_marginLeft="@dimen/standard_margin"
                 android:layout_marginRight="@dimen/standard_margin"
                 android:layout_marginTop="28dp"
-                app:cardBackgroundColor="#f0f0f0"
+                app:cardBackgroundColor="#dadada"
                 app:cardCornerRadius="@dimen/small_margin"
                 app:cardElevation="@dimen/small_margin">
 
@@ -68,13 +68,17 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/head">
 
+                        <android.support.design.widget.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
                         <EditText
                             android:id="@+id/code"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_margin="10dp"
-                            android:hint="Enter code received"
+                            android:hint="Enter code received(check inbox/spam)"
                             android:inputType="number" />
+                        </android.support.design.widget.TextInputLayout>
                     </RelativeLayout>
 
                     <RelativeLayout

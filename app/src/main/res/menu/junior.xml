@@ -34,6 +34,10 @@
             android:title="Follower"
             app:actionViewClass="android.widget.TextView" />
         <item
+            android:id="@+id/fav"
+            android:icon="@drawable/ic_favorite"
+            android:title="Favourite"/>
+        <item
             android:id="@+id/sugg"
             android:icon="@drawable/ic_suggest"
             android:title="Suggestion" />

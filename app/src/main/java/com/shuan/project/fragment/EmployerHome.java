@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,7 @@ import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.shuan.Project.R;
@@ -33,8 +35,10 @@ public class EmployerHome extends Fragment implements AbsListView.OnScrollListen
     private ConnectAdapter adapter;
     private ListView listView;
     private HashMap<String, String> cData;
+    private CardView cv;
     private Common mApp;
     private Context mContext;
+    private RelativeLayout udyowel;
     private ProgressBar progressBar;
 
     private int preLast;
@@ -53,25 +57,30 @@ public class EmployerHome extends Fragment implements AbsListView.OnScrollListen
         mApp = (Common) mContext.getApplicationContext();
         View view = inflater.inflate(R.layout.fragment_employer_home, container, false);
 
-
+        udyowel = (RelativeLayout) view.findViewById(R.id.udyopro_post);
         listView = (ListView) view.findViewById(R.id.post);
         progressBar = (ProgressBar) view.findViewById(R.id.progress_bar);
         swipe = (SwipeRefreshLayout) view.findViewById(R.id.swipe);
+        cv = (CardView) view.findViewById(R.id.udp);
         list = new ArrayList<Sample>();
 
         new GetHome(getActivity(), listView, progressBar, mApp.getPreference().getString(Common.u_id, ""), "all", swipe).execute();
 
 
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        if (listView.getCount()==0){
+            udyowel.setVisibility(View.VISIBLE);
+        }else {
+            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                TextView txt = (TextView) view.findViewById(R.id.jId);
-                Intent in = new Intent(getActivity(), PostViewActivity.class);
-                in.putExtra("jId", txt.getText().toString());
-                startActivity(in);
-            }
-        });
+                    TextView txt = (TextView) view.findViewById(R.id.jId);
+                    Intent in = new Intent(getActivity(), PostViewActivity.class);
+                    in.putExtra("jId", txt.getText().toString());
+                    startActivity(in);
+                }
+            });
+        }
 
         listView.setOnScrollListener(this);
         swipe.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -99,7 +108,7 @@ public class EmployerHome extends Fragment implements AbsListView.OnScrollListen
                 }
 
             } else {
-
+               // udyowel.setVisibility(View.VISIBLE);
             }
         }
     }

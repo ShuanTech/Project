@@ -993,7 +993,11 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.edit:
-                startActivity(new Intent(getApplicationContext(), ResumeEditActivity.class));
+               /* if (mApp.getPreference().getString(Common.LEVEL,"").equalsIgnoreCase("3")){
+                    startActivity(new Intent(getApplicationContext(), CompanyContactInfoActivity.class));
+                }else {*/
+                    startActivity(new Intent(getApplicationContext(), ResumeEditActivity.class));
+                //}
                 break;
             case R.id.search:
                 startActivity(new Intent(getApplicationContext(), SearchActivity.class));

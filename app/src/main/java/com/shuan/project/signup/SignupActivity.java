@@ -175,8 +175,8 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
                 } else if (!usernameValidator.validate(name.getText().toString())) {
                     name.setError("Enter a Valid Name(remove white spaces)");
                     name.requestFocus();
-                } else if (name.getText().toString().length() < 5) {
-                    name.setError("User Name must contain 5 characters");
+                } else if (name.getText().toString().length() < 6) {
+                    name.setError("User Name must contain 6 characters");
                     name.requestFocus();
                 } else if (emailId.getText().toString().length() == 0) {
                     emailId.setError("Email Id Mandatory");
@@ -197,6 +197,9 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
                     pass.requestFocus();
                 } else if (!pasval.validate(pass.getText().toString())) {
                     pass.setError("Password must contain an Alphabet and a Number");
+                    pass.requestFocus();
+                } else if (pass.getText().toString().length() < 8) {
+                    pass.setError("Password must contain at least 8 Characters");
                     pass.requestFocus();
                 } else if (confrmPass.getText().toString().length() == 0) {
                     confrmPass.setError("Conform Password Mandatory");

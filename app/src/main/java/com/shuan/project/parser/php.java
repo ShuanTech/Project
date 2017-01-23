@@ -117,6 +117,6 @@ public class php {
     public static final String eventAttend = "http://www.udyomitra.com/android/eventAttend";
     public static final String portView ="http://www.udyomitra.com/android/portView";
     public static final String serView = "http://www.udyomitra.com/android/serView";
-    public static final String verifymail = "http//udomitra.com/android/mailverify";
+    public static final String verifymail = "http://www.udyomitra.com/android/mailverify";
 
 }

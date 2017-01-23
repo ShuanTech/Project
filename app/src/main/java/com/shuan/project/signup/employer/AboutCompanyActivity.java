@@ -121,6 +121,7 @@ public class AboutCompanyActivity extends AppCompatActivity implements View.OnCl
     @Override
     public void onBackPressed() {
         if (exit) {
+            mApp.getPreference().edit().putBoolean(Common.COMPANY, false).commit();
             super.onBackPressed();
             return;
         } else {

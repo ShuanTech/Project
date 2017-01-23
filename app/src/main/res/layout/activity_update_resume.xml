@@ -39,10 +39,12 @@
                     android:layout_marginTop="@dimen/small_margin"
                     android:gravity="center_horizontal"
                     android:text="@string/profile_summary"
-                    android:textAppearance="?android:textAppearanceMedium"
-                    android:textColor="#333" />
+                    android:textAppearance="?android:textAppearanceLarge"
+                    android:textColor="#333"
+                    android:textStyle="bold"/>
 
                 <android.support.design.widget.TextInputLayout
+                    android:paddingTop="30dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
@@ -81,10 +83,13 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:text="Add Work Detail"
-                    android:textAppearance="?android:textAppearanceMedium" />
+                    android:textStyle="bold"
+                    android:textColor="#333"
+                    android:textAppearance="?android:textAppearanceLarge" />
 
 
                 <android.support.design.widget.TextInputLayout
+                    android:paddingTop="30dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
@@ -242,10 +247,12 @@
                     android:layout_height="wrap_content"
                     android:gravity="center_horizontal"
                     android:text="@string/work_exp"
-                    android:textAppearance="?android:textAppearanceMedium"
+                    android:textStyle="bold"
+                    android:textAppearance="?android:textAppearanceLarge"
                     android:textColor="#333" />
 
                 <android.support.design.widget.TextInputLayout
+                    android:paddingTop="30dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
@@ -285,7 +292,8 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:text="Qualification"
-                    android:textAppearance="?android:textAppearanceMedium"
+                    android:textStyle="bold"
+                    android:textAppearance="?android:textAppearanceLarge"
                     android:textColor="#333" />
 
 
@@ -456,19 +464,16 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:text="Schooling"
-                    android:textAppearance="?android:textAppearanceMedium"
+                    android:textStyle="bold"
+                    android:textAppearance="?android:textAppearanceLarge"
                     android:textColor="#333" />
 
-                <android.support.design.widget.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
 
                     <Spinner
                         android:id="@+id/mode"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/standard_margin" />
-                </android.support.design.widget.TextInputLayout>
 
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
@@ -615,10 +620,12 @@
                     android:layout_height="wrap_content"
                     android:gravity="center_horizontal"
                     android:text="Add Skill"
-                    android:textAppearance="?android:textAppearanceMedium"
+                    android:textStyle="bold"
+                    android:textAppearance="?android:textAppearanceLarge"
                     android:textColor="#333" />
 
                 <android.support.design.widget.TextInputLayout
+                    android:paddingTop="30dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
@@ -659,10 +666,12 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:text="Academic Project"
-                    android:textAppearance="?android:textAppearanceMedium"
+                    android:textStyle="bold"
+                    android:textAppearance="?android:textAppearanceLarge"
                     android:textColor="#333" />
 
                 <android.support.design.widget.TextInputLayout
+                    android:paddingTop="30dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
@@ -781,10 +790,12 @@
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="@dimen/activity_horizontal_margin"
                     android:text="Add Certification"
-                    android:textAppearance="?android:textAppearanceMedium"
+                    android:textStyle="bold"
+                    android:textAppearance="?android:textAppearanceLarge"
                     android:textColor="#333" />
 
                 <android.support.design.widget.TextInputLayout
+                    android:paddingTop="30dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
@@ -855,10 +866,12 @@
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="@dimen/small_margin"
                     android:text="@string/achivement"
-                    android:textAppearance="?android:textAppearanceMedium"
+                    android:textStyle="bold"
+                    android:textAppearance="?android:textAppearanceLarge"
                     android:textColor="#333" />
 
                 <android.support.design.widget.TextInputLayout
+                    android:paddingTop="30dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
@@ -900,11 +913,12 @@
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="@dimen/small_margin"
                     android:text="Extra-Curricular Activity"
-
-                    android:textAppearance="?android:textAppearanceMedium"
+                    android:textStyle="bold"
+                    android:textAppearance="?android:textAppearanceLarge"
                     android:textColor="#333" />
 
                 <android.support.design.widget.TextInputLayout
+                    android:paddingTop="30dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
@@ -1066,10 +1080,12 @@
                     android:layout_marginTop="@dimen/small_margin"
                     android:gravity="center_horizontal"
                     android:text="Objective"
-                    android:textAppearance="?android:textAppearanceMedium"
+                    android:textStyle="bold"
+                    android:textAppearance="?android:textAppearanceLarge"
                     android:textColor="#333" />
 
                 <android.support.design.widget.TextInputLayout
+                    android:paddingTop="30dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
@@ -1110,7 +1126,8 @@
                     android:layout_marginTop="@dimen/small_margin"
                     android:gravity="center_horizontal"
                     android:text="Basic Info"
-                    android:textAppearance="?android:textAppearanceMedium"
+                    android:textStyle="bold"
+                    android:textAppearance="?android:textAppearanceLarge"
                     android:textColor="#333" />
 
                 <LinearLayout

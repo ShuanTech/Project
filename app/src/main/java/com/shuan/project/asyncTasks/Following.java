@@ -46,7 +46,7 @@ public class Following extends AsyncTask<String, String, String> {
                 s = "true";
             } else if (succ == 2) {
                 s = "unflow";
-            } else if (succ == 3) {
+            } else if (succ == 4) {
                 s= "me";
             } else {
                 s = "true";
@@ -66,7 +66,6 @@ public class Following extends AsyncTask<String, String, String> {
         }else if (s.equalsIgnoreCase("me")){
             Toast.makeText(mContext,"It is you", Toast.LENGTH_SHORT).show();
             flow.setEnabled(false);
-
         }
         else if (s.equalsIgnoreCase("false")) {
             Toast.makeText(mContext, "Error! Try Again", Toast.LENGTH_SHORT).show();

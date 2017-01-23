@@ -632,7 +632,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="EmailId"
+                                android:text="Email-Id"
                                 android:textColor="#333" />
 
                         </RelativeLayout>
@@ -765,7 +765,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Contact EmailId"
+                                android:text="Contact Email-Id"
                                 android:textColor="#333" />
 
                         </RelativeLayout>
@@ -1063,7 +1063,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="MailId"
+                                android:text="Email-Id"
                                 android:textColor="#333"
                                 android:textStyle="bold" />
 

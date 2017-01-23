@@ -77,4 +77,6 @@ public class AboutCompany extends AsyncTask<String, String, String> {
             Toast.makeText(mContext,"Something went Wrong. Try Again...",Toast.LENGTH_SHORT).show();
         }
     }
+
 }
+

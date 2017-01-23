@@ -652,9 +652,17 @@ public class UpdateSeniorResumeActivity extends AppCompatActivity implements Vie
                     loc.requestFocus();
                 } else if (frm_yr.getText().toString().length() == 0) {
                     frm_yr.setError("Field Mandatory");
-                } else if (to_yr.getText().toString().length() == 0) {
+                    frm_yr.requestFocus();
+                } else if (frm_yr.getText().toString().length() < 4) {
+                    frm_yr.setError("Enter a valid year");
+                    frm_yr.requestFocus();
+                }else if (to_yr.getText().toString().length() == 0) {
                     to_yr.setError("Field Mandatory");
-                } else if (conCent.getText().toString().length() == 0) {
+                    to_yr.requestFocus();
+                } else if (to_yr.getText().toString().length() < 4) {
+                    to_yr.setError("Enter a valid year");
+                    to_yr.requestFocus();
+                }else if (conCent.getText().toString().length() == 0) {
                     conCent.setError("Concentration Mandatory");
                     conCent.requestFocus();
                 } else if (agrt.getText().toString().length() == 0) {
@@ -675,10 +683,16 @@ public class UpdateSeniorResumeActivity extends AppCompatActivity implements Vie
                 } else if (sFrmyr.getText().toString().length() == 0) {
                     sFrmyr.setError("Field Mandatory");
                     sFrmyr.requestFocus();
-                } else if (sTYr.getText().toString().length() == 0) {
+                } else if (sFrmyr.getText().toString().length() < 4) {
+                    sFrmyr.setError("Enter a valid year");
+                    sFrmyr.requestFocus();
+                }else if (sTYr.getText().toString().length() == 0) {
                     sTYr.setError("Field Mandatory");
                     sTYr.requestFocus();
-                } else if (hAgrt.getText().toString().length() == 0) {
+                } else if (sTYr.getText().toString().length() < 4) {
+                    sTYr.setError("Enter a valid year");
+                    sTYr.requestFocus();
+                }else if (hAgrt.getText().toString().length() == 0) {
                     hAgrt.setError("Field Mandatory");
                 } else {
                     new updateHSC().execute();
@@ -694,10 +708,16 @@ public class UpdateSeniorResumeActivity extends AppCompatActivity implements Vie
                 } else if (ssFrmyr.getText().toString().length() == 0) {
                     ssFrmyr.setError("Field Mandatory");
                     ssFrmyr.requestFocus();
-                } else if (ssTYr.getText().toString().length() == 0) {
+                } else if (ssFrmyr.getText().toString().length() < 4 ) {
+                    ssFrmyr.setError("Enter a valid year");
+                    ssFrmyr.requestFocus();
+                }else if (ssTYr.getText().toString().length() == 0) {
                     ssTYr.setError("Field Mandatory");
                     ssTYr.requestFocus();
-                } else if (sAgrt.getText().toString().length() == 0) {
+                } else if (ssTYr.getText().toString().length() < 4) {
+                    ssTYr.setError("Enter a valid year");
+                    ssTYr.requestFocus();
+                }else if (sAgrt.getText().toString().length() == 0) {
                     sAgrt.setError("Field Mandatory");
                 } else {
 

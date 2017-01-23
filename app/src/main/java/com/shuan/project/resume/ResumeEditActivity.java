@@ -494,6 +494,8 @@ public class ResumeEditActivity extends AppCompatActivity implements View.OnClic
                                                             startActivity(in);
                                                             break;
                                                         case R.id.del:
+                                                            /*AlertDialog.Builder build = new AlertDialog.Builder(ResumeEditActivity.this);
+                                                                    build.setTitle()*/
                                                             new DeleteDetail(ResumeEditActivity.this, pId, "wrkExp").execute();
                                                             break;
                                                     }
@@ -711,7 +713,7 @@ public class ResumeEditActivity extends AppCompatActivity implements View.OnClic
                                     LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                                     View v = inflater.inflate(R.layout.resume_data, null);
                                     TextView txt = (TextView) v.findViewById(R.id.wrk);
-                                    txt.setText(certName + " at " + certCentre);
+                                    txt.setText(certName + " at " + certCentre + " for " + certDur + " months ");
 
                                     final RelativeLayout lay = (RelativeLayout) v.findViewById(R.id.col);
 

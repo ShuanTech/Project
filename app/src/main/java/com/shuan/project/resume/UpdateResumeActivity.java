@@ -807,30 +807,30 @@ public class UpdateResumeActivity extends AppCompatActivity implements View.OnCl
                     fYr.requestFocus();
                 } else if(visible){
 
-                        if (tYr.getText().toString().length() == 0) {
-                            tYr.setError("Field Mandatory");
-                            tYr.requestFocus();
-                        } else if(fYr.getText().toString().equalsIgnoreCase(tYr.getText().toString())){
-                            tYr.setError("From & To year are same.");
-                            tYr.requestFocus();
-                        } else if(yr1>yr2){
-                            tYr.setError("Check From & To Year");
-                            tYr.requestFocus();
-                        }else {
-                            toDate = tYr.getText().toString();
+                    if (tYr.getText().toString().length() == 0) {
+                        tYr.setError("Field Mandatory");
+                        tYr.requestFocus();
+                    } else if(fYr.getText().toString().equalsIgnoreCase(tYr.getText().toString())){
+                        tYr.setError("From & To year are same.");
+                        tYr.requestFocus();
+                    } else if(yr1>yr2){
+                        tYr.setError("Check From & To Year");
+                        tYr.requestFocus();
+                    }else {
+                        toDate = tYr.getText().toString();
 
-                            if (what.equalsIgnoreCase("add")) {
-                                new AddWrkDetail(UpdateResumeActivity.this, mApp.getPreference().getString(Common.u_id, ""),
-                                        orgname.getText().toString(), location.getText().toString(), postition.getText().toString(),
-                                        fYr.getText().toString(), toDate, Ins).execute();
-                            } else {
-                                new EditWrkDetail(UpdateResumeActivity.this, mApp.getPreference().getString("eId", ""),
-                                        orgname.getText().toString(), location.getText().toString(), postition.getText().toString(),
-                                        fYr.getText().toString(), toDate).execute();
-                            }
+                        if (what.equalsIgnoreCase("add")) {
+                            new AddWrkDetail(UpdateResumeActivity.this, mApp.getPreference().getString(Common.u_id, ""),
+                                    orgname.getText().toString(), location.getText().toString(), postition.getText().toString(),
+                                    fYr.getText().toString(), toDate, Ins).execute();
+                        } else {
+                            new EditWrkDetail(UpdateResumeActivity.this, mApp.getPreference().getString("eId", ""),
+                                    orgname.getText().toString(), location.getText().toString(), postition.getText().toString(),
+                                    fYr.getText().toString(), toDate).execute();
                         }
+                    }
                 } else if(!visible){
-                        toDate = "present";
+                    toDate = "present";
                     if (what.equalsIgnoreCase("add")) {
                         new AddWrkDetail(UpdateResumeActivity.this, mApp.getPreference().getString(Common.u_id, ""),
                                 orgname.getText().toString(), location.getText().toString(), postition.getText().toString(),
@@ -891,7 +891,7 @@ public class UpdateResumeActivity extends AppCompatActivity implements View.OnCl
                 break;
             case R.id.h_update:
                 if (set.equalsIgnoreCase("Mode of School")) {
-                   Toast.makeText(getApplicationContext(),"Select Mode of School",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(),"Select Mode of School",Toast.LENGTH_SHORT).show();
                     mode.requestFocus();
                 } else if (h_name.getText().toString().length() == 0) {
                     h_name.setError("Field Mandatory");
@@ -915,11 +915,11 @@ public class UpdateResumeActivity extends AppCompatActivity implements View.OnCl
 
                     if (what.equalsIgnoreCase("add")) {
                         new AddSchool(UpdateResumeActivity.this, mApp.getPreference().getString(Common.u_id, ""), s,
-                               set, h_name.getText().toString(), board.getText().toString(), cty.getText().toString(),
+                                set, h_name.getText().toString(), board.getText().toString(), cty.getText().toString(),
                                 sFrmyr.getText().toString(), sTYr.getText().toString(), hAgrt.getText().toString(), "add", ins).execute();
                     } else {
                         new AddSchool(UpdateResumeActivity.this, mApp.getPreference().getString("eId", ""), s,
-                              set, h_name.getText().toString(), board.getText().toString(), cty.getText().toString(),
+                                set, h_name.getText().toString(), board.getText().toString(), cty.getText().toString(),
                                 sFrmyr.getText().toString(), sTYr.getText().toString(), hAgrt.getText().toString(), "edit", ins).execute();
                     }
 
@@ -948,7 +948,7 @@ public class UpdateResumeActivity extends AppCompatActivity implements View.OnCl
                     if (what.equalsIgnoreCase("add")) {
                         new AddProject(UpdateResumeActivity.this, mApp.getPreference().getString(Common.u_id, ""), title.getText().toString(),
                                 platform.getText().toString(), role.getText().toString(), team_sze.getText().toString(), duration.getText().toString(),
-                                 description.getText().toString(),  "add").execute();
+                                description.getText().toString(),  "add").execute();
                     } else {
                         new AddProject(UpdateResumeActivity.this, mApp.getPreference().getString("eId", ""), title.getText().toString(),
                                 platform.getText().toString(), role.getText().toString(), team_sze.getText().toString(), duration.getText().toString(),

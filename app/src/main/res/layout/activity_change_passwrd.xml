@@ -31,7 +31,7 @@
             android:id="@+id/old_pass"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Old Password"
+            android:hint="Current Password"
             android:imeOptions="actionNext"
             android:inputType="textPassword"
             android:singleLine="true" />

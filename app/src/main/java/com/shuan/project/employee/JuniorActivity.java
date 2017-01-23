@@ -46,6 +46,7 @@ import com.shuan.Project.asyncTasks.Feedback;
 import com.shuan.Project.fragment.AppliedFragment;
 import com.shuan.Project.fragment.ConnectionFragment;
 import com.shuan.Project.fragment.EmployerHome;
+import com.shuan.Project.fragment.FavoriteFragment;
 import com.shuan.Project.fragment.FollowerFragment;
 import com.shuan.Project.fragment.FollowingFragment;
 import com.shuan.Project.fragment.GetReadyFragment;
@@ -104,12 +105,14 @@ public class JuniorActivity extends AppCompatActivity {
 
         if(mApp.getPreference().getBoolean("start",false)==false){
             startActivity(new Intent(getApplicationContext(),ProfileActivity.class));
+            showAlert();
         }
        // new GetInfo(JuniorActivity.this,mApp.getPreference().getString(Common.u_id,""));
 
         if (mApp.getPreference().getString(Common.Version, "").equalsIgnoreCase("true")) {
             builder = new AlertDialog.Builder(JuniorActivity.this)
                     .setTitle("Update")
+                    .setCancelable(false)
                     .setMessage("New Version of UdyoMitra-Beta Available.Do you want Update?");
             builder.setNegativeButton("Later", new DialogInterface.OnClickListener() {
                 @Override
@@ -120,7 +123,7 @@ public class JuniorActivity extends AppCompatActivity {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     Intent in = new Intent("android.intent.action.VIEW")
-                            .setData(Uri.parse("market://details?id=com.shuan.project"));
+                            .setData(Uri.parse("market://details?id=com.shuan.Project"));
                     startActivity(in);
                     dialog.cancel();
                 }
@@ -283,6 +286,11 @@ public class JuniorActivity extends AppCompatActivity {
                         mDrawerLayout.closeDrawers();
                         startActivity(new Intent(getApplicationContext(), Help.class));
                         return true;*/
+                    case R.id.fav:
+                        toolbar.setTitle("Favourite");
+                        display(14);
+                        selected=14;
+                        return true;
                     default:
                         return true;
                 }
@@ -363,8 +371,11 @@ public class JuniorActivity extends AppCompatActivity {
                 f=new InviteFragment();
                 break;
             case 13:
-                f=new PortfolioFragment();
+                f= new PortfolioFragment();
                 Toast.makeText(getApplicationContext(),"Use website for adding portfolio",Toast.LENGTH_SHORT).show();
+                break;
+            case 14:
+                f= new FavoriteFragment();
                 break;
         }
 
@@ -532,10 +543,12 @@ public class JuniorActivity extends AppCompatActivity {
     private void showAlert() {
         AlertDialog.Builder build = new AlertDialog.Builder(JuniorActivity.this);
         build.setTitle("Udyomitra");
+        build.setCancelable(false);
         build.setMessage("Complete Profile, Build your Network!")
                 .setPositiveButton("Build", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        Toast.makeText(JuniorActivity.this, "Keep you profile updated", Toast.LENGTH_SHORT).show();
                         startActivity(new Intent(getApplicationContext(), ResumeEditActivity.class));
                         dialog.cancel();
                     }

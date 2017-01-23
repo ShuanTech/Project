@@ -31,7 +31,7 @@ public class GetHome extends AsyncTask<String, String, String> {
     private Common mApp;
     private ArrayList<Sample> list;
     private PostAdapter adapter;
-    private String u_id, type;
+    private String u_id, type,s;
     private SwipeRefreshLayout swipe;
 
     public GetHome(Context mContext, ListView listView, ProgressBar progressBar, String u_id,String type,SwipeRefreshLayout swipe) {
@@ -55,7 +55,9 @@ public class GetHome extends AsyncTask<String, String, String> {
             JSONObject json = Connection.UrlConnection(php.get_post, cData);
             int succ = json.getInt("success");
             if (succ == 0) {
+                s="false";
             } else {
+                s="true";
                 JSONArray jsonArray = json.getJSONArray("post");
                 for (int i = 0; i < jsonArray.length(); i++) {
                     JSONObject child = jsonArray.getJSONObject(i);
@@ -84,17 +86,21 @@ public class GetHome extends AsyncTask<String, String, String> {
         } catch (Exception e) {
         }
 
-        return null;
+        return s;
     }
 
     @Override
     protected void onPostExecute(String s) {
         super.onPostExecute(s);
-        progressBar.setVisibility(View.GONE);
-        listView.setVisibility(View.VISIBLE);
-        adapter = new PostAdapter(mContext, list);
-        listView.setAdapter(adapter);
-        swipe.setRefreshing(false);
+        if (s.equalsIgnoreCase("true")) {
+            progressBar.setVisibility(View.GONE);
+            listView.setVisibility(View.VISIBLE);
+            adapter = new PostAdapter(mContext, list);
+            listView.setAdapter(adapter);
+            swipe.setRefreshing(false);
+        }else if (s.equalsIgnoreCase("false")){
+
+        }
 
     }
 }

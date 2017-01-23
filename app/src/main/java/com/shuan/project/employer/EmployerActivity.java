@@ -98,6 +98,7 @@ public class EmployerActivity extends AppCompatActivity {
         if (mApp.getPreference().getString(Common.Version, "").equalsIgnoreCase("true")) {
             builder = new AlertDialog.Builder(EmployerActivity.this)
                     .setTitle("Update")
+                    .setCancelable(false)
                     .setMessage("New Version of UdyoMitra-Beta Available.Do you want Update?");
             builder.setNegativeButton("Later", new DialogInterface.OnClickListener() {
                 @Override
@@ -108,7 +109,7 @@ public class EmployerActivity extends AppCompatActivity {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     Intent in = new Intent("android.intent.action.VIEW")
-                            .setData(Uri.parse("market://details?id=com.shuan.project"));
+                            .setData(Uri.parse("market://details?id=com.shuan.Project"));
                     startActivity(in);
                     dialog.cancel();
                 }

@@ -210,7 +210,7 @@ public class CompanyContactInfoActivity extends AppCompatActivity implements Vie
             super.onBackPressed();
             return;
         } else {
-            Toast.makeText(this, "Press Back again to Cancel Signup Process.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Press Back again to Cancel the Process.", Toast.LENGTH_SHORT).show();
             exit = true;
             new Handler().postDelayed(new Runnable() {
                 @Override
