@@ -626,7 +626,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="@dimen/standard_margin"
-                            android:text="EmailId"
+                            android:text="Email-Id"
                             android:textColor="#333" />
 
                     </RelativeLayout>
@@ -1003,7 +1003,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="@dimen/standard_margin"
                             android:gravity="center_vertical"
-                            android:text="Father Name"
+                            android:text="Father's Name"
                             android:textColor="#333" />
 
                     </RelativeLayout>
@@ -1040,7 +1040,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="@dimen/standard_margin"
-                            android:text="Mother Name"
+                            android:text="Mother's Name"
                             android:textColor="#333" />
 
                     </RelativeLayout>

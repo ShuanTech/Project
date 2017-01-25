@@ -434,7 +434,7 @@ public class UpdateSeniorResumeActivity extends AppCompatActivity implements Vie
             lay10.setVisibility(View.GONE);
 
             skill = (MultiAutoCompleteTextView) findViewById(R.id.skill);
-
+            
             cercourse = (EditText) findViewById(R.id.cer_name);
             cerCentre = (EditText) findViewById(R.id.cer_centre);
             cerDur = (EditText) findViewById(R.id.cer_duration);

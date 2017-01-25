@@ -2,23 +2,19 @@ package com.shuan.Project.fragment;
 
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 
 import com.shuan.Project.R;
 import com.shuan.Project.Utils.Common;
 import com.shuan.Project.adapter.ConnectAdapter;
 import com.shuan.Project.asyncTasks.GetSuggest;
 import com.shuan.Project.list.Sample;
-import com.shuan.Project.profile.ProfileViewActivity;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -55,7 +51,7 @@ public class SuggestionFragment extends Fragment {
         new GetSuggest(getActivity(), listView, progressBar, mApp.getPreference().getString(Common.u_id,"")).execute();
 
 
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        /*listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 TextView txt = (TextView) view.findViewById(R.id.u_id);
@@ -68,7 +64,7 @@ public class SuggestionFragment extends Fragment {
                 startActivity(in);
 
             }
-        });
+        });*/
 
         return v;
     }

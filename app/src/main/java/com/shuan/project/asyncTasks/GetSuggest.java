@@ -34,11 +34,11 @@ public class GetSuggest extends AsyncTask<String, String, String> {
     private String u_id, s;
     private int len;
 
-    public GetSuggest(Context mContext, ListView listView, ProgressBar progressBar, String u_id) {
+    public GetSuggest(Context mContext, ListView listView, ProgressBar progressBar, String id) {
         this.mContext = mContext;
         this.listView = listView;
         this.progressBar = progressBar;
-        this.u_id = u_id;
+        this.u_id = id;
         list = new ArrayList<Sample>();
     }
 
@@ -80,6 +80,7 @@ public class GetSuggest extends AsyncTask<String, String, String> {
     @Override
     protected void onPostExecute(String s) {
         super.onPostExecute(s);
+
         progressBar.setVisibility(View.GONE);
         if (s.equalsIgnoreCase("true")) {
             listView.setVisibility(View.VISIBLE);

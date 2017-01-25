@@ -67,20 +67,20 @@ public class EmployerHome extends Fragment implements AbsListView.OnScrollListen
         new GetHome(getActivity(), listView, progressBar, mApp.getPreference().getString(Common.u_id, ""), "all", swipe).execute();
 
 
-        if (listView.getCount()==0){
+       /* if (listView.getCount()==0){
             udyowel.setVisibility(View.VISIBLE);
-        }else {
-            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        }else {*/
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                    TextView txt = (TextView) view.findViewById(R.id.jId);
-                    Intent in = new Intent(getActivity(), PostViewActivity.class);
-                    in.putExtra("jId", txt.getText().toString());
-                    startActivity(in);
-                }
-            });
-        }
+                TextView txt = (TextView) view.findViewById(R.id.jId);
+                Intent in = new Intent(getActivity(), PostViewActivity.class);
+                in.putExtra("jId", txt.getText().toString());
+                startActivity(in);
+            }
+        });
+        // }
 
         listView.setOnScrollListener(this);
         swipe.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -100,15 +100,20 @@ public class EmployerHome extends Fragment implements AbsListView.OnScrollListen
     @Override
     public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
         if (view.getId() == R.id.post) {
-            int lastItem = firstVisibleItem + visibleItemCount;
-            if (lastItem == totalItemCount) {
-                if (preLast != lastItem) {
-                    preLast = lastItem;
-                    //Toast.makeText(getActivity(), "In Last", Toast.LENGTH_SHORT).show();
-                }
+            if (firstVisibleItem == 0) {
+                swipe.setEnabled(true);
+                int lastItem = firstVisibleItem + visibleItemCount;
+                if (lastItem == totalItemCount) {
+                    if (preLast != lastItem) {
+                        preLast = lastItem;
+                        //Toast.makeText(getActivity(), "In Last", Toast.LENGTH_SHORT).show();
+                    }
 
+                }else{
+
+                }
             } else {
-               // udyowel.setVisibility(View.VISIBLE);
+                swipe.setEnabled(false);
             }
         }
     }

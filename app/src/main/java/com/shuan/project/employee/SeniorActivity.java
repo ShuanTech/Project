@@ -103,6 +103,7 @@ public class SeniorActivity extends AppCompatActivity {
         mApp = (Common) getApplicationContext();
         if(mApp.getPreference().getBoolean("start",false)==false){
             startActivity(new Intent(getApplicationContext(),ProfileActivity.class));
+            showWelcome();
             showAlert();
         }
        // new GetInfo(SeniorActivity.this,mApp.getPreference().getString(Common.u_id,""));
@@ -162,7 +163,6 @@ public class SeniorActivity extends AppCompatActivity {
 
         usrName = (TextView) header.findViewById(R.id.usr_name);
         proPic = (CircleImageView) header.findViewById(R.id.profile);
-
 
 
         setImage(mApp.getPreference().getString(Common.PROPIC, ""), proPic);
@@ -339,7 +339,19 @@ public class SeniorActivity extends AppCompatActivity {
             }
         }).show();
     }
-
+    private void showWelcome(){
+    AlertDialog.Builder build = new AlertDialog.Builder(SeniorActivity.this);
+    build.setTitle("Welcome to Udyomitra");
+    build.setIcon(R.drawable.logo);
+    build.setCancelable(false);
+    build.setMessage(" Greetings of the day!! Welcome to a whole new world of opportunities. With the New Year ahead of us, Udyomitra will help you write a new story by setting higher goals in your life. We exposed you to all the vacancies in and around your native location by default. You will be following all your college mates and their working firms by default. We generate a decent quality resume for you for free. We will help you find the work you enjoy since you are best suited for it.We wish you all success!")
+            .setPositiveButton("Start", new DialogInterface.OnClickListener() {
+        @Override
+        public void onClick(DialogInterface dialog, int which) {
+            dialog.cancel();
+        }
+    }).show();
+}
     private void showFeedDialog() {
         LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View v = inflater.inflate(R.layout.intro_dialog, null, false);

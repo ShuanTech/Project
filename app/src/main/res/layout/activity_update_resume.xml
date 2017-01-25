@@ -880,7 +880,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/standard_margin"
-                        android:hint="Enter Achievement"
+                        android:hint="Eg: Won first prize in paper presentation"
                         android:imeOptions="actionDone"
                         android:singleLine="true" />
                 </android.support.design.widget.TextInputLayout>
@@ -927,7 +927,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/standard_margin"
-                        android:hint="Enter Extra Curricular"
+                        android:hint="Eg: Paper presentation"
                         android:imeOptions="actionDone"
                         android:singleLine="true" />
                 </android.support.design.widget.TextInputLayout>

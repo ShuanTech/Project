@@ -93,6 +93,7 @@ public class EmployerActivity extends AppCompatActivity {
         mApp = (Common) getApplicationContext();
         if (mApp.getPreference().getBoolean("start", false) == false) {
             startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
+            showWelcome();
         }
        // new GetInfo(EmployerActivity.this, mApp.getPreference().getString(Common.u_id, ""));
         if (mApp.getPreference().getString(Common.Version, "").equalsIgnoreCase("true")) {
@@ -320,7 +321,19 @@ public class EmployerActivity extends AppCompatActivity {
         }).show();
     }
 
-
+    private void showWelcome(){
+        AlertDialog.Builder build = new AlertDialog.Builder(EmployerActivity.this);
+        build.setTitle("Welcome to Udyomitra");
+        build.setIcon(R.drawable.logo);
+        build.setCancelable(false);
+        build.setMessage(" Greetings of the day!! Welcome to a whole new world of opportunities. We help you connect the dots between individual roles and goals of your organization at ease. We do not restrict you to the number of vacancies you post at Udyomitra and we guarantee to display only qualified, active and apt candidates based on your requirement. We reduce your effort and time for hiring. We have no validity for your relationship with us. We wish you all success!")
+                .setPositiveButton("Start", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                }).show();
+    }
     private void showFeedDialog() {
         LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View v = inflater.inflate(R.layout.intro_dialog, null, false);

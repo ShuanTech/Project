@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.shuan.Project.R;
 import com.shuan.Project.Utils.Common;
+import com.shuan.Project.Utils.PasswordValidator;
 import com.shuan.Project.launcher.LoginActivity;
 import com.shuan.Project.parser.Connection;
 import com.shuan.Project.parser.php;
@@ -30,12 +31,14 @@ public class ChangePasswrd extends AppCompatActivity {
     private Common mApp;
     private EditText oldPass, newPass, cnfrmPass;
     private Button change;
+    private PasswordValidator pasval;
     private LinearLayout scroll;
     private HashMap<String, String> cData;
     private ProgressDialog pDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         mApp = (Common) getApplicationContext();
 
         if (mApp.getPreference().getString(Common.LEVEL, "").equalsIgnoreCase("1")) {
@@ -64,6 +67,7 @@ public class ChangePasswrd extends AppCompatActivity {
         oldPass = (EditText) findViewById(R.id.old_pass);
         newPass = (EditText) findViewById(R.id.new_pass);
         cnfrmPass = (EditText) findViewById(R.id.cnfrm_pass);
+        pasval = new PasswordValidator();
 
 
         change = (Button) findViewById(R.id.update);
@@ -98,8 +102,14 @@ public class ChangePasswrd extends AppCompatActivity {
                 } else if (newPass.getText().toString().length() == 0) {
                     newPass.setError("Enter New Password");
                     newPass.requestFocus();
+                } else if (!pasval.validate(newPass.getText().toString())) {
+                    newPass.setError("Password must contain an Alphabet and a Number");
+                    newPass.requestFocus();
+                } else if (newPass.getText().toString().length() < 8) {
+                    newPass.setError("Password must contain at least 8 Characters");
+                    newPass.requestFocus();
                 } else if (cnfrmPass.getText().toString().length() == 0) {
-                    cnfrmPass.setError("Enter Conform Password");
+                    cnfrmPass.setError("Enter Confirm Password");
                     cnfrmPass.requestFocus();
                 } else if (!newPass.getText().toString().equalsIgnoreCase(cnfrmPass.getText().toString())) {
                     cnfrmPass.setError("Password Mismatch");
