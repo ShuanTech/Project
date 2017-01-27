@@ -61,7 +61,6 @@ public class EmployerHome extends Fragment implements AbsListView.OnScrollListen
         listView = (ListView) view.findViewById(R.id.post);
         progressBar = (ProgressBar) view.findViewById(R.id.progress_bar);
         swipe = (SwipeRefreshLayout) view.findViewById(R.id.swipe);
-        cv = (CardView) view.findViewById(R.id.udp);
         list = new ArrayList<Sample>();
 
         new GetHome(getActivity(), listView, progressBar, mApp.getPreference().getString(Common.u_id, ""), "all", swipe).execute();

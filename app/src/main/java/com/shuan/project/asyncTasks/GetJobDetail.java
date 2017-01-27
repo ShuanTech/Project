@@ -49,6 +49,7 @@ public class GetJobDetail extends AsyncTask<String, String, String> {
             int succ = json.getInt("success");
 
             if (succ == 0) {
+                s="false";
             } else {
                 JSONArray jsonArray = json.getJSONArray("job");
                 for (int i = 0; i < jsonArray.length(); i++) {
@@ -62,6 +63,7 @@ public class GetJobDetail extends AsyncTask<String, String, String> {
 
                     list.add(new Sample(job_id, title, viewed, shared, applied,close));
                 }
+                s="true";
             }
 
         } catch (Exception e) {
@@ -72,10 +74,10 @@ public class GetJobDetail extends AsyncTask<String, String, String> {
     @Override
     protected void onPostExecute(String s) {
         super.onPostExecute(s);
-        progressBar.setVisibility(View.GONE);
-        listView.setVisibility(View.VISIBLE);
-        adapter=new JobAdapter(mContext,list);
-        listView.setAdapter(adapter);
+            progressBar.setVisibility(View.GONE);
+            listView.setVisibility(View.VISIBLE);
+            adapter = new JobAdapter(mContext, list);
+            listView.setAdapter(adapter);
 
     }
 }

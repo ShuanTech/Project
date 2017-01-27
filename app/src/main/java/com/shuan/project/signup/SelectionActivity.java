@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.shuan.Project.R;
 import com.shuan.Project.Utils.Common;
 import com.shuan.Project.Utils.Helper;
+import com.shuan.Project.launcher.LoginActivity;
 
 public class SelectionActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -64,6 +65,12 @@ public class SelectionActivity extends AppCompatActivity implements View.OnClick
                 break;
         }
         startActivity(in);
+        finish();
+    }
+
+    @Override
+    public void onBackPressed(){
+        startActivity(new Intent(getApplicationContext(),LoginActivity.class));
         finish();
     }
 

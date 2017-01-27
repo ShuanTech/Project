@@ -31,7 +31,7 @@
         <item
             android:id="@+id/follower"
             android:icon="@drawable/ic_following"
-            android:title="Follower"
+            android:title="Followers"
             app:actionViewClass="android.widget.TextView" />
         <item
             android:id="@+id/fav"
@@ -103,7 +103,7 @@
         <item
             android:id="@+id/feed"
             android:icon="@drawable/ic_feed_back"
-            android:title="Feed Back" />
+            android:title="Feedback" />
         <item
             android:id="@+id/about"
             android:icon="@drawable/ic_about_us"

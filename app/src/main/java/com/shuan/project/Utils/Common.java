@@ -25,7 +25,7 @@ public class Common extends Application {
 
     public static SharedPreferences preference = null;
     public static final SharedPreferences.Editor editor = null;
-    public static final String PREF = "com.shuan.project";
+    public static final String PREF = "com.shuan.Project";
     public static final String u_id = "UID";
     public static final String LEVEL = "level";
     public static final String QUALIFICATION = "qualification";
@@ -61,6 +61,7 @@ public class Common extends Application {
     public static final String PAGE3="page3";
     public static final String ATTEND ="attend";
     public static final String MAIL = "mail";
+    public static final String IMPORTANT = "important";
     public Context mContext;
     private String update = null;
     public static final String Version = "version";

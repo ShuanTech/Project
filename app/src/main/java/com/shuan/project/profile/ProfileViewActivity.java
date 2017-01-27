@@ -1051,13 +1051,17 @@ public class ProfileViewActivity extends AppCompatActivity {
         //MenuItem item1 = menu.findItem(R.id.unfav);
         if (mApp.getPreference().getString(Common.LEVEL, "").equalsIgnoreCase("3")) {
             if (level.equalsIgnoreCase("3")) {
-                item.setVisible(true);
+                item.setVisible(false);
             } else {
                 item.setVisible(true);
             }
 
         } else {
-            item.setVisible(true);
+            if (level.equalsIgnoreCase("1") || level.equalsIgnoreCase("2"))
+            item.setVisible(false);
+            else {
+                item.setVisible(true);
+            }
         }
         return true;
     }

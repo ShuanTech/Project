@@ -10,6 +10,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -56,6 +57,7 @@ public class NotifyFragment extends Fragment {
         swipe = (SwipeRefreshLayout) v.findViewById(R.id.swipe);
         progressBar = (ProgressBar) v.findViewById(R.id.progress_bar);
         list = (ListView) v.findViewById(R.id.notify_list);
+
         new GetNotifyDetail(getActivity(), mApp.getPreference().getString(Common.u_id, ""), list, progressBar, swipe).execute();
 
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -117,26 +119,25 @@ public class NotifyFragment extends Fragment {
                     new UpdateNotify(getActivity(), mApp.getPreference().getString(Common.u_id, ""),
                             nId.getText().toString()).execute();
                     startActivity(in);
-                }else if (type.getText().toString().equalsIgnoreCase("8")){
+                } else if (type.getText().toString().equalsIgnoreCase("8")) {
                     Intent in = new Intent(mContext, EventViewActivity.class);
-                    in.putExtra("evnt_id",txt1.getText().toString());
+                    in.putExtra("evnt_id", txt1.getText().toString());
                   /*  in.putExtra("u_id"),txt2.getText().toString();*/
                     in.putExtra("level", levl.getText().toString());
-                    new UpdateNotify(getActivity(), mApp.getPreference().getString(Common.u_id,""),
+                    new UpdateNotify(getActivity(), mApp.getPreference().getString(Common.u_id, ""),
                             nId.getText().toString()).execute();
                     startActivity(in);
-                }else if (type.getText().toString().equalsIgnoreCase("9")){
-                    Toast.makeText(getActivity(),"Verification Successful",Toast.LENGTH_SHORT).show();
-                    new UpdateNotify(getActivity(), mApp.getPreference().getString(Common.u_id,""),
+                } else if (type.getText().toString().equalsIgnoreCase("9")) {
+                    Toast.makeText(getActivity(), "Verification Successful", Toast.LENGTH_SHORT).show();
+                    new UpdateNotify(getActivity(), mApp.getPreference().getString(Common.u_id, ""),
                             nId.getText().toString()).execute();
-                }
-                else {
-                    if (txt1.getText() ==""){
-                        Toast.makeText(getActivity(),"Does not exists what are you Looking for",Toast.LENGTH_SHORT).show();
+                } else {
+                    if (txt1.getText() == "") {
+                        Toast.makeText(getActivity(), "Does not exists what are you Looking for", Toast.LENGTH_SHORT).show();
                         new UpdateNotify(getActivity(), mApp.getPreference().getString(Common.u_id, ""),
                                 nId.getText().toString()).execute();
 
-                    }else {
+                    } else {
                         Intent in = new Intent(mContext, PostViewActivity.class);
                         in.putExtra("jId", txt1.getText().toString());
                         new UpdateNotify(getActivity(), mApp.getPreference().getString(Common.u_id, ""),

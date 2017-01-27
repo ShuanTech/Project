@@ -212,7 +212,7 @@ public class SeniorActivity extends AppCompatActivity {
                         selected = 3;
                         return true;
                     case R.id.follower:
-                        toolbar.setTitle("Follower");
+                        toolbar.setTitle("Followers");
                         mDrawerLayout.closeDrawers();
                         display(4);
                         selected = 4;
@@ -356,18 +356,19 @@ public class SeniorActivity extends AppCompatActivity {
         LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View v = inflater.inflate(R.layout.intro_dialog, null, false);
         final EditText feed = (EditText) v.findViewById(R.id.intro);
-        feed.setHint("Enter FeedBack");
+        feed.setHint("Enter Feedback");
         AlertDialog.Builder builder = new AlertDialog.Builder(SeniorActivity.this)
+                .setCancelable(false)
                 .setView(v);
         builder.setTitle("FeedBack")
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         if (feed.getText().toString().length() == 0) {
-                            feed.setError("Filed Mandatory");
+                            Toast.makeText(getApplicationContext(),"Feedback cannot be empty try again..!",Toast.LENGTH_SHORT).show();
                         } else {
                             new Feedback(getApplicationContext(), mApp.getPreference().getString(Common.u_id, ""), feed.getText().toString()).execute();
-                            dialog.cancel();
+                            dialog.dismiss();
 
                         }
                     }
@@ -593,4 +594,5 @@ public class SeniorActivity extends AppCompatActivity {
             }, 2000);
         }
     }
+
 }

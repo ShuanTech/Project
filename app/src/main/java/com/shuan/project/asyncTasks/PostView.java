@@ -213,7 +213,7 @@ public class PostView extends AsyncTask<String, String, String> {
             @Override
             public void onClick(View v) {
                 Intent in = new Intent(mContext, CommentsActivity.class);
-                in.putExtra("j_id",j_id);
+                in.putExtra("jId", j_id);
                 in.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 mContext.startActivity(in);
             }

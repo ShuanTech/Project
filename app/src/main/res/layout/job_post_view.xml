@@ -4,6 +4,10 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
+    <RelativeLayout
+        android:id="@+id/lay_wel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
     <TextView
         android:id="@+id/jId"
         android:layout_width="wrap_content"
@@ -176,7 +180,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:gravity="left"
-                            android:text="Skills Required" />
+                            android:textStyle="bold"
+                            android:text="Skills Required :" />
 
                         <TextView
                             android:id="@+id/skill"
@@ -404,6 +409,58 @@
 
     </RelativeLayout>
 -->
+        </RelativeLayout>
 
+    <RelativeLayout
+        android:layout_below="@+id/lay_wel"
+        android:id="@+id/udyopro_post"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone">
+        <android.support.v7.widget.CardView
+            android:id="@+id/udyopost"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/standard_margin"
+            android:layout_marginLeft="@dimen/standard_margin"
+            android:layout_marginRight="@dimen/standard_margin"
+            android:layout_marginTop="28dp"
+            app:cardBackgroundColor="#f0f0f0"
+            app:cardCornerRadius="@dimen/small_margin"
+            app:cardElevation="@dimen/small_margin">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:id="@+id/cmplo"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:layout_marginBottom="@dimen/small_margin"
+                    android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                    android:layout_marginTop="@dimen/standard_margin"
+                    android:background="@drawable/job_post"
+                    android:elevation="@dimen/standard_margin"
+                    android:padding="2dp"
+                    android:src="@drawable/logo" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/cmplo"
+                    android:textAppearance="?android:textAppearanceLarge"
+                    android:text="Welcome to Udyomitra..!"
+                    android:paddingTop="16dp"
+                    android:paddingLeft="10dp"
+                    android:textStyle="bold"/>
+                <TextView
+                    android:id="@+id/prof"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/cmplo"
+                    android:padding="@dimen/standard_margin"
+                    android:textAppearance="?android:textAppearanceMedium"
+                    android:text="             Greetings of the day!! Welcome to a whole new world of opportunities. With the New Year ahead of us, Udyomitra will help you write a new story by setting higher goals in your life. We exposed you to all the vacancies in and around your native location by default. You will be following all your college mates and their working firms by default. We generate a decent quality resume for you for free. We will help you find the work you enjoy since you are best suited for it.We wish you all success!"/>
+            </RelativeLayout>
+        </android.support.v7.widget.CardView>
+    </RelativeLayout>
 
 </RelativeLayout>

@@ -378,7 +378,22 @@ public class ResumeEditActivity extends AppCompatActivity implements View.OnClic
                                                             startActivity(in);
                                                             break;
                                                         case R.id.del:
-                                                            new DeleteDetail(ResumeEditActivity.this, pId, "proSum").execute();
+                                                            AlertDialog.Builder build = new AlertDialog.Builder(ResumeEditActivity.this);
+                                                            build.setTitle("Delete..?");
+                                                            build.setCancelable(false);
+                                                            build.setMessage("Are you sure..?");
+                                                            build.setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+                                                                @Override
+                                                                public void onClick(DialogInterface dialog, int which) {
+                                                                    new DeleteDetail(ResumeEditActivity.this, pId, "proSum").execute();
+                                                                }
+                                                            }).setNegativeButton("No", new DialogInterface.OnClickListener() {
+                                                                @Override
+                                                                public void onClick(DialogInterface dialog, int which) {
+                                                                    dialog.cancel();
+                                                                }
+                                                            }).show();
+
                                                             break;
                                                     }
                                                     return false;
@@ -440,7 +455,22 @@ public class ResumeEditActivity extends AppCompatActivity implements View.OnClic
                                                             startActivity(in);
                                                             break;
                                                         case R.id.del:
-                                                            new DeleteDetail(ResumeEditActivity.this, pId, "wrkDet").execute();
+                                                            AlertDialog.Builder build = new AlertDialog.Builder(ResumeEditActivity.this);
+                                                            build.setTitle("Delete..?");
+                                                            build.setCancelable(false);
+                                                            build.setMessage("Are you sure..?");
+                                                            build.setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+                                                                @Override
+                                                                public void onClick(DialogInterface dialog, int which) {
+                                                                    new DeleteDetail(ResumeEditActivity.this, pId, "wrkDet").execute();
+                                                                }
+                                                            }).setNegativeButton("No", new DialogInterface.OnClickListener() {
+                                                                @Override
+                                                                public void onClick(DialogInterface dialog, int which) {
+                                                                    dialog.cancel();
+                                                                }
+                                                            }).show();
+
                                                             break;
                                                     }
                                                     return false;
@@ -494,9 +524,22 @@ public class ResumeEditActivity extends AppCompatActivity implements View.OnClic
                                                             startActivity(in);
                                                             break;
                                                         case R.id.del:
-                                                            /*AlertDialog.Builder build = new AlertDialog.Builder(ResumeEditActivity.this);
-                                                                    build.setTitle()*/
-                                                            new DeleteDetail(ResumeEditActivity.this, pId, "wrkExp").execute();
+                                                            AlertDialog.Builder build = new AlertDialog.Builder(ResumeEditActivity.this);
+                                                            build.setTitle("Delete..?");
+                                                            build.setCancelable(false);
+                                                            build.setMessage("Are you sure..?");
+                                                            build.setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+                                                                @Override
+                                                                public void onClick(DialogInterface dialog, int which) {
+                                                                    new DeleteDetail(ResumeEditActivity.this, pId, "wrkExp").execute();
+                                                                }
+                                                            }).setNegativeButton("No", new DialogInterface.OnClickListener() {
+                                                                @Override
+                                                                public void onClick(DialogInterface dialog, int which) {
+                                                                    dialog.cancel();
+                                                                }
+                                                            }).show();
+
                                                             break;
                                                     }
                                                     return false;
@@ -575,7 +618,21 @@ public class ResumeEditActivity extends AppCompatActivity implements View.OnClic
                                                             startActivity(in);
                                                             break;
                                                         case R.id.del:
-                                                            new DeleteDetail(ResumeEditActivity.this, pId, "edu").execute();
+                                                            AlertDialog.Builder build = new AlertDialog.Builder(ResumeEditActivity.this);
+                                                            build.setTitle("Delete..?");
+                                                            build.setCancelable(false);
+                                                            build.setMessage("Are you sure..?");
+                                                            build.setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+                                                                @Override
+                                                                public void onClick(DialogInterface dialog, int which) {
+                                                                    new DeleteDetail(ResumeEditActivity.this, pId, "edu").execute();
+                                                                }
+                                                            }).setNegativeButton("No", new DialogInterface.OnClickListener() {
+                                                                @Override
+                                                                public void onClick(DialogInterface dialog, int which) {
+                                                                    dialog.cancel();
+                                                                }
+                                                            }).show();
                                                             break;
                                                     }
                                                     return false;

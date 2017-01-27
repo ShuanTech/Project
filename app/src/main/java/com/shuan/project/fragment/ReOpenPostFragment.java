@@ -41,6 +41,8 @@ public class ReOpenPostFragment extends Fragment {
         new GetJobDetail(getActivity(), mApp.getPreference().getString(Common.u_id, ""), list, progressBar,"reopen").execute();
 
         return v;
+
     }
+
 
 }

@@ -1,7 +1,9 @@
 package com.shuan.Project.adapter;
 
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.view.LayoutInflater;
@@ -23,6 +25,7 @@ import com.shuan.Project.Utils.Common;
 import com.shuan.Project.Utils.Helper;
 import com.shuan.Project.activities.CommentsActivity;
 import com.shuan.Project.asyncTasks.CheckEligible;
+import com.shuan.Project.asyncTasks.DelSavedPost;
 import com.shuan.Project.asyncTasks.SavePost;
 import com.shuan.Project.asyncTasks.SharePost;
 import com.shuan.Project.list.Sample;
@@ -89,7 +92,7 @@ public class PostAdapter extends BaseAdapter {
         RelativeLayout comments = (RelativeLayout) convertView.findViewById(R.id.comment);
         RelativeLayout apply = (RelativeLayout) convertView.findViewById(R.id.apply);
         RelativeLayout share = (RelativeLayout) convertView.findViewById(R.id.share);
-        RelativeLayout imp = (RelativeLayout) convertView.findViewById(R.id.imp);
+        final RelativeLayout imp = (RelativeLayout) convertView.findViewById(R.id.imp);
         ImageView cImg = (ImageView) convertView.findViewById(R.id.cmpny_logo);
         final TextView jId = (TextView) convertView.findViewById(R.id.jId);
         TextView cName = (TextView) convertView.findViewById(R.id.cmpny_name);
@@ -216,10 +219,26 @@ public class PostAdapter extends BaseAdapter {
         apply.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                final AlertDialog.Builder build = new AlertDialog.Builder(v.getRootView().getContext());
+                build.setTitle("Apply..?");
+                build.setCancelable(false);
+                build.setMessage("Do you want to Apply ?");
 
-                new CheckEligible(mContext, mApp.getPreference().getString(Common.u_id, ""), curr.getjId(),
-                        mApp.getPreference().getString(Common.LEVEL, "")).execute();
-                mApp.getPreference().edit().putBoolean(Common.APPLY, true).commit();
+                build.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        new CheckEligible(mContext, mApp.getPreference().getString(Common.u_id, ""), curr.getjId(),
+                                mApp.getPreference().getString(Common.LEVEL, "")).execute();
+                        mApp.getPreference().edit().putBoolean(Common.APPLY, true).commit();
+                    }
+                }).setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                }).show();
+
+
 
 
             }
@@ -228,9 +247,26 @@ public class PostAdapter extends BaseAdapter {
         });
 
         share.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
-                new SharePost(mContext, mApp.getPreference().getString(Common.u_id, ""), curr.getjId()).execute();
+                final AlertDialog.Builder build = new AlertDialog.Builder(v.getRootView().getContext());
+                build.setTitle("Share..?");
+                build.setCancelable(false);
+                build.setMessage("Want to share this post on your Timeline ?");
+
+                build.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        new SharePost(mContext, mApp.getPreference().getString(Common.u_id, ""), curr.getjId()).execute();
+                    }
+                }).setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                }).show();
+
 
             }
         });
@@ -239,6 +275,12 @@ public class PostAdapter extends BaseAdapter {
             @Override
             public void onClick(View v) {
                 new SavePost(mContext, mApp.getPreference().getString(Common.u_id, ""), curr.getjId(),cImpt).execute();
+            }
+        });
+        cImpt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new DelSavedPost(mContext,mApp.getPreference().getString(Common.u_id, ""), curr.getjId(),cImpt).execute();
             }
         });
 

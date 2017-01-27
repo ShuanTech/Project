@@ -41,7 +41,7 @@ public class DeleteDetail extends AsyncTask<String, String, String> {
     protected void onPreExecute() {
         super.onPreExecute();
         pDialog = new ProgressDialog(mContext);
-        pDialog.setMessage("Deleting Detail");
+        pDialog.setMessage("Deleting Details");
         pDialog.setIndeterminate(false);
         pDialog.setCancelable(false);
         pDialog.show();

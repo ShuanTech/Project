@@ -7,6 +7,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.shuan.Project.Utils.Common;
 import com.shuan.Project.adapter.PostAdapter;
@@ -88,11 +89,13 @@ public class GetPost extends AsyncTask<String, String, String> {
     @Override
     protected void onPostExecute(String s) {
         super.onPostExecute(s);
-        progressBar.setVisibility(View.GONE);
-        listView.setVisibility(View.VISIBLE);
-        adapter = new PostAdapter(mContext, list);
-        listView.setAdapter(adapter);
-
-
+        if (s.equalsIgnoreCase("false")){
+            Toast.makeText(mContext,"No Data to Show",Toast.LENGTH_SHORT).show();
+        }else {
+            progressBar.setVisibility(View.GONE);
+            listView.setVisibility(View.VISIBLE);
+            adapter = new PostAdapter(mContext, list);
+            listView.setAdapter(adapter);
+        }
     }
 }

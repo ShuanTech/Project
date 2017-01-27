@@ -238,7 +238,7 @@ public class EmployerActivity extends AppCompatActivity {
                         showTerm();
                         return true;
                     case R.id.fav:
-                        toolbar.setTitle("Favourite Person");
+                        toolbar.setTitle("Favourite");
                         mDrawerLayout.closeDrawers();
                         display(10);
                         selectd = 10;
@@ -340,13 +340,14 @@ public class EmployerActivity extends AppCompatActivity {
         final EditText feed = (EditText) v.findViewById(R.id.intro);
         feed.setHint("Enter FeedBack");
         AlertDialog.Builder builder = new AlertDialog.Builder(EmployerActivity.this)
+                .setCancelable(false)
                 .setView(v);
         builder.setTitle("FeedBack")
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         if (feed.getText().toString().length() == 0) {
-                            feed.setError("Filed Mandatory");
+                            Toast.makeText(getApplicationContext(),"Please enter your feed back",Toast.LENGTH_SHORT).show();
                         } else {
                             new Feedback(getApplicationContext(), mApp.getPreference().getString(Common.u_id, ""), feed.getText().toString()).execute();
                             dialog.cancel();

@@ -118,5 +118,6 @@ public class php {
     public static final String portView ="http://www.udyomitra.com/android/portView";
     public static final String serView = "http://www.udyomitra.com/android/serView";
     public static final String verifymail = "http://www.udyomitra.com/android/mailverify";
+    public static final String del_savedpost = "http://www.udyomitra.com/android/del_savedpost";
 
 }

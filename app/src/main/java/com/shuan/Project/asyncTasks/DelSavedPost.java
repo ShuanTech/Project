@@ -14,8 +14,11 @@ import org.json.JSONObject;
 
 import java.util.HashMap;
 
+/**
+ * Created by Android on 1/27/2017.
+ */
 
-public class SavePost extends AsyncTask<String, String, String> {
+public class DelSavedPost extends AsyncTask<String, String, String> {
 
     private ProgressDialog pDialog;
     private Context mContext;
@@ -23,23 +26,22 @@ public class SavePost extends AsyncTask<String, String, String> {
     private ImageView img;
     private HashMap<String, String> sData;
 
-
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
         pDialog = new ProgressDialog(mContext);
-        pDialog.setMessage("Saving Post...");
+        pDialog.setMessage("Deleting from saved...");
         pDialog.setIndeterminate(false);
         pDialog.setCancelable(false);
         pDialog.show();
     }
 
-
-    public SavePost(Context mContext, String uId, String jId,ImageView img) {
+    public DelSavedPost(Context mContext, String uId, String jId,ImageView img) {
         this.mContext = mContext;
         this.uId = uId;
         this.jId = jId;
-        this.img=img;
+        this.img = img;
+
     }
 
     @Override
@@ -52,7 +54,7 @@ public class SavePost extends AsyncTask<String, String, String> {
             sData.put("j_id", jId);
 
             try {
-                JSONObject json = Connection.UrlConnection(php.save_post, sData);
+                JSONObject json = Connection.UrlConnection(php.del_savedpost, sData);
                 int succ = json.getInt("success");
                 if (succ == 0) {
                     s = "false";
@@ -69,12 +71,12 @@ public class SavePost extends AsyncTask<String, String, String> {
     }
 
     @Override
-    protected void onPostExecute(String s) {
+    protected void onPostExecute(String s){
         super.onPostExecute(s);
         pDialog.cancel();
         if (s.equalsIgnoreCase("true")) {
-            img.setImageResource(R.drawable.ic_important_clr);
-            Toast.makeText(mContext, "Saved Important", Toast.LENGTH_SHORT).show();
+            img.setImageResource(R.drawable.ic_important);
+            Toast.makeText(mContext, "Removed from Important list", Toast.LENGTH_SHORT).show();
         } else if(s.equalsIgnoreCase("false")){
             Toast.makeText(mContext, "Failed Share.Try Again!...", Toast.LENGTH_SHORT).show();
         }

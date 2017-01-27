@@ -49,7 +49,7 @@ public class AddFavorite extends AsyncTask<String, String, String> {
     protected void onPostExecute(String s) {
         super.onPostExecute(s);
         if (s.equalsIgnoreCase("true")) {
-            Toast.makeText(mContext, "Successfully Add to Favorite", Toast.LENGTH_SHORT).show();
+            Toast.makeText(mContext, "Successfully Added to Favorite", Toast.LENGTH_SHORT).show();
         } else if(s.equalsIgnoreCase("add")){
             Toast.makeText(mContext, "Already in Favorite List.", Toast.LENGTH_SHORT).show();
         }else {

@@ -60,7 +60,7 @@ public class Following extends AsyncTask<String, String, String> {
     protected void onPostExecute(String s) {
         super.onPostExecute(s);
         if (s.equalsIgnoreCase("true")) {
-            Toast.makeText(mContext, "You have successfully following", Toast.LENGTH_SHORT).show();
+            Toast.makeText(mContext, "You are successfully following", Toast.LENGTH_SHORT).show();
             flow.setVisibility(View.GONE);
             unflow.setVisibility(View.VISIBLE);
         }else if (s.equalsIgnoreCase("me")){
@@ -70,7 +70,7 @@ public class Following extends AsyncTask<String, String, String> {
         else if (s.equalsIgnoreCase("false")) {
             Toast.makeText(mContext, "Error! Try Again", Toast.LENGTH_SHORT).show();
         } else {
-            Toast.makeText(mContext, "You have successfully un follow", Toast.LENGTH_SHORT).show();
+            Toast.makeText(mContext, " Unfollowed ", Toast.LENGTH_SHORT).show();
             flow.setVisibility(View.VISIBLE);
             unflow.setVisibility(View.GONE);
         }

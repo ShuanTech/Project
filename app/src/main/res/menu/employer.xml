@@ -110,7 +110,7 @@
         <item
             android:id="@+id/feed"
             android:icon="@drawable/ic_feed_back"
-            android:title="Feed Back" />
+            android:title="Feedback" />
         <item
             android:id="@+id/about"
             android:icon="@drawable/ic_about_us"
