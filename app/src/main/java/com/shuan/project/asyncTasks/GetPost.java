@@ -30,7 +30,7 @@ public class GetPost extends AsyncTask<String, String, String> {
     private Common mApp;
     private ArrayList<Sample> list;
     private PostAdapter adapter;
-    private String u_id,type;
+    private String u_id,type,s;
 
 
 
@@ -54,6 +54,7 @@ public class GetPost extends AsyncTask<String, String, String> {
             JSONObject json = Connection.UrlConnection(php.get_post, cData);
             int succ = json.getInt("success");
             if (succ == 0) {
+                s = "false";
             } else {
                 JSONArray jsonArray = json.getJSONArray("post");
                 for (int i = 0; i < jsonArray.length(); i++) {
@@ -78,24 +79,25 @@ public class GetPost extends AsyncTask<String, String, String> {
 
                     list.add(new Sample(cName, pPic, jId, jTitle, jSkill, jLevel, jLoc, jDated, jView, jApplied, jShare, jFrmId,jImp,fPropic,fshrd,flvl));
                 }
+                s = "true";
             }
 
         } catch (Exception e) {
         }
 
-        return null;
+        return s;
     }
 
     @Override
     protected void onPostExecute(String s) {
         super.onPostExecute(s);
-        if (s.equalsIgnoreCase("false")){
-            Toast.makeText(mContext,"No Data to Show",Toast.LENGTH_SHORT).show();
-        }else {
-            progressBar.setVisibility(View.GONE);
+        progressBar.setVisibility(View.GONE);
+        if (s.equalsIgnoreCase("true")){
             listView.setVisibility(View.VISIBLE);
             adapter = new PostAdapter(mContext, list);
             listView.setAdapter(adapter);
+        }else {
+            Toast.makeText(mContext,"No Data to Show",Toast.LENGTH_SHORT).show();
         }
     }
 }

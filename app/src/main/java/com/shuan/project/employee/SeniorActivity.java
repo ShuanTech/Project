@@ -425,7 +425,7 @@ public class SeniorActivity extends AppCompatActivity {
                 break;
             case 13:
                 f= new PortfolioFragment();
-                Toast.makeText(getApplicationContext(),"Use website for adding portfolio",Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getApplicationContext(),"Use website for adding portfolio",Toast.LENGTH_SHORT).show();
                 break;
             case 14:
                 f= new FavoriteFragment();
