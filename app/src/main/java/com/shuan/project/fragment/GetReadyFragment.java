@@ -61,10 +61,11 @@ public class GetReadyFragment extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 TextView txt = (TextView) view.findViewById(R.id.j_title);
                 TextView txt1 = (TextView) view.findViewById(R.id.job_id);
-                //Toast.makeText(getActivity(),txt.getText().toString(),Toast.LENGTH_SHORT).show();
+               // Toast.makeText(getActivity(),txt1.getText().toString(),Toast.LENGTH_SHORT).show();
                 Intent in = new Intent(getActivity(), InterViewActivity.class);
                 in.putExtra("title", txt.getText().toString());
                 in.putExtra("post", txt1.getText().toString());
+                //Toast.makeText(getActivity(),txt1.getText().toString(),Toast.LENGTH_SHORT).show();
                 startActivity(in);
 
             }

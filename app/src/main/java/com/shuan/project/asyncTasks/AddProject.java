@@ -44,7 +44,7 @@ public class AddProject extends AsyncTask<String, String, String> {
     protected void onPreExecute() {
         super.onPreExecute();
         pDialog = new ProgressDialog(mContext);
-        pDialog.setMessage("Adding Project Detail");
+        pDialog.setMessage("Adding Project Details");
         pDialog.setIndeterminate(false);
         pDialog.setCancelable(false);
         pDialog.show();

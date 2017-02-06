@@ -1012,7 +1012,7 @@
                         android:layout_marginBottom="@dimen/small_margin"
                         android:layout_marginLeft="@dimen/standard_margin"
                         android:layout_marginTop="@dimen/standard_margin"
-                        android:text="Project"
+                        android:text="Portfolio"
                         android:textAppearance="?android:textAppearanceMedium"
                         android:textColor="#000"
                         android:textStyle="bold" />

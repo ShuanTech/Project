@@ -95,18 +95,19 @@ public class SeniorActivity extends AppCompatActivity {
     private CircleImageView proPic;
     private DisplayImageOptions options;
     private TextView alertCount, profileStrength, following, follower;
+    private int count =1;
     int selected;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         mApp = (Common) getApplicationContext();
-        if(mApp.getPreference().getBoolean("start",false)==false){
-            startActivity(new Intent(getApplicationContext(),ProfileActivity.class));
+        if (mApp.getPreference().getBoolean("start", false) == false) {
+            startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
             showWelcome();
             showAlert();
         }
-       // new GetInfo(SeniorActivity.this,mApp.getPreference().getString(Common.u_id,""));
+        // new GetInfo(SeniorActivity.this,mApp.getPreference().getString(Common.u_id,""));
 
         if (mApp.getPreference().getString(Common.Version, "").equalsIgnoreCase("true")) {
             builder = new AlertDialog.Builder(SeniorActivity.this)
@@ -192,29 +193,34 @@ public class SeniorActivity extends AppCompatActivity {
                     case R.id.home:
                         toolbar.setTitle("Home");
                         mDrawerLayout.closeDrawers();
+                        count = 1;
                         selected = 0;
                         display(0);
                         return true;
                     case R.id.strength:
                         startActivity(new Intent(getApplicationContext(), ResumeEditActivity.class));
                         mDrawerLayout.closeDrawers();
+                        count = 2;
                         return true;
                     case R.id.connect:
                         toolbar.setTitle("Connections");
                         mDrawerLayout.closeDrawers();
                         display(2);
+                        count = 2;
                         selected = 2;
                         return true;
                     case R.id.following:
                         toolbar.setTitle("Following");
                         mDrawerLayout.closeDrawers();
                         display(3);
+                        count = 2;
                         selected = 3;
                         return true;
                     case R.id.follower:
                         toolbar.setTitle("Followers");
                         mDrawerLayout.closeDrawers();
                         display(4);
+                        count = 2;
                         selected = 4;
                         return true;
                     case R.id.sugg:
@@ -222,35 +228,41 @@ public class SeniorActivity extends AppCompatActivity {
                         mDrawerLayout.closeDrawers();
                         display(5);
                         selected = 5;
+                        count = 2;
                         return true;
                     case R.id.imp:
                         toolbar.setTitle("Important");
                         mDrawerLayout.closeDrawers();
                         display(6);
                         selected = 6;
+                        count = 2;
                         return true;
                     case R.id.ref:
                         toolbar.setTitle("Reference");
                         mDrawerLayout.closeDrawers();
                         display(7);
                         selected = 7;
+                        count = 2;
                         return true;
                     case R.id.offer:
                         toolbar.setTitle("Offers");
                         mDrawerLayout.closeDrawers();
                         display(8);
                         selected = 8;
+                        count = 2;
                         return true;
                     case R.id.apply:
                         toolbar.setTitle("Applied");
                         mDrawerLayout.closeDrawers();
                         display(9);
                         selected = 9;
+                        count = 2;
                         return true;
                     case R.id.ready:
                         toolbar.setTitle("Get Ready");
                         mDrawerLayout.closeDrawers();
                         display(10);
+                        count = 2;
                         selected = 10;
                         return true;
                     case R.id.feed:
@@ -269,12 +281,14 @@ public class SeniorActivity extends AppCompatActivity {
                         toolbar.setTitle("Invitations");
                         mDrawerLayout.closeDrawers();
                         display(12);
+                        count = 2;
                         selected = 12;
                         return true;
                     case R.id.port:
                         toolbar.setTitle("Portfolio");
                         mDrawerLayout.closeDrawers();
                         display(13);
+                        count = 2;
                         selected = 13;
                         return true;
                     /*case R.id.help:
@@ -282,10 +296,11 @@ public class SeniorActivity extends AppCompatActivity {
                         startActivity(new Intent(getApplicationContext(), Help.class));
                         return true;*/
                     case R.id.fav:
-                        toolbar.setTitle("Favourite");
+                        toolbar.setTitle("Favourites");
                         mDrawerLayout.closeDrawers();
-                        display(14);
-                        selected = 14;
+                        display(11);
+                        count = 2;
+                        selected = 11;
                         return true;
                     default:
                         return true;
@@ -328,7 +343,7 @@ public class SeniorActivity extends AppCompatActivity {
                 .setPositiveButton("Build", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Toast.makeText(SeniorActivity.this,"Keep your profile updated",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(SeniorActivity.this, "Keep your profile updated", Toast.LENGTH_SHORT).show();
                         startActivity(new Intent(getApplicationContext(), ResumeEditActivity.class));
                         dialog.cancel();
                     }
@@ -339,19 +354,21 @@ public class SeniorActivity extends AppCompatActivity {
             }
         }).show();
     }
-    private void showWelcome(){
-    AlertDialog.Builder build = new AlertDialog.Builder(SeniorActivity.this);
-    build.setTitle("Welcome to Udyomitra");
-    build.setIcon(R.drawable.logo);
-    build.setCancelable(false);
-    build.setMessage(" Greetings of the day!! Welcome to a whole new world of opportunities. With the New Year ahead of us, Udyomitra will help you write a new story by setting higher goals in your life. We exposed you to all the vacancies in and around your native location by default. You will be following all your college mates and their working firms by default. We generate a decent quality resume for you for free. We will help you find the work you enjoy since you are best suited for it.We wish you all success!")
-            .setPositiveButton("Start", new DialogInterface.OnClickListener() {
-        @Override
-        public void onClick(DialogInterface dialog, int which) {
-            dialog.cancel();
-        }
-    }).show();
-}
+
+    private void showWelcome() {
+        AlertDialog.Builder build = new AlertDialog.Builder(SeniorActivity.this);
+        build.setTitle("Welcome to Udyomitra");
+        build.setIcon(R.drawable.logo);
+        build.setCancelable(false);
+        build.setMessage(" Greetings of the day!! Welcome to a whole new world of opportunities. With the New Year ahead of us, Udyomitra will help you write a new story by setting higher goals in your life. We exposed you to all the vacancies in and around your native location by default. You will be following all your college mates and their working firms by default. We generate a decent quality resume for you for free. We will help you find the work you enjoy since you are best suited for it.We wish you all success!")
+                .setPositiveButton("Start", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                }).show();
+    }
+
     private void showFeedDialog() {
         LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View v = inflater.inflate(R.layout.intro_dialog, null, false);
@@ -365,7 +382,7 @@ public class SeniorActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         if (feed.getText().toString().length() == 0) {
-                            Toast.makeText(getApplicationContext(),"Feedback cannot be empty try again..!",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "Feedback cannot be empty try again..!", Toast.LENGTH_SHORT).show();
                         } else {
                             new Feedback(getApplicationContext(), mApp.getPreference().getString(Common.u_id, ""), feed.getText().toString()).execute();
                             dialog.dismiss();
@@ -416,19 +433,19 @@ public class SeniorActivity extends AppCompatActivity {
             case 10:
                 f = new GetReadyFragment();
                 break;
-            case 11:
-                toolbar.setTitle("Notification");
+            case 15:
+                toolbar.setTitle("Notifications");
                 f = new NotifyFragment();
                 break;
             case 12:
-                f= new InviteFragment();
+                f = new InviteFragment();
                 break;
             case 13:
-                f= new PortfolioFragment();
+                f = new PortfolioFragment();
                 //Toast.makeText(getApplicationContext(),"Use website for adding portfolio",Toast.LENGTH_SHORT).show();
                 break;
-            case 14:
-                f= new FavoriteFragment();
+            case 11:
+                f = new FavoriteFragment();
                 break;
         }
 
@@ -526,14 +543,16 @@ public class SeniorActivity extends AppCompatActivity {
         lay1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                toolbar.setTitle("Notification");
+                toolbar.setTitle("Notifications");
                 mDrawerLayout.closeDrawers();
-                mNavigationView.getMenu().getItem(selected).setChecked(false);
-                display(11);
+                //mNavigationView.getMenu().getItem(selected).setChecked(false);
+                count=2;
+                display(15);
             }
         });
         return true;
     }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -553,11 +572,12 @@ public class SeniorActivity extends AppCompatActivity {
                 break;
             case R.id.job_ser:
                 startActivity(new Intent(getApplicationContext(), EmplyeeSearchActivity.class));
+                Toast.makeText(getApplicationContext(), "Please wait initializing...", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.logout:
                 mApp.getPreference().edit().clear().commit();
                 Intent intent = new Intent(SeniorActivity.this, LoginActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP |Intent.FLAG_ACTIVITY_CLEAR_TASK |Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                 finish();
                 startActivity(intent);
                 break;
@@ -580,19 +600,27 @@ public class SeniorActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        if (exit) {
-            super.onBackPressed();
-            return;
-        } else {
-            Toast.makeText(this, "Press Back again to Exit.", Toast.LENGTH_SHORT).show();
-            exit = true;
-            new Handler().postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    exit = false;
-                }
-            }, 2000);
+        if (count == 1) {
+            if (exit) {
+                super.onBackPressed();
+                return;
+            } else {
+                Toast.makeText(this, "Press Back again to Exit.", Toast.LENGTH_SHORT).show();
+                exit = true;
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        exit = false;
+                    }
+                }, 2000);
+            }
+        }else {
+            toolbar.setTitle("Home");
+            mDrawerLayout.closeDrawers();
+            count=1;
+            display(0);
         }
     }
+
 
 }

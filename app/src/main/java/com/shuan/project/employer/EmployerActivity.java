@@ -86,7 +86,7 @@ public class EmployerActivity extends AppCompatActivity {
     private RelativeLayout lay1;
     private TextView follower;
     private TextView alertCount;
-    private int selectd;
+    private int selectd,count = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -168,6 +168,7 @@ public class EmployerActivity extends AppCompatActivity {
                     case R.id.home:
                         toolbar.setTitle("Home");
                         mDrawerLayout.closeDrawers();
+                        count = 1 ;
                         display(0);
                         selectd = 0;
                         return true;
@@ -175,6 +176,7 @@ public class EmployerActivity extends AppCompatActivity {
                         toolbar.setTitle("Followers");
                         mDrawerLayout.closeDrawers();
                         display(1);
+                        count = 2;
                         selectd = 1;
                         return true;
                    /* case R.id.ourteam:
@@ -184,8 +186,9 @@ public class EmployerActivity extends AppCompatActivity {
                         selectd = 2;
                         return true;*/
                     case R.id.action:
-                        toolbar.setTitle("Action");
+                        toolbar.setTitle("Actions");
                         mDrawerLayout.closeDrawers();
+                        count = 2;
                         display(3);
                         selectd = 3;
                         return true;
@@ -193,18 +196,21 @@ public class EmployerActivity extends AppCompatActivity {
                         toolbar.setTitle("About Company");
                         mDrawerLayout.closeDrawers();
                         display(5);
+                        count = 2;
                         selectd = 5;
                         return true;
                     case R.id.service:
                         toolbar.setTitle("Services");
                         mDrawerLayout.closeDrawers();
                         display(6);
+                        count = 2;
                         selectd = 6;
                         return true;
                     case R.id.port:
                         toolbar.setTitle("Portfolio");
                         mDrawerLayout.closeDrawers();
                         display(7);
+                        count = 2;
                         selectd = 7;
                         return true;
                     /*case R.id.test:
@@ -217,6 +223,7 @@ public class EmployerActivity extends AppCompatActivity {
                         toolbar.setTitle("Contact");
                         mDrawerLayout.closeDrawers();
                         display(9);
+                        count = 2;
                         selectd = 9;
                         return true;
                     case R.id.setting:
@@ -238,15 +245,17 @@ public class EmployerActivity extends AppCompatActivity {
                         showTerm();
                         return true;
                     case R.id.fav:
-                        toolbar.setTitle("Favourite");
+                        toolbar.setTitle("Favourites");
                         mDrawerLayout.closeDrawers();
                         display(10);
+                        count = 2;
                         selectd = 10;
                         return true;
                     case R.id.reopen:
                         toolbar.setTitle("Reopen Jobs");
                         mDrawerLayout.closeDrawers();
                         display(11);
+                        count = 2;
                         selectd = 11;
                         return true;
                     case R.id.feed:
@@ -347,7 +356,7 @@ public class EmployerActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         if (feed.getText().toString().length() == 0) {
-                            Toast.makeText(getApplicationContext(),"Please enter your feed back",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(),"Feedback cannot be empty try again..!",Toast.LENGTH_SHORT).show();
                         } else {
                             new Feedback(getApplicationContext(), mApp.getPreference().getString(Common.u_id, ""), feed.getText().toString()).execute();
                             dialog.cancel();
@@ -475,9 +484,10 @@ public class EmployerActivity extends AppCompatActivity {
         lay1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                toolbar.setTitle("Notification");
+                toolbar.setTitle("Notifications");
                 mDrawerLayout.closeDrawers();
-                mNavigationView.getMenu().getItem(selectd).setChecked(false);
+                count=2;
+                //mNavigationView.getMenu().getItem(selectd).setChecked(false);
                 display(14);
             }
         });
@@ -496,7 +506,7 @@ public class EmployerActivity extends AppCompatActivity {
                 break;
             case R.id.emp_search:
                 startActivity(new Intent(getApplicationContext(), EmployerSearchActivity.class));
-                Toast.makeText(getApplicationContext(), "Wait until the initialisation", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Please wait initializing...", Toast.LENGTH_SHORT).show();
                 break;
         }
 
@@ -518,18 +528,25 @@ public class EmployerActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        if (exit) {
-            super.onBackPressed();
-            return;
-        } else {
-            Toast.makeText(this, "Press Back again to Exit.", Toast.LENGTH_SHORT).show();
-            exit = true;
-            new Handler().postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    exit = false;
-                }
-            }, 2000);
+        if (count ==1 ) {
+            if (exit) {
+                super.onBackPressed();
+                return;
+            } else {
+                Toast.makeText(this, "Press Back again to Exit.", Toast.LENGTH_SHORT).show();
+                exit = true;
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        exit = false;
+                    }
+                }, 2000);
+            }
+        }else {
+            toolbar.setTitle("Home");
+            mDrawerLayout.closeDrawers();
+            count=1;
+            display(0);
         }
     }
 }

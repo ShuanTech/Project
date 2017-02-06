@@ -9,6 +9,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
@@ -27,7 +28,7 @@ import java.util.HashMap;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class AppliedFragment extends Fragment {
+public class AppliedFragment extends Fragment implements AbsListView.OnScrollListener {
 
     private ArrayList<Sample> list;
     private ConnectAdapter adapter;
@@ -37,6 +38,7 @@ public class AppliedFragment extends Fragment {
     private Context mContext;
     private ProgressBar progressBar;
     private SwipeRefreshLayout swipe;
+    private int preLast;
 
     public AppliedFragment() {
         // Required empty public constructor
@@ -74,6 +76,7 @@ public class AppliedFragment extends Fragment {
             }
         });
 
+        listView.setOnScrollListener(this);
         swipe.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -85,4 +88,30 @@ public class AppliedFragment extends Fragment {
         return view;
     }
 
+    @Override
+    public void onScrollStateChanged(AbsListView view, int scrollState) {
+
+    }
+
+    @Override
+    public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+        if (view.getId() == R.id.post) {
+            if (firstVisibleItem == 0) {
+                swipe.setEnabled(true);
+                int lastItem = firstVisibleItem + visibleItemCount;
+                if (lastItem == totalItemCount) {
+                    if (preLast != lastItem) {
+                        preLast = lastItem;
+                        //Toast.makeText(getActivity(), "In Last", Toast.LENGTH_SHORT).show();
+                    }
+
+                } else {
+
+                }
+            } else {
+                swipe.setEnabled(false);
+            }
+        }
+
+    }
 }

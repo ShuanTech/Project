@@ -45,7 +45,6 @@ public class CSLActivity extends AppCompatActivity {
     private Spinner level;
     private int ab = 1990;
     public EditText fullName, frm_yr, to_yr;
-    public TextView tv1, tv2;
     private boolean ins = false;
     private boolean cIns = false;
     private Button next;
@@ -70,51 +69,59 @@ public class CSLActivity extends AppCompatActivity {
         conCent = (AutoCompleteTextView) findViewById(R.id.concent);
         frm_yr = (EditText) findViewById(R.id.frm_yr);
         to_yr = (EditText) findViewById(R.id.to_yr);
-        tv1 = (TextView) findViewById(R.id.tv1);
-        tv2 = (TextView) findViewById(R.id.tv2);
         skill = (MultiAutoCompleteTextView) findViewById(R.id.skill);
         loc = (AutoCompleteTextView) findViewById(R.id.location);
         textfieldValidator = new TextfieldValidator();
         alphabetValidator = new AlphabetValidator();
         next = (Button) findViewById(R.id.next);
 
+
         frm_yr.addTextChangedListener(new TextWatcher() {
+
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                //abc = frm_yr.getText().toString();
 
             }
 
             @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                abc = frm_yr.getText().toString();
-                tv1.setText(abc);
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
             }
 
             @Override
             public void afterTextChanged(Editable s) {
                 //i = Integer.parseInt(frm_yr.getText().toString());
-                i = Integer.parseInt(tv1.getText().toString());
+                //i = Integer.parseInt(abc.toString());
+                if (frm_yr.getText().toString().length() != 0){
+                    i = Integer.parseInt(frm_yr.getText().toString());
+                }
 
             }
         });
 
+
         to_yr.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
             }
 
             @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                abcd = to_yr.getText().toString();
-                tv2.setText(abcd);
-            }
-
-            @Override
             public void afterTextChanged(Editable s) {
                 //j = Integer.parseInt(to_yr.getText().toString());
-                j = Integer.parseInt(tv2.getText().toString());
+                //j = Integer.parseInt(abcd.toString());
+               if (to_yr.getText().toString().length() != 0){
+                  j = Integer.parseInt(to_yr.getText().toString());
+               }
             }
+
         });
 
 

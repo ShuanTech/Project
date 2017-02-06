@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.text.Html;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
@@ -55,8 +56,9 @@ public class EventView extends AsyncTask<String, String, String> {
     private String attend;
     private String date_created;
     private Helper help;
+    private Button but;
 
-    public EventView(Context mContext, String u_id, String evnt_id, RelativeLayout scroll, ProgressBar progressBar, ImageView coverImg, ImageView cmpny_logo, TextView cmpny, TextView evntname, TextView evntdesc, TextView evntloc, TextView evntdate, TextView evntime) {
+    public EventView(Context mContext, String u_id, String evnt_id, RelativeLayout scroll, ProgressBar progressBar, ImageView coverImg, ImageView cmpny_logo, TextView cmpny, TextView evntname, TextView evntdesc, TextView evntloc, TextView evntdate, TextView evntime,Button but) {
 
         this.mContext = mContext;
         this.u_id = u_id ;
@@ -72,6 +74,7 @@ public class EventView extends AsyncTask<String, String, String> {
         this.evntloc = evntloc;
         this.evntdate = evntdate;
         this.evntime = evntime;
+        this.but = but;
         help = new Helper();
     }
 
@@ -157,8 +160,9 @@ public class EventView extends AsyncTask<String, String, String> {
                 mContext.startActivity(in);
             }
         });
-       /* if (attend.equals("1")){
-        }*/
+        if (attend.equals("1")){
+            but.setText("Attending");
+        }
     }
 
     private void setImage(String path, ImageView img) {

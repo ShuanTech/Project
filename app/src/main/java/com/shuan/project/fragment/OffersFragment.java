@@ -9,6 +9,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
@@ -25,7 +26,7 @@ import com.shuan.Project.list.Sample;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class OffersFragment extends Fragment {
+public class OffersFragment extends Fragment implements AbsListView.OnScrollListener {
 
 
     private ArrayList<Sample> list;
@@ -36,6 +37,7 @@ public class OffersFragment extends Fragment {
     private Context mContext;
     private ProgressBar progressBar;
     private SwipeRefreshLayout swipe;
+    private int preLast;
 
 
     public OffersFragment() {
@@ -48,8 +50,8 @@ public class OffersFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
 
-        mContext=getActivity();
-        mApp= (Common) mContext.getApplicationContext();
+        mContext = getActivity();
+        mApp = (Common) mContext.getApplicationContext();
         View view = inflater.inflate(R.layout.fragment_employer_home, container, false);
 
         swipe = (SwipeRefreshLayout) view.findViewById(R.id.swipe);
@@ -58,29 +60,57 @@ public class OffersFragment extends Fragment {
 
         list = new ArrayList<Sample>();
 
-        new GetPost(getActivity(), listView, progressBar, mApp.getPreference().getString(Common.u_id,""),"all", swipe).execute();
+        new GetPost(getActivity(), listView, progressBar, mApp.getPreference().getString(Common.u_id, ""), "all", swipe).execute();
 
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 TextView txt = (TextView) view.findViewById(R.id.jId);
-                TextView txt1= (TextView) view.findViewById(R.id.frm_id);
-                Intent in=new Intent(getActivity(),PostViewActivity.class);
-                in.putExtra("jId",txt.getText().toString());
-                in.putExtra("frmId",txt1.getText().toString());
-                in.putExtra("apply","no");
+                TextView txt1 = (TextView) view.findViewById(R.id.frm_id);
+                Intent in = new Intent(getActivity(), PostViewActivity.class);
+                in.putExtra("jId", txt.getText().toString());
+                in.putExtra("frmId", txt1.getText().toString());
+                in.putExtra("apply", "no");
                 startActivity(in);
             }
         });
+        listView.setOnScrollListener(this);
         swipe.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                new GetHome(getActivity(), listView, progressBar, mApp.getPreference().getString(Common.u_id, ""), "all",swipe).execute();
+                new GetHome(getActivity(), listView, progressBar, mApp.getPreference().getString(Common.u_id, ""), "all", swipe).execute();
+                swipe.setRefreshing(false);
             }
         });
 
         return view;
     }
 
+    @Override
+    public void onScrollStateChanged(AbsListView view, int scrollState) {
+
+    }
+
+    @Override
+    public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+
+        if (view.getId() == R.id.post) {
+            if (firstVisibleItem == 0) {
+                swipe.setEnabled(true);
+                int lastItem = firstVisibleItem + visibleItemCount;
+                if (lastItem == totalItemCount) {
+                    if (preLast != lastItem) {
+                        preLast = lastItem;
+                        //Toast.makeText(getActivity(), "In Last", Toast.LENGTH_SHORT).show();
+                    }
+
+                } else {
+
+                }
+            } else {
+                swipe.setEnabled(false);
+            }
+        }
+    }
 }

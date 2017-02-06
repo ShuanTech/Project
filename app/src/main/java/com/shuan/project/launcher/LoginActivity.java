@@ -100,7 +100,7 @@ public class LoginActivity extends AppCompatActivity {
         protected void onPreExecute() {
             super.onPreExecute();
             pDialog = new ProgressDialog(LoginActivity.this);
-            pDialog.setMessage("Login...");
+            pDialog.setMessage("Logging In...");
             pDialog.setIndeterminate(false);
             pDialog.setCancelable(false);
             pDialog.show();

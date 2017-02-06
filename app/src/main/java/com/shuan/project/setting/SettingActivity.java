@@ -13,7 +13,7 @@ import com.shuan.Project.Utils.Common;
 public class SettingActivity extends AppCompatActivity implements View.OnClickListener {
 
     private Toolbar toolbar;
-    private LinearLayout chngePass;
+    private LinearLayout chngePass,invitefrnd;
     private Common mApp;
 
 
@@ -42,11 +42,13 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
         }
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
-        toolbar.setTitle("Setting");
+        toolbar.setTitle("Settings");
 
         chngePass = (LinearLayout) findViewById(R.id.chng_pass);
+        invitefrnd = (LinearLayout) findViewById(R.id.invite_frnd);
 
         chngePass.setOnClickListener(this);
+        invitefrnd.setOnClickListener(this);
 
     }
 
@@ -56,6 +58,24 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
             case R.id.chng_pass:
                 startActivity(new Intent(getApplicationContext(),ChangePasswrd.class));
                 break;
+            case  R.id.invite_frnd:
+                invite();
+                break;
         }
     }
+    private void invite() {
+//sharing implementation here
+
+        Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
+
+        sharingIntent.setType("text/plain");
+        String shareBody = "Udyomitra \n The ultimate professional network. \n Create your account today. \n Download the app from the link. " + "\n https://goo.gl/uXxF7H";
+
+        sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Udyomitra invitation");
+        sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody);
+
+
+        startActivity(Intent.createChooser(sharingIntent, "Invite via"));
+    }
+
 }

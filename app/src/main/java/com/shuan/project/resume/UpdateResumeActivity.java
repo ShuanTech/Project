@@ -106,6 +106,8 @@ public class UpdateResumeActivity extends AppCompatActivity implements View.OnCl
     private String[] qulify = new String[]{"Select Qualification", "PG", "UG", "DIPLOMA"};
     private String q, get;
     private Spinner level;
+    private String abcd;
+    private TextView tv1, tv2;
     private Button q_update;
     private TextView frm, to, qfy;
 
@@ -146,7 +148,7 @@ public class UpdateResumeActivity extends AppCompatActivity implements View.OnCl
     private Button cntAdd;
 
     /* Basic Info */
-    public EditText dob, fName, mName, rel, lang, hobby, age;
+    public EditText dob, fName, mName, rel, lang, hobby,age;
     public RadioButton radio, r1, r2;
     public RadioGroup sex;
     public Button bscAdd;
@@ -399,11 +401,15 @@ public class UpdateResumeActivity extends AppCompatActivity implements View.OnCl
                 agrt.setText(mApp.getPreference().getString("aggrt", ""));
                 frm_yr.setText(mApp.getPreference().getString("frm", ""));
                 to_yr.setText(mApp.getPreference().getString("to", ""));
-                i = Integer.parseInt(mApp.getPreference().getString("frm", ""));
-                j = Integer.parseInt(mApp.getPreference().getString("to", ""));
+
+                //i = Integer.parseInt(mApp.getPreference().getString("frm", ""));
+                // j = Integer.parseInt(mApp.getPreference().getString("to", ""));
+
+                i = Integer.parseInt(frm_yr.getText().toString());
+                j = Integer.parseInt(to_yr.getText().toString());
             }
 
-            frm_yr.addTextChangedListener(new TextWatcher() {
+            /*frm_yr.addTextChangedListener(new TextWatcher() {
                 @Override
                 public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -411,12 +417,16 @@ public class UpdateResumeActivity extends AppCompatActivity implements View.OnCl
 
                 @Override
                 public void onTextChanged(CharSequence s, int start, int before, int count) {
+                    abcd = frm_yr.getText().toString();
+                    tv1.setText(abcd);
+
 
                 }
 
                 @Override
                 public void afterTextChanged(Editable s) {
-                    i = Integer.parseInt(frm_yr.getText().toString());
+                    //i = Integer.parseInt(frm_yr.getText().toString());
+                    i= Integer.parseInt(tv1.getText().toString());
                 }
             });
 
@@ -428,15 +438,17 @@ public class UpdateResumeActivity extends AppCompatActivity implements View.OnCl
 
                 @Override
                 public void onTextChanged(CharSequence s, int start, int before, int count) {
-
+                    abcd = to_yr.getText().toString();
+                    tv2.setText(abcd);
                 }
 
                 @Override
                 public void afterTextChanged(Editable s) {
-                    j = Integer.parseInt(to_yr.getText().toString());
+                    //j = Integer.parseInt(to_yr.getText().toString());
+                    j = Integer.parseInt(tv2.getText().toString());
                 }
             });
-
+*/
 
             q_update.setOnClickListener(this);
 
@@ -506,13 +518,16 @@ public class UpdateResumeActivity extends AppCompatActivity implements View.OnCl
                 sFrmyr.setText(mApp.getPreference().getString("frm", ""));
                 sTYr.setText(mApp.getPreference().getString("to", ""));
 
-                k = Integer.parseInt(mApp.getPreference().getString("frm", ""));
-                l = Integer.parseInt(mApp.getPreference().getString("to", ""));
+                //k = Integer.parseInt(mApp.getPreference().getString("frm", ""));
+                //l = Integer.parseInt(mApp.getPreference().getString("to", ""));
+
+                k = Integer.parseInt(sFrmyr.getText().toString());
+                l = Integer.parseInt(sTYr.getText().toString());
 
 
             }
 
-            sFrmyr.addTextChangedListener(new TextWatcher() {
+            /*sFrmyr.addTextChangedListener(new TextWatcher() {
                 @Override
                 public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -520,6 +535,7 @@ public class UpdateResumeActivity extends AppCompatActivity implements View.OnCl
 
                 @Override
                 public void onTextChanged(CharSequence s, int start, int before, int count) {
+
 
                 }
 
@@ -545,7 +561,7 @@ public class UpdateResumeActivity extends AppCompatActivity implements View.OnCl
                     l = Integer.parseInt(sTYr.getText().toString());
                 }
             });
-
+*/
 
             h_update.setOnClickListener(this);
 
@@ -555,6 +571,8 @@ public class UpdateResumeActivity extends AppCompatActivity implements View.OnCl
             progressBar.setVisibility(View.VISIBLE);
 
             skll = (MultiAutoCompleteTextView) findViewById(R.id.skills);
+
+
 
             addSkll = (Button) findViewById(R.id.sk_add);
 
@@ -685,7 +703,6 @@ public class UpdateResumeActivity extends AppCompatActivity implements View.OnCl
             r2 = (RadioButton) findViewById(R.id.female);
             fName = (EditText) findViewById(R.id.f_name);
             mName = (EditText) findViewById(R.id.m_name);
-            rel = (EditText) findViewById(R.id.rel);
             lang = (EditText) findViewById(R.id.lang);
             hobby = (EditText) findViewById(R.id.hobby);
             age = (EditText) findViewById(R.id.age);
@@ -804,7 +821,10 @@ public class UpdateResumeActivity extends AppCompatActivity implements View.OnCl
                 }
                 break;
             case R.id.wk_detail:
-                if (postition.getText().toString().length() == 0) {
+                if (orgname.getText().toString().length() == 0) {
+                    orgname.setError("Organization name is Mandatory");
+                    orgname.requestFocus();
+                } else if (postition.getText().toString().length() == 0) {
                     postition.setError("Position Mandatory");
                     postition.requestFocus();
                 } else if (location.getText().toString().length() == 0) {
@@ -887,6 +907,12 @@ public class UpdateResumeActivity extends AppCompatActivity implements View.OnCl
                     frm_yr.setError("Field Mandatory");
                 } else if (to_yr.getText().toString().length() == 0) {
                     to_yr.setError("Field Mandatory");
+                } else if (frm_yr.getText().toString().length() < 4) {
+                    frm_yr.setError("Enter a valid year");
+                    frm_yr.requestFocus();
+                } else if (to_yr.getText().toString().length() < 4) {
+                    to_yr.setError("Enter a valid year");
+                    to_yr.requestFocus();
                 } else if (conCent.getText().toString().length() == 0) {
                     conCent.setError("Concentration Mandatory");
                     conCent.requestFocus();

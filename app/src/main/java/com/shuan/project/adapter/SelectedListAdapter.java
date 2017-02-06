@@ -69,14 +69,15 @@ public class SelectedListAdapter extends BaseAdapter {
         TextView venue = (TextView) convertView.findViewById(R.id.intrvew_venue);
         TextView type = (TextView) convertView.findViewById(R.id.intrvew_type);
 
-        String[] getdt = curr.getLevel().split("-", 3);
-        String yr = getdt[0];
+       // String[] getdt = curr.getLevel().split("-", 3);
+        //Toast.makeText(mContext,curr.getLevel().toString(),Toast.LENGTH_SHORT).show();
+        /*String yr = getdt[0];
         String mnth = getdt[1];
-        String dat = getdt[2];
+        String dat = getdt[2];*/
 
 
         name.setText(curr.getProPic());
-        dt.setText("Date & Time : " + dat + " ' " + mnth + " ," + curr.getPos());
+        dt.setText("Date & Time : " + curr.getLevel() + " ," + curr.getPos());
         venue.setText("Venue : " + curr.getName());
 
         if (curr.getCompanyName().equalsIgnoreCase("1")) {

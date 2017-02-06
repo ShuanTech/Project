@@ -112,6 +112,8 @@ public class CommentsActivity extends AppCompatActivity implements View.OnClickL
 
         if (v.getId() == R.id.cmt_snd) {
             if (cmtEdt.getText().toString().length() == 0) {
+                cmtEdt.setError("Please enter a Comment");
+                cmtEdt.requestFocus();
             } else {
                 LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                 View vi = inflater.inflate(R.layout.cmt_item, null);

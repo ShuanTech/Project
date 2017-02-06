@@ -61,9 +61,9 @@ public class GetReadyList extends AsyncTask<String, String, String> {
                     String job_id = child.optString("job_id");
                     String type = child.optString("type");
 
-                    list.add(new Sample(job_id,title,type));
-                    s="true";
+                    list.add(new Sample(job_id, title, type));
                 }
+                    s="true";
             }
         } catch (Exception e) {
         }

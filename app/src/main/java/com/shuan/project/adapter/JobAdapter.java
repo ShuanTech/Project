@@ -96,7 +96,7 @@ public class JobAdapter extends BaseAdapter {
 
                 AlertDialog.Builder build = new AlertDialog.Builder(mContext)
                         .setTitle("Confirmation")
-                        .setMessage("Are you sure want to delete the Job Post?");
+                        .setMessage("Are you sure ? Do you want to delete the Job Post?");
                 build.setPositiveButton("DELETE", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -120,8 +120,9 @@ public class JobAdapter extends BaseAdapter {
 
                 if (close.getText().toString().equalsIgnoreCase("close")) {
                     AlertDialog.Builder build = new AlertDialog.Builder(mContext)
+                            .setCancelable(false)
                             .setTitle("Confirmation")
-                            .setMessage("Are you sure want to close Job Post?");
+                            .setMessage("Are you sure ? Do you want to close this Job Post?");
                     build.setPositiveButton("CLOSE", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
@@ -137,8 +138,9 @@ public class JobAdapter extends BaseAdapter {
 
                 } else {
                     AlertDialog.Builder build = new AlertDialog.Builder(mContext)
+                            .setCancelable(false)
                             .setTitle("Confirmation")
-                            .setMessage("Are you sure want to close Job Post?");
+                            .setMessage("Are you sure ? Do you want to reopen this Job Post?");
                     build.setPositiveButton("REOPEN", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {

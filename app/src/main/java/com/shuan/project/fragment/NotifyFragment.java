@@ -10,10 +10,10 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
@@ -33,13 +33,14 @@ import com.shuan.Project.employer.ShortListActivity;
 import com.shuan.Project.profile.ProfileViewActivity;
 
 
-public class NotifyFragment extends Fragment {
+public class NotifyFragment extends Fragment implements AbsListView.OnScrollListener {
 
     private Common mApp;
     private Context mContext;
     private ProgressBar progressBar;
-    private ListView list;
+    private ListView listView;
     private SwipeRefreshLayout swipe;
+    private int preLast;
 
 
     public NotifyFragment() {
@@ -56,11 +57,11 @@ public class NotifyFragment extends Fragment {
 
         swipe = (SwipeRefreshLayout) v.findViewById(R.id.swipe);
         progressBar = (ProgressBar) v.findViewById(R.id.progress_bar);
-        list = (ListView) v.findViewById(R.id.notify_list);
+        listView = (ListView) v.findViewById(R.id.notify_list);
 
-        new GetNotifyDetail(getActivity(), mApp.getPreference().getString(Common.u_id, ""), list, progressBar, swipe).execute();
+        new GetNotifyDetail(getActivity(), mApp.getPreference().getString(Common.u_id, ""), listView, progressBar, swipe).execute();
 
-        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 TextView nId = (TextView) view.findViewById(R.id.n_id);
@@ -136,7 +137,6 @@ public class NotifyFragment extends Fragment {
                         Toast.makeText(getActivity(), "Does not exists what are you Looking for", Toast.LENGTH_SHORT).show();
                         new UpdateNotify(getActivity(), mApp.getPreference().getString(Common.u_id, ""),
                                 nId.getText().toString()).execute();
-
                     } else {
                         Intent in = new Intent(mContext, PostViewActivity.class);
                         in.putExtra("jId", txt1.getText().toString());
@@ -149,12 +149,12 @@ public class NotifyFragment extends Fragment {
 
             }
         });
+        listView.setOnScrollListener(this);
         swipe.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                new GetNotifyDetail(getActivity(), mApp.getPreference().getString(Common.u_id, ""), list, progressBar, swipe).execute();
+                new GetNotifyDetail(getActivity(), mApp.getPreference().getString(Common.u_id, ""), listView, progressBar, swipe).execute();
                 swipe.setRefreshing(false);
-
             }
         });
         return v;
@@ -162,8 +162,9 @@ public class NotifyFragment extends Fragment {
 
     private void showDialog(final String s) {
         AlertDialog.Builder build = new AlertDialog.Builder(getActivity());
+        build.setCancelable(false);
         build.setTitle("Reference")
-                .setMessage("Are You Interest to Refer this Person?");
+                .setMessage("Are You Interested to Refer this Person?");
         build.setPositiveButton("Refer", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -180,4 +181,30 @@ public class NotifyFragment extends Fragment {
 
     }
 
+    @Override
+    public void onScrollStateChanged(AbsListView view, int scrollState) {
+
+    }
+
+    @Override
+    public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+        if (view.getId() == R.id.notify_list) {
+            if (firstVisibleItem == 0) {
+                swipe.setEnabled(true);
+                int lastItem = firstVisibleItem + visibleItemCount;
+                if (lastItem == totalItemCount) {
+                    if (preLast != lastItem) {
+                        preLast = lastItem;
+                        //Toast.makeText(getActivity(), "In Last", Toast.LENGTH_SHORT).show();
+                    }
+
+                } else {
+
+                }
+            } else {
+                swipe.setEnabled(false);
+            }
+        }
+
+    }
 }

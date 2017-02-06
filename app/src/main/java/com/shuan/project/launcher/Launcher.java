@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Window;
@@ -75,20 +76,22 @@ public class Launcher extends AppCompatActivity {
 
     private void showAlert() {
         builder = new AlertDialog.Builder(Launcher.this)
-                .setTitle("No Internet")
+                .setTitle("No Internet Connection")
                 .setCancelable(false)
-                .setMessage("No Internet Connection Available.\n Do you want to try again?");
+                .setMessage("Check your Setting and try again ");
+        builder.setIcon(R.drawable.warning);
 
-        builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+        builder.setNegativeButton("EXIT", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 finish();
                 dialog.cancel();
             }
-        }).setPositiveButton("YES", new DialogInterface.OnClickListener() {
+        }).setPositiveButton("TRY AGAIN", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.cancel();
+                startActivity(new Intent(Settings.ACTION_SETTINGS));
                 checkConnection();
             }
         }).show();
@@ -98,7 +101,6 @@ public class Launcher extends AppCompatActivity {
     private void checkConnection() {
 
         if (NetworkUtil.getConnectivityStatus(getApplicationContext()) == 0) {
-
             showAlert();
 
         } else {

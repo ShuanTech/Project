@@ -36,6 +36,7 @@ public class InterViewActivity extends AppCompatActivity {
     private ProgressBar progressBar;
     private DisplayImageOptions options;
     private ImageView cmpnyImg;
+    private String s;
 
 
     @Override
@@ -92,11 +93,13 @@ public class InterViewActivity extends AppCompatActivity {
 
     public class GetInterViewDetail extends AsyncTask<String, String, String> {
 
+        private String jId= getIntent().getStringExtra("post");
+
         @Override
         protected String doInBackground(String... params) {
             iData = new HashMap<String, String>();
             iData.put("u_id", mApp.getPreference().getString(Common.u_id, ""));
-            iData.put("j_id", getIntent().getStringExtra("post"));
+            iData.put("j_id", jId);
 
             try {
 
@@ -105,8 +108,8 @@ public class InterViewActivity extends AppCompatActivity {
                 if (succ == 0) {
                 } else {
                     JSONArray jsonArray = json.getJSONArray("interview");
-
                     JSONObject child = jsonArray.getJSONObject(0);
+
                     final String cName = child.optString("cmpny_name");
                     final String cImg = child.optString("pro_pic");
                     final String venue = child.optString("venue");

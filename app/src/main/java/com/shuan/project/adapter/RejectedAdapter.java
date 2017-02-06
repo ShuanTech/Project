@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
@@ -66,9 +67,12 @@ public class RejectedAdapter extends BaseAdapter {
         ImageView usrImg = (ImageView) convertView.findViewById(R.id.usr_img);
         TextView name = (TextView) convertView.findViewById(R.id.name);
         TextView reason = (TextView) convertView.findViewById(R.id.reason);
+        LinearLayout line = (LinearLayout) convertView.findViewById(R.id.lay1);
 
         name.setText(curr.getName());
         reason.setText("Reason : " + curr.getLevel());
+
+        //line.setOnClickListener(this);
 
         ImageLoader.getInstance().displayImage(curr.getU_id(), usrImg, options, new SimpleImageLoadingListener() {
 
@@ -100,4 +104,27 @@ public class RejectedAdapter extends BaseAdapter {
 
         return convertView;
     }
+
+    /*@Override
+    public void onClick(View v) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+        builder.setCancelable(false);
+        builder.setTitle("Confirmation")
+                .setMessage("Are you sure ? Do you want to move from Reject list ?")
+                .setPositiveButton("YES", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        new Removefromreject();
+                    }
+                }).setNegativeButton("NOT NOW", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        }).show();
+    }
+
+    private class Removefromreject {
+
+    }*/
 }

@@ -19,7 +19,7 @@
         <item
             android:id="@+id/connect"
             android:icon="@drawable/ic_connection"
-            android:title="Connection"
+            android:title="Connections"
             app:actionViewClass="android.widget.TextView" />
 
         <item
@@ -36,11 +36,11 @@
         <item
             android:id="@+id/fav"
             android:icon="@drawable/ic_favorite"
-            android:title="Favourite"/>
+            android:title="Favourites"/>
         <item
             android:id="@+id/sugg"
             android:icon="@drawable/ic_suggest"
-            android:title="Suggestion" />
+            android:title="Suggestions" />
 
         <item android:title="Labels">
             <menu>
@@ -52,7 +52,7 @@
                     <item
                         android:id="@+id/invite"
                         android:icon="@drawable/invite"
-                        android:title="Invitation" />
+                        android:title="Invitations" />
                     <!--<item
                         android:id="@+id/ref"
                         android:icon="@drawable/ic_reference"

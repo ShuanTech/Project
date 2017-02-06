@@ -101,7 +101,8 @@ public class PostView extends AsyncTask<String, String, String> {
 
             int succ = json.getInt("success");
             if (succ == 0) {
-            } else {
+
+            }else {
                 JSONArray jsonArray = json.getJSONArray("post");
                 JSONObject child = jsonArray.getJSONObject(0);
 

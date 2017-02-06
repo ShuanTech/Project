@@ -29,24 +29,66 @@
             android:layout_margin="@dimen/activity_horizontal_margin"
             android:orientation="vertical">
 
-
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:layout_height="wrap_content">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Account"
-                    android:textAppearance="?android:textAppearanceMedium"
-                    android:textColor="#000"
-                    android:textStyle="bold" />
 
                 <LinearLayout
-                    android:id="@+id/chng_pass"
+                    android:id="@+id/chnge"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Account"
+                        android:textAppearance="?android:textAppearanceMedium"
+                        android:textColor="#000"
+                        android:textStyle="bold" />
+
+                    <LinearLayout
+                        android:id="@+id/chng_pass"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:layout_marginTop="@dimen/standard_margin"
+                        android:background="?android:selectableItemBackground"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="36dp"
+                            android:layout_height="36dp"
+                            android:layout_gravity="center_vertical"
+                            android:scaleType="fitXY"
+                            android:src="@drawable/change_psswrd" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                            android:text="Change Password"
+                            android:textAppearance="?android:textAppearanceMedium"
+                            android:textColor="#333"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+
+                    <!-- <View
+                         android:layout_width="match_parent"
+                         android:layout_height="1dp"
+                         android:layout_marginLeft="36dp"
+                         android:layout_marginRight="@dimen/activity_horizontal_margin"
+                         android:layout_marginTop="@dimen/small_margin"
+                         android:background="#333" />-->
+
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/invite_frnd"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
+                    android:layout_below="@+id/chnge"
                     android:layout_marginTop="@dimen/standard_margin"
                     android:background="?android:selectableItemBackground"
                     android:orientation="horizontal">
@@ -56,31 +98,20 @@
                         android:layout_height="36dp"
                         android:layout_gravity="center_vertical"
                         android:scaleType="fitXY"
-                        android:src="@drawable/change_psswrd" />
+                        android:src="@drawable/ic_invite_others" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                        android:text="Change Password"
+                        android:text="Invite Friends"
                         android:textAppearance="?android:textAppearanceMedium"
                         android:textColor="#333"
                         android:textStyle="bold" />
 
                 </LinearLayout>
-
-               <!-- <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginLeft="36dp"
-                    android:layout_marginRight="@dimen/activity_horizontal_margin"
-                    android:layout_marginTop="@dimen/small_margin"
-                    android:background="#333" />-->
-
-
-            </LinearLayout>
-
+            </RelativeLayout>
         </LinearLayout>
 
     </ScrollView>

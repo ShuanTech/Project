@@ -71,7 +71,7 @@ public class EventViewActivity extends AppCompatActivity {
         }
 
         new EventView(EventViewActivity.this,mApp.getPreference().getString(Common.u_id, ""), getIntent().getStringExtra("evnt_id"),scroll,progressBar,coverImg, cmpny_logo,cmpny,evntname,
-                evntdesc,evntloc,evntdate,evntime).execute();
+                evntdesc,evntloc,evntdate,evntime,attend).execute();
 
         attend.setOnClickListener(new View.OnClickListener() {
             @Override

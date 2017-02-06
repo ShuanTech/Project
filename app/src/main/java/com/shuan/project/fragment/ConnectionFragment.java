@@ -32,6 +32,7 @@ public class ConnectionFragment extends Fragment {
 
 
     public ConnectionFragment() {
+
     }
 
     @Override
@@ -51,6 +52,4 @@ public class ConnectionFragment extends Fragment {
 
         return view;
     }
-
-
 }

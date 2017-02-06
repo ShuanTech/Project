@@ -55,6 +55,7 @@ public class ProfileViewActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
     private Common mApp;
+    private Context mContext;
     private String u_id, level;
     private AlertDialog.Builder builder;
     private ImageView cover;
@@ -89,6 +90,7 @@ public class ProfileViewActivity extends AppCompatActivity {
         mApp = (Common) getApplicationContext();
         u_id = getIntent().getStringExtra("u_id");
         level = getIntent().getStringExtra("level");
+
 
 
         super.onCreate(savedInstanceState);

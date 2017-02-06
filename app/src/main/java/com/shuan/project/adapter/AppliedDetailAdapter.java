@@ -13,16 +13,19 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.shuan.Project.R;
+import com.shuan.Project.Utils.Common;
 import com.shuan.Project.asyncTasks.RejectCandidate;
 import com.shuan.Project.employer.InterviewPanelActivity;
 import com.shuan.Project.employer.PdfViewActivity;
 import com.shuan.Project.list.Sample;
+import com.shuan.Project.profile.ProfileViewActivity;
 
 import java.util.ArrayList;
 
 
-public class AppliedDetailAdapter extends BaseAdapter {
+public class AppliedDetailAdapter extends BaseAdapter  {
 
+    private Common mApp;
     private Context mContext;
     private ArrayList<Sample> list;
     private LayoutInflater inflater;
@@ -64,6 +67,35 @@ public class AppliedDetailAdapter extends BaseAdapter {
         applied.setText(curr.getDis());
         refer.setText(curr.getCty());
 
+
+        applied.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+                builder.setCancelable(false);
+                builder.setTitle("View profile ?")
+                        .setPositiveButton("View", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                               // String level = mApp.getPreference().getString(Common.LEVEL,"");
+                                //Toast.makeText(mContext,level,Toast.LENGTH_SHORT).show();
+                                Intent in = new Intent(mContext , ProfileViewActivity.class);
+                                in.putExtra("u_id", curr.getDistrct());
+                                in.putExtra("level", mApp.getPreference().getString(Common.LEVEL,""));
+                                //in.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                mContext.startActivity(in);
+                                dialog.cancel();
+                            }
+                        }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                }).show();
+
+            }
+        });
+
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -72,7 +104,6 @@ public class AppliedDetailAdapter extends BaseAdapter {
                 in.putExtra("name", curr.getDis());
                 in.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 mContext.startActivity(in);
-
             }
         });
 
@@ -80,8 +111,9 @@ public class AppliedDetailAdapter extends BaseAdapter {
             @Override
             public void onClick(View v) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+                builder.setCancelable(false);
                 builder.setTitle("Confirmation")
-                        .setMessage("Are you sure want to Select the candidate")
+                        .setMessage("Are you sure ? Do you want to Select the candidate ?")
                         .setPositiveButton("SELECT", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
@@ -105,8 +137,9 @@ public class AppliedDetailAdapter extends BaseAdapter {
             @Override
             public void onClick(View v) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+                builder.setCancelable(false);
                 builder.setTitle("Confirmation")
-                        .setMessage("Are you sure want to Reject the candidate")
+                        .setMessage("Are you sure ? Do you want to Reject the candidate ?")
                         .setPositiveButton("REJECT", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
@@ -135,6 +168,7 @@ public class AppliedDetailAdapter extends BaseAdapter {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
         builder.setView(v);
+        builder.setCancelable(false);
         builder.setTitle("Reject Reason");
         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override

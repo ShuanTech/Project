@@ -13,7 +13,7 @@ public class PdfViewActivity extends AppCompatActivity {
 
     private WebView web;
     private Toolbar toolbar;
-    private String path = "http://udyomitra.com/sample.pdf";
+    private String path = "http://www.udyomitra.com/sample.pdf";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,9 +37,10 @@ public class PdfViewActivity extends AppCompatActivity {
             }
         });
 
-        web.loadUrl("https://docs.google.com/gview?embedded=true&url=" + getIntent().getStringExtra("path"));
+        String s = getIntent().getStringExtra("path");
+        //web.loadUrl("https://docs.google.com/gview?embedded=true&url=" +getIntent().getStringExtra("path"));
+        web.loadUrl(s);
 
-        //Toast.makeText(getApplicationContext(),getIntent().getStringExtra("path"),Toast.LENGTH_SHORT).show();
 
     }
 }

@@ -61,7 +61,7 @@
                 android:id="@+id/setting"
                 android:icon="@drawable/ic_setting"
                 android:orderInCategory="105"
-                android:title="Setting" />
+                android:title="Settings" />
 
             <item
                 android:id="@+id/logout"

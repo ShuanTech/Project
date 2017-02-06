@@ -16,7 +16,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:visibility="gone">
+        android:visibility="visible">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -102,10 +102,6 @@
                         android:inputType="numberDecimal"
                         android:maxLength="4"
                         android:singleLine="true" />
-                    <TextView
-                        android:id="@+id/tv1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
 
                 </LinearLayout>
 
@@ -132,10 +128,6 @@
                         android:inputType="numberDecimal"
                         android:maxLength="4"
                         android:singleLine="true" />
-                    <TextView
-                        android:id="@+id/tv2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
 
                 </LinearLayout>
 

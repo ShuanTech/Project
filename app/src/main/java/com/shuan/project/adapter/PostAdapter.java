@@ -93,7 +93,7 @@ public class PostAdapter extends BaseAdapter {
         RelativeLayout apply = (RelativeLayout) convertView.findViewById(R.id.apply);
         RelativeLayout share = (RelativeLayout) convertView.findViewById(R.id.share);
         final RelativeLayout imp = (RelativeLayout) convertView.findViewById(R.id.imp);
-        ImageView cImg = (ImageView) convertView.findViewById(R.id.cmpny_logo);
+        final ImageView cImg = (ImageView) convertView.findViewById(R.id.cmpny_logo);
         final TextView jId = (TextView) convertView.findViewById(R.id.jId);
         TextView cName = (TextView) convertView.findViewById(R.id.cmpny_name);
         TextView cDated = (TextView) convertView.findViewById(R.id.created);
@@ -220,9 +220,8 @@ public class PostAdapter extends BaseAdapter {
             @Override
             public void onClick(View v) {
                 final AlertDialog.Builder build = new AlertDialog.Builder(v.getRootView().getContext());
-                build.setTitle("Apply..?");
                 build.setCancelable(false);
-                build.setMessage("Do you want to Apply ?");
+                build.setTitle("Do you want to Apply ?");
 
                 build.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
@@ -251,9 +250,8 @@ public class PostAdapter extends BaseAdapter {
             @Override
             public void onClick(View v) {
                 final AlertDialog.Builder build = new AlertDialog.Builder(v.getRootView().getContext());
-                build.setTitle("Share..?");
                 build.setCancelable(false);
-                build.setMessage("Want to share this post on your Timeline ?");
+                build.setTitle("Do you want to share this post on your Timeline ?");
 
                 build.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
