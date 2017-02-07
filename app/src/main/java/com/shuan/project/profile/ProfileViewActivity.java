@@ -87,6 +87,7 @@ public class ProfileViewActivity extends AppCompatActivity {
         getWindow().getDecorView().setSystemUiVisibility(
                 View.SYSTEM_UI_FLAG_LAYOUT_STABLE
                         | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
+
         mApp = (Common) getApplicationContext();
         u_id = getIntent().getStringExtra("u_id");
         level = getIntent().getStringExtra("level");

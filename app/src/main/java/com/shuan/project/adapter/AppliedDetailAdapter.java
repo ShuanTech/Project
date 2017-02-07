@@ -30,6 +30,7 @@ public class AppliedDetailAdapter extends BaseAdapter  {
     private ArrayList<Sample> list;
     private LayoutInflater inflater;
     private EditText txt;
+    private String a = "1";
 
 
     public AppliedDetailAdapter(Context mContext, ArrayList<Sample> list) {
@@ -79,10 +80,10 @@ public class AppliedDetailAdapter extends BaseAdapter  {
                             public void onClick(DialogInterface dialog, int which) {
                                // String level = mApp.getPreference().getString(Common.LEVEL,"");
                                 //Toast.makeText(mContext,level,Toast.LENGTH_SHORT).show();
-                                Intent in = new Intent(mContext , ProfileViewActivity.class);
+                                Intent in = new Intent(mContext.getApplicationContext() , ProfileViewActivity.class);
                                 in.putExtra("u_id", curr.getDistrct());
-                                in.putExtra("level", mApp.getPreference().getString(Common.LEVEL,""));
-                                //in.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                in.putExtra("level",a);
+                                in.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                 mContext.startActivity(in);
                                 dialog.cancel();
                             }

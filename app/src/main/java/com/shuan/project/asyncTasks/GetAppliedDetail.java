@@ -61,7 +61,6 @@ public class GetAppliedDetail extends AsyncTask<String, String, String> {
                     String r_id = child.optString("refer_id");
                     String resume = child.optString("resume");
 
-
                     list.add(new Sample(applied, refer, a_id, r_id, resume));
                 }
                 s = "true";
