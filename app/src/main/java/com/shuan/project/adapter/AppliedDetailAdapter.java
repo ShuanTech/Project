@@ -145,7 +145,6 @@ public class AppliedDetailAdapter extends BaseAdapter  {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 getComments(curr.getDistrct());
-
                                 dialog.cancel();
                             }
                         }).setNegativeButton("NOT NOW", new DialogInterface.OnClickListener() {
@@ -187,7 +186,6 @@ public class AppliedDetailAdapter extends BaseAdapter  {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.cancel();
-                new RejectCandidate(mContext, usr_id,txt.getText().toString()).execute();
             }
         }).show();
     }

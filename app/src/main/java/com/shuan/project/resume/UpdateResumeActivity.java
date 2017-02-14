@@ -704,6 +704,7 @@ public class UpdateResumeActivity extends AppCompatActivity implements View.OnCl
             r2 = (RadioButton) findViewById(R.id.female);
             fName = (EditText) findViewById(R.id.f_name);
             mName = (EditText) findViewById(R.id.m_name);
+            rel = (EditText) findViewById(R.id.rel);
             lang = (EditText) findViewById(R.id.lang);
             hobby = (EditText) findViewById(R.id.hobby);
             age = (EditText) findViewById(R.id.age);

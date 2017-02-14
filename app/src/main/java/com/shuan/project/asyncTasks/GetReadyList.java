@@ -20,7 +20,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 
-public class GetReadyList extends AsyncTask<String, String, String> {
+public class  GetReadyList extends AsyncTask<String, String, String> {
 
     private Context mContext;
     private ListView listView;

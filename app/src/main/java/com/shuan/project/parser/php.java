@@ -120,5 +120,6 @@ public class php {
     public static final String verifymail = "http://www.udyomitra.com/android/mailverify";
     public static final String del_savedpost = "http://www.udyomitra.com/android/del_savedpost";
     public static final String rmvfav = "http://www.udyomitra.com/android/rmvfav";
-
+    public static final String Getuid = "http://www.udyomitra.com/android/Getuid";
+    public static final String Getuid1 = "http://www.udyomitra.com/android/Getuid1";
 }

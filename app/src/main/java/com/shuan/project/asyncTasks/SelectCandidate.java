@@ -1,5 +1,6 @@
 package com.shuan.Project.asyncTasks;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -23,6 +24,17 @@ public class SelectCandidate extends AsyncTask<String, String, String> {
     private HashMap<String, String> sData;
     private Common mApp;
     private Button but;
+    private ProgressDialog pDialog;
+
+    @Override
+    protected void onPreExecute() {
+        super.onPreExecute();
+        pDialog = new ProgressDialog(mContext);
+        pDialog.setMessage("Scheduling...");
+        pDialog.setIndeterminate(false);
+        pDialog.setCancelable(false);
+        pDialog.show();
+    }
 
     public SelectCandidate(Context mContext, String jId, String aId, String rId, String loc, String dt, String tme, String cmmts,
                            Button but) {
@@ -68,7 +80,9 @@ public class SelectCandidate extends AsyncTask<String, String, String> {
 
     @Override
     protected void onPostExecute(String s) {
+
         super.onPostExecute(s);
+        pDialog.cancel();
         if (s.equalsIgnoreCase("true")) {
             Toast.makeText(mContext, "Interview Scheduled Successfully ", Toast.LENGTH_SHORT).show();
             new GetInfo(mContext, mApp.getPreference().getString(Common.u_id, "")).execute();

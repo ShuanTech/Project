@@ -1,6 +1,7 @@
 package com.shuan.Project.asyncTasks;
 
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -21,6 +22,18 @@ public class RejectCandidate extends AsyncTask<String, String, String> {
     private String aId, txt, s;
     private HashMap<String, String> rData;
     private Common mApp;
+    private ProgressDialog pDialog;
+
+
+    @Override
+    protected void onPreExecute() {
+        super.onPreExecute();
+        pDialog = new ProgressDialog(mContext);
+        pDialog.setMessage("Please wait...");
+        pDialog.setIndeterminate(false);
+        pDialog.setCancelable(false);
+        pDialog.show();
+    }
 
     public RejectCandidate(Context mContext, String aId, String txt) {
         this.mContext = mContext;
@@ -51,6 +64,7 @@ public class RejectCandidate extends AsyncTask<String, String, String> {
     @Override
     protected void onPostExecute(String s) {
         super.onPostExecute(s);
+        pDialog.cancel();
         if (s.equalsIgnoreCase("true")) {
             Toast.makeText(mContext, "Successfully Rejected", Toast.LENGTH_SHORT).show();
             new GetInfo(mContext, mApp.getPreference().getString(Common.u_id, "")).execute();

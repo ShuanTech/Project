@@ -93,13 +93,13 @@ public class InterViewActivity extends AppCompatActivity {
 
     public class GetInterViewDetail extends AsyncTask<String, String, String> {
 
-        private String jId= getIntent().getStringExtra("post");
+        private String j_id= getIntent().getStringExtra("post");
 
         @Override
         protected String doInBackground(String... params) {
             iData = new HashMap<String, String>();
             iData.put("u_id", mApp.getPreference().getString(Common.u_id, ""));
-            iData.put("j_id", jId);
+            iData.put("j_id", j_id);
 
             try {
 

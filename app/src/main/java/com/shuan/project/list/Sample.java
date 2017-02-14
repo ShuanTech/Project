@@ -9,7 +9,7 @@ public class Sample {
     String jId, jTitle, jSkill, jLevel, jLoc, jCreate, jView, jApply, jShare, jFrmId, jImp,fp,fs,fl;
     String id,frmId,toId,postId,content,vwed;
 
-    public Sample() {
+    public Sample(String pro_pic, String name, String venue, String intervew_date, String intervew_time, String type, String uid) {
     }
 
 
