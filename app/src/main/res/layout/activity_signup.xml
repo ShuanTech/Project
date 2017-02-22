@@ -78,16 +78,27 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/layout_phone">
-
+               <!-- <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+-->
                 <EditText
                     android:id="@+id/pass"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/layout_phone"
                     android:layout_marginTop="8dp"
                     android:hint="@string/password"
                     android:imeOptions="actionNext"
                     android:inputType="textPassword" />
+                   <!-- <CheckBox
+                        android:id="@+id/cbShowPwd"
+                        android:layout_below="@+id/pass"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="show password"
+                        android:textColor="#B7C4C5"
+                        android:textAppearance="?android:textAppearanceSmall"/>
+                </RelativeLayout>-->
             </android.support.design.widget.TextInputLayout>
 
 

@@ -6,7 +6,6 @@ import android.os.AsyncTask;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.shuan.Project.R;
 import com.shuan.Project.parser.Connection;
 import com.shuan.Project.parser.php;
 
@@ -36,11 +35,11 @@ public class DelSavedPost extends AsyncTask<String, String, String> {
         pDialog.show();
     }
 
-    public DelSavedPost(Context mContext, String uId, String jId,ImageView img) {
+    public DelSavedPost(Context mContext, String uId, String jId) {
         this.mContext = mContext;
         this.uId = uId;
         this.jId = jId;
-        this.img = img;
+
 
     }
 
@@ -75,10 +74,10 @@ public class DelSavedPost extends AsyncTask<String, String, String> {
         super.onPostExecute(s);
         pDialog.cancel();
         if (s.equalsIgnoreCase("true")) {
-            img.setImageResource(R.drawable.ic_important);
+            //img.setImageResource(R.drawable.ic_important);
             Toast.makeText(mContext, "Removed from Important list", Toast.LENGTH_SHORT).show();
         } else if(s.equalsIgnoreCase("false")){
-            Toast.makeText(mContext, "Failed Share.Try Again!...", Toast.LENGTH_SHORT).show();
+            Toast.makeText(mContext, "Failed. Try Again!...", Toast.LENGTH_SHORT).show();
         }
 
     }

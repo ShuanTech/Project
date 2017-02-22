@@ -22,16 +22,16 @@ public class RemoveFav  extends AsyncTask<String, String, String> {
     private Class<ProfileViewActivity> profile;
     private Common mApp;
     private Context mContext;
-    private String u_id, frm_id, s="";
+    private String usr, frm, s="",abc;
     private HashMap<String, String> sData;
 
-    public RemoveFav(Context mContext, String u_id, String frm_id) {
+    public RemoveFav(Context mContext, String uId, String frmId) {
 
-       /* Toast.makeText(mContext,frm_id,Toast.LENGTH_SHORT).show();
-        Toast.makeText(mContext,u_id, Toast.LENGTH_SHORT).show();*/
+        /*Toast.makeText(mContext,uId,Toast.LENGTH_SHORT).show();
+        Toast.makeText(mContext,frmId, Toast.LENGTH_SHORT).show();*/
         this.mContext = mContext;
-        this.u_id = u_id;
-        this.frm_id = frm_id;
+        this.usr = frmId;  //here frmId is u_id
+        this.frm = uId;    //here uId is frm_id
 
     }
 
@@ -40,17 +40,18 @@ public class RemoveFav  extends AsyncTask<String, String, String> {
     protected String doInBackground(String... params) {
 
         sData = new HashMap<String, String>();
-        sData.put("u_id",u_id );
-        sData.put("frm_id", frm_id);
+        sData.put("u_id",usr );
+        sData.put("frm_id", frm);
 
         try {
             JSONObject json = Connection.UrlConnection(php.rmvfav,sData);
             int succ = json.getInt("success");
+            abc = String.valueOf(succ);
 
-            if (succ == 0){
+            if (succ == 1){
+                s= "true";
 
             }else{
-                s= "true";
             }
 
         } catch (JSONException e) {

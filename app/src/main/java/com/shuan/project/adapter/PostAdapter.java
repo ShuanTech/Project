@@ -25,7 +25,6 @@ import com.shuan.Project.Utils.Common;
 import com.shuan.Project.Utils.Helper;
 import com.shuan.Project.activities.CommentsActivity;
 import com.shuan.Project.asyncTasks.CheckEligible;
-import com.shuan.Project.asyncTasks.DelSavedPost;
 import com.shuan.Project.asyncTasks.SavePost;
 import com.shuan.Project.asyncTasks.SharePost;
 import com.shuan.Project.list.Sample;
@@ -275,12 +274,12 @@ public class PostAdapter extends BaseAdapter {
                 new SavePost(mContext, mApp.getPreference().getString(Common.u_id, ""), curr.getjId(),cImpt).execute();
             }
         });
-        cImpt.setOnClickListener(new View.OnClickListener() {
+      /*  cImpt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 new DelSavedPost(mContext,mApp.getPreference().getString(Common.u_id, ""), curr.getjId(),cImpt).execute();
             }
-        });
+        });*/
 
         return convertView;
     }

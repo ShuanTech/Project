@@ -67,7 +67,7 @@ public class Refer extends AsyncTask<String, String, String> {
         super.onPostExecute(s);
         pDialog.cancel();
         if (s.equalsIgnoreCase("true")) {
-            Toast.makeText(mContext, "Success", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(mContext, "Completed", Toast.LENGTH_SHORT).show();
             new GetInfo(mContext, referId).execute();
             AppCompatActivity activity = (AppCompatActivity) mContext;
             activity.finish();

@@ -171,10 +171,17 @@ public class NotifyFragment extends Fragment implements AbsListView.OnScrollList
                 dialog.cancel();
                 new Refer(getActivity(), mApp.getPreference().getString(Common.u_id, ""), s, "refer").execute();
             }
-        }).setNegativeButton("Not Refer", new DialogInterface.OnClickListener() {
+        });
+        build.setNegativeButton("No", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 new Refer(getActivity(), mApp.getPreference().getString(Common.u_id, ""), s, "not").execute();
+                dialog.cancel();
+            }
+        });
+        build.setNeutralButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
                 dialog.cancel();
             }
         }).show();

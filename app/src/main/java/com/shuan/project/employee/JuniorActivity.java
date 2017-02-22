@@ -302,6 +302,7 @@ public class JuniorActivity extends AppCompatActivity {
                         return true;*/
                     case R.id.fav:
                         toolbar.setTitle("Favourites");
+                        mDrawerLayout.closeDrawers();
                         display(11);
                         count = 2;
                         selected=11;

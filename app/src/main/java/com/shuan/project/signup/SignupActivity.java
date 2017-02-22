@@ -62,6 +62,7 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
     private CheckBox agree;
     private TextView term;
     private boolean agre = true;
+    CheckBox mCbShowPwd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,6 +77,9 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
         emailId = (EditText) findViewById(R.id.email);
         phNo = (EditText) findViewById(R.id.phone);
         pass = (EditText) findViewById(R.id.pass);
+
+        //mCbShowPwd = (CheckBox) findViewById(R.id.cbShowPwd);
+
         confrmPass = (EditText) findViewById(R.id.confrm_pass);
         level = (RadioGroup) findViewById(R.id.level);
         r1 = (RadioButton) findViewById(R.id.r1);
@@ -89,6 +93,22 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
         agree = (CheckBox) findViewById(R.id.agree);
 
         term = (TextView) findViewById(R.id.term);
+
+        /*mCbShowPwd.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                // checkbox status is changed from uncheck to checked.
+                if (!isChecked) {
+                    // show password
+                    pass.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                    pass.setSelection(pass.length());
+                } else {
+                    // hide password
+                    pass.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                    pass.setSelection(pass.length());
+                }
+            }
+        });*/
 
         term.setOnClickListener(new View.OnClickListener() {
             @Override

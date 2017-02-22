@@ -1,7 +1,9 @@
 package com.shuan.Project.asyncTasks;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -28,7 +30,7 @@ public class SavePost extends AsyncTask<String, String, String> {
     protected void onPreExecute() {
         super.onPreExecute();
         pDialog = new ProgressDialog(mContext);
-        pDialog.setMessage("Saving Post...");
+        pDialog.setMessage("Please wait..");
         pDialog.setIndeterminate(false);
         pDialog.setCancelable(false);
         pDialog.show();
@@ -54,10 +56,12 @@ public class SavePost extends AsyncTask<String, String, String> {
             try {
                 JSONObject json = Connection.UrlConnection(php.save_post, sData);
                 int succ = json.getInt("success");
-                if (succ == 0) {
-                    s = "false";
-                }else {
+                if (succ == 2) {
+                    s = "already";
+                }else if(succ ==1){
                     s = "true";
+                }else{
+                    s="false";
                 }
 
             } catch (Exception e) {
@@ -77,6 +81,22 @@ public class SavePost extends AsyncTask<String, String, String> {
             Toast.makeText(mContext, "Saved Important", Toast.LENGTH_SHORT).show();
         } else if(s.equalsIgnoreCase("false")){
             Toast.makeText(mContext, "Failed Share.Try Again!...", Toast.LENGTH_SHORT).show();
+        } else if (s.equalsIgnoreCase("already")){
+            AlertDialog.Builder build = new AlertDialog.Builder(mContext);
+            build.setCancelable(false);
+            build.setTitle("Do you really want remove from Important list ?");
+            build.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    new DelSavedPost(mContext,uId,jId).execute();
+                }
+            }).setNegativeButton("No", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.cancel();
+                }
+            }).show();
+
         }
 
     }

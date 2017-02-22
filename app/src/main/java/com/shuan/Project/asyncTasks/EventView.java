@@ -162,6 +162,8 @@ public class EventView extends AsyncTask<String, String, String> {
         });
         if (attend.equals("1")){
             but.setText("Attending");
+        }else {
+            but.setText("Attend");
         }
     }
 

@@ -64,7 +64,10 @@ public class AddFavorite extends AsyncTask<String, String, String> {
             build.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-                    new RemoveFav(mContext,frm_id,mApp.getPreference().getString(Common.u_id, "")).execute();
+                    //new RemoveFav(mContext,frm_id,mApp.getPreference().getString(Common.u_id, "")).execute();
+                   /* Toast.makeText(mContext,u_id,Toast.LENGTH_SHORT).show();
+                    Toast.makeText(mContext,frm_id,Toast.LENGTH_SHORT).show();*/
+                    new RemoveFav(mContext,u_id,frm_id).execute();
 
                 }
             }).setNegativeButton("No", new DialogInterface.OnClickListener() {

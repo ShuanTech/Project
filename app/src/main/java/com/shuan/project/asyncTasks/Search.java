@@ -64,7 +64,9 @@ public class Search extends AsyncTask<String, String, String> {
                     String level = child.optString("level");
                     String sec=child.optString("sec");
 
-                    sList.add(new Sample(uId, proPic,full_name, level,sec));
+                    if (!sec.equalsIgnoreCase("")) {
+                        sList.add(new Sample(uId, proPic, full_name, level, sec));
+                    }
                 }
             }
 
