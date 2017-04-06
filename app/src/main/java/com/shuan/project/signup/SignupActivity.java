@@ -33,9 +33,6 @@ import com.shuan.Project.Utils.TextfieldValidator;
 import com.shuan.Project.Utils.UsernameValidator;
 import com.shuan.Project.parser.Connection;
 import com.shuan.Project.parser.php;
-import com.shuan.Project.signup.employee.CSLActivity;
-import com.shuan.Project.signup.employee.WorkActivity;
-import com.shuan.Project.signup.employer.CompanyDetails;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -53,6 +50,7 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
     private String type;
     private HashMap<String, String> sData;
     private ProgressDialog pDialog;
+    private AlertDialog.Builder builder;
     private String select;
     private EmailValidator emailValidator;
     private PasswordValidator pasval;
@@ -61,6 +59,7 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
     private UsernameValidator usernameValidator;
     private CheckBox agree;
     private TextView term;
+    private String app_server_url = "http://192.168.1.111/fcmtest/fcm_insert.php";
     private boolean agre = true;
     CheckBox mCbShowPwd;
 
@@ -72,6 +71,18 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
         select = getIntent().getStringExtra("select");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
+
+        builder = new AlertDialog.Builder(SignupActivity.this)
+                .setCancelable(false)
+                .setTitle("NOTE :")
+                .setIcon(R.drawable.logo)
+                .setMessage("Use Phone Number which is available for verification process");
+        builder.setPositiveButton("Continue", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        }).show();
 
         name = (EditText) findViewById(R.id.name);
         emailId = (EditText) findViewById(R.id.email);
@@ -193,7 +204,7 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
                     name.setError("Name Mandatory");
                     name.requestFocus();
                 } else if (!usernameValidator.validate(name.getText().toString())) {
-                    name.setError("Enter a Valid Name(remove white spaces)");
+                    name.setError("Enter a Valid Name(without spaces and special characters)");
                     name.requestFocus();
                 } else if (name.getText().toString().length() < 6) {
                     name.setError("User Name must contain 6 characters");
@@ -229,6 +240,7 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
                     //
                 } else if (agre) {
                     signUp.setEnabled(false);
+
                     new Signup().execute();
                 } else {
                     Toast.makeText(getApplicationContext(), "Agree the Terms and Conditions.", Toast.LENGTH_SHORT).show();
@@ -317,15 +329,19 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
                             if (type.toString().equalsIgnoreCase("1")) {
 
                                 mApp.getPreference().edit().putInt(Common.PROFILESTRENGTH, 35).commit();
-                                startActivity(new Intent(getApplicationContext(), CSLActivity.class));
+                                //startActivity(new Intent(getApplicationContext(), CSLActivity.class));
+                                //new Push();
+                                startActivity(new Intent(getApplicationContext(), MailVerify.class));
                                 finish();
                             } else if (type.toString().equalsIgnoreCase("2")) {
 
                                 mApp.getPreference().edit().putInt(Common.PROFILESTRENGTH, 35).commit();
-                                startActivity(new Intent(getApplicationContext(), WorkActivity.class));
+                                //startActivity(new Intent(getApplicationContext(), WorkActivity.class));
+                                startActivity(new Intent(getApplicationContext(), MailVerify.class));
                                 finish();
                             } else {
-                                startActivity(new Intent(getApplicationContext(), CompanyDetails.class));
+                                startActivity(new Intent(getApplicationContext(), MailVerify.class));
+                                //startActivity(new Intent(getApplicationContext(), CompanyDetails.class));
                                 finish();
                             }
                         }
@@ -342,7 +358,39 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
+            //new Push();
             pDialog.cancel();
+
         }
+
+        /*private class Push {
+
+            RequestQueue queue = MySingleTon.getInstance(this).getRequestQueue();
+            SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences(getString(R.string.FCM_PREF), Context.MODE_PRIVATE);
+            final String token = sharedPreferences.getString(getString(R.string.FCM_TOKEN), "");
+            StringRequest stringRequest = new StringRequest(Request.Method.POST, app_server_url,
+                    new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+
+                        }
+                    }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+
+                }
+            }) {
+                @Override
+                protected Map<String, String> getParams() throws AuthFailureError {
+                    Map<String, String> params = new HashMap<String, String>();
+                    params.put("fcm_token", token);
+
+                    Toast.makeText(getApplicationContext(), token, Toast.LENGTH_SHORT).show();
+                    return params;
+                }
+            };
+           // MySingleTon.getInstance(this).addToRequestQueue(stringRequest);
+
+        }*/
     }
 }

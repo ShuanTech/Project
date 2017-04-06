@@ -61,6 +61,7 @@
                             android:layout_height="36dp"
                             android:layout_gravity="center_vertical"
                             android:scaleType="fitXY"
+                            android:padding="4dp"
                             android:src="@drawable/change_psswrd" />
 
                         <TextView
@@ -85,10 +86,34 @@
 
                 </LinearLayout>
                 <LinearLayout
+                    android:id="@+id/privacy"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:orientation="horizontal"
+                    android:layout_below="@+id/chnge">
+                    <ImageView
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
+                        android:layout_gravity="center_vertical"
+                        android:scaleType="fitXY"
+                        android:padding="4dp"
+                        android:src="@drawable/privacy"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                        android:text="Profile Privacy"
+                        android:textAppearance="?android:textAppearanceMedium"
+                        android:textColor="#333"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+                <LinearLayout
                     android:id="@+id/invite_frnd"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
-                    android:layout_below="@+id/chnge"
+                    android:layout_below="@+id/privacy"
                     android:layout_marginTop="@dimen/standard_margin"
                     android:background="?android:selectableItemBackground"
                     android:orientation="horizontal">

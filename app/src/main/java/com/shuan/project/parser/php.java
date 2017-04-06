@@ -118,8 +118,10 @@ public class php {
     public static final String portView ="http://www.udyomitra.com/android/portView";
     public static final String serView = "http://www.udyomitra.com/android/serView";
     public static final String verifymail = "http://www.udyomitra.com/android/mailverify";
+    public static final String resend_otp = "http://www.udyomitra.com/android/resendotp";
     public static final String del_savedpost = "http://www.udyomitra.com/android/del_savedpost";
     public static final String rmvfav = "http://www.udyomitra.com/android/rmvfav";
     public static final String Getuid = "http://www.udyomitra.com/android/Getuid";
     public static final String Getuid1 = "http://www.udyomitra.com/android/Getuid1";
+    public static final String pushnot = "http://www.udyomitra.com/android/push";
 }

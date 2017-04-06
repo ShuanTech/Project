@@ -13,7 +13,7 @@ import com.shuan.Project.Utils.Common;
 public class SettingActivity extends AppCompatActivity implements View.OnClickListener {
 
     private Toolbar toolbar;
-    private LinearLayout chngePass,invitefrnd;
+    private LinearLayout chngePass,invitefrnd,privacy;
     private Common mApp;
 
 
@@ -46,9 +46,11 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
 
         chngePass = (LinearLayout) findViewById(R.id.chng_pass);
         invitefrnd = (LinearLayout) findViewById(R.id.invite_frnd);
+        privacy = (LinearLayout) findViewById(R.id.privacy);
 
         chngePass.setOnClickListener(this);
         invitefrnd.setOnClickListener(this);
+        privacy.setOnClickListener(this);
 
     }
 
@@ -58,6 +60,9 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
             case R.id.chng_pass:
                 startActivity(new Intent(getApplicationContext(),ChangePasswrd.class));
                 break;
+            /*case R.id.privacy:
+                startActivity(new Intent(getApplicationContext(),Privacy.class));
+                break;*/
             case  R.id.invite_frnd:
                 invite();
                 break;

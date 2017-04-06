@@ -1,17 +1,20 @@
 package com.shuan.Project.search;
 
 
+import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -27,10 +30,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.GooglePlayServicesClient;
+import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.location.LocationClient;
 import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationServices;
 import com.shuan.Project.R;
 import com.shuan.Project.asyncTasks.EmployerSerchResult;
 import com.shuan.Project.asyncTasks.GetEmployerSerach;
@@ -39,17 +42,24 @@ import com.shuan.Project.profile.ProfileViewActivity;
 import java.util.List;
 import java.util.Locale;
 
-public class EmployerSearchActivity extends AppCompatActivity implements GooglePlayServicesClient.ConnectionCallbacks,
-        GooglePlayServicesClient.OnConnectionFailedListener {
+public class EmployerSearchActivity extends AppCompatActivity implements GoogleApiClient.ConnectionCallbacks,
+        GoogleApiClient.OnConnectionFailedListener {
 
     private Toolbar toolbar;
     private Boolean flag = false;
-    private LocationClient mLocationClient;
+    //private LocationClient mLocationClient;
+    // google client for connecting to Google Api
+    private GoogleApiClient googleApiClient;
     private ProgressDialog pDialog;
     private GoogleApiClient mGoogleApiClient;
-    private LocationRequest mLocationRequest;
+    //for location request
+    private LocationRequest locationRequest;
+    private int locationupdate = 8000; //in milliseconds
+    private int locationdistance = 10; // in meters
+    //private LocationRequest mLocationRequest;
     private Location mLastLocation;
     private ProgressBar progressBar;
+    private final static int PLAY_SERVICES_RESOLUTION_REQUEST = 1000;
     private ListView list;
     private AutoCompleteTextView preferSearch;
 
@@ -60,15 +70,22 @@ public class EmployerSearchActivity extends AppCompatActivity implements GoogleP
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_employee_search);
 
-        mLocationClient = new LocationClient(this, this, this);
-        mLocationClient.connect();
+        //mLocationClient = new LocationClient(this, this, this);
+        // mLocationClient.connect();
         toolbar = (Toolbar) findViewById(R.id.app_bar);
         setSupportActionBar(toolbar);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
-        mLocationRequest = new LocationRequest();
+        //mLocationRequest = new LocationRequest();
+
+        if (checkGooglePlayServices()) {
+            // set up google client
+            setUpGoogleClient();
+            //set Location Request
+            createLocationRequest();
+        }
 
         progressBar = (ProgressBar) findViewById(R.id.progress_bar);
         list = (ListView) findViewById(R.id.ser_res);
@@ -107,6 +124,39 @@ public class EmployerSearchActivity extends AppCompatActivity implements GoogleP
 
     }
 
+    public boolean checkGooglePlayServices() {
+        GoogleApiAvailability gApi = GoogleApiAvailability.getInstance();
+        int resultCode = gApi.isGooglePlayServicesAvailable(this);
+        if (resultCode != ConnectionResult.SUCCESS) {
+            if (gApi.isUserResolvableError(resultCode)) {
+                gApi.getErrorDialog(this, resultCode, PLAY_SERVICES_RESOLUTION_REQUEST).show();
+            } else {
+                Toast.makeText(this, "Google Play Services not Avaliable", Toast.LENGTH_LONG).show();
+                finish();
+            }
+            return false;
+        }
+        return true;
+    }
+
+    public void setUpGoogleClient() {
+        // Create an instance of GoogleAPIClient.
+        if (googleApiClient == null) {
+            googleApiClient = new GoogleApiClient.Builder(this)
+                    .addConnectionCallbacks(this)
+                    .addOnConnectionFailedListener(this)
+                    .addApi(LocationServices.API)
+                    .build();
+        }
+    }
+
+    protected void createLocationRequest() {
+        locationRequest = new LocationRequest();
+        locationRequest.setInterval(locationupdate); //in milliseconds
+        locationRequest.setFastestInterval(5000); //in milliseconds
+        locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+        locationRequest.setSmallestDisplacement(locationdistance);
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -129,17 +179,30 @@ public class EmployerSearchActivity extends AppCompatActivity implements GoogleP
 
     @Override
     public void onConnected(Bundle bundle) {
-
+        new displayCurrentLocation();
     }
 
     @Override
-    public void onDisconnected() {
-
+    public void onConnectionSuspended(int i) {
+        googleApiClient.connect();
     }
+
 
     @Override
     public void onConnectionFailed(ConnectionResult connectionResult) {
+    }
+    protected void onStart() {
+        super.onStart();
+        if (googleApiClient != null) {
+            googleApiClient.connect();
+        }
+    }
 
+    protected void onStop() {
+        if (googleApiClient != null) {
+            googleApiClient.disconnect();
+        }
+        super.onStop();
     }
 
 
@@ -160,21 +223,33 @@ public class EmployerSearchActivity extends AppCompatActivity implements GoogleP
         @Override
         protected String doInBackground(String... params) {
 
-            Location currentLocation = mLocationClient.getLastLocation();
+            // Location currentLocation = mLocationClient.getLastLocation();
+            if (ActivityCompat.checkSelfPermission(EmployerSearchActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(EmployerSearchActivity.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                // TODO: Consider calling
+                //    ActivityCompat#requestPermissions
+                // here to request the missing permissions, and then overriding
+                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                //                                          int[] grantResults)
+                // to handle the case where the user grants the permission. See the documentation
+                // for ActivityCompat#requestPermissions for more details.
+                return null;
+            }
+            Location currentLocation = LocationServices.FusedLocationApi.getLastLocation(googleApiClient);
+            if (currentLocation != null) {
+                Geocoder geocoder = new Geocoder(EmployerSearchActivity.this, Locale.getDefault());
+                Location loc = currentLocation;
+                List<android.location.Address> addresses;
+                try {
+                    addresses = geocoder.getFromLocation(loc.getLatitude(), loc.getLongitude(), 1);
 
-            Geocoder geocoder = new Geocoder(EmployerSearchActivity.this, Locale.getDefault());
-            Location loc = currentLocation;
-            List<android.location.Address> addresses;
-            try {
-                addresses = geocoder.getFromLocation(loc.getLatitude(), loc.getLongitude(), 1);
+                    if (addresses != null && addresses.size() > 0) {
+                        final android.location.Address address = addresses.get(0);
+                        location = address.getLocality();
+                        //Toast.makeText(getApplicationContext(),location,Toast.LENGTH_SHORT).show();
+                    }
 
-                if (addresses != null && addresses.size() > 0) {
-                    final android.location.Address address = addresses.get(0);
-                    location = address.getLocality();
-                    //Toast.makeText(getApplicationContext(),location,Toast.LENGTH_SHORT).show();
+                } catch (Exception e) {
                 }
-
-            } catch (Exception e) {
             }
             return location;
         }
@@ -183,6 +258,7 @@ public class EmployerSearchActivity extends AppCompatActivity implements GoogleP
         protected void onPostExecute(final String s) {
             super.onPostExecute(s);
             pDialog.cancel();
+            //Toast.makeText(getApplicationContext(), s, Toast.LENGTH_SHORT).show();
             Intent in = new Intent(getApplicationContext(), EmployerSearchResultActivity.class);
             in.putExtra("loc", s);
             startActivity(in);

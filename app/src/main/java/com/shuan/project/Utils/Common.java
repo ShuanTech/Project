@@ -60,7 +60,7 @@ public class Common extends Application {
     public static final String PAGE2="page2";
     public static final String PAGE3="page3";
     public static final String ATTEND ="attend";
-    public static final String MAIL = "mail";
+    public static final String OTP = "mail";
     public static final String IMPORTANT = "important";
     public Context mContext;
     private String update = null;

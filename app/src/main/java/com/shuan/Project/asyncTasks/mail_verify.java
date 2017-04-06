@@ -8,11 +8,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
 import com.shuan.Project.Utils.Common;
-import com.shuan.Project.employee.JuniorActivity;
-import com.shuan.Project.employee.SeniorActivity;
-import com.shuan.Project.employer.EmployerActivity;
 import com.shuan.Project.parser.Connection;
 import com.shuan.Project.parser.php;
+import com.shuan.Project.signup.employee.CSLActivity;
+import com.shuan.Project.signup.employee.WorkActivity;
+import com.shuan.Project.signup.employer.CompanyDetails;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -77,21 +77,25 @@ public class mail_verify extends AsyncTask<String, String, String> {
         if (s.equalsIgnoreCase("true")) {
 
             Intent in = null;
-            mApp.getPreference().edit().putBoolean(Common.PAGE1, true).commit();
+            mApp.getPreference().edit().putBoolean(Common.OTP, true).commit();
             if (mApp.getPreference().getString(Common.LEVEL, "").equalsIgnoreCase("1")) {
-                in = new Intent(mContext, JuniorActivity.class);
+                Toast.makeText(mContext," Verified your phone number successfully ",Toast.LENGTH_SHORT).show();
+                in = new Intent(mContext, CSLActivity.class);
                 in.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
             }else if (mApp.getPreference().getString(Common.LEVEL, "").equalsIgnoreCase("2")){
-                in = new Intent(mContext, SeniorActivity.class);
+                Toast.makeText(mContext," Verified your phone number successfully ",Toast.LENGTH_SHORT).show();
+                in = new Intent(mContext, WorkActivity.class);
                 in.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
             }else {
-                in=new Intent(mContext, EmployerActivity.class);
+                Toast.makeText(mContext," Verified your phone number successfully ",Toast.LENGTH_SHORT).show();
+                in=new Intent(mContext, CompanyDetails.class);
                 in.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
             }
             mContext.startActivity(in);
             ((AppCompatActivity) mContext).finish();
 
         }else {
+            mApp.getPreference().edit().putBoolean(Common.OTP, false).commit();
             Toast.makeText(mContext, "Failed. Try Again", Toast.LENGTH_SHORT).show();
         }
 

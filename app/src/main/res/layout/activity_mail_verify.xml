@@ -5,12 +5,14 @@
     android:id="@+id/activity_mail_verify"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/senPrimary"
     tools:context="com.shuan.Project.signup.MailVerify">
 
     <ScrollView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true">
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -56,7 +58,7 @@
                             android:layout_marginLeft="14dp"
                             android:layout_marginTop="20dp"
                             android:layout_toRightOf="@id/cmpny_logo"
-                            android:text="Verify your E-mail id"
+                            android:text="Verify your Phone number "
                             android:textAppearance="?android:textAppearanceMedium"
                             android:textColor="#000"
                             android:textStyle="bold" />
@@ -67,18 +69,13 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/head">
-
-                        <android.support.design.widget.TextInputLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
                         <EditText
                             android:id="@+id/code"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_margin="10dp"
-                            android:hint="Enter code received(check inbox/spam)"
+                            android:hint="Enter OTP received "
                             android:inputType="number" />
-                        </android.support.design.widget.TextInputLayout>
                     </RelativeLayout>
 
                     <RelativeLayout
@@ -88,6 +85,14 @@
                         android:layout_below="@+id/content"
                         android:paddingBottom="8dp">
 
+                        <Button
+                            android:id="@+id/resend"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Resend"
+                            android:layout_marginStart="10dp"
+                            android:background="#dadada"
+                            android:layout_marginLeft="10dp" />
                         <Button
                             android:id="@+id/verify"
                             android:layout_width="wrap_content"

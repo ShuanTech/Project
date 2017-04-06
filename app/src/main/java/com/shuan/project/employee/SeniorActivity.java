@@ -122,6 +122,7 @@ public class SeniorActivity extends AppCompatActivity {
             }).setPositiveButton("Update", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
+                    mApp.getPreference().edit().putBoolean(Common.OTP, true).commit();
                     Intent in = new Intent("android.intent.action.VIEW")
                             .setData(Uri.parse("market://details?id=com.shuan.Project"));
                     startActivity(in);

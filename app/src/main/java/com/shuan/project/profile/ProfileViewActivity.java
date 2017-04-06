@@ -93,6 +93,16 @@ public class ProfileViewActivity extends AppCompatActivity {
         level = getIntent().getStringExtra("level");
 
 
+       /* if (mApp.getPreference().getString(Common.u_id,"").equalsIgnoreCase(u_id)){
+            flow.setVisibility(View.GONE);
+            msg.setVisibility(View.GONE);
+            call.setVisibility(View.GONE);
+        }else {
+            flow.setVisibility(View.VISIBLE);
+            msg.setVisibility(View.VISIBLE);
+            call.setVisibility(View.VISIBLE);
+        }*/
+
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile_view);
