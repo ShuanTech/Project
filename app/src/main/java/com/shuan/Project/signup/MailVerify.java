@@ -108,6 +108,7 @@ public class MailVerify extends AppCompatActivity implements View.OnClickListene
                     verify.setEnabled(true);
                     vercode = code.getText().toString();
                     new mail_verify(MailVerify.this, mApp.getPreference().getString(Common.u_id, ""), vercode).execute();
+                    code.setText("");
                 }
                 break;
             case  R.id.resend :

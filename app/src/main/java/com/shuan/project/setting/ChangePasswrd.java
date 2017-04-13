@@ -6,8 +6,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -64,7 +62,7 @@ public class ChangePasswrd extends AppCompatActivity {
         toolbar.setTitle("Change Password");
 
         scroll = (LinearLayout) findViewById(R.id.scroll);
-        oldPass = (EditText) findViewById(R.id.old_pass);
+        //oldPass = (EditText) findViewById(R.id.old_pass);
         newPass = (EditText) findViewById(R.id.new_pass);
         cnfrmPass = (EditText) findViewById(R.id.cnfrm_pass);
         pasval = new PasswordValidator();
@@ -72,7 +70,7 @@ public class ChangePasswrd extends AppCompatActivity {
 
         change = (Button) findViewById(R.id.update);
 
-        oldPass.addTextChangedListener(new TextWatcher() {
+        /*oldPass.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -91,15 +89,15 @@ public class ChangePasswrd extends AppCompatActivity {
                     oldPass.setError(null);
                 }
             }
-        });
+        });*/
 
         change.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (oldPass.getText().toString().length() == 0) {
+                /*if (oldPass.getText().toString().length() == 0) {
                     oldPass.setError("Enter Old Password");
                     oldPass.requestFocus();
-                } else if (newPass.getText().toString().length() == 0) {
+                } else*/ if (newPass.getText().toString().length() == 0) {
                     newPass.setError("Enter New Password");
                     newPass.requestFocus();
                 } else if (!pasval.validate(newPass.getText().toString())) {

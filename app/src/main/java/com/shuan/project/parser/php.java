@@ -2,7 +2,6 @@ package com.shuan.Project.parser;
 
 
 public class php {
-
     public static final String chkVer = "http://www.udyomitra.com/android/versionchk";
     public static final String signup = "http://www.udyomitra.com/android/signup";
     public static final String getInstitution = "http://www.udyomitra.com/android/get_institution";

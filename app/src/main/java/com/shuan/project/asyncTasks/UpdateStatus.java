@@ -68,7 +68,7 @@ public class UpdateStatus extends AsyncTask<String, String, String> {
         super.onPostExecute(s);
         pDialog.cancel();
         if(s.equalsIgnoreCase("true")){
-            Toast.makeText(mContext,"Status Updated Successfully",Toast.LENGTH_SHORT).show();
+            Toast.makeText(mContext,"Objective Updated Successfully",Toast.LENGTH_SHORT).show();
             int val = mApp.getPreference().getInt(Common.PROFILESTRENGTH, 0);
             mApp.getPreference().edit().putInt(Common.PROFILESTRENGTH, val + 2).commit();
             Intent in = new Intent(mContext, ResumeEditActivity.class);
@@ -76,7 +76,7 @@ public class UpdateStatus extends AsyncTask<String, String, String> {
             mContext.startActivity(in);
             ((AppCompatActivity) mContext).finish();
         }else{
-            Toast.makeText(mContext,"Something Went Wrong! Status couldn't update",Toast.LENGTH_SHORT).show();
+            Toast.makeText(mContext,"Something Went Wrong! Objective couldn't update",Toast.LENGTH_SHORT).show();
         }
     }
 }

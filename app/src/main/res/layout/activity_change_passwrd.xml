@@ -24,7 +24,7 @@
         android:layout_margin="@dimen/activity_horizontal_margin"
         android:orientation="vertical">
 
-        <android.support.design.widget.TextInputLayout
+       <!-- <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
         <EditText
@@ -35,7 +35,7 @@
             android:imeOptions="actionNext"
             android:inputType="textPassword"
             android:singleLine="true" />
-        </android.support.design.widget.TextInputLayout>
+        </android.support.design.widget.TextInputLayout>-->
 
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
@@ -45,7 +45,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/standard_margin"
-            android:hint="New  Password"
+            android:hint="New Password"
             android:imeOptions="actionNext"
             android:inputType="textPassword"
             android:singleLine="true" />
@@ -59,7 +59,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/standard_margin"
-            android:hint="Retype Password"
+            android:hint="Confirm Password"
             android:imeOptions="actionDone"
             android:inputType="textPassword"
             android:singleLine="true" />

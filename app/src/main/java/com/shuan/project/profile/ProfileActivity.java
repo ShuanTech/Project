@@ -12,6 +12,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
+import android.provider.MediaStore;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -67,10 +68,10 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
     private HashMap<String, String> pData;
     private DisplayImageOptions options;
     private ArrayList<Sample> list;
-    private LinearLayout noData, cmpny, employee, exprience, exp, education, edut, skill, skll, project, prjct, contact,objective,web;
-    private LinearLayout c_type,i_type,c_sze,c_fnd,c_mail,c_ph,cntDet,cntt,cnt_mail,cnt_ph,cnt_tm;
-    private TextView url,cate,indus_type,sze,found,cmail,cph,cnt_per,cnt_mail_id,cnt_ph_no,cnt_tme;
-    private TextView mail, phNo,obj;
+    private LinearLayout noData, cmpny, employee, exprience, exp, education, edut, skill, skll, project, prjct, contact, objective, web;
+    private LinearLayout c_type, i_type, c_sze, c_fnd, c_mail, c_ph, cntDet, cntt, cnt_mail, cnt_ph, cnt_tm;
+    private TextView url, cate, indus_type, sze, found, cmail, cph, cnt_per, cnt_mail_id, cnt_ph_no, cnt_tme;
+    private TextView mail, phNo, obj;
     private String pro_pic, cover_pic;
     private final int GALLERY = 1;
     private final int PHOTO = 2;
@@ -90,7 +91,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
                         | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
         mApp = (Common) getApplicationContext();
 
-        mApp.getPreference().edit().putBoolean("start",true).commit();
+        mApp.getPreference().edit().putBoolean("start", true).commit();
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
@@ -115,8 +116,8 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         noData = (LinearLayout) findViewById(R.id.no_data);
         cmpny = (LinearLayout) findViewById(R.id.cmpny);
         employee = (LinearLayout) findViewById(R.id.employee);
-        objective= (LinearLayout) findViewById(R.id.objective);
-        obj= (TextView) findViewById(R.id.obj);
+        objective = (LinearLayout) findViewById(R.id.objective);
+        obj = (TextView) findViewById(R.id.obj);
         exp = (LinearLayout) findViewById(R.id.exp);
         education = (LinearLayout) findViewById(R.id.education);
         edut = (LinearLayout) findViewById(R.id.edu);
@@ -140,35 +141,35 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         job = (LinearLayout) findViewById(R.id.job);
         jobs = (LinearLayout) findViewById(R.id.jobs);
         cmpntDet = (LinearLayout) findViewById(R.id.cmpntDet);
-        web= (LinearLayout) findViewById(R.id.web);
-        url= (TextView) findViewById(R.id.url);
-        c_type= (LinearLayout) findViewById(R.id.c_type);
-        cate= (TextView) findViewById(R.id.cate);
-        i_type= (LinearLayout) findViewById(R.id.i_type);
-        indus_type= (TextView) findViewById(R.id.indus_type);
-        c_sze= (LinearLayout) findViewById(R.id.c_sze);
-        sze= (TextView) findViewById(R.id.sze);
-        c_fnd= (LinearLayout) findViewById(R.id.c_fnd);
-        found= (TextView) findViewById(R.id.found);
-        c_mail= (LinearLayout) findViewById(R.id.c_mail);
-        cmail= (TextView) findViewById(R.id.cmail);
-        c_ph= (LinearLayout) findViewById(R.id.c_ph);
-        cph= (TextView) findViewById(R.id.cph);
-        cntDet= (LinearLayout) findViewById(R.id.cntDet);
-        cntt= (LinearLayout) findViewById(R.id.cnt);
-        cnt_per= (TextView) findViewById(R.id.cnt_per);
-        cnt_mail= (LinearLayout) findViewById(R.id.cnt_mail);
-        cnt_mail_id= (TextView) findViewById(R.id.cnt_mail_id);
-        cnt_ph= (LinearLayout) findViewById(R.id.cnt_ph);
-        cnt_ph_no= (TextView) findViewById(R.id.cnt_ph_no);
-        cnt_tm= (LinearLayout) findViewById(R.id.cnt_tm);
-        cnt_tme= (TextView) findViewById(R.id.cnt_tme);
+        web = (LinearLayout) findViewById(R.id.web);
+        url = (TextView) findViewById(R.id.url);
+        c_type = (LinearLayout) findViewById(R.id.c_type);
+        cate = (TextView) findViewById(R.id.cate);
+        i_type = (LinearLayout) findViewById(R.id.i_type);
+        indus_type = (TextView) findViewById(R.id.indus_type);
+        c_sze = (LinearLayout) findViewById(R.id.c_sze);
+        sze = (TextView) findViewById(R.id.sze);
+        c_fnd = (LinearLayout) findViewById(R.id.c_fnd);
+        found = (TextView) findViewById(R.id.found);
+        c_mail = (LinearLayout) findViewById(R.id.c_mail);
+        cmail = (TextView) findViewById(R.id.cmail);
+        c_ph = (LinearLayout) findViewById(R.id.c_ph);
+        cph = (TextView) findViewById(R.id.cph);
+        cntDet = (LinearLayout) findViewById(R.id.cntDet);
+        cntt = (LinearLayout) findViewById(R.id.cnt);
+        cnt_per = (TextView) findViewById(R.id.cnt_per);
+        cnt_mail = (LinearLayout) findViewById(R.id.cnt_mail);
+        cnt_mail_id = (TextView) findViewById(R.id.cnt_mail_id);
+        cnt_ph = (LinearLayout) findViewById(R.id.cnt_ph);
+        cnt_ph_no = (TextView) findViewById(R.id.cnt_ph_no);
+        cnt_tm = (LinearLayout) findViewById(R.id.cnt_tm);
+        cnt_tme = (TextView) findViewById(R.id.cnt_tme);
 
         list = new ArrayList<Sample>();
 
         new profileView().execute();
 
-       // cover.setOnClickListener(this);
+        // cover.setOnClickListener(this);
         proPic.setOnClickListener(this);
 
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -214,21 +215,22 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
             @Override
             public void onClick(DialogInterface dialog, int itm) {
                 if (action[itm].equalsIgnoreCase("From Camera")) {
-                    Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+                    Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
                     pic = new File(Environment.getExternalStorageDirectory(),
                             mApp.getPreference().getString(Common.u_id, "") + ".jpg");
 
                     picUri = Uri.fromFile(pic);
 
-                    cameraIntent.putExtra(android.provider.MediaStore.EXTRA_OUTPUT, picUri);
+                    cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, picUri);
 
                     cameraIntent.putExtra("return-data", true);
                     startActivityForResult(cameraIntent, PHOTO);
 
+
                 } else {
 
-                    Intent photoPickerIntent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                    Intent photoPickerIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                     photoPickerIntent.setType("image/*");
                     photoPickerIntent.putExtra("return-data", true);
                     startActivityForResult(photoPickerIntent, GALLERY);
@@ -238,7 +240,6 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         }).show();
 
     }
-
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -432,15 +433,14 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
                         final String pro_pic = data.optString("pro_pic");
                         final String cover_pic = data.optString("cover_pic");
 
-                        final JSONObject sec=child.getJSONObject("sec");
-                        JSONArray secArray=sec.getJSONArray("sec");
-                        final JSONObject data1=secArray.getJSONObject(0);
+                        final JSONObject sec = child.getJSONObject("sec");
+                        JSONArray secArray = sec.getJSONArray("sec");
+                        final JSONObject data1 = secArray.getJSONObject(0);
 
 
-
-                        JSONObject cnt=child.getJSONObject("cnt");
-                        JSONArray cntArray=cnt.getJSONArray("cnt");
-                        final JSONObject data8=cntArray.getJSONObject(0);
+                        JSONObject cnt = child.getJSONObject("cnt");
+                        JSONArray cntArray = cnt.getJSONArray("cnt");
+                        final JSONObject data8 = cntArray.getJSONObject(0);
 
 
                         runOnUiThread(new Runnable() {
@@ -451,22 +451,22 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
                                 name.setText(data8.optString("full_name"));
                                 position.setText(data1.optString("sec"));
-                                if(!data.optString("status").equalsIgnoreCase("")){
+                                if (!data.optString("status").equalsIgnoreCase("")) {
                                     org.setTextColor(getResources().getColor(R.color.stus));
                                     org.setTypeface(null, Typeface.BOLD);
                                     org.setText(data.optString("status"));
                                 }
-                                if(!data8.optString("email_id").equalsIgnoreCase("") || !data8.optString("ph_no").equalsIgnoreCase("")){
+                                if (!data8.optString("email_id").equalsIgnoreCase("") || !data8.optString("ph_no").equalsIgnoreCase("")) {
                                     contact.setVisibility(View.VISIBLE);
-                                    if(!data8.optString("email_id").equalsIgnoreCase("")){
+                                    if (!data8.optString("email_id").equalsIgnoreCase("")) {
                                         mail.setText(data8.optString("email_id"));
                                     }
-                                    if(!data8.optString("ph_no").equalsIgnoreCase("")){
+                                    if (!data8.optString("ph_no").equalsIgnoreCase("")) {
                                         phNo.setText(data8.optString("ph_no"));
                                     }
                                 }
 
-                                if(!data8.optString("objective").equalsIgnoreCase("")){
+                                if (!data8.optString("objective").equalsIgnoreCase("")) {
                                     objective.setVisibility(View.VISIBLE);
                                     obj.setText(data8.optString("objective"));
                                 }
@@ -563,15 +563,14 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
                         final String pro_pic = data.optString("pro_pic");
                         final String cover_pic = data.optString("cover_pic");
 
-                        final JSONObject sec=child.getJSONObject("sec");
-                        JSONArray secArray=sec.getJSONArray("sec");
-                        final JSONObject data1=secArray.getJSONObject(0);
+                        final JSONObject sec = child.getJSONObject("sec");
+                        JSONArray secArray = sec.getJSONArray("sec");
+                        final JSONObject data1 = secArray.getJSONObject(0);
 
 
-
-                        JSONObject cnt=child.getJSONObject("cnt");
-                        JSONArray cntArray=cnt.getJSONArray("cnt");
-                        final JSONObject data8=cntArray.getJSONObject(0);
+                        JSONObject cnt = child.getJSONObject("cnt");
+                        JSONArray cntArray = cnt.getJSONArray("cnt");
+                        final JSONObject data8 = cntArray.getJSONObject(0);
 
 
                         runOnUiThread(new Runnable() {
@@ -582,22 +581,22 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
                                 name.setText(data8.optString("full_name"));
                                 position.setText(data1.optString("sec"));
-                                if(!data.optString("status").equalsIgnoreCase("")){
+                                if (!data.optString("status").equalsIgnoreCase("")) {
                                     org.setTextColor(getResources().getColor(R.color.stus));
                                     org.setTypeface(null, Typeface.BOLD);
                                     org.setText(data.optString("status"));
                                 }
-                                if(!data8.optString("email_id").equalsIgnoreCase("") || !data8.optString("ph_no").equalsIgnoreCase("")){
+                                if (!data8.optString("email_id").equalsIgnoreCase("") || !data8.optString("ph_no").equalsIgnoreCase("")) {
                                     contact.setVisibility(View.VISIBLE);
-                                    if(!data8.optString("email_id").equalsIgnoreCase("")){
+                                    if (!data8.optString("email_id").equalsIgnoreCase("")) {
                                         mail.setText(data8.optString("email_id"));
                                     }
-                                    if(!data8.optString("ph_no").equalsIgnoreCase("")){
+                                    if (!data8.optString("ph_no").equalsIgnoreCase("")) {
                                         phNo.setText(data8.optString("ph_no"));
                                     }
                                 }
 
-                                if(!data8.optString("objective").equalsIgnoreCase("")){
+                                if (!data8.optString("objective").equalsIgnoreCase("")) {
                                     objective.setVisibility(View.VISIBLE);
                                     obj.setText(data8.optString("objective"));
                                 }
@@ -721,9 +720,9 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
                         pro_pic = data.optString("pro_pic");
                         cover_pic = data.optString("cover_pic");
 
-                        JSONObject cnt=child.getJSONObject("cnt");
-                        JSONArray cntArray=cnt.getJSONArray("cnt");
-                        final JSONObject data1=cntArray.getJSONObject(0);
+                        JSONObject cnt = child.getJSONObject("cnt");
+                        JSONArray cntArray = cnt.getJSONArray("cnt");
+                        final JSONObject data1 = cntArray.getJSONObject(0);
 
                         runOnUiThread(new Runnable() {
                             @Override
@@ -736,61 +735,61 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
                                 org.setText(data1.optString("city") + "," + data1.optString("country"));
 
 
-                                if(data1.optString("c_desc")!=null && !data1.optString("c_desc").trim().isEmpty()){
+                                if (data1.optString("c_desc") != null && !data1.optString("c_desc").trim().isEmpty()) {
                                     about.setVisibility(View.VISIBLE);
                                     abt.setText(data1.optString("c_desc"));
                                 }
 
-                                if(!data1.optString("c_type").equalsIgnoreCase("") || !data1.optString("i_type").equalsIgnoreCase("") ||
+                                if (!data1.optString("c_type").equalsIgnoreCase("") || !data1.optString("i_type").equalsIgnoreCase("") ||
                                         !data1.optString("mail").equalsIgnoreCase("") || !data1.optString("ph_no").equalsIgnoreCase("") ||
-                                        !data1.optString("c_website").equalsIgnoreCase("") || !data1.optString("year_of_establish").equalsIgnoreCase("")){
+                                        !data1.optString("c_website").equalsIgnoreCase("") || !data1.optString("year_of_establish").equalsIgnoreCase("")) {
 
                                     cmpntDet.setVisibility(View.VISIBLE);
-                                    if(!data1.optString("c_type").equalsIgnoreCase("")){
+                                    if (!data1.optString("c_type").equalsIgnoreCase("")) {
                                         c_type.setVisibility(View.VISIBLE);
                                         cate.setText(data1.optString("c_type"));
                                     }
-                                    if(!data1.optString("i_type").equalsIgnoreCase("")){
+                                    if (!data1.optString("i_type").equalsIgnoreCase("")) {
                                         i_type.setVisibility(View.VISIBLE);
                                         indus_type.setText(data1.optString("i_type"));
                                     }
-                                    if(!data1.optString("mail").equalsIgnoreCase("")){
+                                    if (!data1.optString("mail").equalsIgnoreCase("")) {
                                         c_mail.setVisibility(View.VISIBLE);
                                         cmail.setText(data1.optString("mail"));
                                     }
-                                    if(!data1.optString("ph_no").equalsIgnoreCase("")){
+                                    if (!data1.optString("ph_no").equalsIgnoreCase("")) {
                                         c_ph.setVisibility(View.VISIBLE);
                                         cph.setText(data1.optString("ph_no"));
                                     }
-                                    if(!data1.optString("c_website").equalsIgnoreCase("")){
+                                    if (!data1.optString("c_website").equalsIgnoreCase("")) {
                                         web.setVisibility(View.VISIBLE);
                                         url.setText(data1.optString("c_website"));
                                     }
 
-                                    if(!data1.optString("year_of_establish").equalsIgnoreCase("")){
+                                    if (!data1.optString("year_of_establish").equalsIgnoreCase("")) {
                                         c_fnd.setVisibility(View.VISIBLE);
                                         found.setText(data1.optString("year_of_establish"));
                                     }
                                 }
 
-                                if(!data1.optString("contact_person").equalsIgnoreCase("") || !data1.optString("contact_mail").equalsIgnoreCase("") ||
-                                        !data1.optString("contact_ph").equalsIgnoreCase("") || !data1.optString("contact_time").equalsIgnoreCase("")){
+                                if (!data1.optString("contact_person").equalsIgnoreCase("") || !data1.optString("contact_mail").equalsIgnoreCase("") ||
+                                        !data1.optString("contact_ph").equalsIgnoreCase("") || !data1.optString("contact_time").equalsIgnoreCase("")) {
                                     cntDet.setVisibility(View.VISIBLE);
-                                    if(!data1.optString("contact_person").equalsIgnoreCase("")){
+                                    if (!data1.optString("contact_person").equalsIgnoreCase("")) {
                                         cntt.setVisibility(View.VISIBLE);
                                         cnt_per.setText(data1.optString("contact_person"));
                                     }
-                                    if(!data1.optString("contact_mail").equalsIgnoreCase("")){
+                                    if (!data1.optString("contact_mail").equalsIgnoreCase("")) {
                                         cnt_mail.setVisibility(View.VISIBLE);
                                         cnt_mail_id.setText(data1.optString("contact_mail"));
                                     }
 
-                                    if(!data1.optString("contact_ph").equalsIgnoreCase("")){
+                                    if (!data1.optString("contact_ph").equalsIgnoreCase("")) {
                                         cnt_ph.setVisibility(View.VISIBLE);
                                         cnt_ph_no.setText(data1.optString("contact_ph"));
                                     }
 
-                                    if(!data1.optString("contact_time").equalsIgnoreCase("")){
+                                    if (!data1.optString("contact_time").equalsIgnoreCase("")) {
                                         cnt_tm.setVisibility(View.VISIBLE);
                                         cnt_tme.setText(data1.optString("contact_time"));
                                     }
@@ -983,7 +982,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.profile, menu);
         MenuItem item = menu.findItem(R.id.edit);
-        if(mApp.getPreference().getString(Common.LEVEL,"").equalsIgnoreCase("3")){
+        if (mApp.getPreference().getString(Common.LEVEL, "").equalsIgnoreCase("3")) {
             item.setVisible(false);
         }
         return true;
@@ -996,7 +995,9 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
                /* if (mApp.getPreference().getString(Common.LEVEL,"").equalsIgnoreCase("3")){
                     startActivity(new Intent(getApplicationContext(), CompanyContactInfoActivity.class));
                 }else {*/
-                    startActivity(new Intent(getApplicationContext(), ResumeEditActivity.class));
+                mApp.getPreference().edit().putBoolean(Common.PAGE1, true).commit();
+                mApp.getPreference().edit().putBoolean(Common.PAGE2, true).commit();
+                startActivity(new Intent(getApplicationContext(), ResumeEditActivity.class));
                 //}
                 break;
             case R.id.search:

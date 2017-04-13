@@ -61,7 +61,7 @@ public class GetFollowing extends AsyncTask<String,String,String>{
                     String level=child.optString("level");
                     String sec=child.optString("sec");
 
-                    list.add(new Sample(u_id,pro_pic,name,level,sec));
+                    list.add(new Sample(u_id, pro_pic, name, level, sec));
                 }
                 s="true";
             }

@@ -126,6 +126,7 @@ public class SelectedListAdapter extends BaseAdapter {
                                 Intent in = new Intent(mContext.getApplicationContext(), ProfileViewActivity.class);
                                 in.putExtra("u_id", usrId);
                                 in.putExtra("level", lvl);
+
                                 in.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                 mContext.startActivity(in);
                                 dialog.cancel();

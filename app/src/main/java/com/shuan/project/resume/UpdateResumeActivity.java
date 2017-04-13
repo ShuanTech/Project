@@ -32,10 +32,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.shuan.Project.R;
+import com.shuan.Project.Utils.AlphabetValidator;
 import com.shuan.Project.Utils.Common;
 import com.shuan.Project.Utils.Helper;
 import com.shuan.Project.Utils.MonthYearPicker;
 import com.shuan.Project.Utils.MonthYearPicker1;
+import com.shuan.Project.Utils.PhoneNumberValidator;
 import com.shuan.Project.asyncTasks.AddAchieve;
 import com.shuan.Project.asyncTasks.AddBasicInfo;
 import com.shuan.Project.asyncTasks.AddCert;
@@ -72,6 +74,8 @@ public class UpdateResumeActivity extends AppCompatActivity implements View.OnCl
     private ProgressDialog pDialog;
     private ProgressBar progressBar;
     private ScrollView scroll;
+    private AlphabetValidator alphabetValidator;
+    private PhoneNumberValidator phoneNumberValidator;
     private boolean ins = false;
     private boolean sIns = false;
     private String frmDate;
@@ -182,6 +186,8 @@ public class UpdateResumeActivity extends AppCompatActivity implements View.OnCl
         cntInfo = (LinearLayout) findViewById(R.id.cntInfo);
         bsc = (LinearLayout) findViewById(R.id.bsc);
         objec = (LinearLayout) findViewById(R.id.objec);
+        alphabetValidator = new AlphabetValidator();
+        phoneNumberValidator = new PhoneNumberValidator();
 
         AddDetail();
 
@@ -425,7 +431,7 @@ public class UpdateResumeActivity extends AppCompatActivity implements View.OnCl
                 @Override
                 public void afterTextChanged(Editable s) {
                     //i = Integer.parseInt(frm_yr.getText().toString());
-                    if (frm_yr.getText().toString().length()!=0) {
+                    if (frm_yr.getText().toString().length() != 0) {
                         i = Integer.parseInt(frm_yr.getText().toString());
                     }
                 }
@@ -669,7 +675,7 @@ public class UpdateResumeActivity extends AppCompatActivity implements View.OnCl
             district.setText(mApp.getPreference().getString("distrct", ""));
             state.setText(mApp.getPreference().getString("state", ""));
             country.setText(mApp.getPreference().getString("country", ""));
-            pin.setText(mApp.getPreference().getString("picode", ""));
+            pin.setText(mApp.getPreference().getString("pincode", ""));
 
             new GetLocation(UpdateResumeActivity.this, scroll, city, progressBar).execute();
 
@@ -796,6 +802,10 @@ public class UpdateResumeActivity extends AppCompatActivity implements View.OnCl
                     if (psEdtTxt.getText().toString().length() == 0) {
                         psEdtTxt.setError("Field cannot be empty");
                         psEdtTxt.requestFocus();
+                    }else if (!alphabetValidator.validate(psEdtTxt.getText().toString())){
+                        psEdtTxt.setError("Enter something");
+                        psEdtTxt.setText("");
+                        psEdtTxt.requestFocus();
                     } else {
                         new profileSummaryUpdate(UpdateResumeActivity.this, mApp.getPreference().getString(Common.u_id, ""),
                                 psEdtTxt.getText().toString(), "proSum").execute();
@@ -803,6 +813,10 @@ public class UpdateResumeActivity extends AppCompatActivity implements View.OnCl
                 } else {
                     if (psEdtTxt.getText().toString().length() == 0) {
                         psEdtTxt.setError("Field cannot be empty");
+                        psEdtTxt.requestFocus();
+                    } else if (!alphabetValidator.validate(psEdtTxt.getText().toString())){
+                        psEdtTxt.setError("Enter something");
+                        psEdtTxt.setText("");
                         psEdtTxt.requestFocus();
                     } else {
                         new EditDetail(UpdateResumeActivity.this, mApp.getPreference().getString("eId", ""),
@@ -826,11 +840,23 @@ public class UpdateResumeActivity extends AppCompatActivity implements View.OnCl
                 if (orgname.getText().toString().length() == 0) {
                     orgname.setError("Organization name is Mandatory");
                     orgname.requestFocus();
+                }else if (!alphabetValidator.validate(orgname.getText().toString())){
+                    orgname.setError("Enter something");
+                    orgname.setText("");
+                    orgname.requestFocus();
                 } else if (postition.getText().toString().length() == 0) {
                     postition.setError("Position Mandatory");
                     postition.requestFocus();
+                }else if (!alphabetValidator.validate(postition.getText().toString())){
+                    postition.setError("Enter something");
+                    postition.setText("");
+                    postition.requestFocus();
                 } else if (location.getText().toString().length() == 0) {
                     location.setError("Location Mandatory");
+                    location.requestFocus();
+                } else if (!alphabetValidator.validate(location.getText().toString())){
+                    location.setError("Enter something");
+                    location.setText("");
                     location.requestFocus();
                 } else if (fYr.getText().toString().length() == 0) {
                     fYr.setError("Field Mandatory");
@@ -878,6 +904,10 @@ public class UpdateResumeActivity extends AppCompatActivity implements View.OnCl
                     if (weEdtTxt.getText().toString().length() == 0) {
                         weEdtTxt.setError("Field cannot be empty");
                         weEdtTxt.requestFocus();
+                    }else if (!alphabetValidator.validate(weEdtTxt.getText().toString())){
+                        weEdtTxt.setError("Enter something");
+                        weEdtTxt.setText("");
+                        weEdtTxt.requestFocus();
                     } else {
                         new profileSummaryUpdate(UpdateResumeActivity.this, mApp.getPreference().getString(Common.u_id, ""),
                                 weEdtTxt.getText().toString(), "wrkExp").execute();
@@ -885,6 +915,10 @@ public class UpdateResumeActivity extends AppCompatActivity implements View.OnCl
                 } else {
                     if (weEdtTxt.getText().toString().length() == 0) {
                         weEdtTxt.setError("Field cannot be empty");
+                        weEdtTxt.requestFocus();
+                    }else if (!alphabetValidator.validate(weEdtTxt.getText().toString())){
+                        weEdtTxt.setError("Enter something");
+                        weEdtTxt.setText("");
                         weEdtTxt.requestFocus();
                     } else {
                         new EditDetail(UpdateResumeActivity.this, mApp.getPreference().getString("eId", ""),
@@ -985,12 +1019,19 @@ public class UpdateResumeActivity extends AppCompatActivity implements View.OnCl
             case R.id.p_update:
                 if (title.getText().toString().length() == 0) {
                     title.setError("Field Mandatory");
+                    title.requestFocus();
                 } else if (platform.getText().toString().length() == 0) {
                     platform.setError("Field Mandatory");
+                    platform.requestFocus();
                 } else if (duration.getText().toString().length() == 0) {
                     duration.setError("Field Mandatory");
+                    duration.requestFocus();
+                }else if (!phoneNumberValidator.validate(duration.getText().toString())){
+                    duration.setError("Enter a valid number");
+                    duration.requestFocus();
                 } else if (description.getText().toString().length() == 0) {
                     description.setError("Field Mandatory");
+                    description.requestFocus();
                 } else {
                     if (what.equalsIgnoreCase("add")) {
                         new AddProject(UpdateResumeActivity.this, mApp.getPreference().getString(Common.u_id, ""), title.getText().toString(),
@@ -1009,10 +1050,16 @@ public class UpdateResumeActivity extends AppCompatActivity implements View.OnCl
             case R.id.cert_upt:
                 if (certName.getText().toString().length() == 0) {
                     certName.setError("Field Mandatory");
+                    certName.requestFocus();
                 } else if (certCentre.getText().toString().length() == 0) {
                     certCentre.setError("Field Mandatory");
+                    certCentre.requestFocus();
                 } else if (certDur.getText().toString().length() == 0) {
                     certDur.setError("Field Mandatory");
+                    certDur.requestFocus();
+                }else if (!phoneNumberValidator.validate(certDur.getText().toString())){
+                    certDur.setError("Enter a valid number");
+                    certDur.requestFocus();
                 } else {
                     if (what.equalsIgnoreCase("add")) {
                         new AddCert(UpdateResumeActivity.this, mApp.getPreference().getString(Common.u_id, ""), certName.getText().toString(),
@@ -1026,6 +1073,10 @@ public class UpdateResumeActivity extends AppCompatActivity implements View.OnCl
             case R.id.ach_add:
                 if (acheieve.getText().toString().length() == 0) {
                     acheieve.setError("Field Mandatory");
+                }else if (!alphabetValidator.validate(acheieve.getText().toString())){
+                    acheieve.setError("Enter something");
+                    acheieve.setText("");
+                    acheieve.requestFocus();
                 } else {
                     new AddAchieve(UpdateResumeActivity.this, mApp.getPreference().getString(Common.u_id, ""),
                             acheieve.getText().toString()).execute();
@@ -1059,6 +1110,10 @@ public class UpdateResumeActivity extends AppCompatActivity implements View.OnCl
                 } else if (pin.getText().toString().length() == 0) {
                     pin.setError("Field Mandatory");
                     pin.requestFocus();
+                }else if(!phoneNumberValidator.validate(pin.getText().toString())){
+                    pin.setError("Enter a valid number");
+                    pin.requestFocus();
+                    pin.setText("");
                 } else {
                     new AddContactInfo(UpdateResumeActivity.this, mApp.getPreference().getString(Common.u_id, ""),
                             addr.getText().toString(), city.getText().toString(), district.getText().toString(), state.getText().toString(),
@@ -1095,6 +1150,10 @@ public class UpdateResumeActivity extends AppCompatActivity implements View.OnCl
             case R.id.obj_edt:
                 if (obj.getText().toString().length() == 0) {
                     obj.setError("Field Mandatory");
+                    obj.requestFocus();
+                } else if (!alphabetValidator.validate(obj.getText().toString())) {
+                    obj.setError("Enter your objective");
+                    obj.setText("");
                     obj.requestFocus();
                 } else {
                     new UpdateStatus(UpdateResumeActivity.this, mApp.getPreference().getString(Common.u_id, ""), obj.getText().toString()).execute();

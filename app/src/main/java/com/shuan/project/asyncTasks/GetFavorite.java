@@ -81,8 +81,8 @@ public class GetFavorite extends AsyncTask<String,String,String> {
             adapter = new ConnectAdapter(mContext,list);
             listView.setAdapter(adapter);
 
-        }else{
-            Toast.makeText(mContext,"No Data",Toast.LENGTH_SHORT).show();
+        }else if (s.equalsIgnoreCase("false")){
+            Toast.makeText(mContext,"No Data to show",Toast.LENGTH_SHORT).show();
         }
 
 

@@ -46,7 +46,6 @@ public class SuggestionFragment extends Fragment {
         listView = (ListView) v.findViewById(R.id.connect);
         progressBar = (ProgressBar) v.findViewById(R.id.progress_bar);
 
-        list = new ArrayList<Sample>();
 
         new GetSuggest(getActivity(), listView, progressBar, mApp.getPreference().getString(Common.u_id,"")).execute();
 

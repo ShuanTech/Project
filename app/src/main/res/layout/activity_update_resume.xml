@@ -41,12 +41,12 @@
                     android:text="@string/profile_summary"
                     android:textAppearance="?android:textAppearanceLarge"
                     android:textColor="#333"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold" />
 
                 <android.support.design.widget.TextInputLayout
-                    android:paddingTop="30dp"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:paddingTop="30dp">
 
                     <EditText
                         android:id="@+id/ps_edit_txt"
@@ -82,16 +82,16 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:text="Add Work Detail"
-                    android:textStyle="bold"
+                    android:text="Add Work Details"
+                    android:textAppearance="?android:textAppearanceLarge"
                     android:textColor="#333"
-                    android:textAppearance="?android:textAppearanceLarge" />
+                    android:textStyle="bold" />
 
 
                 <android.support.design.widget.TextInputLayout
-                    android:paddingTop="30dp"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:paddingTop="30dp">
 
                     <AutoCompleteTextView
                         android:id="@+id/orgname"
@@ -247,14 +247,14 @@
                     android:layout_height="wrap_content"
                     android:gravity="center_horizontal"
                     android:text="@string/work_exp"
-                    android:textStyle="bold"
                     android:textAppearance="?android:textAppearanceLarge"
-                    android:textColor="#333" />
+                    android:textColor="#333"
+                    android:textStyle="bold" />
 
                 <android.support.design.widget.TextInputLayout
-                    android:paddingTop="30dp"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:paddingTop="30dp">
 
                     <EditText
                         android:id="@+id/we_edit_txt"
@@ -292,9 +292,9 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:text="Qualification"
-                    android:textStyle="bold"
                     android:textAppearance="?android:textAppearanceLarge"
-                    android:textColor="#333" />
+                    android:textColor="#333"
+                    android:textStyle="bold" />
 
 
                 <Spinner
@@ -464,16 +464,16 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:text="Schooling"
-                    android:textStyle="bold"
                     android:textAppearance="?android:textAppearanceLarge"
-                    android:textColor="#333" />
+                    android:textColor="#333"
+                    android:textStyle="bold" />
 
 
-                    <Spinner
-                        android:id="@+id/mode"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/standard_margin" />
+                <Spinner
+                    android:id="@+id/mode"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/standard_margin" />
 
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
@@ -620,14 +620,14 @@
                     android:layout_height="wrap_content"
                     android:gravity="center_horizontal"
                     android:text="Add Skill"
-                    android:textStyle="bold"
                     android:textAppearance="?android:textAppearanceLarge"
-                    android:textColor="#333" />
+                    android:textColor="#333"
+                    android:textStyle="bold" />
 
                 <android.support.design.widget.TextInputLayout
-                    android:paddingTop="30dp"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:paddingTop="30dp">
 
                     <MultiAutoCompleteTextView
                         android:id="@+id/skills"
@@ -666,14 +666,14 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:text="Academic Project"
-                    android:textStyle="bold"
                     android:textAppearance="?android:textAppearanceLarge"
-                    android:textColor="#333" />
+                    android:textColor="#333"
+                    android:textStyle="bold" />
 
                 <android.support.design.widget.TextInputLayout
-                    android:paddingTop="30dp"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:paddingTop="30dp">
 
                     <EditText
                         android:id="@+id/title"
@@ -790,14 +790,14 @@
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="@dimen/activity_horizontal_margin"
                     android:text="Add Certification"
-                    android:textStyle="bold"
                     android:textAppearance="?android:textAppearanceLarge"
-                    android:textColor="#333" />
+                    android:textColor="#333"
+                    android:textStyle="bold" />
 
                 <android.support.design.widget.TextInputLayout
-                    android:paddingTop="30dp"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:paddingTop="30dp">
 
                     <EditText
                         android:id="@+id/cer_name"
@@ -866,14 +866,14 @@
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="@dimen/small_margin"
                     android:text="@string/achivement"
-                    android:textStyle="bold"
                     android:textAppearance="?android:textAppearanceLarge"
-                    android:textColor="#333" />
+                    android:textColor="#333"
+                    android:textStyle="bold" />
 
                 <android.support.design.widget.TextInputLayout
-                    android:paddingTop="30dp"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:paddingTop="30dp">
 
                     <EditText
                         android:id="@+id/achieve"
@@ -913,14 +913,14 @@
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="@dimen/small_margin"
                     android:text="Extra-Curricular Activity"
-                    android:textStyle="bold"
                     android:textAppearance="?android:textAppearanceLarge"
-                    android:textColor="#333" />
+                    android:textColor="#333"
+                    android:textStyle="bold" />
 
                 <android.support.design.widget.TextInputLayout
-                    android:paddingTop="30dp"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:paddingTop="30dp">
 
                     <EditText
                         android:id="@+id/extra_c"
@@ -1080,14 +1080,14 @@
                     android:layout_marginTop="@dimen/small_margin"
                     android:gravity="center_horizontal"
                     android:text="Objective"
-                    android:textStyle="bold"
                     android:textAppearance="?android:textAppearanceLarge"
-                    android:textColor="#333" />
+                    android:textColor="#333"
+                    android:textStyle="bold" />
 
                 <android.support.design.widget.TextInputLayout
-                    android:paddingTop="30dp"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:paddingTop="30dp">
 
                     <EditText
                         android:id="@+id/obj"
@@ -1126,9 +1126,9 @@
                     android:layout_marginTop="@dimen/small_margin"
                     android:gravity="center_horizontal"
                     android:text="Basic Info"
-                    android:textStyle="bold"
                     android:textAppearance="?android:textAppearanceLarge"
-                    android:textColor="#333" />
+                    android:textColor="#333"
+                    android:textStyle="bold" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -1173,7 +1173,6 @@
                     android:id="@+id/sex"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
                     android:layout_marginTop="@dimen/standard_margin"
                     android:orientation="horizontal">
 

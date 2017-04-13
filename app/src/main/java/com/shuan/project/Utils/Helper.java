@@ -18,6 +18,8 @@ public class Helper implements Methods {
     private static final int MINUTE_MILLIS = 60 * SECOND_MILLIS;
     private static final int HOUR_MILLIS = 60 * MINUTE_MILLIS;
     private static final int DAY_MILLIS = 24 * HOUR_MILLIS;
+    private static final int WEEK_MILLIS = 7 * DAY_MILLIS;
+    private static final int MONTH_MILLIS = 4 * WEEK_MILLIS;
 
 
     @Override
@@ -69,8 +71,18 @@ public class Helper implements Methods {
                 val= diff / HOUR_MILLIS + " hours ago";
             } else if (diff < 48 * HOUR_MILLIS) {
                 val= "yesterday";
-            } else {
+            } else if(diff < 7 * DAY_MILLIS){
                 val= diff / DAY_MILLIS + " days ago";
+            }else if(diff > (7 * DAY_MILLIS ) &&  diff < (14 * DAY_MILLIS)){
+                val = "a week ago";
+            }else if (diff < 4 * WEEK_MILLIS){
+                val = diff/ WEEK_MILLIS + " weeks ago";
+            } else if ( Math.abs(diff / MONTH_MILLIS) == 0){
+                val = "a month ago ";
+            }else if (Math.abs(diff / MONTH_MILLIS) > 0){
+                val = Math.abs(diff / MONTH_MILLIS) + " months ago";
+            }else if (Math.abs(diff / MONTH_MILLIS) > 12){
+                val = "an year ago" ;
             }
 
 

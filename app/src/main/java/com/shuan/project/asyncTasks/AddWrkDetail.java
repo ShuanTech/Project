@@ -72,6 +72,9 @@ public class AddWrkDetail extends AsyncTask<String, String, String> {
             int succ = json.getInt("success");
             if (succ == 0) {
                 s = "false";
+            } else if (succ == 2) {
+                s="already";
+
             } else {
                 s = "true";
             }
@@ -95,21 +98,24 @@ public class AddWrkDetail extends AsyncTask<String, String, String> {
                 AppCompatActivity activity = (AppCompatActivity) mContext;
                 Intent i = activity.getBaseContext().getPackageManager()
                         .getLaunchIntentForPackage(activity.getBaseContext().getPackageName());
-                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                 activity.startActivity(i);
+                ((AppCompatActivity) mContext).finish();
             } else {
                 mApp.getPreference().edit().putBoolean(Common.WORKINFO, true).commit();
 
 
                 Toast.makeText(mContext, "Successfully Work Details Added", Toast.LENGTH_SHORT).show();
                 Intent in = new Intent(mContext, ResumeEditActivity.class);
-                in.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                in.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                 mContext.startActivity(in);
                 ((AppCompatActivity) mContext).finish();
             }
 
 
-        } else {
+        }else if (s.equalsIgnoreCase("already")){
+            Toast.makeText(mContext, "Already added to your profile", Toast.LENGTH_SHORT).show();
+        }else {
             Toast.makeText(mContext, "Something went wrong!... Try Again", Toast.LENGTH_SHORT).show();
         }
     }

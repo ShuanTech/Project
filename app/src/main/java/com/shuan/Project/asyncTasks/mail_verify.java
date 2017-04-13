@@ -59,10 +59,12 @@ public class mail_verify extends AsyncTask<String, String, String> {
             JSONObject json= Connection.UrlConnection(php.verifymail,mData);
             int succ = json.getInt("success");
 
-            if (succ==0){
-                s="false";
+            if (succ==2){
+                s="missmatch";
             }else if (succ==1){
                 s="true";
+            }else{
+                s="false";
             }
 
         } catch (JSONException e) {
@@ -94,9 +96,13 @@ public class mail_verify extends AsyncTask<String, String, String> {
             mContext.startActivity(in);
             ((AppCompatActivity) mContext).finish();
 
-        }else {
+        }else if (s.equalsIgnoreCase("false")){
             mApp.getPreference().edit().putBoolean(Common.OTP, false).commit();
-            Toast.makeText(mContext, "Failed. Try Again", Toast.LENGTH_SHORT).show();
+            Toast.makeText(mContext, "Error try again later", Toast.LENGTH_SHORT).show();
+        }else if(s.equalsIgnoreCase("missmatch")){
+            mApp.getPreference().edit().putBoolean(Common.OTP, false).commit();
+            Toast.makeText(mContext, "Code you entered does not matches", Toast.LENGTH_SHORT).show();
+
         }
 
     }
