@@ -90,7 +90,7 @@ public class mail_verify extends AsyncTask<String, String, String> {
                 in.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
             }else {
                 Toast.makeText(mContext," Verified your phone number successfully ",Toast.LENGTH_SHORT).show();
-                in=new Intent(mContext, CompanyDetails.class);
+                in= new Intent(mContext, CompanyDetails.class);
                 in.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
             }
             mContext.startActivity(in);

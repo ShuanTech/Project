@@ -54,7 +54,7 @@ public class ResumeEditActivity extends AppCompatActivity implements View.OnClic
     private String disrct;
     private LinearLayout stus;
     private TextView status;
-    private String db,age;
+    private String db,age,pinCode;
     final String[] stuss={"Looking for job","In Work","In Notice period","In Internship","Doing Course","In Training"};
 
 
@@ -272,7 +272,7 @@ public class ResumeEditActivity extends AppCompatActivity implements View.OnClic
                 mApp.getPreference().edit().putString("state", ste.getText().toString()).commit();
                 mApp.getPreference().edit().putString("distrct", disrct).commit();
                 mApp.getPreference().edit().putString("country", cntry.getText().toString()).commit();
-                mApp.getPreference().edit().putString("picode", pin.getText().toString());
+                mApp.getPreference().edit().putString("pincode", pin.getText().toString()).commit();
                 startActivity(in);
                 break;
             case R.id.bsc_edt:
@@ -929,7 +929,7 @@ public class ResumeEditActivity extends AppCompatActivity implements View.OnClic
                     final String married_status = data.optString("married_status");
                     final String language = data.optString("language");
                     final String hobbies = data.optString("hobbies");
-                    final String pinCode = data.optString("pincode");
+                    pinCode = data.optString("pincode");
                     final String objc = data.optString("objective");
 
                     runOnUiThread(new Runnable() {

@@ -77,9 +77,9 @@ public class Helper implements Methods {
                 val = "a week ago";
             }else if (diff < 4 * WEEK_MILLIS){
                 val = diff/ WEEK_MILLIS + " weeks ago";
-            } else if ( Math.abs(diff / MONTH_MILLIS) == 0){
+            } else if ( (Math.abs(diff / MONTH_MILLIS) == 0) || (Math.abs(diff / MONTH_MILLIS) == 1)){
                 val = "a month ago ";
-            }else if (Math.abs(diff / MONTH_MILLIS) > 0){
+            }else if (Math.abs(diff / MONTH_MILLIS) > 1){
                 val = Math.abs(diff / MONTH_MILLIS) + " months ago";
             }else if (Math.abs(diff / MONTH_MILLIS) > 12){
                 val = "an year ago" ;

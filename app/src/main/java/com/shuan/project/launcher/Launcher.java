@@ -23,6 +23,7 @@ import com.shuan.Project.employee.SeniorActivity;
 import com.shuan.Project.employer.EmployerActivity;
 import com.shuan.Project.parser.Connection;
 import com.shuan.Project.parser.php;
+import com.shuan.Project.signup.MailVerify;
 import com.shuan.Project.signup.employee.CSLActivity;
 import com.shuan.Project.signup.employee.WorkActivity;
 import com.shuan.Project.signup.employer.CompanyDetails;
@@ -121,10 +122,10 @@ public class Launcher extends AppCompatActivity {
         } else {
                 if (mApp.getPreference().getString(Common.LEVEL, "").equalsIgnoreCase("3")) {
 
-                   /* if (mApp.getPreference().getBoolean(Common.OTP, false) == false){
+                    if (mApp.getPreference().getBoolean(Common.OTP, false) == false){
                         startActivity(new Intent(Launcher.this, MailVerify.class));
 
-                    }else*/ if (mApp.getPreference().getBoolean(Common.COMPANY, false) == false) {
+                    }else if (mApp.getPreference().getBoolean(Common.COMPANY, false) == false) {
                         startActivity(new Intent(Launcher.this, CompanyDetails.class));
                     } else {
                         startActivity(new Intent(Launcher.this, EmployerActivity.class));
@@ -133,10 +134,10 @@ public class Launcher extends AppCompatActivity {
 
                     if (mApp.getPreference().getString(Common.LEVEL, "").equalsIgnoreCase("1")) {
 
-                       /*if (mApp.getPreference().getBoolean(Common.OTP, false) == false) {
+                       if (mApp.getPreference().getBoolean(Common.OTP, false) == false) {
                             startActivity(new Intent(Launcher.this, MailVerify.class));
 
-                        }else*/ if (mApp.getPreference().getBoolean(Common.PAGE1, false) == false) {
+                        }else if (mApp.getPreference().getBoolean(Common.PAGE1, false) == false) {
                             startActivity(new Intent(Launcher.this, CSLActivity.class));
                         } else {
                             startActivity(new Intent(Launcher.this, JuniorActivity.class));
@@ -144,10 +145,10 @@ public class Launcher extends AppCompatActivity {
 
                     } else {
 
-                       /* if (mApp.getPreference().getBoolean(Common.OTP, false) == false) {
+                        if (mApp.getPreference().getBoolean(Common.OTP, false) == false) {
                             startActivity(new Intent(Launcher.this, MailVerify.class));
 
-                        } else*/ if (mApp.getPreference().getBoolean(Common.PAGE2, false) == false) {
+                        } else if (mApp.getPreference().getBoolean(Common.PAGE2, false) == false) {
                             startActivity(new Intent(getApplicationContext(), WorkActivity.class));
                         } else if (mApp.getPreference().getBoolean(Common.PAGE1, false) == false) {
                             startActivity(new Intent(getApplicationContext(), CSLActivity.class));
